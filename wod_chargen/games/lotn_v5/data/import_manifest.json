@@ -1,0 +1,45 @@
+{
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
+  "files": {
+    "merits_flaws.json": {
+      "merits": 28,
+      "flaws": 46
+    },
+    "loresheets.json": {
+      "loresheets": 24
+    },
+    "background_catalog.json": {
+      "entries": 45
+    },
+    "generation_blood_potency.json": {
+      "generations": 11,
+      "blood_potency_rows": 5
+    },
+    "dyscrasias.json": {
+      "resonances": 4
+    },
+    "predator_catalog.json": {
+      "predators": 13
+    },
+    "xp_matrix.json": {
+      "rows": 10
+    },
+    "equipment_qualities.json": {
+      "qualities": 27
+    },
+    "clans_table.json": {
+      "clans": 16
+    },
+    "discipline_powers.json": {
+      "disciplines": 14,
+      "powers": 278,
+      "quick_reference": 12
+    }
+  }
+}

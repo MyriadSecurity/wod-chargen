@@ -1,0 +1,147 @@
+{
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
+  "generations": [
+    {
+      "label": "6th Generation",
+      "min_blood_potency": 2,
+      "max_blood_potency": 5,
+      "notes": "Elder (NPC)",
+      "generation_number": 6,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "7th Generation",
+      "min_blood_potency": 2,
+      "max_blood_potency": 5,
+      "notes": "Elder (NPC)",
+      "generation_number": 7,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "8th Generation",
+      "min_blood_potency": 2,
+      "max_blood_potency": 5,
+      "notes": "Elder (NPC)",
+      "generation_number": 8,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "9th Generation",
+      "min_blood_potency": 2,
+      "max_blood_potency": 5,
+      "notes": "Ancilla",
+      "generation_number": 9,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "10th Generation",
+      "min_blood_potency": 1,
+      "max_blood_potency": 4,
+      "notes": "Ancilla",
+      "generation_number": 10,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "11th Generation",
+      "min_blood_potency": 1,
+      "max_blood_potency": 4,
+      "notes": "Ancilla",
+      "generation_number": 11,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "12th Generation",
+      "min_blood_potency": 1,
+      "max_blood_potency": 3,
+      "notes": "Neonate",
+      "generation_number": 12,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "13th Generation",
+      "min_blood_potency": 1,
+      "max_blood_potency": 3,
+      "notes": "Neonate",
+      "generation_number": 13,
+      "thin_blood": false,
+      "ghoul": false
+    },
+    {
+      "label": "14th Generation",
+      "min_blood_potency": 0,
+      "max_blood_potency": 0,
+      "notes": "Thin-Blooded",
+      "generation_number": 14,
+      "thin_blood": true,
+      "ghoul": false
+    },
+    {
+      "label": "15th Generation",
+      "min_blood_potency": 0,
+      "max_blood_potency": 0,
+      "notes": "Thin-Blooded",
+      "generation_number": 15,
+      "thin_blood": true,
+      "ghoul": false
+    },
+    {
+      "label": "16th Generation",
+      "min_blood_potency": 0,
+      "max_blood_potency": 0,
+      "notes": "Thin-Blooded",
+      "generation_number": 16,
+      "thin_blood": true,
+      "ghoul": false
+    }
+  ],
+  "blood_potency": [
+    {
+      "rating": 1,
+      "blood_surge_bonus": 1,
+      "mending_per_rouse": 1,
+      "discipline_defense_bonus": 0,
+      "discipline_rouse_bonus": 1.0
+    },
+    {
+      "rating": 2,
+      "blood_surge_bonus": 1,
+      "mending_per_rouse": 2,
+      "discipline_defense_bonus": 0,
+      "discipline_rouse_bonus": 1.0
+    },
+    {
+      "rating": 3,
+      "blood_surge_bonus": 2,
+      "mending_per_rouse": 2,
+      "discipline_defense_bonus": 0,
+      "discipline_rouse_bonus": 2.0
+    },
+    {
+      "rating": 4,
+      "blood_surge_bonus": 2,
+      "mending_per_rouse": 3,
+      "discipline_defense_bonus": 1,
+      "discipline_rouse_bonus": 2.0
+    },
+    {
+      "rating": 5,
+      "blood_surge_bonus": 3,
+      "mending_per_rouse": 3,
+      "discipline_defense_bonus": 1,
+      "discipline_rouse_bonus": 3.0
+    }
+  ]
+}

@@ -19,6 +19,7 @@ from wod_chargen.core.share import (
 )
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type, get_archetype
+from wod_chargen.games.lotn_v5.convictions import pick_convictions
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.system import LotnV5System
 from wod_chargen.games.registry import load_game_catalog
@@ -50,6 +51,7 @@ class WizardApp:
             "venue": "mes_end_to_dawn",
             "approval": "2026-06",
             "seed": random.randint(1, 999_999),
+            "convictions_seed": random.randint(1, 999_999),
             "step": "game",
             "result": None,
             "error": None,
@@ -64,6 +66,8 @@ class WizardApp:
                 return
             payload = decode_query(qs)
             self.state["seed"] = payload.seed
+            if payload.convictions_seed is not None:
+                self.state["convictions_seed"] = payload.convictions_seed
             self.state["game"] = payload.game
             self.state["venue"] = payload.venue
             opts = payload.options
@@ -98,10 +102,22 @@ class WizardApp:
     def _share_payload(self) -> SharePayload:
         return SharePayload(
             seed=int(self.state["seed"]),
+            convictions_seed=int(self.state["convictions_seed"]),
             game=self.state["game"],
             venue=self.state["venue"],
             options=self._options(),
         )
+
+    def _convictions(self) -> list[dict[str, str]]:
+        return pick_convictions(int(self.state["convictions_seed"]))
+
+    def _reroll_convictions(self, _=None) -> None:
+        self.state["convictions_seed"] = random.randint(1, 999_999)
+        try:
+            self._sync_url()
+        except Exception:
+            pass
+        self._render()
 
     def _share_url(self) -> str:
         return browser_share_url(window.location.pathname, self._share_payload())
@@ -639,7 +655,14 @@ class WizardApp:
         panel.className = "card p-6"
         if self.state["tab"] == "sheet":
             panel.className += " sheet-panel"
-            panel.appendChild(render_lotn_v5_sheet(result.character))
+            panel.appendChild(
+                render_lotn_v5_sheet(
+                    result.character,
+                    convictions=self._convictions(),
+                    convictions_seed=int(self.state["convictions_seed"]),
+                    on_reroll_convictions=self._reroll_convictions,
+                )
+            )
         elif self.state["tab"] == "log":
             lines = [f"[{e.phase}] {e.message}" for e in result.creation_log]
             panel.innerText = "\n".join(lines)
@@ -666,7 +689,10 @@ class WizardApp:
             self._render()
 
         def export_json(_=None):
-            blob = json.dumps(result.to_dict(), indent=2)
+            payload = result.to_dict()
+            payload["convictions_seed"] = int(self.state["convictions_seed"])
+            payload["convictions"] = self._convictions()
+            blob = json.dumps(payload, indent=2)
             window.navigator.clipboard.writeText(blob)
 
         for label, fn in [("Copy Share Link", copy_link), ("Re-roll", reroll), ("Copy JSON", export_json)]:
@@ -685,6 +711,9 @@ class WizardApp:
 
         meta = document.createElement("p")
         meta.className = "text-stone-500 text-sm mt-4"
-        meta.innerText = f"Seed {result.seed} · XP {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked"
+        meta.innerText = (
+            f"Seed {result.seed} · Convictions seed {self.state['convictions_seed']} · "
+            f"XP {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked"
+        )
         el.appendChild(meta)
         return el

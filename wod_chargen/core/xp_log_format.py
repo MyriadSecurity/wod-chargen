@@ -12,6 +12,7 @@ CATEGORY_ORDER = (
     "discipline",
     "background",
     "background_modifier",
+    "background_disadvantage",
     "merit",
     "ghoul_power",
     "thin_blood_formula",
@@ -25,6 +26,7 @@ CATEGORY_LABELS = {
     "discipline": "Disciplines",
     "background": "Backgrounds",
     "background_modifier": "Background Modifiers",
+    "background_disadvantage": "Background Disadvantages",
     "merit": "Merits",
     "ghoul_power": "Ghoul Powers",
     "thin_blood_formula": "Thin-Blood Formulas",
@@ -35,6 +37,16 @@ CATEGORY_LABELS = {
 
 def _sorted_entries(entries: list[XpLogEntry]) -> list[XpLogEntry]:
     return sorted(entries, key=lambda e: (e.item, e.new_level))
+
+
+def _format_cost(entry: XpLogEntry) -> str:
+    if entry.cost > 0:
+        return f"{entry.cost} XP"
+    if entry.source == "disadv_trade":
+        return "free (disadv trade)"
+    if entry.source == "free":
+        return "free"
+    return "0 XP"
 
 
 def format_xp_log(entries: list[XpLogEntry]) -> str:
@@ -56,7 +68,7 @@ def format_xp_log(entries: list[XpLogEntry]) -> str:
         label = CATEGORY_LABELS.get(category, category.replace("_", " ").title())
         purchase_lines.append(f"── {label} " + "─" * max(0, 36 - len(label)))
         for entry in group:
-            purchase_lines.append(f"  {entry.item} → {entry.new_level} ({entry.cost} XP)")
+            purchase_lines.append(f"  {entry.item} → {entry.new_level} ({_format_cost(entry)})")
             debug_lines.append(
                 f"  [{category}] {entry.item} → {entry.new_level} | "
                 f"group_w={entry.group_weight:.2f} item_bias={entry.item_bias:.2f} "

@@ -1,0 +1,5392 @@
+{
+  "disciplines": [
+    {
+      "id": "animalism",
+      "label": "Animalism",
+      "in_clan": false,
+      "type": "Social",
+      "threat": "Low",
+      "resonance": "Animal",
+      "powers": [
+        {
+          "level": 1,
+          "id": "feral_whispers",
+          "label": "Feral Whispers",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "description": "Speak with and command animals; extend simple instructions.",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "sense_the_beast",
+          "label": "Sense the Beast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "animal_succulence",
+          "label": "Animal Succulence",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Slake +1 from animals; feeding penalties 2BP lower from animals",
+          "description": "Slake +1 from animals; feeding penalties 2BP lower from animals",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "atavism",
+          "label": "Atavism",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "enhance_the_wild_ride",
+          "label": "Enhance the Wild Ride",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "BP +2 to determine Blood Surge bonus in Frenzy",
+          "description": "BP +2 to determine Blood Surge bonus in Frenzy",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "quell_the_beast",
+          "label": "Quell the Beast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "unliving_hive",
+          "label": "Unliving Hive",
+          "amalgam": "Obfuscate",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "obfuscate",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 4,
+          "id": "subsume_the_spirit",
+          "label": "Subsume the Spirit",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "control_the_savage_beast",
+          "label": "Control the Savage Beast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "animal_dominion",
+          "label": "Animal Dominion",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "drawing_out_the_beast",
+          "label": "Drawing Out the Beast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 11,
+      "named_formula_count": 11,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "auspex",
+      "label": "Auspex",
+      "in_clan": false,
+      "type": "Mental",
+      "threat": "Low",
+      "resonance": "Phlegmatic",
+      "powers": [
+        {
+          "level": 1,
+          "id": "heightened_senses",
+          "label": "Heightened Senses",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "sense_the_unseen",
+          "label": "Sense the Unseen",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "panacea",
+          "label": "Panacea",
+          "amalgam": "Fortitude",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Composure",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "fortitude",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 2,
+          "id": "premonition",
+          "label": "Premonition",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "scry_the_soul",
+          "label": "Scry the Soul",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "collective_cognizance",
+          "label": "Collective Cognizance",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "share_the_senses",
+          "label": "Share the Senses",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "unveil_the_edifice",
+          "label": "Unveil the Edifice",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "spirit_s_touch",
+          "label": "Spirit's Touch",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "clairvoyance",
+          "label": "Clairvoyance",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "possession",
+          "label": "Possession",
+          "amalgam": "Dominate",
+          "amalgam_level": 3,
+          "prerequisite": null,
+          "cost": "1+",
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 3
+          }
+        },
+        {
+          "level": 5,
+          "id": "telepathy",
+          "label": "Telepathy",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "unburdening_the_bestial_soul",
+          "label": "Unburdening the Bestial Soul",
+          "amalgam": "Dominate",
+          "amalgam_level": 3,
+          "prerequisite": "Panacea",
+          "cost": "2+",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 3,
+            "requires_all_powers": [
+              "panacea"
+            ]
+          }
+        }
+      ],
+      "power_count": 13,
+      "named_formula_count": 13,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "blood_sorcery",
+      "label": "Blood Sorcery",
+      "in_clan": false,
+      "type": "Mental",
+      "threat": "Low to High",
+      "resonance": "Sanguine",
+      "powers": [
+        {
+          "level": 1,
+          "id": "a_taste_for_blood",
+          "label": "A Taste for Blood",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "description": "Learn a target's Blood Potency, Hunger, and other vitae traits from a sample.",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "corrosive_vitae",
+          "label": "Corrosive Vitae",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "blood_rash",
+          "label": "Blood Rash",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "extinguish_vitae",
+          "label": "Extinguish Vitae",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "blood_of_potency",
+          "label": "Blood of Potency",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "scorpion_s_touch",
+          "label": "Scorpion's Touch",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Dexterity",
+          "pool_skill": 5,
+          "pool_bonus": null,
+          "difficulty": 3,
+          "duration": 8,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "theft_of_vitae",
+          "label": "Theft of Vitae",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "slow_the_beating_heart",
+          "label": "Slow the Beating Heart",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 5,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "baal_s_caress",
+          "label": "Baal's Caress",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "Scorpion's Touch",
+          "cost": "0-1",
+          "pool_attribute": "Dexterity",
+          "pool_skill": 5,
+          "pool_bonus": null,
+          "difficulty": 3,
+          "duration": 8,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "requires_all_powers": [
+              "scorpion_s_touch"
+            ]
+          }
+        },
+        {
+          "level": 5,
+          "id": "cauldron_of_blood",
+          "label": "Cauldron of Blood",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 10,
+      "named_formula_count": 10,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "blood_sorcery_rituals",
+      "label": "Blood Sorcery Rituals",
+      "powers": [
+        {
+          "level": 1,
+          "id": "blood_walk",
+          "label": "Blood Walk",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "A Taste For Blood",
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "description": "Ritual: trace a Kindred's recent movements through their vitae.",
+          "rules": {
+            "track": "ritual",
+            "requires_all_powers": [
+              "a_taste_for_blood"
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "id": "cling_of_the_arachnid",
+          "label": "Cling of the Arachnid",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 1,
+          "id": "craft_bloodstone",
+          "label": "Craft Bloodstone",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 1,
+          "id": "wake_with_evening_s_freshness",
+          "label": "Wake With Evening's Freshness",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 1,
+          "id": "ward_against_ghouls",
+          "label": "Ward Against Ghouls",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 2,
+          "id": "illuminate_the_trail_of_prey",
+          "label": "Illuminate the Trail of Prey",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 2,
+          "id": "instantaneous_materialization",
+          "label": "Instantaneous Materialization",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 2,
+          "id": "phantom_whispers",
+          "label": "Phantom Whispers",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 2,
+          "id": "ward_against_spirits",
+          "label": "Ward Against Spirits",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 2,
+          "id": "warding_circle_against_ghouls",
+          "label": "Warding Circle Against Ghouls",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 3.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 3,
+          "id": "dagon_s_call",
+          "label": "Dagon's Call",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 3,
+          "id": "firewalker",
+          "label": "Firewalker",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 3,
+          "id": "perfect_forgery",
+          "label": "Perfect Forgery",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 3,
+          "id": "ward_against_shifters",
+          "label": "Ward Against Shifters",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 3,
+          "id": "warding_circle_against_spirits",
+          "label": "Warding Circle Against Spirits",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 3.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 4,
+          "id": "defense_of_the_sacred_haven",
+          "label": "Defense of the Sacred Haven",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "1+",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 4,
+          "id": "incorporeal_passage",
+          "label": "Incorporeal Passage",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 4,
+          "id": "splinter_servant",
+          "label": "Splinter Servant",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 4,
+          "id": "ward_against_cainites",
+          "label": "Ward Against Cainites",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 4,
+          "id": "warding_circle_against_shifters",
+          "label": "Warding Circle Against Shifters",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 3.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 5,
+          "id": "blade_of_eternal_thirst",
+          "label": "Blade of Eternal Thirst",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 3.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 5,
+          "id": "cobra_s_favor",
+          "label": "Cobra's Favor",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 5,
+          "id": "escape_to_true_sanctuary",
+          "label": "Escape to True Sanctuary",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 5,
+          "id": "shaft_of_belated_dissolution",
+          "label": "Shaft of Belated Dissolution",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        },
+        {
+          "level": 5,
+          "id": "warding_circle_against_cainites",
+          "label": "Warding Circle Against Cainites",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 3.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ritual"
+          }
+        }
+      ],
+      "power_count": 25,
+      "named_formula_count": 25,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "celerity",
+      "label": "Celerity",
+      "in_clan": false,
+      "type": "Physical",
+      "threat": "High",
+      "resonance": "Choleric",
+      "powers": [
+        {
+          "level": 1,
+          "id": "cat_s_grace",
+          "label": "Cat's Grace",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "quicksilver",
+          "label": "Quicksilver",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "fleetness",
+          "label": "Fleetness",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "bonus to initiative = celerity dots",
+          "description": "Move with supernatural speed for brief bursts.",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "rapid_reflexes",
+          "label": "Rapid Reflexes",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+ Celerity dots to non-combat dex tests",
+          "description": "+ Celerity dots to non-combat dex tests",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "blink",
+          "label": "Blink",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "nimble_departure",
+          "label": "Nimble Departure",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "unerring_aim",
+          "label": "Unerring Aim",
+          "amalgam": "Auspex",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "auspex",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 4,
+          "id": "velocity",
+          "label": "Velocity",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "zephyr",
+          "label": "Zephyr",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "bulletstorm",
+          "label": "Bulletstorm",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "lightning_strike",
+          "label": "Lightning Strike",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 11,
+      "named_formula_count": 11,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "ceremonies",
+      "label": "Ceremonies",
+      "powers": [
+        {
+          "level": 1,
+          "id": "din_of_the_damned",
+          "label": "Din of the Damned",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "description": "Ceremony: fill an area with wailing spirits that hinder foes.",
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 1,
+          "id": "eyes_of_the_dead",
+          "label": "Eyes of the Dead",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 1,
+          "id": "guiding_spirits",
+          "label": "Guiding Spirits",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 1,
+          "id": "summon_spirit",
+          "label": "Summon Spirit",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 2,
+          "id": "awaken_homuncular_servant",
+          "label": "Awaken Homuncular Servant",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 2,
+          "id": "blinding_the_alloy_eye",
+          "label": "Blinding the Alloy Eye",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 2,
+          "id": "compel_spirit",
+          "label": "Compel Spirit",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 2,
+          "id": "sin_eater",
+          "label": "Sin Eater",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 3,
+          "id": "black_blood",
+          "label": "Black Blood",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 3,
+          "id": "chill_of_oblivion",
+          "label": "Chill of Oblivion",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 3,
+          "id": "forsaken_edifice",
+          "label": "Forsaken Edifice",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 3,
+          "id": "shambling_hordes",
+          "label": "Shambling Hordes",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 4,
+          "id": "bastone_diabolico",
+          "label": "Bastone Diabolico",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 4,
+          "id": "bind_spirit",
+          "label": "Bind Spirit",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 4,
+          "id": "faces_of_the_dead",
+          "label": "Faces of the Dead",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 4,
+          "id": "heart_s_bane",
+          "label": "Heart's Bane",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 5,
+          "id": "ethereal_horde",
+          "label": "Ethereal Horde",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 5,
+          "id": "chalchiuhtotolin_s_judgment",
+          "label": "Chalchiuhtotolin’s Judgment",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 5,
+          "id": "alone_in_the_dark",
+          "label": "Alone in the Dark",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        },
+        {
+          "level": 5,
+          "id": "avatar_of_rot",
+          "label": "Avatar of Rot",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "ceremony"
+          }
+        }
+      ],
+      "power_count": 20,
+      "named_formula_count": 20,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "dominate",
+      "label": "Dominate",
+      "in_clan": false,
+      "type": "Social",
+      "threat": "Minimal",
+      "resonance": "Phlegmatic",
+      "powers": [
+        {
+          "level": 1,
+          "id": "cloud_memory",
+          "label": "Cloud Memory",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "compel",
+          "label": "Compel",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "dementation",
+          "label": "Dementation",
+          "amalgam": "Obfuscate",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "obfuscate",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 2,
+          "id": "mesmerize",
+          "label": "Mesmerize",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "domitor_s_favor",
+          "label": "Domitor's Favor",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "forgetful_mind",
+          "label": "Forgetful Mind",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": "10 minutes per Rouse Check",
+          "description": "10 minutes per Rouse Check",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "submerged_directive",
+          "label": "Submerged Directive",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "rationalize",
+          "label": "Rationalize",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "conditioning",
+          "label": "Conditioning",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "Submerged Directive",
+          "cost": 2.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "requires_all_powers": [
+              "submerged_directive"
+            ]
+          }
+        },
+        {
+          "level": 5,
+          "id": "mass_manipulation",
+          "label": "Mass Manipulation",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "1+",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "terminal_decree",
+          "label": "Terminal Decree",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 11,
+      "named_formula_count": 11,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "fortitude",
+      "label": "Fortitude",
+      "in_clan": false,
+      "type": "Physical",
+      "threat": "Medium to High",
+      "resonance": "Melancholic",
+      "powers": [
+        {
+          "level": 1,
+          "id": "resiliency",
+          "label": "Resiliency",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "toughness",
+          "label": "Toughness",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+1 Health level no wound penalties",
+          "description": "+1 Health level no wound penalties",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "coagulate",
+          "label": "Coagulate",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "enduring_beasts",
+          "label": "Enduring Beasts",
+          "amalgam": "Animalism",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "animalism",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 2,
+          "id": "unswayable_minds",
+          "label": "Unswayable Minds",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "valeren",
+          "label": "Valeren",
+          "amalgam": "Auspex",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 5,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "auspex",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 3,
+          "id": "roots_of_the_mountain",
+          "label": "Roots of the Mountain",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "unyielding",
+          "label": "Unyielding",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "aegis",
+          "label": "Aegis",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "adaptability",
+          "label": "Adaptability",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "flesh_of_marble",
+          "label": "Flesh of Marble",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "personal_armor",
+          "label": "Personal Armor",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 12,
+      "named_formula_count": 12,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "obfuscate",
+      "label": "Obfuscate",
+      "in_clan": false,
+      "type": "Mental",
+      "threat": "Minimal",
+      "resonance": "Melancholic",
+      "powers": [
+        {
+          "level": 1,
+          "id": "conceal",
+          "label": "Conceal",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "silence_of_death",
+          "label": "Silence of Death",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "chimerstry",
+          "label": "Chimerstry",
+          "amalgam": "Presence",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "presence",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 2,
+          "id": "unseen_passage",
+          "label": "Unseen Passage",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "cache",
+          "label": "Cache",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "Conceal",
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "requires_all_powers": [
+              "conceal"
+            ]
+          }
+        },
+        {
+          "level": 3,
+          "id": "fata_morgana",
+          "label": "Fata Morgana",
+          "amalgam": "Presence",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "presence",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 3,
+          "id": "ghost_in_the_machine",
+          "label": "Ghost in the Machine",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "mask_of_a_thousand_faces",
+          "label": "Mask of a Thousand Faces",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "vanish_from_the_mind_s_eye",
+          "label": "Vanish from the Mind's Eye",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "Conceal or Unseen Passage",
+          "cost": 0.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "requires_any_powers": [
+              "conceal",
+              "unseen_passage"
+            ]
+          }
+        },
+        {
+          "level": 4,
+          "id": "soul_mask",
+          "label": "Soul Mask",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "cloak_the_gathering",
+          "label": "Cloak the Gathering",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "1+",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "phantom_hunter",
+          "label": "Phantom Hunter",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 12,
+      "named_formula_count": 12,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "oblivion",
+      "label": "Oblivion",
+      "in_clan": false,
+      "type": "Variable",
+      "threat": "Medium to High",
+      "resonance": "None",
+      "powers": [
+        {
+          "level": 1,
+          "id": "shadow_cloak",
+          "label": "Shadow Cloak",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "oblivion_s_sight",
+          "label": "Oblivion's Sight",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "arms_of_ahriman",
+          "label": "Arms of Ahriman",
+          "amalgam": "Potence",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "potence",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 2,
+          "id": "shadow_cast",
+          "label": "Shadow Cast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "masque_of_death",
+          "label": "Masque of Death",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "aura_of_decay",
+          "label": "Aura of Decay",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "reaper_s_passing",
+          "label": "Reaper's Passing",
+          "amalgam": "Dominate",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 4,
+          "id": "stygian_shroud",
+          "label": "Stygian Shroud",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "touch_of_oblivion",
+          "label": "Touch of Oblivion",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "shadowstep",
+          "label": "Shadowstep",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "tenebrous_avatar",
+          "label": "Tenebrous Avatar",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 11,
+      "named_formula_count": 11,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "potence",
+      "label": "Potence",
+      "in_clan": true,
+      "type": "Physical",
+      "threat": "High",
+      "resonance": "Choleric",
+      "powers": [
+        {
+          "level": 1,
+          "id": "prowess",
+          "label": "Prowess",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+ Potence to non-combat strength test",
+          "description": "+ Potence to non-combat strength test",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "soaring_leap",
+          "label": "Soaring Leap",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "lethal_body",
+          "label": "Lethal Body",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "description": "Unarmed attacks inflict Aggravated damage to mortals and some supernaturals.",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "uncanny_grip",
+          "label": "Uncanny Grip",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "brutal_feed",
+          "label": "Brutal Feed",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "staggering_strike",
+          "label": "Staggering Strike",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "fist_of_caine",
+          "label": "Fist of Caine",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "savage_pursuit",
+          "label": "Savage Pursuit",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "earth_shock",
+          "label": "Earth Shock",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": "Strength",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "puissance",
+          "label": "Puissance",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+1 Brawl and Melee base damage",
+          "description": "+1 Brawl and Melee base damage",
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 10,
+      "named_formula_count": 10,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "presence",
+      "label": "Presence",
+      "in_clan": false,
+      "type": "Social",
+      "threat": "Low to Medium",
+      "resonance": "Sanguine",
+      "powers": [
+        {
+          "level": 1,
+          "id": "awe",
+          "label": "Awe",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "daunt",
+          "label": "Daunt",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "eyes_of_the_serpent",
+          "label": "Eyes of the Serpent",
+          "amalgam": "Protean",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "protean",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 2,
+          "id": "monologue",
+          "label": "Monologue",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "silencing_tongue",
+          "label": "Silencing Tongue",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "dread_gaze",
+          "label": "Dread Gaze",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "entrancement",
+          "label": "Entrancement",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "summon",
+          "label": "Summon",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "nightmare_mantle",
+          "label": "Nightmare Mantle",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "majesty",
+          "label": "Majesty",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "capricious_visage",
+          "label": "Capricious Visage",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "1+",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        }
+      ],
+      "power_count": 11,
+      "named_formula_count": 11,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "protean",
+      "label": "Protean",
+      "in_clan": false,
+      "type": "Physical",
+      "threat": "High",
+      "resonance": "Animal",
+      "powers": [
+        {
+          "level": 1,
+          "id": "eyes_of_the_beast",
+          "label": "Eyes of the Beast",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 1,
+          "id": "weight_of_a_feather",
+          "label": "Weight of a Feather",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "feral_weapons",
+          "label": "Feral Weapons",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "earth_meld",
+          "label": "Earth Meld",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 2,
+          "id": "vicissitude",
+          "label": "Vicissitude",
+          "amalgam": "Dominate",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 3,
+          "id": "fleshcrafting",
+          "label": "Fleshcrafting",
+          "amalgam": "Dominate",
+          "amalgam_level": 2,
+          "prerequisite": "Vicissitude",
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 2,
+            "requires_all_powers": [
+              "vicissitude"
+            ]
+          }
+        },
+        {
+          "level": 3,
+          "id": "unfettered_heart",
+          "label": "Unfettered Heart",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Immune to staking",
+          "description": "Immune to staking",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 3,
+          "id": "shapechange",
+          "label": "Shapechange",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Can buy more forms for 3xp",
+          "description": "Can buy more forms for 3xp",
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 4,
+          "id": "metamorphosis",
+          "label": "Metamorphosis",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": "Shapechange",
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Can buy more forms for 5xp",
+          "description": "Can buy more forms for 5xp",
+          "rules": {
+            "track": "discipline",
+            "requires_all_powers": [
+              "shapechange"
+            ]
+          }
+        },
+        {
+          "level": 4,
+          "id": "abrupt_internment",
+          "label": "Abrupt Internment",
+          "amalgam": "Auspex",
+          "amalgam_level": 1,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Strength",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "auspex",
+            "amalgam_min_level": 1
+          }
+        },
+        {
+          "level": 4,
+          "id": "horrid_form",
+          "label": "Horrid Form",
+          "amalgam": "Dominate",
+          "amalgam_level": 2,
+          "prerequisite": "Vicssitide",
+          "cost": null,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Messy Criticals, +2 Frenzy difficulty",
+          "description": "Messy Criticals, +2 Frenzy difficulty",
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "dominate",
+            "amalgam_min_level": 2,
+            "requires_all_powers": [
+              "vicissitude"
+            ]
+          }
+        },
+        {
+          "level": 5,
+          "id": "heart_of_darkness",
+          "label": "Heart of Darkness",
+          "amalgam": "Fortitude",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Add Heart Removed toggle",
+          "description": "Add Heart Removed toggle",
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "fortitude",
+            "amalgam_min_level": 2
+          }
+        },
+        {
+          "level": 5,
+          "id": "form_of_mist",
+          "label": "Form of Mist",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "discipline"
+          }
+        },
+        {
+          "level": 5,
+          "id": "shape_mastery",
+          "label": "Shape Mastery",
+          "amalgam": "Presence",
+          "amalgam_level": 2,
+          "prerequisite": null,
+          "cost": 2.0,
+          "pool_attribute": "Strength",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "discipline",
+            "amalgam_discipline": "presence",
+            "amalgam_min_level": 2
+          }
+        }
+      ],
+      "power_count": 14,
+      "named_formula_count": 14,
+      "counterfeit_count": 0
+    },
+    {
+      "id": "thin_blood_alchemy",
+      "label": "Thin-Blood Alchemy",
+      "powers": [
+        {
+          "level": 1,
+          "id": "far_reach",
+          "label": "Far Reach",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 3,
+          "duration": 6,
+          "notes": null,
+          "description": "Thin-blood formula: extend reach and grip at a distance.",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 1,
+          "id": "haze",
+          "label": "Haze",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": null,
+          "notes": null,
+          "description": "Thin-blood formula: obscure an area with supernatural fog.",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_a_taste_for_blood",
+          "label": "Counterfeit (A Taste for Blood)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_awe",
+          "label": "Counterfeit (Awe)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_cat_s_grace",
+          "label": "Counterfeit (Cat's Grace)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_cloud_memory",
+          "label": "Counterfeit (Cloud Memory)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_compel",
+          "label": "Counterfeit (Compel)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_conceal",
+          "label": "Counterfeit (Conceal)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_corrosive_vitae",
+          "label": "Counterfeit (Corrosive Vitae)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_daunt",
+          "label": "Counterfeit (Daunt)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_eyes_of_the_beast",
+          "label": "Counterfeit (Eyes of the Beast)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_eyes_of_the_serpent",
+          "label": "Counterfeit (Eyes of the Serpent)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_feral_whispers",
+          "label": "Counterfeit (Feral Whispers)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_heightened_senses",
+          "label": "Counterfeit (Heightened Senses)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_oblivion_s_sight",
+          "label": "Counterfeit (Oblivion's Sight)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_prowess",
+          "label": "Counterfeit (Prowess)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+ Potence to non-combat strength test",
+          "description": "+ Potence to non-combat strength test",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_quicksilver",
+          "label": "Counterfeit (Quicksilver)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_resiliency",
+          "label": "Counterfeit (Resiliency)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_sense_the_beast",
+          "label": "Counterfeit (Sense the Beast)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_sense_the_unseen",
+          "label": "Counterfeit (Sense the Unseen)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_shadow_cloak",
+          "label": "Counterfeit (Shadow Cloak)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_silence_of_death",
+          "label": "Counterfeit (Silence of Death)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_soaring_leap",
+          "label": "Counterfeit (Soaring Leap)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_toughness",
+          "label": "Counterfeit (Toughness)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+1 Health level no wound penalties",
+          "description": "+1 Health level no wound penalties",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "counterfeit_weight_of_a_feather",
+          "label": "Counterfeit (Weight of a Feather)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 2,
+          "id": "envelope",
+          "label": "Envelope",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 3,
+          "duration": 5,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_animal_succulence",
+          "label": "Counterfeit (Animal Succulence)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Slake +1 from animals; feeding penalties 2BP lower from animals",
+          "description": "Slake +1 from animals; feeding penalties 2BP lower from animals",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_arms_of_ahriman",
+          "label": "Counterfeit (Arms of Ahriman)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_atavism",
+          "label": "Counterfeit (Atavism)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_blood_rash",
+          "label": "Counterfeit (Blood Rash)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_cache",
+          "label": "Counterfeit (Cache)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_chimerstry",
+          "label": "Counterfeit (Chimerstry)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_coagulate",
+          "label": "Counterfeit (Coagulate)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_dementation",
+          "label": "Counterfeit (Dementation)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_domitor_s_favor",
+          "label": "Counterfeit (Domitor's Favor)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_earth_meld",
+          "label": "Counterfeit (Earth Meld)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_enduring_beasts",
+          "label": "Counterfeit (Enduring Beasts)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_extinguish_vitae",
+          "label": "Counterfeit (Extinguish Vitae)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_feral_weapons",
+          "label": "Counterfeit (Feral Weapons)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_fleetness",
+          "label": "Counterfeit (Fleetness)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "bonus to initiative = celerity dots",
+          "description": "bonus to initiative = celerity dots",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_lethal_body",
+          "label": "Counterfeit (Lethal Body)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_masque_of_death",
+          "label": "Counterfeit (Masque of Death)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_mesmerize",
+          "label": "Counterfeit (Mesmerize)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_monologue",
+          "label": "Counterfeit (Monologue)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_panacea",
+          "label": "Counterfeit (Panacea)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Composure",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_premonition",
+          "label": "Counterfeit (Premonition)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_rapid_reflexes",
+          "label": "Counterfeit (Rapid Reflexes)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "+ Celerity dots to non-combat dex tests",
+          "description": "+ Celerity dots to non-combat dex tests",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_scry_the_soul",
+          "label": "Counterfeit (Scry the Soul)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_shadow_cast",
+          "label": "Counterfeit (Shadow Cast)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_silencing_tongue",
+          "label": "Counterfeit (Silencing Tongue)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_uncanny_grip",
+          "label": "Counterfeit (Uncanny Grip)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_unseen_passage",
+          "label": "Counterfeit (Unseen Passage)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_unswayable_minds",
+          "label": "Counterfeit (Unswayable Minds)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_valeren",
+          "label": "Counterfeit (Valeren)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 5,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "counterfeit_vicissitude",
+          "label": "Counterfeit (Vicissitude)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 3,
+          "id": "defractionate",
+          "label": "Defractionate",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "airbourne_momentum",
+          "label": "Airbourne Momentum",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_aura_of_decay",
+          "label": "Counterfeit (Aura of Decay)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_blink",
+          "label": "Counterfeit (Blink)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_blood_of_potency",
+          "label": "Counterfeit (Blood of Potency)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_brutal_feed",
+          "label": "Counterfeit (Brutal Feed)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_collective_cognizance",
+          "label": "Counterfeit (Collective Cognizance)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_dread_gaze",
+          "label": "Counterfeit (Dread Gaze)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_enhance_the_wild_ride",
+          "label": "Counterfeit (Enhance the Wild Ride)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "BP +2 to determine Blood Surge bonus in Frenzy",
+          "description": "BP +2 to determine Blood Surge bonus in Frenzy",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_entrancement",
+          "label": "Counterfeit (Entrancement)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_fata_morgana",
+          "label": "Counterfeit (Fata Morgana)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_fleshcrafting",
+          "label": "Counterfeit (Fleshcrafting)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_forgetful_mind",
+          "label": "Counterfeit (Forgetful Mind)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": "10 minutes per Rouse Check",
+          "description": "10 minutes per Rouse Check",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_ghost_in_the_machine",
+          "label": "Counterfeit (Ghost in the Machine)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_mask_of_a_thousand_faces",
+          "label": "Counterfeit (Mask of a Thousand Faces)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_nimble_departure",
+          "label": "Counterfeit (Nimble Departure)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_quell_the_beast",
+          "label": "Counterfeit (Quell the Beast)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_reaper_s_passing",
+          "label": "Counterfeit (Reaper's Passing)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_roots_of_the_mountain",
+          "label": "Counterfeit (Roots of the Mountain)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_scorpion_s_touch",
+          "label": "Counterfeit (Scorpion's Touch)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Dexterity",
+          "pool_skill": 5,
+          "pool_bonus": null,
+          "difficulty": 3,
+          "duration": 8,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_shapechange",
+          "label": "Counterfeit (Shapechange)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Can buy more forms for 3xp",
+          "description": "Can buy more forms for 3xp",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_share_the_senses",
+          "label": "Counterfeit (Share the Senses)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_staggering_strike",
+          "label": "Counterfeit (Staggering Strike)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_submerged_directive",
+          "label": "Counterfeit (Submerged Directive)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_unfettered_heart",
+          "label": "Counterfeit (Unfettered Heart)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Immune to staking",
+          "description": "Immune to staking",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_unliving_hive",
+          "label": "Counterfeit (Unliving Hive)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_unyielding",
+          "label": "Counterfeit (Unyielding)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_abrupt_internment",
+          "label": "Counterfeit (Abrupt Internment)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Strength",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_adaptability",
+          "label": "Counterfeit (Adaptability)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_aegis",
+          "label": "Counterfeit (Aegis)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_conditioning",
+          "label": "Counterfeit (Conditioning)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 2,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_control_the_savage_beast",
+          "label": "Counterfeit (Control the Savage Beast)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Charisma",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_fist_of_caine",
+          "label": "Counterfeit (Fist of Caine)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_horrid_form",
+          "label": "Counterfeit (Horrid Form)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": null,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Messy Criticals, +2 Frenzy difficulty",
+          "description": "Messy Criticals, +2 Frenzy difficulty",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_metamorphosis",
+          "label": "Counterfeit (Metamorphosis)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": "Can buy more forms for 5xp",
+          "description": "Can buy more forms for 5xp",
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_nightmare_mantle",
+          "label": "Counterfeit (Nightmare Mantle)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_rationalize",
+          "label": "Counterfeit (Rationalize)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_savage_pursuit",
+          "label": "Counterfeit (Savage Pursuit)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_slow_the_beating_heart",
+          "label": "Counterfeit (Slow the Beating Heart)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Resolve",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 2,
+          "duration": 5,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_soul_mask",
+          "label": "Counterfeit (Soul Mask)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_spirit_s_touch",
+          "label": "Counterfeit (Spirit's Touch)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Intelligence",
+          "pool_skill": 3,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 4,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 4,
+          "id": "counterfeit_stygian_shroud",
+          "label": "Counterfeit (Stygian Shroud)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_subsume_the_spirit",
+          "label": "Counterfeit (Subsume the Spirit)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": "0-1",
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_summon",
+          "label": "Counterfeit (Summon)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Manipulation",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 2,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_theft_of_vitae",
+          "label": "Counterfeit (Theft of Vitae)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_touch_of_oblivion",
+          "label": "Counterfeit (Touch of Oblivion)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_unerring_aim",
+          "label": "Counterfeit (Unerring Aim)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_unveil_the_edifice",
+          "label": "Counterfeit (Unveil the Edifice)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_vanish_from_the_mind_s_eye",
+          "label": "Counterfeit (Vanish from the Mind's Eye)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0,
+          "pool_attribute": "Wits",
+          "pool_skill": 2,
+          "pool_bonus": null,
+          "difficulty": 1,
+          "duration": 3,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_velocity",
+          "label": "Counterfeit (Velocity)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "counterfeit_zephyr",
+          "label": "Counterfeit (Zephyr)",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 1,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        },
+        {
+          "level": 5,
+          "id": "awaken_the_sleeper",
+          "label": "Awaken the Sleeper",
+          "amalgam": null,
+          "amalgam_level": null,
+          "prerequisite": null,
+          "cost": 0.0,
+          "pool_attribute": null,
+          "pool_skill": 0,
+          "pool_bonus": null,
+          "difficulty": 0,
+          "duration": 0,
+          "notes": null,
+          "rules": {
+            "track": "formula"
+          }
+        }
+      ],
+      "power_count": 107,
+      "named_formula_count": 6,
+      "counterfeit_count": 101
+    }
+  ],
+  "quick_reference": [
+    {
+      "discipline": "celerity",
+      "discipline_label": "Celerity",
+      "power": "Cat's Grace",
+      "power_id": "cat_s_grace",
+      "level": 1,
+      "rouse": 1,
+      "duration": "1 hour"
+    },
+    {
+      "discipline": "celerity",
+      "discipline_label": "Celerity",
+      "power": "Rapid Reflexes",
+      "power_id": "rapid_reflexes",
+      "level": 1,
+      "rouse": 0,
+      "duration": "Passive"
+    },
+    {
+      "discipline": "celerity",
+      "discipline_label": "Celerity",
+      "power": "Nimble Departure",
+      "power_id": "nimble_departure",
+      "level": 2,
+      "rouse": 1,
+      "duration": "N/A"
+    },
+    {
+      "discipline": "presence",
+      "discipline_label": "Presence",
+      "power": "Daunt",
+      "power_id": "daunt",
+      "level": 2,
+      "rouse": 1,
+      "duration": "1 scene"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Far Reach",
+      "power_id": "far_reach",
+      "level": 3,
+      "rouse": 1,
+      "duration": null
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Haze",
+      "power_id": "haze",
+      "level": 3,
+      "rouse": 1,
+      "duration": null
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Envelope",
+      "power_id": "envelope",
+      "level": 3,
+      "rouse": 1,
+      "duration": "15 minutes"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Counterfeit (Unseen Passage)",
+      "power_id": "counterfeit_unseen_passage",
+      "level": 4,
+      "rouse": 1,
+      "duration": "Until detection"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Defractionate",
+      "power_id": "defractionate",
+      "level": 4,
+      "rouse": 0,
+      "duration": "24 hours+"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Airbourne Momentum",
+      "power_id": "airbourne_momentum",
+      "level": 5,
+      "rouse": 1,
+      "duration": "30 minutes"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Counterfeit (Quell the Beast)",
+      "power_id": "counterfeit_quell_the_beast",
+      "level": 5,
+      "rouse": 1,
+      "duration": "Varies"
+    },
+    {
+      "discipline": "thin_blood_alchemy",
+      "discipline_label": "Thin-Blood Alchemy",
+      "power": "Awaken the Sleeper",
+      "power_id": "awaken_the_sleeper",
+      "level": 1,
+      "rouse": 0,
+      "duration": "24 hours+"
+    }
+  ],
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  }
+}

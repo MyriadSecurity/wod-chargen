@@ -14,6 +14,7 @@ from wod_chargen import __version__ as ENGINE_VERSION
 class SharePayload:
     schema: str = "0.1"
     seed: int = 0
+    convictions_seed: int | None = None
     game: str = "lotn_v5"
     venue: str = "mes_end_to_dawn"
     options: dict[str, Any] = field(default_factory=dict)
@@ -25,6 +26,8 @@ class SharePayload:
             "game": self.game,
             "venue": self.venue,
         }
+        if self.convictions_seed is not None:
+            params["convictions_seed"] = str(self.convictions_seed)
         for key, value in sorted(self.options.items()):
             if value is None or value == "":
                 continue
@@ -47,7 +50,7 @@ def decode_query(query: str) -> SharePayload:
     if schema not in SUPPORTED_SCHEMAS:
         raise ValueError(f"Unsupported or missing schema: {schema!r}")
 
-    reserved = {"schema", "seed", "game", "venue"}
+    reserved = {"schema", "seed", "convictions_seed", "game", "venue"}
     options = {k: v for k, v in flat.items() if k not in reserved}
 
     try:
@@ -55,9 +58,17 @@ def decode_query(query: str) -> SharePayload:
     except ValueError as exc:
         raise ValueError("Invalid seed") from exc
 
+    convictions_seed: int | None = None
+    if "convictions_seed" in flat:
+        try:
+            convictions_seed = int(flat["convictions_seed"])
+        except ValueError as exc:
+            raise ValueError("Invalid convictions_seed") from exc
+
     return SharePayload(
         schema=schema,
         seed=seed,
+        convictions_seed=convictions_seed,
         game=flat.get("game", "lotn_v5"),
         venue=flat.get("venue", "mes_end_to_dawn"),
         options=options,

@@ -3,226 +3,747 @@
     {
       "id": "alleycat",
       "label": "Alleycat",
-      "summary": "Feed by force or intimidation — stalk, overpower, and drink when you can.",
-      "feeding_pool": "Strength + Brawl",
+      "summary": "An opportunistic feeder \u2014 ambush the weak and unsuspecting, threaten, overpower, and leave victims dazed or dead.",
+      "feeding_pool": "Wits + Streetwise",
+      "pool": {
+        "attribute": "wits",
+        "skill": "streetwise"
+      },
+      "pool_weights": {
+        "attributes": {
+          "wits": 1.4
+        },
+        "skills": {
+          "streetwise": 1.55,
+          "intimidation": 1.25,
+          "brawl": 1.25
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "contacts": 1.6,
+          "resources": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Intimidation (Stickups) or Brawl (Grappling)",
-        "+1 Celerity or Potence",
-        "Criminal Contacts •••"
+        "Contacts \u2022\u2022 (Underworld or Street)",
+        "Resources \u2022 + Cash Money advantage"
       ],
-      "drawbacks": ["−1 Humanity"],
+      "drawbacks": [
+        "\u22121 Humanity"
+      ],
+      "package": {
+        "humanity": -1,
+        "backgrounds": [
+          {
+            "type": "contacts",
+            "dots": 2,
+            "sphere_options": [
+              "underworld",
+              "street"
+            ]
+          }
+        ],
+        "background_grants": [
+          {
+            "type": "resources",
+            "dots": 1,
+            "advantage": {
+              "id": "cash_money",
+              "dots": 1
+            }
+          }
+        ]
+      },
       "weight": 1.0
     },
     {
       "id": "bagger",
       "label": "Bagger",
-      "summary": "Procure cold or preserved blood through theft, black markets, or medical channels instead of hunting the living.",
-      "feeding_pool": "Intelligence + Streetwise",
+      "summary": "Procure bagged blood from the black market or steal from hospitals when your stash runs dry.",
+      "feeding_pool": "Intelligence + Larceny",
+      "pool": {
+        "attribute": "intelligence",
+        "skill": "larceny"
+      },
+      "pool_weights": {
+        "attributes": {
+          "intelligence": 1.4
+        },
+        "skills": {
+          "larceny": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "contacts": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Larceny (Lock Picking) or Streetwise (Black Market)",
-        "+1 Blood Sorcery (Tremere/Banu Haqim), Oblivion (Hecata/Lasombra), or Obfuscate",
-        "Feeding Merit: Iron Gullet •••"
-      ],
-      "drawbacks": ["Enemy ••"],
-      "restrictions": ["Ventrue cannot select this type"],
-      "weight": 0.8
-    },
-    {
-      "id": "blood_leech",
-      "label": "Blood Leech",
-      "summary": "Feed on vampire vitae rather than mortals — hunted, coerced, or paid for.",
-      "feeding_pool": "Roleplay (no dice pool)",
-      "benefits": [
-        "Specialty: Brawl (Kindred) or Stealth (Against Kindred)",
-        "+1 Celerity or Protean",
-        "+1 Blood Potency"
+        "Feeding Merit: Iron Gullet \u2022\u2022\u2022",
+        "Contacts \u2022\u2022 (Underworld, black-market sellers)"
       ],
       "drawbacks": [
-        "−1 Humanity",
-        "Dark Secret: Diablerist •• or Shunned ••",
-        "Feeding Flaw: Prey Exclusion (Mortals) ••"
+        "Enemy \u2022\u2022"
       ],
-      "weight": 0.7
+      "restrictions": [
+        "Blood Potency 2 or lower only; must change Predator Type if BP rises above 2"
+      ],
+      "requires_max_blood_potency": 2,
+      "package": {
+        "merits": [
+          {
+            "id": "iron_gullet",
+            "dots": 3,
+            "category": "feeding"
+          }
+        ],
+        "backgrounds": [
+          {
+            "type": "contacts",
+            "dots": 2,
+            "sphere": "underworld"
+          }
+        ],
+        "flaws": [
+          {
+            "id": "enemy",
+            "dots": 2,
+            "note": "respawns within one month or two games unless removed with XP"
+          }
+        ]
+      },
+      "weight": 0.8
     },
     {
       "id": "cleaver",
       "label": "Cleaver",
-      "summary": "Covertly feed from mortal family or close friends you still maintain ties with.",
+      "summary": "Feed covertly from mortal family and close friends while hiding your undead condition.",
       "feeding_pool": "Manipulation + Subterfuge",
+      "pool": {
+        "attribute": "manipulation",
+        "skill": "subterfuge"
+      },
+      "pool_weights": {
+        "attributes": {
+          "manipulation": 1.4
+        },
+        "skills": {
+          "subterfuge": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "herd": 1.6,
+          "mask": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Persuasion (Gaslighting) or Subterfuge (Coverups)",
-        "+1 Dominate or Animalism",
-        "Herd ••"
-      ],
-      "drawbacks": ["Dark Secret: Cleaver •"],
-      "weight": 0.8
-    },
-    {
-      "id": "consensualist",
-      "label": "Consensualist",
-      "summary": "Never feed against a vessel's free will — charity drives, kink communities, or open consent.",
-      "feeding_pool": "Manipulation + Persuasion",
-      "benefits": [
-        "Specialty: Medicine (Phlebotomy) or Persuasion (Vessels)",
-        "+1 Auspex or Fortitude",
-        "+1 Humanity"
+        "Herd \u2022\u2022",
+        "Mask \u2022\u2022"
       ],
       "drawbacks": [
-        "Dark Secret: Masquerade Breacher •",
-        "Feeding Flaw: Prey Exclusion (Nonconsenting) •"
+        "Dark Secret: Cleaver \u2022"
       ],
-      "weight": 0.6
+      "package": {
+        "flaws": [
+          {
+            "id": "cleaver",
+            "dots": 1,
+            "category": "dark_secret"
+          }
+        ],
+        "backgrounds": [
+          {
+            "type": "herd",
+            "dots": 2
+          },
+          {
+            "type": "mask",
+            "dots": 2
+          }
+        ]
+      },
+      "weight": 0.9
+    },
+    {
+      "id": "consentualist",
+      "label": "Consentualist",
+      "summary": "Always feed from mortals who consent \u2014 walking a fine line with the Masquerade.",
+      "feeding_pool": "Manipulation + Persuasion",
+      "pool": {
+        "attribute": "manipulation",
+        "skill": "persuasion"
+      },
+      "pool_weights": {
+        "attributes": {
+          "manipulation": 1.4
+        },
+        "skills": {
+          "persuasion": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "herd": 1.6
+        }
+      },
+      "benefits": [
+        "+1 Humanity",
+        "Herd \u2022\u2022\u2022 + one Herd Advantage"
+      ],
+      "drawbacks": [
+        "Dark Secret: Masquerade Breacher \u2022",
+        "Prey Exclusion (non-consenting) \u2022"
+      ],
+      "package": {
+        "humanity": 1,
+        "backgrounds": [
+          {
+            "type": "herd",
+            "dots": 3
+          }
+        ],
+        "advantage_spend": {
+          "background": "herd",
+          "dots": 1,
+          "options": [
+            "friendly",
+            "flavor_station",
+            "open_bar"
+          ]
+        },
+        "flaws": [
+          {
+            "id": "masquerade_breacher",
+            "dots": 1,
+            "category": "dark_secret"
+          },
+          {
+            "id": "prey_exclusion_non_consenting",
+            "dots": 1,
+            "category": "feeding"
+          }
+        ]
+      },
+      "weight": 0.7
     },
     {
       "id": "extortionist",
       "label": "Extortionist",
-      "summary": "Force victims to bleed for you, or trade blood for protection, surveillance, and favors.",
+      "summary": "Promise deals mortals cannot refuse, then collect payment in blood once they are on the hook.",
       "feeding_pool": "Manipulation + Intimidation",
+      "pool": {
+        "attribute": "manipulation",
+        "skill": "intimidation"
+      },
+      "pool_weights": {
+        "attributes": {
+          "manipulation": 1.4
+        },
+        "skills": {
+          "intimidation": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "contacts": 1.6,
+          "allies": 1.6,
+          "resources": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Intimidation (Coercion) or Larceny (Security)",
-        "+1 Dominate or Potence",
-        "3 dots between Contacts and Resources"
+        "Resources \u2022 + one Resources Advantage",
+        "Contacts or Allies \u2022\u2022\u2022 (any Sphere)"
       ],
-      "drawbacks": ["Enemy •• (police or escaped victim)"],
-      "weight": 0.7
+      "drawbacks": [
+        "Enemy \u2022\u2022 (escaped victim; any Sphere)"
+      ],
+      "package": {
+        "background_grants": [
+          {
+            "type": "resources",
+            "dots": 1,
+            "advantage_pick": {
+              "options": [
+                "cash_money",
+                "cryptocurrency",
+                "liquidity"
+              ],
+              "dots": 1
+            }
+          }
+        ],
+        "background_spend": {
+          "dots": 3,
+          "options": [
+            "contacts",
+            "allies"
+          ]
+        },
+        "flaws": [
+          {
+            "id": "enemy",
+            "dots": 2
+          }
+        ]
+      },
+      "weight": 0.75
     },
     {
       "id": "farmer",
       "label": "Farmer",
-      "summary": "Feed exclusively from animals.",
+      "summary": "Feed exclusively from animals \u2014 a cattle ranch, pet stores, zoo work, or similar.",
       "feeding_pool": "Composure + Animal Ken",
+      "pool": {
+        "attribute": "composure",
+        "skill": "animal_ken"
+      },
+      "pool_weights": {
+        "attributes": {
+          "composure": 1.4
+        },
+        "skills": {
+          "animal_ken": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "haven": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Animal Ken (Specific Animal) or Survival (Hunting)",
-        "+1 Animalism or Protean",
+        "Haven \u2022\u2022 + Zoo Haven Advantage \u2022\u2022",
         "+1 Humanity"
       ],
-      "drawbacks": ["Feeding Flaw: Farmer ••"],
-      "restrictions": ["Ventrue cannot select; Blood Potency 3+ cannot select"],
+      "drawbacks": [
+        "Farmer \u2022\u2022 Feeding Flaw"
+      ],
+      "restrictions": [
+        "Blood Potency 2 or lower only; must change Predator Type if BP rises above 2"
+      ],
+      "requires_max_blood_potency": 2,
+      "package": {
+        "humanity": 1,
+        "background_grants": [
+          {
+            "type": "haven",
+            "dots": 2,
+            "advantage": {
+              "id": "zoo",
+              "dots": 2
+            }
+          }
+        ],
+        "flaws": [
+          {
+            "id": "farmer",
+            "dots": 2,
+            "category": "feeding"
+          }
+        ]
+      },
       "weight": 0.6
+    },
+    {
+      "id": "ferryman",
+      "label": "Ferryman",
+      "summary": "Send your ghoul retainer to procure blood while you stay off the streets.",
+      "feeding_pool": "Special (ghoul retainer; Storyteller resolves)",
+      "pool": null,
+      "pool_weights": {
+        "attributes": {},
+        "skills": {}
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "allies": 1.6,
+          "haven": 1.6
+        }
+      },
+      "benefits": [
+        "Ally \u2022\u2022 + Retainer advantage \u2022\u2022",
+        "Haven \u2022\u2022"
+      ],
+      "drawbacks": [
+        "Mythical Flaws \u2022\u2022\u2022 (Storyteller-assigned)"
+      ],
+      "package": {
+        "background_grants": [
+          {
+            "type": "allies",
+            "dots": 2,
+            "advantage": {
+              "id": "retainer",
+              "dots": 2
+            }
+          },
+          {
+            "type": "haven",
+            "dots": 2
+          }
+        ],
+        "flaw_spend": {
+          "dots": 3,
+          "category": "mythical",
+          "options": [
+            "bound_to_the_earth",
+            "eerie_presence",
+            "folkloric_block",
+            "haunted",
+            "stigmata",
+            "trouble_magnet"
+          ]
+        }
+      },
+      "weight": 0.65
     },
     {
       "id": "graverobber",
       "label": "Graverobber",
-      "summary": "Feed from fresh corpses, mourners, and the frightened — often tied to hospitals, morgues, or churches.",
-      "feeding_pool": "Resolve + Medicine",
+      "summary": "Feed on mourners and morgue visitors \u2014 or preserved corpses when the living run dry.",
+      "feeding_pool": "Wits + Medicine",
+      "pool": {
+        "attribute": "wits",
+        "skill": "medicine"
+      },
+      "pool_weights": {
+        "attributes": {
+          "wits": 1.4
+        },
+        "skills": {
+          "medicine": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "haven": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Occult (Grave Rituals) or Medicine (Cadavers)",
-        "+1 Fortitude or Oblivion (Hecata/Lasombra)",
-        "Feeding Merit: Iron Gullet •••",
-        "Haven •"
+        "Feeding Merit: Iron Gullet \u2022\u2022\u2022",
+        "Haven \u2022 + Walk-In Freezer advantage"
       ],
-      "drawbacks": ["Herd Flaw: Obvious Predator ••"],
-      "weight": 0.5
+      "drawbacks": [
+        "Obvious Predator \u2022\u2022"
+      ],
+      "package": {
+        "merits": [
+          {
+            "id": "iron_gullet",
+            "dots": 3,
+            "category": "feeding"
+          }
+        ],
+        "background_grants": [
+          {
+            "type": "haven",
+            "dots": 1,
+            "advantage": {
+              "id": "walk_in_freezer",
+              "dots": 1
+            }
+          }
+        ],
+        "flaws": [
+          {
+            "id": "obvious_predator",
+            "dots": 2,
+            "category": "feeding"
+          }
+        ]
+      },
+      "weight": 0.7
     },
     {
-      "id": "grim_reaper",
-      "label": "Grim Reaper",
-      "summary": "Hunt hospice, assisted living, and others near death — always moving to find the next dying vessel.",
-      "feeding_pool": "Intelligence + Medicine",
+      "id": "hitcher",
+      "label": "Hitcher",
+      "summary": "Feed from travelers at rest stops and roadside diners \u2014 rarely locals, rarely missed.",
+      "feeding_pool": "Wits + Etiquette",
+      "pool": {
+        "attribute": "wits",
+        "skill": "etiquette"
+      },
+      "pool_weights": {
+        "attributes": {
+          "wits": 1.4
+        },
+        "skills": {
+          "etiquette": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "haven": 1.6,
+          "resources": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Awareness (Death) or Larceny (Forgery)",
-        "+1 Auspex or Oblivion (Hecata/Lasombra)",
-        "+1 Allies or Influence (medical community)",
-        "+1 Humanity"
+        "Haven \u2022 + Garage advantage",
+        "Resources \u2022 + Liquidity advantage"
       ],
-      "drawbacks": ["Feeding Flaw: Prey Exclusion (Healthy Mortals) •"],
-      "weight": 0.5
-    },
-    {
-      "id": "montero",
-      "label": "Montero",
-      "summary": "Retainers or allies drive prey toward you — long cons, flash mobs, or coordinated pursuits.",
-      "feeding_pool": "Intelligence + Stealth",
-      "benefits": [
-        "Specialty: Leadership (Hunting Pack) or Stealth (Stakeout)",
-        "+1 Dominate or Obfuscate",
-        "Retainers ••"
+      "drawbacks": [
+        "Prey Exclusion \u2022 (player choice)"
       ],
-      "drawbacks": ["−1 Humanity"],
-      "weight": 0.6
+      "package": {
+        "background_grants": [
+          {
+            "type": "haven",
+            "dots": 1,
+            "advantage": {
+              "id": "garage",
+              "dots": 1
+            }
+          },
+          {
+            "type": "resources",
+            "dots": 1,
+            "advantage": {
+              "id": "liquidity",
+              "dots": 1
+            }
+          }
+        ],
+        "flaw_pick": {
+          "options": [
+            {
+              "id": "prey_exclusion_mortals",
+              "dots": 1,
+              "category": "feeding"
+            },
+            {
+              "id": "prey_exclusion_locals",
+              "dots": 1,
+              "category": "feeding"
+            },
+            {
+              "id": "prey_exclusion_women",
+              "dots": 1,
+              "category": "feeding"
+            }
+          ]
+        }
+      },
+      "weight": 0.65
     },
     {
       "id": "osiris",
       "label": "Osiris",
-      "summary": "Feed from cultists, congregations, fans, or any devoted group you sway.",
+      "summary": "Celebrity or cult leader \u2014 worshipers provide blood lest you forget them.",
       "feeding_pool": "Manipulation + Subterfuge",
+      "pool": {
+        "attribute": "manipulation",
+        "skill": "subterfuge"
+      },
+      "pool_weights": {
+        "attributes": {
+          "manipulation": 1.4
+        },
+        "skills": {
+          "subterfuge": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "herd": 1.6,
+          "fame": 1.6,
+          "mask": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Occult (Specific Tradition) or Performance (Specific Entertainment Field)",
-        "+1 Blood Sorcery (Tremere/Banu Haqim) or Presence",
-        "3 dots between Fame and Herd"
+        "Mask \u2022\u2022",
+        "Herd or Fame \u2022\u2022\u2022 (free spend)"
       ],
-      "drawbacks": ["2 dots between Enemies and Mythic Flaws"],
-      "weight": 0.7
-    },
-    {
-      "id": "pursuer",
-      "label": "Pursuer",
-      "summary": "Stalk a victim, learn their habits, and strike when hunger and opportunity align.",
-      "feeding_pool": "Intelligence + Investigation",
-      "benefits": [
-        "Specialty: Investigation (Profiling) or Stealth (Shadowing)",
-        "+1 Animalism or Auspex",
-        "Merit: Bloodhound •",
-        "Contacts • (morally inflexible hunting grounds)"
+      "drawbacks": [
+        "Enemy \u2022\u2022 (any Sphere)"
       ],
-      "drawbacks": ["−1 Humanity"],
-      "weight": 0.8
+      "package": {
+        "backgrounds": [
+          {
+            "type": "mask",
+            "dots": 2
+          }
+        ],
+        "background_spend": {
+          "dots": 3,
+          "options": [
+            "herd",
+            "fame"
+          ]
+        },
+        "flaws": [
+          {
+            "id": "enemy",
+            "dots": 2
+          }
+        ]
+      },
+      "weight": 0.85
     },
     {
       "id": "sandman",
       "label": "Sandman",
-      "summary": "Feed from sleeping mortals — breaking into homes, hospitals, or targeting the homeless.",
+      "summary": "Feed from sleeping mortals \u2014 security guard, hotel attendant, graveyard-shift nurse covers.",
       "feeding_pool": "Dexterity + Stealth",
+      "pool": {
+        "attribute": "dexterity",
+        "skill": "stealth"
+      },
+      "pool_weights": {
+        "attributes": {
+          "dexterity": 1.4
+        },
+        "skills": {
+          "stealth": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "mask": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Medicine (Anesthetics) or Stealth (Break-in)",
-        "+1 Auspex or Obfuscate",
-        "Resources •"
+        "Mask \u2022\u2022\u2022\u2022 (may split across identities)"
       ],
-      "drawbacks": [],
-      "weight": 0.9
+      "drawbacks": [
+        "Prey Exclusion: Conscious Mortals \u2022"
+      ],
+      "package": {
+        "backgrounds": [
+          {
+            "type": "mask",
+            "dots": 4,
+            "split_instances": true
+          }
+        ],
+        "flaws": [
+          {
+            "id": "prey_exclusion_conscious",
+            "dots": 1,
+            "category": "feeding"
+          }
+        ]
+      },
+      "weight": 0.8
     },
     {
       "id": "scene_queen",
       "label": "Scene Queen",
-      "summary": "Hunt within a subculture or exclusive scene where you hold status and a crafted pose.",
-      "feeding_pool": "Manipulation + Persuasion",
+      "summary": "Well-established in a subculture \u2014 your reputation grants easy feeding among adoring peers.",
+      "feeding_pool": "Charisma + Etiquette",
+      "pool": {
+        "attribute": "charisma",
+        "skill": "etiquette"
+      },
+      "pool_weights": {
+        "attributes": {
+          "charisma": 1.4
+        },
+        "skills": {
+          "etiquette": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "mask": 1.6,
+          "fame": 1.6,
+          "herd": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Etiquette, Leadership, or Streetwise (Specific Scene)",
-        "+1 Dominate or Potence",
-        "Fame •",
-        "Contacts •"
+        "Mask \u2022\u2022 + Fame \u2022 (linked to Mask)",
+        "Herd \u2022\u2022"
       ],
       "drawbacks": [
-        "Influence Flaw: Disliked • (outside subculture) or Feeding Flaw: Prey Exclusion • (other subculture)"
+        "Enemy \u2022\u2022 or Mythical Flaws \u2022\u2022"
       ],
-      "weight": 0.9
+      "package": {
+        "backgrounds": [
+          {
+            "type": "mask",
+            "dots": 2
+          },
+          {
+            "type": "fame",
+            "dots": 1
+          },
+          {
+            "type": "herd",
+            "dots": 2
+          }
+        ],
+        "flaw_choice": [
+          {
+            "flaws": [
+              {
+                "id": "enemy",
+                "dots": 2
+              }
+            ]
+          },
+          {
+            "flaw_spend": {
+              "dots": 2,
+              "category": "mythical",
+              "options": [
+                "bound_to_the_earth",
+                "eerie_presence",
+                "folkloric_block",
+                "haunted",
+                "stigmata",
+                "trouble_magnet"
+              ]
+            }
+          }
+        ]
+      },
+      "weight": 0.85
     },
     {
       "id": "siren",
       "label": "Siren",
-      "summary": "Feed through seduction or under the pretense of sexual encounters.",
+      "summary": "Charm and seduce victims \u2014 the Kiss masked as intimacy, broken hearts in your wake.",
       "feeding_pool": "Charisma + Subterfuge",
+      "pool": {
+        "attribute": "charisma",
+        "skill": "subterfuge"
+      },
+      "pool_weights": {
+        "attributes": {
+          "charisma": 1.4
+        },
+        "skills": {
+          "subterfuge": 1.55
+        }
+      },
+      "benefit_weights": {
+        "backgrounds": {
+          "herd": 1.6,
+          "fame": 1.6
+        }
+      },
       "benefits": [
-        "Specialty: Persuasion (Seduction) or Subterfuge (Seduction)",
-        "+1 Fortitude or Presence",
-        "Looks Merit: Beautiful ••"
+        "Herd or Fame \u2022\u2022\u2022\u2022\u2022 (backgrounds and/or advantages)"
       ],
-      "drawbacks": ["Enemy • (spurned lover or jealous partner)"],
-      "weight": 1.2
-    },
-    {
-      "id": "trapdoor",
-      "label": "Trapdoor",
-      "summary": "Build a nest — club, haunt, or trap — and lure prey inside on your terms.",
-      "feeding_pool": "Charisma + Stealth",
-      "benefits": [
-        "Specialty: Persuasion (Marketing) or Stealth (Ambushes or Traps)",
-        "+1 Protean or Obfuscate",
-        "Haven •",
-        "+1 Retainers, Herd, or second Haven dot"
+      "drawbacks": [
+        "Enemy \u2022\u2022 (spurned lover; any Sphere)"
       ],
-      "drawbacks": ["Haven Flaw: Creepy • or Haunted •"],
-      "weight": 0.6
+      "package": {
+        "background_spend": {
+          "dots": 5,
+          "options": [
+            "herd",
+            "fame"
+          ]
+        },
+        "flaws": [
+          {
+            "id": "enemy",
+            "dots": 2
+          }
+        ]
+      },
+      "weight": 0.9
     }
   ]
 }

@@ -93,9 +93,11 @@ Per-background URL: `/backgrounds/<slug>` (e.g. [/backgrounds/mask](https://www.
 
 ## Predator types (index)
 
-[Full list](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types)
+[SRD hub](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types) — partial; some entries require **Enemies of the Night** (not yet in `predator_types.json`).
 
-Blood Leech · Cleaver · Consensualist · Extortionist · Graverobber · Grim Reaper · Montero · Pursuer · Sandman · Scene Queen · Trapdoor (and others — verify against `predator_types.json`)
+**Implemented (pocket book, Ch. 3 pp. 70–75):** Alleycat, Bagger, Cleaver, Consentualist, Extortionist, Farmer, Ferryman, Graverobber, Hitcher, Osiris, Sandman, Scene Queen, Siren.
+
+**Deferred until Enemies of the Night:** Blood Leech, Montero, Trapdoor, and any other supplement-only types. LoTN MET predator packages grant backgrounds/merits/flaws only — no free discipline dots (unlike tabletop V5).
 
 ---
 

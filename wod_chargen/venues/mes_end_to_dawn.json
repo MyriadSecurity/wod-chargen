@@ -10,6 +10,6 @@
   },
   "mc_milestones": false,
   "bonus_xp": false,
-  "house_rules": { "max_generation": 13 },
+  "house_rules": { "min_generation": 9, "max_generation": 13 },
   "archetype_pack": "default"
 }

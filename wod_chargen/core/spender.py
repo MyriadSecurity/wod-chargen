@@ -81,8 +81,7 @@ def _pick_candidate(
     group_weights = [by_group[g][0].weight for g in eligible_groups]
     chosen_group = rng.weighted_choice(eligible_groups, group_weights)
     pool = by_group[chosen_group]
-    roll = rng.uniform()
-    scored: list[tuple[PurchaseCandidate, float, float]] = []
+    scored: list[tuple[PurchaseCandidate, float, float, float]] = []
     for cand in pool:
         eff = efficiency_item_bias(cand.new_level - 1, cand.new_level)
         eff *= budget_efficiency_scale(
@@ -91,9 +90,10 @@ def _pick_candidate(
             spent_by_macro=spent_by_macro,
             xp_spent=xp_spent,
         )
-        score = cand.item_weight() * eff * roll
-        scored.append((cand, eff, score))
-    best, eff, score = max(scored, key=lambda pair: pair[2])
+        item_roll = rng.uniform()
+        score = cand.item_weight() * eff * item_roll
+        scored.append((cand, eff, score, item_roll))
+    best, eff, score, roll = max(scored, key=lambda pair: pair[2])
     return best, roll, score, eff
 
 
@@ -122,7 +122,7 @@ def spend_xp(
 
     while remaining > 0 and iterations < MAX_ITERATIONS:
         iterations += 1
-        candidates = [c for c in enumerate_fn() if c.cost <= remaining and c.cost > 0]
+        candidates = [c for c in enumerate_fn() if 0 < c.cost <= remaining]
         if not candidates:
             break
 

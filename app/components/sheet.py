@@ -8,6 +8,8 @@ from pyscript import document
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
+from wod_chargen.games.lotn_v5.merits_flaws import trait_display_label
+from wod_chargen.games.lotn_v5.disciplines import power_label
 from wod_chargen.games.lotn_v5.backgrounds import (
     background_defs,
     background_label,
@@ -117,7 +119,85 @@ def _trait_column(title: str, attrs: list[str], skills: list[str], character: di
     return col
 
 
-def _rated_traits_section(title: str, items: dict[str, int]) -> Any | None:
+def _disciplines_section(character: dict[str, Any]) -> Any | None:
+    discs = {k: v for k, v in character.get("disciplines", {}).items() if v > 0}
+    if not discs:
+        return None
+    picks = character.get("discipline_powers", {})
+    section = document.createElement("section")
+    section.className = "sheet-disciplines"
+    section.appendChild(_section_heading("Disciplines"))
+    list_el = document.createElement("div")
+    list_el.className = "sheet-discipline-list"
+    for disc_id, rating in sorted(discs.items()):
+        card = document.createElement("div")
+        card.className = "sheet-discipline-card"
+        head = document.createElement("div")
+        head.className = "sheet-discipline-card__head"
+        name = document.createElement("span")
+        name.className = "sheet-stat__name"
+        name.innerText = _title(disc_id)
+        head.appendChild(name)
+        head.appendChild(_dot_row(int(rating), max_dots=5))
+        card.appendChild(head)
+        levels = picks.get(disc_id, {})
+        if levels:
+            powers = document.createElement("ul")
+            powers.className = "sheet-discipline-card__powers"
+            for level in sorted(levels.keys(), key=lambda x: int(x)):
+                item = document.createElement("li")
+                pid = levels[level]
+                item.innerText = f"•{level} {power_label(pid)}"
+                powers.appendChild(item)
+            card.appendChild(powers)
+        list_el.appendChild(card)
+    section.appendChild(list_el)
+    return section
+
+
+def _power_id_list_section(title: str, power_ids: list[str]) -> Any | None:
+    if not power_ids:
+        return None
+    section = document.createElement("section")
+    section.className = "sheet-rated-traits"
+    section.appendChild(_section_heading(title))
+    grid = document.createElement("div")
+    grid.className = "sheet-rated-traits__grid"
+    for pid in sorted(power_ids):
+        line = document.createElement("div")
+        line.className = "sheet-stat"
+        label = document.createElement("span")
+        label.className = "sheet-stat__name"
+        label.innerText = power_label(pid)
+        line.appendChild(label)
+        grid.appendChild(line)
+    section.appendChild(grid)
+    return section
+
+
+def _formula_section(character: dict[str, Any]) -> Any | None:
+    formulas = {k: v for k, v in character.get("thin_blood_formulas", {}).items() if v > 0}
+    if not formulas:
+        return None
+    fp = character.get("formula_powers", {})
+    section = document.createElement("section")
+    section.className = "sheet-disciplines"
+    section.appendChild(_section_heading("Thin-Blood Formulas"))
+    list_el = document.createElement("div")
+    list_el.className = "sheet-discipline-list"
+    for fid in sorted(formulas.keys()):
+        card = document.createElement("div")
+        card.className = "sheet-discipline-card"
+        name = document.createElement("span")
+        name.className = "sheet-stat__name"
+        name.innerText = power_label(fid)
+        card.appendChild(name)
+        list_el.appendChild(card)
+    section.appendChild(list_el)
+    return section
+
+
+def _rated_traits_section(title: str, items: dict[str, int], *, kind: str | None = None) -> Any | None:
     rated = {k: v for k, v in items.items() if v > 0}
     if not rated:
         return None
@@ -127,7 +207,8 @@ def _rated_traits_section(title: str, items: dict[str, int]) -> Any | None:
     grid = document.createElement("div")
     grid.className = "sheet-rated-traits__grid"
     for key, value in sorted(rated.items()):
-        grid.appendChild(_stat_line(key, value))
+        label = trait_display_label(key, kind) if kind in ("merit", "flaw") else _title(key)
+        grid.appendChild(_stat_line(label, value))
     section.appendChild(grid)
     return section
 
@@ -220,7 +301,52 @@ def _background_section(entries: list[dict[str, Any]]) -> Any | None:
     return section
 
 
-def render_lotn_v5_sheet(character: dict[str, Any]) -> Any:
+def _convictions_section(
+    convictions: list[dict[str, str]],
+    *,
+    convictions_seed: int,
+    on_reroll=None,
+) -> Any:
+    section = document.createElement("section")
+    section.className = "sheet-convictions"
+    section.appendChild(_section_heading("Convictions"))
+
+    list_el = document.createElement("ol")
+    list_el.className = "sheet-convictions__list"
+    for idx, entry in enumerate(convictions, start=1):
+        item = document.createElement("li")
+        item.className = "sheet-convictions__item"
+        item.innerText = entry["text"]
+        list_el.appendChild(item)
+    section.appendChild(list_el)
+
+    footer = document.createElement("div")
+    footer.className = "sheet-convictions__footer no-print"
+
+    seed_note = document.createElement("p")
+    seed_note.className = "sheet-convictions__seed"
+    seed_note.innerText = f"Convictions seed {convictions_seed}"
+    footer.appendChild(seed_note)
+
+    if on_reroll is not None:
+        btn = document.createElement("button")
+        btn.type = "button"
+        btn.className = "btn-secondary sheet-convictions__reroll"
+        btn.innerText = "Re-roll convictions"
+        btn.onclick = on_reroll
+        footer.appendChild(btn)
+
+    section.appendChild(footer)
+    return section
+
+
+def render_lotn_v5_sheet(
+    character: dict[str, Any],
+    *,
+    convictions: list[dict[str, str]] | None = None,
+    convictions_seed: int | None = None,
+    on_reroll_convictions=None,
+) -> Any:
     """Build a printable LoTN-style sheet element from generated character data."""
     attrs = load_json_cached(DATA, "attributes.json")
     skills = load_json_cached(DATA, "skills.json")
@@ -279,6 +405,15 @@ def render_lotn_v5_sheet(character: dict[str, Any]) -> Any:
     header.appendChild(meta)
     sheet.appendChild(header)
 
+    if convictions and convictions_seed is not None:
+        sheet.appendChild(
+            _convictions_section(
+                convictions,
+                convictions_seed=convictions_seed,
+                on_reroll=on_reroll_convictions,
+            )
+        )
+
     columns = document.createElement("div")
     columns.className = "sheet-columns"
     columns.appendChild(_trait_column("Physical", attrs["physical"], skills["physical"], character))
@@ -286,16 +421,49 @@ def render_lotn_v5_sheet(character: dict[str, Any]) -> Any:
     columns.appendChild(_trait_column("Mental", attrs["mental"], skills["mental"], character))
     sheet.appendChild(columns)
 
-    for section_title, block in (
-        ("Disciplines", character.get("disciplines", {})),
-        ("Merits", character.get("merits", {})),
-        ("Loresheets", character.get("loresheets", {})),
-        ("Ghoul Powers", character.get("ghoul_powers", {})),
-        ("Thin-Blood Formulas", character.get("thin_blood_formulas", {})),
+    for section_title, block, trait_kind in (
+        ("Merits", character.get("merits", {}), "merit"),
+        ("Flaws", character.get("flaws", {}), "flaw"),
+        ("Loresheets", character.get("loresheets", {}), None),
+        ("Ghoul Powers", character.get("ghoul_powers", {}), None),
     ):
-        section = _rated_traits_section(section_title, block)
+        section = _rated_traits_section(section_title, block, kind=trait_kind)
         if section:
             sheet.appendChild(section)
+
+    disc_section = _disciplines_section(character)
+    if disc_section:
+        sheet.appendChild(disc_section)
+
+    ritual_section = _power_id_list_section("Rituals", character.get("rituals", []))
+    if ritual_section:
+        sheet.appendChild(ritual_section)
+
+    ceremony_section = _power_id_list_section("Ceremonies", character.get("ceremonies", []))
+    if ceremony_section:
+        sheet.appendChild(ceremony_section)
+
+    formula_section = _formula_section(character)
+    if formula_section:
+        sheet.appendChild(formula_section)
+
+    specialties = character.get("specialties", [])
+    if specialties:
+        spec_section = document.createElement("section")
+        spec_section.className = "sheet-rated-traits"
+        spec_section.appendChild(_section_heading("Specialties"))
+        grid = document.createElement("div")
+        grid.className = "sheet-rated-traits__grid"
+        for spec in specialties:
+            line = document.createElement("div")
+            line.className = "sheet-stat"
+            label = document.createElement("span")
+            label.className = "sheet-stat__name"
+            label.innerText = f"{_title(spec['skill'])} ({spec['name']})"
+            line.appendChild(label)
+            grid.appendChild(line)
+        spec_section.appendChild(grid)
+        sheet.appendChild(spec_section)
 
     bg_section = _background_section(character.get("backgrounds", []))
     if bg_section:

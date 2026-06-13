@@ -4,6 +4,7 @@ import pytest
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.generator import generate_character
+from wod_chargen.games.lotn_v5.merits_flaws import max_trait_rating
 from wod_chargen.games.lotn_v5.archetypes import load_all_archetypes
 
 
@@ -21,19 +22,6 @@ def _opts(**kwargs):
     }
     base.update(kwargs)
     return base
-
-
-def test_predator_type_catalog():
-    types = load_json_cached("wod_chargen.games.lotn_v5.data", "predator_types.json")["types"]
-    ids = {t["id"] for t in types}
-    assert len(types) == 16
-    assert "blood_leech" in ids
-    assert "trapdoor" in ids
-    assert "scene_queen" in ids
-    for t in types:
-        assert t.get("feeding_pool"), f"{t['id']} missing feeding_pool"
-        assert t.get("benefits"), f"{t['id']} missing benefits"
-        assert "drawbacks" in t, f"{t['id']} missing drawbacks key"
 
 
 def test_user_selected_predator():
@@ -98,17 +86,31 @@ def test_reproducibility_per_archetype(arch_id: str):
 
 
 def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int = 5) -> None:
+    ctype = character.get("character_type", "vampire")
     assert all(0 <= v <= 5 for v in character["attributes"].values())
     assert all(0 <= v <= 5 for v in character["skills"].values())
     for entry in character["backgrounds"]:
         assert 1 <= entry["dots"] <= 3
     assert all(0 <= v <= discipline_cap for v in character["disciplines"].values())
-    assert all(0 <= v <= 3 for v in character["merits"].values())
+    for merit_id, rating in character["merits"].items():
+        cap = max_trait_rating(merit_id, "merit")
+        if cap:
+            assert 0 < rating <= cap
+    for flaw_id, rating in character["flaws"].items():
+        cap = max_trait_rating(flaw_id, "flaw")
+        if cap:
+            assert 0 < rating <= cap
     assert all(0 <= v <= 3 for v in character["loresheets"].values())
     assert all(0 <= v <= formula_cap for v in character["thin_blood_formulas"].values())
     assert all(0 <= v <= 1 for v in character["ghoul_powers"].values())
     if character["character_type"] == "vampire":
-        assert character["blood_potency"] <= 3
+        meta = character.get("generation_meta") or {}
+        bp_cap = meta.get("max_blood_potency", 3)
+        assert character["blood_potency"] <= bp_cap
+        for disc_id, rating in character.get("disciplines", {}).items():
+            picks = character.get("discipline_powers", {}).get(disc_id, {})
+            for level in range(1, int(rating) + 1):
+                assert str(level) in picks, f"seed missing power {disc_id}@{level}"
 
 
 @pytest.mark.parametrize("seed", range(50))

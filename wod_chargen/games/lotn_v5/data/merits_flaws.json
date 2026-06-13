@@ -1,0 +1,940 @@
+{
+  "merits": [
+    {
+      "id": "bond_resistance",
+      "label": "Bond Resistance",
+      "description": "Easier to resist the Blood Bond; each dot reduces Defiance check difficulty by one.",
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "short_bond",
+      "label": "Short Bond",
+      "description": "Bond decays faster: reduce Bond Strength by two each month without feeding from your regnant (still need one successful Defiance check that month).",
+      "rules": {
+        "forbidden_with": [
+          "long_bond"
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "sympathy_pains",
+      "label": "Sympathy Pains",
+      "description": "Whenever any of your thralls take Aggravated Damage, you feel a twinge signaling they are in danger.",
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "unbondable",
+      "label": "Unbondable",
+      "description": "Cannot be Blood Bound. Must be purchased at character creation.",
+      "rules": {
+        "creation_only": true,
+        "forbidden_with_categories": [
+          {
+            "kind": "flaw",
+            "category": "bonding"
+          }
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 5,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "linguistics",
+      "label": "Linguistics",
+      "description": "Each dot grants two extra languages you may speak and/or write beyond your native tongue and the game's local common language.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 1,
+      "max_dots": 5,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "cobbler",
+      "label": "Cobbler",
+      "description": "Can create and improve Masks for yourself and others using downtime actions. Prerequisite: Mask (••).",
+      "rules": {
+        "requires_background_min": {
+          "mask": 2
+        }
+      },
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "phenom",
+      "label": "Phenom",
+      "description": "Extremely talented performer, academic, or craftsperson. Choose Academics, Crafts, or Performance; gain an extra specialty per dot in that Skill. May purchase once per listed Skill.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "zeroed",
+      "label": "Zeroed",
+      "description": "No fingerprints, DNA, or facial recognition on file; name searches come up empty. Cannot take both Zeroed and Known Blankbody. Prerequisite: Mask (•••).",
+      "rules": {
+        "requires_background_min": {
+          "mask": 3
+        },
+        "forbidden_with": [
+          "known_blankbody"
+        ]
+      },
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "bloodhound",
+      "label": "Bloodhound",
+      "description": "Identify a mortal's Blood Resonance within five steps (simple action, then Resolve + Awareness vs. 3). Ghouls may purchase.",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "iron_gullet",
+      "label": "Iron Gullet",
+      "description": "Can feed from stale, bagged, or long-dead blood. Ventrue and Blood Potency 3+ cannot benefit.",
+      "rules": {
+        "forbidden_clans": [
+          "ventrue"
+        ],
+        "requires_max_blood_potency": 2
+      },
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "viscosity",
+      "label": "Viscosity",
+      "description": "Blood does not dilute after tapping a Dyscrasia; each dot allows one additional Dyscrasia tap per session (still only one Dyscrasia at a time).",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "blood_empathy",
+      "label": "Blood Empathy",
+      "description": "Stronger bond to your regnant: sense their emotional state while in their presence; feel a twinge when they take aggravated damage.",
+      "category": "ghoul",
+      "category_label": "Ghoul",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": true
+    },
+    {
+      "id": "vampiric_visage",
+      "label": "Vampiric Visage",
+      "description": "Aura reads vampiric; heartbeat hard to detect, teeth appear fang-like, breath nearly undetectable.",
+      "category": "ghoul",
+      "category_label": "Ghoul",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": true
+    },
+    {
+      "id": "loremaster",
+      "label": "Loremaster",
+      "description": "Encyclopedic supernatural knowledge; +2 bonus to all Lore checks.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "description": "Channel to the Shadowlands: sense and hear ghosts within 15 steps; ghosts may become visible to you alone without spending Pathos.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "ambidextrous",
+      "label": "Ambidextrous",
+      "description": "Use both hands with equal dexterity; dual-wield benefits, staggered firearm reload, disarm targets only one held weapon.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "eat_food",
+      "label": "Eat Food",
+      "description": "May consume food and drink (not blood) regardless of Humanity; provides no nourishment and must be expelled before resting.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "light_sleeper",
+      "label": "Light Sleeper",
+      "description": "Automatically wake in dangerous situations; may stay awake 30 minutes free, then spend Willpower for up to one more hour.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "calm_heart",
+      "label": "Calm Heart",
+      "description": "Great emotional control; reduce all Frenzy trigger difficulty by two (Brujah gain no benefit vs. Fury Frenzy).",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "common_sense",
+      "label": "Common Sense",
+      "description": "Twice per game, ask the Storyteller one risk-assessment question about the current situation and receive a truthful answer.",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 4,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "anarch_comrades",
+      "label": "Anarch Comrades",
+      "description": "Local Anarch vampires will exchange major and life boons with you; without it, non-thin-blood Anarchs may refuse major/life boons.",
+      "rules": {
+        "forbidden_with": [
+          "shunned_by_the_anarchs"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "camarilla_contact",
+      "label": "Camarilla Contact",
+      "description": "A friendly Camarilla vampire holds minor/trivial boons for you and keeps your thin-blood nature secret.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "catenating_blood",
+      "label": "Catenating Blood",
+      "description": "Blood strong enough to Blood Bond, create ghouls, and Embrace (embraced child is also thin-blood).",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "day_drinker",
+      "label": "Day Drinker",
+      "description": "No sunlight damage; instead halve health boxes while exposed, cannot use Disciplines/Alchemy in sun, and lose Willpower if awake more than two days.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "discipline_affinity",
+      "label": "Discipline Affinity",
+      "description": "Affinity for one Discipline: gain one free dot and may buy more at out-of-clinic costs in addition to resonance-fed Discipline.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "lifelike",
+      "label": "Lifelike",
+      "description": "Biologically identical to a mortal at all times; mundane and supernatural scrutiny (except sun damage) reads human.",
+      "rules": {
+        "forbidden_with": [
+          "dead_flesh"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "thin_blood_alchemist",
+      "label": "Thin-Blood Alchemist",
+      "description": "Know Thin-Blood Alchemy: first dot and one Formula free; buy more dots and Formulae with XP.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "vampiric_resilience",
+      "label": "Vampiric Resilience",
+      "description": "Take damage and heal like a full vampire rather than a mortal.",
+      "rules": {
+        "forbidden_with": [
+          "mortal_frailty"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    }
+  ],
+  "flaws": [
+    {
+      "id": "bond_at_first_taste",
+      "label": "Bond at First Taste",
+      "description": "Bond at the first drink of vampire blood; thrall after one drink with Bond Strength starting at one.",
+      "rules": {
+        "forbidden_with": [
+          "unbondable"
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "bond_junkie",
+      "label": "Bond Junkie",
+      "description": "The Bond feels sweeter; increase Defiance check difficulty by this Flaw's dot rating.",
+      "rules": {
+        "forbidden_with": [
+          "unbondable"
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "long_bond",
+      "label": "Long Bond",
+      "description": "Bond decays slowly: reduce Bond Strength by one every three months without feeding from regnant.",
+      "rules": {
+        "forbidden_with": [
+          "short_bond",
+          "unbondable"
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "symbiotic_dependency",
+      "label": "Symbiotic Dependency",
+      "description": "Physical link to regnant: for every two damage they take, you take one of the same type anywhere; their Final Death kills you within minutes.",
+      "rules": {
+        "forbidden_with": [
+          "unbondable"
+        ]
+      },
+      "category": "bonding",
+      "category_label": "Bonding",
+      "dot_cost": 4,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "enemy",
+      "label": "Enemy",
+      "description": "Someone in a Sphere of Influence actively works against you (harassment to murder by dot level). May be taken multiple times for different enemies.",
+      "rules": {
+        "instance_key": "sphere",
+        "max_dots_per_instance": 3
+      },
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "infamy",
+      "label": "Infamy",
+      "description": "Famous for something horrible in a chosen Sphere; cumulative -2 to mundane non-Intimidation social interactions with those who recognize you per dot.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "poor",
+      "label": "Poor",
+      "description": "Worse off than lower-middle class; cannot buy Resources. Limits Haven dots/advantages by level; at three dots you may not buy Haven (but can use others' Havens without advantages).",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "no_haven",
+      "label": "No Haven",
+      "description": "No consistent daytime rest; must find shelter each dawn, one fewer downtime action, cannot buy or benefit from Haven.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "obvious_predator",
+      "label": "Obvious Predator",
+      "description": "Look frighteningly predatory; cannot buy Herd and take -1 to non-violent feeding challenges.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "illiterate",
+      "label": "Illiterate",
+      "description": "Cannot read or write; can match familiar sign letters but not compose text.",
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "known_corpse",
+      "label": "Known Corpse",
+      "description": "Mortals know you died; friends and family react with horror. Prerequisite: no Mask dots.",
+      "rules": {
+        "requires_background_max": {
+          "mask": 0
+        }
+      },
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "known_blankbody",
+      "label": "Known Blankbody",
+      "description": "Flagged in government databases; monthly downtime to cover tracks or face Hunters. Failed hunts draw Hunter attention. Cannot take Zeroed. Prerequisite: no Mask dots.",
+      "rules": {
+        "requires_background_max": {
+          "mask": 0
+        },
+        "forbidden_with": [
+          "zeroed"
+        ]
+      },
+      "category": "connection",
+      "category_label": "Connection",
+      "dot_cost": 4,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "farmer",
+      "label": "Farmer",
+      "description": "Feed exclusively from animals; must spend two Willpower to feed from any other source. Blood Potency 3+ may not take.",
+      "rules": {
+        "requires_max_blood_potency": 2
+      },
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "methuselah_s_thirst",
+      "label": "Methuselah´s Thirst",
+      "description": "Hunger only fully Slaked by draining a supernatural creature dry (killing it unless it can survive).",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 5,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "organovore",
+      "label": "Organovore",
+      "description": "Slake Hunger only from live human flesh/organs (major organs, ≤30 minutes dead); must kill and consume most organs/flesh to drop Hunger below 1.",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "prey_exclusion",
+      "label": "Prey Exclusion",
+      "description": "Refuse to feed from a chosen class of mortals; doing so gains Stains as a Tenet violation. Ventrue gain an extra vessel restriction.",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "weak_stomach",
+      "label": "Weak Stomach",
+      "description": "Squeamish around blood; Weakened for one hour after feeding and start each session Weakened. Ghouls may purchase.",
+      "category": "feeding",
+      "category_label": "Feeding",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "baneful_blood",
+      "label": "Baneful Blood",
+      "description": "Your regnant's clan Bane transferred to you at Bane Severity equal to this Flaw's dots; persists even if regnant changes.",
+      "category": "ghoul",
+      "category_label": "Ghoul",
+      "dot_cost": 2,
+      "max_dots": 4,
+      "thin_blood_only": false,
+      "ghoul_only": true
+    },
+    {
+      "id": "crone_s_curse",
+      "label": "Crone´s Curse",
+      "description": "Ghouling aged you unnaturally: appear ten years older and have one fewer health box.",
+      "category": "ghoul",
+      "category_label": "Ghoul",
+      "dot_cost": 4,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": true
+    },
+    {
+      "id": "distressing_fangs",
+      "label": "Distressing Fangs",
+      "description": "Teeth mystically sharpen overnight; off-putting to humans and probable cause for Inquisition stops.",
+      "category": "ghoul",
+      "category_label": "Ghoul",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": true
+    },
+    {
+      "id": "bound_to_the_earth",
+      "label": "Bound to the Earth",
+      "description": "Must rest near natural soil or do not regain Willpower upon Awakening.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "eerie_presence",
+      "label": "Eerie Presence",
+      "description": "Radiate unsettling otherworldliness (visual, scent, or tactile); always disconcerting, may breach Masquerade.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "folkloric_bane",
+      "label": "Folkloric Bane",
+      "description": "Besides sun and fire, a common substance (e.g. silver, cold iron, holy water) deals Aggravated Damage; touching it causes one aggravated.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "folkloric_block",
+      "label": "Folkloric Block",
+      "description": "Cannot willingly come within five steps of a chosen folkloric object/place (holy symbols, running water, invitation-only entries, etc.) or gain Frightened until you leave.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "haunted",
+      "label": "Haunted",
+      "description": "A ghostly enemy harasses you like the Enemy Background, built by the Storyteller.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 1,
+      "max_dots": 3,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "stake_bait",
+      "label": "Stake Bait",
+      "description": "Heart remains mortal; successful staking causes Final Death.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 5,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "stigmata",
+      "label": "Stigmata",
+      "description": "At Hunger 4+, bleed from hands, feet, and forehead (attracts attention, no extra Hunger).",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "trouble_magnet",
+      "label": "Trouble Magnet",
+      "description": "Storyteller random bad luck always targets you when multiple outcomes are possible.",
+      "category": "mythical",
+      "category_label": "Mythical",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "awkward_mobility",
+      "label": "Awkward Mobility",
+      "description": "Move slowly; two steps per movement action instead of three.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "deep_sleeper",
+      "label": "Deep Sleeper",
+      "description": "Cannot spend Willpower to stay awake at sunrise unless danger; Awakening costs an extra Willpower.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "low_pain_threshold",
+      "label": "Low Pain Threshold",
+      "description": "Wound penalties start one box earlier per dot (max dots = total health boxes − 3).",
+      "rules": {
+        "max_dots_from_health_minus": 3
+      },
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 1,
+      "max_dots": 5,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "slow_healing",
+      "label": "Slow Healing",
+      "description": "Combat Rouse-to-mend resolves at end of round after the mass Rouse challenge.",
+      "category": "physical",
+      "category_label": "Physical",
+      "dot_cost": 3,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "archaic",
+      "label": "Archaic",
+      "description": "Modern technology enrages you; cannot buy Driving, modern Science, or Technology and cannot use machinery from the last 100 years. 9th Gen+, 100+ years Embraced only.",
+      "rules": {
+        "requires_max_generation": 9
+      },
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "dark_secret",
+      "label": "Dark Secret",
+      "description": "A secret that would cause great embarrassment if revealed; must buy off if public. Only one Dark Secret.",
+      "rules": {
+        "max_per_character": 1
+      },
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "death_sight",
+      "label": "Death Sight",
+      "description": "World appears decaying and dead; cannot determine creature type or mood even with powers like Scry the Soul.",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 1,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "living_on_the_edge",
+      "label": "Living on the Edge",
+      "description": "Curiosity overrides caution; lose Willpower when you pass up new experiences, Impaired if you run out.",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "impatient",
+      "label": "Impatient",
+      "description": "Must spend Willpower to wait five minutes when forced to be patient; otherwise lash out in anger.",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 2,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "weak_willed",
+      "label": "Weak Willed",
+      "description": "Cannot resolve Distracted, Disoriented, Staggered, or Prone without another character's help; immune to powers that alter those Conditions.",
+      "category": "psychological",
+      "category_label": "Psychological",
+      "dot_cost": 4,
+      "max_dots": null,
+      "thin_blood_only": false,
+      "ghoul_only": false
+    },
+    {
+      "id": "baby_teeth",
+      "label": "Baby Teeth",
+      "description": "Never developed fangs; must cut victims or use a syringe—no Sip unless target is unconscious.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "bestial_temper",
+      "label": "Bestial Temper",
+      "description": "Beast as strong as a full vampire; test for Terror and Rage Frenzy like a full-blood.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "branded_by_the_camarilla",
+      "label": "Branded by the Camarilla",
+      "description": "Pay trivial boons to be tolerated on Camarilla turf; name known as branded and extortion-prone.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "clan_curse",
+      "label": "Clan Curse",
+      "description": "Suffer your sire's clan Bane at Severity 1 (Brujah/Gangrel if Bestial Temper; Tremere if Catenating Blood).",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "dead_flesh",
+      "label": "Dead Flesh",
+      "description": "Rotting, green-tinted flesh and stench; Masquerade breach without Obfuscate. Cannot take Lifelike.",
+      "rules": {
+        "forbidden_with": [
+          "lifelike"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "mortal_frailty",
+      "label": "Mortal Frailty",
+      "description": "Heal as a mortal; cannot Rouse the Blood to mend. Cannot take Vampiric Resilience.",
+      "rules": {
+        "forbidden_with": [
+          "vampiric_resilience"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "shunned_by_the_anarchs",
+      "label": "Shunned by the Anarchs",
+      "description": "Anarchs refuse all boons with you and may send Enforcers; cannot take Anarch Comrades.",
+      "rules": {
+        "forbidden_with": [
+          "anarch_comrades"
+        ]
+      },
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    },
+    {
+      "id": "vitae_dependency",
+      "label": "Vitae Dependency",
+      "description": "Must Slake at least one Hunger from vampire blood weekly or lose Disciplines and Thin-Blood Alchemy.",
+      "category": "thin_blood",
+      "category_label": "Thin-Blood",
+      "dot_cost": 0,
+      "max_dots": null,
+      "thin_blood_only": true,
+      "ghoul_only": false
+    }
+  ],
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  }
+}

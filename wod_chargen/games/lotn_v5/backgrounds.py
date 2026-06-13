@@ -209,6 +209,7 @@ def can_add_modifier_dot(
     entry: dict[str, Any],
     mod_def: dict[str, Any],
     kind: ModifierKind,
+    char: dict[str, Any] | None = None,
 ) -> bool:
     if int(entry.get("dots", 0)) <= 0:
         return False
@@ -219,12 +220,18 @@ def can_add_modifier_dot(
     required_bg = int(mod_def.get("requires_dots", 1))
     if int(entry.get("dots", 0)) < required_bg:
         return False
+    if char and kind == "advantage" and entry.get("type") == "haven":
+        from wod_chargen.games.lotn_v5.merits_flaws import haven_advantage_blocked
+
+        if haven_advantage_blocked(char):
+            return False
     return True
 
 
 def _eligible_modifier_targets(
     entries: list[dict[str, Any]],
     kind: ModifierKind,
+    char: dict[str, Any] | None = None,
 ) -> list[tuple[dict[str, Any], dict[str, Any]]]:
     targets: list[tuple[dict[str, Any], dict[str, Any]]] = []
     for entry in entries:
@@ -233,7 +240,7 @@ def _eligible_modifier_targets(
         spec = background_defs().get(entry["type"], {})
         catalog = spec.get(_MODIFIER_KEY[kind], [])
         for mod_def in catalog:
-            if can_add_modifier_dot(entry, mod_def, kind):
+            if can_add_modifier_dot(entry, mod_def, kind, char):
                 targets.append((entry, mod_def))
     return targets
 
@@ -301,7 +308,25 @@ def _can_add_new_instance(entries: list[dict[str, Any]], bg_type: str, spec: dic
     return True
 
 
-def _can_add_dot(entries: list[dict[str, Any]], bg_type: str, spec: dict[str, Any]) -> bool:
+def _can_add_dot(
+    entries: list[dict[str, Any]],
+    bg_type: str,
+    spec: dict[str, Any],
+    char: dict[str, Any] | None = None,
+) -> bool:
+    if char is not None:
+        from wod_chargen.games.lotn_v5.merits_flaws import (
+            background_connection_blocked,
+            max_haven_connection_dots_allowed,
+        )
+
+        if background_connection_blocked(char, bg_type):
+            return False
+        if bg_type == "haven":
+            cap = max_haven_connection_dots_allowed(char)
+            if cap is not None and total_background_dots(entries_for_type(entries, "haven")) >= cap:
+                return False
+
     max_dots = int(spec.get("max_dots", 3))
     typed = entries_for_type(entries, bg_type)
     if spec.get("purchase_mode") == "single_rating":
@@ -325,6 +350,93 @@ def _new_entry(rng: SeededRng, bg_type: str, spec: dict[str, Any], profile: Any)
     }
 
 
+def grant_background_rating(
+    rng: SeededRng,
+    entries: list[dict[str, Any]],
+    bg_type: str,
+    dots: int,
+    profile: Any,
+    *,
+    sphere: str | None = None,
+    name: str | None = None,
+    from_predator: bool = False,
+    char: dict[str, Any] | None = None,
+) -> str | None:
+    """Grant background dots from predator packages (outside creation pool)."""
+    if dots <= 0:
+        return None
+    spec = background_defs().get(bg_type)
+    if not spec:
+        return None
+    if char is not None:
+        from wod_chargen.games.lotn_v5.merits_flaws import (
+            background_connection_blocked,
+            max_haven_connection_dots_allowed,
+        )
+
+        if background_connection_blocked(char, bg_type):
+            return None
+        if bg_type == "haven":
+            cap = max_haven_connection_dots_allowed(char)
+            if cap is not None and total_background_dots(entries_for_type(entries, "haven")) >= cap:
+                return None
+    max_dots = int(spec.get("max_dots", 3))
+    typed = entries_for_type(entries, bg_type)
+
+    if spec.get("purchase_mode") == "multi_instance" and _can_add_new_instance(entries, bg_type, spec):
+        grant = min(dots, max_dots)
+        sphere_id = sphere
+        if sphere_id is None and spec.get("requires_sphere"):
+            sphere_id = _pick_sphere(rng, profile)
+        entry = {
+            "type": bg_type,
+            "dots": grant,
+            "sphere": sphere_id,
+            "name": name or _procedural_name(rng, bg_type, sphere_id),
+            "advantages": [],
+            "disadvantages": [],
+        }
+        if from_predator:
+            entry["from_predator"] = True
+        entries.append(entry)
+        sphere_txt = f" ({sphere_label(sphere_id)})" if sphere_id else ""
+        return (
+            f"Predator: {background_label(bg_type)}{sphere_txt} → {grant} "
+            f"({level_label(bg_type, grant)})"
+        )
+
+    entry = typed[0] if typed else None
+    if entry is None:
+        sphere_id = sphere
+        if sphere_id is None and spec.get("requires_sphere"):
+            sphere_id = _pick_sphere(rng, profile)
+        entry = {
+            "type": bg_type,
+            "dots": 0,
+            "sphere": sphere_id,
+            "name": name or _procedural_name(rng, bg_type, sphere_id),
+            "advantages": [],
+            "disadvantages": [],
+        }
+        if from_predator:
+            entry["from_predator"] = True
+        entries.append(entry)
+
+    before = int(entry["dots"])
+    entry["dots"] = min(max_dots, before + dots)
+    added = entry["dots"] - before
+    if added <= 0:
+        return None
+    if from_predator:
+        entry["from_predator"] = True
+    sphere_txt = f" ({sphere_label(entry['sphere'])})" if entry.get("sphere") else ""
+    name_txt = entry_display_name(entry)
+    return (
+        f"Predator: {background_label(bg_type)} {name_txt}{sphere_txt} +{added} "
+        f"→ {entry['dots']} ({level_label(bg_type, entry['dots'])})"
+    )
+
+
 def _assign_one_background_dot(
     rng: SeededRng,
     entries: list[dict[str, Any]],
@@ -332,9 +444,10 @@ def _assign_one_background_dot(
     *,
     biases: dict[str, float] | None = None,
     prefer_new_instance: bool = True,
+    char: dict[str, Any] | None = None,
 ) -> str | None:
     defs = background_defs()
-    eligible_types = [t for t in defs if _can_add_dot(entries, t, defs[t])]
+    eligible_types = [t for t in defs if _can_add_dot(entries, t, defs[t], char)]
     if not eligible_types:
         return None
     weights = [defs[t].get("creation_bias", 1.0) * (biases or {}).get(t, 1.0) for t in eligible_types]
@@ -357,21 +470,34 @@ def _assign_one_modifier_dot(
     kind: ModifierKind,
     *,
     source: ModifierSource,
-) -> str | None:
-    targets = _eligible_modifier_targets(entries, kind)
+    only_entries: list[dict[str, Any]] | None = None,
+    char: dict[str, Any] | None = None,
+) -> tuple[str, dict[str, Any], str, int] | None:
+    """Apply one modifier dot; optionally restrict to a subset of background entries."""
+    if only_entries is not None:
+        targets: list[tuple[dict[str, Any], dict[str, Any]]] = []
+        for entry in only_entries:
+            if int(entry.get("dots", 0)) <= 0:
+                continue
+            spec = background_defs().get(entry["type"], {})
+            for mod_def in spec.get(_MODIFIER_KEY[kind], []):
+                if can_add_modifier_dot(entry, mod_def, kind, char):
+                    targets.append((entry, mod_def))
+    else:
+        targets = _eligible_modifier_targets(entries, kind, char)
     if not targets:
         return None
     entry, mod_def = rng.choice(targets)
     mod_id = mod_def["id"]
-    new_level = get_modifier_rating(entry, mod_id, kind) + 1
-    set_modifier_rating(entry, mod_id, kind, new_level)
+    new_level = apply_modifier_purchase(entry, mod_id, kind)
     label = mod_def["label"]
     name = entry_display_name(entry)
     if kind == "advantage":
         prefix = "Background modifier"
     else:
         prefix = "Background disadvantage"
-    return f"{prefix} {label} on {name} +1 → {new_level} [{_source_tag(source)}]"
+    line = f"{prefix} {label} on {name} +1 → {new_level} [{_source_tag(source)}]"
+    return line, entry, mod_id, new_level
 
 
 def validate_creation_modifier_accounting(
@@ -400,7 +526,15 @@ def validate_full_modifier_accounting(
     """Creation + XP modifier advantages must balance against recorded sources."""
     ledger = BackgroundCreationLedger.from_meta(meta)
     total_adv = total_modifier_dots(entries, "advantage")
-    expected = ledger.pool_spent_modifier + ledger.adv_from_disadv_granted + ledger.xp_spent_modifier
+    predator_adv = int(meta.get("predator_modifier_dots", 0))
+    xp_disadv_trade = int(meta.get("xp_adv_from_disadv_trade", 0))
+    expected = (
+        ledger.pool_spent_modifier
+        + ledger.adv_from_disadv_granted
+        + ledger.xp_spent_modifier
+        + xp_disadv_trade
+        + predator_adv
+    )
     if total_adv != expected:
         raise ValueError(
             f"Full modifier accounting mismatch: {total_adv} adv dots, expected {expected}"
@@ -411,6 +545,34 @@ def record_xp_modifier_purchase(meta: dict[str, Any], *, dots: int = 1) -> None:
     meta["xp_spent_modifier"] = int(meta.get("xp_spent_modifier", 0)) + dots
 
 
+def record_xp_disadvantage_purchase(meta: dict[str, Any], *, dots: int = 1) -> None:
+    meta["xp_disadvantage_dots"] = int(meta.get("xp_disadvantage_dots", 0)) + dots
+
+
+def record_xp_disadv_trade_advantage(meta: dict[str, Any], *, dots: int = 1) -> None:
+    meta["xp_adv_from_disadv_trade"] = int(meta.get("xp_adv_from_disadv_trade", 0)) + dots
+
+
+def xp_disadv_trade_remaining(meta: dict[str, Any]) -> int:
+    credit = int(meta.get("xp_disadvantage_dots", 0))
+    spent = int(meta.get("xp_adv_from_disadv_trade", 0))
+    return max(0, credit - spent)
+
+
+def modifier_xp_item_bias(entry: dict[str, Any], kind: ModifierKind) -> float:
+    """Favor bare entries and predator-granted backgrounds for modifier XP."""
+    bias = 1.0
+    adv_dots = total_modifier_dots([entry], "advantage")
+    dis_dots = total_modifier_dots([entry], "disadvantage")
+    if kind == "advantage" and adv_dots == 0:
+        bias *= 2.0
+    if kind == "disadvantage" and dis_dots == 0:
+        bias *= 2.5
+    if entry.get("from_predator"):
+        bias *= 1.35
+    return bias
+
+
 def run_background_creation(
     rng: SeededRng,
     entries: list[dict[str, Any]],
@@ -419,14 +581,15 @@ def run_background_creation(
     *,
     biases: dict[str, float] | None = None,
     predator_disadvantages_grant_adv: bool = True,
+    char: dict[str, Any] | None = None,
 ) -> tuple[list[str], BackgroundCreationLedger]:
     """Creation pool, free disadvantages, and disadv-matched modifier advantages."""
     lines: list[str] = []
     ledger = BackgroundCreationLedger(pool_total=pool_dots)
 
     while ledger.pool_remaining > 0:
-        can_bg = any(_can_add_dot(entries, t, background_defs()[t]) for t in background_defs())
-        can_mod = bool(_eligible_modifier_targets(entries, "advantage"))
+        can_bg = any(_can_add_dot(entries, t, background_defs()[t], char) for t in background_defs())
+        can_mod = bool(_eligible_modifier_targets(entries, "advantage", char))
         spent = False
 
         if not can_bg and not can_mod:
@@ -441,14 +604,16 @@ def run_background_creation(
         pick_mod = can_mod and (not can_bg or rng.uniform() < mod_weight)
 
         if pick_mod:
-            line = _assign_one_modifier_dot(rng, entries, "advantage", source="creation_pool")
-            if line:
-                lines.append(line)
+            result = _assign_one_modifier_dot(
+                rng, entries, "advantage", source="creation_pool", char=char
+            )
+            if result:
+                lines.append(result[0])
                 ledger.pool_spent_modifier += 1
                 spent = True
 
         if not spent:
-            line = _assign_one_background_dot(rng, entries, profile, biases=biases)
+            line = _assign_one_background_dot(rng, entries, profile, biases=biases, char=char)
             if line:
                 lines.append(line)
                 ledger.pool_spent_connection += 1
@@ -464,18 +629,18 @@ def run_background_creation(
     if rated and rng.uniform() < 0.7:
         disad_attempts = rng.choice([1, 1, 2, 2, 3])
         for _ in range(disad_attempts):
-            line = _assign_one_modifier_dot(rng, entries, "disadvantage", source="free")
-            if line:
-                lines.append(line)
+            result = _assign_one_modifier_dot(rng, entries, "disadvantage", source="free", char=char)
+            if result:
+                lines.append(result[0])
                 ledger.disadv_dots_added += 1
             else:
                 break
 
     grant = ledger.disadv_trade_credit(grant=predator_disadvantages_grant_adv)
     while ledger.disadv_trade_remaining > 0 and grant > 0:
-        line = _assign_one_modifier_dot(rng, entries, "advantage", source="disadv_trade")
-        if line:
-            lines.append(line)
+        result = _assign_one_modifier_dot(rng, entries, "advantage", source="disadv_trade", char=char)
+        if result:
+            lines.append(result[0])
             ledger.adv_from_disadv_granted += 1
         else:
             lines.append("Background modifier +1 unplaced (disadvantage trade, no eligible targets)")
@@ -506,6 +671,8 @@ def apply_background_purchase(
     bg_type: str,
     rng: SeededRng,
     profile: Any,
+    *,
+    mark_xp: bool = False,
 ) -> tuple[dict[str, Any], int]:
     """Raise an existing entry or add a new one. Returns (entry, new_dot_level)."""
     spec = background_defs()[bg_type]
@@ -514,7 +681,47 @@ def apply_background_purchase(
         entry = _new_entry(rng, bg_type, spec, profile)
         entries.append(entry)
     entry["dots"] += 1
+    if mark_xp:
+        entry["xp_purchased"] = True
     return entry, entry["dots"]
+
+
+def apply_xp_background_disadv_trade(
+    rng: SeededRng,
+    entries: list[dict[str, Any]],
+    meta: dict[str, Any],
+) -> list[tuple[str, str, int, str]]:
+    """After XP spend: free disadv + matching adv on backgrounds bought with XP only."""
+    xp_entries = [e for e in entries if e.get("xp_purchased") and int(e.get("dots", 0)) > 0]
+    if not xp_entries or rng.uniform() >= 0.7:
+        return []
+
+    log: list[tuple[str, str, int, str]] = []
+    for _ in range(rng.choice([1, 1, 2])):
+        result = _assign_one_modifier_dot(
+            rng, entries, "disadvantage", source="free", only_entries=xp_entries
+        )
+        if not result:
+            break
+        _line, entry, mod_id, new_level = result
+        record_xp_disadvantage_purchase(meta)
+        log.append(
+            (modifier_item_key(entry, mod_id, "disadvantage"), "background_disadvantage", new_level, "free")
+        )
+
+    while xp_disadv_trade_remaining(meta) > 0:
+        result = _assign_one_modifier_dot(
+            rng, entries, "advantage", source="disadv_trade", only_entries=xp_entries
+        )
+        if not result:
+            break
+        _line, entry, mod_id, new_level = result
+        record_xp_disadv_trade_advantage(meta)
+        log.append(
+            (modifier_item_key(entry, mod_id, "advantage"), "background_modifier", new_level, "disadv_trade")
+        )
+
+    return log
 
 
 def apply_modifier_purchase(
@@ -540,7 +747,7 @@ def enumerate_xp_background_types(char: dict[str, Any], max_rating: int) -> list
     entries = char.get("backgrounds", [])
     available: list[str] = []
     for bg_type, spec in background_defs().items():
-        if _can_add_dot(entries, bg_type, spec):
+        if _can_add_dot(entries, bg_type, spec, char):
             cap = min(int(spec.get("max_dots", 3)), max_rating)
             typed = entries_for_type(entries, bg_type)
             if spec.get("purchase_mode") == "single_rating":
@@ -548,23 +755,29 @@ def enumerate_xp_background_types(char: dict[str, Any], max_rating: int) -> list
                 if cur < cap:
                     available.append(bg_type)
             else:
-                if any(e["dots"] < cap for e in typed) or _can_add_dot(entries, bg_type, spec):
+                if any(e["dots"] < cap for e in typed) or _can_add_dot(entries, bg_type, spec, char):
                     available.append(bg_type)
     return available
 
 
 def enumerate_xp_modifier_purchases(
     char: dict[str, Any],
+    *,
+    kinds: tuple[ModifierKind, ...] = ("advantage", "disadvantage"),
+    only_xp_purchased: bool = False,
 ) -> list[tuple[dict[str, Any], dict[str, Any], ModifierKind, int]]:
     """Return (entry, mod_def, kind, new_level) for purchasable modifier dots."""
     results: list[tuple[dict[str, Any], dict[str, Any], ModifierKind, int]] = []
     for entry in char.get("backgrounds", []):
         if int(entry.get("dots", 0)) <= 0:
             continue
+        if only_xp_purchased and not entry.get("xp_purchased"):
+            continue
         spec = background_defs().get(entry["type"], {})
-        for mod_def in spec.get("advantages", []):
-            if not can_add_modifier_dot(entry, mod_def, "advantage"):
-                continue
-            cur = get_modifier_rating(entry, mod_def["id"], "advantage")
-            results.append((entry, mod_def, "advantage", cur + 1))
+        for kind in kinds:
+            for mod_def in spec.get(_MODIFIER_KEY[kind], []):
+                if not can_add_modifier_dot(entry, mod_def, kind, char):
+                    continue
+                cur = get_modifier_rating(entry, mod_def["id"], kind)
+                results.append((entry, mod_def, kind, cur + 1))
     return results

@@ -1,7 +1,18 @@
 {
   "source_ref": { "pdf_page": 79 },
   "all": [
-    "animalism", "auspex", "celerity", "dominate", "fortitude", "obfuscate",
-    "potence", "presence", "blood_sorcery", "protean", "thin_blood_alchemy"
-  ]
+    "animalism",
+    "auspex",
+    "blood_sorcery",
+    "celerity",
+    "dominate",
+    "fortitude",
+    "obfuscate",
+    "oblivion",
+    "potence",
+    "presence",
+    "protean",
+    "thin_blood_alchemy"
+  ],
+  "secondary_tracks": ["blood_sorcery_rituals", "ceremonies"]
 }

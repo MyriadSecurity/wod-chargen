@@ -1,8 +1,41 @@
 {
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
   "formulas": [
-    { "id": "thin_blood_strength", "label": "Thin-Blood Strength" },
-    { "id": "thin_blood_deception", "label": "Thin-Blood Deception" },
-    { "id": "thin_blood_illusion", "label": "Thin-Blood Illusion" },
-    { "id": "thin_blood_transmutation", "label": "Thin-Blood Transmutation" }
+    {
+      "id": "far_reach",
+      "label": "Far Reach",
+      "level": 1
+    },
+    {
+      "id": "haze",
+      "label": "Haze",
+      "level": 1
+    },
+    {
+      "id": "envelope",
+      "label": "Envelope",
+      "level": 2
+    },
+    {
+      "id": "defractionate",
+      "label": "Defractionate",
+      "level": 3
+    },
+    {
+      "id": "airbourne_momentum",
+      "label": "Airbourne Momentum",
+      "level": 4
+    },
+    {
+      "id": "awaken_the_sleeper",
+      "label": "Awaken the Sleeper",
+      "level": 5
+    }
   ]
 }

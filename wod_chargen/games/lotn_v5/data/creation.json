@@ -6,5 +6,9 @@
   "backgrounds": 7,
   "disciplines": { "primary": 2, "secondary": 1, "tertiary": 1 },
   "generation_default": 13,
-  "blood_potency_default": 1
+  "blood_potency_default": 1,
+  "generation_weights": {
+    "vampire": { "13": 4, "12": 3, "11": 1.5, "10": 0.5, "9": 0.2 },
+    "thin_blood": { "14": 2, "15": 2, "16": 1 }
+  }
 }

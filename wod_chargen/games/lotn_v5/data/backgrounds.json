@@ -118,7 +118,11 @@
         { "dots": 2, "label": "Well-appointed haven", "summary": "Comfortable and harder to discover." },
         { "dots": 3, "label": "Elite haven", "summary": "Excellent security and amenities." }
       ],
-      "advantages": [],
+      "advantages": [
+        { "id": "garage", "label": "Garage", "dots": 1, "max_dots": 3 },
+        { "id": "walk_in_freezer", "label": "Walk-In Freezer", "dots": 1, "max_dots": 3 },
+        { "id": "zoo", "label": "Zoo", "dots": 1, "max_dots": 3 }
+      ],
       "disadvantages": []
     },
     "herd": {

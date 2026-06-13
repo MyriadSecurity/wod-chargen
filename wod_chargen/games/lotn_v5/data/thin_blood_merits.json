@@ -1,6 +1,77 @@
 {
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
   "merits": [
-    { "id": "thin_blood_merit_1", "label": "Thin-Blood Inclination" },
-    { "id": "thin_blood_merit_2", "label": "Catenating Blood" }
+    {
+      "id": "anarch_comrades",
+      "label": "Anarch Comrades"
+    },
+    {
+      "id": "camarilla_contact",
+      "label": "Camarilla Contact"
+    },
+    {
+      "id": "catenating_blood",
+      "label": "Catenating Blood"
+    },
+    {
+      "id": "day_drinker",
+      "label": "Day Drinker"
+    },
+    {
+      "id": "discipline_affinity",
+      "label": "Discipline Affinity"
+    },
+    {
+      "id": "lifelike",
+      "label": "Lifelike"
+    },
+    {
+      "id": "thin_blood_alchemist",
+      "label": "Thin-Blood Alchemist"
+    },
+    {
+      "id": "vampiric_resilience",
+      "label": "Vampiric Resilience"
+    }
+  ],
+  "flaws": [
+    {
+      "id": "baby_teeth",
+      "label": "Baby Teeth"
+    },
+    {
+      "id": "bestial_temper",
+      "label": "Bestial Temper"
+    },
+    {
+      "id": "branded_by_the_camarilla",
+      "label": "Branded by the Camarilla"
+    },
+    {
+      "id": "clan_curse",
+      "label": "Clan Curse"
+    },
+    {
+      "id": "dead_flesh",
+      "label": "Dead Flesh"
+    },
+    {
+      "id": "mortal_frailty",
+      "label": "Mortal Frailty"
+    },
+    {
+      "id": "shunned_by_the_anarchs",
+      "label": "Shunned by the Anarchs"
+    },
+    {
+      "id": "vitae_dependency",
+      "label": "Vitae Dependency"
+    }
   ]
 }

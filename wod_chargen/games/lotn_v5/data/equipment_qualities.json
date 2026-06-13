@@ -1,0 +1,227 @@
+{
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
+  "qualities": [
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "bane_silver",
+      "label": "Bane (Silver)",
+      "effect": "Aggravated Damaged to Werewolves",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "bane_cold_iron",
+      "label": "Bane (Cold Iron)",
+      "effect": "Aggravated Damaged to Changelings",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "bane_fire",
+      "label": "Bane (Fire)",
+      "effect": "Aggravated Damaged; Vampires must test for Terror Frenzy (diif: 2) to use",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "concealable",
+      "label": "Concealable",
+      "effect": "May be noticed with Wits + Investigation vs. Wits + Larceny",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "destructive",
+      "label": "Destructive",
+      "effect": "+1 damage to structures and objects; ignore protective gear; two-hands",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "devastating",
+      "label": "Devastating",
+      "effect": "+1 to pool for exceptional success; two-hands",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "reach",
+      "label": "Reach",
+      "effect": "Can attack target 3 steps away; two-hands",
+      "cost": null
+    },
+    {
+      "category": "melee",
+      "category_label": "Melee",
+      "id": "staking",
+      "label": "Staking",
+      "effect": "Wood; Can stake vampires",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "automatic_fire",
+      "label": "Automatic Fire",
+      "effect": "Choose 2 targets within 1 step of each other",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "bane_silver",
+      "label": "Bane (Silver)",
+      "effect": "Aggravated Damaged to Werewolves",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "bane_cold_iron",
+      "label": "Bane (Cold Iron)",
+      "effect": "Aggravated Damaged to Changelings",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "bane_fire",
+      "label": "Bane (Fire)",
+      "effect": "Aggravated Damaged; Vampires must test for Terror Frenzy (diif: 2) to use",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "blasting",
+      "label": "Blasting",
+      "effect": "Choose 2 targets within 3 steps of each other",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "compact",
+      "label": "Compact",
+      "effect": "May be noticed with Wits + Investigation vs. Wits + Larceny",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "destructive",
+      "label": "Destructive",
+      "effect": "+1 damage to structures and objects; ignore protective gear; two-hands",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "long_range",
+      "label": "Long-Range",
+      "effect": "Can target any range with line of sight; two hands",
+      "cost": null
+    },
+    {
+      "category": "ranged",
+      "category_label": "Ranged",
+      "id": "silenced",
+      "label": "Silenced",
+      "effect": "Makes almost no noise",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "inconspicuous",
+      "label": "Inconspicuous",
+      "effect": "May be noticed with Wits + Investigation vs. Wits + Larceny",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "ballistic",
+      "label": "Ballistic",
+      "effect": "+1 to defense pool vs. critical attack from Marksmanship",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "deflecting",
+      "label": "Deflecting",
+      "effect": "+1 to defense pool vs. critical attack from Melee/Brawl",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "environmental_cold",
+      "label": "Environmental (Cold)",
+      "effect": "Protected from environmental hazard: cold",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "environmental_heat",
+      "label": "Environmental (Heat)",
+      "effect": "Protected from environmental hazard: heat",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "environmental_deep_water",
+      "label": "Environmental (Deep-Water)",
+      "effect": "Protected from environmental hazard: deep-water pressure",
+      "cost": null
+    },
+    {
+      "category": "protective",
+      "category_label": "Protective",
+      "id": "sturdy",
+      "label": "Sturdy",
+      "effect": "Provides one extra health level while worn",
+      "cost": null
+    },
+    {
+      "category": "miscellaneous",
+      "category_label": "Miscellaneous",
+      "id": "proficient",
+      "label": "Proficient",
+      "effect": "+1 bonus to test pool",
+      "cost": 1
+    },
+    {
+      "category": "miscellaneous",
+      "category_label": "Miscellaneous",
+      "id": "superior",
+      "label": "Superior",
+      "effect": "+2 bonus to test pool",
+      "cost": 2
+    },
+    {
+      "category": "miscellaneous",
+      "category_label": "Miscellaneous",
+      "id": "artisan",
+      "label": "Artisan",
+      "effect": "+3 bonus to test pool",
+      "cost": 3
+    }
+  ]
+}

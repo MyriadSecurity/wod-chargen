@@ -7,5 +7,8 @@
   "disciplines": { "primary": 1, "secondary": 0, "tertiary": 0 },
   "discipline_max": 2,
   "blood_potency": 0,
-  "formula_max": 3
+  "formula_max": 3,
+  "generation_weights": {
+    "thin_blood": { "14": 2, "15": 2, "16": 1 }
+  }
 }

@@ -1,0 +1,539 @@
+{
+  "source_ref": {
+    "mes_sheet_version": "5.2.9 MES",
+    "mes_workbook": "Monroe.xlsx",
+    "imported_at": "2026-06-13T20:56:47.806106+00:00",
+    "import_script": "scripts/import_mes_tables.py",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+  },
+  "loresheets": [
+    {
+      "id": "anarch_revolt",
+      "label": "Anarch Revolt",
+      "restriction": "Anarch Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Hold the Line",
+          "id": "hold_the_line"
+        },
+        {
+          "dots": 2,
+          "label": "Mutual Support",
+          "id": "mutual_support"
+        },
+        {
+          "dots": 3,
+          "label": "In Open Rebellion",
+          "id": "in_open_rebellion"
+        }
+      ]
+    },
+    {
+      "id": "the_cobweb",
+      "label": "The Cobweb",
+      "restriction": "Malkavian Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "A Break in the Static",
+          "id": "a_break_in_the_static"
+        },
+        {
+          "dots": 2,
+          "label": "The Call",
+          "id": "the_call"
+        },
+        {
+          "dots": 3,
+          "label": "Pluck the Strands",
+          "id": "pluck_the_strands"
+        }
+      ]
+    },
+    {
+      "id": "the_church_of_set",
+      "label": "The Church of Set",
+      "restriction": "Ministry Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Congregation",
+          "id": "congregation"
+        },
+        {
+          "dots": 2,
+          "label": "Degenerative Process",
+          "id": "degenerative_process"
+        },
+        {
+          "dots": 3,
+          "label": "Avatar of Belief",
+          "id": "avatar_of_belief"
+        }
+      ]
+    },
+    {
+      "id": "the_circulatory_system",
+      "label": "The Circulatory System",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Secure Transit",
+          "id": "secure_transit"
+        },
+        {
+          "dots": 2,
+          "label": "Farm Upstate",
+          "id": "farm_upstate"
+        },
+        {
+          "dots": 3,
+          "label": "Blood Sommelier",
+          "id": "blood_sommelier"
+        }
+      ]
+    },
+    {
+      "id": "convention_of_thorns",
+      "label": "Convention of Thorns",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Thorns Historian",
+          "id": "thorns_historian"
+        },
+        {
+          "dots": 2,
+          "label": "Archivist",
+          "id": "archivist"
+        },
+        {
+          "dots": 3,
+          "label": "Lessons of the Convention",
+          "id": "lessons_of_the_convention"
+        }
+      ]
+    },
+    {
+      "id": "decendant_of_hardestadt",
+      "label": "Decendant of Hardestadt",
+      "restriction": "Ventrue Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Wealth",
+          "id": "wealth"
+        },
+        {
+          "dots": 2,
+          "label": "Pedigree",
+          "id": "pedigree"
+        },
+        {
+          "dots": 3,
+          "label": "Control",
+          "id": "control"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_helena",
+      "label": "Descendant of Helena",
+      "restriction": "Toreador Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Real Talent",
+          "id": "real_talent"
+        },
+        {
+          "dots": 2,
+          "label": "Popular",
+          "id": "popular"
+        },
+        {
+          "dots": 3,
+          "label": "Succubus Club Franchise",
+          "id": "succubus_club_franchise"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_karl_schrekt",
+      "label": "Descendant of Karl Schrekt",
+      "restriction": "Tremere Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Ritual Preparedness",
+          "id": "ritual_preparedness"
+        },
+        {
+          "dots": 2,
+          "label": "Know the World",
+          "id": "know_the_world"
+        },
+        {
+          "dots": 3,
+          "label": "Surveilance",
+          "id": "surveilance"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_montano",
+      "label": "Descendant of Montano",
+      "restriction": "Lasombra Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Siblings in Darkness",
+          "id": "siblings_in_darkness"
+        },
+        {
+          "dots": 2,
+          "label": "Purity of Remorse",
+          "id": "purity_of_remorse"
+        },
+        {
+          "dots": 3,
+          "label": "Abyssal Appearance",
+          "id": "abyssal_appearance"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_tyler",
+      "label": "Descendant of Tyler",
+      "restriction": "Brujah Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Champion of the Cause",
+          "id": "champion_of_the_cause"
+        },
+        {
+          "dots": 2,
+          "label": "Tyler´s Mercy",
+          "id": "tyler_s_mercy"
+        },
+        {
+          "dots": 3,
+          "label": "The Furores",
+          "id": "the_furores"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_vasantasena",
+      "label": "Descendant of Vasantasena",
+      "restriction": "Malkavian Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Scent the Bond",
+          "id": "scent_the_bond"
+        },
+        {
+          "dots": 2,
+          "label": "Agent of Chaos",
+          "id": "agent_of_chaos"
+        },
+        {
+          "dots": 3,
+          "label": "Destroy the Bond",
+          "id": "destroy_the_bond"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_xavier",
+      "label": "Descendant of Xavier",
+      "restriction": "Gangrel Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Where the Bodies are Buried",
+          "id": "where_the_bodies_are_buried"
+        },
+        {
+          "dots": 2,
+          "label": "Monstrous Bat",
+          "id": "monstrous_bat"
+        },
+        {
+          "dots": 3,
+          "label": "Loyal Hounds",
+          "id": "loyal_hounds"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_zao_xue",
+      "label": "Descendant of Zao-Xue",
+      "restriction": "Salubri Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Hidden Scholar",
+          "id": "hidden_scholar"
+        },
+        {
+          "dots": 2,
+          "label": "Supernatural Encyclopedia",
+          "id": "supernatural_encyclopedia"
+        },
+        {
+          "dots": 3,
+          "label": "Shadow Network",
+          "id": "shadow_network"
+        }
+      ]
+    },
+    {
+      "id": "descendant_of_zelios",
+      "label": "Descendant of Zelios",
+      "restriction": "Nosferatu Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Architect",
+          "id": "architect"
+        },
+        {
+          "dots": 2,
+          "label": "Sanctuary",
+          "id": "sanctuary"
+        },
+        {
+          "dots": 3,
+          "label": "The Labyrinth",
+          "id": "the_labyrinth"
+        }
+      ]
+    },
+    {
+      "id": "the_first_inquisition",
+      "label": "The First Inquisition",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Mistakes of the Past",
+          "id": "mistakes_of_the_past"
+        },
+        {
+          "dots": 2,
+          "label": "The Second Act",
+          "id": "the_second_act"
+        },
+        {
+          "dots": 3,
+          "label": "Black Spot",
+          "id": "black_spot"
+        }
+      ]
+    },
+    {
+      "id": "firstlight",
+      "label": "FIRSTLIGHT",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "No Records Found",
+          "id": "no_records_found"
+        },
+        {
+          "dots": 2,
+          "label": "Evasion",
+          "id": "evasion"
+        },
+        {
+          "dots": 3,
+          "label": "Friend on the Inside",
+          "id": "friend_on_the_inside"
+        }
+      ]
+    },
+    {
+      "id": "golconda",
+      "label": "Golconda",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Satisfy the Hunger",
+          "id": "satisfy_the_hunger"
+        },
+        {
+          "dots": 2,
+          "label": "Saulot´s Disciple",
+          "id": "saulot_s_disciple"
+        },
+        {
+          "dots": 3,
+          "label": "Overcoming Banes",
+          "id": "overcoming_banes"
+        }
+      ]
+    },
+    {
+      "id": "high_clan",
+      "label": "High Clan",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Peacock",
+          "id": "peacock"
+        },
+        {
+          "dots": 2,
+          "label": "Friends in High Places",
+          "id": "friends_in_high_places"
+        },
+        {
+          "dots": 3,
+          "label": "Blessed, Not Cursed",
+          "id": "blessed_not_cursed"
+        }
+      ]
+    },
+    {
+      "id": "low_clan",
+      "label": "Low Clan",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Thick Hide",
+          "id": "thick_hide"
+        },
+        {
+          "dots": 2,
+          "label": "Uncanny Kinship",
+          "id": "uncanny_kinship"
+        },
+        {
+          "dots": 3,
+          "label": "Critical Incident",
+          "id": "critical_incident"
+        }
+      ]
+    },
+    {
+      "id": "scion_of_lucretia",
+      "label": "Scion of Lucretia",
+      "restriction": "Camarilla Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Peacemaker",
+          "id": "peacemaker"
+        },
+        {
+          "dots": 2,
+          "label": "Revitalization",
+          "id": "revitalization"
+        },
+        {
+          "dots": 3,
+          "label": "Armistice",
+          "id": "armistice"
+        }
+      ]
+    },
+    {
+      "id": "sect_war_veteran",
+      "label": "Sect War Veteran",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Survivor",
+          "id": "survivor"
+        },
+        {
+          "dots": 2,
+          "label": "Soldier",
+          "id": "soldier"
+        },
+        {
+          "dots": 3,
+          "label": "Strategist",
+          "id": "strategist"
+        }
+      ]
+    },
+    {
+      "id": "the_society_of_heralds",
+      "label": "The Society of Heralds",
+      "restriction": "Camarilla Only",
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Hot Gossip",
+          "id": "hot_gossip"
+        },
+        {
+          "dots": 2,
+          "label": "Tenured Protection",
+          "id": "tenured_protection"
+        },
+        {
+          "dots": 3,
+          "label": "Social Elite",
+          "id": "social_elite"
+        }
+      ]
+    },
+    {
+      "id": "the_trinity",
+      "label": "The Trinity",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "Constantinople",
+          "id": "constantinople"
+        },
+        {
+          "dots": 2,
+          "label": "The Dream",
+          "id": "the_dream"
+        },
+        {
+          "dots": 3,
+          "label": "The New Trinity",
+          "id": "the_new_trinity"
+        }
+      ]
+    },
+    {
+      "id": "the_week_of_nightmares",
+      "label": "The Week of Nightmares",
+      "restriction": null,
+      "levels": [
+        {
+          "dots": 1,
+          "label": "The Night Network",
+          "id": "the_night_network"
+        },
+        {
+          "dots": 2,
+          "label": "Survivor",
+          "id": "survivor"
+        },
+        {
+          "dots": 3,
+          "label": "The Red Star",
+          "id": "the_red_star"
+        }
+      ]
+    }
+  ]
+}

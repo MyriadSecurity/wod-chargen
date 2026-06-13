@@ -326,6 +326,51 @@ body {
   }
 }
 
+.sheet-dots--compact .sheet-dot-extra {
+  font-size: 0.65rem;
+}
+
+.sheet-convictions {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sheet-convictions__list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sheet-convictions__item {
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.sheet-convictions__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.sheet-convictions__seed {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.sheet-convictions__reroll {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+}
+
 @media print {
   .no-print {
     display: none !important;

@@ -24,7 +24,7 @@ cp "/path/to/laws_of_the_night_pocket.pdf" reference/lotn_v5/
 | Ghouls | [dramatic-systems/ghouls](https://www.oneworldofdarkness.com/laws-of-the-night/dramatic-systems/ghouls) | ghoul chapter | `ghoul_creation.json`, `ghoul_powers.json` |
 | Thin-blood | [/thin-blood](https://www.oneworldofdarkness.com/laws-of-the-night/thin-blood) | thin-blood section | `thin_blood_creation.json`, `thin_blood_formulas.json`, `thin_blood_merits.json` |
 | Clans | [/clans](https://www.oneworldofdarkness.com/laws-of-the-night/clans) | clan chapter | `clans.json` |
-| Disciplines | [/disciplines](https://www.oneworldofdarkness.com/laws-of-the-night/disciplines) | disciplines chapter | `disciplines.json` |
+| Disciplines | [/disciplines](https://www.oneworldofdarkness.com/laws-of-the-night/disciplines) | disciplines chapter | `disciplines.json`, `discipline_powers.json`, `discipline_tracks.json` |
 | Backgrounds | [/backgrounds](https://www.oneworldofdarkness.com/laws-of-the-night/backgrounds) | backgrounds | `backgrounds.json` (connections, spheres, modifiers) |
 | Merits & flaws | [/merits-flaws](https://www.oneworldofdarkness.com/laws-of-the-night/merits-flaws) | merits | `merits.json` → `merits`, `flaws` |
 | Predator types | [/predator-types](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types) | creation | `predator_types.json` |

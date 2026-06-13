@@ -1,0 +1,478 @@
+{
+  "source_ref": {
+    "title": "Convictions Master List",
+    "url": "https://www.reddit.com/r/vtm/comments/1ecdulq/convictions_master_list/",
+    "community": "r/vtm"
+  },
+  "pick_count": 3,
+  "convictions": [
+    {
+      "id": "above_all_fill_in_the_blank_with_a_core_value_or_create_your_own",
+      "text": "_____ above all (Fill in the blank with a core value or create your own)"
+    },
+    {
+      "id": "act_like_a_person_not_a_beast",
+      "text": "Act like a person, not a Beast"
+    },
+    {
+      "id": "admit_fault",
+      "text": "Admit fault"
+    },
+    {
+      "id": "all_attention_is_good_attention",
+      "text": "All attention is good attention"
+    },
+    {
+      "id": "all_you_ve_got_is_yourself",
+      "text": "All you've got is yourself"
+    },
+    {
+      "id": "all_s_fair_in_love_and_war",
+      "text": "All's fair in love and war"
+    },
+    {
+      "id": "always_be_polite_kind",
+      "text": "Always be polite & kind"
+    },
+    {
+      "id": "always_get_the_better_end_of_the_deal",
+      "text": "Always get the better end of the deal"
+    },
+    {
+      "id": "always_help_women_in_need",
+      "text": "Always help women in need"
+    },
+    {
+      "id": "always_keep_sworn_word_thou_shalt_not_lie",
+      "text": "Always keep sworn word/Thou shalt not lie"
+    },
+    {
+      "id": "always_keep_something_for_yourself",
+      "text": "Always keep something for yourself"
+    },
+    {
+      "id": "always_protect_comrades",
+      "text": "Always protect comrades"
+    },
+    {
+      "id": "always_pursue_pleasure_even_when_it_s_inconvenient",
+      "text": "Always pursue pleasure, even when it's inconvenient"
+    },
+    {
+      "id": "always_repay_favours",
+      "text": "Always repay favours"
+    },
+    {
+      "id": "always_seek_a_deeper_truth",
+      "text": "Always seek a deeper truth"
+    },
+    {
+      "id": "always_start_with_the_biggest_problem",
+      "text": "Always start with the biggest problem"
+    },
+    {
+      "id": "always_treat_others_with_kindness",
+      "text": "Always treat others with kindness"
+    },
+    {
+      "id": "an_eye_for_an_eye",
+      "text": "An eye for an eye"
+    },
+    {
+      "id": "an_ye_harm_none_do_what_ye_will",
+      "text": "An ye harm none, do what ye will"
+    },
+    {
+      "id": "animals_are_better_than_people",
+      "text": "Animals are better than people"
+    },
+    {
+      "id": "fools_deserve_to_be_fooled",
+      "text": "Fools deserve to be fooled"
+    },
+    {
+      "id": "forgive_and_forget",
+      "text": "Forgive and forget"
+    },
+    {
+      "id": "forgive_but_never_forget",
+      "text": "Forgive, but never forget"
+    },
+    {
+      "id": "fuck_around_and_find_out",
+      "text": "Fuck around and find out"
+    },
+    {
+      "id": "gamblers_and_carousers_are_destined_for_the_pit",
+      "text": "Gamblers and carousers are destined for the Pit"
+    },
+    {
+      "id": "help_those_in_need",
+      "text": "Help those in need"
+    },
+    {
+      "id": "i_am_on_this_earth_to_enjoy_myself",
+      "text": "I am on this earth to enjoy myself"
+    },
+    {
+      "id": "if_you_can_t_beat_em_join_em",
+      "text": "If you can't beat 'em, join 'em"
+    },
+    {
+      "id": "ignorance_is_bliss",
+      "text": "Ignorance is bliss"
+    },
+    {
+      "id": "if_you_re_not_with_us_you_re_against_us",
+      "text": "If you're not with us, you're against us"
+    },
+    {
+      "id": "impossible_is_a_matter_of_will",
+      "text": "Impossible is a matter of will"
+    },
+    {
+      "id": "it_is_morally_wrong_to_spend_money_on_a_luxury_item",
+      "text": "It is morally wrong to spend money on a luxury item"
+    },
+    {
+      "id": "knowledge_is_power",
+      "text": "Knowledge is power"
+    },
+    {
+      "id": "learn_from_others_misfortunes",
+      "text": "Learn from others' misfortunes"
+    },
+    {
+      "id": "leave_well_enough_alone",
+      "text": "Leave well enough alone"
+    },
+    {
+      "id": "don_t_poke_the_bear",
+      "text": "Don't poke the bear"
+    },
+    {
+      "id": "let_the_innocent_stay_ignorant",
+      "text": "Let the innocent stay ignorant"
+    },
+    {
+      "id": "love_thy_neighbour_as_thyself",
+      "text": "Love thy neighbour as thyself"
+    },
+    {
+      "id": "make_sure_to_always_get_your_share",
+      "text": "Make sure to always get your share"
+    },
+    {
+      "id": "might_makes_right",
+      "text": "Might makes right"
+    },
+    {
+      "id": "mind_your_own_business",
+      "text": "Mind your own business"
+    },
+    {
+      "id": "my_country_for_better_or_worse",
+      "text": "My country, for better or worse"
+    },
+    {
+      "id": "my_survival_comes_first",
+      "text": "My survival comes first"
+    },
+    {
+      "id": "my_way_is_the_right_way",
+      "text": "My way is the right way"
+    },
+    {
+      "id": "my_word_is_my_bond",
+      "text": "My word is my bond."
+    },
+    {
+      "id": "never_act_against_another_insert_own_group_faith_sect",
+      "text": "Never act against another (insert own group/faith/sect)"
+    },
+    {
+      "id": "never_back_down",
+      "text": "Never back down"
+    },
+    {
+      "id": "never_be_caught_unprepared",
+      "text": "Never be caught unprepared"
+    },
+    {
+      "id": "never_break_a_deal",
+      "text": "Never break a deal"
+    },
+    {
+      "id": "never_deny_true_love",
+      "text": "Never deny true love"
+    },
+    {
+      "id": "never_do_drugs_drink_alcohol",
+      "text": "Never do drugs/drink alcohol"
+    },
+    {
+      "id": "never_expose_children_to_violence",
+      "text": "Never expose children to violence"
+    },
+    {
+      "id": "never_give_a_sucker_an_even_chance",
+      "text": "Never give a sucker an even chance"
+    },
+    {
+      "id": "never_give_anything_away_for_free",
+      "text": "Never give anything away for free"
+    },
+    {
+      "id": "never_kill_an_innocent",
+      "text": "Never kill an innocent"
+    },
+    {
+      "id": "never_let_the_beast_rule_your_actions",
+      "text": "Never let the Beast rule your actions"
+    },
+    {
+      "id": "never_share_intel_without_getting_paid",
+      "text": "Never share intel without getting paid"
+    },
+    {
+      "id": "never_take_more_than_you_need",
+      "text": "Never take more than you need"
+    },
+    {
+      "id": "no_half_measures",
+      "text": "No half measures"
+    },
+    {
+      "id": "none_may_control_me",
+      "text": "None may control me"
+    },
+    {
+      "id": "none_should_suffer_as_i_have",
+      "text": "None should suffer as I have"
+    },
+    {
+      "id": "outcasts_look_after_their_own",
+      "text": "Outcasts look after their own"
+    },
+    {
+      "id": "people_matter_more_than_rules",
+      "text": "People matter more than rules"
+    },
+    {
+      "id": "always_choose_the_least_safe_path",
+      "text": "Always choose the least safe path"
+    },
+    {
+      "id": "possession_is_nine_tenths_of_the_law",
+      "text": "Possession is nine-tenths of the law"
+    },
+    {
+      "id": "poverty_is_a_sign_of_poor_moral_character",
+      "text": "Poverty is a sign of poor moral character"
+    },
+    {
+      "id": "protect_the_innocent_from_harm",
+      "text": "Protect the innocent from harm"
+    },
+    {
+      "id": "purity_is_health_health_is_purity",
+      "text": "Purity is health, health is purity"
+    },
+    {
+      "id": "reject_wealth_for_it_corrupts",
+      "text": "Reject wealth, for it corrupts"
+    },
+    {
+      "id": "resilience_through_experience",
+      "text": "Resilience through experience"
+    },
+    {
+      "id": "respect_religion_as_sacred_and_obey_its_moral_laws",
+      "text": "Respect (religion) as sacred and obey its moral laws"
+    },
+    {
+      "id": "respect_differences",
+      "text": "Respect differences"
+    },
+    {
+      "id": "respect_others_and_demand_respect",
+      "text": "Respect others, and demand respect"
+    },
+    {
+      "id": "respect_the_dead",
+      "text": "Respect the dead"
+    },
+    {
+      "id": "respect_the_natural_world",
+      "text": "Respect the natural world"
+    },
+    {
+      "id": "respect_the_property_of_others",
+      "text": "Respect the property of others"
+    },
+    {
+      "id": "respect_the_rights_of_others",
+      "text": "Respect the rights of others"
+    },
+    {
+      "id": "respect_the_rules_in_others_houses",
+      "text": "Respect the rules in others' houses"
+    },
+    {
+      "id": "respect_those_who_respect_you",
+      "text": "Respect those who respect you"
+    },
+    {
+      "id": "respect_your_elders",
+      "text": "Respect your Elders"
+    },
+    {
+      "id": "revenge_is_a_dish_best_served_cold",
+      "text": "Revenge is a dish best served cold"
+    },
+    {
+      "id": "revenge_is_mandatory",
+      "text": "Revenge is mandatory"
+    },
+    {
+      "id": "rob_from_the_rich_give_to_the_poor",
+      "text": "Rob from the rich, give to the poor"
+    },
+    {
+      "id": "science_must_improve_lives",
+      "text": "Science must improve lives"
+    },
+    {
+      "id": "slavery_is_evil",
+      "text": "Slavery is evil"
+    },
+    {
+      "id": "snitches_get_stitches",
+      "text": "Snitches get stitches"
+    },
+    {
+      "id": "stand_up_for_the_disenfranchised",
+      "text": "Stand up for the disenfranchised"
+    },
+    {
+      "id": "step_forward_when_no_one_else_will",
+      "text": "Step forward when no one else will"
+    },
+    {
+      "id": "strong_women_stand_together",
+      "text": "Strong women stand together"
+    },
+    {
+      "id": "subvert_all_expectations",
+      "text": "Subvert all expectations"
+    },
+    {
+      "id": "support_those_loyal_to_you",
+      "text": "Support those loyal to you"
+    },
+    {
+      "id": "support_your_brothers_in_arms",
+      "text": "Support your brothers-in-arms"
+    },
+    {
+      "id": "surveillance_is_security",
+      "text": "Surveillance is security;"
+    },
+    {
+      "id": "survival_of_the_fittest",
+      "text": "Survival of the fittest"
+    },
+    {
+      "id": "take_no_secret_to_the_grave",
+      "text": "Take no secret to the grave"
+    },
+    {
+      "id": "take_responsibility_for_your_actions",
+      "text": "Take responsibility for your actions"
+    },
+    {
+      "id": "talk_softly_and_carry_a_big_stick",
+      "text": "Talk softly and carry a big stick"
+    },
+    {
+      "id": "the_audience_wants_to_be_fooled_the_world_wants_to_be_deceived_so_let_it",
+      "text": "The audience wants to be fooled/The world wants to be deceived, so let it be deceived"
+    },
+    {
+      "id": "the_divine_right_of_princes",
+      "text": "The Divine Right of Princes"
+    },
+    {
+      "id": "the_guilty_must_suffer_be_punished",
+      "text": "The guilty must suffer/be punished"
+    },
+    {
+      "id": "there_is_always_room_for_improvement",
+      "text": "There is always room for improvement"
+    },
+    {
+      "id": "there_is_no_beauty_like_decay",
+      "text": "There is no beauty like decay"
+    },
+    {
+      "id": "thou_shalt_not_kill_kill_only_the_unworthy_unbelievers_in_fair_combat_in",
+      "text": "Thou shalt not kill/Kill only the unworthy/unbelievers/in fair combat/in self-defence"
+    },
+    {
+      "id": "thou_shalt_not_rape_or_torture",
+      "text": "Thou shalt not rape or torture"
+    },
+    {
+      "id": "treat_everyone_equally",
+      "text": "Treat everyone equally"
+    },
+    {
+      "id": "turn_the_other_cheek",
+      "text": "Turn the other cheek"
+    },
+    {
+      "id": "turnabout_is_fair_play_give_as_good_as_you_get",
+      "text": "Turnabout is fair play/Give as good as you get"
+    },
+    {
+      "id": "uphold_the_norms_of_a_decent_society",
+      "text": "Uphold the norms of a decent society"
+    },
+    {
+      "id": "we_re_all_in_this_together",
+      "text": "We're all in this together"
+    },
+    {
+      "id": "you_are_nothing_without_a_cause",
+      "text": "You are nothing without a cause"
+    },
+    {
+      "id": "you_are_responsible_for_the_lives_you_save",
+      "text": "You are responsible for the lives you save"
+    },
+    {
+      "id": "do_not_damage_one_s_reputation",
+      "text": "Do not damage one's reputation"
+    },
+    {
+      "id": "listen_to_the_liquor",
+      "text": "Listen to the Liquor"
+    },
+    {
+      "id": "i_m_from_round_the_way_i_m_leaving_with_something",
+      "text": "I'm from round the way, I'm leaving with something"
+    },
+    {
+      "id": "measure_twice_cut_once",
+      "text": "Measure twice, cut once"
+    },
+    {
+      "id": "never_let_a_man_piss_on_your_leg_son",
+      "text": "Never let a man piss on your leg, son"
+    },
+    {
+      "id": "remove_others_from_pain",
+      "text": "Remove others from pain"
+    }
+  ]
+}

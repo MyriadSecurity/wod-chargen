@@ -28,3 +28,8 @@ pythonpath = ["."]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[dependency-groups]
+dev = [
+    "pypdf>=6.13.2",
+]

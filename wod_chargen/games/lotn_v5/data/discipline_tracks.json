@@ -1,0 +1,29 @@
+{
+  "source_ref": { "doc": "docs/disciplines-review.md" },
+  "tracks": {
+    "animalism": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "auspex": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "blood_sorcery": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "celerity": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "dominate": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "fortitude": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "obfuscate": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "oblivion": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "potence": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "presence": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "protean": { "kind": "discipline", "xp_cost_key": "discipline_in_clan", "in_clan": true },
+    "thin_blood_alchemy": { "kind": "discipline", "xp_cost_key": "thin_blood_formula", "in_clan": true },
+    "blood_sorcery_rituals": {
+      "kind": "ritual",
+      "parent_discipline": "blood_sorcery",
+      "xp_cost_key": "ritual",
+      "in_clan": false
+    },
+    "ceremonies": {
+      "kind": "ceremony",
+      "parent_discipline": "oblivion",
+      "xp_cost_key": "ceremony",
+      "in_clan": false
+    }
+  }
+}

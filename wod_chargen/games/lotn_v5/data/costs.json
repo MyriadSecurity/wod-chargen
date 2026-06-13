@@ -9,6 +9,8 @@
   "discipline_out_of_clan": { "kind": "multiply", "factor": 7 },
   "discipline_caitiff": { "kind": "multiply", "factor": 6 },
   "blood_potency": { "kind": "multiply", "factor": 10 },
+  "ritual": { "kind": "multiply", "factor": 5 },
+  "ceremony": { "kind": "multiply", "factor": 5 },
   "humanity": { "kind": "multiply", "factor": 3 },
   "thin_blood_formula": { "kind": "multiply", "factor": 4 },
   "ghoul_power": { "kind": "flat", "amount": 10 }
