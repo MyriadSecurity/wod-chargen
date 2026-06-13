@@ -33,8 +33,11 @@ class MockElement:
         self.children: list[MockElement] = []
         self.style = types.SimpleNamespace()
         self.onclick: Any = None
+        self.onchange: Any = None
         self.src = ""
         self.alt = ""
+        self.href = ""
+        self.rel = ""
         self._attrs: dict[str, str] = {}
 
     def appendChild(self, child: MockElement) -> MockElement:
@@ -73,6 +76,7 @@ class MockLocation:
     search = ""
     pathname = "/"
     href = "http://127.0.0.1/"
+    hash = ""
 
 
 class MockWindow:
@@ -80,6 +84,15 @@ class MockWindow:
         self.location = MockLocation()
         self.history = MockHistory()
         self.navigator = MockNavigator()
+        self._listeners: dict[str, list] = {}
+
+    def addEventListener(self, event: str, handler) -> None:
+        self._listeners.setdefault(event, []).append(handler)
+
+    def setTimeout(self, handler, _ms: int = 0):
+        if callable(handler):
+            handler()
+        return 0
 
     def print(self) -> None:
         pass
@@ -93,12 +106,19 @@ class MockDocument:
             "py-error": MockElement("div", "py-error"),
         }
         self.elements["py-error"].classList.add("hidden")
+        self.head = MockElement("head")
 
     def getElementById(self, element_id: str) -> MockElement | None:
         return self.elements.get(element_id)
 
     def createElement(self, tag: str) -> MockElement:
-        return MockElement(tag)
+        el = MockElement(tag)
+        if tag == "link":
+            el.rel = ""
+            el.href = ""
+        if tag == "script":
+            el.src = ""
+        return el
 
 
 class PyScriptStubs:

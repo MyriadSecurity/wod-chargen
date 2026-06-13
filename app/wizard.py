@@ -10,6 +10,7 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.components.sheet import render_lotn_v5_sheet
+from app.nav import app_nav
 from wod_chargen.core.xp_log_format import format_xp_log
 from wod_chargen.core.share import (
     SharePayload,
@@ -167,6 +168,7 @@ class WizardApp:
 
     def _render(self) -> None:
         self.root.innerHTML = ""
+        self.root.appendChild(app_nav("generator"))
         step = self.state["step"]
         container = document.createElement("div")
         container.className = "flex-1 mx-auto w-full px-4 py-8"
@@ -243,6 +245,12 @@ class WizardApp:
             "Pick lineage and build. Same seed gives the same sheet.",
         )
         el.appendChild(p)
+
+        map_link = document.createElement("a")
+        map_link.href = "#weights"
+        map_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        map_link.innerText = "Explore archetype weight map →"
+        el.appendChild(map_link)
 
         catalog = load_game_catalog()
         for game_id, game in catalog.items():

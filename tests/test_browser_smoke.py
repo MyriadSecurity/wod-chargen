@@ -62,6 +62,59 @@ def test_main_page_loads_wizard(site_base_url: str):
 
 
 @pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
+def test_weight_map_page_renders(site_base_url: str):
+    """Weight map must boot and render SVG or a visible error — bounded wait."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--disable-http-cache"])
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto(f"{site_base_url}/#weights", wait_until="domcontentloaded", timeout=60_000)
+
+        deadline = time.monotonic() + 90
+        last_state = ""
+        while time.monotonic() < deadline:
+            boot_error = page.evaluate(
+                """() => {
+                    const el = document.getElementById('py-error');
+                    if (!el || el.classList.contains('hidden')) return null;
+                    return el.innerText || 'Unknown PyScript error';
+                }"""
+            )
+            if boot_error:
+                raise AssertionError(f"Weight map failed to boot:\n{boot_error}")
+
+            state = page.evaluate(
+                """() => {
+                    const root = document.getElementById('app-root');
+                    const overlay = document.getElementById('loading-overlay');
+                    if (!root || !overlay || !overlay.classList.contains('hidden')) return 'loading';
+                    const title = root.querySelector('h1');
+                    if (!title || !title.textContent.toLowerCase().includes('weight map')) return 'no-title';
+                    const canvas = document.getElementById('weight-map-canvas');
+                    if (!canvas) return 'no-canvas';
+                    if (canvas.querySelector('svg')) return 'svg';
+                    const err = canvas.querySelector('.weight-map-error');
+                    if (err) return 'canvas-error:' + err.textContent;
+                    return 'waiting';
+                }"""
+            )
+            last_state = state
+            if state == "svg":
+                break
+            if state.startswith("canvas-error:"):
+                raise AssertionError(f"Weight map canvas error: {state.split(':', 1)[1]}")
+            page.wait_for_timeout(500)
+        else:
+            raise TimeoutError(
+                f"Weight map did not render within 90s (last state: {last_state!r})"
+            )
+
+        assert page.locator("#weight-map-canvas svg").count() >= 1
+        context.close()
+        browser.close()
+
+
+@pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
 def test_share_url_loads_results_sheet(site_base_url: str):
     share_path = (
         "/?schema=0.1&seed=424242&game=lotn_v5&venue=mes_end_to_dawn"
