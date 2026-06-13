@@ -1,0 +1,13 @@
+archetype,sub,seeds,top_skills,top_disciplines
+alchemist,chemist,30,"medicine(5), stealth(4), science(4), performance(2), insight(2)",thin_blood_alchemy(60)
+artist,virtuoso,30,"leadership(3), animal_ken(3), firearms(2), intimidation(2), stealth(2)","celerity(116), presence(100), potence(64)"
+criminal,thief,30,"leadership(3), larceny(3), finance(3), stealth(3), survival(3)","celerity(125), potence(87), presence(67)"
+diplomat,silver_tongue,30,"performance(3), etiquette(3), larceny(2), leadership(2), insight(2)","presence(126), celerity(90), potence(63)"
+duelist,fencer,30,"melee(9), firearms(2), insight(2), intimidation(2), science(2)","celerity(127), potence(88), presence(80)"
+enforcer,tank,30,"intimidation(7), melee(3), drive(2), science(2), survival(2)","potence(108), celerity(91), presence(90)"
+investigator,detective,30,"investigation(6), insight(3), animal_ken(3), leadership(2), stealth(2)","celerity(114), presence(105), potence(61)"
+manipulator,puppetmaster,30,"subterfuge(4), performance(3), stealth(3), firearms(2), leadership(2)","presence(110), celerity(109), potence(63)"
+occultist,thaumaturge,30,"performance(3), stealth(3), firearms(2), leadership(2), science(2)","celerity(117), presence(111), potence(71)"
+predator,stalker,30,"stealth(5), survival(5), insight(3), firearms(2), intimidation(2)","celerity(127), potence(91), presence(66)"
+scholar,loremaster,30,"stealth(3), performance(2), firearms(2), insight(2), science(2)","presence(112), celerity(103), potence(66)"
+shadow,spy,30,"stealth(7), larceny(3), intimidation(2), etiquette(2), science(2)","celerity(133), potence(78), presence(75)"

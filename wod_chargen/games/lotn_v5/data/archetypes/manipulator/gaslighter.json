@@ -5,11 +5,25 @@
   "modifiers": {
     "skill_biases": {
       "persuasion": 0.4,
-      "subterfuge": 0.25,
-      "insight": 0.1
+      "subterfuge": 0.3,
+      "insight": 0.2
     },
     "discipline_biases": {
-      "dominate": 0.2
+      "dominate": 0.3
+    },
+    "flaw_biases": {
+      "enemy": 0.25
+    },
+    "discipline_power_biases": {
+      "forgetful_mind": 2.1,
+      "cloud_memory": 2.05,
+      "dementation": 1.9,
+      "mesmerize": 1.85,
+      "compel": 1.7
+    },
+    "tag_affinities": {
+      "deception": 0.4,
+      "control": 0.3
     }
   }
 }

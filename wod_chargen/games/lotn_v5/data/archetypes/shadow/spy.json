@@ -8,11 +8,31 @@
     },
     "skill_biases": {
       "stealth": 0.3,
-      "subterfuge": 0.25,
-      "investigation": 0.15
+      "subterfuge": 0.3,
+      "investigation": 0.3,
+      "awareness": 0.25
     },
     "discipline_biases": {
-      "auspex": 0.15
+      "auspex": 0.25
+    },
+    "sphere_biases": {
+      "media": 0.35,
+      "political": 0.3
+    },
+    "modifier_biases": {
+      "paranoid": 0.3,
+      "at_arms_length": 0.25
+    },
+    "discipline_power_biases": {
+      "sense_the_unseen": 2.05,
+      "share_the_senses": 1.95,
+      "heightened_senses": 1.85,
+      "scry_the_soul": 1.75,
+      "conceal": 1.65
+    },
+    "tag_affinities": {
+      "information": 0.4,
+      "perception": 0.35
     }
   }
 }

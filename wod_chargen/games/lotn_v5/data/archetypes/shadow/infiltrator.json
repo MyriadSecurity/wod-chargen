@@ -4,12 +4,26 @@
   "description": "Inside the place you're not meant to reach.",
   "modifiers": {
     "skill_biases": {
-      "larceny": 0.3,
-      "stealth": 0.3
+      "larceny": 0.35,
+      "stealth": 0.35
     },
     "discipline_biases": {
-      "obfuscate": 0.25,
-      "celerity": 0.1
+      "obfuscate": 0.35,
+      "celerity": 0.2
+    },
+    "modifier_biases": {
+      "at_arms_length": 0.35
+    },
+    "discipline_power_biases": {
+      "unseen_passage": 2.1,
+      "conceal": 2.0,
+      "mask_of_a_thousand_faces": 1.9,
+      "cache": 1.8,
+      "blink": 1.7
+    },
+    "tag_affinities": {
+      "stealth": 0.4,
+      "crime": 0.3
     }
   }
 }

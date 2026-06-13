@@ -248,7 +248,8 @@ def assign_power_at_level(
 ) -> str | None:
     """Pick and record one power for a discipline track at the given level."""
     _ensure_char_discipline_fields(char)
-    biases = getattr(profile, "discipline_power_biases", None) or {}
+    from wod_chargen.games.lotn_v5.trait_biases import build_power_biases
+
     kind = track_kind(track_id)
 
     if kind == "formula":
@@ -262,7 +263,7 @@ def assign_power_at_level(
                 )
             )
             return None
-        power = pick_power(rng, eligible, biases)
+        power = pick_power(rng, eligible, build_power_biases(profile, [p["id"] for p in eligible]))
         record_formula_selection(char, power["id"])
         msg = f"Formula {power['label']} ({len(eligible)} options)"
     else:
@@ -278,7 +279,7 @@ def assign_power_at_level(
                 )
             )
             return None
-        power = pick_power(rng, eligible, biases)
+        power = pick_power(rng, eligible, build_power_biases(profile, [p["id"] for p in eligible]))
         if kind == "ritual":
             char["rituals"].append(power["id"])
             msg = f"Ritual {power['label']} ({len(eligible)} options)"

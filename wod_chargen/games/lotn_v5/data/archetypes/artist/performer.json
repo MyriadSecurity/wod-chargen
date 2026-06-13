@@ -5,11 +5,29 @@
   "modifiers": {
     "skill_biases": {
       "performance": 0.45,
-      "persuasion": 0.2,
+      "persuasion": 0.25,
       "craft": -0.2
     },
     "discipline_biases": {
-      "presence": 0.25
+      "presence": 0.3
+    },
+    "background_biases": {
+      "fame": 0.35
+    },
+    "modifier_biases": {
+      "fan_club": 0.35,
+      "star_power": 0.3
+    },
+    "discipline_power_biases": {
+      "awe": 2.15,
+      "entrancement": 2.05,
+      "monologue": 1.9,
+      "eyes_of_the_serpent": 1.8,
+      "silencing_tongue": 1.7
+    },
+    "tag_affinities": {
+      "art": 0.45,
+      "reputation": 0.35
     }
   }
 }

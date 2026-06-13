@@ -8,13 +8,28 @@
     },
     "skill_biases": {
       "firearms": 0.4,
-      "intimidation": 0.1,
+      "intimidation": 0.4,
       "stealth": 0.15,
-      "brawl": -0.5
+      "brawl": 0.3
     },
     "discipline_biases": {
       "potence": 0.25,
-      "celerity": 0.15
+      "celerity": 0.15,
+      "presence": 0.3
+    },
+    "flaw_biases": {
+      "obvious_predator": 0.3,
+      "bestial_temper": 0.25
+    },
+    "discipline_power_biases": {
+      "dread_gaze": 2.15,
+      "daunt": 2.0,
+      "prowess": 1.85,
+      "lethal_body": 1.75
+    },
+    "tag_affinities": {
+      "intimidation": 0.4,
+      "combat": 0.35
     }
   }
 }

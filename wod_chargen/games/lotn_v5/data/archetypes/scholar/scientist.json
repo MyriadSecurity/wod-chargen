@@ -4,9 +4,26 @@
   "description": "Lab work, medicine, and answers that don't need a ritual circle.",
   "modifiers": {
     "skill_biases": {
-      "science": 0.5,
+      "science": 0.45,
       "medicine": 0.35,
-      "academics": 0.15
+      "academics": 0.2
+    },
+    "merit_biases": {
+      "phenom": 0.3
+    },
+    "sphere_biases": {
+      "university": 0.4,
+      "health": 0.35
+    },
+    "discipline_power_biases": {
+      "panacea": 1.9,
+      "heightened_senses": 1.85,
+      "premonition": 1.75,
+      "scry_the_soul": 1.65
+    },
+    "tag_affinities": {
+      "science": 0.45,
+      "mental": 0.3
     }
   }
 }

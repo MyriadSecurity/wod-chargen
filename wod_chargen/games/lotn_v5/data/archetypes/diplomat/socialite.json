@@ -8,8 +8,30 @@
       "backgrounds": 0.15
     },
     "skill_biases": {
-      "etiquette": 0.4,
-      "insight": 0.2
+      "etiquette": 0.35,
+      "insight": 0.25
+    },
+    "background_biases": {
+      "fame": 0.35,
+      "contacts": 0.25
+    },
+    "sphere_biases": {
+      "high_society": 0.4,
+      "media": 0.25
+    },
+    "modifier_biases": {
+      "open_bar": 0.35,
+      "fan_club": 0.3
+    },
+    "discipline_power_biases": {
+      "awe": 2.0,
+      "entrancement": 1.9,
+      "silencing_tongue": 1.75,
+      "monologue": 1.7
+    },
+    "tag_affinities": {
+      "reputation": 0.35,
+      "social": 0.25
     }
   }
 }

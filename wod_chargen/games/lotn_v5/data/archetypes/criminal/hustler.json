@@ -8,9 +8,26 @@
     },
     "skill_biases": {
       "subterfuge": 0.4,
-      "persuasion": 0.2,
-      "streetwise": 0.2,
+      "persuasion": 0.3,
+      "streetwise": 0.25,
       "stealth": -0.2
+    },
+    "background_biases": {
+      "contacts": 0.3,
+      "mask": 0.25
+    },
+    "modifier_biases": {
+      "cash_money": 0.3
+    },
+    "discipline_power_biases": {
+      "mesmerize": 1.9,
+      "compel": 1.85,
+      "cloud_memory": 1.8,
+      "mask_of_a_thousand_faces": 1.7
+    },
+    "tag_affinities": {
+      "deception": 0.4,
+      "street": 0.3
     }
   }
 }

@@ -7,13 +7,34 @@
       "social_attrs": 0.1
     },
     "skill_biases": {
-      "streetwise": 0.4,
-      "persuasion": 0.2,
-      "politics": 0.15,
+      "streetwise": 0.35,
+      "persuasion": 0.25,
+      "politics": 0.2,
       "etiquette": -0.35
     },
     "discipline_biases": {
       "presence": 0.2
+    },
+    "flaw_biases": {
+      "shunned_by_the_anarchs": 0.25
+    },
+    "sphere_biases": {
+      "street": 0.4,
+      "welfare": 0.3,
+      "political": 0.2
+    },
+    "modifier_biases": {
+      "diversity": 0.3
+    },
+    "discipline_power_biases": {
+      "daunt": 2.0,
+      "dread_gaze": 1.9,
+      "monologue": 1.8,
+      "awe": 1.65
+    },
+    "tag_affinities": {
+      "street": 0.35,
+      "influence": 0.3
     }
   }
 }

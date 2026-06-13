@@ -5,10 +5,24 @@
   "modifiers": {
     "skill_biases": {
       "melee": 0.45,
-      "athletics": 0.2
+      "athletics": 0.25
     },
     "discipline_biases": {
-      "celerity": 0.25
+      "celerity": 0.35
+    },
+    "merit_biases": {
+      "ambidextrous": 0.35
+    },
+    "discipline_power_biases": {
+      "fleetness": 2.1,
+      "rapid_reflexes": 2.0,
+      "blink": 1.9,
+      "cat_s_grace": 1.85,
+      "nimble_departure": 1.75
+    },
+    "tag_affinities": {
+      "combat": 0.4,
+      "mobility": 0.35
     }
   }
 }

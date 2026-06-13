@@ -5,10 +5,24 @@
   "modifiers": {
     "skill_biases": {
       "firearms": 0.45,
-      "awareness": 0.2
+      "awareness": 0.25
     },
     "discipline_biases": {
-      "celerity": 0.15
+      "celerity": 0.2
+    },
+    "modifier_biases": {
+      "garage": 0.25
+    },
+    "discipline_power_biases": {
+      "rapid_reflexes": 2.05,
+      "fleetness": 1.95,
+      "heightened_senses": 1.85,
+      "cat_s_grace": 1.75,
+      "blink": 1.65
+    },
+    "tag_affinities": {
+      "combat": 0.4,
+      "perception": 0.3
     }
   }
 }

@@ -7,12 +7,33 @@
       "backgrounds": 0.1
     },
     "skill_biases": {
-      "intimidation": 0.4,
+      "intimidation": 0.35,
       "streetwise": 0.3,
-      "finance": 0.15
+      "finance": 0.25
     },
     "discipline_biases": {
       "presence": 0.2
+    },
+    "background_biases": {
+      "contacts": 0.3,
+      "resources": 0.25
+    },
+    "sphere_biases": {
+      "underworld": 0.35,
+      "finance": 0.25
+    },
+    "modifier_biases": {
+      "cash_money": 0.3
+    },
+    "discipline_power_biases": {
+      "daunt": 1.95,
+      "dread_gaze": 1.85,
+      "prowess": 1.8,
+      "compel": 1.65
+    },
+    "tag_affinities": {
+      "street": 0.35,
+      "wealth": 0.3
     }
   }
 }

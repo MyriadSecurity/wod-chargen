@@ -1,7 +1,7 @@
 {
   "id": "fixer",
   "label": "Fixer",
-  "description": "Wrong tool, wrong contact, wrong hour \u2014 you know who to call.",
+  "description": "Wrong tool, wrong contact, wrong hour — you know who to call.",
   "modifiers": {
     "weights": {
       "backgrounds": 0.15,
@@ -9,9 +9,31 @@
     },
     "skill_biases": {
       "streetwise": 0.4,
-      "subterfuge": 0.2,
-      "finance": 0.2,
+      "subterfuge": 0.25,
+      "finance": 0.25,
       "larceny": -0.35
+    },
+    "background_biases": {
+      "contacts": 0.35,
+      "allies": 0.3
+    },
+    "sphere_biases": {
+      "underworld": 0.35,
+      "street": 0.3
+    },
+    "modifier_biases": {
+      "diversity": 0.3,
+      "reliable": 0.25
+    },
+    "discipline_power_biases": {
+      "compel": 1.9,
+      "cloud_memory": 1.85,
+      "mesmerize": 1.75,
+      "conceal": 1.65
+    },
+    "tag_affinities": {
+      "street": 0.4,
+      "support": 0.3
     }
   }
 }

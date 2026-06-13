@@ -9,12 +9,32 @@
     },
     "skill_biases": {
       "persuasion": 0.25,
-      "occult": 0.3,
+      "occult": 0.35,
       "insight": 0.2,
       "subterfuge": -0.25
     },
     "discipline_biases": {
       "presence": 0.2
+    },
+    "merit_biases": {
+      "loremaster": 0.35
+    },
+    "flaw_biases": {
+      "enemy": 0.25
+    },
+    "sphere_biases": {
+      "church": 0.45,
+      "political": 0.2
+    },
+    "discipline_power_biases": {
+      "dread_gaze": 2.0,
+      "monologue": 1.85,
+      "daunt": 1.75,
+      "awe": 1.7
+    },
+    "tag_affinities": {
+      "occult": 0.35,
+      "influence": 0.25
     }
   }
 }

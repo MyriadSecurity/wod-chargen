@@ -338,6 +338,8 @@ def _apply_base_creation(
 
     if bg_dots:
         bg_bias = {"contacts": 1.2, "resources": 1.0}
+        for bg_type, mult in getattr(profile, "background_biases", {}).items():
+            bg_bias[bg_type] = bg_bias.get(bg_type, 1.0) * mult
         if background_biases:
             bg_bias.update(background_biases)
         bg_lines, ledger = run_background_creation(
@@ -552,6 +554,8 @@ def _enumerate_purchases(
             apply_modifier_purchase(e, mid, "advantage")
             record_xp_modifier_purchase(char.setdefault("background_meta", {}))
 
+        from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
         candidates.append(
             PurchaseCandidate(
                 item_id=modifier_item_key(entry, mod_id, kind),
@@ -560,7 +564,8 @@ def _enumerate_purchases(
                 new_level=new_level,
                 cost=cost,
                 weight=mod_w,
-                item_bias=modifier_xp_item_bias(entry, kind),
+                item_bias=modifier_xp_item_bias(entry, kind)
+                * resolve_trait_bias(profile, mod_id, "modifiers"),
                 clan_factor=1.0,
                 source=source,
                 apply=apply_mod,
@@ -823,7 +828,7 @@ def generate_character(
 
     bg_meta = char.setdefault("background_meta", {})
     for item_id, category, new_level, trade_source in apply_xp_background_disadv_trade(
-        rng, char["backgrounds"], bg_meta
+        rng, char["backgrounds"], bg_meta, profile
     ):
         xp_log.append(
             XpLogEntry(

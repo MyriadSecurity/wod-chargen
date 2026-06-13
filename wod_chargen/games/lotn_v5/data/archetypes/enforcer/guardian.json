@@ -11,14 +11,32 @@
       "strength": 0.15
     },
     "skill_biases": {
-      "awareness": 0.5,
-      "athletics": 0.2,
+      "awareness": 0.3,
+      "athletics": 0.25,
       "intimidation": 0.1,
       "firearms": -0.2,
       "brawl": -0.25
     },
     "discipline_biases": {
       "fortitude": 0.25
+    },
+    "background_biases": {
+      "haven": 0.35,
+      "allies": 0.3
+    },
+    "modifier_biases": {
+      "reliable": 0.35,
+      "retainer": 0.3
+    },
+    "discipline_power_biases": {
+      "resiliency": 2.0,
+      "unyielding": 1.9,
+      "coagulate": 1.8,
+      "toughness": 1.7
+    },
+    "tag_affinities": {
+      "defense": 0.4,
+      "support": 0.3
     }
   }
 }

@@ -8,10 +8,25 @@
       "in_clan_disciplines": 0.1
     },
     "attribute_biases": {
-      "stamina": 0.35
+      "stamina": 0.35,
+      "strength": 0.25
     },
     "discipline_biases": {
-      "fortitude": 0.35
+      "fortitude": 0.4,
+      "potence": 0.2
+    },
+    "modifier_biases": {
+      "walk_in_freezer": 0.3
+    },
+    "discipline_power_biases": {
+      "toughness": 2.05,
+      "resiliency": 2.0,
+      "unyielding": 1.85,
+      "roots_of_the_mountain": 1.75
+    },
+    "tag_affinities": {
+      "endurance": 0.4,
+      "resilience": 0.35
     }
   }
 }

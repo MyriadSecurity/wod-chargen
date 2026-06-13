@@ -5,9 +5,27 @@
   "modifiers": {
     "skill_biases": {
       "science": 0.45,
-      "investigation": 0.25,
-      "medicine": 0.2,
+      "investigation": 0.3,
+      "medicine": 0.25,
       "intimidation": -0.2
+    },
+    "merit_biases": {
+      "bloodhound": 0.3
+    },
+    "sphere_biases": {
+      "health": 0.4,
+      "police": 0.35
+    },
+    "discipline_power_biases": {
+      "heightened_senses": 2.1,
+      "scry_the_soul": 2.0,
+      "panacea": 1.85,
+      "sense_the_unseen": 1.8,
+      "premonition": 1.7
+    },
+    "tag_affinities": {
+      "science": 0.4,
+      "investigation": 0.35
     }
   }
 }

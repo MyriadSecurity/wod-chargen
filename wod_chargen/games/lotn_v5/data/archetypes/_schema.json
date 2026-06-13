@@ -8,6 +8,13 @@
     "attribute_biases": "per-attribute multipliers",
     "skill_biases": "per-skill multipliers",
     "discipline_biases": "per-discipline multipliers",
+    "merit_biases": "per-merit multipliers (explicit override over tags)",
+    "flaw_biases": "per-flaw multipliers",
+    "background_biases": "per background type (allies, contacts, …)",
+    "sphere_biases": "per contact sphere id",
+    "modifier_biases": "per background adv/disadv modifier id",
+    "discipline_power_biases": "per discipline power id",
+    "tag_affinities": "tag slug → multiplier for all tagged traits",
     "type_weights": "optional per-character-type weight multipliers"
   },
   "sub_archetype": {
@@ -20,7 +27,14 @@
       "weights": "additive deltas applied to parent weights",
       "attribute_biases": "additive deltas applied to parent attribute_biases",
       "skill_biases": "additive deltas applied to parent skill_biases",
-      "discipline_biases": "additive deltas applied to parent discipline_biases"
+      "discipline_biases": "additive deltas applied to parent discipline_biases",
+      "merit_biases": "additive deltas on parent merit_biases",
+      "flaw_biases": "additive deltas on parent flaw_biases",
+      "background_biases": "additive deltas on parent background_biases",
+      "sphere_biases": "additive deltas on parent sphere_biases",
+      "modifier_biases": "additive deltas on parent modifier_biases",
+      "discipline_power_biases": "additive deltas on parent discipline_power_biases",
+      "tag_affinities": "additive deltas on parent tag_affinities"
     }
   }
 }

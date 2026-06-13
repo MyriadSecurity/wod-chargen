@@ -7,11 +7,32 @@
       "merits": 0.15
     },
     "skill_biases": {
-      "occult": 0.3,
-      "academics": 0.25
+      "occult": 0.35,
+      "academics": 0.3
     },
     "discipline_biases": {
       "blood_sorcery": -0.15
+    },
+    "merit_biases": {
+      "loremaster": 0.3
+    },
+    "sphere_biases": {
+      "church": 0.35,
+      "occult": 0.35
+    },
+    "modifier_biases": {
+      "conspiracy_theorist": 0.3
+    },
+    "discipline_power_biases": {
+      "blood_walk": 2.0,
+      "ward_against_ghouls": 1.95,
+      "phantom_whispers": 1.9,
+      "craft_bloodstone": 1.8,
+      "cling_of_the_arachnid": 1.7
+    },
+    "tag_affinities": {
+      "ritual": 0.45,
+      "occult": 0.35
     }
   }
 }

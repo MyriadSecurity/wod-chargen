@@ -7,9 +7,27 @@
       "mental_attrs": 0.1
     },
     "skill_biases": {
-      "craft": 0.3,
-      "technology": 0.25,
-      "larceny": 0.15
+      "craft": 0.35,
+      "technology": 0.35,
+      "larceny": 0.2
+    },
+    "sphere_biases": {
+      "industry": 0.35,
+      "transportation": 0.25
+    },
+    "modifier_biases": {
+      "garage": 0.3
+    },
+    "discipline_power_biases": {
+      "chimerstry": 1.9,
+      "ghost_in_the_machine": 1.85,
+      "fata_morgana": 1.8,
+      "cache": 1.7,
+      "conceal": 1.65
+    },
+    "tag_affinities": {
+      "crime": 0.35,
+      "stealth": 0.3
     }
   }
 }

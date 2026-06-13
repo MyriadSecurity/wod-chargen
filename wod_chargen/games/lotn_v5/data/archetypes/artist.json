@@ -12,18 +12,83 @@
     "merits": 0.8
   },
   "attribute_biases": {
-    "charisma": 1.7,
-    "composure": 1.4,
+    "charisma": 1.1,
+    "composure": 1.1,
     "manipulation": 1.2
   },
   "skill_biases": {
     "performance": 2.0,
     "persuasion": 1.5,
     "etiquette": 1.4,
-    "craft": 1.2
+    "craft": 1.2,
+    "insight": 1.15,
+    "finance": 1.1
   },
   "discipline_biases": {
-    "presence": 1.7,
-    "auspex": 1.2
+    "presence": 1.1,
+    "auspex": 1.05,
+    "obfuscate": 0.65,
+    "potence": 0.4,
+    "dominate": 0.55,
+    "oblivion": 0.4
+  },
+  "merit_biases": {
+    "phenom": 1.6,
+    "vampiric_visage": 1.5,
+    "lifelike": 1.4,
+    "linguistics": 1.25,
+    "camarilla_contact": 1.2
+  },
+  "flaw_biases": {
+    "infamy": 1.5,
+    "enemy": 1.35,
+    "trouble_magnet": 1.2,
+    "obvious_predator": 0.1,
+    "illiterate": 0.1,
+    "poor": 0.12
+  },
+  "background_biases": {
+    "fame": 1.75,
+    "contacts": 1.45,
+    "resources": 1.35,
+    "herd": 1.25,
+    "allies": 1.15,
+    "haven": 1.1,
+    "mask": 0.95,
+    "familiar": 0.7
+  },
+  "sphere_biases": {
+    "media": 1.8,
+    "high_society": 1.65,
+    "finance": 1.25,
+    "political": 1.15,
+    "church": 1.0,
+    "street": 0.6,
+    "underworld": 0.5,
+    "police": 0.55
+  },
+  "modifier_biases": {
+    "fan_club": 1.55,
+    "star_power": 1.45,
+    "open_bar": 1.35,
+    "paparazzi": 1.3,
+    "jealousy": 1.25,
+    "flaky": 0.45
+  },
+  "discipline_power_biases": {
+    "awe": 1.85,
+    "entrancement": 1.8,
+    "monologue": 1.7,
+    "eyes_of_the_serpent": 1.6
+  },
+  "tag_affinities": {
+    "art": 1.9,
+    "reputation": 1.8,
+    "social": 1.7,
+    "influence": 1.55,
+    "wealth": 1.25,
+    "combat": 0.45,
+    "stealth": 0.5,
+    "crime": 0.45
   }
 }

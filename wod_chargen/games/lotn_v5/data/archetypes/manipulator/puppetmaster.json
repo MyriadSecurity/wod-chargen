@@ -9,10 +9,28 @@
     "skill_biases": {
       "subterfuge": 0.35,
       "insight": 0.35,
-      "politics": 0.2
+      "politics": 0.25
     },
     "discipline_biases": {
-      "dominate": 0.25
+      "dominate": 0.35
+    },
+    "background_biases": {
+      "contacts": 0.3,
+      "allies": 0.25
+    },
+    "modifier_biases": {
+      "at_arms_length": 0.35
+    },
+    "discipline_power_biases": {
+      "mesmerize": 2.1,
+      "submerged_directive": 2.0,
+      "compel": 1.95,
+      "forgetful_mind": 1.85,
+      "domitor_s_favor": 1.7
+    },
+    "tag_affinities": {
+      "control": 0.4,
+      "politics": 0.35
     }
   }
 }

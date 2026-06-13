@@ -9,7 +9,21 @@
       "investigation": 0.1
     },
     "discipline_biases": {
-      "dominate": 0.2
+      "dominate": 0.3
+    },
+    "flaw_biases": {
+      "impatient": 0.25
+    },
+    "discipline_power_biases": {
+      "compel": 2.05,
+      "mesmerize": 1.95,
+      "dread_gaze": 1.85,
+      "daunt": 1.8,
+      "forgetful_mind": 1.7
+    },
+    "tag_affinities": {
+      "intimidation": 0.4,
+      "control": 0.3
     }
   }
 }

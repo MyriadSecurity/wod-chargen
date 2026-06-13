@@ -7,13 +7,35 @@
       "backgrounds": 0.15
     },
     "skill_biases": {
-      "finance": 0.35,
-      "larceny": 0.15,
+      "finance": 0.4,
+      "larceny": 0.2,
       "streetwise": -0.15,
-      "subterfuge": 0.1
+      "subterfuge": 0.25
     },
     "discipline_biases": {
       "obfuscate": 0.15
+    },
+    "background_biases": {
+      "resources": 0.3,
+      "contacts": 0.25
+    },
+    "sphere_biases": {
+      "underworld": 0.35,
+      "finance": 0.3
+    },
+    "modifier_biases": {
+      "liquidity": 0.35,
+      "cryptocurrency": 0.25
+    },
+    "discipline_power_biases": {
+      "conceal": 1.85,
+      "chimerstry": 1.8,
+      "mask_of_a_thousand_faces": 1.75,
+      "cache": 1.65
+    },
+    "tag_affinities": {
+      "wealth": 0.4,
+      "crime": 0.3
     }
   }
 }

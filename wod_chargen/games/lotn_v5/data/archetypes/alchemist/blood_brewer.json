@@ -8,12 +8,32 @@
       "in_clan_disciplines": 0.1
     },
     "skill_biases": {
-      "occult": 0.3,
-      "medicine": 0.2,
-      "science": 0.1
+      "occult": 0.35,
+      "medicine": 0.3,
+      "science": 0.2
     },
     "discipline_biases": {
-      "thin_blood_alchemy": 0.35
+      "thin_blood_alchemy": 0.4
+    },
+    "merit_biases": {
+      "thin_blood_alchemist": 0.4,
+      "catenating_blood": 0.25
+    },
+    "sphere_biases": {
+      "occult": 0.3,
+      "health": 0.25
+    },
+    "discipline_power_biases": {
+      "counterfeit_a_taste_for_blood": 2.1,
+      "counterfeit_blood_of_potency": 2.0,
+      "counterfeit_corrosive_vitae": 1.95,
+      "counterfeit_extinguish_vitae": 1.85,
+      "defractionate": 1.75
+    },
+    "tag_affinities": {
+      "alchemy": 0.45,
+      "occult": 0.3,
+      "ritual": 0.25
     }
   }
 }

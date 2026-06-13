@@ -1,0 +1,72 @@
+"""Unit tests for trait bias resolution."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+import pytest
+
+from wod_chargen.games.lotn_v5.archetypes import effective_profile, get_archetype, load_all_archetypes
+from wod_chargen.games.lotn_v5.trait_biases import (
+    BIAS_MAX,
+    BIAS_MIN,
+    resolve_trait_bias,
+    trait_tag_list,
+)
+
+
+@dataclass
+class _StubProfile:
+    attribute_biases: dict[str, float] = field(default_factory=dict)
+    skill_biases: dict[str, float] = field(default_factory=dict)
+    discipline_biases: dict[str, float] = field(default_factory=dict)
+    merit_biases: dict[str, float] = field(default_factory=dict)
+    flaw_biases: dict[str, float] = field(default_factory=dict)
+    background_biases: dict[str, float] = field(default_factory=dict)
+    sphere_biases: dict[str, float] = field(default_factory=dict)
+    modifier_biases: dict[str, float] = field(default_factory=dict)
+    discipline_power_biases: dict[str, float] = field(default_factory=dict)
+    tag_affinities: dict[str, float] = field(default_factory=dict)
+
+
+def test_explicit_bias_overrides_tags():
+    profile = _StubProfile(
+        skill_biases={"persuasion": 2.0},
+        tag_affinities={"social": 1.5},
+    )
+    assert resolve_trait_bias(profile, "persuasion", "skills") == 2.0
+
+
+def test_tag_product_for_untagged_explicit():
+    profile = _StubProfile(tag_affinities={"social": 1.6, "influence": 1.4})
+    bias = resolve_trait_bias(profile, "persuasion", "skills")
+    assert bias > 1.0
+    assert BIAS_MIN <= bias <= BIAS_MAX
+
+
+def test_clamp_extreme_values():
+    profile = _StubProfile(merit_biases={"iron_gullet": 99.0})
+    assert resolve_trait_bias(profile, "iron_gullet", "merits") == BIAS_MAX
+
+
+def test_unknown_trait_returns_one():
+    profile = _StubProfile(tag_affinities={"social": 2.0})
+    assert resolve_trait_bias(profile, "nonexistent_skill", "skills") == 1.0
+
+
+def test_trait_tag_list_skills():
+    tags = trait_tag_list("stealth", "skills")
+    assert "stealth" in tags
+
+
+@pytest.mark.parametrize("arch_id", list(load_all_archetypes().keys()))
+def test_all_primaries_load(arch_id: str):
+    profile = get_archetype(arch_id)
+    assert profile.sub_archetypes
+
+
+def test_effective_profile_merges_sub_deltas():
+    base = get_archetype("diplomat")
+    sub = base.sub_archetypes[0]
+    merged = effective_profile("diplomat", sub.id, "vampire")
+    assert merged.skill_biases.get("persuasion", 0) >= base.skill_biases.get("persuasion", 1.0)

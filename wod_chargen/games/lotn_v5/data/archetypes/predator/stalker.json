@@ -5,10 +5,27 @@
   "modifiers": {
     "skill_biases": {
       "stealth": 0.4,
-      "awareness": 0.25
+      "awareness": 0.25,
+      "survival": 0.3
     },
     "discipline_biases": {
-      "obfuscate": 0.15
+      "obfuscate": 0.2,
+      "celerity": 0.25
+    },
+    "modifier_biases": {
+      "paranoid": 0.3
+    },
+    "discipline_power_biases": {
+      "sense_the_unseen": 2.0,
+      "unseen_passage": 1.9,
+      "fleetness": 1.85,
+      "conceal": 1.75,
+      "heightened_senses": 1.7
+    },
+    "tag_affinities": {
+      "stealth": 0.4,
+      "predation": 0.35,
+      "perception": 0.3
     }
   }
 }

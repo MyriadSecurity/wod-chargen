@@ -8,11 +8,22 @@
     },
     "skill_biases": {
       "athletics": 0.35,
-      "melee": 0.2,
-      "brawl": 0.15
+      "melee": 0.25,
+      "brawl": 0.2
     },
     "discipline_biases": {
-      "celerity": 0.3
+      "celerity": 0.35
+    },
+    "discipline_power_biases": {
+      "blink": 2.1,
+      "nimble_departure": 2.0,
+      "fleetness": 1.95,
+      "soaring_leap": 1.85,
+      "rapid_reflexes": 1.75
+    },
+    "tag_affinities": {
+      "mobility": 0.4,
+      "combat": 0.35
     }
   }
 }

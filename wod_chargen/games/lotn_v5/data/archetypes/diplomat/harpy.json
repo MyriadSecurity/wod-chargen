@@ -11,10 +11,32 @@
       "politics": 0.3,
       "subterfuge": 0.3,
       "etiquette": 0.15,
-      "insight": 0.15
+      "insight": 0.25
     },
     "discipline_biases": {
       "presence": 0.25
+    },
+    "flaw_biases": {
+      "infamy": 0.35
+    },
+    "background_biases": {
+      "fame": 0.35,
+      "contacts": 0.25
+    },
+    "modifier_biases": {
+      "paparazzi": 0.35,
+      "jealousy": 0.3
+    },
+    "discipline_power_biases": {
+      "silencing_tongue": 2.1,
+      "dread_gaze": 2.0,
+      "monologue": 1.85,
+      "entrancement": 1.7
+    },
+    "tag_affinities": {
+      "politics": 0.35,
+      "deception": 0.3,
+      "reputation": 0.25
     }
   }
 }

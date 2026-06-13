@@ -9,9 +9,31 @@
     },
     "skill_biases": {
       "etiquette": 0.35,
-      "finance": 0.25,
+      "finance": 0.3,
       "performance": -0.35,
       "craft": -0.2
+    },
+    "background_biases": {
+      "resources": 0.4,
+      "contacts": 0.3
+    },
+    "sphere_biases": {
+      "high_society": 0.4,
+      "finance": 0.35
+    },
+    "modifier_biases": {
+      "liquidity": 0.35,
+      "open_bar": 0.3
+    },
+    "discipline_power_biases": {
+      "awe": 1.85,
+      "entrancement": 1.8,
+      "monologue": 1.75,
+      "mesmerize": 1.65
+    },
+    "tag_affinities": {
+      "wealth": 0.4,
+      "reputation": 0.35
     }
   }
 }

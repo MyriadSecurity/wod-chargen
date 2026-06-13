@@ -497,14 +497,21 @@ def _pick_trait(
     catalog: list[dict[str, Any]],
     char: dict[str, Any],
     kind: TraitKind,
+    profile: Any,
     *,
     item_bias: float = 1.0,
     phase: TraitPhase = "creation",
 ) -> tuple[dict[str, Any], int] | None:
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
     targets = _eligible_trait_targets(traits, catalog, char, kind, phase=phase)
     if not targets:
         return None
-    weights = [item_bias for _ in targets]
+    category = "merits" if kind == "merit" else "flaws"
+    weights = [
+        item_bias * resolve_trait_bias(profile, entry["id"], category)
+        for entry, _current in targets
+    ]
     return rng.weighted_choice(targets, weights)
 
 
@@ -592,6 +599,7 @@ def run_merit_flaw_creation(
                 flaw_catalog,
                 char,
                 "flaw",
+                profile,
                 item_bias=profile.weights.get("merits", 1.0),
             )
             if picked is None:
@@ -616,6 +624,8 @@ def run_merit_flaw_creation(
             )
 
     merit_bias = profile.weights.get("merits", 1.0)
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
     while ledger.trade_remaining > 0:
         affordable = [
             (entry, current)
@@ -630,7 +640,11 @@ def run_merit_flaw_creation(
                 )
             break
 
-        picked = rng.weighted_choice(affordable, [merit_bias for _ in affordable])
+        weights = [
+            merit_bias * resolve_trait_bias(profile, entry["id"], "merits")
+            for entry, _current in affordable
+        ]
+        picked = rng.weighted_choice(affordable, weights)
         entry, current = picked
         new_rating, credit = _apply_trait_increment(merits, entry, current, char, kind="merit")
         ledger.merit_from_trade += credit
@@ -670,6 +684,8 @@ def enumerate_xp_merit_purchases(
     merits = char.setdefault("merits", {})
     weight = profile.weights.get("merits", 1.0)
 
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
     for entry in traits_for_type("merit", ctype):
         if int(entry.get("dot_cost", 1)) <= 0:
             continue
@@ -697,7 +713,7 @@ def enumerate_xp_merit_purchases(
                 new_level=new_level,
                 cost=cost,
                 weight=weight,
-                item_bias=1.0,
+                item_bias=resolve_trait_bias(profile, merit_id, "merits"),
                 clan_factor=1.0,
                 source=source,
                 apply=apply_merit,

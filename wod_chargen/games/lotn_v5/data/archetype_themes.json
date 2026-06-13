@@ -1,0 +1,2119 @@
+{
+  "primaries": {
+    "diplomat": {
+      "label": "The Diplomat",
+      "notes": "Court voice and faction broker — persuasion, etiquette, and political leverage over raw violence.",
+      "tag_affinities": {
+        "social": 1.85,
+        "influence": 1.75,
+        "politics": 1.7,
+        "reputation": 1.5,
+        "deception": 0.65,
+        "combat": 0.5,
+        "stealth": 0.55,
+        "crime": 0.5
+      },
+      "attribute_biases": {
+        "resolve": 1.15,
+        "composure": 1.1
+      },
+      "skill_biases": {
+        "leadership": 1.4,
+        "finance": 1.2
+      },
+      "discipline_biases": {
+        "presence": 1.15,
+        "dominate": 1.1,
+        "obfuscate": 0.45,
+        "potence": 0.4,
+        "protean": 0.45,
+        "oblivion": 0.35
+      },
+      "background_biases": {
+        "contacts": 1.75,
+        "allies": 1.55,
+        "fame": 1.45,
+        "herd": 1.2,
+        "mask": 1.15,
+        "resources": 1.1,
+        "haven": 0.85,
+        "familiar": 0.6
+      },
+      "sphere_biases": {
+        "high_society": 1.85,
+        "political": 1.65,
+        "media": 1.45,
+        "church": 1.25,
+        "legal": 1.2,
+        "finance": 1.15,
+        "underworld": 0.5,
+        "street": 0.55,
+        "industry": 0.65
+      },
+      "modifier_biases": {
+        "reliable": 1.55,
+        "friendly": 1.45,
+        "diversity": 1.35,
+        "open_bar": 1.3,
+        "fan_club": 1.25,
+        "paparazzi": 1.2,
+        "flaky": 0.4,
+        "paranoid": 0.55
+      },
+      "merit_biases": {
+        "linguistics": 1.75,
+        "camarilla_contact": 1.6,
+        "vampiric_visage": 1.5,
+        "calm_heart": 1.45,
+        "common_sense": 1.35,
+        "lifelike": 1.3
+      },
+      "flaw_biases": {
+        "obvious_predator": 0.1,
+        "weak_willed": 0.1,
+        "illiterate": 0.1,
+        "infamy": 1.5,
+        "enemy": 1.35,
+        "impatient": 1.25
+      },
+      "discipline_power_biases": {
+        "mesmerize": 1.85,
+        "awe": 1.75,
+        "entrancement": 1.65,
+        "monologue": 1.55
+      },
+      "subs": {
+        "silver_tongue": {
+          "skill_biases": {
+            "persuasion": 0.35,
+            "subterfuge": 0.2
+          },
+          "discipline_biases": {
+            "presence": 0.3
+          },
+          "modifier_biases": {
+            "friendly": 0.3
+          },
+          "tag_affinities": {
+            "influence": 0.35,
+            "social": 0.25
+          },
+          "discipline_power_biases": {
+            "mesmerize": 2.05,
+            "awe": 1.95,
+            "entrancement": 1.85,
+            "monologue": 1.75
+          }
+        },
+        "socialite": {
+          "weights": {
+            "backgrounds": 0.2
+          },
+          "skill_biases": {
+            "etiquette": 0.35,
+            "insight": 0.25
+          },
+          "background_biases": {
+            "fame": 0.35,
+            "contacts": 0.25
+          },
+          "sphere_biases": {
+            "high_society": 0.4,
+            "media": 0.25
+          },
+          "modifier_biases": {
+            "open_bar": 0.35,
+            "fan_club": 0.3
+          },
+          "tag_affinities": {
+            "reputation": 0.35,
+            "social": 0.25
+          },
+          "discipline_power_biases": {
+            "awe": 2.0,
+            "entrancement": 1.9,
+            "silencing_tongue": 1.75,
+            "monologue": 1.7
+          }
+        },
+        "zealot": {
+          "skill_biases": {
+            "occult": 0.35,
+            "persuasion": 0.25,
+            "insight": 0.2
+          },
+          "merit_biases": {
+            "loremaster": 0.35
+          },
+          "flaw_biases": {
+            "enemy": 0.25
+          },
+          "sphere_biases": {
+            "church": 0.45,
+            "political": 0.2
+          },
+          "tag_affinities": {
+            "occult": 0.35,
+            "influence": 0.25
+          },
+          "discipline_power_biases": {
+            "dread_gaze": 2.0,
+            "monologue": 1.85,
+            "daunt": 1.75,
+            "awe": 1.7
+          }
+        },
+        "negotiator": {
+          "skill_biases": {
+            "politics": 0.35,
+            "persuasion": 0.3
+          },
+          "discipline_biases": {
+            "dominate": 0.25
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "allies": 0.25
+          },
+          "sphere_biases": {
+            "legal": 0.35,
+            "political": 0.3
+          },
+          "modifier_biases": {
+            "reliable": 0.35
+          },
+          "tag_affinities": {
+            "politics": 0.35,
+            "control": 0.25
+          },
+          "discipline_power_biases": {
+            "compel": 2.05,
+            "mesmerize": 1.9,
+            "submerged_directive": 1.8,
+            "forgetful_mind": 1.65
+          }
+        },
+        "harpy": {
+          "skill_biases": {
+            "politics": 0.3,
+            "subterfuge": 0.3,
+            "insight": 0.25
+          },
+          "flaw_biases": {
+            "infamy": 0.35
+          },
+          "background_biases": {
+            "fame": 0.35,
+            "contacts": 0.25
+          },
+          "modifier_biases": {
+            "paparazzi": 0.35,
+            "jealousy": 0.3
+          },
+          "tag_affinities": {
+            "politics": 0.35,
+            "deception": 0.3,
+            "reputation": 0.25
+          },
+          "discipline_power_biases": {
+            "silencing_tongue": 2.1,
+            "dread_gaze": 2.0,
+            "monologue": 1.85,
+            "entrancement": 1.7
+          }
+        },
+        "courtier": {
+          "skill_biases": {
+            "politics": 0.4,
+            "etiquette": 0.3,
+            "leadership": 0.25
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "allies": 0.25
+          },
+          "sphere_biases": {
+            "high_society": 0.35,
+            "political": 0.3
+          },
+          "modifier_biases": {
+            "reliable": 0.3,
+            "diversity": 0.25
+          },
+          "tag_affinities": {
+            "politics": 0.4,
+            "influence": 0.25
+          },
+          "discipline_power_biases": {
+            "monologue": 1.95,
+            "awe": 1.85,
+            "entrancement": 1.75,
+            "mesmerize": 1.7
+          }
+        },
+        "agitator": {
+          "skill_biases": {
+            "streetwise": 0.35,
+            "persuasion": 0.25,
+            "politics": 0.2
+          },
+          "flaw_biases": {
+            "shunned_by_the_anarchs": 0.25
+          },
+          "sphere_biases": {
+            "street": 0.4,
+            "welfare": 0.3,
+            "political": 0.2
+          },
+          "modifier_biases": {
+            "diversity": 0.3
+          },
+          "tag_affinities": {
+            "street": 0.35,
+            "influence": 0.3
+          },
+          "discipline_power_biases": {
+            "daunt": 2.0,
+            "dread_gaze": 1.9,
+            "monologue": 1.8,
+            "awe": 1.65
+          }
+        }
+      }
+    },
+    "enforcer": {
+      "label": "The Enforcer",
+      "notes": "Violence as profession — intimidation, brawling, and disciplines that end fights fast.",
+      "tag_affinities": {
+        "combat": 1.9,
+        "physical": 1.75,
+        "intimidation": 1.7,
+        "endurance": 1.55,
+        "street": 1.3,
+        "social": 0.55,
+        "deception": 0.5,
+        "occult": 0.45
+      },
+      "attribute_biases": {
+        "strength": 1.15,
+        "stamina": 1.1
+      },
+      "skill_biases": {
+        "melee": 1.25,
+        "firearms": 1.15
+      },
+      "discipline_biases": {
+        "potence": 1.15,
+        "fortitude": 1.1,
+        "presence": 1.05,
+        "obfuscate": 0.45,
+        "blood_sorcery": 0.35,
+        "auspex": 0.5
+      },
+      "background_biases": {
+        "haven": 1.3,
+        "allies": 1.15,
+        "contacts": 1.0,
+        "herd": 0.9,
+        "fame": 0.45,
+        "mask": 0.85,
+        "resources": 0.9,
+        "familiar": 1.1
+      },
+      "sphere_biases": {
+        "street": 1.5,
+        "underworld": 1.4,
+        "industry": 1.2,
+        "police": 1.15,
+        "high_society": 0.45,
+        "media": 0.5,
+        "university": 0.45
+      },
+      "modifier_biases": {
+        "reliable": 1.4,
+        "retainer": 1.35,
+        "garage": 1.2,
+        "flaky": 0.35,
+        "paparazzi": 0.4
+      },
+      "merit_biases": {
+        "iron_gullet": 1.5,
+        "vampiric_resilience": 1.45,
+        "ambidextrous": 1.35,
+        "bloodhound": 1.25,
+        "anarch_comrades": 1.2
+      },
+      "flaw_biases": {
+        "obvious_predator": 1.4,
+        "bestial_temper": 1.35,
+        "weak_willed": 0.1,
+        "infamy": 1.25,
+        "impatient": 1.3,
+        "illiterate": 0.12
+      },
+      "discipline_power_biases": {
+        "prowess": 1.85,
+        "dread_gaze": 1.75,
+        "lethal_body": 1.7,
+        "toughness": 1.6
+      },
+      "subs": {
+        "tank": {
+          "attribute_biases": {
+            "stamina": 0.35,
+            "strength": 0.25
+          },
+          "discipline_biases": {
+            "fortitude": 0.4,
+            "potence": 0.2
+          },
+          "modifier_biases": {
+            "walk_in_freezer": 0.3
+          },
+          "tag_affinities": {
+            "endurance": 0.4,
+            "resilience": 0.35
+          },
+          "discipline_power_biases": {
+            "toughness": 2.05,
+            "resiliency": 2.0,
+            "unyielding": 1.85,
+            "roots_of_the_mountain": 1.75
+          }
+        },
+        "brawler": {
+          "skill_biases": {
+            "brawl": 0.4,
+            "athletics": 0.25
+          },
+          "discipline_biases": {
+            "potence": 0.35
+          },
+          "sphere_biases": {
+            "street": 0.3,
+            "underworld": 0.25
+          },
+          "tag_affinities": {
+            "combat": 0.4,
+            "physical": 0.3
+          },
+          "discipline_power_biases": {
+            "prowess": 2.1,
+            "lethal_body": 2.0,
+            "brutal_feed": 1.85,
+            "staggering_strike": 1.75
+          }
+        },
+        "collector": {
+          "skill_biases": {
+            "intimidation": 0.35,
+            "streetwise": 0.3,
+            "finance": 0.25
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "resources": 0.25
+          },
+          "sphere_biases": {
+            "underworld": 0.35,
+            "finance": 0.25
+          },
+          "modifier_biases": {
+            "cash_money": 0.3
+          },
+          "tag_affinities": {
+            "street": 0.35,
+            "wealth": 0.3
+          },
+          "discipline_power_biases": {
+            "daunt": 1.95,
+            "dread_gaze": 1.85,
+            "prowess": 1.8,
+            "compel": 1.65
+          }
+        },
+        "guardian": {
+          "skill_biases": {
+            "awareness": 0.3,
+            "athletics": 0.25
+          },
+          "background_biases": {
+            "haven": 0.35,
+            "allies": 0.3
+          },
+          "modifier_biases": {
+            "reliable": 0.35,
+            "retainer": 0.3
+          },
+          "tag_affinities": {
+            "defense": 0.4,
+            "support": 0.3
+          },
+          "discipline_power_biases": {
+            "resiliency": 2.0,
+            "unyielding": 1.9,
+            "coagulate": 1.8,
+            "toughness": 1.7
+          }
+        },
+        "scourge": {
+          "skill_biases": {
+            "intimidation": 0.4,
+            "brawl": 0.3
+          },
+          "discipline_biases": {
+            "presence": 0.3,
+            "potence": 0.25
+          },
+          "flaw_biases": {
+            "obvious_predator": 0.3,
+            "bestial_temper": 0.25
+          },
+          "tag_affinities": {
+            "intimidation": 0.4,
+            "combat": 0.35
+          },
+          "discipline_power_biases": {
+            "dread_gaze": 2.15,
+            "daunt": 2.0,
+            "prowess": 1.85,
+            "lethal_body": 1.75
+          }
+        }
+      }
+    },
+    "predator": {
+      "label": "The Predator",
+      "notes": "Hunter and territory reader — stealth, survival, animal bonds, and feral disciplines.",
+      "tag_affinities": {
+        "predation": 1.9,
+        "animal": 1.7,
+        "stealth": 1.65,
+        "perception": 1.5,
+        "physical": 1.45,
+        "social": 0.45,
+        "politics": 0.4,
+        "science": 0.5
+      },
+      "attribute_biases": {
+        "wits": 1.1,
+        "dexterity": 1.1
+      },
+      "skill_biases": {
+        "awareness": 1.2,
+        "larceny": 1.1
+      },
+      "discipline_biases": {
+        "protean": 1.15,
+        "animalism": 1.1,
+        "celerity": 1.05,
+        "potence": 1.0,
+        "presence": 0.45,
+        "dominate": 0.4,
+        "blood_sorcery": 0.35
+      },
+      "background_biases": {
+        "herd": 1.5,
+        "haven": 1.35,
+        "familiar": 1.4,
+        "mask": 1.1,
+        "contacts": 0.7,
+        "fame": 0.35,
+        "allies": 0.75,
+        "resources": 0.8
+      },
+      "sphere_biases": {
+        "street": 1.4,
+        "welfare": 1.2,
+        "transportation": 1.15,
+        "underworld": 1.1,
+        "high_society": 0.4,
+        "media": 0.45,
+        "university": 0.5
+      },
+      "modifier_biases": {
+        "retainer": 1.45,
+        "zoo": 1.4,
+        "skittish": 1.2,
+        "friendly": 1.15,
+        "flavor_station": 1.1,
+        "paparazzi": 0.35,
+        "fan_club": 0.3
+      },
+      "merit_biases": {
+        "bloodhound": 1.7,
+        "iron_gullet": 1.45,
+        "light_sleeper": 1.4,
+        "eat_food": 1.25,
+        "ambidextrous": 1.2
+      },
+      "flaw_biases": {
+        "obvious_predator": 1.5,
+        "bestial_temper": 1.45,
+        "prey_exclusion": 1.3,
+        "farmer": 0.1,
+        "infamy": 0.12,
+        "illiterate": 0.1
+      },
+      "discipline_power_biases": {
+        "feral_whispers": 1.85,
+        "sense_the_beast": 1.75,
+        "eyes_of_the_beast": 1.7,
+        "feral_weapons": 1.65
+      },
+      "subs": {
+        "stalker": {
+          "skill_biases": {
+            "stealth": 0.4,
+            "survival": 0.3,
+            "awareness": 0.25
+          },
+          "discipline_biases": {
+            "celerity": 0.25,
+            "obfuscate": 0.2
+          },
+          "modifier_biases": {
+            "paranoid": 0.3
+          },
+          "tag_affinities": {
+            "stealth": 0.4,
+            "predation": 0.35,
+            "perception": 0.3
+          },
+          "discipline_power_biases": {
+            "sense_the_unseen": 2.0,
+            "unseen_passage": 1.9,
+            "fleetness": 1.85,
+            "conceal": 1.75,
+            "heightened_senses": 1.7
+          }
+        },
+        "feral": {
+          "skill_biases": {
+            "animal_ken": 0.4,
+            "survival": 0.35,
+            "brawl": 0.25
+          },
+          "discipline_biases": {
+            "protean": 0.4,
+            "animalism": 0.35
+          },
+          "flaw_biases": {
+            "bestial_temper": 0.35,
+            "obvious_predator": 0.25
+          },
+          "modifier_biases": {
+            "zoo": 0.35,
+            "retainer": 0.3
+          },
+          "tag_affinities": {
+            "animal": 0.45,
+            "predation": 0.4,
+            "shapeshift": 0.35
+          },
+          "discipline_power_biases": {
+            "feral_weapons": 2.1,
+            "shapechange": 2.0,
+            "atavism": 1.9,
+            "quell_the_beast": 1.75,
+            "eyes_of_the_beast": 1.7
+          }
+        }
+      }
+    },
+    "criminal": {
+      "label": "The Criminal",
+      "notes": "Street economy operator — larceny, streetwise networks, and staying unseen when deals go bad.",
+      "tag_affinities": {
+        "crime": 1.85,
+        "street": 1.75,
+        "deception": 1.55,
+        "stealth": 1.45,
+        "wealth": 1.3,
+        "politics": 0.55,
+        "occult": 0.5,
+        "reputation": 0.6
+      },
+      "attribute_biases": {
+        "manipulation": 1.1,
+        "wits": 1.1
+      },
+      "skill_biases": {
+        "finance": 1.25,
+        "technology": 1.1
+      },
+      "discipline_biases": {
+        "obfuscate": 1.1,
+        "celerity": 1.05,
+        "fortitude": 1.0,
+        "dominate": 0.5,
+        "presence": 0.55,
+        "blood_sorcery": 0.4
+      },
+      "background_biases": {
+        "contacts": 1.5,
+        "mask": 1.4,
+        "resources": 1.25,
+        "haven": 1.15,
+        "allies": 1.1,
+        "fame": 0.45,
+        "herd": 0.85,
+        "familiar": 0.7
+      },
+      "sphere_biases": {
+        "underworld": 1.8,
+        "street": 1.65,
+        "industry": 1.35,
+        "transportation": 1.25,
+        "finance": 1.2,
+        "high_society": 0.5,
+        "church": 0.45,
+        "legal": 0.55
+      },
+      "modifier_biases": {
+        "cash_money": 1.45,
+        "liquidity": 1.35,
+        "cryptocurrency": 1.25,
+        "at_arms_length": 1.3,
+        "paranoid": 1.2,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "zeroed": 1.55,
+        "cobbler": 1.4,
+        "anarch_comrades": 1.35,
+        "light_sleeper": 1.25,
+        "common_sense": 1.2
+      },
+      "flaw_biases": {
+        "dark_secret": 1.4,
+        "enemy": 1.35,
+        "trouble_magnet": 1.3,
+        "infamy": 1.15,
+        "poor": 1.1,
+        "illiterate": 0.12
+      },
+      "discipline_power_biases": {
+        "conceal": 1.8,
+        "unseen_passage": 1.7,
+        "fleetness": 1.65,
+        "silence_of_death": 1.55
+      },
+      "subs": {
+        "thief": {
+          "skill_biases": {
+            "larceny": 0.4,
+            "stealth": 0.35,
+            "awareness": 0.2
+          },
+          "discipline_biases": {
+            "obfuscate": 0.3,
+            "celerity": 0.2
+          },
+          "modifier_biases": {
+            "at_arms_length": 0.3
+          },
+          "tag_affinities": {
+            "crime": 0.4,
+            "stealth": 0.35
+          },
+          "discipline_power_biases": {
+            "unseen_passage": 2.05,
+            "conceal": 2.0,
+            "cache": 1.85,
+            "fleetness": 1.75,
+            "silence_of_death": 1.65
+          }
+        },
+        "hustler": {
+          "skill_biases": {
+            "subterfuge": 0.4,
+            "persuasion": 0.3,
+            "streetwise": 0.25
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "mask": 0.25
+          },
+          "modifier_biases": {
+            "cash_money": 0.3
+          },
+          "tag_affinities": {
+            "deception": 0.4,
+            "street": 0.3
+          },
+          "discipline_power_biases": {
+            "mesmerize": 1.9,
+            "compel": 1.85,
+            "cloud_memory": 1.8,
+            "mask_of_a_thousand_faces": 1.7
+          }
+        },
+        "fence": {
+          "skill_biases": {
+            "finance": 0.4,
+            "larceny": 0.2,
+            "subterfuge": 0.25
+          },
+          "background_biases": {
+            "resources": 0.3,
+            "contacts": 0.25
+          },
+          "sphere_biases": {
+            "underworld": 0.35,
+            "finance": 0.3
+          },
+          "modifier_biases": {
+            "liquidity": 0.35,
+            "cryptocurrency": 0.25
+          },
+          "tag_affinities": {
+            "wealth": 0.4,
+            "crime": 0.3
+          },
+          "discipline_power_biases": {
+            "conceal": 1.85,
+            "chimerstry": 1.8,
+            "mask_of_a_thousand_faces": 1.75,
+            "cache": 1.65
+          }
+        },
+        "fixer": {
+          "skill_biases": {
+            "streetwise": 0.4,
+            "subterfuge": 0.25,
+            "finance": 0.25
+          },
+          "background_biases": {
+            "contacts": 0.35,
+            "allies": 0.3
+          },
+          "sphere_biases": {
+            "underworld": 0.35,
+            "street": 0.3
+          },
+          "modifier_biases": {
+            "diversity": 0.3,
+            "reliable": 0.25
+          },
+          "tag_affinities": {
+            "street": 0.4,
+            "support": 0.3
+          },
+          "discipline_power_biases": {
+            "compel": 1.9,
+            "cloud_memory": 1.85,
+            "mesmerize": 1.75,
+            "conceal": 1.65
+          }
+        }
+      }
+    },
+    "shadow": {
+      "label": "The Shadow",
+      "notes": "Covert operator — stealth, subterfuge, obfuscate, and intelligence gathering without a trace.",
+      "tag_affinities": {
+        "stealth": 1.9,
+        "deception": 1.7,
+        "information": 1.55,
+        "perception": 1.45,
+        "crime": 1.3,
+        "reputation": 0.4,
+        "influence": 0.55,
+        "combat": 0.65
+      },
+      "attribute_biases": {
+        "dexterity": 1.1,
+        "wits": 1.1
+      },
+      "skill_biases": {
+        "awareness": 1.2,
+        "technology": 1.15
+      },
+      "discipline_biases": {
+        "obfuscate": 1.15,
+        "celerity": 1.05,
+        "auspex": 1.0,
+        "presence": 0.45,
+        "potence": 0.5,
+        "blood_sorcery": 0.35
+      },
+      "background_biases": {
+        "mask": 1.55,
+        "contacts": 1.4,
+        "haven": 1.25,
+        "allies": 0.9,
+        "fame": 0.25,
+        "herd": 0.75,
+        "resources": 0.85,
+        "familiar": 0.65
+      },
+      "sphere_biases": {
+        "police": 1.45,
+        "media": 1.35,
+        "legal": 1.25,
+        "political": 1.2,
+        "underworld": 1.15,
+        "high_society": 0.55,
+        "church": 0.5,
+        "welfare": 0.65
+      },
+      "modifier_biases": {
+        "at_arms_length": 1.5,
+        "paranoid": 1.4,
+        "garage": 1.15,
+        "flaky": 0.4,
+        "fan_club": 0.15,
+        "paparazzi": 0.15
+      },
+      "merit_biases": {
+        "light_sleeper": 1.55,
+        "zeroed": 1.5,
+        "ambidextrous": 1.3,
+        "cobbler": 1.25,
+        "common_sense": 1.2
+      },
+      "flaw_biases": {
+        "dark_secret": 1.45,
+        "enemy": 1.35,
+        "infamy": 0.1,
+        "known_blankbody": 1.3,
+        "obvious_predator": 0.12,
+        "farmer": 0.1
+      },
+      "discipline_power_biases": {
+        "conceal": 1.85,
+        "silence_of_death": 1.8,
+        "unseen_passage": 1.75,
+        "sense_the_unseen": 1.65
+      },
+      "subs": {
+        "spy": {
+          "skill_biases": {
+            "investigation": 0.3,
+            "subterfuge": 0.3,
+            "awareness": 0.25
+          },
+          "discipline_biases": {
+            "auspex": 0.25
+          },
+          "sphere_biases": {
+            "media": 0.35,
+            "political": 0.3
+          },
+          "modifier_biases": {
+            "paranoid": 0.3,
+            "at_arms_length": 0.25
+          },
+          "tag_affinities": {
+            "information": 0.4,
+            "perception": 0.35
+          },
+          "discipline_power_biases": {
+            "sense_the_unseen": 2.05,
+            "share_the_senses": 1.95,
+            "heightened_senses": 1.85,
+            "scry_the_soul": 1.75,
+            "conceal": 1.65
+          }
+        },
+        "infiltrator": {
+          "skill_biases": {
+            "larceny": 0.35,
+            "stealth": 0.35
+          },
+          "discipline_biases": {
+            "obfuscate": 0.35,
+            "celerity": 0.2
+          },
+          "modifier_biases": {
+            "at_arms_length": 0.35
+          },
+          "tag_affinities": {
+            "stealth": 0.4,
+            "crime": 0.3
+          },
+          "discipline_power_biases": {
+            "unseen_passage": 2.1,
+            "conceal": 2.0,
+            "mask_of_a_thousand_faces": 1.9,
+            "cache": 1.8,
+            "blink": 1.7
+          }
+        },
+        "saboteur": {
+          "skill_biases": {
+            "craft": 0.35,
+            "technology": 0.35,
+            "larceny": 0.2
+          },
+          "sphere_biases": {
+            "industry": 0.35,
+            "transportation": 0.25
+          },
+          "modifier_biases": {
+            "garage": 0.3
+          },
+          "tag_affinities": {
+            "crime": 0.35,
+            "stealth": 0.3
+          },
+          "discipline_power_biases": {
+            "chimerstry": 1.9,
+            "ghost_in_the_machine": 1.85,
+            "fata_morgana": 1.8,
+            "cache": 1.7,
+            "conceal": 1.65
+          }
+        }
+      }
+    },
+    "scholar": {
+      "label": "The Scholar",
+      "notes": "Knowledge worker — academics, occult theory, investigation, and measured mental attributes.",
+      "tag_affinities": {
+        "mental": 1.85,
+        "science": 1.6,
+        "occult": 1.55,
+        "investigation": 1.45,
+        "information": 1.35,
+        "combat": 0.45,
+        "street": 0.5,
+        "reputation": 0.65
+      },
+      "attribute_biases": {
+        "intelligence": 1.1,
+        "resolve": 1.1
+      },
+      "skill_biases": {
+        "insight": 1.2,
+        "medicine": 1.15
+      },
+      "discipline_biases": {
+        "auspex": 1.1,
+        "dominate": 0.55,
+        "potence": 0.4,
+        "protean": 0.45,
+        "blood_sorcery": 0.7,
+        "oblivion": 0.5
+      },
+      "background_biases": {
+        "contacts": 1.4,
+        "resources": 1.2,
+        "haven": 1.15,
+        "mask": 1.1,
+        "allies": 1.0,
+        "fame": 0.7,
+        "herd": 0.85,
+        "familiar": 0.75
+      },
+      "sphere_biases": {
+        "university": 1.8,
+        "health": 1.45,
+        "legal": 1.3,
+        "occult": 1.25,
+        "church": 1.15,
+        "industry": 1.1,
+        "street": 0.55,
+        "underworld": 0.5
+      },
+      "modifier_biases": {
+        "reliable": 1.35,
+        "diversity": 1.2,
+        "conspiracy_theorist": 1.15,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "loremaster": 1.75,
+        "common_sense": 1.5,
+        "linguistics": 1.45,
+        "medium": 1.35,
+        "calm_heart": 1.3,
+        "phenom": 1.25
+      },
+      "flaw_biases": {
+        "illiterate": 0.08,
+        "impatient": 1.25,
+        "dark_secret": 1.2,
+        "obvious_predator": 0.1,
+        "infamy": 0.55,
+        "weak_willed": 0.12
+      },
+      "discipline_power_biases": {
+        "heightened_senses": 1.8,
+        "scry_the_soul": 1.7,
+        "premonition": 1.65,
+        "sense_the_unseen": 1.55
+      },
+      "subs": {
+        "loremaster": {
+          "skill_biases": {
+            "occult": 0.4,
+            "academics": 0.3
+          },
+          "discipline_biases": {
+            "auspex": 0.25
+          },
+          "merit_biases": {
+            "loremaster": 0.4
+          },
+          "sphere_biases": {
+            "occult": 0.35,
+            "university": 0.3
+          },
+          "tag_affinities": {
+            "occult": 0.4,
+            "information": 0.3
+          },
+          "discipline_power_biases": {
+            "scry_the_soul": 2.05,
+            "premonition": 1.95,
+            "heightened_senses": 1.85,
+            "collective_cognizance": 1.75
+          }
+        },
+        "scientist": {
+          "skill_biases": {
+            "science": 0.45,
+            "medicine": 0.35,
+            "academics": 0.2
+          },
+          "merit_biases": {
+            "phenom": 0.3
+          },
+          "sphere_biases": {
+            "university": 0.4,
+            "health": 0.35
+          },
+          "tag_affinities": {
+            "science": 0.45,
+            "mental": 0.3
+          },
+          "discipline_power_biases": {
+            "panacea": 1.9,
+            "heightened_senses": 1.85,
+            "premonition": 1.75,
+            "scry_the_soul": 1.65
+          }
+        },
+        "archivist": {
+          "skill_biases": {
+            "academics": 0.35,
+            "investigation": 0.35
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "haven": 0.25
+          },
+          "sphere_biases": {
+            "university": 0.35,
+            "legal": 0.25
+          },
+          "modifier_biases": {
+            "reliable": 0.3
+          },
+          "tag_affinities": {
+            "information": 0.4,
+            "investigation": 0.3
+          },
+          "discipline_power_biases": {
+            "heightened_senses": 1.9,
+            "sense_the_unseen": 1.85,
+            "premonition": 1.75,
+            "share_the_senses": 1.65
+          }
+        },
+        "medic": {
+          "skill_biases": {
+            "medicine": 0.45,
+            "science": 0.35,
+            "insight": 0.2
+          },
+          "merit_biases": {
+            "sympathy_pains": 0.3
+          },
+          "sphere_biases": {
+            "health": 0.45,
+            "welfare": 0.25
+          },
+          "tag_affinities": {
+            "medicine": 0.45,
+            "science": 0.35
+          },
+          "discipline_power_biases": {
+            "panacea": 2.1,
+            "valeren": 1.95,
+            "coagulate": 1.85,
+            "heightened_senses": 1.7
+          }
+        }
+      }
+    },
+    "manipulator": {
+      "label": "The Manipulator",
+      "notes": "Behind-the-throne schemer — subterfuge, dominate, and reading motives before anyone speaks.",
+      "tag_affinities": {
+        "deception": 1.85,
+        "control": 1.8,
+        "influence": 1.65,
+        "social": 1.55,
+        "politics": 1.45,
+        "combat": 0.45,
+        "physical": 0.5,
+        "reputation": 0.55
+      },
+      "attribute_biases": {
+        "manipulation": 1.1,
+        "intelligence": 1.1
+      },
+      "skill_biases": {
+        "insight": 1.2,
+        "leadership": 1.15
+      },
+      "discipline_biases": {
+        "dominate": 1.15,
+        "presence": 1.05,
+        "obfuscate": 1.0,
+        "potence": 0.4,
+        "protean": 0.45,
+        "animalism": 0.5
+      },
+      "background_biases": {
+        "contacts": 1.55,
+        "allies": 1.45,
+        "mask": 1.35,
+        "resources": 1.2,
+        "fame": 0.55,
+        "herd": 0.9,
+        "haven": 1.0,
+        "familiar": 0.65
+      },
+      "sphere_biases": {
+        "political": 1.65,
+        "high_society": 1.5,
+        "media": 1.4,
+        "legal": 1.25,
+        "finance": 1.15,
+        "street": 0.55,
+        "church": 0.6,
+        "welfare": 0.5
+      },
+      "modifier_biases": {
+        "at_arms_length": 1.4,
+        "paranoid": 1.3,
+        "reliable": 1.25,
+        "flaky": 0.4,
+        "fan_club": 0.35
+      },
+      "merit_biases": {
+        "unbondable": 1.55,
+        "bond_resistance": 1.5,
+        "calm_heart": 1.4,
+        "common_sense": 1.35,
+        "linguistics": 1.25
+      },
+      "flaw_biases": {
+        "weak_willed": 0.08,
+        "bond_junkie": 1.4,
+        "long_bond": 1.35,
+        "enemy": 1.3,
+        "dark_secret": 1.25,
+        "infamy": 0.55
+      },
+      "discipline_power_biases": {
+        "mesmerize": 1.9,
+        "compel": 1.85,
+        "cloud_memory": 1.75,
+        "forgetful_mind": 1.65
+      },
+      "subs": {
+        "puppetmaster": {
+          "skill_biases": {
+            "subterfuge": 0.35,
+            "insight": 0.35,
+            "politics": 0.25
+          },
+          "discipline_biases": {
+            "dominate": 0.35
+          },
+          "background_biases": {
+            "contacts": 0.3,
+            "allies": 0.25
+          },
+          "modifier_biases": {
+            "at_arms_length": 0.35
+          },
+          "tag_affinities": {
+            "control": 0.4,
+            "politics": 0.35
+          },
+          "discipline_power_biases": {
+            "mesmerize": 2.1,
+            "submerged_directive": 2.0,
+            "compel": 1.95,
+            "forgetful_mind": 1.85,
+            "domitor_s_favor": 1.7
+          }
+        },
+        "gaslighter": {
+          "skill_biases": {
+            "persuasion": 0.4,
+            "subterfuge": 0.3,
+            "insight": 0.2
+          },
+          "discipline_biases": {
+            "dominate": 0.3
+          },
+          "flaw_biases": {
+            "enemy": 0.25
+          },
+          "tag_affinities": {
+            "deception": 0.4,
+            "control": 0.3
+          },
+          "discipline_power_biases": {
+            "forgetful_mind": 2.1,
+            "cloud_memory": 2.05,
+            "dementation": 1.9,
+            "mesmerize": 1.85,
+            "compel": 1.7
+          }
+        },
+        "siren": {
+          "skill_biases": {
+            "persuasion": 0.4,
+            "insight": 0.25
+          },
+          "discipline_biases": {
+            "presence": 0.35,
+            "dominate": 0.2
+          },
+          "merit_biases": {
+            "vampiric_visage": 0.3
+          },
+          "modifier_biases": {
+            "friendly": 0.3
+          },
+          "tag_affinities": {
+            "influence": 0.4,
+            "presence": 0.35
+          },
+          "discipline_power_biases": {
+            "entrancement": 2.15,
+            "awe": 2.05,
+            "eyes_of_the_serpent": 1.9,
+            "monologue": 1.8,
+            "mesmerize": 1.7
+          }
+        }
+      }
+    },
+    "duelist": {
+      "label": "The Duelist",
+      "notes": "Trained combatant — melee, athletics, celerity, and winning fights that become public spectacle.",
+      "tag_affinities": {
+        "combat": 1.9,
+        "physical": 1.75,
+        "mobility": 1.55,
+        "endurance": 1.35,
+        "reputation": 1.2,
+        "deception": 0.5,
+        "occult": 0.45,
+        "stealth": 0.55
+      },
+      "attribute_biases": {
+        "dexterity": 1.1,
+        "composure": 1.1
+      },
+      "skill_biases": {
+        "awareness": 1.15,
+        "athletics": 1.1
+      },
+      "discipline_biases": {
+        "celerity": 1.15,
+        "potence": 1.1,
+        "fortitude": 1.0,
+        "obfuscate": 0.45,
+        "dominate": 0.5,
+        "blood_sorcery": 0.35
+      },
+      "background_biases": {
+        "haven": 1.2,
+        "resources": 1.1,
+        "fame": 1.0,
+        "mask": 0.95,
+        "allies": 0.85,
+        "contacts": 0.8,
+        "herd": 0.85,
+        "familiar": 0.7
+      },
+      "sphere_biases": {
+        "high_society": 1.25,
+        "legal": 1.15,
+        "media": 1.1,
+        "street": 1.05,
+        "underworld": 0.75,
+        "university": 0.5,
+        "church": 0.55,
+        "occult": 0.45
+      },
+      "modifier_biases": {
+        "reliable": 1.3,
+        "garage": 1.15,
+        "star_power": 1.1,
+        "flaky": 0.4
+      },
+      "merit_biases": {
+        "ambidextrous": 1.6,
+        "vampiric_resilience": 1.45,
+        "iron_gullet": 1.3,
+        "light_sleeper": 1.2,
+        "discipline_affinity": 1.15
+      },
+      "flaw_biases": {
+        "impatient": 1.35,
+        "obvious_predator": 1.2,
+        "infamy": 1.15,
+        "weak_willed": 0.1,
+        "illiterate": 0.12,
+        "mortal_frailty": 0.1
+      },
+      "discipline_power_biases": {
+        "fleetness": 1.85,
+        "prowess": 1.8,
+        "rapid_reflexes": 1.7,
+        "cat_s_grace": 1.6
+      },
+      "subs": {
+        "fencer": {
+          "skill_biases": {
+            "melee": 0.45,
+            "athletics": 0.25
+          },
+          "discipline_biases": {
+            "celerity": 0.35
+          },
+          "merit_biases": {
+            "ambidextrous": 0.35
+          },
+          "tag_affinities": {
+            "combat": 0.4,
+            "mobility": 0.35
+          },
+          "discipline_power_biases": {
+            "fleetness": 2.1,
+            "rapid_reflexes": 2.0,
+            "blink": 1.9,
+            "cat_s_grace": 1.85,
+            "nimble_departure": 1.75
+          }
+        },
+        "marksman": {
+          "skill_biases": {
+            "firearms": 0.45,
+            "awareness": 0.25
+          },
+          "discipline_biases": {
+            "celerity": 0.2
+          },
+          "modifier_biases": {
+            "garage": 0.25
+          },
+          "tag_affinities": {
+            "combat": 0.4,
+            "perception": 0.3
+          },
+          "discipline_power_biases": {
+            "rapid_reflexes": 2.05,
+            "fleetness": 1.95,
+            "heightened_senses": 1.85,
+            "cat_s_grace": 1.75,
+            "blink": 1.65
+          }
+        },
+        "skirmisher": {
+          "attribute_biases": {
+            "dexterity": 0.3
+          },
+          "skill_biases": {
+            "athletics": 0.35,
+            "melee": 0.25,
+            "brawl": 0.2
+          },
+          "discipline_biases": {
+            "celerity": 0.35
+          },
+          "tag_affinities": {
+            "mobility": 0.4,
+            "combat": 0.35
+          },
+          "discipline_power_biases": {
+            "blink": 2.1,
+            "nimble_departure": 2.0,
+            "fleetness": 1.95,
+            "soaring_leap": 1.85,
+            "rapid_reflexes": 1.75
+          }
+        }
+      }
+    },
+    "occultist": {
+      "label": "The Occultist",
+      "notes": "Blood sorcerer and ritual worker — occult lore, thaumaturgy, and forbidden texts as tools.",
+      "tag_affinities": {
+        "occult": 1.9,
+        "ritual": 1.85,
+        "blood_sorcery": 1.8,
+        "necromancy": 1.45,
+        "mental": 1.4,
+        "combat": 0.45,
+        "street": 0.5,
+        "reputation": 0.55
+      },
+      "attribute_biases": {
+        "resolve": 1.1,
+        "intelligence": 1.1
+      },
+      "skill_biases": {
+        "academics": 1.15,
+        "insight": 1.1
+      },
+      "discipline_biases": {
+        "blood_sorcery": 1.15,
+        "auspex": 1.1,
+        "oblivion": 0.85,
+        "dominate": 0.7,
+        "potence": 0.4,
+        "protean": 0.45
+      },
+      "background_biases": {
+        "contacts": 1.35,
+        "haven": 1.3,
+        "resources": 1.15,
+        "mask": 1.1,
+        "allies": 0.95,
+        "fame": 0.5,
+        "herd": 0.9,
+        "familiar": 0.8
+      },
+      "sphere_biases": {
+        "occult": 1.85,
+        "church": 1.45,
+        "university": 1.35,
+        "health": 1.15,
+        "legal": 1.1,
+        "high_society": 0.55,
+        "street": 0.5,
+        "media": 0.55
+      },
+      "modifier_biases": {
+        "conspiracy_theorist": 1.45,
+        "walk_in_freezer": 1.2,
+        "paranoid": 1.15,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "loremaster": 1.7,
+        "medium": 1.55,
+        "catenating_blood": 1.45,
+        "viscosity": 1.35,
+        "blood_empathy": 1.3,
+        "discipline_affinity": 1.25
+      },
+      "flaw_biases": {
+        "haunted": 1.45,
+        "stigmata": 1.35,
+        "dark_secret": 1.3,
+        "folkloric_bane": 1.25,
+        "folkloric_block": 1.2,
+        "illiterate": 0.1
+      },
+      "discipline_power_biases": {
+        "a_taste_for_blood": 1.9,
+        "blood_of_potency": 1.8,
+        "corrosive_vitae": 1.7,
+        "scry_the_soul": 1.6
+      },
+      "subs": {
+        "thaumaturge": {
+          "skill_biases": {
+            "occult": 0.35
+          },
+          "discipline_biases": {
+            "blood_sorcery": 0.45,
+            "auspex": 0.2
+          },
+          "merit_biases": {
+            "catenating_blood": 0.35,
+            "viscosity": 0.3
+          },
+          "sphere_biases": {
+            "occult": 0.4
+          },
+          "tag_affinities": {
+            "blood_sorcery": 0.45,
+            "ritual": 0.4
+          },
+          "discipline_power_biases": {
+            "blood_of_potency": 2.1,
+            "a_taste_for_blood": 2.05,
+            "scorpion_s_touch": 1.95,
+            "extinguish_vitae": 1.85,
+            "corrosive_vitae": 1.75
+          }
+        },
+        "ritualist": {
+          "skill_biases": {
+            "occult": 0.35,
+            "academics": 0.3
+          },
+          "merit_biases": {
+            "loremaster": 0.3
+          },
+          "sphere_biases": {
+            "church": 0.35,
+            "occult": 0.35
+          },
+          "modifier_biases": {
+            "conspiracy_theorist": 0.3
+          },
+          "tag_affinities": {
+            "ritual": 0.45,
+            "occult": 0.35
+          },
+          "discipline_power_biases": {
+            "blood_walk": 2.0,
+            "ward_against_ghouls": 1.95,
+            "phantom_whispers": 1.9,
+            "craft_bloodstone": 1.8,
+            "cling_of_the_arachnid": 1.7
+          }
+        },
+        "necromancer": {
+          "skill_biases": {
+            "occult": 0.4,
+            "medicine": 0.2
+          },
+          "discipline_biases": {
+            "oblivion": 0.35
+          },
+          "merit_biases": {
+            "medium": 0.4
+          },
+          "flaw_biases": {
+            "haunted": 0.35,
+            "death_sight": 0.3
+          },
+          "tag_affinities": {
+            "necromancy": 0.45,
+            "oblivion": 0.4
+          },
+          "discipline_power_biases": {
+            "oblivion_s_sight": 2.05,
+            "shadow_cloak": 1.95,
+            "arms_of_ahriman": 1.9,
+            "masque_of_death": 1.85,
+            "aura_of_decay": 1.75
+          }
+        }
+      }
+    },
+    "investigator": {
+      "label": "The Investigator",
+      "notes": "Case solver — investigation, insight, awareness, and auspex to reconstruct what happened.",
+      "tag_affinities": {
+        "investigation": 1.9,
+        "information": 1.75,
+        "perception": 1.65,
+        "mental": 1.45,
+        "street": 1.2,
+        "reputation": 0.65,
+        "occult": 0.7,
+        "combat": 0.65
+      },
+      "attribute_biases": {
+        "wits": 1.1,
+        "composure": 1.1
+      },
+      "skill_biases": {
+        "science": 1.15,
+        "streetwise": 1.1
+      },
+      "discipline_biases": {
+        "auspex": 1.15,
+        "dominate": 0.85,
+        "obfuscate": 0.7,
+        "potence": 0.45,
+        "protean": 0.5,
+        "blood_sorcery": 0.4
+      },
+      "background_biases": {
+        "contacts": 1.5,
+        "mask": 1.25,
+        "allies": 1.1,
+        "haven": 1.1,
+        "resources": 1.0,
+        "fame": 0.55,
+        "herd": 0.8,
+        "familiar": 0.75
+      },
+      "sphere_biases": {
+        "police": 1.7,
+        "legal": 1.55,
+        "media": 1.35,
+        "street": 1.25,
+        "underworld": 1.15,
+        "high_society": 0.7,
+        "church": 0.65,
+        "welfare": 0.75
+      },
+      "modifier_biases": {
+        "paranoid": 1.35,
+        "at_arms_length": 1.3,
+        "reliable": 1.25,
+        "conspiracy_theorist": 1.15,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "bloodhound": 1.55,
+        "common_sense": 1.45,
+        "light_sleeper": 1.35,
+        "calm_heart": 1.3,
+        "linguistics": 1.2
+      },
+      "flaw_biases": {
+        "dark_secret": 1.35,
+        "enemy": 1.3,
+        "trouble_magnet": 1.25,
+        "impatient": 1.2,
+        "infamy": 0.55,
+        "illiterate": 0.12
+      },
+      "discipline_power_biases": {
+        "sense_the_unseen": 1.85,
+        "heightened_senses": 1.8,
+        "scry_the_soul": 1.7,
+        "premonition": 1.6
+      },
+      "subs": {
+        "detective": {
+          "skill_biases": {
+            "investigation": 0.45,
+            "insight": 0.3
+          },
+          "discipline_biases": {
+            "auspex": 0.25
+          },
+          "sphere_biases": {
+            "police": 0.4,
+            "legal": 0.3
+          },
+          "modifier_biases": {
+            "reliable": 0.3
+          },
+          "tag_affinities": {
+            "investigation": 0.45,
+            "information": 0.35
+          },
+          "discipline_power_biases": {
+            "sense_the_unseen": 2.05,
+            "heightened_senses": 1.95,
+            "premonition": 1.85,
+            "share_the_senses": 1.75,
+            "scry_the_soul": 1.7
+          }
+        },
+        "forensic": {
+          "skill_biases": {
+            "science": 0.45,
+            "investigation": 0.3,
+            "medicine": 0.25
+          },
+          "merit_biases": {
+            "bloodhound": 0.3
+          },
+          "sphere_biases": {
+            "health": 0.4,
+            "police": 0.35
+          },
+          "tag_affinities": {
+            "science": 0.4,
+            "investigation": 0.35
+          },
+          "discipline_power_biases": {
+            "heightened_senses": 2.1,
+            "scry_the_soul": 2.0,
+            "panacea": 1.85,
+            "sense_the_unseen": 1.8,
+            "premonition": 1.7
+          }
+        },
+        "interrogator": {
+          "skill_biases": {
+            "intimidation": 0.45,
+            "insight": 0.35
+          },
+          "discipline_biases": {
+            "dominate": 0.3
+          },
+          "flaw_biases": {
+            "impatient": 0.25
+          },
+          "tag_affinities": {
+            "intimidation": 0.4,
+            "control": 0.3
+          },
+          "discipline_power_biases": {
+            "compel": 2.05,
+            "mesmerize": 1.95,
+            "dread_gaze": 1.85,
+            "daunt": 1.8,
+            "forgetful_mind": 1.7
+          }
+        }
+      }
+    },
+    "artist": {
+      "label": "The Artist",
+      "notes": "Public creative — performance, presence, fame, and turning attention into leverage.",
+      "tag_affinities": {
+        "art": 1.9,
+        "reputation": 1.8,
+        "social": 1.7,
+        "influence": 1.55,
+        "wealth": 1.25,
+        "combat": 0.45,
+        "stealth": 0.5,
+        "crime": 0.45
+      },
+      "attribute_biases": {
+        "charisma": 1.1,
+        "composure": 1.1
+      },
+      "skill_biases": {
+        "insight": 1.15,
+        "finance": 1.1
+      },
+      "discipline_biases": {
+        "presence": 1.1,
+        "auspex": 1.05,
+        "obfuscate": 0.65,
+        "potence": 0.4,
+        "dominate": 0.55,
+        "oblivion": 0.4
+      },
+      "background_biases": {
+        "fame": 1.75,
+        "contacts": 1.45,
+        "resources": 1.35,
+        "herd": 1.25,
+        "allies": 1.15,
+        "haven": 1.1,
+        "mask": 0.95,
+        "familiar": 0.7
+      },
+      "sphere_biases": {
+        "media": 1.8,
+        "high_society": 1.65,
+        "finance": 1.25,
+        "political": 1.15,
+        "church": 1.0,
+        "street": 0.6,
+        "underworld": 0.5,
+        "police": 0.55
+      },
+      "modifier_biases": {
+        "fan_club": 1.55,
+        "star_power": 1.45,
+        "open_bar": 1.35,
+        "paparazzi": 1.3,
+        "jealousy": 1.25,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "phenom": 1.6,
+        "vampiric_visage": 1.5,
+        "lifelike": 1.4,
+        "linguistics": 1.25,
+        "camarilla_contact": 1.2
+      },
+      "flaw_biases": {
+        "infamy": 1.5,
+        "enemy": 1.35,
+        "trouble_magnet": 1.2,
+        "obvious_predator": 0.1,
+        "illiterate": 0.1,
+        "poor": 0.12
+      },
+      "discipline_power_biases": {
+        "awe": 1.85,
+        "entrancement": 1.8,
+        "monologue": 1.7,
+        "eyes_of_the_serpent": 1.6
+      },
+      "subs": {
+        "virtuoso": {
+          "skill_biases": {
+            "craft": 0.45,
+            "academics": 0.25
+          },
+          "discipline_biases": {
+            "auspex": 0.25
+          },
+          "merit_biases": {
+            "phenom": 0.35
+          },
+          "modifier_biases": {
+            "star_power": 0.25
+          },
+          "tag_affinities": {
+            "art": 0.45,
+            "mental": 0.3
+          },
+          "discipline_power_biases": {
+            "heightened_senses": 1.9,
+            "scry_the_soul": 1.85,
+            "premonition": 1.8,
+            "collective_cognizance": 1.7
+          }
+        },
+        "performer": {
+          "skill_biases": {
+            "performance": 0.45,
+            "persuasion": 0.25
+          },
+          "discipline_biases": {
+            "presence": 0.3
+          },
+          "background_biases": {
+            "fame": 0.35
+          },
+          "modifier_biases": {
+            "fan_club": 0.35,
+            "star_power": 0.3
+          },
+          "tag_affinities": {
+            "art": 0.45,
+            "reputation": 0.35
+          },
+          "discipline_power_biases": {
+            "awe": 2.15,
+            "entrancement": 2.05,
+            "monologue": 1.9,
+            "eyes_of_the_serpent": 1.8,
+            "silencing_tongue": 1.7
+          }
+        },
+        "patron": {
+          "skill_biases": {
+            "etiquette": 0.35,
+            "finance": 0.3
+          },
+          "background_biases": {
+            "resources": 0.4,
+            "contacts": 0.3
+          },
+          "sphere_biases": {
+            "high_society": 0.4,
+            "finance": 0.35
+          },
+          "modifier_biases": {
+            "liquidity": 0.35,
+            "open_bar": 0.3
+          },
+          "tag_affinities": {
+            "wealth": 0.4,
+            "reputation": 0.35
+          },
+          "discipline_power_biases": {
+            "awe": 1.85,
+            "entrancement": 1.8,
+            "monologue": 1.75,
+            "mesmerize": 1.65
+          }
+        },
+        "director": {
+          "skill_biases": {
+            "persuasion": 0.35,
+            "insight": 0.35
+          },
+          "sphere_biases": {
+            "media": 0.4,
+            "high_society": 0.25
+          },
+          "modifier_biases": {
+            "jealousy": 0.25
+          },
+          "tag_affinities": {
+            "influence": 0.4,
+            "control": 0.3
+          },
+          "discipline_power_biases": {
+            "monologue": 2.0,
+            "mesmerize": 1.9,
+            "compel": 1.85,
+            "dread_gaze": 1.75,
+            "awe": 1.7
+          }
+        }
+      }
+    },
+    "alchemist": {
+      "label": "The Alchemist",
+      "notes": "Thin-blood innovator — science, craft, thin-blood alchemy formulas, and improvised miracles.",
+      "tag_affinities": {
+        "alchemy": 1.95,
+        "thin_blood": 1.9,
+        "science": 1.75,
+        "medicine": 1.55,
+        "mental": 1.45,
+        "occult": 1.2,
+        "combat": 0.45,
+        "reputation": 0.5
+      },
+      "attribute_biases": {
+        "intelligence": 1.1,
+        "wits": 1.1
+      },
+      "skill_biases": {
+        "craft": 1.15,
+        "occult": 1.1
+      },
+      "discipline_biases": {
+        "thin_blood_alchemy": 1.15,
+        "auspex": 0.65,
+        "obfuscate": 0.6,
+        "potence": 0.35,
+        "protean": 0.35,
+        "blood_sorcery": 0.5
+      },
+      "background_biases": {
+        "haven": 1.35,
+        "resources": 1.2,
+        "contacts": 1.15,
+        "mask": 1.1,
+        "allies": 0.9,
+        "herd": 0.85,
+        "fame": 0.45,
+        "familiar": 0.65
+      },
+      "sphere_biases": {
+        "health": 1.55,
+        "university": 1.5,
+        "industry": 1.35,
+        "occult": 1.2,
+        "street": 0.75,
+        "high_society": 0.5,
+        "media": 0.55,
+        "underworld": 0.65
+      },
+      "modifier_biases": {
+        "walk_in_freezer": 1.3,
+        "garage": 1.25,
+        "conspiracy_theorist": 1.1,
+        "flaky": 0.45
+      },
+      "merit_biases": {
+        "thin_blood_alchemist": 1.85,
+        "phenom": 1.45,
+        "cobbler": 1.35,
+        "common_sense": 1.25,
+        "day_drinker": 1.2
+      },
+      "flaw_biases": {
+        "mortal_frailty": 1.4,
+        "weak_stomach": 1.35,
+        "poor": 1.2,
+        "folkloric_bane": 1.15,
+        "illiterate": 0.1,
+        "infamy": 0.12
+      },
+      "discipline_power_biases": {
+        "far_reach": 1.85,
+        "haze": 1.8,
+        "envelope": 1.7,
+        "counterfeit_a_taste_for_blood": 1.65
+      },
+      "subs": {
+        "chemist": {
+          "skill_biases": {
+            "science": 0.45,
+            "medicine": 0.3
+          },
+          "merit_biases": {
+            "phenom": 0.35
+          },
+          "sphere_biases": {
+            "university": 0.4,
+            "health": 0.35
+          },
+          "tag_affinities": {
+            "science": 0.45,
+            "medicine": 0.35
+          },
+          "discipline_power_biases": {
+            "counterfeit_panacea": 2.0,
+            "counterfeit_heightened_senses": 1.9,
+            "far_reach": 1.85,
+            "haze": 1.75,
+            "envelope": 1.7
+          }
+        },
+        "distiller": {
+          "skill_biases": {
+            "craft": 0.4,
+            "science": 0.25
+          },
+          "sphere_biases": {
+            "industry": 0.35
+          },
+          "modifier_biases": {
+            "garage": 0.35,
+            "walk_in_freezer": 0.3
+          },
+          "tag_affinities": {
+            "alchemy": 0.45,
+            "art": 0.35
+          },
+          "discipline_power_biases": {
+            "envelope": 2.05,
+            "defractionate": 2.0,
+            "haze": 1.9,
+            "far_reach": 1.8,
+            "counterfeit_corrosive_vitae": 1.7
+          }
+        },
+        "blood_brewer": {
+          "skill_biases": {
+            "occult": 0.35,
+            "medicine": 0.3,
+            "science": 0.2
+          },
+          "discipline_biases": {
+            "thin_blood_alchemy": 0.4
+          },
+          "merit_biases": {
+            "thin_blood_alchemist": 0.4,
+            "catenating_blood": 0.25
+          },
+          "sphere_biases": {
+            "occult": 0.3,
+            "health": 0.25
+          },
+          "tag_affinities": {
+            "alchemy": 0.45,
+            "occult": 0.3,
+            "ritual": 0.25
+          },
+          "discipline_power_biases": {
+            "counterfeit_a_taste_for_blood": 2.1,
+            "counterfeit_blood_of_potency": 2.0,
+            "counterfeit_corrosive_vitae": 1.95,
+            "counterfeit_extinguish_vitae": 1.85,
+            "defractionate": 1.75
+          }
+        }
+      }
+    }
+  }
+}

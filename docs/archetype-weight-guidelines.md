@@ -1,0 +1,69 @@
+# Archetype weight guidelines
+
+Bias values steer procedural character generation toward archetype themes without hard-locking picks. Eligibility rules always apply first; bias only weights among eligible options.
+
+## Value ranges
+
+| Role | Range | Notes |
+|------|-------|-------|
+| Primary on-theme affinity | 1.4–2.0 | `tag_affinities` or explicit trait bias |
+| Sub sharpen (delta) | +0.2–0.5 | Additive on parent via sub `modifiers` |
+| Soft opposed / off-theme | 0.4–0.7 | Tag clash or low affinity |
+| Hard antithesis | 0.05–0.15 | Explicit trait id or `hard_opposed:*` tag |
+| Global clamp | 0.05–3.0 | Enforced in `trait_biases.resolve_trait_bias` |
+
+## Resolution order
+
+For any trait id (skill, merit, power, `contacts`, sphere `underworld`, etc.):
+
+```
+effective_bias = explicit_bias.get(trait_id)
+              OR product(tag_affinity[t] for t in trait_tags[trait_id])
+              OR 1.0
+```
+
+Explicit keys on the merged profile (primary + sub deltas) take precedence over tag products.
+
+## Profile fields
+
+| Field | Keys | Used by |
+|-------|------|---------|
+| `attribute_biases` | attribute id | creation + XP attributes |
+| `skill_biases` | skill id | creation + XP skills |
+| `discipline_biases` | discipline id | creation + XP disciplines |
+| `merit_biases` | merit id | Step 8 + XP merits |
+| `flaw_biases` | flaw id | Step 8 flaws |
+| `background_biases` | allies, contacts, … | creation + XP backgrounds |
+| `sphere_biases` | church, underworld, … | sphere pick on new entries |
+| `modifier_biases` | flaky, reliable, … | adv/disadv modifier picks |
+| `discipline_power_biases` | power id | power pick in disciplines |
+| `tag_affinities` | tag slug → multiplier | all tagged traits |
+
+Subs use additive deltas under `modifiers` for every field except where a sub JSON documents explicit signature overrides (e.g. `discipline_power_biases` on subs are merged additively like other bias keys).
+
+## Tags
+
+Shared tags live in `wod_chargen/games/lotn_v5/data/trait_tags.json`. Powers inherit discipline tags plus per-power overrides. Regenerate power tags after catalog changes:
+
+```bash
+uv run python scripts/generate_trait_tags.py
+```
+
+## Opposition policy (mixed)
+
+- **Soft clash** — off-theme flavor: multiply opposing tag affinity by ~0.55 (`opposed:tag`) or set tag affinity 0.4–0.7.
+- **Hard antithesis** — direct contradiction (Spy vs Fame, Brawler vs Etiquette-adjacent merits): explicit `0.05–0.15` on trait id or `hard_opposed:tag` on the flaw/trait tag list.
+
+## Content workflow
+
+1. Edit `data/archetype_themes.json` (central theme source).
+2. Run `uv run python scripts/apply_archetype_themes.py`.
+3. Validate: `uv run python scripts/validate_archetype_biases.py`.
+4. Spot-check: `uv run python scripts/archetype_weight_report.py --seeds 30`.
+5. Document per-archetype notes in `docs/archetype-weights/<id>.md` (auto-generated header; extend by hand if needed).
+
+## Pitfalls
+
+- **Over-tuning** — prefer soft tag affinities; floor is 0.05 so nothing is truly zero.
+- **Amalgam/prereq** — power bias never bypasses eligibility.
+- **Orphan keys** — validation script fails on unknown ids; run after JSON edits.

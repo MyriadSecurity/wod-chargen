@@ -11,8 +11,26 @@
       "occult": 0.35
     },
     "discipline_biases": {
-      "blood_sorcery": 0.4,
-      "auspex": 0.15
+      "blood_sorcery": 0.45,
+      "auspex": 0.2
+    },
+    "merit_biases": {
+      "catenating_blood": 0.35,
+      "viscosity": 0.3
+    },
+    "sphere_biases": {
+      "occult": 0.4
+    },
+    "discipline_power_biases": {
+      "blood_of_potency": 2.1,
+      "a_taste_for_blood": 2.05,
+      "scorpion_s_touch": 1.95,
+      "extinguish_vitae": 1.85,
+      "corrosive_vitae": 1.75
+    },
+    "tag_affinities": {
+      "blood_sorcery": 0.45,
+      "ritual": 0.4
     }
   }
 }

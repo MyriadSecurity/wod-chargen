@@ -8,13 +8,30 @@
     },
     "skill_biases": {
       "persuasion": 0.4,
-      "insight": 0.2,
+      "insight": 0.25,
       "subterfuge": 0.1,
       "politics": -0.2
     },
     "discipline_biases": {
-      "presence": 0.25,
-      "dominate": 0.1
+      "presence": 0.35,
+      "dominate": 0.2
+    },
+    "merit_biases": {
+      "vampiric_visage": 0.3
+    },
+    "modifier_biases": {
+      "friendly": 0.3
+    },
+    "discipline_power_biases": {
+      "entrancement": 2.15,
+      "awe": 2.05,
+      "eyes_of_the_serpent": 1.9,
+      "monologue": 1.8,
+      "mesmerize": 1.7
+    },
+    "tag_affinities": {
+      "influence": 0.4,
+      "presence": 0.35
     }
   }
 }

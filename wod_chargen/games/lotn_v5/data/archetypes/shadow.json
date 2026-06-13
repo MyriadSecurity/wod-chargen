@@ -12,19 +12,83 @@
     "merits": 0.8
   },
   "attribute_biases": {
-    "dexterity": 1.5,
-    "wits": 1.4,
+    "dexterity": 1.1,
+    "wits": 1.1,
     "composure": 1.2
   },
   "skill_biases": {
     "stealth": 2.0,
     "subterfuge": 1.6,
     "larceny": 1.4,
-    "investigation": 1.2
+    "investigation": 1.2,
+    "awareness": 1.2,
+    "technology": 1.15
   },
   "discipline_biases": {
-    "obfuscate": 1.8,
-    "celerity": 1.2,
-    "auspex": 1.0
+    "obfuscate": 1.15,
+    "celerity": 1.05,
+    "auspex": 1.0,
+    "presence": 0.45,
+    "potence": 0.5,
+    "blood_sorcery": 0.35
+  },
+  "merit_biases": {
+    "light_sleeper": 1.55,
+    "zeroed": 1.5,
+    "ambidextrous": 1.3,
+    "cobbler": 1.25,
+    "common_sense": 1.2
+  },
+  "flaw_biases": {
+    "dark_secret": 1.45,
+    "enemy": 1.35,
+    "infamy": 0.1,
+    "known_blankbody": 1.3,
+    "obvious_predator": 0.12,
+    "farmer": 0.1
+  },
+  "background_biases": {
+    "mask": 1.55,
+    "contacts": 1.4,
+    "haven": 1.25,
+    "allies": 0.9,
+    "fame": 0.25,
+    "herd": 0.75,
+    "resources": 0.85,
+    "familiar": 0.65
+  },
+  "sphere_biases": {
+    "police": 1.45,
+    "media": 1.35,
+    "legal": 1.25,
+    "political": 1.2,
+    "underworld": 1.15,
+    "high_society": 0.55,
+    "church": 0.5,
+    "welfare": 0.65
+  },
+  "modifier_biases": {
+    "at_arms_length": 1.5,
+    "paranoid": 1.4,
+    "garage": 1.15,
+    "flaky": 0.4,
+    "fan_club": 0.15,
+    "paparazzi": 0.15
+  },
+  "discipline_power_biases": {
+    "conceal": 1.85,
+    "silence_of_death": 1.8,
+    "unseen_passage": 1.75,
+    "sense_the_unseen": 1.65
+  },
+  "tag_affinities": {
+    "stealth": 1.9,
+    "deception": 1.7,
+    "information": 1.55,
+    "perception": 1.45,
+    "crime": 1.3,
+    "reputation": 0.4,
+    "influence": 0.55,
+    "combat": 0.65
   }
 }

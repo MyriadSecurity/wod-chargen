@@ -7,12 +7,34 @@
       "backgrounds": 0.15
     },
     "skill_biases": {
-      "politics": 0.45,
-      "etiquette": 0.25,
-      "leadership": 0.15
+      "politics": 0.4,
+      "etiquette": 0.3,
+      "leadership": 0.25
     },
     "discipline_biases": {
       "presence": 0.15
+    },
+    "background_biases": {
+      "contacts": 0.3,
+      "allies": 0.25
+    },
+    "sphere_biases": {
+      "high_society": 0.35,
+      "political": 0.3
+    },
+    "modifier_biases": {
+      "reliable": 0.3,
+      "diversity": 0.25
+    },
+    "discipline_power_biases": {
+      "monologue": 1.95,
+      "awe": 1.85,
+      "entrancement": 1.75,
+      "mesmerize": 1.7
+    },
+    "tag_affinities": {
+      "politics": 0.4,
+      "influence": 0.25
     }
   }
 }

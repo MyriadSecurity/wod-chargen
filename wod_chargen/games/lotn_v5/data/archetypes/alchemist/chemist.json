@@ -5,10 +5,28 @@
   "modifiers": {
     "skill_biases": {
       "science": 0.45,
-      "medicine": 0.25
+      "medicine": 0.3
     },
     "weights": {
       "thin_blood_formulas": 0.15
+    },
+    "merit_biases": {
+      "phenom": 0.35
+    },
+    "sphere_biases": {
+      "university": 0.4,
+      "health": 0.35
+    },
+    "discipline_power_biases": {
+      "counterfeit_panacea": 2.0,
+      "counterfeit_heightened_senses": 1.9,
+      "far_reach": 1.85,
+      "haze": 1.75,
+      "envelope": 1.7
+    },
+    "tag_affinities": {
+      "science": 0.45,
+      "medicine": 0.35
     }
   }
 }

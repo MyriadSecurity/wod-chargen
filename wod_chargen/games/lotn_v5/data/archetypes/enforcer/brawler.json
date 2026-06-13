@@ -8,10 +8,24 @@
     },
     "skill_biases": {
       "brawl": 0.4,
-      "athletics": 0.2
+      "athletics": 0.25
     },
     "discipline_biases": {
-      "potence": 0.25
+      "potence": 0.35
+    },
+    "sphere_biases": {
+      "street": 0.3,
+      "underworld": 0.25
+    },
+    "discipline_power_biases": {
+      "prowess": 2.1,
+      "lethal_body": 2.0,
+      "brutal_feed": 1.85,
+      "staggering_strike": 1.75
+    },
+    "tag_affinities": {
+      "combat": 0.4,
+      "physical": 0.3
     }
   }
 }

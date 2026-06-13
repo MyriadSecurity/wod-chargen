@@ -12,19 +12,81 @@
     "merits": 1.2
   },
   "attribute_biases": {
-    "intelligence": 1.6,
-    "resolve": 1.5,
+    "intelligence": 1.1,
+    "resolve": 1.1,
     "wits": 1.3
   },
   "skill_biases": {
     "occult": 2.0,
-    "academics": 1.4,
+    "academics": 1.15,
     "investigation": 1.2,
-    "medicine": 1.0
+    "medicine": 1.0,
+    "insight": 1.1
   },
   "discipline_biases": {
-    "blood_sorcery": 2.0,
-    "auspex": 1.4,
-    "dominate": 1.0
+    "blood_sorcery": 1.15,
+    "auspex": 1.1,
+    "dominate": 0.7,
+    "oblivion": 0.85,
+    "potence": 0.4,
+    "protean": 0.45
+  },
+  "merit_biases": {
+    "loremaster": 1.7,
+    "medium": 1.55,
+    "catenating_blood": 1.45,
+    "viscosity": 1.35,
+    "blood_empathy": 1.3,
+    "discipline_affinity": 1.25
+  },
+  "flaw_biases": {
+    "haunted": 1.45,
+    "stigmata": 1.35,
+    "dark_secret": 1.3,
+    "folkloric_bane": 1.25,
+    "folkloric_block": 1.2,
+    "illiterate": 0.1
+  },
+  "background_biases": {
+    "contacts": 1.35,
+    "haven": 1.3,
+    "resources": 1.15,
+    "mask": 1.1,
+    "allies": 0.95,
+    "fame": 0.5,
+    "herd": 0.9,
+    "familiar": 0.8
+  },
+  "sphere_biases": {
+    "occult": 1.85,
+    "church": 1.45,
+    "university": 1.35,
+    "health": 1.15,
+    "legal": 1.1,
+    "high_society": 0.55,
+    "street": 0.5,
+    "media": 0.55
+  },
+  "modifier_biases": {
+    "conspiracy_theorist": 1.45,
+    "walk_in_freezer": 1.2,
+    "paranoid": 1.15,
+    "flaky": 0.45
+  },
+  "discipline_power_biases": {
+    "a_taste_for_blood": 1.9,
+    "blood_of_potency": 1.8,
+    "corrosive_vitae": 1.7,
+    "scry_the_soul": 1.6
+  },
+  "tag_affinities": {
+    "occult": 1.9,
+    "ritual": 1.85,
+    "blood_sorcery": 1.8,
+    "necromancy": 1.45,
+    "mental": 1.4,
+    "combat": 0.45,
+    "street": 0.5,
+    "reputation": 0.55
   }
 }

@@ -7,8 +7,26 @@
       "thin_blood_formulas": 0.35
     },
     "skill_biases": {
-      "craft": 0.3,
-      "science": 0.2
+      "craft": 0.4,
+      "science": 0.25
+    },
+    "sphere_biases": {
+      "industry": 0.35
+    },
+    "modifier_biases": {
+      "garage": 0.35,
+      "walk_in_freezer": 0.3
+    },
+    "discipline_power_biases": {
+      "envelope": 2.05,
+      "defractionate": 2.0,
+      "haze": 1.9,
+      "far_reach": 1.8,
+      "counterfeit_corrosive_vitae": 1.7
+    },
+    "tag_affinities": {
+      "alchemy": 0.45,
+      "art": 0.35
     }
   }
 }

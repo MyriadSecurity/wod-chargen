@@ -8,7 +8,28 @@
     },
     "skill_biases": {
       "academics": 0.35,
-      "investigation": 0.25
+      "investigation": 0.35
+    },
+    "background_biases": {
+      "contacts": 0.3,
+      "haven": 0.25
+    },
+    "sphere_biases": {
+      "university": 0.35,
+      "legal": 0.25
+    },
+    "modifier_biases": {
+      "reliable": 0.3
+    },
+    "discipline_power_biases": {
+      "heightened_senses": 1.9,
+      "sense_the_unseen": 1.85,
+      "premonition": 1.75,
+      "share_the_senses": 1.65
+    },
+    "tag_affinities": {
+      "information": 0.4,
+      "investigation": 0.3
     }
   }
 }

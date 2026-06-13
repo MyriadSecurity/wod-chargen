@@ -7,10 +7,27 @@ from functools import lru_cache
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags
 
 DATA_PKG = "wod_chargen.games.lotn_v5.data"
 VALID_TYPES = {"vampire", "ghoul", "thin_blood"}
-MODIFIER_KEYS = ("weights", "attribute_biases", "skill_biases", "discipline_biases")
+
+BIAS_MODIFIER_KEYS = (
+    "weights",
+    "attribute_biases",
+    "skill_biases",
+    "discipline_biases",
+    "merit_biases",
+    "flaw_biases",
+    "background_biases",
+    "sphere_biases",
+    "modifier_biases",
+    "discipline_power_biases",
+    "tag_affinities",
+)
+
+# Legacy alias for tests importing MODIFIER_KEYS
+MODIFIER_KEYS = BIAS_MODIFIER_KEYS
 
 
 @dataclass(frozen=True)
@@ -22,6 +39,13 @@ class SubArchetypeProfile:
     attribute_bias_deltas: dict[str, float]
     skill_bias_deltas: dict[str, float]
     discipline_bias_deltas: dict[str, float]
+    merit_bias_deltas: dict[str, float] = field(default_factory=dict)
+    flaw_bias_deltas: dict[str, float] = field(default_factory=dict)
+    background_bias_deltas: dict[str, float] = field(default_factory=dict)
+    sphere_bias_deltas: dict[str, float] = field(default_factory=dict)
+    modifier_bias_deltas: dict[str, float] = field(default_factory=dict)
+    discipline_power_bias_deltas: dict[str, float] = field(default_factory=dict)
+    tag_affinity_deltas: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -36,23 +60,70 @@ class ArchetypeProfile:
     sub_archetypes: tuple[SubArchetypeProfile, ...]
     allowed_types: tuple[str, ...] = ()
     type_weights: dict[str, dict[str, float]] = field(default_factory=dict)
+    merit_biases: dict[str, float] = field(default_factory=dict)
+    flaw_biases: dict[str, float] = field(default_factory=dict)
+    background_biases: dict[str, float] = field(default_factory=dict)
+    sphere_biases: dict[str, float] = field(default_factory=dict)
+    modifier_biases: dict[str, float] = field(default_factory=dict)
+    discipline_power_biases: dict[str, float] = field(default_factory=dict)
+    tag_affinities: dict[str, float] = field(default_factory=dict)
 
 
-def _registry_ids() -> tuple[set[str], set[str], set[str]]:
+def _registry_ids() -> dict[str, set[str]]:
     attrs = set(load_json_cached(DATA_PKG, "attributes.json")["all"])
     skills = set(load_json_cached(DATA_PKG, "skills.json")["all"])
     discs = set(load_json_cached(DATA_PKG, "disciplines.json")["all"])
-    return attrs, skills, discs
+    mf = load_json_cached(DATA_PKG, "merits_flaws.json")
+    merits = {m["id"] for m in mf["merits"]}
+    flaws = {f["id"] for f in mf["flaws"]}
+    bg = load_json_cached(DATA_PKG, "backgrounds.json")
+    backgrounds = set(bg["backgrounds"].keys())
+    spheres = {s["id"] for s in bg["spheres"]}
+    modifiers: set[str] = set()
+    for spec in bg["backgrounds"].values():
+        for mod in spec.get("advantages", []) + spec.get("disadvantages", []):
+            modifiers.add(mod["id"])
+    tags = set(load_trait_tags().get("tags", {}).keys())
+    powers: set[str] = set()
+    for disc in load_json_cached(DATA_PKG, "discipline_powers.json")["disciplines"]:
+        for p in disc.get("powers", []):
+            powers.add(p["id"])
+    return {
+        "attribute_biases": attrs,
+        "skill_biases": skills,
+        "discipline_biases": discs,
+        "merit_biases": merits,
+        "flaw_biases": flaws,
+        "background_biases": backgrounds,
+        "sphere_biases": spheres,
+        "modifier_biases": modifiers,
+        "discipline_power_biases": powers,
+        "tag_affinities": tags,
+    }
 
 
-def _validate_bias_keys(data: dict[str, Any], registry: set[str], label: str, arch_id: str) -> None:
+def _validate_bias_keys(data: dict[str, float], registry: set[str], label: str, arch_id: str) -> None:
     for key in data:
         if key not in registry:
             raise ValueError(f"Unknown {label} key {key!r} in archetype {arch_id!r}")
 
 
+def _parse_bias_block(
+    raw: dict[str, Any],
+    key: str,
+    arch_id: str,
+    sub_id: str,
+    registries: dict[str, set[str]],
+) -> dict[str, float]:
+    block = {k: float(v) for k, v in raw.get(key, {}).items()}
+    registry = registries.get(key)
+    if registry is not None and block:
+        _validate_bias_keys(block, registry, key.replace("_", " "), f"{arch_id}/{sub_id}")
+    return block
+
+
 def _parse_modifiers(raw: dict[str, Any], arch_id: str, sub_id: str) -> dict[str, dict[str, float]]:
-    attrs, skills, discs = _registry_ids()
+    registries = _registry_ids()
     modifiers = raw.get("modifiers", {})
     if not modifiers and any(k in raw for k in ("weight_deltas", "skill_bias_deltas", "discipline_bias_deltas")):
         modifiers = {
@@ -62,15 +133,8 @@ def _parse_modifiers(raw: dict[str, Any], arch_id: str, sub_id: str) -> dict[str
             "discipline_biases": raw.get("discipline_bias_deltas", {}),
         }
     parsed: dict[str, dict[str, float]] = {}
-    for key in MODIFIER_KEYS:
-        block = {k: float(v) for k, v in modifiers.get(key, {}).items()}
-        if key == "attribute_biases":
-            _validate_bias_keys(block, attrs, "attribute", f"{arch_id}/{sub_id}")
-        elif key == "skill_biases":
-            _validate_bias_keys(block, skills, "skill", f"{arch_id}/{sub_id}")
-        elif key == "discipline_biases":
-            _validate_bias_keys(block, discs, "discipline", f"{arch_id}/{sub_id}")
-        parsed[key] = block
+    for key in BIAS_MODIFIER_KEYS:
+        parsed[key] = _parse_bias_block(modifiers, key, arch_id, sub_id, registries)
     return parsed
 
 
@@ -85,6 +149,13 @@ def _parse_sub(raw: dict[str, Any], arch_id: str) -> SubArchetypeProfile:
         attribute_bias_deltas=mods["attribute_biases"],
         skill_bias_deltas=mods["skill_biases"],
         discipline_bias_deltas=mods["discipline_biases"],
+        merit_bias_deltas=mods["merit_biases"],
+        flaw_bias_deltas=mods["flaw_biases"],
+        background_bias_deltas=mods["background_biases"],
+        sphere_bias_deltas=mods["sphere_biases"],
+        modifier_bias_deltas=mods["modifier_biases"],
+        discipline_power_bias_deltas=mods["discipline_power_biases"],
+        tag_affinity_deltas=mods["tag_affinities"],
     )
 
 
@@ -108,10 +179,24 @@ def _load_sub_archetypes(arch_id: str, inline: list[dict[str, Any]] | None = Non
 
 def _parse_profile(raw: dict[str, Any]) -> ArchetypeProfile:
     arch_id = raw["id"]
-    attrs, skills, discs = _registry_ids()
-    _validate_bias_keys(raw.get("attribute_biases", {}), attrs, "attribute", arch_id)
-    _validate_bias_keys(raw.get("skill_biases", {}), skills, "skill", arch_id)
-    _validate_bias_keys(raw.get("discipline_biases", {}), discs, "discipline", arch_id)
+    registries = _registry_ids()
+    for key in (
+        "attribute_biases",
+        "skill_biases",
+        "discipline_biases",
+        "merit_biases",
+        "flaw_biases",
+        "background_biases",
+        "sphere_biases",
+        "modifier_biases",
+        "discipline_power_biases",
+        "tag_affinities",
+    ):
+        block = {k: float(v) for k, v in raw.get(key, {}).items()}
+        registry = registries.get(key)
+        if registry is not None and block:
+            _validate_bias_keys(block, registry, key.replace("_", " "), arch_id)
+        raw[key] = block
 
     allowed = tuple(raw.get("allowed_types", ()))
     for t in allowed:
@@ -130,12 +215,19 @@ def _parse_profile(raw: dict[str, Any]) -> ArchetypeProfile:
         label=raw["label"],
         description=raw.get("description", ""),
         weights={k: float(v) for k, v in raw["weights"].items()},
-        attribute_biases={k: float(v) for k, v in raw.get("attribute_biases", {}).items()},
-        skill_biases={k: float(v) for k, v in raw.get("skill_biases", {}).items()},
-        discipline_biases={k: float(v) for k, v in raw.get("discipline_biases", {}).items()},
+        attribute_biases=raw.get("attribute_biases", {}),
+        skill_biases=raw.get("skill_biases", {}),
+        discipline_biases=raw.get("discipline_biases", {}),
         sub_archetypes=subs,
         allowed_types=allowed,
         type_weights=raw.get("type_weights", {}),
+        merit_biases=raw.get("merit_biases", {}),
+        flaw_biases=raw.get("flaw_biases", {}),
+        background_biases=raw.get("background_biases", {}),
+        sphere_biases=raw.get("sphere_biases", {}),
+        modifier_biases=raw.get("modifier_biases", {}),
+        discipline_power_biases=raw.get("discipline_power_biases", {}),
+        tag_affinities=raw.get("tag_affinities", {}),
     )
 
 
@@ -195,6 +287,13 @@ def effective_profile(
     attribute_biases = _apply_deltas(base.attribute_biases, sub.attribute_bias_deltas)
     skill_biases = _apply_deltas(base.skill_biases, sub.skill_bias_deltas)
     disc_biases = _apply_deltas(base.discipline_biases, sub.discipline_bias_deltas)
+    merit_biases = _apply_deltas(base.merit_biases, sub.merit_bias_deltas)
+    flaw_biases = _apply_deltas(base.flaw_biases, sub.flaw_bias_deltas)
+    background_biases = _apply_deltas(base.background_biases, sub.background_bias_deltas)
+    sphere_biases = _apply_deltas(base.sphere_biases, sub.sphere_bias_deltas)
+    modifier_biases = _apply_deltas(base.modifier_biases, sub.modifier_bias_deltas)
+    power_biases = _apply_deltas(base.discipline_power_biases, sub.discipline_power_bias_deltas)
+    tag_affinities = _apply_deltas(base.tag_affinities, sub.tag_affinity_deltas)
 
     if venue_overrides and arch_id in venue_overrides:
         vo = venue_overrides[arch_id]
@@ -212,4 +311,11 @@ def effective_profile(
         sub_archetypes=base.sub_archetypes,
         allowed_types=base.allowed_types,
         type_weights=base.type_weights,
+        merit_biases=merit_biases,
+        flaw_biases=flaw_biases,
+        background_biases=background_biases,
+        sphere_biases=sphere_biases,
+        modifier_biases=modifier_biases,
+        discipline_power_biases=power_biases,
+        tag_affinities=tag_affinities,
     )

@@ -255,14 +255,10 @@ def _source_tag(source: ModifierSource) -> str:
 
 
 def _pick_sphere(rng: SeededRng, profile: Any) -> str:
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
     spheres = [s["id"] for s in sphere_defs()]
-    weights = [profile.skill_biases.get("persuasion", 1.0)] * len(spheres)
-    social_bias = getattr(profile, "weights", {}).get("social_attrs", 1.0)
-    for i, sphere in enumerate(spheres):
-        if sphere in ("high_society", "media", "political"):
-            weights[i] *= social_bias
-        if sphere in ("street", "underworld", "police"):
-            weights[i] *= profile.weights.get("skills", 1.0)
+    weights = [resolve_trait_bias(profile, sphere, "spheres") for sphere in spheres]
     return rng.weighted_choice(spheres, weights)
 
 
@@ -450,7 +446,14 @@ def _assign_one_background_dot(
     eligible_types = [t for t in defs if _can_add_dot(entries, t, defs[t], char)]
     if not eligible_types:
         return None
-    weights = [defs[t].get("creation_bias", 1.0) * (biases or {}).get(t, 1.0) for t in eligible_types]
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
+    weights = [
+        defs[t].get("creation_bias", 1.0)
+        * (biases or {}).get(t, 1.0)
+        * resolve_trait_bias(profile, t, "backgrounds")
+        for t in eligible_types
+    ]
     bg_type = rng.weighted_choice(eligible_types, weights)
     spec = defs[bg_type]
     entry = _pick_target_entry(rng, entries, bg_type, spec, prefer_new_instance=prefer_new_instance)
@@ -468,6 +471,7 @@ def _assign_one_modifier_dot(
     rng: SeededRng,
     entries: list[dict[str, Any]],
     kind: ModifierKind,
+    profile: Any,
     *,
     source: ModifierSource,
     only_entries: list[dict[str, Any]] | None = None,
@@ -487,7 +491,11 @@ def _assign_one_modifier_dot(
         targets = _eligible_modifier_targets(entries, kind, char)
     if not targets:
         return None
-    entry, mod_def = rng.choice(targets)
+    from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+
+    weights = [resolve_trait_bias(profile, mod_def["id"], "modifiers") for _entry, mod_def in targets]
+    idx = rng.weighted_choice(list(range(len(targets))), weights)
+    entry, mod_def = targets[idx]
     mod_id = mod_def["id"]
     new_level = apply_modifier_purchase(entry, mod_id, kind)
     label = mod_def["label"]
@@ -605,7 +613,7 @@ def run_background_creation(
 
         if pick_mod:
             result = _assign_one_modifier_dot(
-                rng, entries, "advantage", source="creation_pool", char=char
+                rng, entries, "advantage", profile, source="creation_pool", char=char
             )
             if result:
                 lines.append(result[0])
@@ -629,7 +637,9 @@ def run_background_creation(
     if rated and rng.uniform() < 0.7:
         disad_attempts = rng.choice([1, 1, 2, 2, 3])
         for _ in range(disad_attempts):
-            result = _assign_one_modifier_dot(rng, entries, "disadvantage", source="free", char=char)
+            result = _assign_one_modifier_dot(
+                rng, entries, "disadvantage", profile, source="free", char=char
+            )
             if result:
                 lines.append(result[0])
                 ledger.disadv_dots_added += 1
@@ -638,7 +648,9 @@ def run_background_creation(
 
     grant = ledger.disadv_trade_credit(grant=predator_disadvantages_grant_adv)
     while ledger.disadv_trade_remaining > 0 and grant > 0:
-        result = _assign_one_modifier_dot(rng, entries, "advantage", source="disadv_trade", char=char)
+        result = _assign_one_modifier_dot(
+            rng, entries, "advantage", profile, source="disadv_trade", char=char
+        )
         if result:
             lines.append(result[0])
             ledger.adv_from_disadv_granted += 1
@@ -690,6 +702,7 @@ def apply_xp_background_disadv_trade(
     rng: SeededRng,
     entries: list[dict[str, Any]],
     meta: dict[str, Any],
+    profile: Any,
 ) -> list[tuple[str, str, int, str]]:
     """After XP spend: free disadv + matching adv on backgrounds bought with XP only."""
     xp_entries = [e for e in entries if e.get("xp_purchased") and int(e.get("dots", 0)) > 0]
@@ -699,7 +712,7 @@ def apply_xp_background_disadv_trade(
     log: list[tuple[str, str, int, str]] = []
     for _ in range(rng.choice([1, 1, 2])):
         result = _assign_one_modifier_dot(
-            rng, entries, "disadvantage", source="free", only_entries=xp_entries
+            rng, entries, "disadvantage", profile, source="free", only_entries=xp_entries
         )
         if not result:
             break
@@ -711,7 +724,7 @@ def apply_xp_background_disadv_trade(
 
     while xp_disadv_trade_remaining(meta) > 0:
         result = _assign_one_modifier_dot(
-            rng, entries, "advantage", source="disadv_trade", only_entries=xp_entries
+            rng, entries, "advantage", profile, source="disadv_trade", only_entries=xp_entries
         )
         if not result:
             break

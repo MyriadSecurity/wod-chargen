@@ -1,0 +1,1423 @@
+{
+  "tags": {
+    "physical": {
+      "label": "Physical prowess"
+    },
+    "social": {
+      "label": "Social influence"
+    },
+    "mental": {
+      "label": "Mental acuity"
+    },
+    "combat": {
+      "label": "Direct violence"
+    },
+    "stealth": {
+      "label": "Hidden action"
+    },
+    "deception": {
+      "label": "Lies and misdirection"
+    },
+    "influence": {
+      "label": "Persuasion and sway"
+    },
+    "control": {
+      "label": "Command and domination"
+    },
+    "intimidation": {
+      "label": "Fear and force"
+    },
+    "crime": {
+      "label": "Street crime and larceny"
+    },
+    "street": {
+      "label": "Street-level networks"
+    },
+    "occult": {
+      "label": "Supernatural lore and rites"
+    },
+    "ritual": {
+      "label": "Blood sorcery rituals and ceremonies"
+    },
+    "necromancy": {
+      "label": "Oblivion and the dead"
+    },
+    "predation": {
+      "label": "Hunting and feeding"
+    },
+    "animal": {
+      "label": "Animal bonds and feral nature"
+    },
+    "investigation": {
+      "label": "Clues, forensics, deduction"
+    },
+    "information": {
+      "label": "Intel and awareness"
+    },
+    "perception": {
+      "label": "Senses and insight"
+    },
+    "medicine": {
+      "label": "Healing and anatomy"
+    },
+    "science": {
+      "label": "Research and technology"
+    },
+    "art": {
+      "label": "Performance and creativity"
+    },
+    "reputation": {
+      "label": "Fame and public face"
+    },
+    "politics": {
+      "label": "Courts, factions, law"
+    },
+    "endurance": {
+      "label": "Stamina and toughness"
+    },
+    "resilience": {
+      "label": "Mental and physical resilience"
+    },
+    "mobility": {
+      "label": "Speed and agility"
+    },
+    "alchemy": {
+      "label": "Thin-blood formulas"
+    },
+    "thin_blood": {
+      "label": "Thin-blood specific"
+    },
+    "support": {
+      "label": "Allies and reliability"
+    },
+    "wealth": {
+      "label": "Money and resources"
+    },
+    "haven": {
+      "label": "Safe spaces and lairs"
+    },
+    "dominate": {
+      "label": "Dominate discipline theme"
+    },
+    "presence": {
+      "label": "Presence discipline theme"
+    },
+    "blood_sorcery": {
+      "label": "Blood sorcery theme"
+    },
+    "oblivion": {
+      "label": "Oblivion theme"
+    },
+    "defense": {
+      "label": "Protection and wards"
+    },
+    "shapeshift": {
+      "label": "Protean transformation"
+    }
+  },
+  "attributes": {
+    "strength": [
+      "physical",
+      "combat"
+    ],
+    "dexterity": [
+      "physical",
+      "mobility",
+      "stealth"
+    ],
+    "stamina": [
+      "physical",
+      "endurance"
+    ],
+    "charisma": [
+      "social",
+      "influence"
+    ],
+    "manipulation": [
+      "social",
+      "deception",
+      "control"
+    ],
+    "composure": [
+      "social",
+      "mental",
+      "resilience"
+    ],
+    "intelligence": [
+      "mental",
+      "science"
+    ],
+    "wits": [
+      "mental",
+      "perception"
+    ],
+    "resolve": [
+      "mental",
+      "resilience",
+      "endurance"
+    ]
+  },
+  "skills": {
+    "athletics": [
+      "physical",
+      "mobility"
+    ],
+    "brawl": [
+      "physical",
+      "combat"
+    ],
+    "craft": [
+      "physical",
+      "art"
+    ],
+    "drive": [
+      "physical",
+      "street"
+    ],
+    "firearms": [
+      "physical",
+      "combat"
+    ],
+    "larceny": [
+      "physical",
+      "crime",
+      "stealth"
+    ],
+    "melee": [
+      "physical",
+      "combat"
+    ],
+    "stealth": [
+      "physical",
+      "stealth"
+    ],
+    "survival": [
+      "physical",
+      "predation"
+    ],
+    "animal_ken": [
+      "social",
+      "animal",
+      "predation"
+    ],
+    "etiquette": [
+      "social",
+      "politics",
+      "reputation"
+    ],
+    "insight": [
+      "social",
+      "mental",
+      "perception"
+    ],
+    "intimidation": [
+      "social",
+      "intimidation",
+      "combat"
+    ],
+    "leadership": [
+      "social",
+      "influence",
+      "politics"
+    ],
+    "performance": [
+      "social",
+      "art",
+      "reputation"
+    ],
+    "persuasion": [
+      "social",
+      "influence"
+    ],
+    "streetwise": [
+      "social",
+      "street",
+      "crime"
+    ],
+    "subterfuge": [
+      "social",
+      "deception",
+      "stealth"
+    ],
+    "academics": [
+      "mental",
+      "politics"
+    ],
+    "awareness": [
+      "mental",
+      "perception",
+      "information"
+    ],
+    "finance": [
+      "mental",
+      "wealth",
+      "politics"
+    ],
+    "investigation": [
+      "mental",
+      "investigation",
+      "information"
+    ],
+    "medicine": [
+      "mental",
+      "medicine",
+      "science"
+    ],
+    "occult": [
+      "mental",
+      "occult"
+    ],
+    "politics": [
+      "mental",
+      "politics",
+      "influence"
+    ],
+    "science": [
+      "mental",
+      "science"
+    ],
+    "technology": [
+      "mental",
+      "science",
+      "investigation"
+    ]
+  },
+  "merits": {
+    "bond_resistance": [
+      "mental",
+      "resilience"
+    ],
+    "short_bond": [
+      "social",
+      "deception"
+    ],
+    "sympathy_pains": [
+      "mental",
+      "resilience"
+    ],
+    "unbondable": [
+      "mental",
+      "resilience",
+      "control"
+    ],
+    "linguistics": [
+      "social",
+      "influence"
+    ],
+    "cobbler": [
+      "physical",
+      "craft"
+    ],
+    "phenom": [
+      "art",
+      "reputation"
+    ],
+    "zeroed": [
+      "stealth",
+      "deception"
+    ],
+    "bloodhound": [
+      "predation",
+      "perception"
+    ],
+    "iron_gullet": [
+      "predation",
+      "endurance"
+    ],
+    "viscosity": [
+      "predation",
+      "endurance"
+    ],
+    "blood_empathy": [
+      "predation",
+      "social"
+    ],
+    "vampiric_visage": [
+      "social",
+      "reputation"
+    ],
+    "loremaster": [
+      "occult",
+      "mental"
+    ],
+    "medium": [
+      "occult",
+      "necromancy"
+    ],
+    "ambidextrous": [
+      "physical",
+      "combat"
+    ],
+    "eat_food": [
+      "social",
+      "deception"
+    ],
+    "light_sleeper": [
+      "mental",
+      "perception"
+    ],
+    "calm_heart": [
+      "mental",
+      "resilience"
+    ],
+    "common_sense": [
+      "mental",
+      "investigation"
+    ],
+    "anarch_comrades": [
+      "street",
+      "politics"
+    ],
+    "camarilla_contact": [
+      "politics",
+      "social"
+    ],
+    "catenating_blood": [
+      "occult",
+      "blood_sorcery"
+    ],
+    "day_drinker": [
+      "predation",
+      "endurance"
+    ],
+    "discipline_affinity": [
+      "occult"
+    ],
+    "lifelike": [
+      "deception",
+      "social"
+    ],
+    "thin_blood_alchemist": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "vampiric_resilience": [
+      "endurance",
+      "resilience"
+    ]
+  },
+  "flaws": {
+    "bond_at_first_taste": [
+      "predation",
+      "control"
+    ],
+    "bond_junkie": [
+      "predation",
+      "control"
+    ],
+    "long_bond": [
+      "social",
+      "control"
+    ],
+    "symbiotic_dependency": [
+      "predation"
+    ],
+    "enemy": [
+      "reputation",
+      "politics"
+    ],
+    "infamy": [
+      "reputation",
+      "social",
+      "hard_opposed:reputation"
+    ],
+    "poor": [
+      "wealth"
+    ],
+    "no_haven": [
+      "haven"
+    ],
+    "obvious_predator": [
+      "predation",
+      "stealth",
+      "hard_opposed:stealth"
+    ],
+    "illiterate": [
+      "mental",
+      "hard_opposed:mental"
+    ],
+    "known_corpse": [
+      "deception",
+      "reputation",
+      "hard_opposed:deception"
+    ],
+    "known_blankbody": [
+      "deception",
+      "hard_opposed:deception"
+    ],
+    "farmer": [
+      "predation",
+      "street"
+    ],
+    "methuselah_s_thirst": [
+      "predation",
+      "endurance"
+    ],
+    "organovore": [
+      "predation"
+    ],
+    "prey_exclusion": [
+      "predation",
+      "mental"
+    ],
+    "weak_stomach": [
+      "predation",
+      "endurance"
+    ],
+    "baneful_blood": [
+      "occult",
+      "predation"
+    ],
+    "crone_s_curse": [
+      "occult"
+    ],
+    "distressing_fangs": [
+      "social",
+      "reputation"
+    ],
+    "bound_to_the_earth": [
+      "occult",
+      "endurance"
+    ],
+    "eerie_presence": [
+      "social",
+      "occult",
+      "hard_opposed:social"
+    ],
+    "folkloric_bane": [
+      "occult"
+    ],
+    "folkloric_block": [
+      "occult"
+    ],
+    "haunted": [
+      "occult",
+      "necromancy"
+    ],
+    "stake_bait": [
+      "endurance",
+      "combat"
+    ],
+    "stigmata": [
+      "occult",
+      "reputation"
+    ],
+    "trouble_magnet": [
+      "reputation",
+      "street"
+    ],
+    "awkward_mobility": [
+      "physical",
+      "mobility",
+      "hard_opposed:combat"
+    ],
+    "deep_sleeper": [
+      "mental",
+      "perception"
+    ],
+    "low_pain_threshold": [
+      "endurance",
+      "combat"
+    ],
+    "slow_healing": [
+      "endurance"
+    ],
+    "archaic": [
+      "mental",
+      "politics"
+    ],
+    "dark_secret": [
+      "deception",
+      "reputation"
+    ],
+    "death_sight": [
+      "occult",
+      "necromancy",
+      "perception"
+    ],
+    "living_on_the_edge": [
+      "street",
+      "predation"
+    ],
+    "impatient": [
+      "mental",
+      "social"
+    ],
+    "weak_willed": [
+      "mental",
+      "control",
+      "hard_opposed:control"
+    ],
+    "baby_teeth": [
+      "combat",
+      "intimidation"
+    ],
+    "bestial_temper": [
+      "predation",
+      "combat"
+    ],
+    "branded_by_the_camarilla": [
+      "politics",
+      "reputation"
+    ],
+    "clan_curse": [
+      "social"
+    ],
+    "dead_flesh": [
+      "social",
+      "reputation"
+    ],
+    "mortal_frailty": [
+      "endurance",
+      "combat"
+    ],
+    "shunned_by_the_anarchs": [
+      "street",
+      "politics"
+    ],
+    "vitae_dependency": [
+      "predation",
+      "control"
+    ]
+  },
+  "backgrounds": {
+    "allies": [
+      "social",
+      "support",
+      "politics"
+    ],
+    "contacts": [
+      "social",
+      "information",
+      "street"
+    ],
+    "fame": [
+      "social",
+      "reputation"
+    ],
+    "familiar": [
+      "predation",
+      "animal"
+    ],
+    "haven": [
+      "haven",
+      "support"
+    ],
+    "herd": [
+      "predation",
+      "social"
+    ],
+    "mask": [
+      "deception",
+      "reputation"
+    ],
+    "resources": [
+      "wealth",
+      "support"
+    ]
+  },
+  "spheres": {
+    "church": [
+      "occult",
+      "politics",
+      "social"
+    ],
+    "finance": [
+      "wealth",
+      "politics"
+    ],
+    "health": [
+      "medicine",
+      "science"
+    ],
+    "high_society": [
+      "reputation",
+      "politics",
+      "social"
+    ],
+    "industry": [
+      "wealth",
+      "street"
+    ],
+    "legal": [
+      "politics",
+      "investigation"
+    ],
+    "media": [
+      "reputation",
+      "information",
+      "social"
+    ],
+    "occult": [
+      "occult"
+    ],
+    "police": [
+      "investigation",
+      "street",
+      "politics"
+    ],
+    "political": [
+      "politics",
+      "influence"
+    ],
+    "street": [
+      "street",
+      "crime"
+    ],
+    "transportation": [
+      "street",
+      "mobility"
+    ],
+    "underworld": [
+      "crime",
+      "street"
+    ],
+    "university": [
+      "science",
+      "mental"
+    ],
+    "welfare": [
+      "street",
+      "social"
+    ]
+  },
+  "modifiers": {
+    "at_arms_length": [
+      "deception",
+      "support"
+    ],
+    "cash_money": [
+      "wealth"
+    ],
+    "conspiracy_theorist": [
+      "information",
+      "occult"
+    ],
+    "cryptocurrency": [
+      "wealth",
+      "technology"
+    ],
+    "diversity": [
+      "social",
+      "support"
+    ],
+    "fan_club": [
+      "reputation",
+      "social"
+    ],
+    "flaky": [
+      "support",
+      "hard_opposed:support"
+    ],
+    "flavor_station": [
+      "haven",
+      "social"
+    ],
+    "friendly": [
+      "support",
+      "social"
+    ],
+    "garage": [
+      "haven",
+      "street"
+    ],
+    "jealousy": [
+      "social",
+      "reputation"
+    ],
+    "liquidity": [
+      "wealth"
+    ],
+    "open_bar": [
+      "social",
+      "reputation"
+    ],
+    "paparazzi": [
+      "reputation",
+      "information"
+    ],
+    "paranoid": [
+      "deception",
+      "stealth"
+    ],
+    "reliable": [
+      "support"
+    ],
+    "retainer": [
+      "support",
+      "predation"
+    ],
+    "skittish": [
+      "animal",
+      "predation"
+    ],
+    "star_power": [
+      "reputation",
+      "art"
+    ],
+    "walk_in_freezer": [
+      "haven",
+      "predation"
+    ],
+    "wall_street_wizard": [
+      "wealth",
+      "finance"
+    ],
+    "zoo": [
+      "animal",
+      "predation"
+    ]
+  },
+  "powers": {
+    "a_taste_for_blood": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "abrupt_internment": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "adaptability": [
+      "endurance",
+      "resilience"
+    ],
+    "aegis": [
+      "endurance",
+      "resilience"
+    ],
+    "airbourne_momentum": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "alone_in_the_dark": [],
+    "animal_dominion": [
+      "predation",
+      "animal"
+    ],
+    "animal_succulence": [
+      "predation",
+      "animal"
+    ],
+    "arms_of_ahriman": [
+      "occult",
+      "necromancy",
+      "oblivion",
+      "combat"
+    ],
+    "atavism": [
+      "predation",
+      "animal"
+    ],
+    "aura_of_decay": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "avatar_of_rot": [],
+    "awaken_homuncular_servant": [],
+    "awaken_the_sleeper": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "awe": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "baal_s_caress": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "bastone_diabolico": [],
+    "bind_spirit": [],
+    "black_blood": [],
+    "blade_of_eternal_thirst": [],
+    "blinding_the_alloy_eye": [],
+    "blink": [
+      "combat",
+      "mobility"
+    ],
+    "blood_of_potency": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "blood_rash": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "blood_walk": [],
+    "brutal_feed": [
+      "combat",
+      "physical"
+    ],
+    "bulletstorm": [
+      "combat",
+      "mobility"
+    ],
+    "cache": [
+      "stealth",
+      "deception"
+    ],
+    "capricious_visage": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "cat_s_grace": [
+      "combat",
+      "mobility"
+    ],
+    "cauldron_of_blood": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "chalchiuhtotolin_s_judgment": [],
+    "chill_of_oblivion": [],
+    "chimerstry": [
+      "stealth",
+      "deception"
+    ],
+    "clairvoyance": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "cling_of_the_arachnid": [],
+    "cloak_the_gathering": [
+      "stealth",
+      "deception"
+    ],
+    "cloud_memory": [
+      "social",
+      "control",
+      "dominate",
+      "deception"
+    ],
+    "coagulate": [
+      "endurance",
+      "resilience"
+    ],
+    "cobra_s_favor": [],
+    "collective_cognizance": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "compel": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "compel_spirit": [],
+    "conceal": [
+      "stealth",
+      "deception"
+    ],
+    "conditioning": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "control_the_savage_beast": [
+      "predation",
+      "animal"
+    ],
+    "corrosive_vitae": [
+      "occult",
+      "ritual",
+      "blood_sorcery",
+      "combat"
+    ],
+    "craft_bloodstone": [],
+    "dagon_s_call": [],
+    "daunt": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "defense_of_the_sacred_haven": [],
+    "defractionate": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "dementation": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "din_of_the_damned": [],
+    "domitor_s_favor": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "drawing_out_the_beast": [
+      "predation",
+      "animal"
+    ],
+    "dread_gaze": [
+      "social",
+      "influence",
+      "presence",
+      "intimidation"
+    ],
+    "earth_meld": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "earth_shock": [
+      "combat",
+      "physical"
+    ],
+    "enduring_beasts": [
+      "endurance",
+      "resilience"
+    ],
+    "enhance_the_wild_ride": [
+      "predation",
+      "animal"
+    ],
+    "entrancement": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "envelope": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "escape_to_true_sanctuary": [],
+    "ethereal_horde": [],
+    "extinguish_vitae": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "eyes_of_the_beast": [
+      "predation",
+      "physical",
+      "shapeshift",
+      "perception"
+    ],
+    "eyes_of_the_dead": [],
+    "eyes_of_the_serpent": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "faces_of_the_dead": [],
+    "far_reach": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "fata_morgana": [
+      "stealth",
+      "deception"
+    ],
+    "feral_weapons": [
+      "predation",
+      "physical",
+      "shapeshift",
+      "combat"
+    ],
+    "feral_whispers": [
+      "predation",
+      "animal"
+    ],
+    "firewalker": [],
+    "fist_of_caine": [
+      "combat",
+      "physical"
+    ],
+    "fleetness": [
+      "combat",
+      "mobility"
+    ],
+    "flesh_of_marble": [
+      "endurance",
+      "resilience"
+    ],
+    "fleshcrafting": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "forgetful_mind": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "form_of_mist": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "forsaken_edifice": [],
+    "ghost_in_the_machine": [
+      "stealth",
+      "deception"
+    ],
+    "guiding_spirits": [],
+    "haze": [
+      "alchemy",
+      "thin_blood"
+    ],
+    "heart_of_darkness": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "heart_s_bane": [],
+    "heightened_senses": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "horrid_form": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "illuminate_the_trail_of_prey": [],
+    "incorporeal_passage": [],
+    "instantaneous_materialization": [],
+    "lethal_body": [
+      "combat",
+      "physical"
+    ],
+    "lightning_strike": [
+      "combat",
+      "mobility"
+    ],
+    "majesty": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "mask_of_a_thousand_faces": [
+      "stealth",
+      "deception"
+    ],
+    "masque_of_death": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "mass_manipulation": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "mesmerize": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "metamorphosis": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "monologue": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "nightmare_mantle": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "nimble_departure": [
+      "combat",
+      "mobility"
+    ],
+    "oblivion_s_sight": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "panacea": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "perfect_forgery": [],
+    "personal_armor": [
+      "endurance",
+      "resilience"
+    ],
+    "phantom_hunter": [
+      "stealth",
+      "deception"
+    ],
+    "phantom_whispers": [],
+    "possession": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "premonition": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "prowess": [
+      "combat",
+      "physical"
+    ],
+    "puissance": [
+      "combat",
+      "physical"
+    ],
+    "quell_the_beast": [
+      "predation",
+      "animal"
+    ],
+    "quicksilver": [
+      "combat",
+      "mobility"
+    ],
+    "rapid_reflexes": [
+      "combat",
+      "mobility"
+    ],
+    "rationalize": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "reaper_s_passing": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "resiliency": [
+      "endurance",
+      "resilience"
+    ],
+    "roots_of_the_mountain": [
+      "endurance",
+      "resilience"
+    ],
+    "savage_pursuit": [
+      "combat",
+      "physical"
+    ],
+    "scorpion_s_touch": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "scry_the_soul": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "sense_the_beast": [
+      "predation",
+      "animal"
+    ],
+    "sense_the_unseen": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "shadow_cast": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "shadow_cloak": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "shadowstep": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "shaft_of_belated_dissolution": [],
+    "shambling_hordes": [],
+    "shape_mastery": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "shapechange": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "share_the_senses": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "silence_of_death": [
+      "stealth",
+      "deception"
+    ],
+    "silencing_tongue": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "sin_eater": [],
+    "slow_the_beating_heart": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "soaring_leap": [
+      "combat",
+      "physical",
+      "mobility"
+    ],
+    "soul_mask": [
+      "stealth",
+      "deception"
+    ],
+    "spirit_s_touch": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "splinter_servant": [],
+    "staggering_strike": [
+      "combat",
+      "physical"
+    ],
+    "stygian_shroud": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "submerged_directive": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "subsume_the_spirit": [
+      "predation",
+      "animal"
+    ],
+    "summon": [
+      "social",
+      "influence",
+      "presence"
+    ],
+    "summon_spirit": [],
+    "telepathy": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "tenebrous_avatar": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "terminal_decree": [
+      "social",
+      "control",
+      "dominate"
+    ],
+    "theft_of_vitae": [
+      "occult",
+      "ritual",
+      "blood_sorcery"
+    ],
+    "touch_of_oblivion": [
+      "occult",
+      "necromancy",
+      "oblivion"
+    ],
+    "toughness": [
+      "endurance",
+      "resilience"
+    ],
+    "unburdening_the_bestial_soul": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "uncanny_grip": [
+      "combat",
+      "physical"
+    ],
+    "unerring_aim": [
+      "combat",
+      "mobility"
+    ],
+    "unfettered_heart": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "unliving_hive": [
+      "predation",
+      "animal"
+    ],
+    "unseen_passage": [
+      "stealth",
+      "deception"
+    ],
+    "unswayable_minds": [
+      "endurance",
+      "resilience"
+    ],
+    "unveil_the_edifice": [
+      "mental",
+      "information",
+      "perception"
+    ],
+    "unyielding": [
+      "endurance",
+      "resilience"
+    ],
+    "valeren": [
+      "endurance",
+      "resilience"
+    ],
+    "vanish_from_the_mind_s_eye": [
+      "stealth",
+      "deception"
+    ],
+    "velocity": [
+      "combat",
+      "mobility"
+    ],
+    "vicissitude": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "wake_with_evening_s_freshness": [],
+    "ward_against_cainites": [],
+    "ward_against_ghouls": [],
+    "ward_against_shifters": [],
+    "ward_against_spirits": [],
+    "warding_circle_against_cainites": [],
+    "warding_circle_against_ghouls": [],
+    "warding_circle_against_shifters": [],
+    "warding_circle_against_spirits": [],
+    "weight_of_a_feather": [
+      "predation",
+      "physical",
+      "shapeshift"
+    ],
+    "zephyr": [
+      "combat",
+      "mobility"
+    ]
+  }
+}

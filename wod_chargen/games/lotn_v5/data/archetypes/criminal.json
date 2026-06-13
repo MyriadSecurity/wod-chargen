@@ -13,9 +13,9 @@
   },
   "attribute_biases": {
     "dexterity": 1.4,
-    "wits": 1.4,
+    "wits": 1.1,
     "stamina": 1.2,
-    "manipulation": 1.15
+    "manipulation": 1.1
   },
   "skill_biases": {
     "streetwise": 2.0,
@@ -23,16 +23,80 @@
     "subterfuge": 1.35,
     "survival": 1.2,
     "awareness": 1.1,
-    "drive": 1.1
+    "drive": 1.1,
+    "finance": 1.25,
+    "technology": 1.1
   },
   "discipline_biases": {
-    "obfuscate": 1.35,
-    "celerity": 1.15,
-    "fortitude": 1.05
+    "obfuscate": 1.1,
+    "celerity": 1.05,
+    "fortitude": 1.0,
+    "dominate": 0.5,
+    "presence": 0.55,
+    "blood_sorcery": 0.4
   },
   "type_weights": {
     "ghoul": {
       "in_clan_disciplines": 0.6
     }
+  },
+  "merit_biases": {
+    "zeroed": 1.55,
+    "cobbler": 1.4,
+    "anarch_comrades": 1.35,
+    "light_sleeper": 1.25,
+    "common_sense": 1.2
+  },
+  "flaw_biases": {
+    "dark_secret": 1.4,
+    "enemy": 1.35,
+    "trouble_magnet": 1.3,
+    "infamy": 1.15,
+    "poor": 1.1,
+    "illiterate": 0.12
+  },
+  "background_biases": {
+    "contacts": 1.5,
+    "mask": 1.4,
+    "resources": 1.25,
+    "haven": 1.15,
+    "allies": 1.1,
+    "fame": 0.45,
+    "herd": 0.85,
+    "familiar": 0.7
+  },
+  "sphere_biases": {
+    "underworld": 1.8,
+    "street": 1.65,
+    "industry": 1.35,
+    "transportation": 1.25,
+    "finance": 1.2,
+    "high_society": 0.5,
+    "church": 0.45,
+    "legal": 0.55
+  },
+  "modifier_biases": {
+    "cash_money": 1.45,
+    "liquidity": 1.35,
+    "cryptocurrency": 1.25,
+    "at_arms_length": 1.3,
+    "paranoid": 1.2,
+    "flaky": 0.45
+  },
+  "discipline_power_biases": {
+    "conceal": 1.8,
+    "unseen_passage": 1.7,
+    "fleetness": 1.65,
+    "silence_of_death": 1.55
+  },
+  "tag_affinities": {
+    "crime": 1.85,
+    "street": 1.75,
+    "deception": 1.55,
+    "stealth": 1.45,
+    "wealth": 1.3,
+    "politics": 0.55,
+    "occult": 0.5,
+    "reputation": 0.6
   }
 }

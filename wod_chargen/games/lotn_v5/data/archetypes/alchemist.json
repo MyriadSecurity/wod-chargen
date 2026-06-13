@@ -13,20 +13,82 @@
     "thin_blood_formulas": 2.5
   },
   "attribute_biases": {
-    "intelligence": 1.8,
-    "wits": 1.5,
+    "intelligence": 1.1,
+    "wits": 1.1,
     "resolve": 1.3
   },
   "skill_biases": {
     "science": 2.0,
     "medicine": 1.6,
-    "craft": 1.4,
-    "occult": 1.3
+    "craft": 1.15,
+    "occult": 1.1
   },
   "discipline_biases": {
-    "thin_blood_alchemy": 2.0
+    "thin_blood_alchemy": 1.15,
+    "auspex": 0.65,
+    "obfuscate": 0.6,
+    "potence": 0.35,
+    "protean": 0.35,
+    "blood_sorcery": 0.5
   },
   "allowed_types": [
     "thin_blood"
-  ]
+  ],
+  "merit_biases": {
+    "thin_blood_alchemist": 1.85,
+    "phenom": 1.45,
+    "cobbler": 1.35,
+    "common_sense": 1.25,
+    "day_drinker": 1.2
+  },
+  "flaw_biases": {
+    "mortal_frailty": 1.4,
+    "weak_stomach": 1.35,
+    "poor": 1.2,
+    "folkloric_bane": 1.15,
+    "illiterate": 0.1,
+    "infamy": 0.12
+  },
+  "background_biases": {
+    "haven": 1.35,
+    "resources": 1.2,
+    "contacts": 1.15,
+    "mask": 1.1,
+    "allies": 0.9,
+    "herd": 0.85,
+    "fame": 0.45,
+    "familiar": 0.65
+  },
+  "sphere_biases": {
+    "health": 1.55,
+    "university": 1.5,
+    "industry": 1.35,
+    "occult": 1.2,
+    "street": 0.75,
+    "high_society": 0.5,
+    "media": 0.55,
+    "underworld": 0.65
+  },
+  "modifier_biases": {
+    "walk_in_freezer": 1.3,
+    "garage": 1.25,
+    "conspiracy_theorist": 1.1,
+    "flaky": 0.45
+  },
+  "discipline_power_biases": {
+    "far_reach": 1.85,
+    "haze": 1.8,
+    "envelope": 1.7,
+    "counterfeit_a_taste_for_blood": 1.65
+  },
+  "tag_affinities": {
+    "alchemy": 1.95,
+    "thin_blood": 1.9,
+    "science": 1.75,
+    "medicine": 1.55,
+    "mental": 1.45,
+    "occult": 1.2,
+    "combat": 0.45,
+    "reputation": 0.5
+  }
 }

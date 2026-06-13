@@ -7,11 +7,24 @@
       "skills": 0.2
     },
     "skill_biases": {
-      "persuasion": 0.5,
+      "persuasion": 0.35,
       "subterfuge": 0.2
     },
     "discipline_biases": {
       "presence": 0.3
+    },
+    "modifier_biases": {
+      "friendly": 0.3
+    },
+    "discipline_power_biases": {
+      "mesmerize": 2.05,
+      "awe": 1.95,
+      "entrancement": 1.85,
+      "monologue": 1.75
+    },
+    "tag_affinities": {
+      "influence": 0.35,
+      "social": 0.25
     }
   }
 }

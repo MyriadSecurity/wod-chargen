@@ -12,20 +12,81 @@
     "merits": 0.65
   },
   "attribute_biases": {
-    "strength": 1.7,
-    "stamina": 1.5,
+    "strength": 1.15,
+    "stamina": 1.1,
     "charisma": 1.1
   },
   "skill_biases": {
     "intimidation": 2.0,
     "brawl": 1.8,
     "athletics": 1.3,
-    "melee": 1.3,
-    "streetwise": 1.2
+    "melee": 1.25,
+    "streetwise": 1.2,
+    "firearms": 1.15
   },
   "discipline_biases": {
-    "potence": 1.7,
-    "fortitude": 1.35,
-    "presence": 1.25
+    "potence": 1.15,
+    "fortitude": 1.1,
+    "presence": 1.05,
+    "obfuscate": 0.45,
+    "blood_sorcery": 0.35,
+    "auspex": 0.5
+  },
+  "merit_biases": {
+    "iron_gullet": 1.5,
+    "vampiric_resilience": 1.45,
+    "ambidextrous": 1.35,
+    "bloodhound": 1.25,
+    "anarch_comrades": 1.2
+  },
+  "flaw_biases": {
+    "obvious_predator": 1.4,
+    "bestial_temper": 1.35,
+    "weak_willed": 0.1,
+    "infamy": 1.25,
+    "impatient": 1.3,
+    "illiterate": 0.12
+  },
+  "background_biases": {
+    "haven": 1.3,
+    "allies": 1.15,
+    "contacts": 1.0,
+    "herd": 0.9,
+    "fame": 0.45,
+    "mask": 0.85,
+    "resources": 0.9,
+    "familiar": 1.1
+  },
+  "sphere_biases": {
+    "street": 1.5,
+    "underworld": 1.4,
+    "industry": 1.2,
+    "police": 1.15,
+    "high_society": 0.45,
+    "media": 0.5,
+    "university": 0.45
+  },
+  "modifier_biases": {
+    "reliable": 1.4,
+    "retainer": 1.35,
+    "garage": 1.2,
+    "flaky": 0.35,
+    "paparazzi": 0.4
+  },
+  "discipline_power_biases": {
+    "prowess": 1.85,
+    "dread_gaze": 1.75,
+    "lethal_body": 1.7,
+    "toughness": 1.6
+  },
+  "tag_affinities": {
+    "combat": 1.9,
+    "physical": 1.75,
+    "intimidation": 1.7,
+    "endurance": 1.55,
+    "street": 1.3,
+    "social": 0.55,
+    "deception": 0.5,
+    "occult": 0.45
   }
 }

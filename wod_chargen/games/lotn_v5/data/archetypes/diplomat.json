@@ -14,17 +14,87 @@
   "attribute_biases": {
     "charisma": 1.5,
     "manipulation": 1.45,
-    "composure": 1.25
+    "composure": 1.1,
+    "resolve": 1.15
   },
   "skill_biases": {
     "persuasion": 2.0,
     "politics": 1.7,
     "etiquette": 1.5,
     "subterfuge": 1.3,
-    "insight": 1.2
+    "insight": 1.2,
+    "leadership": 1.4,
+    "finance": 1.2
   },
   "discipline_biases": {
-    "presence": 1.65,
-    "dominate": 1.2
+    "presence": 1.15,
+    "dominate": 1.1,
+    "obfuscate": 0.45,
+    "potence": 0.4,
+    "protean": 0.45,
+    "oblivion": 0.35
+  },
+  "merit_biases": {
+    "linguistics": 1.75,
+    "camarilla_contact": 1.6,
+    "vampiric_visage": 1.5,
+    "calm_heart": 1.45,
+    "common_sense": 1.35,
+    "lifelike": 1.3
+  },
+  "flaw_biases": {
+    "obvious_predator": 0.1,
+    "weak_willed": 0.1,
+    "illiterate": 0.1,
+    "infamy": 1.5,
+    "enemy": 1.35,
+    "impatient": 1.25
+  },
+  "background_biases": {
+    "contacts": 1.75,
+    "allies": 1.55,
+    "fame": 1.45,
+    "herd": 1.2,
+    "mask": 1.15,
+    "resources": 1.1,
+    "haven": 0.85,
+    "familiar": 0.6
+  },
+  "sphere_biases": {
+    "high_society": 1.85,
+    "political": 1.65,
+    "media": 1.45,
+    "church": 1.25,
+    "legal": 1.2,
+    "finance": 1.15,
+    "underworld": 0.5,
+    "street": 0.55,
+    "industry": 0.65
+  },
+  "modifier_biases": {
+    "reliable": 1.55,
+    "friendly": 1.45,
+    "diversity": 1.35,
+    "open_bar": 1.3,
+    "fan_club": 1.25,
+    "paparazzi": 1.2,
+    "flaky": 0.4,
+    "paranoid": 0.55
+  },
+  "discipline_power_biases": {
+    "mesmerize": 1.85,
+    "awe": 1.75,
+    "entrancement": 1.65,
+    "monologue": 1.55
+  },
+  "tag_affinities": {
+    "social": 1.85,
+    "influence": 1.75,
+    "politics": 1.7,
+    "reputation": 1.5,
+    "deception": 0.65,
+    "combat": 0.5,
+    "stealth": 0.55,
+    "crime": 0.5
   }
 }

@@ -4,12 +4,28 @@
   "description": "Take it and vanish.",
   "modifiers": {
     "skill_biases": {
-      "larceny": 0.45,
+      "larceny": 0.4,
       "stealth": 0.35,
-      "subterfuge": -0.2
+      "subterfuge": -0.2,
+      "awareness": 0.2
     },
     "discipline_biases": {
-      "celerity": 0.15
+      "celerity": 0.2,
+      "obfuscate": 0.3
+    },
+    "modifier_biases": {
+      "at_arms_length": 0.3
+    },
+    "discipline_power_biases": {
+      "unseen_passage": 2.05,
+      "conceal": 2.0,
+      "cache": 1.85,
+      "fleetness": 1.75,
+      "silence_of_death": 1.65
+    },
+    "tag_affinities": {
+      "crime": 0.4,
+      "stealth": 0.35
     }
   }
 }

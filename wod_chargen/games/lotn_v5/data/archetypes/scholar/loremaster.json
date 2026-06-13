@@ -4,11 +4,28 @@
   "description": "Kindred history, occult theory, and what the elders got wrong.",
   "modifiers": {
     "skill_biases": {
-      "occult": 0.45,
+      "occult": 0.4,
       "academics": 0.3
     },
     "discipline_biases": {
-      "auspex": 0.15
+      "auspex": 0.25
+    },
+    "merit_biases": {
+      "loremaster": 0.4
+    },
+    "sphere_biases": {
+      "occult": 0.35,
+      "university": 0.3
+    },
+    "discipline_power_biases": {
+      "scry_the_soul": 2.05,
+      "premonition": 1.95,
+      "heightened_senses": 1.85,
+      "collective_cognizance": 1.75
+    },
+    "tag_affinities": {
+      "occult": 0.4,
+      "information": 0.3
     }
   }
 }

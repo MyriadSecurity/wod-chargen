@@ -5,10 +5,28 @@
   "modifiers": {
     "skill_biases": {
       "investigation": 0.45,
-      "insight": 0.25
+      "insight": 0.3
     },
     "discipline_biases": {
-      "auspex": 0.15
+      "auspex": 0.25
+    },
+    "sphere_biases": {
+      "police": 0.4,
+      "legal": 0.3
+    },
+    "modifier_biases": {
+      "reliable": 0.3
+    },
+    "discipline_power_biases": {
+      "sense_the_unseen": 2.05,
+      "heightened_senses": 1.95,
+      "premonition": 1.85,
+      "share_the_senses": 1.75,
+      "scry_the_soul": 1.7
+    },
+    "tag_affinities": {
+      "investigation": 0.45,
+      "information": 0.35
     }
   }
 }

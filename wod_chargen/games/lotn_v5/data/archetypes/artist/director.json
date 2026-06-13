@@ -7,9 +7,27 @@
       "social_attrs": 0.15
     },
     "skill_biases": {
-      "persuasion": 0.3,
-      "insight": 0.3,
+      "persuasion": 0.35,
+      "insight": 0.35,
       "performance": 0.1
+    },
+    "sphere_biases": {
+      "media": 0.4,
+      "high_society": 0.25
+    },
+    "modifier_biases": {
+      "jealousy": 0.25
+    },
+    "discipline_power_biases": {
+      "monologue": 2.0,
+      "mesmerize": 1.9,
+      "compel": 1.85,
+      "dread_gaze": 1.75,
+      "awe": 1.7
+    },
+    "tag_affinities": {
+      "influence": 0.4,
+      "control": 0.3
     }
   }
 }

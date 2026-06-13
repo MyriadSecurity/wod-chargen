@@ -7,12 +7,33 @@
       "physical_attrs": 0.15
     },
     "skill_biases": {
-      "animal_ken": 0.35,
-      "brawl": 0.25
+      "animal_ken": 0.4,
+      "brawl": 0.25,
+      "survival": 0.35
     },
     "discipline_biases": {
-      "protean": 0.3,
-      "animalism": 0.25
+      "protean": 0.4,
+      "animalism": 0.35
+    },
+    "flaw_biases": {
+      "bestial_temper": 0.35,
+      "obvious_predator": 0.25
+    },
+    "modifier_biases": {
+      "zoo": 0.35,
+      "retainer": 0.3
+    },
+    "discipline_power_biases": {
+      "feral_weapons": 2.1,
+      "shapechange": 2.0,
+      "atavism": 1.9,
+      "quell_the_beast": 1.75,
+      "eyes_of_the_beast": 1.7
+    },
+    "tag_affinities": {
+      "animal": 0.45,
+      "predation": 0.4,
+      "shapeshift": 0.35
     }
   }
 }

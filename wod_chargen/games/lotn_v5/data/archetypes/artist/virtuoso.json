@@ -1,20 +1,36 @@
 {
   "id": "virtuoso",
   "label": "Virtuoso",
-  "description": "Canvas, verse, clay \u2014 you make the work they argue about.",
+  "description": "Canvas, verse, clay — you make the work they argue about.",
   "modifiers": {
     "weights": {
       "mental_attrs": 0.15,
       "social_attrs": -0.15
     },
     "skill_biases": {
-      "craft": 0.5,
+      "craft": 0.45,
       "performance": -0.5,
-      "academics": 0.2
+      "academics": 0.25
     },
     "discipline_biases": {
-      "auspex": 0.15,
+      "auspex": 0.25,
       "presence": -0.15
+    },
+    "merit_biases": {
+      "phenom": 0.35
+    },
+    "modifier_biases": {
+      "star_power": 0.25
+    },
+    "discipline_power_biases": {
+      "heightened_senses": 1.9,
+      "scry_the_soul": 1.85,
+      "premonition": 1.8,
+      "collective_cognizance": 1.7
+    },
+    "tag_affinities": {
+      "art": 0.45,
+      "mental": 0.3
     }
   }
 }
