@@ -95,6 +95,12 @@ def test_index_html_loads_pyscript_entry():
     assert (ROOT / "pyscript.toml").is_file()
 
 
+def test_index_html_requires_secure_context_for_pyscript():
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert "crypto.randomUUID" in html
+    assert "location.replace" in html
+
+
 def test_all_app_and_engine_python_compiles():
     targets = [ROOT / "app", ROOT / "wod_chargen"]
     for target in targets:
