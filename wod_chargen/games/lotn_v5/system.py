@@ -108,3 +108,18 @@ class LotnV5System:
     def get_character_types(self) -> list[dict[str, Any]]:
         types = load_json_cached(DATA_PKG, "character_types.json")
         return [{"id": k, **v} for k, v in types.items()]
+
+    def type_uses_predator(self, character_type: str) -> bool:
+        types = load_json_cached(DATA_PKG, "character_types.json")
+        return bool(types.get(character_type, {}).get("predator"))
+
+    def get_predator_picker(self) -> list[dict[str, Any]]:
+        data = load_json_cached(DATA_PKG, "predator_types.json")
+        out: list[dict[str, Any]] = []
+        for t in data["types"]:
+            entry: dict[str, Any] = {"id": t["id"], "label": t["label"]}
+            for key in ("summary", "feeding_pool", "benefits", "drawbacks", "restrictions"):
+                if t.get(key):
+                    entry[key] = t[key]
+            out.append(entry)
+        return out

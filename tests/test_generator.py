@@ -23,6 +23,28 @@ def _opts(**kwargs):
     return base
 
 
+def test_predator_type_catalog():
+    types = load_json_cached("wod_chargen.games.lotn_v5.data", "predator_types.json")["types"]
+    ids = {t["id"] for t in types}
+    assert len(types) == 16
+    assert "blood_leech" in ids
+    assert "trapdoor" in ids
+    assert "scene_queen" in ids
+    for t in types:
+        assert t.get("feeding_pool"), f"{t['id']} missing feeding_pool"
+        assert t.get("benefits"), f"{t['id']} missing benefits"
+        assert "drawbacks" in t, f"{t['id']} missing drawbacks key"
+
+
+def test_user_selected_predator():
+    result = generate_character(
+        42,
+        _opts(predator="farmer"),
+        _venue(),
+    )
+    assert result.character["predator"] == "farmer"
+
+
 def test_mes_xp_budget_only():
     result = generate_character(42, _opts(), _venue())
     assert result.xp_budget == 185
@@ -78,7 +100,8 @@ def test_reproducibility_per_archetype(arch_id: str):
 def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int = 5) -> None:
     assert all(0 <= v <= 5 for v in character["attributes"].values())
     assert all(0 <= v <= 5 for v in character["skills"].values())
-    assert all(0 <= v <= 5 for v in character["backgrounds"].values())
+    for entry in character["backgrounds"]:
+        assert 1 <= entry["dots"] <= 3
     assert all(0 <= v <= discipline_cap for v in character["disciplines"].values())
     assert all(0 <= v <= 3 for v in character["merits"].values())
     assert all(0 <= v <= 3 for v in character["loresheets"].values())
@@ -114,16 +137,13 @@ def test_thin_blood_ratings_respect_caps(seed: int):
     _assert_caps(result.character, discipline_cap=2, formula_cap=3)
 
 
-def test_creation_backgrounds_each_assigned_once():
-    """Seven 1-dot background picks each land on a distinct background."""
-    for seed in range(50):
+def test_creation_backgrounds_assign_seven_dots():
+    """Seven free pool dots are fully allocated (connections, modifiers, or unplaced)."""
+    for seed in range(30):
         result = generate_character(seed, _opts(), _venue())
-        names = [
-            _trait_from_log(entry.message)
-            for entry in result.creation_log
-            if entry.phase == "base" and entry.message.startswith("Background")
-        ]
-        assert len(names) == len(set(names)), f"seed {seed}: {names}"
+        pool = result.character["background_meta"]["creation_pool"]
+        spent = pool["connection"] + pool["modifier"] + pool.get("unplaced", 0)
+        assert spent == pool["total"], f"seed {seed}"
 
 
 def test_creation_log_shows_increment():
@@ -140,7 +160,7 @@ def _trait_from_log(message: str) -> str:
 def test_each_creation_trait_assigned_once():
     """LoTN pool rules: one pool chunk per trait — no +4 then later +1 on same skill."""
     result = generate_character(1, _opts(), _venue())
-    for prefix in ("Attribute", "Skill", "Background"):
+    for prefix in ("Attribute", "Skill"):
         names = [
             _trait_from_log(entry.message)
             for entry in result.creation_log
@@ -152,7 +172,7 @@ def test_each_creation_trait_assigned_once():
 @pytest.mark.parametrize("seed", range(50))
 def test_creation_traits_never_reused(seed: int):
     result = generate_character(seed, _opts(), _venue())
-    for prefix in ("Attribute", "Skill", "Background"):
+    for prefix in ("Attribute", "Skill"):
         names = [
             _trait_from_log(entry.message)
             for entry in result.creation_log
@@ -161,17 +181,38 @@ def test_creation_traits_never_reused(seed: int):
         assert len(names) == len(set(names)), f"seed {seed} {prefix}: {names}"
 
 
-def test_creation_log_ordered_highest_to_lowest():
+def _creation_log_category(message: str) -> int:
+    if message.startswith("Attribute"):
+        return 0
+    if message.startswith("Skill"):
+        return 1
+    if message.startswith("Discipline"):
+        return 2
+    if message.startswith(("Background", "Creation pool")):
+        return 3
+    return 99
+
+
+def test_creation_log_ordered_by_category_then_rating():
+    """Within each category, higher pool tiers are assigned before lower ones."""
     result = generate_character(42, _opts(), _venue())
-    tiers: list[int] = []
+    by_category: dict[int, list[int]] = {}
+    category_sequence: list[int] = []
     for entry in result.creation_log:
         if entry.phase != "base" or entry.message.startswith("Predator"):
             continue
+        cat = _creation_log_category(entry.message)
+        if cat == 99:
+            continue
+        if not category_sequence or category_sequence[-1] != cat:
+            category_sequence.append(cat)
         pool_rating = entry.detail.get("pool_rating")
         if pool_rating is not None:
-            tiers.append(int(pool_rating))
-    assert tiers
-    assert tiers == sorted(tiers, reverse=True)
+            by_category.setdefault(cat, []).append(int(pool_rating))
+
+    assert category_sequence == sorted(category_sequence)
+    for cat, tiers in by_category.items():
+        assert tiers == sorted(tiers, reverse=True), f"category {cat}: {tiers}"
 
 
 def test_xp_spend_uses_multiple_categories():

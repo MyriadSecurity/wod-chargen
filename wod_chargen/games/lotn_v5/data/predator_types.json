@@ -1,9 +1,228 @@
 {
   "types": [
-    { "id": "alleycat", "label": "Alleycat", "weight": 1.0 },
-    { "id": "bagger", "label": "Bagger", "weight": 0.8 },
-    { "id": "siren", "label": "Siren", "weight": 1.2 },
-    { "id": "osiris", "label": "Osiris", "weight": 0.7 },
-    { "id": "farmer", "label": "Farmer", "weight": 0.6 }
+    {
+      "id": "alleycat",
+      "label": "Alleycat",
+      "summary": "Feed by force or intimidation — stalk, overpower, and drink when you can.",
+      "feeding_pool": "Strength + Brawl",
+      "benefits": [
+        "Specialty: Intimidation (Stickups) or Brawl (Grappling)",
+        "+1 Celerity or Potence",
+        "Criminal Contacts •••"
+      ],
+      "drawbacks": ["−1 Humanity"],
+      "weight": 1.0
+    },
+    {
+      "id": "bagger",
+      "label": "Bagger",
+      "summary": "Procure cold or preserved blood through theft, black markets, or medical channels instead of hunting the living.",
+      "feeding_pool": "Intelligence + Streetwise",
+      "benefits": [
+        "Specialty: Larceny (Lock Picking) or Streetwise (Black Market)",
+        "+1 Blood Sorcery (Tremere/Banu Haqim), Oblivion (Hecata/Lasombra), or Obfuscate",
+        "Feeding Merit: Iron Gullet •••"
+      ],
+      "drawbacks": ["Enemy ••"],
+      "restrictions": ["Ventrue cannot select this type"],
+      "weight": 0.8
+    },
+    {
+      "id": "blood_leech",
+      "label": "Blood Leech",
+      "summary": "Feed on vampire vitae rather than mortals — hunted, coerced, or paid for.",
+      "feeding_pool": "Roleplay (no dice pool)",
+      "benefits": [
+        "Specialty: Brawl (Kindred) or Stealth (Against Kindred)",
+        "+1 Celerity or Protean",
+        "+1 Blood Potency"
+      ],
+      "drawbacks": [
+        "−1 Humanity",
+        "Dark Secret: Diablerist •• or Shunned ••",
+        "Feeding Flaw: Prey Exclusion (Mortals) ••"
+      ],
+      "weight": 0.7
+    },
+    {
+      "id": "cleaver",
+      "label": "Cleaver",
+      "summary": "Covertly feed from mortal family or close friends you still maintain ties with.",
+      "feeding_pool": "Manipulation + Subterfuge",
+      "benefits": [
+        "Specialty: Persuasion (Gaslighting) or Subterfuge (Coverups)",
+        "+1 Dominate or Animalism",
+        "Herd ••"
+      ],
+      "drawbacks": ["Dark Secret: Cleaver •"],
+      "weight": 0.8
+    },
+    {
+      "id": "consensualist",
+      "label": "Consensualist",
+      "summary": "Never feed against a vessel's free will — charity drives, kink communities, or open consent.",
+      "feeding_pool": "Manipulation + Persuasion",
+      "benefits": [
+        "Specialty: Medicine (Phlebotomy) or Persuasion (Vessels)",
+        "+1 Auspex or Fortitude",
+        "+1 Humanity"
+      ],
+      "drawbacks": [
+        "Dark Secret: Masquerade Breacher •",
+        "Feeding Flaw: Prey Exclusion (Nonconsenting) •"
+      ],
+      "weight": 0.6
+    },
+    {
+      "id": "extortionist",
+      "label": "Extortionist",
+      "summary": "Force victims to bleed for you, or trade blood for protection, surveillance, and favors.",
+      "feeding_pool": "Manipulation + Intimidation",
+      "benefits": [
+        "Specialty: Intimidation (Coercion) or Larceny (Security)",
+        "+1 Dominate or Potence",
+        "3 dots between Contacts and Resources"
+      ],
+      "drawbacks": ["Enemy •• (police or escaped victim)"],
+      "weight": 0.7
+    },
+    {
+      "id": "farmer",
+      "label": "Farmer",
+      "summary": "Feed exclusively from animals.",
+      "feeding_pool": "Composure + Animal Ken",
+      "benefits": [
+        "Specialty: Animal Ken (Specific Animal) or Survival (Hunting)",
+        "+1 Animalism or Protean",
+        "+1 Humanity"
+      ],
+      "drawbacks": ["Feeding Flaw: Farmer ••"],
+      "restrictions": ["Ventrue cannot select; Blood Potency 3+ cannot select"],
+      "weight": 0.6
+    },
+    {
+      "id": "graverobber",
+      "label": "Graverobber",
+      "summary": "Feed from fresh corpses, mourners, and the frightened — often tied to hospitals, morgues, or churches.",
+      "feeding_pool": "Resolve + Medicine",
+      "benefits": [
+        "Specialty: Occult (Grave Rituals) or Medicine (Cadavers)",
+        "+1 Fortitude or Oblivion (Hecata/Lasombra)",
+        "Feeding Merit: Iron Gullet •••",
+        "Haven •"
+      ],
+      "drawbacks": ["Herd Flaw: Obvious Predator ••"],
+      "weight": 0.5
+    },
+    {
+      "id": "grim_reaper",
+      "label": "Grim Reaper",
+      "summary": "Hunt hospice, assisted living, and others near death — always moving to find the next dying vessel.",
+      "feeding_pool": "Intelligence + Medicine",
+      "benefits": [
+        "Specialty: Awareness (Death) or Larceny (Forgery)",
+        "+1 Auspex or Oblivion (Hecata/Lasombra)",
+        "+1 Allies or Influence (medical community)",
+        "+1 Humanity"
+      ],
+      "drawbacks": ["Feeding Flaw: Prey Exclusion (Healthy Mortals) •"],
+      "weight": 0.5
+    },
+    {
+      "id": "montero",
+      "label": "Montero",
+      "summary": "Retainers or allies drive prey toward you — long cons, flash mobs, or coordinated pursuits.",
+      "feeding_pool": "Intelligence + Stealth",
+      "benefits": [
+        "Specialty: Leadership (Hunting Pack) or Stealth (Stakeout)",
+        "+1 Dominate or Obfuscate",
+        "Retainers ••"
+      ],
+      "drawbacks": ["−1 Humanity"],
+      "weight": 0.6
+    },
+    {
+      "id": "osiris",
+      "label": "Osiris",
+      "summary": "Feed from cultists, congregations, fans, or any devoted group you sway.",
+      "feeding_pool": "Manipulation + Subterfuge",
+      "benefits": [
+        "Specialty: Occult (Specific Tradition) or Performance (Specific Entertainment Field)",
+        "+1 Blood Sorcery (Tremere/Banu Haqim) or Presence",
+        "3 dots between Fame and Herd"
+      ],
+      "drawbacks": ["2 dots between Enemies and Mythic Flaws"],
+      "weight": 0.7
+    },
+    {
+      "id": "pursuer",
+      "label": "Pursuer",
+      "summary": "Stalk a victim, learn their habits, and strike when hunger and opportunity align.",
+      "feeding_pool": "Intelligence + Investigation",
+      "benefits": [
+        "Specialty: Investigation (Profiling) or Stealth (Shadowing)",
+        "+1 Animalism or Auspex",
+        "Merit: Bloodhound •",
+        "Contacts • (morally inflexible hunting grounds)"
+      ],
+      "drawbacks": ["−1 Humanity"],
+      "weight": 0.8
+    },
+    {
+      "id": "sandman",
+      "label": "Sandman",
+      "summary": "Feed from sleeping mortals — breaking into homes, hospitals, or targeting the homeless.",
+      "feeding_pool": "Dexterity + Stealth",
+      "benefits": [
+        "Specialty: Medicine (Anesthetics) or Stealth (Break-in)",
+        "+1 Auspex or Obfuscate",
+        "Resources •"
+      ],
+      "drawbacks": [],
+      "weight": 0.9
+    },
+    {
+      "id": "scene_queen",
+      "label": "Scene Queen",
+      "summary": "Hunt within a subculture or exclusive scene where you hold status and a crafted pose.",
+      "feeding_pool": "Manipulation + Persuasion",
+      "benefits": [
+        "Specialty: Etiquette, Leadership, or Streetwise (Specific Scene)",
+        "+1 Dominate or Potence",
+        "Fame •",
+        "Contacts •"
+      ],
+      "drawbacks": [
+        "Influence Flaw: Disliked • (outside subculture) or Feeding Flaw: Prey Exclusion • (other subculture)"
+      ],
+      "weight": 0.9
+    },
+    {
+      "id": "siren",
+      "label": "Siren",
+      "summary": "Feed through seduction or under the pretense of sexual encounters.",
+      "feeding_pool": "Charisma + Subterfuge",
+      "benefits": [
+        "Specialty: Persuasion (Seduction) or Subterfuge (Seduction)",
+        "+1 Fortitude or Presence",
+        "Looks Merit: Beautiful ••"
+      ],
+      "drawbacks": ["Enemy • (spurned lover or jealous partner)"],
+      "weight": 1.2
+    },
+    {
+      "id": "trapdoor",
+      "label": "Trapdoor",
+      "summary": "Build a nest — club, haunt, or trap — and lure prey inside on your terms.",
+      "feeding_pool": "Charisma + Stealth",
+      "benefits": [
+        "Specialty: Persuasion (Marketing) or Stealth (Ambushes or Traps)",
+        "+1 Protean or Obfuscate",
+        "Haven •",
+        "+1 Retainers, Herd, or second Haven dot"
+      ],
+      "drawbacks": ["Haven Flaw: Creepy • or Haunted •"],
+      "weight": 0.6
+    }
   ]
 }

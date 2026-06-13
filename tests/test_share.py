@@ -45,6 +45,27 @@ def test_unsupported_schema():
         decode_query("?schema=9.9&seed=1")
 
 
+def test_wizard_share_options_vampire_includes_predator():
+    opts = wizard_share_options(
+        character_type="vampire",
+        arch="artist",
+        sub="virtuoso",
+        clan="toreador",
+        predator="siren",
+        approval="2026-06",
+        venue_requires_approval_month=True,
+        type_uses_predator=True,
+    )
+    assert opts == {
+        "type": "vampire",
+        "arch": "artist",
+        "sub": "virtuoso",
+        "clan": "toreador",
+        "predator": "siren",
+        "approval": "2026-06",
+    }
+
+
 def test_wizard_share_options_vampire():
     opts = wizard_share_options(
         character_type="vampire",
@@ -61,6 +82,7 @@ def test_wizard_share_options_vampire():
         "clan": "toreador",
         "approval": "2026-06",
     }
+    assert "predator" not in opts
 
 
 def test_wizard_share_options_ghoul():
@@ -115,8 +137,10 @@ def test_share_url_regenerates_same_character():
         arch="diplomat",
         sub="silver_tongue",
         clan="brujah",
+        predator="siren",
         approval="2026-06",
         venue_requires_approval_month=True,
+        type_uses_predator=True,
     )
     venue = _venue()
     original = generate_character(seed, options, venue)

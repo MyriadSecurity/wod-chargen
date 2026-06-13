@@ -8,6 +8,14 @@ from pyscript import document
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
+from wod_chargen.games.lotn_v5.backgrounds import (
+    background_defs,
+    background_label,
+    level_label,
+    level_summary,
+    modifier_max_dots,
+    sphere_label,
+)
 
 DATA = "wod_chargen.games.lotn_v5.data"
 
@@ -109,18 +117,106 @@ def _trait_column(title: str, attrs: list[str], skills: list[str], character: di
     return col
 
 
-def _advantage_section(title: str, items: dict[str, int]) -> Any | None:
+def _rated_traits_section(title: str, items: dict[str, int]) -> Any | None:
     rated = {k: v for k, v in items.items() if v > 0}
     if not rated:
         return None
     section = document.createElement("section")
-    section.className = "sheet-advantages"
+    section.className = "sheet-rated-traits"
     section.appendChild(_section_heading(title))
     grid = document.createElement("div")
-    grid.className = "sheet-advantage-grid"
+    grid.className = "sheet-rated-traits__grid"
     for key, value in sorted(rated.items()):
         grid.appendChild(_stat_line(key, value))
     section.appendChild(grid)
+    return section
+
+
+def _modifier_list(items: list[Any], catalog: list[dict[str, Any]], css: str) -> Any:
+    wrap = document.createElement("div")
+    wrap.className = f"sheet-bg-modifiers sheet-bg-modifiers--{css}"
+    catalog_by_id = {entry["id"]: entry for entry in catalog}
+    for raw in items:
+        if isinstance(raw, dict):
+            mod_id = raw.get("id", "")
+            dots = int(raw.get("dots", 1))
+        else:
+            mod_id = str(raw)
+            dots = 1
+        mod_def = catalog_by_id.get(mod_id, {})
+        label = mod_def.get("label", mod_id.replace("_", " ").title())
+        max_dots = modifier_max_dots(mod_def) if mod_def else max(dots, 1)
+
+        tag = document.createElement("span")
+        tag.className = f"sheet-bg-modifier sheet-bg-modifier--{css}"
+        name = document.createElement("span")
+        name.className = "sheet-bg-modifier__label"
+        name.innerText = label
+        tag.appendChild(name)
+        dots_el = _dot_row(dots, max_dots=max_dots)
+        dots_el.classList.add("sheet-dots--compact")
+        tag.appendChild(dots_el)
+        wrap.appendChild(tag)
+    return wrap
+
+
+def _background_card_title_el(entry: dict[str, Any], bg_type: str) -> Any:
+    wrap = document.createElement("span")
+    wrap.className = "sheet-background-card__title"
+    type_line = document.createElement("span")
+    type_line.className = "sheet-background-card__type"
+    type_line.innerText = background_label(bg_type)
+    wrap.appendChild(type_line)
+    sphere_id = entry.get("sphere")
+    if sphere_id:
+        sep = document.createElement("span")
+        sep.className = "sheet-background-card__sep"
+        sep.setAttribute("aria-hidden", "true")
+        sep.innerText = "·"
+        wrap.appendChild(sep)
+        sphere = document.createElement("span")
+        sphere.className = "sheet-background-card__sphere"
+        sphere.innerText = sphere_label(sphere_id)
+        wrap.appendChild(sphere)
+    return wrap
+
+
+def _background_section(entries: list[dict[str, Any]]) -> Any | None:
+    rated = [e for e in entries if int(e.get("dots", 0)) > 0]
+    if not rated:
+        return None
+    section = document.createElement("section")
+    section.className = "sheet-backgrounds"
+    section.appendChild(_section_heading("Backgrounds"))
+    list_el = document.createElement("div")
+    list_el.className = "sheet-background-list"
+
+    defs = background_defs()
+    for entry in rated:
+        bg_type = entry.get("type", "")
+        spec = defs.get(bg_type, {})
+        card = document.createElement("div")
+        card.className = "sheet-background-card"
+
+        head = document.createElement("div")
+        head.className = "sheet-background-card__head"
+        head.appendChild(_background_card_title_el(entry, bg_type))
+        head.appendChild(_dot_row(int(entry.get("dots", 0)), max_dots=int(spec.get("max_dots", 3))))
+        card.appendChild(head)
+
+        lvl = document.createElement("p")
+        lvl.className = "sheet-background-card__level"
+        dots = int(entry.get("dots", 0))
+        lvl.innerText = f"{level_label(bg_type, dots)} — {level_summary(bg_type, dots)}"
+        card.appendChild(lvl)
+
+        if entry.get("advantages"):
+            card.appendChild(_modifier_list(entry["advantages"], spec.get("advantages", []), "adv"))
+        if entry.get("disadvantages"):
+            card.appendChild(_modifier_list(entry["disadvantages"], spec.get("disadvantages", []), "dis"))
+
+        list_el.appendChild(card)
+    section.appendChild(list_el)
     return section
 
 
@@ -192,14 +288,17 @@ def render_lotn_v5_sheet(character: dict[str, Any]) -> Any:
 
     for section_title, block in (
         ("Disciplines", character.get("disciplines", {})),
-        ("Backgrounds", character.get("backgrounds", {})),
         ("Merits", character.get("merits", {})),
         ("Loresheets", character.get("loresheets", {})),
         ("Ghoul Powers", character.get("ghoul_powers", {})),
         ("Thin-Blood Formulas", character.get("thin_blood_formulas", {})),
     ):
-        section = _advantage_section(section_title, block)
+        section = _rated_traits_section(section_title, block)
         if section:
             sheet.appendChild(section)
+
+    bg_section = _background_section(character.get("backgrounds", []))
+    if bg_section:
+        sheet.appendChild(bg_section)
 
     return sheet

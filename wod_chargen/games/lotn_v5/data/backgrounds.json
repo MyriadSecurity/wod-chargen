@@ -1,0 +1,186 @@
+{
+  "source_ref": {
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/dramatic-systems/backgrounds"
+  },
+  "spheres": [
+    { "id": "church", "label": "Church" },
+    { "id": "finance", "label": "Finance" },
+    { "id": "health", "label": "Health" },
+    { "id": "high_society", "label": "High Society" },
+    { "id": "industry", "label": "Industry" },
+    { "id": "legal", "label": "Legal" },
+    { "id": "media", "label": "Media" },
+    { "id": "occult", "label": "Occult" },
+    { "id": "police", "label": "Police" },
+    { "id": "political", "label": "Political" },
+    { "id": "street", "label": "Street" },
+    { "id": "transportation", "label": "Transportation" },
+    { "id": "underworld", "label": "Underworld" },
+    { "id": "university", "label": "University" },
+    { "id": "welfare", "label": "Welfare" }
+  ],
+  "backgrounds": {
+    "allies": {
+      "id": "allies",
+      "label": "Allies",
+      "purchase_mode": "multi_instance",
+      "max_dots": 3,
+      "requires_sphere": true,
+      "creation_bias": 1.0,
+      "summary": "Mortals who will carry out activities on your behalf. Each purchase is one Ally (1–3 dots).",
+      "levels": [
+        { "dots": 1, "label": "Weak mortal", "summary": "Pool 3 in specialty, 2 elsewhere; 4 Health." },
+        { "dots": 2, "label": "Average mortal", "summary": "Pool 5 in specialty, 3 elsewhere; 5 Health." },
+        { "dots": 3, "label": "Gifted mortal", "summary": "Pool 7 in specialty, 4 elsewhere; 6 Health." }
+      ],
+      "advantages": [
+        { "id": "at_arms_length", "label": "At Arm's Length", "dots": 1 },
+        { "id": "diversity", "label": "Diversity", "dots": 1, "max_dots": 2 },
+        { "id": "reliable", "label": "Reliable", "dots": 1, "max_dots": 2 },
+        { "id": "retainer", "label": "Retainer", "dots": 2 }
+      ],
+      "disadvantages": [
+        { "id": "flaky", "label": "Flaky", "dots": 1, "max_dots": 2 },
+        { "id": "conspiracy_theorist", "label": "Conspiracy Theorist", "dots": 1 }
+      ]
+    },
+    "contacts": {
+      "id": "contacts",
+      "label": "Contacts",
+      "purchase_mode": "multi_instance",
+      "max_dots": 3,
+      "requires_sphere": true,
+      "creation_bias": 1.2,
+      "summary": "Professional connections who share information. Each purchase is one Contact (1–3 dots).",
+      "levels": [
+        { "dots": 1, "label": "Low-level employee", "summary": "General insider knowledge and early-access information." },
+        { "dots": 2, "label": "Middle management", "summary": "Non-public information and fair sway in their field." },
+        { "dots": 3, "label": "Senior management", "summary": "Private or secret information and major influence." }
+      ],
+      "advantages": [
+        { "id": "at_arms_length", "label": "At Arm's Length", "dots": 1 },
+        { "id": "diversity", "label": "Diversity", "dots": 1, "max_dots": 2 }
+      ],
+      "disadvantages": [
+        { "id": "paranoid", "label": "Paranoid", "dots": 1, "max_dots": 2 }
+      ]
+    },
+    "fame": {
+      "id": "fame",
+      "label": "Fame",
+      "purchase_mode": "single_rating",
+      "max_dots": 3,
+      "max_instances": 1,
+      "requires_sphere": true,
+      "creation_bias": 0.6,
+      "summary": "Public recognition in a Sphere; +1 to mundane Social challenges per dot.",
+      "levels": [
+        { "dots": 1, "label": "Getting there", "summary": "Recognized in your field locally." },
+        { "dots": 2, "label": "Edge of legitimate fame", "summary": "Large local in-genre following." },
+        { "dots": 3, "label": "Made it big", "summary": "City-wide recognition in your Sphere." }
+      ],
+      "advantages": [
+        { "id": "fan_club", "label": "Fan Club", "dots": 2 },
+        { "id": "star_power", "label": "Star Power", "dots": 1, "max_dots": 2, "requires_dots": 3 }
+      ],
+      "disadvantages": [
+        { "id": "jealousy", "label": "Jealousy", "dots": 1, "max_dots": 2 },
+        { "id": "paparazzi", "label": "Paparazzi", "dots": 2 }
+      ]
+    },
+    "familiar": {
+      "id": "familiar",
+      "label": "Familiar",
+      "purchase_mode": "single_rating",
+      "max_dots": 3,
+      "max_instances": 1,
+      "requires_sphere": false,
+      "creation_bias": 0.4,
+      "summary": "Animal ghoul companion. Choose Celerity, Potence, or Fortitude (both level-1 powers).",
+      "levels": [
+        { "dots": 1, "label": "Small animal", "summary": "Bird or cat; 2 Health, Physical pool 3." },
+        { "dots": 2, "label": "Medium animal", "summary": "Dog or wolf; 4 Health, Physical pool 5." },
+        { "dots": 3, "label": "Large animal", "summary": "Bear or tiger; 6 Health, Physical pool 7." }
+      ],
+      "advantages": [],
+      "disadvantages": []
+    },
+    "haven": {
+      "id": "haven",
+      "label": "Haven",
+      "purchase_mode": "multi_instance",
+      "max_dots": 3,
+      "requires_sphere": false,
+      "creation_bias": 0.8,
+      "summary": "Safe resting place. May purchase multiple Havens.",
+      "levels": [
+        { "dots": 1, "label": "Basic haven", "summary": "A secured place to rest during the day." },
+        { "dots": 2, "label": "Well-appointed haven", "summary": "Comfortable and harder to discover." },
+        { "dots": 3, "label": "Elite haven", "summary": "Excellent security and amenities." }
+      ],
+      "advantages": [],
+      "disadvantages": []
+    },
+    "herd": {
+      "id": "herd",
+      "label": "Herd",
+      "purchase_mode": "single_rating",
+      "max_dots": 3,
+      "max_instances": 1,
+      "requires_sphere": false,
+      "creation_bias": 0.9,
+      "summary": "Stable feeding sources; Slake Hunger up to Herd rating per session.",
+      "levels": [
+        { "dots": 1, "label": "Basic herd", "summary": "Random Resonance each use; no Dyscrasia." },
+        { "dots": 2, "label": "Tuned herd", "summary": "Choose one monthly Resonance; random Dyscrasia." },
+        { "dots": 3, "label": "Refined herd", "summary": "Two monthly Resonances; pick Dyscrasia when feeding." }
+      ],
+      "advantages": [
+        { "id": "friendly", "label": "Friendly", "dots": 1, "max_dots": 2 },
+        { "id": "flavor_station", "label": "Flavor Station", "dots": 1, "max_dots": 2 },
+        { "id": "open_bar", "label": "Open Bar", "dots": 1, "max_dots": 2 }
+      ],
+      "disadvantages": [
+        { "id": "skittish", "label": "Skittish", "dots": 1, "max_dots": 2, "requires_dots": 2 }
+      ]
+    },
+    "mask": {
+      "id": "mask",
+      "label": "Mask",
+      "purchase_mode": "multi_instance",
+      "max_dots": 3,
+      "requires_sphere": false,
+      "creation_bias": 0.7,
+      "summary": "Cover identity for passing as mortal. Multiple Masks allowed.",
+      "levels": [
+        { "dots": 1, "label": "Routine inspection", "summary": "Believable identity without close scrutiny." },
+        { "dots": 2, "label": "State-level check", "summary": "Passes police database / state background check." },
+        { "dots": 3, "label": "Deep investigation", "summary": "Passes intense national-level scrutiny." }
+      ],
+      "advantages": [],
+      "disadvantages": []
+    },
+    "resources": {
+      "id": "resources",
+      "label": "Resources",
+      "purchase_mode": "single_rating",
+      "max_dots": 3,
+      "max_instances": 1,
+      "requires_sphere": false,
+      "creation_bias": 1.0,
+      "summary": "Disposable monthly income and lifestyle.",
+      "levels": [
+        { "dots": 1, "label": "Middle class", "summary": "$2,500 disposable income monthly." },
+        { "dots": 2, "label": "Upper class", "summary": "$20,000 disposable income monthly." },
+        { "dots": 3, "label": "Rich", "summary": "$100,000 disposable income monthly." }
+      ],
+      "advantages": [
+        { "id": "cash_money", "label": "Cash Money", "dots": 1, "max_dots": 2 },
+        { "id": "cryptocurrency", "label": "Cryptocurrency", "dots": 1 },
+        { "id": "liquidity", "label": "Liquidity", "dots": 1 },
+        { "id": "wall_street_wizard", "label": "Wall Street Wizard", "dots": 1, "max_dots": 2, "requires_dots": 3 }
+      ],
+      "disadvantages": []
+    }
+  }
+}

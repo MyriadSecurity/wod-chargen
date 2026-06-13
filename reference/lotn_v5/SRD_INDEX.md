@@ -95,7 +95,7 @@ Per-background URL: `/backgrounds/<slug>` (e.g. [/backgrounds/mask](https://www.
 
 [Full list](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types)
 
-Blood Leech · Montero · Trapdoor (and others on site — verify against `predator_types.json`)
+Blood Leech · Cleaver · Consensualist · Extortionist · Graverobber · Grim Reaper · Montero · Pursuer · Sandman · Scene Queen · Trapdoor (and others — verify against `predator_types.json`)
 
 ---
 

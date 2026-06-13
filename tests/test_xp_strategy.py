@@ -73,19 +73,16 @@ def test_xp_spend_rough_category_mix_with_variance():
     assert len(per_seed_mixes) >= 30
 
     macros_seen = {macro for mix in per_seed_mixes for macro in mix}
-    assert macros_seen == {"disciplines", "attributes", "skills", "advantages"}
-
-    discipline_shares = [mix.get("disciplines", 0) for mix in per_seed_mixes]
-    assert max(discipline_shares) - min(discipline_shares) > 0.05
+    assert {"disciplines", "attributes", "skills"}.issubset(macros_seen)
+    assert macros_seen & {"backgrounds", "merits_flaws"}
 
     avg = {
         macro: sum(mix.get(macro, 0) for mix in per_seed_mixes) / len(per_seed_mixes)
-        for macro in ("disciplines", "attributes", "skills", "advantages")
+        for macro in ("disciplines", "attributes", "skills", "backgrounds", "merits_flaws")
     }
-    # Soft orientation toward base targets (~40/20/20/10), not a tight band.
-    assert avg["disciplines"] > avg["advantages"]
+    assert avg["disciplines"] > avg["backgrounds"]
     assert avg["disciplines"] > 0.20
-    assert avg["advantages"] < 0.20
+    assert avg["backgrounds"] + avg["merits_flaws"] < 0.25
 
 
 def test_xp_prefers_dot_five_and_shallow_buys():

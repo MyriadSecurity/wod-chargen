@@ -46,6 +46,7 @@ class WizardApp:
             "domitor_clan": "tremere",
             "arch": "diplomat",
             "sub": "silver_tongue",
+            "predator": "",
             "venue": "mes_end_to_dawn",
             "approval": "2026-06",
             "seed": random.randint(1, 999_999),
@@ -66,7 +67,7 @@ class WizardApp:
             self.state["game"] = payload.game
             self.state["venue"] = payload.venue
             opts = payload.options
-            for key in ("type", "clan", "domitor_clan", "arch", "sub", "approval"):
+            for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
                 if key in opts:
                     self.state[key] = opts[key]
             self._validate_selection()
@@ -76,6 +77,9 @@ class WizardApp:
             self.state["error"] = str(exc)
             self.state["step"] = "game"
 
+    def _type_uses_predator(self) -> bool:
+        return self.system.type_uses_predator(self.state["type"])
+
     def _options(self) -> dict[str, str]:
         return wizard_share_options(
             character_type=self.state["type"],
@@ -83,10 +87,12 @@ class WizardApp:
             sub=self.state["sub"],
             clan=self.state.get("clan", ""),
             domitor_clan=self.state.get("domitor_clan", ""),
+            predator=self.state.get("predator", ""),
             approval=self.state.get("approval", ""),
             venue_requires_approval_month=bool(
                 self._venue_picker.get(self.state["venue"], {}).get("requires_approval_month")
             ),
+            type_uses_predator=self._type_uses_predator(),
         )
 
     def _share_payload(self) -> SharePayload:
@@ -113,6 +119,11 @@ class WizardApp:
         valid_sub = {s.id for s in profile.sub_archetypes}
         if self.state["sub"] not in valid_sub:
             self.state["sub"] = profile.sub_archetypes[0].id
+        if self._type_uses_predator():
+            valid_pred = {p["id"] for p in self.system.get_predator_picker()}
+            pred = self.state.get("predator") or ""
+            if pred and pred not in valid_pred:
+                self.state["predator"] = self.system.get_predator_picker()[0]["id"]
 
     def _generate(self) -> None:
         import traceback
@@ -158,6 +169,8 @@ class WizardApp:
             container.appendChild(self._view_archetype())
         elif step == "sub_archetype":
             container.appendChild(self._view_sub_archetype())
+        elif step == "predator":
+            container.appendChild(self._view_predator())
         elif step == "venue":
             container.appendChild(self._view_venue())
         elif step == "generate":
@@ -187,6 +200,22 @@ class WizardApp:
         h.innerText = title
         wrap.appendChild(h)
         return wrap
+
+    def _append_card_list(self, parent: Any, title: str, items: list[str], item_class: str) -> None:
+        if not items:
+            return
+        heading = document.createElement("div")
+        heading.className = "predator-card__section-title"
+        heading.innerText = title
+        parent.appendChild(heading)
+        ul = document.createElement("ul")
+        ul.className = "predator-card__list"
+        for text in items:
+            li = document.createElement("li")
+            li.className = item_class
+            li.innerText = text
+            ul.appendChild(li)
+        parent.appendChild(ul)
 
     def _view_game(self) -> Any:
         el = document.createElement("div")
@@ -397,6 +426,68 @@ class WizardApp:
 
             def pick(e, sid=s.id):
                 self.state["sub"] = sid
+                self.state["step"] = "predator" if self._type_uses_predator() else "venue"
+                self._render()
+
+            btn.onclick = pick
+            grid.appendChild(btn)
+        el.appendChild(grid)
+        return el
+
+    def _view_predator(self) -> Any:
+        el = document.createElement("div")
+        copy = self.system.get_wizard_copy()
+        el.appendChild(self._header(copy.get("predator_title", "Predator type"), "sub_archetype"))
+
+        intro = document.createElement("p")
+        intro.className = "text-stone-400 mb-4"
+        intro.innerText = copy.get("predator_intro", "")
+        el.appendChild(intro)
+
+        picker = self.system.get_predator_picker()
+        grid = document.createElement("div")
+        grid.className = "predator-grid"
+        selected = self.state.get("predator") or picker[0]["id"]
+        for entry in picker:
+            pid = entry["id"]
+            btn = document.createElement("button")
+            btn.className = (
+                "archetype-card archetype-card--pickable predator-card "
+                f"{'archetype-card--active' if selected == pid else ''}"
+            )
+            btn.setAttribute("type", "button")
+
+            label = document.createElement("span")
+            label.className = "archetype-card__label"
+            label.innerText = entry["label"]
+            btn.appendChild(label)
+
+            if entry.get("summary"):
+                desc = document.createElement("p")
+                desc.className = "archetype-card__desc"
+                desc.innerText = entry["summary"]
+                btn.appendChild(desc)
+
+            pool = entry.get("feeding_pool")
+            if pool:
+                pool_block = document.createElement("div")
+                pool_block.className = "predator-card__pool-block"
+                pool_title = document.createElement("div")
+                pool_title.className = "predator-card__section-title"
+                pool_title.innerText = "Feeding pool"
+                pool_value = document.createElement("div")
+                pool_value.className = "predator-card__pool"
+                pool_value.innerText = pool
+                pool_block.appendChild(pool_title)
+                pool_block.appendChild(pool_value)
+                btn.appendChild(pool_block)
+
+            self._append_card_list(btn, "Benefits", entry.get("benefits", []), "predator-card__benefit")
+            self._append_card_list(btn, "Restrictions", entry.get("restrictions", []), "predator-card__restriction")
+            self._append_card_list(btn, "Drawbacks", entry.get("drawbacks", []), "predator-card__drawback")
+
+            def pick(e, p=pid):
+                self.state["predator"] = p
                 self.state["step"] = "venue"
                 self._render()
 
@@ -407,7 +498,8 @@ class WizardApp:
 
     def _view_venue(self) -> Any:
         el = document.createElement("div")
-        el.appendChild(self._header("Venue & XP", "sub_archetype"))
+        back = "predator" if self._type_uses_predator() else "sub_archetype"
+        el.appendChild(self._header("Venue & XP", back))
         for venue in self.system.get_venue_picker():
             vid = venue["id"]
             label = venue["label"]

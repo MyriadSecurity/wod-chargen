@@ -75,8 +75,10 @@ def wizard_share_options(
     sub: str,
     clan: str = "",
     domitor_clan: str = "",
+    predator: str = "",
     approval: str = "",
     venue_requires_approval_month: bool = False,
+    type_uses_predator: bool = False,
 ) -> dict[str, str]:
     """Build query options for schema 0.1 share URLs."""
     opts = {
@@ -88,6 +90,8 @@ def wizard_share_options(
         opts["clan"] = clan
     elif character_type == "ghoul":
         opts["domitor_clan"] = domitor_clan
+    if type_uses_predator and predator:
+        opts["predator"] = predator
     if venue_requires_approval_month and approval:
         opts["approval"] = approval
     return opts

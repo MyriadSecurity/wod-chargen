@@ -6,10 +6,11 @@ from wod_chargen.core.rng import SeededRng
 
 # Macro buckets for budget tracking (values vary per character via roll_category_targets).
 BASE_CATEGORY_TARGETS = {
-    "disciplines": 0.40,
+    "disciplines": 0.38,
     "attributes": 0.20,
     "skills": 0.20,
-    "advantages": 0.10,
+    "backgrounds": 0.12,
+    "merits_flaws": 0.10,
 }
 
 SPEND_GROUP_MACRO = {
@@ -20,10 +21,10 @@ SPEND_GROUP_MACRO = {
     "in_clan_disciplines": "disciplines",
     "ghoul_powers": "disciplines",
     "thin_blood_formulas": "disciplines",
-    "backgrounds": "advantages",
-    "merits": "advantages",
-    "loresheets": "advantages",
-    "blood_potency": "advantages",
+    "backgrounds": "backgrounds",
+    "merits": "merits_flaws",
+    "loresheets": "merits_flaws",
+    "blood_potency": "merits_flaws",
 }
 
 DEFICIT_SCALE = 4.5
@@ -32,7 +33,7 @@ MAX_GROUP_BOOST = 4.0
 
 
 def macro_for_spend_group(spend_group: str) -> str:
-    return SPEND_GROUP_MACRO.get(spend_group, "advantages")
+    return SPEND_GROUP_MACRO.get(spend_group, "merits_flaws")
 
 
 def roll_category_targets(rng: SeededRng) -> dict[str, float]:
@@ -70,7 +71,7 @@ def budget_efficiency_scale(
     spent_by_macro: dict[str, int],
     xp_spent: int,
 ) -> float:
-    """Dampen efficient picks in categories already above their XP target share."""
+    """Dampen efficient picks in categories already above their target spend share."""
     if xp_spent <= 0:
         return 1.0
     macro = macro_for_spend_group(spend_group)

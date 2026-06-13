@@ -25,8 +25,8 @@ cp "/path/to/laws_of_the_night_pocket.pdf" reference/lotn_v5/
 | Thin-blood | [/thin-blood](https://www.oneworldofdarkness.com/laws-of-the-night/thin-blood) | thin-blood section | `thin_blood_creation.json`, `thin_blood_formulas.json`, `thin_blood_merits.json` |
 | Clans | [/clans](https://www.oneworldofdarkness.com/laws-of-the-night/clans) | clan chapter | `clans.json` |
 | Disciplines | [/disciplines](https://www.oneworldofdarkness.com/laws-of-the-night/disciplines) | disciplines chapter | `disciplines.json` |
-| Backgrounds | [/backgrounds](https://www.oneworldofdarkness.com/laws-of-the-night/backgrounds) | backgrounds | `advantages.json` → `backgrounds` |
-| Merits | [/merits-flaws](https://www.oneworldofdarkness.com/laws-of-the-night/merits-flaws) | merits | `advantages.json` → `merits` |
+| Backgrounds | [/backgrounds](https://www.oneworldofdarkness.com/laws-of-the-night/backgrounds) | backgrounds | `backgrounds.json` (connections, spheres, modifiers) |
+| Merits & flaws | [/merits-flaws](https://www.oneworldofdarkness.com/laws-of-the-night/merits-flaws) | merits | `merits.json` → `merits`, `flaws` |
 | Predator types | [/predator-types](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types) | creation | `predator_types.json` |
 | Loresheets | [/loresheets](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets) | loresheets | (partial — generator stubs) |
 | Attributes & skills | character-creation | Ch. 3 | `attributes.json`, `skills.json` |

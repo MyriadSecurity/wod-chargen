@@ -12,6 +12,20 @@ from wod_chargen.core.share import ENGINE_VERSION
 from wod_chargen.core.spender import PurchaseCandidate, spend_xp
 from wod_chargen.core.xp_strategy import creation_pick_weight
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
+from wod_chargen.games.lotn_v5.backgrounds import (
+    _can_add_dot,
+    apply_background_purchase,
+    apply_modifier_purchase,
+    background_defs,
+    empty_backgrounds,
+    enumerate_xp_background_types,
+    enumerate_xp_modifier_purchases,
+    entries_for_type,
+    modifier_item_key,
+    record_xp_modifier_purchase,
+    run_background_creation,
+    validate_full_modifier_accounting,
+)
 from wod_chargen.venues import resolve_xp_budget
 
 DATA = "wod_chargen.games.lotn_v5.data"
@@ -23,7 +37,7 @@ def _resolve_caps(creation: dict[str, Any]) -> dict[str, int]:
     return {
         "attribute": DEFAULT_CAP,
         "skill": DEFAULT_CAP,
-        "background": DEFAULT_CAP,
+        "background": 3,
         "discipline": int(creation.get("discipline_max", DEFAULT_CAP)),
         "merit": 3,
         "loresheet": 3,
@@ -47,7 +61,8 @@ def _empty_character(options: dict[str, Any]) -> dict[str, Any]:
         "attributes": {},
         "skills": {},
         "disciplines": {},
-        "backgrounds": {},
+        "backgrounds": empty_backgrounds(),
+        "background_meta": {},
         "merits": {},
         "loresheets": {},
         "ghoul_powers": {},
@@ -175,9 +190,19 @@ def _assign_one_discipline_pick(
     return disc
 
 
-def _pick_predator(rng: SeededRng, char: dict[str, Any], log: list[LogEntry]) -> None:
+def _apply_predator(
+    options: dict[str, Any],
+    rng: SeededRng,
+    char: dict[str, Any],
+    log: list[LogEntry],
+) -> None:
     types = load_json_cached(DATA, "predator_types.json")["types"]
-    pick = rng.weighted_choice(types, [t["weight"] for t in types])
+    by_id = {t["id"]: t for t in types}
+    chosen = options.get("predator")
+    if chosen and chosen in by_id:
+        pick = by_id[chosen]
+    else:
+        pick = rng.weighted_choice(types, [t["weight"] for t in types])
     char["predator"] = pick["id"]
     log.append(LogEntry(phase="base", message=f"Predator type: {pick['label']}", detail={"id": pick["id"]}))
 
@@ -205,9 +230,7 @@ def _apply_base_creation(
 
     char["humanity"] = creation.get("humanity", 7)
 
-    bg_dots = creation.get("backgrounds", 0)
-    bgs = load_json_cached(DATA, "advantages.json")["backgrounds"] if bg_dots else []
-    bg_pool = {"1": bg_dots} if bg_dots else {}
+    bg_dots = int(creation.get("backgrounds", 0))
 
     dot_categories: list[tuple[str, dict[str, int], list[str], dict[str, float], dict[str, int], int]] = [
         (
@@ -227,18 +250,6 @@ def _apply_base_creation(
             caps["skill"],
         ),
     ]
-    if bg_dots:
-        dot_categories.append(
-            (
-                "Background",
-                bg_pool,
-                bgs,
-                {"contacts": 1.2, "resources": 1.0},
-                char["backgrounds"],
-                caps["background"],
-            )
-        )
-
     disc_spec = creation.get("disciplines", {})
     discipline_slots_by_rating: dict[int, list[str]] = {}
     for slot_key in ("primary", "secondary", "tertiary"):
@@ -246,15 +257,10 @@ def _apply_base_creation(
         if dots > 0:
             discipline_slots_by_rating.setdefault(dots, []).append(slot_key)
 
-    ratings: set[int] = set()
-    for _label, pool, _items, _biases, _target, _cap in dot_categories:
-        ratings.update(int(k) for k in pool)
-    ratings.update(discipline_slots_by_rating)
-
     clan_pool = _clan_disciplines(char.get("clan") or char.get("domitor_clan"))
 
-    for rating in sorted(ratings, reverse=True):
-        for label, pool, items, biases, target, max_rating in dot_categories:
+    for label, pool, items, biases, target, max_rating in dot_categories:
+        for rating in sorted({int(k) for k in pool}, reverse=True):
             count = _pool_count(pool, rating)
             if count > 0:
                 _assign_dots_at_rating(
@@ -270,7 +276,8 @@ def _apply_base_creation(
                     max_rating=max_rating,
                 )
 
-        for slot_key in discipline_slots_by_rating.get(rating, []):
+    for rating in sorted(discipline_slots_by_rating.keys(), reverse=True):
+        for slot_key in discipline_slots_by_rating[rating]:
             if clan_pool:
                 _assign_one_discipline_pick(
                     rng,
@@ -283,6 +290,18 @@ def _apply_base_creation(
                     max_rating=caps["discipline"],
                 )
 
+    if bg_dots:
+        bg_lines, ledger = run_background_creation(
+            rng,
+            char["backgrounds"],
+            bg_dots,
+            profile,
+            biases={"contacts": 1.2, "resources": 1.0},
+        )
+        char["background_meta"] = ledger.to_meta()
+        for line in bg_lines:
+            log.append(LogEntry(phase="base", message=line, detail={}))
+
     char["blood_potency"] = creation.get("blood_potency", char.get("blood_potency", 1))
 
 
@@ -293,6 +312,7 @@ def _enumerate_purchases(
     ctype: str,
     source: str,
     caps: dict[str, int],
+    rng: SeededRng,
 ) -> list[PurchaseCandidate]:
     candidates: list[PurchaseCandidate] = []
     clan_pool = set(_clan_disciplines(char.get("clan") or char.get("domitor_clan")))
@@ -389,33 +409,98 @@ def _enumerate_purchases(
         )
 
     bw = profile.weights.get("backgrounds", 1.0)
-    for bg in load_json_cached(DATA, "advantages.json")["backgrounds"]:
-        cur = char["backgrounds"].get(bg, 0)
-        if cur >= caps["background"]:
+    for bg_type in enumerate_xp_background_types(char, caps["background"]):
+        spec = background_defs()[bg_type]
+        max_dots = min(int(spec.get("max_dots", 3)), caps["background"])
+        typed = entries_for_type(char["backgrounds"], bg_type)
+
+        def add_candidate(entry: dict[str, Any] | None, *, create_new: bool) -> None:
+            if create_new:
+                cur = 0
+                entry_ref: dict[str, Any] | None = None
+            else:
+                assert entry is not None
+                cur = entry["dots"]
+                entry_ref = entry
+            new_level = cur + 1
+            if new_level > max_dots:
+                return
+            cost = lookup_cost(costs, "background", new_level=new_level)
+
+            def apply_bg(
+                t=bg_type,
+                e=entry_ref,
+                create=create_new,
+            ) -> None:
+                if create:
+                    _, nl = apply_background_purchase(char["backgrounds"], t, rng, profile)
+                else:
+                    assert e is not None
+                    e["dots"] += 1
+
+            item_key = (
+                f"{bg_type}/{entry_ref['name']}"
+                if entry_ref
+                else f"{bg_type}/new"
+            )
+            candidates.append(
+                PurchaseCandidate(
+                    item_id=item_key,
+                    category="background",
+                    spend_group="backgrounds",
+                    new_level=new_level,
+                    cost=cost,
+                    weight=bw,
+                    item_bias=spec.get("creation_bias", 1.0),
+                    clan_factor=1.0,
+                    source=source,
+                    apply=apply_bg,
+                )
+            )
+
+        if spec.get("purchase_mode") == "single_rating":
+            entry = typed[0] if typed else None
+            if entry is None or entry["dots"] < max_dots:
+                add_candidate(entry, create_new=entry is None)
+        else:
+            for entry in typed:
+                if entry["dots"] < max_dots:
+                    add_candidate(entry, create_new=False)
+            if _can_add_dot(char["backgrounds"], bg_type, spec):
+                add_candidate(None, create_new=True)
+
+    mod_w = profile.weights.get("backgrounds", 1.0) * 0.9
+    for entry, mod_def, kind, new_level in enumerate_xp_modifier_purchases(char):
+        if kind == "disadvantage":
             continue
-        new_level = cur + 1
+        mod_id = mod_def["id"]
         cost = lookup_cost(costs, "background", new_level=new_level)
 
-        def apply_bg(b=bg, nl=new_level) -> None:
-            char["backgrounds"][b] = nl
+        def apply_mod(
+            e=entry,
+            mid=mod_id,
+            k=kind,
+        ) -> None:
+            apply_modifier_purchase(e, mid, k)
+            record_xp_modifier_purchase(char.setdefault("background_meta", {}))
 
         candidates.append(
             PurchaseCandidate(
-                item_id=bg,
-                category="background",
+                item_id=modifier_item_key(entry, mod_id, kind),
+                category="background_modifier",
                 spend_group="backgrounds",
                 new_level=new_level,
                 cost=cost,
-                weight=bw,
+                weight=mod_w,
                 item_bias=1.0,
                 clan_factor=1.0,
                 source=source,
-                apply=apply_bg,
+                apply=apply_mod,
             )
         )
 
     mw = profile.weights.get("merits", 1.0)
-    for merit in load_json_cached(DATA, "advantages.json")["merits"]:
+    for merit in load_json_cached(DATA, "merits.json")["merits"]:
         cur = char["merits"].get(merit, 0)
         if cur >= caps["merit"]:
             continue
@@ -590,7 +675,7 @@ def generate_character(
     _apply_base_creation(rng, char, profile, creation, log, caps)
 
     if meta.get("predator"):
-        _pick_predator(rng, char, log)
+        _apply_predator(options, rng, char, log)
 
     xp_budget, xp_lines = resolve_xp_budget(venue_id, options)
     for line in xp_lines:
@@ -599,11 +684,14 @@ def generate_character(
     spent_before = xp_budget
 
     def enumerate() -> list[PurchaseCandidate]:
-        return _enumerate_purchases(char, profile, costs, ctype, source, caps)
+        return _enumerate_purchases(char, profile, costs, ctype, source, caps, rng)
 
     remaining, xp_log, spend_logs = spend_xp(rng, xp_budget, enumerate, source=source)
     log.extend(spend_logs)
     xp_spent = spent_before - remaining
+
+    if char.get("background_meta"):
+        validate_full_modifier_accounting(char["backgrounds"], char["background_meta"])
 
     return GenerationResult(
         engine_version=ENGINE_VERSION,
