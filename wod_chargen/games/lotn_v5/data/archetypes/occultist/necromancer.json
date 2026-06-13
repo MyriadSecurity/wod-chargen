@@ -1,0 +1,14 @@
+{
+  "id": "necromancer",
+  "label": "Necromancer",
+  "description": "Dead things answer. Living things regret asking.",
+  "modifiers": {
+    "skill_biases": {
+      "occult": 0.4,
+      "medicine": 0.15
+    },
+    "discipline_biases": {
+      "blood_sorcery": 0.25
+    }
+  }
+}

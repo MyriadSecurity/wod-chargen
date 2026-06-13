@@ -1,0 +1,15 @@
+{
+  "id": "saboteur",
+  "label": "Saboteur",
+  "description": "Break the lock, the camera, or the whole plan.",
+  "modifiers": {
+    "weights": {
+      "mental_attrs": 0.1
+    },
+    "skill_biases": {
+      "craft": 0.3,
+      "technology": 0.25,
+      "larceny": 0.15
+    }
+  }
+}

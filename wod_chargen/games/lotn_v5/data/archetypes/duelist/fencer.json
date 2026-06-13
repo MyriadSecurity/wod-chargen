@@ -1,0 +1,14 @@
+{
+  "id": "fencer",
+  "label": "Fencer",
+  "description": "Blades, footwork, and winning the elegant way.",
+  "modifiers": {
+    "skill_biases": {
+      "melee": 0.45,
+      "athletics": 0.2
+    },
+    "discipline_biases": {
+      "celerity": 0.25
+    }
+  }
+}

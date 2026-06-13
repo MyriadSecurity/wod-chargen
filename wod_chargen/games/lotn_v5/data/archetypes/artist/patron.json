@@ -1,0 +1,17 @@
+{
+  "id": "patron",
+  "label": "Patron",
+  "description": "Wealthy admirers and what they pay for access.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.2,
+      "social_attrs": 0.1
+    },
+    "skill_biases": {
+      "etiquette": 0.35,
+      "finance": 0.25,
+      "performance": -0.35,
+      "craft": -0.2
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "alchemist",
+  "label": "The Alchemist",
+  "description": "Thin blood means improvising. You brew what passes for miracles in a bottle and hope the batch holds.",
+  "weights": {
+    "physical_attrs": 0.6,
+    "social_attrs": 0.7,
+    "mental_attrs": 2.0,
+    "skills": 1.6,
+    "in_clan_disciplines": 0.5,
+    "backgrounds": 1.0,
+    "merits": 1.2,
+    "thin_blood_formulas": 2.5
+  },
+  "attribute_biases": {
+    "intelligence": 1.8,
+    "wits": 1.5,
+    "resolve": 1.3
+  },
+  "skill_biases": {
+    "science": 2.0,
+    "medicine": 1.6,
+    "craft": 1.4,
+    "occult": 1.3
+  },
+  "discipline_biases": {
+    "thin_blood_alchemy": 2.0
+  },
+  "allowed_types": [
+    "thin_blood"
+  ]
+}

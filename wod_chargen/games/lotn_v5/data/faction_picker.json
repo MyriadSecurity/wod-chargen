@@ -1,0 +1,43 @@
+{
+  "vampire": {
+    "title": "Clan & lineage",
+    "order": [
+      "brujah",
+      "gangrel",
+      "malkavian",
+      "nosferatu",
+      "toreador",
+      "tremere",
+      "ventrue",
+      "lasombra",
+      "ministry",
+      "hecata",
+      "ravnos",
+      "tzimisce",
+      "salubri",
+      "caitiff",
+      "thin_blood"
+    ],
+    "exclude_kinds": []
+  },
+  "ghoul": {
+    "title": "Domitor clan",
+    "order": [
+      "brujah",
+      "gangrel",
+      "malkavian",
+      "nosferatu",
+      "toreador",
+      "tremere",
+      "ventrue",
+      "lasombra",
+      "ministry",
+      "hecata",
+      "ravnos",
+      "tzimisce",
+      "salubri",
+      "caitiff"
+    ],
+    "exclude_kinds": ["thin_blood"]
+  }
+}

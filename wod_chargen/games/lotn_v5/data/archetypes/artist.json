@@ -1,0 +1,29 @@
+{
+  "id": "artist",
+  "label": "The Artist",
+  "description": "The city watches you, and you know how to use that. Patrons, premieres, and being impossible to ignore.",
+  "weights": {
+    "physical_attrs": 0.6,
+    "social_attrs": 1.9,
+    "mental_attrs": 1.0,
+    "skills": 1.6,
+    "in_clan_disciplines": 1.1,
+    "backgrounds": 1.5,
+    "merits": 0.8
+  },
+  "attribute_biases": {
+    "charisma": 1.7,
+    "composure": 1.4,
+    "manipulation": 1.2
+  },
+  "skill_biases": {
+    "performance": 2.0,
+    "persuasion": 1.5,
+    "etiquette": 1.4,
+    "craft": 1.2
+  },
+  "discipline_biases": {
+    "presence": 1.7,
+    "auspex": 1.2
+  }
+}

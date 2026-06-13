@@ -1,0 +1,20 @@
+{
+  "id": "siren",
+  "label": "Siren",
+  "description": "Desire on a leash. They come closer and call it their choice.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.15
+    },
+    "skill_biases": {
+      "persuasion": 0.4,
+      "insight": 0.2,
+      "subterfuge": 0.1,
+      "politics": -0.2
+    },
+    "discipline_biases": {
+      "presence": 0.25,
+      "dominate": 0.1
+    }
+  }
+}

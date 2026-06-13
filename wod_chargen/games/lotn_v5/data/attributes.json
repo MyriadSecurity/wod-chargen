@@ -1,0 +1,11 @@
+{
+  "source_ref": { "pdf_page": 51 },
+  "physical": ["strength", "dexterity", "stamina"],
+  "social": ["charisma", "manipulation", "composure"],
+  "mental": ["intelligence", "wits", "resolve"],
+  "all": [
+    "strength", "dexterity", "stamina",
+    "charisma", "manipulation", "composure",
+    "intelligence", "wits", "resolve"
+  ]
+}

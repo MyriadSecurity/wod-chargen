@@ -1,0 +1,15 @@
+{
+  "id": "infiltrator",
+  "label": "Infiltrator",
+  "description": "Inside the place you're not meant to reach.",
+  "modifiers": {
+    "skill_biases": {
+      "larceny": 0.3,
+      "stealth": 0.3
+    },
+    "discipline_biases": {
+      "obfuscate": 0.25,
+      "celerity": 0.1
+    }
+  }
+}

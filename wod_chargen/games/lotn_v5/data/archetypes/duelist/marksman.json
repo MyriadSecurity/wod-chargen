@@ -1,0 +1,14 @@
+{
+  "id": "marksman",
+  "label": "Marksman",
+  "description": "Distance, sight lines, one clean shot.",
+  "modifiers": {
+    "skill_biases": {
+      "firearms": 0.45,
+      "awareness": 0.2
+    },
+    "discipline_biases": {
+      "celerity": 0.15
+    }
+  }
+}

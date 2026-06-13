@@ -1,0 +1,14 @@
+{
+  "id": "chemist",
+  "label": "Chemist",
+  "description": "Lab discipline. Measured doses. No guessing.",
+  "modifiers": {
+    "skill_biases": {
+      "science": 0.45,
+      "medicine": 0.25
+    },
+    "weights": {
+      "thin_blood_formulas": 0.15
+    }
+  }
+}

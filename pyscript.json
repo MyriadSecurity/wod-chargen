@@ -1,0 +1,6 @@
+{
+  "name": "wod-chargen",
+  "description": "WoD MET procedural character generator",
+  "type": "app",
+  "version": "2024.11.1"
+}

@@ -1,0 +1,15 @@
+{
+  "source_ref": { "pdf_page": 79 },
+  "attribute": { "kind": "multiply", "factor": 5 },
+  "skill": { "kind": "multiply", "factor": 3 },
+  "background": { "kind": "per_dot", "per_dot": 3 },
+  "merit": { "kind": "per_dot", "per_dot": 3 },
+  "loresheet": { "kind": "per_dot", "per_dot": 3 },
+  "discipline_in_clan": { "kind": "multiply", "factor": 5 },
+  "discipline_out_of_clan": { "kind": "multiply", "factor": 7 },
+  "discipline_caitiff": { "kind": "multiply", "factor": 6 },
+  "blood_potency": { "kind": "multiply", "factor": 10 },
+  "humanity": { "kind": "multiply", "factor": 3 },
+  "thin_blood_formula": { "kind": "multiply", "factor": 4 },
+  "ghoul_power": { "kind": "flat", "amount": 10 }
+}

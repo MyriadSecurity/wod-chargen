@@ -1,0 +1,17 @@
+{
+  "id": "fixer",
+  "label": "Fixer",
+  "description": "Wrong tool, wrong contact, wrong hour \u2014 you know who to call.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.15,
+      "skills": 0.1
+    },
+    "skill_biases": {
+      "streetwise": 0.4,
+      "subterfuge": 0.2,
+      "finance": 0.2,
+      "larceny": -0.35
+    }
+  }
+}

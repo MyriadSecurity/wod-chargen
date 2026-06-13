@@ -1,0 +1,9 @@
+{
+  "types": [
+    { "id": "alleycat", "label": "Alleycat", "weight": 1.0 },
+    { "id": "bagger", "label": "Bagger", "weight": 0.8 },
+    { "id": "siren", "label": "Siren", "weight": 1.2 },
+    { "id": "osiris", "label": "Osiris", "weight": 0.7 },
+    { "id": "farmer", "label": "Farmer", "weight": 0.6 }
+  ]
+}

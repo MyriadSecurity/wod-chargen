@@ -1,0 +1,8 @@
+{
+  "backgrounds": [
+    "allies", "contacts", "fame", "herd", "influence", "mask", "resources", "retainers", "status"
+  ],
+  "merits": [
+    "acute_senses", "iron_will", "languages", "library", "mystic_insight", "prestigious_sire"
+  ]
+}

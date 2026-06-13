@@ -1,0 +1,30 @@
+{
+  "id": "diplomat",
+  "label": "The Diplomat",
+  "description": "Your coterie sends you to Elysium because you can stand a room full of hungry aristocrats and still look like you belong. You speak for the group, trade favors between factions, and keep the knives sheathed long enough to matter.",
+  "weights": {
+    "physical_attrs": 0.45,
+    "social_attrs": 1.9,
+    "mental_attrs": 1.1,
+    "skills": 1.55,
+    "in_clan_disciplines": 1.15,
+    "backgrounds": 1.45,
+    "merits": 0.75
+  },
+  "attribute_biases": {
+    "charisma": 1.5,
+    "manipulation": 1.45,
+    "composure": 1.25
+  },
+  "skill_biases": {
+    "persuasion": 2.0,
+    "politics": 1.7,
+    "etiquette": 1.5,
+    "subterfuge": 1.3,
+    "insight": 1.2
+  },
+  "discipline_biases": {
+    "presence": 1.65,
+    "dominate": 1.2
+  }
+}

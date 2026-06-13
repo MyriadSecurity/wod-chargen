@@ -1,0 +1,8 @@
+{
+  "formulas": [
+    { "id": "thin_blood_strength", "label": "Thin-Blood Strength" },
+    { "id": "thin_blood_deception", "label": "Thin-Blood Deception" },
+    { "id": "thin_blood_illusion", "label": "Thin-Blood Illusion" },
+    { "id": "thin_blood_transmutation", "label": "Thin-Blood Transmutation" }
+  ]
+}

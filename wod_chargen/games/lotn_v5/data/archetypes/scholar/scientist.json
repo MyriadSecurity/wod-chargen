@@ -1,0 +1,12 @@
+{
+  "id": "scientist",
+  "label": "Scientist",
+  "description": "Lab work, medicine, and answers that don't need a ritual circle.",
+  "modifiers": {
+    "skill_biases": {
+      "science": 0.5,
+      "medicine": 0.35,
+      "academics": 0.15
+    }
+  }
+}

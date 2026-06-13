@@ -1,0 +1,17 @@
+{
+  "id": "tank",
+  "label": "Tank",
+  "description": "Stand in the fire and keep standing.",
+  "modifiers": {
+    "weights": {
+      "physical_attrs": 0.2,
+      "in_clan_disciplines": 0.1
+    },
+    "attribute_biases": {
+      "stamina": 0.35
+    },
+    "discipline_biases": {
+      "fortitude": 0.35
+    }
+  }
+}

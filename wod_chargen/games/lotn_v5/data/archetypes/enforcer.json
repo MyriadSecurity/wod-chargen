@@ -1,0 +1,31 @@
+{
+  "id": "enforcer",
+  "label": "The Enforcer",
+  "description": "When the Prince needs a message delivered in bruises, you're the one who shows up on time. You break legs, collect debts, and win the fight that was never supposed to become a fair match.",
+  "weights": {
+    "physical_attrs": 1.9,
+    "social_attrs": 0.75,
+    "mental_attrs": 0.55,
+    "skills": 1.45,
+    "in_clan_disciplines": 1.25,
+    "backgrounds": 0.9,
+    "merits": 0.65
+  },
+  "attribute_biases": {
+    "strength": 1.7,
+    "stamina": 1.5,
+    "charisma": 1.1
+  },
+  "skill_biases": {
+    "intimidation": 2.0,
+    "brawl": 1.8,
+    "athletics": 1.3,
+    "melee": 1.3,
+    "streetwise": 1.2
+  },
+  "discipline_biases": {
+    "potence": 1.7,
+    "fortitude": 1.35,
+    "presence": 1.25
+  }
+}

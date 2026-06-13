@@ -1,0 +1,16 @@
+{
+  "id": "hustler",
+  "label": "Hustler",
+  "description": "Every handshake hides an angle.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.1
+    },
+    "skill_biases": {
+      "subterfuge": 0.4,
+      "persuasion": 0.2,
+      "streetwise": 0.2,
+      "stealth": -0.2
+    }
+  }
+}

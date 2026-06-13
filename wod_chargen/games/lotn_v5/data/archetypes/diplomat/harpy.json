@@ -1,0 +1,20 @@
+{
+  "id": "harpy",
+  "label": "Harpy",
+  "description": "Status games, scandal, and public humiliation as sport.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.15,
+      "merits": 0.1
+    },
+    "skill_biases": {
+      "politics": 0.3,
+      "subterfuge": 0.3,
+      "etiquette": 0.15,
+      "insight": 0.15
+    },
+    "discipline_biases": {
+      "presence": 0.25
+    }
+  }
+}

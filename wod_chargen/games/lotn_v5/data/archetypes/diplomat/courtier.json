@@ -1,0 +1,18 @@
+{
+  "id": "courtier",
+  "label": "Courtier",
+  "description": "Who stands where, and who owes whom before the vote.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.15
+    },
+    "skill_biases": {
+      "politics": 0.45,
+      "etiquette": 0.25,
+      "leadership": 0.15
+    },
+    "discipline_biases": {
+      "presence": 0.15
+    }
+  }
+}

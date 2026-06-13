@@ -1,0 +1,14 @@
+{
+  "id": "distiller",
+  "label": "Distiller",
+  "description": "Batches, bottles, and what not to drink yet.",
+  "modifiers": {
+    "weights": {
+      "thin_blood_formulas": 0.35
+    },
+    "skill_biases": {
+      "craft": 0.3,
+      "science": 0.2
+    }
+  }
+}

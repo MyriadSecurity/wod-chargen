@@ -1,0 +1,18 @@
+{
+  "id": "collector",
+  "label": "Debt Collector",
+  "description": "Money owed comes back with interest and bruises.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.1
+    },
+    "skill_biases": {
+      "intimidation": 0.4,
+      "streetwise": 0.3,
+      "finance": 0.15
+    },
+    "discipline_biases": {
+      "presence": 0.2
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "blood_brewer",
+  "label": "Blood Brewer",
+  "description": "Vitae in the mix. Gloves on. Prayers optional.",
+  "modifiers": {
+    "weights": {
+      "thin_blood_formulas": 0.25,
+      "in_clan_disciplines": 0.1
+    },
+    "skill_biases": {
+      "occult": 0.3,
+      "medicine": 0.2,
+      "science": 0.1
+    },
+    "discipline_biases": {
+      "thin_blood_alchemy": 0.35
+    }
+  }
+}

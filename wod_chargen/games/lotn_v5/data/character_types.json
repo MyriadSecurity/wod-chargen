@@ -1,0 +1,20 @@
+{
+  "vampire": {
+    "label": "Vampire",
+    "creation_ref": "creation.json",
+    "predator": true
+  },
+  "ghoul": {
+    "label": "Ghoul",
+    "creation_ref": "ghoul_creation.json",
+    "predator": false,
+    "requires": ["domitor_clan"],
+    "bp_fixed": 0
+  },
+  "thin_blood": {
+    "label": "Thin-Blood",
+    "creation_ref": "thin_blood_creation.json",
+    "predator": true,
+    "bp_fixed": 0
+  }
+}

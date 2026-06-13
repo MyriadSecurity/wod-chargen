@@ -1,0 +1,11 @@
+{
+  "source_ref": { "pdf_page": 51 },
+  "attributes": { "4": 1, "3": 3, "2": 4, "1": 1 },
+  "skills": { "3": 3, "2": 5, "1": 7 },
+  "humanity": 7,
+  "backgrounds": 5,
+  "disciplines": { "primary": 1, "secondary": 0, "tertiary": 0 },
+  "discipline_max": 2,
+  "blood_potency": 0,
+  "formula_max": 3
+}

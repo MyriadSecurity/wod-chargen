@@ -1,0 +1,20 @@
+{
+  "source_ref": { "pdf_page": 52 },
+  "physical": [
+    "athletics", "brawl", "craft", "drive", "firearms", "larceny", "melee", "stealth", "survival"
+  ],
+  "social": [
+    "animal_ken", "etiquette", "insight", "intimidation", "leadership",
+    "performance", "persuasion", "streetwise", "subterfuge"
+  ],
+  "mental": [
+    "academics", "awareness", "finance", "investigation", "medicine",
+    "occult", "politics", "science", "technology"
+  ],
+  "all": [
+    "athletics", "brawl", "craft", "drive", "firearms", "larceny", "melee", "stealth", "survival",
+    "animal_ken", "etiquette", "insight", "intimidation", "leadership", "performance", "persuasion",
+    "streetwise", "subterfuge", "academics", "awareness", "finance", "investigation", "medicine",
+    "occult", "politics", "science", "technology"
+  ]
+}

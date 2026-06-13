@@ -1,0 +1,9 @@
+{
+  "id": "string",
+  "label": "string",
+  "game_id": "lotn_v5",
+  "xp_method": "mes_approval_month | fixed",
+  "xp_config": {},
+  "house_rules": {},
+  "archetype_pack": "default"
+}

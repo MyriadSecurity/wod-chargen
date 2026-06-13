@@ -1,0 +1,24 @@
+{
+  "id": "guardian",
+  "label": "Guardian",
+  "description": "Stand between the threat and whoever you're sworn to protect.",
+  "modifiers": {
+    "weights": {
+      "physical_attrs": 0.15
+    },
+    "attribute_biases": {
+      "stamina": 0.25,
+      "strength": 0.15
+    },
+    "skill_biases": {
+      "awareness": 0.5,
+      "athletics": 0.2,
+      "intimidation": 0.1,
+      "firearms": -0.2,
+      "brawl": -0.25
+    },
+    "discipline_biases": {
+      "fortitude": 0.25
+    }
+  }
+}

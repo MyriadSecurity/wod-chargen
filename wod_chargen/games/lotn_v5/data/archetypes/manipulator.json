@@ -1,0 +1,30 @@
+{
+  "id": "manipulator",
+  "label": "The Manipulator",
+  "description": "The prince signs the order. You decide who whispers in his ear first. Rumors, pressure, and debts that never show on paper.",
+  "weights": {
+    "physical_attrs": 0.3,
+    "social_attrs": 1.8,
+    "mental_attrs": 1.5,
+    "skills": 1.6,
+    "in_clan_disciplines": 1.4,
+    "backgrounds": 1.4,
+    "merits": 0.9
+  },
+  "attribute_biases": {
+    "manipulation": 1.8,
+    "intelligence": 1.4,
+    "composure": 1.3
+  },
+  "skill_biases": {
+    "subterfuge": 2.0,
+    "persuasion": 1.5,
+    "insight": 1.4,
+    "politics": 1.3
+  },
+  "discipline_biases": {
+    "dominate": 1.8,
+    "presence": 1.2,
+    "obfuscate": 1.0
+  }
+}

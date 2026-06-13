@@ -1,0 +1,145 @@
+{
+  "brujah": {
+    "label": "Brujah",
+    "kind": "clan",
+    "description": "Revolution in their veins and a grudge for anyone talking down to them.",
+    "disciplines": [
+      "celerity",
+      "potence",
+      "presence"
+    ]
+  },
+  "gangrel": {
+    "label": "Gangrel",
+    "kind": "clan",
+    "description": "More comfortable on the road than in a salon.",
+    "disciplines": [
+      "animalism",
+      "fortitude",
+      "protean"
+    ]
+  },
+  "malkavian": {
+    "label": "Malkavian",
+    "kind": "clan",
+    "description": "Sees the crack in everything. Can't always explain it.",
+    "disciplines": [
+      "auspex",
+      "dominate",
+      "obfuscate"
+    ]
+  },
+  "nosferatu": {
+    "label": "Nosferatu",
+    "kind": "clan",
+    "description": "Ugly, unseen, and usually first to know.",
+    "disciplines": [
+      "animalism",
+      "obfuscate",
+      "potence"
+    ]
+  },
+  "toreador": {
+    "label": "Toreador",
+    "kind": "clan",
+    "description": "Beauty is leverage. They never forget to spend it.",
+    "disciplines": [
+      "auspex",
+      "celerity",
+      "presence"
+    ]
+  },
+  "tremere": {
+    "label": "Tremere",
+    "kind": "clan",
+    "description": "Rank, ritual, and blood magic behind locked doors.",
+    "disciplines": [
+      "auspex",
+      "blood_sorcery",
+      "dominate"
+    ]
+  },
+  "ventrue": {
+    "label": "Ventrue",
+    "kind": "clan",
+    "description": "Breeding, boardrooms, and the assumption you'll obey.",
+    "disciplines": [
+      "dominate",
+      "fortitude",
+      "presence"
+    ]
+  },
+  "lasombra": {
+    "label": "Lasombra",
+    "kind": "clan",
+    "description": "Faith, shadow, and a smile that never reaches the eyes.",
+    "disciplines": [
+      "dominate",
+      "obfuscate",
+      "potence"
+    ]
+  },
+  "ministry": {
+    "label": "Ministry",
+    "kind": "clan",
+    "description": "Vice sold as salvation. Serpents in good linen.",
+    "disciplines": [
+      "obfuscate",
+      "potence",
+      "presence"
+    ]
+  },
+  "hecata": {
+    "label": "Hecata",
+    "kind": "clan",
+    "description": "Death is family business. They collect on both sides.",
+    "disciplines": [
+      "auspex",
+      "fortitude",
+      "blood_sorcery"
+    ]
+  },
+  "ravnos": {
+    "label": "Ravnos",
+    "kind": "clan",
+    "description": "A good story beats the truth. They travel light.",
+    "disciplines": [
+      "animalism",
+      "obfuscate",
+      "presence"
+    ]
+  },
+  "tzimisce": {
+    "label": "Tzimisce",
+    "kind": "clan",
+    "description": "Landlords of nightmare. They remember every trespass.",
+    "disciplines": [
+      "animalism",
+      "fortitude",
+      "protean"
+    ]
+  },
+  "salubri": {
+    "label": "Salubri",
+    "kind": "clan",
+    "description": "Healers with a price on their heads.",
+    "disciplines": [
+      "auspex",
+      "fortitude",
+      "presence"
+    ]
+  },
+  "caitiff": {
+    "label": "Caitiff",
+    "kind": "clan",
+    "description": "No clan. Pick three Disciplines and make your own luck.",
+    "disciplines": [],
+    "discipline_note": "Choose any three disciplines at creation"
+  },
+  "thin_blood": {
+    "label": "Thin-Blood",
+    "kind": "thin_blood",
+    "description": "Half in the mortal world. Alchemy where pedigree fails.",
+    "discipline_note": "Thin-Blood Alchemy \u00b7 formulas at creation"
+  }
+}

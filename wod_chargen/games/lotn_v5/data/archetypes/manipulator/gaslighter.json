@@ -1,0 +1,15 @@
+{
+  "id": "gaslighter",
+  "label": "Gaslighter",
+  "description": "They doubt what they saw because you said so.",
+  "modifiers": {
+    "skill_biases": {
+      "persuasion": 0.4,
+      "subterfuge": 0.25,
+      "insight": 0.1
+    },
+    "discipline_biases": {
+      "dominate": 0.2
+    }
+  }
+}

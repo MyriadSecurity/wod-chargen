@@ -1,0 +1,38 @@
+{
+  "id": "criminal",
+  "label": "The Criminal",
+  "description": "You know which pawn shop doesn't ask questions and which alley still has a working exit. Stolen goods, side deals, and the stubborn habit of staying alive when the night turns ugly.",
+  "weights": {
+    "physical_attrs": 1.15,
+    "social_attrs": 0.95,
+    "mental_attrs": 1.1,
+    "skills": 1.75,
+    "in_clan_disciplines": 1.0,
+    "backgrounds": 1.2,
+    "merits": 0.75
+  },
+  "attribute_biases": {
+    "dexterity": 1.4,
+    "wits": 1.4,
+    "stamina": 1.2,
+    "manipulation": 1.15
+  },
+  "skill_biases": {
+    "streetwise": 2.0,
+    "larceny": 1.9,
+    "subterfuge": 1.35,
+    "survival": 1.2,
+    "awareness": 1.1,
+    "drive": 1.1
+  },
+  "discipline_biases": {
+    "obfuscate": 1.35,
+    "celerity": 1.15,
+    "fortitude": 1.05
+  },
+  "type_weights": {
+    "ghoul": {
+      "in_clan_disciplines": 0.6
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "negotiator",
+  "label": "Negotiator",
+  "description": "Truces, treaties, and threats everyone can sign.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.1
+    },
+    "skill_biases": {
+      "politics": 0.4,
+      "persuasion": 0.25
+    },
+    "discipline_biases": {
+      "dominate": 0.15
+    }
+  }
+}

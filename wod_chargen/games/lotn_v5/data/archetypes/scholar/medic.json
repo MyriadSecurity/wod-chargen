@@ -1,0 +1,14 @@
+{
+  "id": "medic",
+  "label": "Medic",
+  "description": "Stitches, transfusions, and keeping mortals alive long enough to matter.",
+  "modifiers": {
+    "skill_biases": {
+      "medicine": 0.55,
+      "science": 0.3,
+      "insight": 0.15,
+      "academics": -0.45,
+      "occult": -0.3
+    }
+  }
+}

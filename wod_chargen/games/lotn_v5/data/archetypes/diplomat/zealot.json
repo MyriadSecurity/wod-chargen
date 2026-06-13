@@ -1,0 +1,20 @@
+{
+  "id": "zealot",
+  "label": "Zealot",
+  "description": "Faith, dogma, and sermons that leave no room for doubt.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.15,
+      "merits": 0.1
+    },
+    "skill_biases": {
+      "persuasion": 0.25,
+      "occult": 0.3,
+      "insight": 0.2,
+      "subterfuge": -0.25
+    },
+    "discipline_biases": {
+      "presence": 0.2
+    }
+  }
+}

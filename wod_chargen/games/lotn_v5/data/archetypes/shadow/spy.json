@@ -1,0 +1,18 @@
+{
+  "id": "spy",
+  "label": "Spy",
+  "description": "Watch, listen, report back.",
+  "modifiers": {
+    "weights": {
+      "skills": 0.15
+    },
+    "skill_biases": {
+      "stealth": 0.3,
+      "subterfuge": 0.25,
+      "investigation": 0.15
+    },
+    "discipline_biases": {
+      "auspex": 0.15
+    }
+  }
+}

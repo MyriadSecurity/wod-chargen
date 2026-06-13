@@ -1,0 +1,15 @@
+{
+  "id": "mes_end_to_dawn",
+  "label": "MES VtM — End to Dawn",
+  "game_id": "lotn_v5",
+  "xp_method": "mes_approval_month",
+  "xp_config": {
+    "chart_ref": "mes_xp_chart.json",
+    "replaces_lotn_base_xp": true,
+    "lotn_base_xp_replaced": 20
+  },
+  "mc_milestones": false,
+  "bonus_xp": false,
+  "house_rules": { "max_generation": 13 },
+  "archetype_pack": "default"
+}

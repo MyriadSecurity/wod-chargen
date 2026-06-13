@@ -1,0 +1,18 @@
+{
+  "id": "puppetmaster",
+  "label": "Puppetmaster",
+  "description": "People move and swear it was their idea.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.15
+    },
+    "skill_biases": {
+      "subterfuge": 0.35,
+      "insight": 0.35,
+      "politics": 0.2
+    },
+    "discipline_biases": {
+      "dominate": 0.25
+    }
+  }
+}

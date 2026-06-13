@@ -1,0 +1,15 @@
+{
+  "id": "socialite",
+  "label": "Socialite",
+  "description": "Guest lists, introductions, and who not to sit beside.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.2,
+      "backgrounds": 0.15
+    },
+    "skill_biases": {
+      "etiquette": 0.4,
+      "insight": 0.2
+    }
+  }
+}

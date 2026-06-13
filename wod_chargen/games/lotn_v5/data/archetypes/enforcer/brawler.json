@@ -1,0 +1,17 @@
+{
+  "id": "brawler",
+  "label": "Brawler",
+  "description": "Fists, bottles, and whatever's loose on the floor.",
+  "modifiers": {
+    "weights": {
+      "skills": 0.15
+    },
+    "skill_biases": {
+      "brawl": 0.4,
+      "athletics": 0.2
+    },
+    "discipline_biases": {
+      "potence": 0.25
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "fence",
+  "label": "Fence",
+  "description": "Hot goods find quiet buyers through you.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.15
+    },
+    "skill_biases": {
+      "finance": 0.35,
+      "larceny": 0.15,
+      "streetwise": -0.15,
+      "subterfuge": 0.1
+    },
+    "discipline_biases": {
+      "obfuscate": 0.15
+    }
+  }
+}

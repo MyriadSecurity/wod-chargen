@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WoD Character Generator</title>
+  <link rel="icon" href="static/img/dark-pack-logo.svg" type="image/svg+xml" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blood: '#8b1538',
+            void: '#0d0d0f',
+            ash: '#1a1a22',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="static/theme.css" />
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css" />
+  <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+</head>
+<body class="bg-void text-stone-200 min-h-screen">
+  <div id="loading-overlay">
+    <div class="text-center">
+      <p class="text-xl text-blood font-semibold mb-2">WoD Character Generator</p>
+      <p class="text-stone-400">Loading PyScript runtime…</p>
+      <p class="text-stone-500 text-sm mt-2">First load may take 10–20 seconds.</p>
+    </div>
+  </div>
+
+  <div id="app-root" class="min-h-screen flex flex-col"></div>
+  <div id="py-error" class="hidden max-w-4xl mx-auto px-4 py-4 text-red-400 font-mono text-sm whitespace-pre-wrap"></div>
+
+  <script type="py" src="app/main.py?v=13a0a6df08bf" config="pyscript.toml?v=13a0a6df08bf"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "primaries": [
+    "diplomat",
+    "enforcer",
+    "predator",
+    "criminal",
+    "shadow",
+    "scholar",
+    "manipulator",
+    "duelist",
+    "occultist",
+    "investigator",
+    "artist",
+    "alchemist"
+  ],
+  "subtypes": {
+    "diplomat": [
+      "silver_tongue",
+      "socialite",
+      "zealot",
+      "negotiator",
+      "harpy",
+      "courtier",
+      "agitator"
+    ],
+    "enforcer": [
+      "tank",
+      "brawler",
+      "collector",
+      "guardian",
+      "scourge"
+    ],
+    "predator": [
+      "stalker",
+      "feral"
+    ],
+    "criminal": [
+      "thief",
+      "hustler",
+      "fence",
+      "fixer"
+    ],
+    "shadow": [
+      "spy",
+      "infiltrator",
+      "saboteur"
+    ],
+    "scholar": [
+      "loremaster",
+      "scientist",
+      "archivist",
+      "medic"
+    ],
+    "manipulator": [
+      "puppetmaster",
+      "gaslighter",
+      "siren"
+    ],
+    "duelist": [
+      "fencer",
+      "marksman",
+      "skirmisher"
+    ],
+    "occultist": [
+      "thaumaturge",
+      "ritualist",
+      "necromancer"
+    ],
+    "investigator": [
+      "detective",
+      "forensic",
+      "interrogator"
+    ],
+    "artist": [
+      "virtuoso",
+      "performer",
+      "patron",
+      "director"
+    ],
+    "alchemist": [
+      "chemist",
+      "distiller",
+      "blood_brewer"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "scourge",
+  "label": "Scourge",
+  "description": "Prince's errand. The problem doesn't wake up.",
+  "modifiers": {
+    "weights": {
+      "in_clan_disciplines": 0.1
+    },
+    "skill_biases": {
+      "firearms": 0.4,
+      "intimidation": 0.1,
+      "stealth": 0.15,
+      "brawl": -0.5
+    },
+    "discipline_biases": {
+      "potence": 0.25,
+      "celerity": 0.15
+    }
+  }
+}

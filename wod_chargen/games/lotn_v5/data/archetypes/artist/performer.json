@@ -1,0 +1,15 @@
+{
+  "id": "performer",
+  "label": "Performer",
+  "description": "Stage, crowd, and the silence after the last note.",
+  "modifiers": {
+    "skill_biases": {
+      "performance": 0.45,
+      "persuasion": 0.2,
+      "craft": -0.2
+    },
+    "discipline_biases": {
+      "presence": 0.25
+    }
+  }
+}

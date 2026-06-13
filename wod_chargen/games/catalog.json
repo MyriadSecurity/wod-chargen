@@ -1,0 +1,12 @@
+{
+  "lotn_v5": {
+    "label": "Laws of the Night V5",
+    "tagline": "BNS MET — vampire, ghoul, thin-blood",
+    "implemented": true
+  },
+  "werewolf_apocalypse": {
+    "label": "Werewolf: the Apocalypse",
+    "tagline": "BNS MET — Coming soon",
+    "implemented": false
+  }
+}

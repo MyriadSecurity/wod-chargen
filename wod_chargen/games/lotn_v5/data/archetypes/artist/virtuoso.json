@@ -1,0 +1,20 @@
+{
+  "id": "virtuoso",
+  "label": "Virtuoso",
+  "description": "Canvas, verse, clay \u2014 you make the work they argue about.",
+  "modifiers": {
+    "weights": {
+      "mental_attrs": 0.15,
+      "social_attrs": -0.15
+    },
+    "skill_biases": {
+      "craft": 0.5,
+      "performance": -0.5,
+      "academics": 0.2
+    },
+    "discipline_biases": {
+      "auspex": 0.15,
+      "presence": -0.15
+    }
+  }
+}

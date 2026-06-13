@@ -1,0 +1,17 @@
+{
+  "id": "silver_tongue",
+  "label": "Silver Tongue",
+  "description": "Public charm. You talk a room into calm or chaos.",
+  "modifiers": {
+    "weights": {
+      "skills": 0.2
+    },
+    "skill_biases": {
+      "persuasion": 0.5,
+      "subterfuge": 0.2
+    },
+    "discipline_biases": {
+      "presence": 0.3
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "forensic",
+  "label": "Forensic",
+  "description": "Blood spatter, fibers, what the scene still says.",
+  "modifiers": {
+    "skill_biases": {
+      "science": 0.45,
+      "investigation": 0.25,
+      "medicine": 0.2,
+      "intimidation": -0.2
+    }
+  }
+}

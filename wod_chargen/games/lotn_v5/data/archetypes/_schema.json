@@ -1,0 +1,26 @@
+{
+  "archetype": {
+    "id": "primary archetype slug (filename without .json)",
+    "label": "display name",
+    "description": "player-facing pitch",
+    "allowed_types": "optional list of character type ids; omit = all types",
+    "weights": "core category weight vector for procedural spend",
+    "attribute_biases": "per-attribute multipliers",
+    "skill_biases": "per-skill multipliers",
+    "discipline_biases": "per-discipline multipliers",
+    "type_weights": "optional per-character-type weight multipliers"
+  },
+  "sub_archetype": {
+    "file": "archetypes/<archetype_id>/<sub_id>.json",
+    "count": "at least 2 per primary; only include subs with a distinct theme",
+    "id": "sub-archetype slug",
+    "label": "display name — should read clearly at a glance",
+    "description": "one-line flavor",
+    "modifiers": {
+      "weights": "additive deltas applied to parent weights",
+      "attribute_biases": "additive deltas applied to parent attribute_biases",
+      "skill_biases": "additive deltas applied to parent skill_biases",
+      "discipline_biases": "additive deltas applied to parent discipline_biases"
+    }
+  }
+}

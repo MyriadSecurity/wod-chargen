@@ -1,0 +1,14 @@
+{
+  "id": "loremaster",
+  "label": "Loremaster",
+  "description": "Kindred history, occult theory, and what the elders got wrong.",
+  "modifiers": {
+    "skill_biases": {
+      "occult": 0.45,
+      "academics": 0.3
+    },
+    "discipline_biases": {
+      "auspex": 0.15
+    }
+  }
+}

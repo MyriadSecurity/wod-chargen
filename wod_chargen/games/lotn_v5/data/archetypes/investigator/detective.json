@@ -1,0 +1,14 @@
+{
+  "id": "detective",
+  "label": "Detective",
+  "description": "Interviews, timelines, and who lied first.",
+  "modifiers": {
+    "skill_biases": {
+      "investigation": 0.45,
+      "insight": 0.25
+    },
+    "discipline_biases": {
+      "auspex": 0.15
+    }
+  }
+}

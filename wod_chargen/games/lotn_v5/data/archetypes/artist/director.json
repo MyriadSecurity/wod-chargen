@@ -1,0 +1,15 @@
+{
+  "id": "director",
+  "label": "Director",
+  "description": "Owns the vision. Names the scene. Blocks everyone else.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.15
+    },
+    "skill_biases": {
+      "persuasion": 0.3,
+      "insight": 0.3,
+      "performance": 0.1
+    }
+  }
+}

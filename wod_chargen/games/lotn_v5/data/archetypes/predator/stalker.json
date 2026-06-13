@@ -1,0 +1,14 @@
+{
+  "id": "stalker",
+  "label": "Stalker",
+  "description": "Follow a target for nights without being clocked.",
+  "modifiers": {
+    "skill_biases": {
+      "stealth": 0.4,
+      "awareness": 0.25
+    },
+    "discipline_biases": {
+      "obfuscate": 0.15
+    }
+  }
+}

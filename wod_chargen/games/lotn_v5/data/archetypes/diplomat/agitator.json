@@ -1,0 +1,19 @@
+{
+  "id": "agitator",
+  "label": "Agitator",
+  "description": "Crowds, slogans, and making the street impossible to ignore.",
+  "modifiers": {
+    "weights": {
+      "social_attrs": 0.1
+    },
+    "skill_biases": {
+      "streetwise": 0.4,
+      "persuasion": 0.2,
+      "politics": 0.15,
+      "etiquette": -0.35
+    },
+    "discipline_biases": {
+      "presence": 0.2
+    }
+  }
+}

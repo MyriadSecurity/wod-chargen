@@ -1,0 +1,14 @@
+{
+  "id": "archivist",
+  "label": "Archivist",
+  "description": "Records, dates, and what someone tried to shred.",
+  "modifiers": {
+    "weights": {
+      "backgrounds": 0.1
+    },
+    "skill_biases": {
+      "academics": 0.35,
+      "investigation": 0.25
+    }
+  }
+}

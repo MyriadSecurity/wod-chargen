@@ -1,0 +1,18 @@
+{
+  "id": "feral",
+  "label": "Feral",
+  "description": "The Beast shows. Manners don't.",
+  "modifiers": {
+    "weights": {
+      "physical_attrs": 0.15
+    },
+    "skill_biases": {
+      "animal_ken": 0.35,
+      "brawl": 0.25
+    },
+    "discipline_biases": {
+      "protean": 0.3,
+      "animalism": 0.25
+    }
+  }
+}

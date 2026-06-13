@@ -1,0 +1,18 @@
+{
+  "id": "thaumaturge",
+  "label": "Thaumaturge",
+  "description": "Formal blood magic. Steps you do not skip.",
+  "modifiers": {
+    "weights": {
+      "in_clan_disciplines": 0.2,
+      "merits": 0.1
+    },
+    "skill_biases": {
+      "occult": 0.35
+    },
+    "discipline_biases": {
+      "blood_sorcery": 0.4,
+      "auspex": 0.15
+    }
+  }
+}

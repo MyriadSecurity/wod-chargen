@@ -1,0 +1,30 @@
+{
+  "id": "shadow",
+  "label": "The Shadow",
+  "description": "You slip through places that keep guest lists for a reason. Listen, take, leave before anyone agrees on what they saw.",
+  "weights": {
+    "physical_attrs": 1.2,
+    "social_attrs": 0.8,
+    "mental_attrs": 1.2,
+    "skills": 1.8,
+    "in_clan_disciplines": 1.2,
+    "backgrounds": 1.0,
+    "merits": 0.8
+  },
+  "attribute_biases": {
+    "dexterity": 1.5,
+    "wits": 1.4,
+    "composure": 1.2
+  },
+  "skill_biases": {
+    "stealth": 2.0,
+    "subterfuge": 1.6,
+    "larceny": 1.4,
+    "investigation": 1.2
+  },
+  "discipline_biases": {
+    "obfuscate": 1.8,
+    "celerity": 1.2,
+    "auspex": 1.0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "fixed_100",
+  "label": "Generic — 100 XP",
+  "game_id": "lotn_v5",
+  "xp_method": "fixed",
+  "xp_config": { "total": 100 },
+  "house_rules": { "max_generation": 13 },
+  "archetype_pack": "default"
+}

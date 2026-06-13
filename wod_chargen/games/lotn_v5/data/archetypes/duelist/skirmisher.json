@@ -1,0 +1,18 @@
+{
+  "id": "skirmisher",
+  "label": "Skirmisher",
+  "description": "Hit, move, hit again. Never a static target.",
+  "modifiers": {
+    "attribute_biases": {
+      "dexterity": 0.3
+    },
+    "skill_biases": {
+      "athletics": 0.35,
+      "melee": 0.2,
+      "brawl": 0.15
+    },
+    "discipline_biases": {
+      "celerity": 0.3
+    }
+  }
+}

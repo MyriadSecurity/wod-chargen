@@ -1,0 +1,17 @@
+{
+  "id": "ritualist",
+  "label": "Ritualist",
+  "description": "Circles, components, and the long way that works.",
+  "modifiers": {
+    "weights": {
+      "merits": 0.15
+    },
+    "skill_biases": {
+      "occult": 0.3,
+      "academics": 0.25
+    },
+    "discipline_biases": {
+      "blood_sorcery": -0.15
+    }
+  }
+}

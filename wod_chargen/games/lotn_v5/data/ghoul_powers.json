@@ -1,0 +1,9 @@
+{
+  "powers": [
+    { "id": "potence", "label": "Potence" },
+    { "id": "celerity", "label": "Celerity" },
+    { "id": "fortitude", "label": "Fortitude" },
+    { "id": "presence", "label": "Presence" },
+    { "id": "dominate", "label": "Dominate" }
+  ]
+}

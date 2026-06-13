@@ -1,0 +1,15 @@
+{
+  "id": "interrogator",
+  "label": "Interrogator",
+  "description": "One room. One chair. Answers.",
+  "modifiers": {
+    "skill_biases": {
+      "intimidation": 0.45,
+      "insight": 0.35,
+      "investigation": 0.1
+    },
+    "discipline_biases": {
+      "dominate": 0.2
+    }
+  }
+}

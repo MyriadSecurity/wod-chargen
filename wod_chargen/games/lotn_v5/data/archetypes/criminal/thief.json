@@ -1,0 +1,15 @@
+{
+  "id": "thief",
+  "label": "Thief",
+  "description": "Take it and vanish.",
+  "modifiers": {
+    "skill_biases": {
+      "larceny": 0.45,
+      "stealth": 0.35,
+      "subterfuge": -0.2
+    },
+    "discipline_biases": {
+      "celerity": 0.15
+    }
+  }
+}
