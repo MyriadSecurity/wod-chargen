@@ -10,6 +10,7 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.components.sheet import render_lotn_v5_sheet
+from wod_chargen.core.xp_log_format import format_xp_log
 from wod_chargen.core.share import (
     SharePayload,
     browser_share_url,
@@ -529,7 +530,7 @@ class WizardApp:
 
         tabs = document.createElement("div")
         tabs.className = "flex gap-4 mb-4 border-b border-stone-800 no-print"
-        for tid, label in [("sheet", "Sheet"), ("log", "Creation Log"), ("xp", "XP Breakdown")]:
+        for tid, label in [("sheet", "Sheet"), ("log", "Creation Log"), ("xp", "XP Log")]:
             tbtn = document.createElement("button")
             tbtn.className = f"pb-2 px-2 {'tab-active' if self.state['tab'] == tid else 'text-stone-500'}"
 
@@ -552,11 +553,7 @@ class WizardApp:
             panel.innerText = "\n".join(lines)
             panel.className += " font-mono text-sm whitespace-pre-wrap"
         else:
-            lines = [
-                f"{e.item} ({e.cost} XP) w={e.weight:.2f} roll={e.roll:.2f} score={e.score:.2f}"
-                for e in result.xp_log
-            ]
-            panel.innerText = "\n".join(lines) or "No XP purchases."
+            panel.innerText = format_xp_log(result.xp_log)
             panel.className += " font-mono text-sm whitespace-pre-wrap"
         el.appendChild(panel)
 

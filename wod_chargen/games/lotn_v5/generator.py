@@ -10,6 +10,7 @@ from wod_chargen.core.models import GenerationResult, LogEntry
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.share import ENGINE_VERSION
 from wod_chargen.core.spender import PurchaseCandidate, spend_xp
+from wod_chargen.core.xp_strategy import creation_pick_weight
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
 from wod_chargen.venues import resolve_xp_budget
 
@@ -54,14 +55,6 @@ def _empty_character(options: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _placement_weight(bias: float, current: int, max_rating: int) -> float:
-    """Archetype bias tempered by remaining room — spreads pool dots instead of stacking."""
-    room = max_rating - current
-    if room <= 0:
-        return 0.0
-    return bias * room
-
-
 def _pool_count(pool: dict[str, int], rating: int) -> int:
     return int(pool.get(str(rating), pool.get(rating, 0)))
 
@@ -94,7 +87,7 @@ def _assign_one_dot_pick(
         )
         return None
 
-    weights = [_placement_weight(biases.get(i, 1.0), 0, max_rating) for i in eligible]
+    weights = [creation_pick_weight(biases.get(i, 1.0), 0, max_rating, dots) for i in eligible]
     pick = rng.weighted_choice(eligible, weights)
     target[pick] = dots
     log.append(
@@ -169,7 +162,7 @@ def _assign_one_discipline_pick(
         )
         return None
 
-    weights = [_placement_weight(profile.discipline_biases.get(d, 1.0), 0, max_rating) for d in eligible]
+    weights = [creation_pick_weight(profile.discipline_biases.get(d, 1.0), 0, max_rating, dots) for d in eligible]
     disc = rng.weighted_choice(eligible, weights)
     char["disciplines"][disc] = dots
     log.append(
@@ -319,6 +312,7 @@ def _enumerate_purchases(
                 item_id=attr,
                 category="attribute",
                 spend_group=spend_group,
+                new_level=new_level,
                 cost=cost,
                 weight=cat_weight,
                 item_bias=profile.attribute_biases.get(attr, 1.0),
@@ -351,6 +345,7 @@ def _enumerate_purchases(
                 item_id=skill,
                 category="skill",
                 spend_group="skills",
+                new_level=new_level,
                 cost=cost,
                 weight=sw,
                 item_bias=profile.skill_biases.get(skill, 1.0),
@@ -383,6 +378,7 @@ def _enumerate_purchases(
                 item_id=disc,
                 category="discipline",
                 spend_group="in_clan_disciplines",
+                new_level=new_level,
                 cost=cost,
                 weight=dw,
                 item_bias=profile.discipline_biases.get(disc, 1.0),
@@ -408,6 +404,7 @@ def _enumerate_purchases(
                 item_id=bg,
                 category="background",
                 spend_group="backgrounds",
+                new_level=new_level,
                 cost=cost,
                 weight=bw,
                 item_bias=1.0,
@@ -433,6 +430,7 @@ def _enumerate_purchases(
                 item_id=merit,
                 category="merit",
                 spend_group="merits",
+                new_level=new_level,
                 cost=cost,
                 weight=mw,
                 item_bias=1.0,
@@ -457,6 +455,7 @@ def _enumerate_purchases(
                     item_id=pid,
                     category="ghoul_power",
                     spend_group="ghoul_powers",
+                    new_level=1,
                     cost=cost,
                     weight=profile.weights.get("in_clan_disciplines", 1.0),
                     item_bias=profile.discipline_biases.get(pid, 1.0),
@@ -484,6 +483,7 @@ def _enumerate_purchases(
                     item_id=fid,
                     category="thin_blood_formula",
                     spend_group="thin_blood_formulas",
+                    new_level=new_level,
                     cost=cost,
                     weight=fw,
                     item_bias=1.2,
@@ -509,6 +509,7 @@ def _enumerate_purchases(
                     item_id=ls,
                     category="loresheet",
                     spend_group="loresheets",
+                    new_level=new_level,
                     cost=cost,
                     weight=profile.weights.get("merits", 0.5),
                     item_bias=1.0,
@@ -531,6 +532,7 @@ def _enumerate_purchases(
                 item_id="blood_potency",
                 category="blood_potency",
                 spend_group="blood_potency",
+                new_level=new_level,
                 cost=cost,
                 weight=0.4,
                 item_bias=1.0,

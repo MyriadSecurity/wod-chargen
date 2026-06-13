@@ -1,0 +1,39 @@
+---
+description: LoTN V5 rules context — use OWOD SRD and local reference when editing game data or generator logic
+globs: wod_chargen/games/lotn_v5/**/*
+alwaysApply: false
+---
+
+# LoTN V5 SRD reference
+
+When changing Laws of the Night V5 rules, data, or generation logic:
+
+## Authority order
+
+1. **OWOD SRD** — https://www.oneworldofdarkness.com/laws-of-the-night/  
+   In Cursor chat: `@LoTN V5 SRD` (after adding the URL under Settings → Features → Docs)
+2. **`reference/lotn_v5/SRD_INDEX.md`** — deep links to SRD sections
+3. **`reference/lotn_v5/RULES_INDEX.md`** — maps PDF sections to JSON under `wod_chargen/games/lotn_v5/data/`
+4. **Local pocket PDF** (`reference/lotn_v5/*.pdf`, gitignored) — optional offline detail
+
+## Key SRD entry points for this project
+
+| Topic | SRD |
+|-------|-----|
+| Character creation & XP | `/dramatic-systems/character-creation` |
+| Ghouls | `/dramatic-systems/ghouls` |
+| Clans | `/clans` |
+| Disciplines | `/disciplines` |
+| Backgrounds | `/backgrounds` |
+| Predator types | `/predator-types` |
+| Thin-blood | `/thin-blood` |
+| Merits/flaws | `/merits-flaws` |
+
+Full URL list: `reference/lotn_v5/SRD_INDEX.md`
+
+## Implementation notes
+
+- Canonical game data lives in `wod_chargen/games/lotn_v5/data/*.json` — not inline in `app/`.
+- After adding packaged JSON/Python, run `python scripts/generate_pyscript_config.py`.
+- Validate archetypes: `python scripts/validate_archetypes.py`
+- Do not commit copyrighted PDFs; SRD URLs are the public reference.

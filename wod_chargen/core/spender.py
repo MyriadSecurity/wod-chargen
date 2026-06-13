@@ -8,6 +8,13 @@ from typing import Any, Callable
 
 from wod_chargen.core.models import LogEntry, XpLogEntry
 from wod_chargen.core.rng import SeededRng
+from wod_chargen.core.xp_strategy import (
+    budget_efficiency_scale,
+    efficiency_item_bias,
+    macro_deficit_boost,
+    macro_for_spend_group,
+    roll_category_targets,
+)
 
 MAX_ITERATIONS = 500
 
@@ -17,6 +24,7 @@ class PurchaseCandidate:
     item_id: str
     category: str
     spend_group: str
+    new_level: int
     cost: int
     weight: float
     item_bias: float
@@ -32,21 +40,61 @@ class PurchaseCandidate:
         return self.item_bias * self.clan_factor
 
 
-def _pick_candidate(rng: SeededRng, candidates: list[PurchaseCandidate]) -> tuple[PurchaseCandidate, float, float]:
-    """Pick spend group by archetype weight, then item within that group."""
+def _pick_candidate(
+    rng: SeededRng,
+    candidates: list[PurchaseCandidate],
+    *,
+    category_targets: dict[str, float],
+    spent_by_macro: dict[str, int],
+    xp_spent: int,
+    budget: int,
+) -> tuple[PurchaseCandidate, float, float, float]:
+    """Pick macro category mix, spend group, then item by bias and efficiency."""
     by_group: dict[str, list[PurchaseCandidate]] = defaultdict(list)
-    group_weights: dict[str, float] = {}
     for cand in candidates:
         by_group[cand.spend_group].append(cand)
-        group_weights[cand.spend_group] = cand.weight
 
-    groups = list(by_group.keys())
-    chosen_group = rng.weighted_choice(groups, [group_weights[g] for g in groups])
+    macro_strength: dict[str, float] = defaultdict(float)
+    macro_group_count: dict[str, int] = defaultdict(int)
+    for spend_group, pool in by_group.items():
+        macro = macro_for_spend_group(spend_group)
+        macro_strength[macro] += pool[0].weight
+        macro_group_count[macro] += 1
+
+    macro_weights: dict[str, float] = {}
+    for macro, total_strength in macro_strength.items():
+        avg_strength = total_strength / macro_group_count[macro]
+        target = category_targets.get(macro, 0.1)
+        deficit = macro_deficit_boost(
+            macro,
+            category_targets=category_targets,
+            spent_by_macro=spent_by_macro,
+            xp_spent=xp_spent,
+            budget=budget,
+        )
+        macro_weights[macro] = target * avg_strength * deficit
+
+    macros = list(macro_weights.keys())
+    chosen_macro = rng.weighted_choice(macros, [macro_weights[m] for m in macros])
+
+    eligible_groups = [g for g in by_group if macro_for_spend_group(g) == chosen_macro]
+    group_weights = [by_group[g][0].weight for g in eligible_groups]
+    chosen_group = rng.weighted_choice(eligible_groups, group_weights)
     pool = by_group[chosen_group]
     roll = rng.uniform()
-    scored = [(cand, cand.item_weight() * roll) for cand in pool]
-    best, score = max(scored, key=lambda pair: pair[1])
-    return best, roll, score
+    scored: list[tuple[PurchaseCandidate, float, float]] = []
+    for cand in pool:
+        eff = efficiency_item_bias(cand.new_level - 1, cand.new_level)
+        eff *= budget_efficiency_scale(
+            cand.spend_group,
+            category_targets=category_targets,
+            spent_by_macro=spent_by_macro,
+            xp_spent=xp_spent,
+        )
+        score = cand.item_weight() * eff * roll
+        scored.append((cand, eff, score))
+    best, eff, score = max(scored, key=lambda pair: pair[2])
+    return best, roll, score, eff
 
 
 def spend_xp(
@@ -60,6 +108,17 @@ def spend_xp(
     xp_log: list[XpLogEntry] = []
     logs: list[LogEntry] = []
     iterations = 0
+    category_targets = roll_category_targets(rng)
+    spent_by_macro: dict[str, int] = defaultdict(int)
+    xp_spent = 0
+
+    logs.append(
+        LogEntry(
+            phase="xp",
+            message="XP category targets",
+            detail={k: round(v, 3) for k, v in category_targets.items()},
+        )
+    )
 
     while remaining > 0 and iterations < MAX_ITERATIONS:
         iterations += 1
@@ -67,15 +126,29 @@ def spend_xp(
         if not candidates:
             break
 
-        best, roll, score = _pick_candidate(rng, candidates)
+        best, roll, score, eff = _pick_candidate(
+            rng,
+            candidates,
+            category_targets=category_targets,
+            spent_by_macro=spent_by_macro,
+            xp_spent=xp_spent,
+            budget=budget,
+        )
         best.apply()
         remaining -= best.cost
+        xp_spent += best.cost
+        spent_by_macro[macro_for_spend_group(best.spend_group)] += best.cost
         xp_log.append(
             XpLogEntry(
                 item=best.item_id,
                 category=best.category,
+                spend_group=best.spend_group,
+                new_level=best.new_level,
                 cost=best.cost,
-                weight=best.effective_weight,
+                group_weight=best.weight,
+                item_bias=best.item_bias,
+                clan_factor=best.clan_factor,
+                efficiency_bias=eff,
                 roll=roll,
                 score=score,
                 source=best.source or source,

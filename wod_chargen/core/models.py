@@ -17,11 +17,21 @@ class LogEntry:
 class XpLogEntry:
     item: str
     category: str
+    spend_group: str
+    new_level: int
     cost: int
-    weight: float
+    group_weight: float
+    item_bias: float
+    clan_factor: float
+    efficiency_bias: float
     roll: float
     score: float
     source: str
+
+    @property
+    def weight(self) -> float:
+        """Effective pick weight (group × item bias × clan factor)."""
+        return self.group_weight * self.item_bias * self.clan_factor
 
 
 @dataclass
@@ -55,7 +65,13 @@ class GenerationResult:
                 {
                     "item": e.item,
                     "category": e.category,
+                    "spend_group": e.spend_group,
+                    "new_level": e.new_level,
                     "cost": e.cost,
+                    "group_weight": e.group_weight,
+                    "item_bias": e.item_bias,
+                    "clan_factor": e.clan_factor,
+                    "efficiency_bias": e.efficiency_bias,
                     "weight": e.weight,
                     "roll": e.roll,
                     "score": e.score,

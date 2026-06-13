@@ -1,5 +1,10 @@
 # Contributing
 
+## Rules reference
+
+- **SRD (web):** [One World of Darkness — Laws of the Night](https://www.oneworldofdarkness.com/laws-of-the-night/) — index at `reference/lotn_v5/SRD_INDEX.md`; add to Cursor via `reference/lotn_v5/CURSOR_DOCS.md`
+- **Local PDF:** copy to `reference/lotn_v5/` (gitignored). See `reference/README.md`.
+
 ## Tuning archetype weights
 
 **12 primaries** (11 for vampire/ghoul + Alchemist for thin-blood). Merges: Diplomat (was Face+Diplomat), Enforcer (was Bruiser+Enforcer), Predator (was Hunter+Beast), Criminal (absorbed Survivor).
