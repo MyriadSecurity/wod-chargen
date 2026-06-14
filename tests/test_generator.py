@@ -141,7 +141,7 @@ def test_thin_blood_ratings_respect_caps(seed: int):
         _opts(type="thin_blood", arch="alchemist", sub="distiller"),
         _venue(),
     )
-    _assert_caps(result.character, discipline_cap=2, formula_cap=3)
+    _assert_caps(result.character, discipline_cap=5, formula_cap=3)
 
 
 def test_creation_backgrounds_assign_seven_dots():

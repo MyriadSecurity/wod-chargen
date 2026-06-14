@@ -5,10 +5,9 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.core.models import LogEntry, XpLogEntry
+from wod_chargen.core.models import LogEntry
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.games.lotn_v5.disciplines import (
-    assign_power_at_level,
     assign_powers_for_discipline,
     caitiff_discipline_pool,
     owned_power_ids,
@@ -377,137 +376,6 @@ def run_thin_blood_merit_flaw_creation(
     fill_thin_blood_merit_flaw_pairs(
         rng, char, profile, log, caps=caps, max_pairs=_MAX_PAIRS, phase="creation"
     )
-
-
-def spend_merit_driven_discipline_xp(
-    rng: SeededRng,
-    char: dict[str, Any],
-    profile: Any,
-    costs: dict[str, Any],
-    caps: dict[str, int],
-    budget: int,
-    *,
-    source: str,
-    discipline_logs: list[LogEntry],
-    log: list[LogEntry],
-) -> tuple[int, list[XpLogEntry]]:
-    """Spend XP on merit-gated disciplines and formulas before general allocation."""
-    from wod_chargen.core.costs import lookup_cost
-
-    if char.get("character_type") != "thin_blood" or not has_merit_driven_disciplines(char):
-        return budget, []
-
-    remaining = budget
-    xp_log: list[XpLogEntry] = []
-    max_disc = int(caps.get("discipline", 2))
-
-    def _buy_discipline_dot(
-        disc_id: str,
-        *,
-        cost_key: str,
-        spend_group: str,
-        label: str,
-    ) -> None:
-        nonlocal remaining
-        while int(char.get("disciplines", {}).get(disc_id, 0)) < max_disc:
-            cur = int(char.get("disciplines", {}).get(disc_id, 0))
-            new_level = cur + 1
-            cost = lookup_cost(costs, cost_key, new_level=new_level)
-            if cost > remaining:
-                return
-            char.setdefault("disciplines", {})[disc_id] = new_level
-            assign_power_at_level(
-                rng, char, disc_id, new_level, profile, discipline_logs, phase="xp", source=source
-            )
-            remaining -= cost
-            xp_log.append(
-                XpLogEntry(
-                    item=disc_id,
-                    category="discipline",
-                    spend_group=spend_group,
-                    new_level=new_level,
-                    cost=cost,
-                    group_weight=1.0,
-                    item_bias=1.0,
-                    clan_factor=1.0,
-                    efficiency_bias=1.0,
-                    roll=1.0,
-                    score=1.0,
-                    source=f"{source}:merit_discipline",
-                )
-            )
-            log.append(
-                LogEntry(
-                    phase="xp",
-                    message=f"Merit priority: {label} •{new_level} ({cost} XP)",
-                    detail={"discipline": disc_id, "merit_priority": True},
-                )
-            )
-
-    if has_thin_blood_alchemist(char):
-        _buy_discipline_dot(
-            "thin_blood_alchemy",
-            cost_key="discipline_in_clan",
-            spend_group="thin_blood_disciplines",
-            label="Thin-Blood Alchemy",
-        )
-
-    if has_discipline_affinity(char):
-        affinity = (char.get("discipline_meta") or {}).get("affinity_discipline")
-        if affinity:
-            _buy_discipline_dot(
-                affinity,
-                cost_key="discipline_out_of_clan",
-                spend_group="affinity_discipline",
-                label=affinity.replace("_", " ").title(),
-            )
-
-    if has_thin_blood_alchemist(char):
-        tba = int(char.get("disciplines", {}).get("thin_blood_alchemy", 0))
-        formula_cap = int(caps.get("thin_blood_formula", 3))
-        formulas = sorted(
-            load_json_cached(DATA, "thin_blood_formulas.json")["formulas"],
-            key=lambda entry: (int(entry.get("level", 1)), entry["id"]),
-        )
-        owned = owned_power_ids(char)
-        for formula in formulas:
-            if len(char.get("thin_blood_formulas", {})) >= formula_cap:
-                break
-            fid = formula["id"]
-            if char.get("thin_blood_formulas", {}).get(fid, 0) >= 1 or fid in owned:
-                continue
-            if tba < int(formula.get("level", 1)):
-                continue
-            cost = lookup_cost(costs, "thin_blood_formula", new_level=1)
-            if cost > remaining:
-                break
-            record_formula_selection(char, fid)
-            remaining -= cost
-            xp_log.append(
-                XpLogEntry(
-                    item=fid,
-                    category="thin_blood_formula",
-                    spend_group="thin_blood_formulas",
-                    new_level=1,
-                    cost=cost,
-                    group_weight=1.0,
-                    item_bias=1.0,
-                    clan_factor=1.0,
-                    efficiency_bias=1.0,
-                    roll=1.0,
-                    score=1.0,
-                    source=f"{source}:merit_discipline",
-                )
-            )
-            log.append(
-                LogEntry(
-                    phase="xp",
-                    message=f"Merit priority: Formula {formula['label']} ({cost} XP)",
-                    detail={"formula": fid, "merit_priority": True},
-                )
-            )
-
-    return remaining, xp_log
 
 
 def thin_blood_trait_label(trait_id: str, kind: TraitKind) -> str:

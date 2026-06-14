@@ -5,7 +5,6 @@
   "humanity": 7,
   "backgrounds": 5,
   "disciplines": { "primary": 0, "secondary": 0, "tertiary": 0 },
-  "discipline_max": 2,
   "blood_potency": 0,
   "formula_max": 3,
   "generation_weights": {

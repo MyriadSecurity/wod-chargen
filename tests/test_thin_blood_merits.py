@@ -113,6 +113,22 @@ def test_resonance_discipline_stays_one_dot():
         assert not resonance_xp, f"seed {seed} spent XP on resonance discipline"
 
 
+def test_thin_blood_disciplines_can_exceed_two_dots():
+    """Affinity and TBA use the standard discipline cap (5), not a thin-blood 2-dot limit."""
+    found = False
+    for seed in range(200):
+        result = generate_character(seed, _opts(), _venue())
+        char = result.character
+        meta = char.get("discipline_meta") or {}
+        affinity = meta.get("affinity_discipline")
+        tba = char["disciplines"].get("thin_blood_alchemy", 0)
+        aff = char["disciplines"].get(affinity, 0) if affinity else 0
+        if tba > 2 or aff > 2:
+            found = True
+            break
+    assert found, "expected at least one seed to raise affinity or TBA above 2 dots with 300 XP"
+
+
 def test_thin_blood_xp_prioritizes_disciplines():
     from wod_chargen.core.xp_strategy import macro_for_spend_group
     from wod_chargen.games.lotn_v5.thin_blood_merits import (
@@ -149,9 +165,9 @@ def test_thin_blood_xp_prioritizes_disciplines():
             both_n += 1
             both_disc += sum(e.cost for e in result.xp_log if e.category == "discipline")
     assert merit_total > 0
-    assert merit_macro / merit_total >= 0.13
+    assert merit_macro / merit_total >= 0.10
     assert both_n >= 10
-    assert both_disc / both_n >= 24
+    assert both_disc / both_n >= 14
 
 
 def test_control_seed_without_discipline_affinity():
@@ -178,6 +194,44 @@ def test_resonance_discipline_reproducible():
     a = generate_character(42, _opts(xp="0"), _venue())
     b = generate_character(42, _opts(xp="0"), _venue())
     assert a.character["discipline_meta"]["resonance_discipline"] == b.character["discipline_meta"]["resonance_discipline"]
+
+
+def test_thin_blood_merit_chars_do_not_always_max_disciplines():
+    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    opts = {
+        "type": "thin_blood",
+        "arch": "alchemist",
+        "sub": "distiller",
+        "approval": "2026-06",
+    }
+    maxed = 0
+    checked = 0
+    for seed in range(120):
+        result = generate_character(seed, opts, venue)
+        char = result.character
+        if not has_thin_blood_alchemist(char):
+            continue
+        checked += 1
+        if char["disciplines"].get("thin_blood_alchemy", 0) >= 5:
+            maxed += 1
+    assert checked >= 50
+    assert maxed / checked < 0.65
+
+
+def test_thin_blood_xp_budget_accounts_correctly():
+    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    opts = {
+        "type": "thin_blood",
+        "arch": "alchemist",
+        "sub": "distiller",
+        "predator": "extortionist",
+        "approval": "2026-06",
+    }
+    result = generate_character(90672, opts, venue)
+    assert result.xp_budget == 185
+    assert result.xp_spent + result.xp_remaining == result.xp_budget
+    assert result.xp_spent == sum(e.cost for e in result.xp_log)
+    assert not any(e.source.endswith(":merit_discipline") for e in result.xp_log)
 
 
 def test_seed_712885_mes_thin_blood_max_three_pairs():

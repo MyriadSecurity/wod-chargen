@@ -10,7 +10,6 @@ from wod_chargen.core.models import GenerationResult, LogEntry, XpLogEntry
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.share import ENGINE_VERSION
 from wod_chargen.core.spender import PurchaseCandidate, spend_xp
-from wod_chargen.core.xp_strategy import thin_blood_discipline_category_targets
 from wod_chargen.core.xp_strategy import creation_pick_weight
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
 from wod_chargen.games.lotn_v5.clan_discipline_adapt import (
@@ -71,10 +70,8 @@ from wod_chargen.games.lotn_v5.loresheets import (
 from wod_chargen.games.lotn_v5.thin_blood_merits import (
     assign_resonance_discipline,
     has_discipline_affinity,
-    has_merit_driven_disciplines,
     has_thin_blood_alchemist,
     run_thin_blood_merit_flaw_creation,
-    spend_merit_driven_discipline_xp,
     validate_thin_blood_merit_flaw_pairs,
 )
 from wod_chargen.venues import resolve_xp_budget
@@ -396,11 +393,6 @@ def _enumerate_purchases(
 ) -> list[PurchaseCandidate]:
     candidates: list[PurchaseCandidate] = []
     dlogs = discipline_logs if discipline_logs is not None else []
-    non_disc_scale = 1.0
-    merit_disc_mult = 1.0
-    if ctype == "thin_blood" and has_merit_driven_disciplines(char):
-        non_disc_scale = 0.5
-        merit_disc_mult = float(profile.weights.get("merit_discipline_priority", 5.0))
     clan_pool = set(discipline_pool_for_char(char, ctype))
 
     def add_attr(attr: str, cat_weight: float, spend_group: str) -> None:
@@ -431,15 +423,11 @@ def _enumerate_purchases(
     attrs = load_json_cached(DATA, "attributes.json")
     for group, wkey in [("physical", "physical_attrs"), ("social", "social_attrs"), ("mental", "mental_attrs")]:
         cw = profile.weights.get(wkey, 1.0)
-        if ctype == "thin_blood" and wkey == "mental_attrs":
-            cw *= non_disc_scale
         for attr in attrs[group]:
             add_attr(attr, cw, wkey)
 
     skills_data = load_json_cached(DATA, "skills.json")
     sw = profile.weights.get("skills", 1.0)
-    if ctype == "thin_blood":
-        sw *= non_disc_scale
     for skill in skills_data["all"]:
         cur = char["skills"].get(skill, 0)
         if cur >= caps["skill"]:
@@ -482,7 +470,8 @@ def _enumerate_purchases(
         if ctype == "thin_blood" and not in_clan:
             meta = char.get("discipline_meta") or {}
             affinity = meta.get("affinity_discipline")
-            if disc != affinity:
+            resonance = meta.get("resonance_discipline")
+            if disc != affinity or disc == resonance:
                 continue
             cost_key = "discipline_out_of_clan"
             clan_factor = off_clan_signature_factor(profile, disc, clan_pool)
@@ -504,12 +493,13 @@ def _enumerate_purchases(
             disc_weight = dw
             spend_group = "in_clan_disciplines"
 
-        if ctype == "thin_blood":
+        if ctype == "thin_blood" and cur >= 3:
             affinity_id = (char.get("discipline_meta") or {}).get("affinity_discipline")
-            if in_clan and disc == "thin_blood_alchemy" and has_thin_blood_alchemist(char):
-                disc_weight *= merit_disc_mult
-            elif not in_clan and has_discipline_affinity(char) and disc == affinity_id:
-                disc_weight *= merit_disc_mult
+            merit_gated = (disc == "thin_blood_alchemy" and has_thin_blood_alchemist(char)) or (
+                has_discipline_affinity(char) and disc == affinity_id
+            )
+            if merit_gated:
+                disc_weight *= 0.35
 
         def apply_disc(d=disc, nl=new_level) -> None:
             char["disciplines"][d] = nl
@@ -518,8 +508,6 @@ def _enumerate_purchases(
             )
 
         item_bias = resolve_discipline_bias(profile, disc, clan_pool)
-        if ctype == "thin_blood" and cur == 1 and new_level == 2:
-            item_bias *= 1.4
 
         candidates.append(
             PurchaseCandidate(
@@ -677,7 +665,7 @@ def _enumerate_purchases(
             )
 
     if ctype == "thin_blood" and has_thin_blood_alchemist(char):
-        fw = profile.weights.get("thin_blood_formulas", 1.5) * merit_disc_mult
+        fw = profile.weights.get("thin_blood_formulas", 1.5)
         tba = char["disciplines"].get("thin_blood_alchemy", 0)
         for formula in load_json_cached(DATA, "thin_blood_formulas.json")["formulas"]:
             fid = formula["id"]
@@ -888,28 +876,9 @@ def generate_character(
     xp_log.extend(mandatory_xp)
     log.extend(mandatory_logs)
 
+    xp_budget_total = xp_budget
     spent_before = xp_budget
     discipline_logs: list[LogEntry] = []
-
-    if ctype == "thin_blood":
-        xp_budget, priority_xp = spend_merit_driven_discipline_xp(
-            rng,
-            char,
-            profile,
-            costs,
-            caps,
-            xp_budget,
-            source=source,
-            discipline_logs=discipline_logs,
-            log=log,
-        )
-        xp_log.extend(priority_xp)
-
-    xp_targets = (
-        thin_blood_discipline_category_targets(rng, char)
-        if ctype == "thin_blood"
-        else None
-    )
 
     def enumerate() -> list[PurchaseCandidate]:
         return _enumerate_purchases(
@@ -925,7 +894,7 @@ def generate_character(
         )
 
     remaining, spend_xp_log, spend_logs = spend_xp(
-        rng, xp_budget, enumerate, source=source, category_targets=xp_targets
+        rng, xp_budget, enumerate, source=source
     )
     xp_log.extend(spend_xp_log)
     log.extend(spend_logs)
@@ -980,7 +949,7 @@ def generate_character(
         character=char,
         creation_log=log,
         xp_log=xp_log,
-        xp_budget=xp_budget,
+        xp_budget=xp_budget_total,
         xp_spent=xp_spent,
         xp_remaining=remaining,
     )

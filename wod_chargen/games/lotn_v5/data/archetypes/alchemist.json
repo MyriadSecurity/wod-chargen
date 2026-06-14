@@ -7,14 +7,13 @@
     "social_attrs": 0.7,
     "mental_attrs": 1.75,
     "skills": 1.45,
-    "in_clan_disciplines": 1.35,
-    "thin_blood_disciplines": 1.55,
-    "affinity_discipline": 1.45,
+    "in_clan_disciplines": 1.15,
+    "thin_blood_disciplines": 1.05,
+    "affinity_discipline": 1.05,
     "backgrounds": 1.0,
     "merits": 1.2,
     "thin_blood_merits": 2.0,
-    "thin_blood_formulas": 2.5,
-    "merit_discipline_priority": 5.0,
+    "thin_blood_formulas": 1.65,
     "loresheets": 2.4
   },
   "attribute_biases": {
