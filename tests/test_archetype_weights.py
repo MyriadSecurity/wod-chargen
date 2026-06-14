@@ -22,7 +22,15 @@ def _venue():
 
 
 def _opts(**kwargs):
-    return opts(arch="diplomat", sub="courtier", **kwargs)
+    base = {
+        "type": "vampire",
+        "clan": "brujah",
+        "arch": "diplomat",
+        "sub": "courtier",
+        "approval": "2026-06",
+    }
+    base.update(kwargs)
+    return base
 
 
 def test_all_profiles_load_without_orphans():

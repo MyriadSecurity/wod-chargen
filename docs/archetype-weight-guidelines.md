@@ -1,6 +1,12 @@
 # Archetype weight guidelines
 
-Bias values steer procedural character generation toward archetype themes without hard-locking picks. Eligibility rules always apply first; bias only weights among eligible options.
+Bias values steer procedural generation toward archetype themes. Eligibility rules apply first; bias only weights among eligible options.
+
+**Data locations:**
+
+- `wod_chargen/games/lotn_v5/data/archetype_themes.json` — central theme source
+- `wod_chargen/games/lotn_v5/data/archetypes/<id>.json` — merged primary profiles
+- `wod_chargen/games/lotn_v5/data/archetypes/<id>/<sub>.json` — sub modifiers
 
 ## Value ranges
 
@@ -13,8 +19,6 @@ Bias values steer procedural character generation toward archetype themes withou
 | Global clamp | 0.05–3.0 | Enforced in `trait_biases.resolve_trait_bias` |
 
 ## Resolution order
-
-For any trait id (skill, merit, power, `contacts`, sphere `underworld`, etc.):
 
 ```
 effective_bias = explicit_bias.get(trait_id)
@@ -37,64 +41,57 @@ Explicit keys on the merged profile (primary + sub deltas) take precedence over 
 | `sphere_biases` | church, underworld, … | sphere pick on new entries |
 | `modifier_biases` | flaky, reliable, … | adv/disadv modifier picks |
 | `loresheet_biases` | loresheet id | XP loresheet pick (one per character) |
-| `weights.loresheets` | spend group | XP weight within merits/flaws bucket (typically ~2× merits) |
+| `weights.loresheets` | spend group | XP weight within merits/flaws bucket |
 | `discipline_power_biases` | power id | power pick in disciplines |
 | `tag_affinities` | tag slug → multiplier | all tagged traits |
 
-Subs use additive deltas under `modifiers` for every field except where a sub JSON documents explicit signature overrides (e.g. `discipline_power_biases` on subs are merged additively like other bias keys).
+Subs use additive deltas under `modifiers`. Do not add `discipline_expressions` on subs.
 
 ## Tags
 
-Shared tags live in `wod_chargen/games/lotn_v5/data/trait_tags.json`. Powers inherit discipline tags plus per-power overrides. Regenerate power tags after catalog changes:
+Shared tags: `wod_chargen/games/lotn_v5/data/trait_tags.json`. Regenerate after catalog changes:
 
 ```bash
 uv run python scripts/generate_trait_tags.py
 ```
 
-## Opposition policy (mixed)
+## Opposition policy
 
-- **Soft clash** — off-theme flavor: multiply opposing tag affinity by ~0.55 (`opposed:tag`) or set tag affinity 0.4–0.7.
-- **Hard antithesis** — direct contradiction (Spy vs Fame, Brawler vs Etiquette-adjacent merits): explicit `0.05–0.15` on trait id or `hard_opposed:tag` on the flaw/trait tag list.
+- **Soft clash** — off-theme flavor: `opposed:tag` (~0.55) or tag affinity 0.4–0.7.
+- **Hard antithesis** — direct contradiction: explicit 0.05–0.15 on trait id or `hard_opposed:tag`.
 
 ## Content workflow
 
-1. Edit `data/archetype_themes.json` (central theme source).
+1. Edit `data/archetype_themes.json`.
 2. Run `uv run python scripts/apply_archetype_themes.py`.
 3. Validate: `uv run python scripts/validate_archetype_biases.py`.
 4. Spot-check: `uv run python scripts/archetype_weight_report.py --seeds 30`.
-5. Document per-archetype notes in `docs/archetype-weights/<id>.md` (auto-generated header; extend by hand if needed).
 
 ## Pitfalls
 
-- **Over-tuning** — prefer soft tag affinities; floor is 0.05 so nothing is truly zero.
+- **Over-tuning** — prefer soft tag affinities; floor is 0.05.
 - **Amalgam/prereq** — power bias never bypasses eligibility.
-- **Orphan keys** — validation script fails on unknown ids; run after JSON edits.
-- **Single-discipline tunnel vision** — explicit `discipline_power_biases` should name 3–5 signature picks, not every power in one discipline. Tag affinities already boost whole tag families (e.g. all `presence`-tagged powers).
-- **Sub power deltas** — subs add to primary via `effective_profile`; use **+0.2–0.5** deltas on subs, not target totals like `2.05`.
-- **Secondary in-clan** — clan pool forces 3 disciplines at creation; only one may match the archetype core. Review picks for the other two.
+- **Orphan keys** — validation fails on unknown ids.
+- **Single-discipline tunnel vision** — name 3–5 signature `discipline_power_biases`, not every power.
+- **Sub power deltas** — use +0.2–0.5 on subs, not target totals.
+- **Secondary in-clan** — clan pool forces 3 disciplines; only one may match archetype core.
 
 ## Discipline power layers
-
-Effective pick weight is the product of two layers:
-
-| Layer | Source | Purpose |
-|-------|--------|---------|
-| Archetype theme | `discipline_power_biases`, `tag_affinities` | On-concept flavor |
-| Neutral utility | `discipline_power_utility.json` | Broad LARP usefulness when a discipline is taken anyway |
 
 ```
 effective_power_bias = clamp(archetype_bias × utility_bias)
 ```
 
-- **Utility defaults** — level 1–2 powers slightly favored (more table time per dot); level 5 slightly deprioritized unless overridden.
-- **Utility overrides** — ~40 staple powers (Fleetness, Conceal, Sense the Unseen, etc.) get explicit scores.
-- **Review workflow** — for each primary, run `scripts/discipline_power_coverage_report.py --clan <typical>` and confirm in-clan disciplines without signature picks still produce sensible staples via utility.
+| Layer | Source | Purpose |
+|-------|--------|---------|
+| Archetype theme | `discipline_power_biases`, `tag_affinities` | On-concept flavor |
+| Neutral utility | `discipline_power_utility.json` | Broad usefulness when discipline is taken anyway |
 
-Do **not** rely on tag affinities alone for off-theme in-clan disciplines — broad tags like `combat` suppress entire Celerity/Potence pools for social archetypes.
+Review: `uv run python scripts/discipline_power_coverage_report.py --matrix --clan <clan> [--arch <id>]`. See `docs/discipline-clan-matrix.md`.
 
 ## Clan discipline expressions
 
-When an archetype’s **signature** disciplines (Potence/Fortitude for Enforcer, Blood Sorcery for Occultist, etc.) are off-clan, define `discipline_expressions` on the **primary** in `archetype_themes.json`:
+When signature disciplines are off-clan, define `discipline_expressions` on the **primary** in `archetype_themes.json`:
 
 ```json
 "discipline_expressions": {
@@ -109,10 +106,6 @@ When an archetype’s **signature** disciplines (Potence/Fortitude for Enforcer,
 ```
 
 - `signature` — explicit list, or inferred from `discipline_biases` ≥ 1.05.
-- `alternates` — merged **only** for disciplines in the character’s in-clan pool when any signature is missing from that pool.
-- Alternate `discipline_bias` values are **targets** (max with current); `power_biases` are **explicit overrides**, not deltas.
-- Runtime also applies in-clan soft floors (discipline ≥ 0.85, non-explicit powers ≥ 0.75) via `clan_discipline_adapt.py`.
-- Off-clan signature disciplines use XP `clan_factor` **0.6** instead of 0.3.
-- Do **not** add expression maps on subs; subs keep +0.2–0.5 deltas only.
-
-Review matrix: `uv run python scripts/discipline_power_coverage_report.py --matrix --clan <clan> [--arch <id>]`. See `docs/discipline-clan-matrix.md` for batch notes.
+- `alternates` — merged only for in-clan disciplines when a signature is missing.
+- Alternate `discipline_bias` values are targets (max with current); `power_biases` are overrides.
+- Runtime floors via `clan_discipline_adapt.py`; off-clan signatures use XP `clan_factor` 0.6.

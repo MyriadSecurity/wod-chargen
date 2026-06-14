@@ -91,7 +91,7 @@ def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int =
         if cap:
             assert 0 < rating <= cap
     assert all(0 <= v <= 3 for v in character["loresheets"].values())
-    assert len(character["loresheets"]) <= 1, "pocket book allows one loresheet per character"
+    assert len(character["loresheets"]) <= 1
     assert all(0 <= v <= formula_cap for v in character["thin_blood_formulas"].values())
     assert not character.get("ghoul_powers"), "ghoul XP powers belong in discipline_powers"
     for disc_id, rating in character.get("disciplines", {}).items():

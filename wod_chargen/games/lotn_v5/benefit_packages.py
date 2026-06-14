@@ -17,13 +17,13 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     trait_label,
     _dots_display,
 )
-from wod_chargen.games.lotn_v5.predators import (
-    _apply_flaw_grant,
-    _apply_flaw_spend,
-    _attach_advantage,
-    _grant_background_spec,
-    _latest_background_entry,
-    _split_dots,
+from wod_chargen.games.lotn_v5.package_grants import (
+    apply_flaw_grant,
+    apply_flaw_spend,
+    attach_advantage,
+    grant_background_spec,
+    latest_background_entry,
+    split_dots,
 )
 
 
@@ -70,16 +70,16 @@ def apply_benefit_package(
     entries = char["backgrounds"]
 
     for bg in package.get("backgrounds", []):
-        for line in _grant_background_spec(rng, entries, bg, profile, char=char):
+        for line in grant_background_spec(rng, entries, bg, profile, char=char):
             lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     for grant in package.get("background_grants", []):
-        for line in _grant_background_spec(rng, entries, grant, profile, char=char):
+        for line in grant_background_spec(rng, entries, grant, profile, char=char):
             lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     spend = package.get("background_spend")
     if spend:
-        allocation = _split_dots(rng, int(spend["dots"]), list(spend["options"]))
+        allocation = split_dots(rng, int(spend["dots"]), list(spend["options"]))
         for bg_type, grant in allocation.items():
             if grant <= 0:
                 continue
@@ -99,7 +99,7 @@ def apply_benefit_package(
     adv_spend = package.get("advantage_spend")
     if adv_spend:
         bg_type = adv_spend["background"]
-        entry = _latest_background_entry(entries, bg_type)
+        entry = latest_background_entry(entries, bg_type)
         if entry is None:
             line = grant_background_rating(
                 rng,
@@ -113,16 +113,16 @@ def apply_benefit_package(
             )
             if line:
                 lines.append(line)
-            entry = _latest_background_entry(entries, bg_type)
+            entry = latest_background_entry(entries, bg_type)
         if entry:
             options = adv_spend.get("options") or []
             total = int(adv_spend.get("dots", 1))
             if adv_spend.get("split"):
-                allocation = _split_dots(rng, total, list(options))
+                allocation = split_dots(rng, total, list(options))
                 for mod_id, mod_dots in allocation.items():
                     if mod_dots <= 0:
                         continue
-                    adv_line = _attach_advantage(
+                    adv_line = attach_advantage(
                         entry,
                         mod_id,
                         mod_dots,
@@ -133,7 +133,7 @@ def apply_benefit_package(
                         lines.append(adv_line.replace("Predator:", f"{log_prefix}:", 1))
             else:
                 mod_id = rng.choice(list(options))
-                adv_line = _attach_advantage(
+                adv_line = attach_advantage(
                     entry,
                     mod_id,
                     total,
@@ -172,12 +172,12 @@ def apply_benefit_package(
         lines.append(f"{log_prefix}: Blood Potency +{delta} → {char['blood_potency']}")
 
     for flaw_spec in package.get("flaws", []):
-        for line in _apply_flaw_grant(rng, char, entries, flaw_spec, profile):
+        for line in apply_flaw_grant(rng, char, entries, flaw_spec, profile):
             lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     flaw_pick = package.get("flaw_pick")
     if flaw_pick:
-        for line in _apply_flaw_grant(rng, char, entries, rng.choice(flaw_pick["options"]), profile):
+        for line in apply_flaw_grant(rng, char, entries, rng.choice(flaw_pick["options"]), profile):
             lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     flaw_choice = package.get("flaw_choice")
@@ -185,15 +185,15 @@ def apply_benefit_package(
         branch = rng.choice(flaw_choice)
         if branch.get("flaws"):
             for flaw_spec in branch["flaws"]:
-                for line in _apply_flaw_grant(rng, char, entries, flaw_spec, profile):
+                for line in apply_flaw_grant(rng, char, entries, flaw_spec, profile):
                     lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
         if branch.get("flaw_spend"):
-            for line in _apply_flaw_spend(rng, char, branch["flaw_spend"], profile):
+            for line in apply_flaw_spend(rng, char, branch["flaw_spend"], profile):
                 lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     flaw_spend = package.get("flaw_spend")
     if flaw_spend:
-        for line in _apply_flaw_spend(rng, char, flaw_spend, profile):
+        for line in apply_flaw_spend(rng, char, flaw_spend, profile):
             lines.append(line.replace("Predator:", f"{log_prefix}:", 1))
 
     return lines

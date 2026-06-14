@@ -10,36 +10,34 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.components.sheet import render_lotn_v5_sheet
+from app.formatting import titleize_id
 from app.nav import app_nav
-from wod_chargen.core.xp_log_format import format_xp_log
-from wod_chargen.core.share import (
-    SharePayload,
-    browser_share_url,
-    decode_query,
-    wizard_share_options,
+from app.views import archetype as archetype_view
+from app.views import faction as faction_view
+from app.views import generate as generate_view
+from app.views import predator as predator_view
+from app.views import type as type_view
+from app.views import venue as venue_view
+from app.wizard_state import (
+    build_share_options,
+    default_state,
+    generate,
+    parse_url,
+    share_payload,
+    share_url,
+    sync_url,
+    type_uses_predator,
+    validate_selection,
+    venue_continue_error,
 )
-from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.core.xp_log_format import format_xp_log
 from wod_chargen.games.lotn_v5.archetypes import (
-    THIN_BLOOD_ONLY_SUFFIX,
     archetypes_for_type,
     archetype_display_label,
     get_archetype,
-    is_thin_blood_only,
 )
-from wod_chargen.defaults import DEFAULT_GAME_ID
 from wod_chargen.games.lotn_v5.convictions import pick_convictions
-from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.registry import get_game, load_game_catalog
-from wod_chargen.venues import load_venue
-
-
-def _format_disciplines(entry: dict[str, Any]) -> str:
-    if entry.get("discipline_note"):
-        return entry["discipline_note"]
-    discipline_ids = entry.get("disciplines", [])
-    if not discipline_ids:
-        return "No in-clan disciplines"
-    return " · ".join(d.replace("_", " ").title() for d in discipline_ids)
 
 
 def _flash_button(btn, message: str = "Copied!", *, reset_ms: int = 1600) -> None:
@@ -76,102 +74,25 @@ def _render_generation_error(el, err: str) -> None:
 class WizardApp:
     def __init__(self, root) -> None:
         self.root = root
-        self.state: dict[str, Any] = {
-            "game": DEFAULT_GAME_ID,
-            "type": "vampire",
-            "clan": "brujah",
-            "domitor_clan": "tremere",
-            "arch": "diplomat",
-            "sub": "silver_tongue",
-            "predator": "",
-            "venue": "mes_end_to_dawn",
-            "approval": "2026-06",
-            "xp_custom": "100",
-            "seed": random.randint(1, 999_999),
-            "convictions_seed": random.randint(1, 999_999),
-            "phase": "landing",
-            "unlocked_through": "venue",
-            "scroll_to_step": None,
-            "expanded_sections": [],
-            "result": None,
-            "error": None,
-            "tab": "sheet",
-            "full_random": False,
-        }
+        self.state: dict[str, Any] = default_state()
         self.system = get_game(self.state["game"])
         self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
-        self._parse_url()
+        parse_url(self)
 
     def _build_steps(self) -> list[str]:
         return self.system.get_wizard_steps()
 
     def _parse_url(self) -> None:
-        try:
-            qs = window.location.search
-            if not qs:
-                return
-            payload = decode_query(qs)
-            self.state["seed"] = payload.seed
-            if payload.convictions_seed is not None:
-                self.state["convictions_seed"] = payload.convictions_seed
-            self.state["game"] = payload.game
-            self.system = get_game(payload.game)
-            self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
-            self.state["venue"] = payload.venue
-            opts = payload.options
-            for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
-                if key in opts:
-                    self.state[key] = opts[key]
-            if "xp" in opts:
-                self.state["xp_custom"] = opts["xp"]
-                self.state["venue"] = "custom_xp"
-            self._validate_selection()
-            self._generate()
-            self.state["phase"] = "results" if self.state.get("result") else "build"
-            self.state["unlocked_through"] = "generate"
-        except Exception as exc:
-            self.state["error"] = str(exc)
-            self.state["phase"] = "landing"
+        parse_url(self)
 
     def _type_uses_predator(self) -> bool:
-        return self.system.type_uses_predator(self.state["type"])
+        return type_uses_predator(self)
 
     def _options(self) -> dict[str, str]:
-        opts = wizard_share_options(
-            character_type=self.state["type"],
-            arch=self.state["arch"],
-            sub=self.state["sub"],
-            clan=self.state.get("clan", ""),
-            domitor_clan=self.state.get("domitor_clan", ""),
-            predator=self.state.get("predator", ""),
-            approval=self.state.get("approval", ""),
-            venue_requires_approval_month=bool(
-                self._venue_picker.get(self.state["venue"], {}).get("requires_approval_month")
-            ),
-            type_uses_predator=self._type_uses_predator(),
-        )
-        if self.state.get("venue") == "custom_xp":
-            opts["xp"] = str(self.state.get("xp_custom", "")).strip()
-        return opts
+        return build_share_options(self)
 
     def _venue_continue_error(self) -> str | None:
-        venue_id = self.state.get("venue", "")
-        if venue_id == "custom_xp":
-            raw = str(self.state.get("xp_custom", "")).strip()
-            if not raw:
-                return "Enter an XP amount."
-            try:
-                xp = int(raw)
-            except ValueError:
-                return "XP must be a whole number."
-            if xp < 0:
-                return "XP must be zero or greater."
-            return None
-        if self._venue_picker.get(venue_id, {}).get("requires_approval_month"):
-            approval = str(self.state.get("approval", "")).strip()
-            if not approval:
-                return "Enter an approval month (YYYY-MM)."
-        return None
+        return venue_continue_error(self)
 
     def _step_index(self, step: str) -> int:
         return self._build_steps().index(step)
@@ -267,7 +188,7 @@ class WizardApp:
         if step == "predator":
             labels = {entry["id"]: entry["label"] for entry in self.system.get_predator_picker()}
             pred = self.state.get("predator") or ""
-            return labels.get(pred, pred.replace("_", " ").title())
+            return labels.get(pred, titleize_id(pred))
         if step == "generate":
             return f"Seed {self.state.get('seed', '')}"
         return ""
@@ -374,14 +295,8 @@ class WizardApp:
             self.state["predator"] = ""
         self._finish_step("type")
 
-    def _share_payload(self) -> SharePayload:
-        return SharePayload(
-            seed=int(self.state["seed"]),
-            convictions_seed=int(self.state["convictions_seed"]),
-            game=self.state["game"],
-            venue=self.state["venue"],
-            options=self._options(),
-        )
+    def _share_payload(self):
+        return share_payload(self)
 
     def _convictions(self) -> list[dict[str, str]]:
         return pick_convictions(int(self.state["convictions_seed"]))
@@ -395,7 +310,7 @@ class WizardApp:
         self._render()
 
     def _share_url(self) -> str:
-        return browser_share_url(window.location.pathname, self._share_payload())
+        return share_url(self)
 
     def _recreate_summary_lines(self, result) -> list[str]:
         """Build options + seeds needed to regenerate this character from a share URL."""
@@ -415,23 +330,10 @@ class WizardApp:
         return lines
 
     def _sync_url(self) -> None:
-        window.history.replaceState(None, "", self._share_url())
+        sync_url(self)
 
     def _validate_selection(self) -> None:
-        """Ensure arch/sub still exist after data changes or stale share URLs."""
-        profiles = archetypes_for_type(self.state["type"])
-        valid_arch = {p.id for p in profiles}
-        if self.state["arch"] not in valid_arch:
-            self.state["arch"] = profiles[0].id
-        profile = get_archetype(self.state["arch"])
-        valid_sub = {s.id for s in profile.sub_archetypes}
-        if self.state["sub"] not in valid_sub:
-            self.state["sub"] = profile.sub_archetypes[0].id
-        if self._type_uses_predator():
-            valid_pred = {p["id"] for p in self.system.get_predator_picker()}
-            pred = self.state.get("predator") or ""
-            if pred and pred not in valid_pred:
-                self.state["predator"] = self.system.get_predator_picker()[0]["id"]
+        validate_selection(self)
 
     def _apply_full_random(self, character_type: str) -> None:
         """Pick clan, archetype, subtype, and predator (vampire) at random."""
@@ -475,25 +377,7 @@ class WizardApp:
         self._generate()
 
     def _generate(self) -> None:
-        import traceback
-
-        try:
-            self._validate_selection()
-            venue = load_venue(self.state["venue"])
-            result = generate_character(
-                int(self.state["seed"]),
-                self._options(),
-                venue,
-            )
-            self.state["result"] = result
-            self.state["error"] = None
-            try:
-                self._sync_url()
-            except Exception as sync_exc:
-                self.state["error"] = f"Share URL sync failed: {sync_exc}"
-        except Exception as exc:
-            self.state["error"] = f"{exc}\n\n{traceback.format_exc()}"
-            self.state["result"] = None
+        generate(self)
 
     def mount(self) -> None:
         self._render()
@@ -553,21 +437,21 @@ class WizardApp:
 
         copy = self.system.get_wizard_copy()
         sections: list[tuple[str, str, Any]] = [
-            ("venue", copy.get("xp_title", "Starting XP"), self._view_venue()),
-            ("type", "Character type", self._view_type()),
-            ("faction", self.system.get_faction_picker_title(self._faction_role()), self._view_faction()),
+            ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
+            ("type", "Character type", type_view.render_type(self)),
+            ("faction", self.system.get_faction_picker_title(self._faction_role()), faction_view.render_faction(self)),
             (
                 "archetype",
                 copy.get("archetype_title", "Archetype"),
-                self._view_archetype(),
+                archetype_view.render_archetype(self),
             ),
             (
                 "sub_archetype",
                 copy.get("sub_archetype_title", "Subtype"),
-                self._view_sub_archetype(),
+                archetype_view.render_sub_archetype(self),
             ),
-            ("predator", copy.get("predator_title", "Predator type"), self._view_predator()),
-            ("generate", "Generate", self._view_generate()),
+            ("predator", copy.get("predator_title", "Predator type"), predator_view.render_predator(self)),
+            ("generate", "Generate", generate_view.render_generate(self)),
         ]
         for step, title, body in sections:
             if not self._step_visible(step):
@@ -591,22 +475,6 @@ class WizardApp:
         h.innerText = title
         wrap.appendChild(h)
         return wrap
-
-    def _append_card_list(self, parent: Any, title: str, items: list[str], item_class: str) -> None:
-        if not items:
-            return
-        heading = document.createElement("div")
-        heading.className = "predator-card__section-title"
-        heading.innerText = title
-        parent.appendChild(heading)
-        ul = document.createElement("ul")
-        ul.className = "predator-card__list"
-        for text in items:
-            li = document.createElement("li")
-            li.className = item_class
-            li.innerText = text
-            ul.appendChild(li)
-        parent.appendChild(ul)
 
     def _view_game(self) -> Any:
         el = document.createElement("div")
@@ -663,416 +531,8 @@ class WizardApp:
             el.appendChild(err)
         return el
 
-    def _view_type(self) -> Any:
-        el = document.createElement("div")
-        copy = self.system.get_wizard_copy()
-        random_wrap = document.createElement("label")
-        random_wrap.className = "card p-4 mb-4 flex items-start gap-3 cursor-pointer"
-        random_cb = document.createElement("input")
-        random_cb.type = "checkbox"
-        random_cb.className = "mt-1"
-        random_cb.checked = bool(self.state.get("full_random"))
-
-        def on_random_toggle(_=None):
-            self.state["full_random"] = bool(random_cb.checked)
-
-        random_cb.onchange = on_random_toggle
-        random_wrap.appendChild(random_cb)
-        random_text = document.createElement("div")
-        random_title = document.createElement("div")
-        random_title.className = "font-semibold"
-        random_title.innerText = copy.get("full_random_label", "Full random")
-        random_hint = document.createElement("p")
-        random_hint.className = "text-stone-400 text-sm mt-1"
-        random_hint.innerText = copy.get(
-            "full_random_hint",
-            "Skip the build steps — randomly pick clan, archetype, subtype, and predator type, then generate.",
-        )
-        random_text.appendChild(random_title)
-        random_text.appendChild(random_hint)
-        random_wrap.appendChild(random_text)
-        el.appendChild(random_wrap)
-
-        grid = document.createElement("div")
-        grid.className = "wizard-type-grid"
-        for entry in self.system.get_character_type_picker():
-            tid = entry["id"]
-            btn = document.createElement("button")
-            btn.type = "button"
-            active = self.state["type"] == tid
-            btn.className = f"wizard-type-card {'wizard-type-card--active' if active else ''}"
-
-            label_el = document.createElement("span")
-            label_el.className = "wizard-type-card__label"
-            label_el.innerText = entry["label"]
-            btn.appendChild(label_el)
-            summary = entry.get("summary")
-            if summary:
-                summary_el = document.createElement("p")
-                summary_el.className = "wizard-type-card__summary"
-                summary_el.innerText = summary
-                btn.appendChild(summary_el)
-
-            def pick(e, t=tid):
-                if self.state.get("full_random"):
-                    self._apply_full_random(t)
-                    self._generate()
-                    if self.state.get("result"):
-                        self._goto_results()
-                    else:
-                        self.state["phase"] = "build"
-                        self.state["unlocked_through"] = "generate"
-                else:
-                    self._on_type_selected(t)
-                self._render()
-
-            btn.onclick = pick
-            grid.appendChild(btn)
-        el.appendChild(grid)
-        return el
-
     def _faction_role(self) -> str:
-        return "ghoul" if self.state["type"] == "ghoul" else "vampire"
-
-    def _view_faction(self) -> Any:
-        el = document.createElement("div")
-        role = self._faction_role()
-        options = self.system.get_faction_options(role)
-        clan_key = "clan" if role == "vampire" else "domitor_clan"
-
-        grid = document.createElement("div")
-        grid.className = "clan-grid"
-        for c in options:
-            btn = document.createElement("button")
-            is_thin = c.get("kind") == "thin_blood"
-            if is_thin:
-                active = self.state["type"] == "thin_blood"
-            else:
-                active = self.state["type"] != "thin_blood" and self.state[clan_key] == c["id"]
-            btn.className = f"clan-card {'clan-card--active' if active else ''}"
-            btn.setAttribute("type", "button")
-            btn.setAttribute("aria-label", c["label"])
-            btn.setAttribute("aria-pressed", "true" if active else "false")
-
-            img = document.createElement("img")
-            img.src = c["symbol"]
-            img.alt = ""
-            img.className = "clan-card__symbol"
-            img.setAttribute("aria-hidden", "true")
-            btn.appendChild(img)
-
-            label = document.createElement("span")
-            label.className = "clan-card__label"
-            label.innerText = c["label"]
-            btn.appendChild(label)
-
-            desc = document.createElement("p")
-            desc.className = "clan-card__desc"
-            desc.innerText = c["description"]
-            btn.appendChild(desc)
-
-            discs = document.createElement("p")
-            discs.className = "clan-card__disciplines"
-            discs.innerText = _format_disciplines(c)
-            btn.appendChild(discs)
-
-            def pick(e, entry=c, k=clan_key, r=role):
-                if entry.get("kind") == "thin_blood":
-                    self.state["type"] = "thin_blood"
-                    profiles = archetypes_for_type("thin_blood")
-                    if profiles:
-                        self.state["arch"] = profiles[0].id
-                        self.state["sub"] = profiles[0].sub_archetypes[0].id
-                else:
-                    self.state["type"] = r
-                    self.state[k] = entry["id"]
-                self._finish_step("faction")
-                self._render()
-
-            btn.onclick = pick
-            grid.appendChild(btn)
-        el.appendChild(grid)
-        return el
-
-    def _append_archetype_label(self, parent: Any, profile: Any) -> None:
-        label = document.createElement("span")
-        label.className = "archetype-card__label"
-        name = document.createElement("span")
-        name.innerText = profile.label
-        label.appendChild(name)
-        if is_thin_blood_only(profile):
-            note = document.createElement("span")
-            note.className = "archetype-card__type-note"
-            note.innerText = THIN_BLOOD_ONLY_SUFFIX
-            label.appendChild(note)
-        parent.appendChild(label)
-
-    def _view_archetype(self) -> Any:
-        el = document.createElement("div")
-        profiles = archetypes_for_type(self.state["type"])
-
-        grid = document.createElement("div")
-        grid.className = "archetype-grid"
-        for p in profiles:
-            btn = document.createElement("button")
-            active = self.state["arch"] == p.id
-            btn.className = f"archetype-card archetype-card--pickable {'archetype-card--active' if active else ''}"
-            btn.setAttribute("type", "button")
-
-            self._append_archetype_label(btn, p)
-
-            desc = document.createElement("p")
-            desc.className = "archetype-card__desc"
-            desc.innerText = p.description
-            btn.appendChild(desc)
-
-            subs = document.createElement("p")
-            subs.className = "archetype-card__subs-preview"
-            subs.innerText = " · ".join(s.label for s in p.sub_archetypes)
-            btn.appendChild(subs)
-
-            def pick(e, aid=p.id):
-                self.state["arch"] = aid
-                profile = get_archetype(aid)
-                if profile.sub_archetypes:
-                    self.state["sub"] = profile.sub_archetypes[0].id
-                self._finish_step("archetype")
-                self._render()
-
-            btn.onclick = pick
-            grid.appendChild(btn)
-        el.appendChild(grid)
-        return el
-
-    def _view_sub_archetype(self) -> Any:
-        el = document.createElement("div")
-        copy = self.system.get_wizard_copy()
-        profile = get_archetype(self.state["arch"])
-
-        intro = document.createElement("p")
-        intro.className = "text-stone-400 mb-4"
-        intro.innerText = copy.get("sub_archetype_intro", "")
-        el.appendChild(intro)
-
-        picked = document.createElement("p")
-        picked.className = "text-stone-500 text-sm mb-4"
-        picked.innerText = archetype_display_label(profile)
-        el.appendChild(picked)
-
-        grid = document.createElement("div")
-        grid.className = "sub-archetype-grid"
-        for s in profile.sub_archetypes:
-            btn = document.createElement("button")
-            active = self.state["sub"] == s.id
-            btn.className = f"archetype-card archetype-card--pickable {'archetype-card--active' if active else ''}"
-            btn.setAttribute("type", "button")
-
-            label = document.createElement("span")
-            label.className = "archetype-card__label"
-            label.innerText = s.label
-            btn.appendChild(label)
-
-            if s.description:
-                desc = document.createElement("p")
-                desc.className = "archetype-card__desc"
-                desc.innerText = s.description
-                btn.appendChild(desc)
-
-            def pick(e, sid=s.id):
-                self.state["sub"] = sid
-                self._finish_step("sub_archetype")
-                self._render()
-
-            btn.onclick = pick
-            grid.appendChild(btn)
-        el.appendChild(grid)
-        return el
-
-    def _view_predator(self) -> Any:
-        el = document.createElement("div")
-        copy = self.system.get_wizard_copy()
-
-        intro = document.createElement("p")
-        intro.className = "text-stone-400 mb-4"
-        intro.innerText = copy.get("predator_intro", "")
-        el.appendChild(intro)
-
-        picker = self.system.get_predator_picker()
-        grid = document.createElement("div")
-        grid.className = "predator-grid"
-        selected = self.state.get("predator") or picker[0]["id"]
-        for entry in picker:
-            pid = entry["id"]
-            btn = document.createElement("button")
-            btn.className = (
-                "archetype-card archetype-card--pickable predator-card "
-                f"{'archetype-card--active' if selected == pid else ''}"
-            )
-            btn.setAttribute("type", "button")
-
-            label = document.createElement("span")
-            label.className = "archetype-card__label"
-            label.innerText = entry["label"]
-            btn.appendChild(label)
-
-            if entry.get("summary"):
-                desc = document.createElement("p")
-                desc.className = "archetype-card__desc"
-                desc.innerText = entry["summary"]
-                btn.appendChild(desc)
-
-            pool = entry.get("feeding_pool")
-            if pool:
-                pool_block = document.createElement("div")
-                pool_block.className = "predator-card__pool-block"
-                pool_title = document.createElement("div")
-                pool_title.className = "predator-card__section-title"
-                pool_title.innerText = "Feeding pool"
-                pool_value = document.createElement("div")
-                pool_value.className = "predator-card__pool"
-                pool_value.innerText = pool
-                pool_block.appendChild(pool_title)
-                pool_block.appendChild(pool_value)
-                btn.appendChild(pool_block)
-
-            self._append_card_list(btn, "Benefits", entry.get("benefits", []), "predator-card__benefit")
-            self._append_card_list(btn, "Restrictions", entry.get("restrictions", []), "predator-card__restriction")
-            self._append_card_list(btn, "Drawbacks", entry.get("drawbacks", []), "predator-card__drawback")
-
-            def pick(e, p=pid):
-                self.state["predator"] = p
-                self._finish_step("predator")
-                self._render()
-
-            btn.onclick = pick
-            grid.appendChild(btn)
-        el.appendChild(grid)
-        return el
-
-    def _view_venue(self) -> Any:
-        el = document.createElement("div")
-        copy = self.system.get_wizard_copy()
-
-        intro = document.createElement("p")
-        intro.className = "text-stone-400 mb-4"
-        intro.innerText = copy.get(
-            "xp_intro",
-            "Choose how much experience the character has to spend.",
-        )
-        el.appendChild(intro)
-
-        for venue in self.system.get_venue_picker():
-            vid = venue["id"]
-            label = venue["label"]
-            btn = document.createElement("button")
-            btn.className = f"card p-4 w-full text-left mb-3 {'card--selected' if self.state['venue'] == vid else ''}"
-
-            def pick(e, v=vid):
-                self.state["venue"] = v
-                self.state["error"] = None
-                self._render()
-
-            btn.innerText = label
-            btn.onclick = pick
-            el.appendChild(btn)
-
-        if self._venue_picker.get(self.state["venue"], {}).get("requires_approval_month"):
-            lbl = document.createElement("label")
-            lbl.className = "block mt-4 text-stone-400"
-            lbl.innerText = "Approval month (YYYY-MM)"
-            inp = document.createElement("input")
-            inp.type = "text"
-            inp.value = self.state["approval"]
-            inp.className = "bg-ash border border-stone-700 rounded px-3 py-2 w-full mt-1"
-
-            def on_change(e):
-                self.state["approval"] = inp.value
-
-            inp.oninput = on_change
-            el.appendChild(lbl)
-            el.appendChild(inp)
-
-        xp_inp: Any | None = None
-        if self.state.get("venue") == "custom_xp":
-            lbl = document.createElement("label")
-            lbl.className = "block mt-4 text-stone-400"
-            lbl.innerText = copy.get("xp_custom_label", "XP amount")
-            xp_inp = document.createElement("input")
-            xp_inp.type = "number"
-            xp_inp.min = "0"
-            xp_inp.step = "1"
-            xp_inp.value = str(self.state.get("xp_custom", "100"))
-            xp_inp.className = "bg-ash border border-stone-700 rounded px-3 py-2 w-full mt-1"
-
-            def on_xp_change(e):
-                self.state["xp_custom"] = xp_inp.value
-
-            xp_inp.oninput = on_xp_change
-            el.appendChild(lbl)
-            el.appendChild(xp_inp)
-
-        go = document.createElement("button")
-        go.className = "btn-primary mt-6"
-
-        def next_step(_=None):
-            if xp_inp is not None:
-                self.state["xp_custom"] = str(xp_inp.value).strip()
-            err = self._venue_continue_error()
-            if err:
-                self.state["error"] = err
-                self._render()
-                return
-            self.state["error"] = None
-            self._finish_step("venue")
-            self._render()
-
-        go.innerText = "Continue"
-        go.onclick = next_step
-        el.appendChild(go)
-        return el
-
-    def _view_generate(self) -> Any:
-        el = document.createElement("div")
-        seed_lbl = document.createElement("label")
-        seed_lbl.className = "block text-stone-400"
-        seed_lbl.innerText = "Seed (reproducible)"
-        seed_inp = document.createElement("input")
-        seed_inp.type = "number"
-        seed_inp.value = str(self.state["seed"])
-        seed_inp.className = "bg-ash border border-stone-700 rounded px-3 py-2 w-full mt-1 mb-4"
-
-        def on_seed(e):
-            self.state["seed"] = int(seed_inp.value or 0)
-
-        seed_inp.oninput = on_seed
-        el.appendChild(seed_lbl)
-        el.appendChild(seed_inp)
-
-        gen = document.createElement("button")
-        gen.className = "btn-primary"
-
-        def do_gen(_=None):
-            try:
-                self.state["seed"] = int(seed_inp.value) if str(seed_inp.value).strip() else int(self.state["seed"])
-            except (ValueError, TypeError):
-                self.state["error"] = "Enter a valid numeric seed."
-                self._render()
-                return
-            self._generate()
-            if self.state.get("result"):
-                self._goto_results()
-            self._render()
-
-        gen.innerText = "Generate character"
-        gen.onclick = do_gen
-        el.appendChild(gen)
-
-        if self.state.get("error"):
-            err = document.createElement("p")
-            err.className = "text-red-400 mt-4"
-            err.innerText = self.state["error"]
-            el.appendChild(err)
-        return el
+        return faction_view.faction_role(self)
 
     def _view_results(self) -> Any:
         el = document.createElement("div")
@@ -1150,11 +610,14 @@ class WizardApp:
         sheet_panel.className = "results-tab-panel sheet-panel"
         if self.state["tab"] != "sheet":
             sheet_panel.className += " results-tab-hidden"
+        sheet_model = self.system.build_sheet_model(
+            result,
+            convictions=self._convictions(),
+            convictions_seed=int(self.state["convictions_seed"]),
+        )
         sheet_panel.appendChild(
             render_lotn_v5_sheet(
-                result.character,
-                convictions=self._convictions(),
-                convictions_seed=int(self.state["convictions_seed"]),
+                sheet_model,
                 on_reroll_convictions=self._reroll_convictions,
             )
         )

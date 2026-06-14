@@ -1,4 +1,4 @@
-"""Predator type package, weight, and bias validation against LoTN pocket rules."""
+"""Predator type package, weight, and bias validation."""
 
 from __future__ import annotations
 
@@ -12,7 +12,6 @@ from wod_chargen.games.lotn_v5.predators import (
     validate_predator_catalog,
 )
 
-# Canonical mechanical packages — keyed by predator id (pocket book pp. 70–75).
 EXPECTED = {
     "alleycat": {
         "pool": ("wits", "streetwise"),

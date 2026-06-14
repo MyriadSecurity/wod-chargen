@@ -8,7 +8,7 @@ from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.paths import DATA_PKG
-from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags
+from wod_chargen.games.lotn_v5.trait_catalog import all_bias_keys
 
 VALID_TYPES = {"vampire", "ghoul", "thin_blood"}
 THIN_BLOOD_ONLY_SUFFIX = " *** Thin-Blood Only ***"
@@ -28,8 +28,7 @@ BIAS_MODIFIER_KEYS = (
     "loresheet_biases",
 )
 
-# Legacy alias for tests importing MODIFIER_KEYS
-MODIFIER_KEYS = BIAS_MODIFIER_KEYS
+MODIFIER_KEYS = BIAS_MODIFIER_KEYS  # test alias
 
 
 @dataclass(frozen=True)
@@ -75,38 +74,7 @@ class ArchetypeProfile:
 
 
 def _registry_ids() -> dict[str, set[str]]:
-    attrs = set(load_json_cached(DATA_PKG, "attributes.json")["all"])
-    skills = set(load_json_cached(DATA_PKG, "skills.json")["all"])
-    discs = set(load_json_cached(DATA_PKG, "disciplines.json")["all"])
-    mf = load_json_cached(DATA_PKG, "merits_flaws.json")
-    merits = {m["id"] for m in mf["merits"]}
-    flaws = {f["id"] for f in mf["flaws"]}
-    bg = load_json_cached(DATA_PKG, "backgrounds.json")
-    backgrounds = set(bg["backgrounds"].keys())
-    spheres = {s["id"] for s in bg["spheres"]}
-    modifiers: set[str] = set()
-    for spec in bg["backgrounds"].values():
-        for mod in spec.get("advantages", []) + spec.get("disadvantages", []):
-            modifiers.add(mod["id"])
-    tags = set(load_trait_tags().get("tags", {}).keys())
-    powers: set[str] = set()
-    for disc in load_json_cached(DATA_PKG, "discipline_powers.json")["disciplines"]:
-        for p in disc.get("powers", []):
-            powers.add(p["id"])
-    loresheets = {ls["id"] for ls in load_json_cached(DATA_PKG, "loresheets.json")["loresheets"]}
-    return {
-        "attribute_biases": attrs,
-        "skill_biases": skills,
-        "discipline_biases": discs,
-        "merit_biases": merits,
-        "flaw_biases": flaws,
-        "background_biases": backgrounds,
-        "sphere_biases": spheres,
-        "modifier_biases": modifiers,
-        "discipline_power_biases": powers,
-        "tag_affinities": tags,
-        "loresheet_biases": loresheets,
-    }
+    return all_bias_keys()
 
 
 def _validate_bias_keys(data: dict[str, float], registry: set[str], label: str, arch_id: str) -> None:

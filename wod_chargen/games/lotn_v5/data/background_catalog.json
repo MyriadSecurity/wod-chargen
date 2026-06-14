@@ -1,11 +1,4 @@
 {
-  "source_ref": {
-    "mes_sheet_version": "5.2.9 MES",
-    "mes_workbook": "Monroe.xlsx",
-    "imported_at": "2026-06-13T20:56:47.806106+00:00",
-    "import_script": "scripts/import_mes_tables.py",
-    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
-  },
   "entries": [
     {
       "background": "allies",

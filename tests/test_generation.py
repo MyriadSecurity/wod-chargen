@@ -101,7 +101,7 @@ def test_apply_mandatory_blood_potency_shortfall():
 
 
 def test_mandatory_blood_potency_only_for_ninth_gen_pcs():
-    """9th is the PC floor at MES; it is the only eligible gen with min BP 2."""
+    """9th is the PC floor at MES; only eligible gen with min BP 2."""
     result = generate_character(1, _opts(generation=9), _venue())
     mandatory = [e for e in result.xp_log if e.source == "mandatory"]
     assert mandatory

@@ -1,11 +1,4 @@
 {
-  "source_ref": {
-    "book": "Laws of the Night pocket edition",
-    "chapter": 6,
-    "pages": "159-175",
-    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/loresheets",
-    "built_by": "scripts/build_loresheet_data.py"
-  },
   "rules": {
     "max_per_character": 1,
     "cost_per_dot_xp": 3,

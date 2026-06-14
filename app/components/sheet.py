@@ -6,50 +6,31 @@ from typing import Any
 
 from pyscript import document
 
-from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
-from wod_chargen.games.lotn_v5.archetypes import get_archetype
-from wod_chargen.games.lotn_v5.merits_flaws import trait_base_id, trait_def, trait_display_label
-from wod_chargen.games.lotn_v5.thin_blood_merits import thin_blood_trait_label
-from wod_chargen.games.lotn_v5.disciplines import discipline_power_ids_for_track, ghoul_domitor_discipline_pool, power_label
-from wod_chargen.games.lotn_v5.backgrounds import (
-    background_defs,
-    background_label,
-    level_label,
-    level_summary,
-    modifier_max_dots,
-    sphere_label,
+from wod_chargen.games.lotn_v5.sheet_model import (
+    BackgroundCard,
+    BackgroundModifier,
+    BackgroundsSection,
+    ConvictionsSection,
+    DisciplineCard,
+    DisciplinesSection,
+    DotRow,
+    LoresheetSection,
+    MetaItem,
+    NamedItemsSection,
+    RatedTraitsSection,
+    SheetHeader,
+    SheetModel,
+    StatLine,
+    TraitColumn,
+    TraitPanel,
 )
 
-from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
-
-def _discipline_labels() -> dict[str, str]:
-    catalog = load_json_cached(DATA, "discipline_powers.json")
-    return {disc["id"]: disc["label"] for disc in catalog.get("disciplines", [])}
-
-
-def _discipline_label(disc_id: str) -> str:
-    return _discipline_labels().get(disc_id, _title(disc_id))
-
-
-def _title(key: str) -> str:
-    return key.replace("_", " ").title()
-
-
-def _lookup_label(mapping: dict[str, Any], item_id: str | None) -> str:
-    if not item_id:
-        return "—"
-    entry = mapping.get(item_id)
-    if isinstance(entry, dict):
-        return entry.get("label", _title(item_id))
-    return _title(item_id)
-
-
-def _dot_row(value: int, *, max_dots: int = 5) -> Any:
+def _dot_row(dots: DotRow) -> Any:
     row = document.createElement("span")
     row.className = "sheet-dots"
-    filled = max(0, int(value))
+    filled = max(0, int(dots.value))
+    max_dots = dots.max_dots
     for i in range(1, max_dots + 1):
         dot = document.createElement("span")
         dot.className = "sheet-dot sheet-dot--filled" if i <= min(filled, max_dots) else "sheet-dot"
@@ -63,14 +44,14 @@ def _dot_row(value: int, *, max_dots: int = 5) -> Any:
     return row
 
 
-def _stat_line(name: str, value: int) -> Any:
+def _stat_line(stat: StatLine) -> Any:
     line = document.createElement("div")
     line.className = "sheet-stat"
     label = document.createElement("span")
     label.className = "sheet-stat__name"
-    label.innerText = _title(name)
+    label.innerText = stat.label
     line.appendChild(label)
-    line.appendChild(_dot_row(value))
+    line.appendChild(_dot_row(stat.dots))
     return line
 
 
@@ -81,298 +62,186 @@ def _section_heading(text: str) -> Any:
     return head
 
 
-def _meta_item(label: str, value: str) -> Any:
+def _meta_item(item: MetaItem) -> Any:
     wrap = document.createElement("div")
     wrap.className = "sheet-meta__item"
     dt = document.createElement("span")
     dt.className = "sheet-meta__label"
-    dt.innerText = label
+    dt.innerText = item.label
     dd = document.createElement("span")
     dd.className = "sheet-meta__value"
-    dd.innerText = value
+    dd.innerText = item.value
     wrap.appendChild(dt)
     wrap.appendChild(dd)
     return wrap
 
 
-def _category_stat_column(title: str, trait_ids: list[str], values: dict[str, int]) -> Any:
+def _category_stat_column(column: TraitColumn) -> Any:
     col = document.createElement("div")
     col.className = "sheet-trait-col"
 
     head = document.createElement("h4")
     head.className = "sheet-trait-col__title"
-    head.innerText = title
+    head.innerText = column.title
     col.appendChild(head)
 
     stat_list = document.createElement("div")
     stat_list.className = "sheet-stat-list"
-    for trait_id in trait_ids:
-        stat_list.appendChild(_stat_line(trait_id, values.get(trait_id, 0)))
+    for stat in column.stats:
+        stat_list.appendChild(_stat_line(stat))
     col.appendChild(stat_list)
     return col
 
 
-def _trait_panel(
-    panel_title: str,
-    categories: list[tuple[str, list[str]]],
-    values: dict[str, int],
-) -> Any:
-    panel = document.createElement("section")
-    panel.className = "sheet-trait-panel"
-    panel.appendChild(_section_heading(panel_title))
+def _trait_panel(panel: TraitPanel) -> Any:
+    section = document.createElement("section")
+    section.className = "sheet-trait-panel"
+    section.appendChild(_section_heading(panel.title))
 
     columns = document.createElement("div")
     columns.className = "sheet-trait-panel__columns"
-    for category_title, trait_ids in categories:
-        columns.appendChild(_category_stat_column(category_title, trait_ids, values))
-    panel.appendChild(columns)
-    return panel
-
-
-def _disciplines_section(character: dict[str, Any], *, exclude: set[str] | None = None) -> Any | None:
-    skip = exclude or set()
-    is_ghoul = character.get("character_type") == "ghoul"
-    discs = {k: v for k, v in character.get("disciplines", {}).items() if v > 0 and k not in skip}
-    if not discs:
-        return None
-    picks = character.get("discipline_powers", {})
-    section = document.createElement("section")
-    section.className = "sheet-disciplines"
-    section.appendChild(_section_heading("Domitor Disciplines" if is_ghoul else "Disciplines"))
-    list_el = document.createElement("div")
-    list_el.className = "sheet-discipline-list"
-    dot_cap = 1 if is_ghoul else 5
-    for disc_id, rating in sorted(discs.items()):
-        card = document.createElement("div")
-        card.className = "sheet-discipline-card"
-        head = document.createElement("div")
-        head.className = "sheet-discipline-card__head"
-        name = document.createElement("span")
-        name.className = "sheet-stat__name"
-        name.innerText = _discipline_label(disc_id)
-        head.appendChild(name)
-        head.appendChild(_dot_row(int(rating), max_dots=dot_cap))
-        card.appendChild(head)
-        picks_for_disc = picks.get(disc_id, {})
-        if is_ghoul:
-            power_ids = discipline_power_ids_for_track(character, disc_id)
-            if power_ids:
-                powers = document.createElement("ul")
-                powers.className = "sheet-discipline-card__powers sheet-discipline-card__powers--ghoul"
-                for pid in power_ids:
-                    item = document.createElement("li")
-                    item.innerText = power_label(pid)
-                    powers.appendChild(item)
-                card.appendChild(powers)
-        elif picks_for_disc:
-            powers = document.createElement("ul")
-            powers.className = "sheet-discipline-card__powers"
-            for level in sorted(picks_for_disc.keys(), key=lambda x: int(x) if x.isdigit() else 0):
-                if level == "extra":
-                    continue
-                item = document.createElement("li")
-                pid = picks_for_disc[level]
-                item.innerText = f"•{level} {power_label(pid)}"
-                powers.appendChild(item)
-            card.appendChild(powers)
-        list_el.appendChild(card)
-    section.appendChild(list_el)
+    for column in panel.columns:
+        columns.appendChild(_category_stat_column(column))
+    section.appendChild(columns)
     return section
 
 
-def _resonance_discipline_section(character: dict[str, Any]) -> Any | None:
-    if character.get("character_type") != "thin_blood":
-        return None
-    disc_id = (character.get("discipline_meta") or {}).get("resonance_discipline")
-    if not disc_id:
-        return None
-    rating = int((character.get("discipline_meta") or {}).get("resonance_rating", 1))
-    picks = character.get("discipline_powers", {}).get(disc_id, {})
-    level_one = picks.get("1")
-    section = document.createElement("section")
-    section.className = "sheet-disciplines sheet-disciplines--resonance"
-    section.appendChild(_section_heading("Resonance Discipline"))
-    card = document.createElement("div")
-    card.className = "sheet-discipline-card"
+def _discipline_card(card: DisciplineCard) -> Any:
+    card_el = document.createElement("div")
+    card_el.className = "sheet-discipline-card"
     head = document.createElement("div")
     head.className = "sheet-discipline-card__head"
     name = document.createElement("span")
     name.className = "sheet-stat__name"
-    name.innerText = _discipline_label(disc_id)
+    name.innerText = card.name
     head.appendChild(name)
-    head.appendChild(_dot_row(rating, max_dots=5))
-    card.appendChild(head)
-    if level_one:
+    head.appendChild(_dot_row(card.rating))
+    card_el.appendChild(head)
+    if card.powers:
         powers = document.createElement("ul")
-        powers.className = "sheet-discipline-card__powers"
-        item = document.createElement("li")
-        item.innerText = f"•1 {power_label(level_one)}"
-        powers.appendChild(item)
-        card.appendChild(powers)
-    section.appendChild(card)
-    return section
+        powers.className = (
+            "sheet-discipline-card__powers sheet-discipline-card__powers--ghoul"
+            if card.ghoul_powers
+            else "sheet-discipline-card__powers"
+        )
+        for power_text in card.powers:
+            item = document.createElement("li")
+            item.innerText = power_text
+            powers.appendChild(item)
+        card_el.appendChild(powers)
+    return card_el
 
 
-def _power_id_list_section(title: str, power_ids: list[str]) -> Any | None:
-    if not power_ids:
-        return None
-    section = document.createElement("section")
-    section.className = "sheet-rated-traits"
-    section.appendChild(_section_heading(title))
-    grid = document.createElement("div")
-    grid.className = "sheet-rated-traits__grid"
-    for pid in sorted(power_ids):
-        line = document.createElement("div")
-        line.className = "sheet-stat"
-        label = document.createElement("span")
-        label.className = "sheet-stat__name"
-        label.innerText = power_label(pid)
-        line.appendChild(label)
-        grid.appendChild(line)
-    section.appendChild(grid)
-    return section
-
-
-def _formula_section(character: dict[str, Any]) -> Any | None:
-    formulas = {k: v for k, v in character.get("thin_blood_formulas", {}).items() if v > 0}
-    if not formulas:
-        return None
-    fp = character.get("formula_powers", {})
-    section = document.createElement("section")
-    section.className = "sheet-disciplines"
-    section.appendChild(_section_heading("Thin-Blood Formulas"))
+def _disciplines_section(section: DisciplinesSection, *, css_class: str = "sheet-disciplines") -> Any:
+    el = document.createElement("section")
+    el.className = css_class
+    el.appendChild(_section_heading(section.title))
     list_el = document.createElement("div")
     list_el.className = "sheet-discipline-list"
-    for fid in sorted(formulas.keys()):
+    for card in section.cards:
+        list_el.appendChild(_discipline_card(card))
+    el.appendChild(list_el)
+    return el
+
+
+def _named_items_section(section: NamedItemsSection) -> Any:
+    el = document.createElement("section")
+    el.className = "sheet-rated-traits"
+    el.appendChild(_section_heading(section.title))
+    grid = document.createElement("div")
+    grid.className = "sheet-rated-traits__grid"
+    for label in section.items:
+        line = document.createElement("div")
+        line.className = "sheet-stat"
+        name = document.createElement("span")
+        name.className = "sheet-stat__name"
+        name.innerText = label
+        line.appendChild(name)
+        grid.appendChild(line)
+    el.appendChild(grid)
+    return el
+
+
+def _formula_section(section: NamedItemsSection) -> Any:
+    el = document.createElement("section")
+    el.className = "sheet-disciplines"
+    el.appendChild(_section_heading(section.title))
+    list_el = document.createElement("div")
+    list_el.className = "sheet-discipline-list"
+    for label in section.items:
         card = document.createElement("div")
         card.className = "sheet-discipline-card"
         name = document.createElement("span")
         name.className = "sheet-stat__name"
-        name.innerText = power_label(fid)
+        name.innerText = label
         card.appendChild(name)
         list_el.appendChild(card)
-    section.appendChild(list_el)
-    return section
+    el.appendChild(list_el)
+    return el
 
 
-def _rated_traits_section(title: str, items: dict[str, int], *, kind: str | None = None) -> Any | None:
-    rated = {k: v for k, v in items.items() if v > 0}
-    if not rated:
-        return None
-    section = document.createElement("section")
-    section.className = "sheet-rated-traits"
-    section.appendChild(_section_heading(title))
+def _rated_traits_section(section: RatedTraitsSection, *, css_class: str = "sheet-rated-traits") -> Any:
+    el = document.createElement("section")
+    el.className = css_class
+    el.appendChild(_section_heading(section.title))
     grid = document.createElement("div")
     grid.className = "sheet-rated-traits__grid"
-    for key, value in sorted(rated.items()):
-        label = trait_display_label(key, kind) if kind in ("merit", "flaw") else _title(key)
-        grid.appendChild(_stat_line(label, value))
-    section.appendChild(grid)
-    return section
+    for stat in section.stats:
+        grid.appendChild(_stat_line(stat))
+    el.appendChild(grid)
+    return el
 
 
-def _is_thin_blood_trait_key(trait_key: str, kind: str) -> bool:
-    entry = trait_def(trait_base_id(trait_key), kind)  # type: ignore[arg-type]
-    return bool(entry and entry.get("thin_blood_only"))
-
-
-def _standard_traits(items: dict[str, int], kind: str) -> dict[str, int]:
-    return {
-        key: value
-        for key, value in items.items()
-        if value > 0 and not _is_thin_blood_trait_key(key, kind)
-    }
-
-
-def _thin_blood_traits_section(
-    title: str,
-    items: dict[str, int],
-    *,
-    kind: str,
-) -> Any | None:
-    rated = {k: v for k, v in items.items() if v > 0}
-    if not rated:
-        return None
-    section = document.createElement("section")
-    section.className = "sheet-rated-traits sheet-rated-traits--thin-blood"
-    section.appendChild(_section_heading(title))
+def _loresheet_section(section: LoresheetSection) -> Any:
+    el = document.createElement("section")
+    el.className = "sheet-rated-traits"
+    el.appendChild(_section_heading("Loresheet"))
     grid = document.createElement("div")
     grid.className = "sheet-rated-traits__grid"
-    for key in sorted(rated):
-        grid.appendChild(_stat_line(thin_blood_trait_label(key, kind), 1))  # type: ignore[arg-type]
-    section.appendChild(grid)
-    return section
-
-
-def _loresheet_section(character: dict[str, Any]) -> Any | None:
-    sheets = character.get("loresheets") or {}
-    rated = {k: v for k, v in sheets.items() if int(v) > 0}
-    if not rated:
-        return None
-    catalog = {
-        ls["id"]: ls["label"]
-        for ls in load_json_cached(DATA, "loresheets.json").get("loresheets", [])
-    }
-    section = document.createElement("section")
-    section.className = "sheet-rated-traits"
-    section.appendChild(_section_heading("Loresheet"))
-    grid = document.createElement("div")
-    grid.className = "sheet-rated-traits__grid"
-    for ls_id, dots in sorted(rated.items()):
-        label = catalog.get(ls_id, _title(ls_id))
-        grid.appendChild(_stat_line(label, int(dots)))
-    section.appendChild(grid)
-    meta = character.get("loresheet_meta") or {}
-    narratives = meta.get("narratives") or []
-    if narratives:
+    for stat in section.stats:
+        grid.appendChild(_stat_line(stat))
+    el.appendChild(grid)
+    if section.notes:
         notes = document.createElement("div")
         notes.className = "sheet-loresheet-notes"
-        for entry in narratives:
+        for text in section.notes:
             p = document.createElement("p")
             p.className = "sheet-loresheet-notes__item"
-            p.textContent = f"{entry.get('label', entry.get('id', ''))}: {entry.get('narrative', '')}"
+            p.textContent = text
             notes.appendChild(p)
-        section.appendChild(notes)
-    return section
+        el.appendChild(notes)
+    return el
 
 
-def _modifier_list(items: list[Any], catalog: list[dict[str, Any]], css: str) -> Any:
+def _modifier_tag(modifier: BackgroundModifier, css: str) -> Any:
+    tag = document.createElement("span")
+    tag.className = f"sheet-bg-modifier sheet-bg-modifier--{css}"
+    name = document.createElement("span")
+    name.className = "sheet-bg-modifier__label"
+    name.innerText = modifier.label
+    tag.appendChild(name)
+    dots_el = _dot_row(modifier.dots)
+    dots_el.classList.add("sheet-dots--compact")
+    tag.appendChild(dots_el)
+    return tag
+
+
+def _modifier_list(modifiers: tuple[BackgroundModifier, ...], css: str) -> Any:
     wrap = document.createElement("div")
     wrap.className = f"sheet-bg-modifiers sheet-bg-modifiers--{css}"
-    catalog_by_id = {entry["id"]: entry for entry in catalog}
-    for raw in items:
-        if isinstance(raw, dict):
-            mod_id = raw.get("id", "")
-            dots = int(raw.get("dots", 1))
-        else:
-            mod_id = str(raw)
-            dots = 1
-        mod_def = catalog_by_id.get(mod_id, {})
-        label = mod_def.get("label", mod_id.replace("_", " ").title())
-        max_dots = modifier_max_dots(mod_def) if mod_def else max(dots, 1)
-
-        tag = document.createElement("span")
-        tag.className = f"sheet-bg-modifier sheet-bg-modifier--{css}"
-        name = document.createElement("span")
-        name.className = "sheet-bg-modifier__label"
-        name.innerText = label
-        tag.appendChild(name)
-        dots_el = _dot_row(dots, max_dots=max_dots)
-        dots_el.classList.add("sheet-dots--compact")
-        tag.appendChild(dots_el)
-        wrap.appendChild(tag)
+    for modifier in modifiers:
+        wrap.appendChild(_modifier_tag(modifier, css))
     return wrap
 
 
-def _background_card_title_el(entry: dict[str, Any], bg_type: str) -> Any:
+def _background_card_title_el(card: BackgroundCard) -> Any:
     wrap = document.createElement("span")
     wrap.className = "sheet-background-card__title"
     type_line = document.createElement("span")
     type_line.className = "sheet-background-card__type"
-    type_line.innerText = background_label(bg_type)
+    type_line.innerText = card.type_label
     wrap.appendChild(type_line)
-    sphere_id = entry.get("sphere")
-    if sphere_id:
+    if card.sphere_label:
         sep = document.createElement("span")
         sep.className = "sheet-background-card__sep"
         sep.setAttribute("aria-hidden", "true")
@@ -380,75 +249,62 @@ def _background_card_title_el(entry: dict[str, Any], bg_type: str) -> Any:
         wrap.appendChild(sep)
         sphere = document.createElement("span")
         sphere.className = "sheet-background-card__sphere"
-        sphere.innerText = sphere_label(sphere_id)
+        sphere.innerText = card.sphere_label
         wrap.appendChild(sphere)
     return wrap
 
 
-def _background_section(entries: list[dict[str, Any]]) -> Any | None:
-    rated = [e for e in entries if int(e.get("dots", 0)) > 0]
-    if not rated:
-        return None
-    section = document.createElement("section")
-    section.className = "sheet-backgrounds"
-    section.appendChild(_section_heading("Backgrounds"))
+def _background_section(section: BackgroundsSection) -> Any:
+    el = document.createElement("section")
+    el.className = "sheet-backgrounds"
+    el.appendChild(_section_heading("Backgrounds"))
     list_el = document.createElement("div")
     list_el.className = "sheet-background-list"
-
-    defs = background_defs()
-    for entry in rated:
-        bg_type = entry.get("type", "")
-        spec = defs.get(bg_type, {})
-        card = document.createElement("div")
-        card.className = "sheet-background-card"
+    for card in section.cards:
+        card_el = document.createElement("div")
+        card_el.className = "sheet-background-card"
 
         head = document.createElement("div")
         head.className = "sheet-background-card__head"
-        head.appendChild(_background_card_title_el(entry, bg_type))
-        head.appendChild(_dot_row(int(entry.get("dots", 0)), max_dots=int(spec.get("max_dots", 3))))
-        card.appendChild(head)
+        head.appendChild(_background_card_title_el(card))
+        head.appendChild(_dot_row(card.dots))
+        card_el.appendChild(head)
 
         lvl = document.createElement("p")
         lvl.className = "sheet-background-card__level"
-        dots = int(entry.get("dots", 0))
-        lvl.innerText = f"{level_label(bg_type, dots)} — {level_summary(bg_type, dots)}"
-        card.appendChild(lvl)
+        lvl.innerText = card.level_text
+        card_el.appendChild(lvl)
 
-        if entry.get("advantages"):
-            card.appendChild(_modifier_list(entry["advantages"], spec.get("advantages", []), "adv"))
-        if entry.get("disadvantages"):
-            card.appendChild(_modifier_list(entry["disadvantages"], spec.get("disadvantages", []), "dis"))
+        if card.advantages:
+            card_el.appendChild(_modifier_list(card.advantages, "adv"))
+        if card.disadvantages:
+            card_el.appendChild(_modifier_list(card.disadvantages, "dis"))
 
-        list_el.appendChild(card)
-    section.appendChild(list_el)
-    return section
+        list_el.appendChild(card_el)
+    el.appendChild(list_el)
+    return el
 
 
-def _convictions_section(
-    convictions: list[dict[str, str]],
-    *,
-    convictions_seed: int,
-    on_reroll=None,
-) -> Any:
-    section = document.createElement("section")
-    section.className = "sheet-convictions"
-    section.appendChild(_section_heading("Convictions"))
+def _convictions_section(section: ConvictionsSection, *, on_reroll=None) -> Any:
+    el = document.createElement("section")
+    el.className = "sheet-convictions"
+    el.appendChild(_section_heading("Convictions"))
 
     list_el = document.createElement("ol")
     list_el.className = "sheet-convictions__list"
-    for idx, entry in enumerate(convictions, start=1):
+    for text in section.items:
         item = document.createElement("li")
         item.className = "sheet-convictions__item"
-        item.innerText = entry["text"]
+        item.innerText = text
         list_el.appendChild(item)
-    section.appendChild(list_el)
+    el.appendChild(list_el)
 
     footer = document.createElement("div")
     footer.className = "sheet-convictions__footer no-print"
 
     seed_note = document.createElement("p")
     seed_note.className = "sheet-convictions__seed"
-    seed_note.innerText = f"Convictions seed {convictions_seed}"
+    seed_note.innerText = f"Convictions seed {section.seed}"
     footer.appendChild(seed_note)
 
     if on_reroll is not None:
@@ -459,35 +315,13 @@ def _convictions_section(
         btn.onclick = on_reroll
         footer.appendChild(btn)
 
-    section.appendChild(footer)
-    return section
+    el.appendChild(footer)
+    return el
 
 
-def render_lotn_v5_sheet(
-    character: dict[str, Any],
-    *,
-    convictions: list[dict[str, str]] | None = None,
-    convictions_seed: int | None = None,
-    on_reroll_convictions=None,
-) -> Any:
-    """Build a printable LoTN-style sheet element from generated character data."""
-    attrs = load_json_cached(DATA, "attributes.json")
-    skills = load_json_cached(DATA, "skills.json")
-    clans = load_json_cached(DATA, "clans.json")
-    types = load_json_cached(DATA, "character_types.json")
-    predators = {t["id"]: t["label"] for t in load_json_cached(DATA, "predator_types.json")["types"]}
-
-    ctype = character.get("character_type", "vampire")
-    arch_id = character.get("archetype", "")
-    sub_id = character.get("sub_archetype", "")
-    arch = get_archetype(arch_id)
-    sub = next((s for s in arch.sub_archetypes if s.id == sub_id), None)
-
-    sheet = document.createElement("article")
-    sheet.className = "character-sheet"
-
-    header = document.createElement("header")
-    header.className = "sheet-header"
+def _render_header(header: SheetHeader) -> Any:
+    header_el = document.createElement("header")
+    header_el.className = "sheet-header"
 
     title_row = document.createElement("div")
     title_row.className = "sheet-header__top"
@@ -500,134 +334,83 @@ def render_lotn_v5_sheet(
     title_row.appendChild(title)
     title_row.appendChild(subtitle)
 
-    clan_id = character.get("clan") or character.get("domitor_clan")
-    if clan_id and clan_id in clans:
+    if header.clan_symbol_src:
         symbol = document.createElement("img")
         symbol.className = "sheet-header__clan"
-        symbol.src = clans[clan_id].get("symbol", clan_symbol_path(clan_id))
-        symbol.alt = clans[clan_id]["label"]
+        symbol.src = header.clan_symbol_src
+        symbol.alt = header.clan_symbol_alt or ""
         title_row.appendChild(symbol)
 
-    header.appendChild(title_row)
+    header_el.appendChild(title_row)
 
     meta = document.createElement("div")
     meta.className = "sheet-meta"
-    meta.appendChild(_meta_item("Type", types.get(ctype, {}).get("label", _title(ctype))))
-    if character.get("clan"):
-        meta.appendChild(_meta_item("Clan", _lookup_label(clans, character["clan"])))
-    if character.get("domitor_clan"):
-        meta.appendChild(_meta_item("Domitor", _lookup_label(clans, character["domitor_clan"])))
-    meta.appendChild(_meta_item("Archetype", arch.label))
-    if sub:
-        meta.appendChild(_meta_item("Subtype", sub.label))
-    if character.get("predator"):
-        meta.appendChild(_meta_item("Predator", predators.get(character["predator"], _title(character["predator"]))))
-    if ctype == "ghoul":
-        domitor_pool = character.get("domitor_disciplines") or ghoul_domitor_discipline_pool(character)
-        if domitor_pool:
-            pool_text = ", ".join(_discipline_label(d) for d in domitor_pool)
-            meta.appendChild(_meta_item("Domitor pool", pool_text))
-    elif ctype == "vampire":
-        meta.appendChild(_meta_item("Generation", str(character.get("generation", "—"))))
-        meta.appendChild(_meta_item("Blood Potency", str(character.get("blood_potency", 0))))
-    elif ctype == "thin_blood":
-        meta.appendChild(_meta_item("Generation", str(character.get("generation", "—"))))
-        meta.appendChild(_meta_item("Blood Potency", str(character.get("blood_potency", 0))))
-    meta.appendChild(_meta_item("Humanity", str(character.get("humanity", "—"))))
-    header.appendChild(meta)
-    sheet.appendChild(header)
+    for item in header.meta:
+        meta.appendChild(_meta_item(item))
+    header_el.appendChild(meta)
+    return header_el
 
-    if convictions and convictions_seed is not None:
-        sheet.appendChild(
-            _convictions_section(
-                convictions,
-                convictions_seed=convictions_seed,
-                on_reroll=on_reroll_convictions,
+
+def render_lotn_v5_sheet(model: SheetModel, *, on_reroll_convictions=None) -> Any:
+    """Build a printable LoTN-style sheet element from a sheet view-model."""
+    sheet = document.createElement("article")
+    sheet.className = "character-sheet"
+    sheet.appendChild(_render_header(model.header))
+
+    if model.convictions:
+        sheet.appendChild(_convictions_section(model.convictions, on_reroll=on_reroll_convictions))
+
+    if model.attributes:
+        sheet.appendChild(_trait_panel(model.attributes))
+    if model.skills:
+        sheet.appendChild(_trait_panel(model.skills))
+
+    for section in (model.merits, model.flaws):
+        if section:
+            sheet.appendChild(_rated_traits_section(section))
+
+    for section in (model.thin_blood_merits, model.thin_blood_flaws):
+        if section:
+            sheet.appendChild(
+                _rated_traits_section(section, css_class="sheet-rated-traits sheet-rated-traits--thin-blood")
             )
+
+    if model.loresheet:
+        sheet.appendChild(_loresheet_section(model.loresheet))
+
+    if model.resonance_discipline:
+        sheet.appendChild(
+            _disciplines_section(model.resonance_discipline, css_class="sheet-disciplines sheet-disciplines--resonance")
         )
 
-    trait_categories = [
-        ("Physical", "physical"),
-        ("Social", "social"),
-        ("Mental", "mental"),
-    ]
-    sheet.appendChild(
-        _trait_panel(
-            "Attributes",
-            [(label, attrs[cat_id]) for label, cat_id in trait_categories],
-            character["attributes"],
-        )
-    )
-    sheet.appendChild(
-        _trait_panel(
-            "Skills",
-            [(label, skills[cat_id]) for label, cat_id in trait_categories],
-            character["skills"],
-        )
-    )
+    if model.disciplines:
+        sheet.appendChild(_disciplines_section(model.disciplines))
 
-    for section_title, block, trait_kind in (
-        ("Merits", _standard_traits(character.get("merits", {}), "merit"), "merit"),
-        ("Flaws", _standard_traits(character.get("flaws", {}), "flaw"), "flaw"),
-    ):
-        section = _rated_traits_section(section_title, block, kind=trait_kind)
+    for section in (model.rituals, model.ceremonies):
         if section:
-            sheet.appendChild(section)
+            sheet.appendChild(_named_items_section(section))
 
-    for section_title, block, trait_kind in (
-        ("Thin-Blood Merits", character.get("thin_blood_merits", {}), "merit"),
-        ("Thin-Blood Flaws", character.get("thin_blood_flaws", {}), "flaw"),
-    ):
-        section = _thin_blood_traits_section(section_title, block, kind=trait_kind)
-        if section:
-            sheet.appendChild(section)
+    if model.formulas:
+        sheet.appendChild(_formula_section(model.formulas))
 
-    ls_section = _loresheet_section(character)
-    if ls_section:
-        sheet.appendChild(ls_section)
-
-    resonance_section = _resonance_discipline_section(character)
-    if resonance_section:
-        sheet.appendChild(resonance_section)
-
-    resonance_id = (character.get("discipline_meta") or {}).get("resonance_discipline")
-    disc_exclude = {resonance_id} if resonance_id else set()
-    disc_section = _disciplines_section(character, exclude=disc_exclude)
-    if disc_section:
-        sheet.appendChild(disc_section)
-
-    ritual_section = _power_id_list_section("Rituals", character.get("rituals", []))
-    if ritual_section:
-        sheet.appendChild(ritual_section)
-
-    ceremony_section = _power_id_list_section("Ceremonies", character.get("ceremonies", []))
-    if ceremony_section:
-        sheet.appendChild(ceremony_section)
-
-    formula_section = _formula_section(character)
-    if formula_section:
-        sheet.appendChild(formula_section)
-
-    specialties = character.get("specialties", [])
-    if specialties:
+    if model.specialties:
         spec_section = document.createElement("section")
         spec_section.className = "sheet-rated-traits"
         spec_section.appendChild(_section_heading("Specialties"))
         grid = document.createElement("div")
         grid.className = "sheet-rated-traits__grid"
-        for spec in specialties:
+        for label in model.specialties:
             line = document.createElement("div")
             line.className = "sheet-stat"
-            label = document.createElement("span")
-            label.className = "sheet-stat__name"
-            label.innerText = f"{_title(spec['skill'])} ({spec['name']})"
-            line.appendChild(label)
+            name = document.createElement("span")
+            name.className = "sheet-stat__name"
+            name.innerText = label
+            line.appendChild(name)
             grid.appendChild(line)
         spec_section.appendChild(grid)
         sheet.appendChild(spec_section)
 
-    bg_section = _background_section(character.get("backgrounds", []))
-    if bg_section:
-        sheet.appendChild(bg_section)
+    if model.backgrounds:
+        sheet.appendChild(_background_section(model.backgrounds))
 
     return sheet

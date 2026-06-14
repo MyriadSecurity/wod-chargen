@@ -10,7 +10,7 @@ from wod_chargen.core.rng import SeededRng
 
 from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
-# Neonate-heavy defaults; Storyteller may override via creation.json or options.
+# Neonate-heavy defaults; override via creation.json or options.
 _DEFAULT_WEIGHTS: dict[str, dict[int, float]] = {
     "vampire": {13: 4.0, 12: 3.0, 11: 1.5, 10: 0.5, 9: 0.2},
     "thin_blood": {14: 2.0, 15: 2.0, 16: 1.0},

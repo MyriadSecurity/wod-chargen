@@ -79,7 +79,9 @@ def _tb_trait_eligible(
     current = int(bucket.get(entry["id"], 0))
     if trait_increment(entry, current, char, kind=kind) is None:
         return False
-    return trait_eligible(entry, kind, char, phase=phase)  # type: ignore[arg-type]
+    return trait_eligible(
+        entry, kind, char, phase=phase, for_thin_blood_catalog=True
+    )  # type: ignore[arg-type]
 
 
 def _eligible_tb_merits(char: dict[str, Any], *, phase: str) -> list[dict[str, Any]]:
@@ -115,7 +117,9 @@ def _eligible_tb_flaws_for_merit(
             continue
         if not _pair_compatible(merit_entry, entry):
             continue
-        if not trait_eligible(entry, "flaw", simulated, phase=phase):  # type: ignore[arg-type]
+        if not trait_eligible(
+            entry, "flaw", simulated, phase=phase, for_thin_blood_catalog=True
+        ):  # type: ignore[arg-type]
             continue
         out.append(entry)
     return out

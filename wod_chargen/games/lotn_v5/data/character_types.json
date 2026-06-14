@@ -16,6 +16,7 @@
   "thin_blood": {
     "label": "Thin-Blood",
     "summary": "Duskborn — choose on the lineage step; thin-blood merits and alchemy.",
+    "creation_ref": "thin_blood_creation.json",
     "predator": true,
     "bp_fixed": 0
   }

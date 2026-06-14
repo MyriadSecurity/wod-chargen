@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-# Re-fetch with: uv run python scripts/fetch_clan_symbols_wiki.py
-# Source: https://vtm.paradoxwikis.com/Category:Clan_symbols
+# Re-fetch: uv run python scripts/fetch_clan_symbols_wiki.py
 
 
 def clan_symbol_path(clan_id: str) -> str:

@@ -9,6 +9,7 @@ from wod_chargen.games.lotn_v5.archetypes import ArchetypeProfile, archetype_dis
 from wod_chargen.games.lotn_v5.clan_discipline_adapt import adapt_profile_for_clan
 from wod_chargen.games.lotn_v5.predators import apply_predator_biases, load_predator_types, predator_by_id
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags, resolve_trait_bias
+from wod_chargen.games.lotn_v5.trait_catalog import trait_ids_for_category
 
 from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
@@ -371,37 +372,7 @@ def build_catalog_overview_tree() -> dict[str, Any]:
 
 
 def _registry_for_category(category: str) -> list[str]:
-    if category == "attributes":
-        return load_json_cached(DATA, "attributes.json")["all"]
-    if category == "skills":
-        return load_json_cached(DATA, "skills.json")["all"]
-    if category == "disciplines":
-        return load_json_cached(DATA, "disciplines.json")["all"]
-    if category == "backgrounds":
-        return list(load_json_cached(DATA, "backgrounds.json")["backgrounds"].keys())
-    if category == "spheres":
-        return [s["id"] for s in load_json_cached(DATA, "backgrounds.json")["spheres"]]
-    if category == "modifiers":
-        bg = load_json_cached(DATA, "backgrounds.json")
-        mods: set[str] = set()
-        for spec in bg["backgrounds"].values():
-            for mod in spec.get("advantages", []) + spec.get("disadvantages", []):
-                mods.add(mod["id"])
-        return sorted(mods)
-    if category == "merits":
-        return [m["id"] for m in load_json_cached(DATA, "merits_flaws.json")["merits"]]
-    if category == "flaws":
-        return [f["id"] for f in load_json_cached(DATA, "merits_flaws.json")["flaws"]]
-    if category == "powers":
-        ids: list[str] = []
-        for disc in load_json_cached(DATA, "discipline_powers.json")["disciplines"]:
-            for p in disc.get("powers", []):
-                if not p["id"].startswith("counterfeit"):
-                    ids.append(p["id"])
-        return ids
-    if category == "tags":
-        return sorted(load_trait_tags().get("tags", {}).keys())
-    raise ValueError(f"Unknown category: {category}")
+    return trait_ids_for_category(category)
 
 
 def _max_archetype_bias(category: str, trait_id: str) -> float:

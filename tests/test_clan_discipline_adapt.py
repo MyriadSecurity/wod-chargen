@@ -27,7 +27,15 @@ def _venue():
 
 
 def _opts(**kwargs):
-    return opts(clan="toreador", **kwargs)
+    base = {
+        "type": "vampire",
+        "clan": "toreador",
+        "arch": "enforcer",
+        "sub": "brawler",
+        "approval": "2026-06",
+    }
+    base.update(kwargs)
+    return base
 
 
 def _toreador_pool() -> frozenset[str]:

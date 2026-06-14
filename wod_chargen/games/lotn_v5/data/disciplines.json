@@ -1,5 +1,4 @@
 {
-  "source_ref": { "pdf_page": 79 },
   "all": [
     "animalism",
     "auspex",
@@ -14,5 +13,8 @@
     "protean",
     "thin_blood_alchemy"
   ],
-  "secondary_tracks": ["blood_sorcery_rituals", "ceremonies"]
+  "secondary_tracks": [
+    "blood_sorcery_rituals",
+    "ceremonies"
+  ]
 }

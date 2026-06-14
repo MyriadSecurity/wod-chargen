@@ -24,7 +24,15 @@ def _venue():
 
 
 def _opts(**kwargs):
-    return opts(clan="tremere", arch="occultist", sub="thaumaturge", **kwargs)
+    base = {
+        "type": "vampire",
+        "clan": "tremere",
+        "arch": "occultist",
+        "sub": "thaumaturge",
+        "approval": "2026-06",
+    }
+    base.update(kwargs)
+    return base
 
 
 class _Profile:

@@ -10,6 +10,7 @@ from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.paths import DATA_PKG, GAMES_PKG, VENUE_PKG
+from wod_chargen.games.lotn_v5.sheet_model import SheetModel, build_sheet_model
 
 
 class LotnV5System:
@@ -34,6 +35,19 @@ class LotnV5System:
 
     def generate(self, seed: int, options: dict[str, Any], venue_config: dict[str, Any]) -> GenerationResult:
         return generate_character(seed, options, venue_config)
+
+    def build_sheet_model(
+        self,
+        result: GenerationResult,
+        *,
+        convictions: list[dict[str, str]] | None = None,
+        convictions_seed: int | None = None,
+    ) -> SheetModel:
+        return build_sheet_model(
+            result,
+            convictions=convictions,
+            convictions_seed=convictions_seed,
+        )
 
     def get_wizard_steps(self) -> list[str]:
         return list(self._wizard_ui()["wizard_steps"])

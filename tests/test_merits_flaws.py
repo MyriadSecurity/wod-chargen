@@ -124,14 +124,14 @@ def test_unbondable_not_xp_eligible():
 
 
 def test_poor_blocks_resources_and_caps_haven():
-    from wod_chargen.games.lotn_v5.backgrounds import _can_add_dot, can_add_modifier_dot
+    from wod_chargen.games.lotn_v5.backgrounds import can_add_dot, can_add_modifier_dot
 
     char = _char(
         flaws={"poor": 2},
         backgrounds=[{"type": "haven", "dots": 1, "advantages": [], "disadvantages": []}],
     )
-    assert not _can_add_dot(char["backgrounds"], "resources", background_defs()["resources"], char)
-    assert not _can_add_dot(char["backgrounds"], "haven", background_defs()["haven"], char)
+    assert not can_add_dot(char["backgrounds"], "resources", background_defs()["resources"], char)
+    assert not can_add_dot(char["backgrounds"], "haven", background_defs()["haven"], char)
     entry = char["backgrounds"][0]
     garage = next(m for m in background_defs()["haven"]["advantages"] if m["id"] == "garage")
     assert not can_add_modifier_dot(entry, garage, "advantage", char)

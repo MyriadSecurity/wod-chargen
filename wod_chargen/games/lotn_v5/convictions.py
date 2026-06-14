@@ -1,8 +1,4 @@
-"""Humanity convictions — pick from master list using an independent seed.
-
-Conviction text sourced from the r/vtm community master list:
-https://www.reddit.com/r/vtm/comments/1ecdulq/convictions_master_list/
-"""
+"""Humanity convictions — pick from master list using an independent seed."""
 
 from __future__ import annotations
 

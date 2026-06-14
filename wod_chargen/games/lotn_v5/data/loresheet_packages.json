@@ -1,36 +1,54 @@
 {
-  "source_ref": {
-    "book": "Laws of the Night pocket edition",
-    "chapter": 6,
-    "pages": "159-175",
-    "notes": "Mechanical sheet grants only. Narrative/session abilities live in loresheets.json level.narrative."
-  },
   "packages": {
     "anarch_revolt/hold_the_line": {
       "skills": [
-        { "id": "leadership", "dots": 2 },
-        { "id": "politics", "dots": 2 }
+        {
+          "id": "leadership",
+          "dots": 2
+        },
+        {
+          "id": "politics",
+          "dots": 2
+        }
       ]
     },
     "the_church_of_set/congregation": {
       "background_spend": {
         "dots": 5,
-        "options": ["allies", "haven", "herd", "resources"]
+        "options": [
+          "allies",
+          "haven",
+          "herd",
+          "resources"
+        ]
       }
     },
     "the_circulatory_system/farm_upstate": {
-      "background_spend": { "dots": 5, "options": ["herd"] }
+      "background_spend": {
+        "dots": 5,
+        "options": [
+          "herd"
+        ]
+      }
     },
     "the_circulatory_system/blood_sommelier": {
       "background_spend": {
         "dots": 5,
-        "options": ["contacts", "allies", "resources"]
+        "options": [
+          "contacts",
+          "allies",
+          "resources"
+        ]
       }
     },
     "convention_of_thorns/thorns_historian": {
       "background_spend": {
         "dots": 3,
-        "options": ["allies", "resources", "contacts"]
+        "options": [
+          "allies",
+          "resources",
+          "contacts"
+        ]
       }
     },
     "convention_of_thorns/archivist": {
@@ -38,13 +56,18 @@
         {
           "type": "haven",
           "dots": 2,
-          "advantage": { "id": "library", "dots": 2 }
+          "advantage": {
+            "id": "library",
+            "dots": 2
+          }
         }
       ],
       "advantage_spend": {
         "background": "haven",
         "dots": 2,
-        "options": ["location"]
+        "options": [
+          "location"
+        ]
       }
     },
     "descendant_of_hardestadt/wealth": {
@@ -52,56 +75,112 @@
         {
           "type": "resources",
           "dots": 3,
-          "advantage": { "id": "liquidity", "dots": 1 }
+          "advantage": {
+            "id": "liquidity",
+            "dots": 1
+          }
         }
       ]
     },
     "descendant_of_hardestadt/pedigree": {
       "merits": [
-        { "id": "linguistics", "dots": 2 },
-        { "id": "common_sense", "dots": 1 },
-        { "id": "calm_heart", "dots": 1 }
+        {
+          "id": "linguistics",
+          "dots": 2
+        },
+        {
+          "id": "common_sense",
+          "dots": 1
+        },
+        {
+          "id": "calm_heart",
+          "dots": 1
+        }
       ]
     },
     "descendant_of_helena/real_talent": {
-      "skills": [{ "choice": ["crafts", "performance"], "dots": 5 }]
+      "skills": [
+        {
+          "choice": [
+            "crafts",
+            "performance"
+          ],
+          "dots": 5
+        }
+      ]
     },
     "descendant_of_helena/succubus_club_franchise": {
       "background_spend": {
         "dots": 4,
-        "options": ["resources", "fame", "mask"]
+        "options": [
+          "resources",
+          "fame",
+          "mask"
+        ]
       }
     },
     "descendant_of_karl_schrekt/know_the_world": {
-      "backgrounds": [{ "type": "haven", "dots": 2 }],
+      "backgrounds": [
+        {
+          "type": "haven",
+          "dots": 2
+        }
+      ],
       "advantage_spend": {
         "background": "haven",
         "dots": 3,
-        "options": ["library"]
+        "options": [
+          "library"
+        ]
       }
     },
     "descendant_of_montano/siblings_in_darkness": {
       "background_spend": {
         "dots": 4,
-        "options": ["allies", "contacts", "resources"]
+        "options": [
+          "allies",
+          "contacts",
+          "resources"
+        ]
       }
     },
     "descendant_of_tyler/champion_of_the_cause": {
       "background_spend": {
         "dots": 3,
-        "options": ["contacts", "resources", "haven"]
+        "options": [
+          "contacts",
+          "resources",
+          "haven"
+        ]
       }
     },
     "descendant_of_zao_xue/hidden_scholar": {
-      "background_spend": { "dots": 4, "options": ["mask", "haven"] }
+      "background_spend": {
+        "dots": 4,
+        "options": [
+          "mask",
+          "haven"
+        ]
+      }
     },
     "descendant_of_zelios/sanctuary": {
-      "backgrounds": [{ "type": "haven", "dots": 3 }],
+      "backgrounds": [
+        {
+          "type": "haven",
+          "dots": 3
+        }
+      ],
       "advantage_spend": {
         "background": "haven",
         "dots": 4,
         "split": true,
-        "options": ["security", "guards", "luxury", "garage", "library"]
+        "options": [
+          "security",
+          "guards",
+          "luxury",
+          "garage",
+          "library"
+        ]
       }
     },
     "the_first_inquisition/the_second_act": {
@@ -110,79 +189,153 @@
           "type": "contacts",
           "dots": 3,
           "sphere": "church",
-          "advantage": { "id": "at_arms_length", "dots": 1 }
+          "advantage": {
+            "id": "at_arms_length",
+            "dots": 1
+          }
         }
       ]
     },
     "firstlight/no_records_found": {
-      "backgrounds": [{ "type": "mask", "dots": 3 }],
-      "merits": [{ "id": "zeroed", "dots": 1 }]
+      "backgrounds": [
+        {
+          "type": "mask",
+          "dots": 3
+        }
+      ],
+      "merits": [
+        {
+          "id": "zeroed",
+          "dots": 1
+        }
+      ]
     },
     "high_clan/peacock": {
       "skills": [
-        { "id": "etiquette", "dots": 2 },
-        { "id": "politics", "dots": 2 }
+        {
+          "id": "etiquette",
+          "dots": 2
+        },
+        {
+          "id": "politics",
+          "dots": 2
+        }
       ]
     },
     "high_clan/friends_in_high_places": {
       "background_spend": {
         "dots": 5,
-        "options": ["contacts", "resources", "allies"]
+        "options": [
+          "contacts",
+          "resources",
+          "allies"
+        ]
       }
     },
     "low_clan/thick_hide": {
       "skills": [
-        { "id": "streetwise", "dots": 2 },
-        { "id": "subterfuge", "dots": 2 }
+        {
+          "id": "streetwise",
+          "dots": 2
+        },
+        {
+          "id": "subterfuge",
+          "dots": 2
+        }
       ]
     },
     "low_clan/uncanny_kinship": {
       "background_spend": {
         "dots": 5,
-        "options": ["mask", "familiar", "haven", "allies"]
+        "options": [
+          "mask",
+          "familiar",
+          "haven",
+          "allies"
+        ]
       }
     },
     "scion_of_lucretia/peacemaker": {
       "skills": [
-        { "id": "etiquette", "dots": 2 },
-        { "id": "politics", "dots": 2 }
+        {
+          "id": "etiquette",
+          "dots": 2
+        },
+        {
+          "id": "politics",
+          "dots": 2
+        }
       ]
     },
     "scion_of_lucretia/revitalization": {
       "background_spend": {
         "dots": 6,
-        "options": ["contacts", "resources", "allies"]
+        "options": [
+          "contacts",
+          "resources",
+          "allies"
+        ]
       }
     },
     "sect_war_veteran/soldier": {
       "background_spend": {
         "dots": 3,
-        "options": ["resources", "herd", "contacts"]
+        "options": [
+          "resources",
+          "herd",
+          "contacts"
+        ]
       }
     },
     "sect_war_veteran/strategist": {
-      "backgrounds": [{ "type": "haven", "dots": 2 }],
+      "backgrounds": [
+        {
+          "type": "haven",
+          "dots": 2
+        }
+      ],
       "advantage_spend": {
         "background": "haven",
         "dots": 2,
         "split": true,
-        "options": ["security", "guards"]
+        "options": [
+          "security",
+          "guards"
+        ]
       }
     },
     "the_trinity/constantinople": {
       "background_spend": {
         "dots": 2,
-        "options": ["resources", "haven", "allies"]
+        "options": [
+          "resources",
+          "haven",
+          "allies"
+        ]
       },
-      "skills": [{ "id": "politics", "dots": 3 }]
+      "skills": [
+        {
+          "id": "politics",
+          "dots": 3
+        }
+      ]
     },
     "the_week_of_nightmares/the_night_network": {
-      "backgrounds": [{ "type": "haven", "dots": 2 }],
+      "backgrounds": [
+        {
+          "type": "haven",
+          "dots": 2
+        }
+      ],
       "advantage_spend": {
         "background": "haven",
         "dots": 3,
         "split": true,
-        "options": ["luxury", "security", "guards"]
+        "options": [
+          "luxury",
+          "security",
+          "guards"
+        ]
       }
     }
   }

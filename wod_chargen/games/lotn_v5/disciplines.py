@@ -1,9 +1,4 @@
-"""Discipline power catalog, eligibility, and procedural selection.
-
-Standard generation policy: each discipline dot at level *N* selects exactly one
-catalog power at level *N* (one power per dot level). Alternate picks (e.g. filling
-a missed lower-level slot when advancing) are not used during procedural generation.
-"""
+"""Discipline power catalog, eligibility, and procedural selection."""
 
 from __future__ import annotations
 

@@ -15,11 +15,10 @@ This project uses World of Darkness intellectual property under the [Dark Pack A
 
 ## Clan symbols
 
-Official V5 clan symbol PNGs in `static/img/clans/` were sourced from the
-[VTM Wiki](https://vtm.paradoxwikis.com/Category:Clan_symbols) (Paradox Interactive).
+Official V5 clan symbol PNGs in `static/img/clans/` from the
+[VTM Wiki](https://vtm.paradoxwikis.com/Category:Clan_symbols).
 Re-fetch with `uv run python scripts/fetch_clan_symbols_wiki.py` (requires Playwright).
-Symbols are inverted for the dark UI via `uv run python scripts/invert_clan_symbols.py`.
-Thin-blood uses [Thinblood_symbol.png](https://vtm.paradoxwikis.com/thumb.php?f=Thinblood_symbol.png&width=1280) on the same wiki.
+Invert for dark UI: `uv run python scripts/invert_clan_symbols.py`.
 
 ## Notice text (footer)
 
