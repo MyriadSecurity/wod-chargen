@@ -89,3 +89,28 @@ effective_power_bias = clamp(archetype_bias × utility_bias)
 - **Review workflow** — for each primary, run `scripts/discipline_power_coverage_report.py --clan <typical>` and confirm in-clan disciplines without signature picks still produce sensible staples via utility.
 
 Do **not** rely on tag affinities alone for off-theme in-clan disciplines — broad tags like `combat` suppress entire Celerity/Potence pools for social archetypes.
+
+## Clan discipline expressions
+
+When an archetype’s **signature** disciplines (Potence/Fortitude for Enforcer, Blood Sorcery for Occultist, etc.) are off-clan, define `discipline_expressions` on the **primary** in `archetype_themes.json`:
+
+```json
+"discipline_expressions": {
+  "signature": ["potence", "fortitude"],
+  "alternates": {
+    "celerity": {
+      "discipline_bias": 1.12,
+      "power_biases": { "fleetness": 1.25, "rapid_reflexes": 1.2 }
+    }
+  }
+}
+```
+
+- `signature` — explicit list, or inferred from `discipline_biases` ≥ 1.05.
+- `alternates` — merged **only** for disciplines in the character’s in-clan pool when any signature is missing from that pool.
+- Alternate `discipline_bias` values are **targets** (max with current); `power_biases` are **explicit overrides**, not deltas.
+- Runtime also applies in-clan soft floors (discipline ≥ 0.85, non-explicit powers ≥ 0.75) via `clan_discipline_adapt.py`.
+- Off-clan signature disciplines use XP `clan_factor` **0.6** instead of 0.3.
+- Do **not** add expression maps on subs; subs keep +0.2–0.5 deltas only.
+
+Review matrix: `uv run python scripts/discipline_power_coverage_report.py --matrix --clan <clan> [--arch <id>]`. See `docs/discipline-clan-matrix.md` for batch notes.

@@ -371,6 +371,14 @@ body {
   padding: 0.35rem 0.75rem;
 }
 
+.results-tab-hidden {
+  display: none;
+}
+
+.results-print-heading {
+  display: none;
+}
+
 @media print {
   .no-print {
     display: none !important;
@@ -379,7 +387,32 @@ body {
     background: white;
     color: black;
   }
-  .card.sheet-panel {
+  .results-tab-hidden {
+    display: block !important;
+  }
+  .results-print-heading {
+    display: block !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: #111;
+  }
+  .results-log-panel,
+  .results-xp-panel {
+    break-before: page;
+    page-break-before: always;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+  }
+  .results-log-body {
+    color: #111;
+    font-size: 0.75rem;
+    white-space: pre-wrap;
+    font-family: ui-monospace, monospace;
+  }
+  .card.sheet-panel,
+  .card.results-print-root {
     background: white;
     border: none;
     box-shadow: none;

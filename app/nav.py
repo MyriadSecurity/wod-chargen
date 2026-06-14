@@ -23,7 +23,7 @@ def _nav_click(page: str, event: Any = None) -> None:
 def app_nav(active: str) -> Any:
     """Top nav: generator vs weight map. active is 'generator' or 'weights'."""
     nav = document.createElement("nav")
-    nav.className = "app-nav max-w-6xl mx-auto px-4 pt-4"
+    nav.className = "app-nav no-print max-w-6xl mx-auto px-4 pt-4"
 
     for href, label, key in (
         ("#", "Character generator", "generator"),

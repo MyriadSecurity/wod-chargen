@@ -40,6 +40,8 @@ def apply_primary(arch_id: str, theme: dict[str, Any]) -> None:
     for key in PRIMARY_BIAS_KEYS:
         if key in theme:
             data[key] = _merge_dict(data.get(key, {}), theme[key])
+    if "discipline_expressions" in theme:
+        data["discipline_expressions"] = theme["discipline_expressions"]
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

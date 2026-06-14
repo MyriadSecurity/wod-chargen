@@ -40,6 +40,27 @@ def _check_block(
             warnings.append(f"{arch_path}: {label}[{key}]={val} extreme")
 
 
+def _validate_discipline_expressions(
+    expr: dict[str, Any],
+    arch_path: str,
+    disc_ids: set[str],
+    power_ids: set[str],
+    errors: list[str],
+) -> None:
+    if not expr:
+        return
+    for sig in expr.get("signature") or []:
+        if sig not in disc_ids:
+            errors.append(f"{arch_path}: discipline_expressions.signature unknown {sig!r}")
+    alternates = expr.get("alternates") or {}
+    for disc_id, spec in alternates.items():
+        if disc_id not in disc_ids:
+            errors.append(f"{arch_path}: discipline_expressions.alternates unknown disc {disc_id!r}")
+        for pid in (spec.get("power_biases") or {}):
+            if pid not in power_ids:
+                errors.append(f"{arch_path}: discipline_expressions alternate unknown power {pid!r}")
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -66,6 +87,13 @@ def main() -> int:
                 errors,
                 warnings,
             )
+        _validate_discipline_expressions(
+            raw.get("discipline_expressions") or {},
+            arch_id,
+            registries.get("discipline_biases", set()),
+            registries.get("discipline_power_biases", set()),
+            errors,
+        )
         for sub_id in manifest["subtypes"].get(arch_id, []):
             sub_raw = json.loads(
                 (ROOT / f"wod_chargen/games/lotn_v5/data/archetypes/{arch_id}/{sub_id}.json").read_text()

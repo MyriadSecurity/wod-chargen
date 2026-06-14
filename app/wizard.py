@@ -617,7 +617,9 @@ class WizardApp:
 
     def _view_results(self) -> Any:
         el = document.createElement("div")
-        el.appendChild(self._header("Results", "generate"))
+        header = self._header("Results", "generate")
+        header.className += " no-print"
+        el.appendChild(header)
         result = self.state.get("result")
         if not result:
             if not self.state.get("error"):
@@ -665,24 +667,51 @@ class WizardApp:
         el.appendChild(tabs)
 
         panel = document.createElement("div")
-        panel.className = "card p-6"
-        if self.state["tab"] == "sheet":
-            panel.className += " sheet-panel"
-            panel.appendChild(
-                render_lotn_v5_sheet(
-                    result.character,
-                    convictions=self._convictions(),
-                    convictions_seed=int(self.state["convictions_seed"]),
-                    on_reroll_convictions=self._reroll_convictions,
-                )
+        panel.className = "card p-6 results-print-root"
+
+        sheet_panel = document.createElement("div")
+        sheet_panel.className = "results-tab-panel sheet-panel"
+        if self.state["tab"] != "sheet":
+            sheet_panel.className += " results-tab-hidden"
+        sheet_panel.appendChild(
+            render_lotn_v5_sheet(
+                result.character,
+                convictions=self._convictions(),
+                convictions_seed=int(self.state["convictions_seed"]),
+                on_reroll_convictions=self._reroll_convictions,
             )
-        elif self.state["tab"] == "log":
-            lines = [f"[{e.phase}] {e.message}" for e in result.creation_log]
-            panel.innerText = "\n".join(lines)
-            panel.className += " font-mono text-sm whitespace-pre-wrap"
-        else:
-            panel.innerText = format_xp_log(result.xp_log)
-            panel.className += " font-mono text-sm whitespace-pre-wrap"
+        )
+        panel.appendChild(sheet_panel)
+
+        creation_lines = [f"[{e.phase}] {e.message}" for e in result.creation_log]
+        log_panel = document.createElement("div")
+        log_panel.className = "results-tab-panel results-log-panel font-mono text-sm"
+        if self.state["tab"] != "log":
+            log_panel.className += " results-tab-hidden"
+        log_heading = document.createElement("h2")
+        log_heading.className = "results-print-heading"
+        log_heading.innerText = "Creation Log"
+        log_panel.appendChild(log_heading)
+        log_body = document.createElement("pre")
+        log_body.className = "results-log-body whitespace-pre-wrap"
+        log_body.innerText = "\n".join(creation_lines)
+        log_panel.appendChild(log_body)
+        panel.appendChild(log_panel)
+
+        xp_panel = document.createElement("div")
+        xp_panel.className = "results-tab-panel results-xp-panel font-mono text-sm"
+        if self.state["tab"] != "xp":
+            xp_panel.className += " results-tab-hidden"
+        xp_heading = document.createElement("h2")
+        xp_heading.className = "results-print-heading"
+        xp_heading.innerText = "XP Log"
+        xp_panel.appendChild(xp_heading)
+        xp_body = document.createElement("pre")
+        xp_body.className = "results-log-body whitespace-pre-wrap"
+        xp_body.innerText = format_xp_log(result.xp_log)
+        xp_panel.appendChild(xp_body)
+        panel.appendChild(xp_panel)
+
         el.appendChild(panel)
 
         actions = document.createElement("div")

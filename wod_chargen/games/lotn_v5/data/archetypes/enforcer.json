@@ -88,5 +88,35 @@
     "social": 0.55,
     "deception": 0.5,
     "occult": 0.45
+  },
+  "discipline_expressions": {
+    "signature": [
+      "potence",
+      "fortitude"
+    ],
+    "alternates": {
+      "celerity": {
+        "discipline_bias": 1.12,
+        "power_biases": {
+          "fleetness": 1.25,
+          "rapid_reflexes": 1.2,
+          "cat_s_grace": 1.15
+        }
+      },
+      "presence": {
+        "discipline_bias": 1.1,
+        "power_biases": {
+          "dread_gaze": 1.3,
+          "awe": 1.15
+        }
+      },
+      "protean": {
+        "discipline_bias": 1.08,
+        "power_biases": {
+          "feral_weapons": 1.25,
+          "eyes_of_the_beast": 1.1
+        }
+      }
+    }
   }
 }
