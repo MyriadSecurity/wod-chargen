@@ -13,6 +13,17 @@ This project uses World of Darkness intellectual property under the [Dark Pack A
 
 - LoTN pocket PDF under `reference/lotn_v5/` — **not** distributed in the public repository
 
+## Dark Pack logo
+
+Official asset from Paradox Contentful CDN. Re-fetch:
+
+```bash
+curl -sL "https://images.ctfassets.net/u73tyf0fa8v1/3oBTHBZk9XmfcBlUPylvFh/673e4a6b14566548c03424ddf627b944/darkpack_logo2.png?w=400" \
+  -o static/img/dark-pack-logo.png
+```
+
+Favicons (`dark-pack-favicon-32.png`, etc.) are resized from the main logo.
+
 ## Clan symbols
 
 Official V5 clan symbol PNGs in `static/img/clans/` from the

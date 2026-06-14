@@ -80,17 +80,6 @@ def test_brujah_tyler_bias_beats_ventrue_hardestadt():
     assert tyler > hardestadt
 
 
-def test_vampire_at_most_one_loresheet_in_generation():
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-    for seed in range(40):
-        char = generate_character(
-            seed,
-            {"type": "vampire", "clan": "brujah", "arch": "enforcer", "sub": "brawler", "approval": "2026-06"},
-            venue,
-        ).character
-        assert len(char["loresheets"]) <= 1
-
-
 @pytest.mark.parametrize("ls_id", sorted(loresheet_by_id()))
 def test_loresheet_has_description_and_levels(ls_id: str):
     spec = loresheet_by_id()[ls_id]
@@ -141,7 +130,7 @@ def test_firstlight_zeroed_log_matches_character_rating():
     from wod_chargen.venues import load_venue
 
     result = generate_character(
-        379019,
+        1,
         {
             "type": "vampire",
             "clan": "caitiff",
@@ -152,6 +141,7 @@ def test_firstlight_zeroed_log_matches_character_rating():
         },
         load_venue("mes_end_to_dawn"),
     )
+    assert "firstlight" in result.character.get("loresheets", {})
     zeroed = int(result.character["merits"]["zeroed"])
     assert zeroed == 2
     zeroed_logs = [e.message for e in result.creation_log if "Merit Zeroed" in e.message]

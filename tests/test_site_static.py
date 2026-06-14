@@ -135,7 +135,13 @@ def test_import_wod_chargen_module(module_name: str):
 
 
 def test_static_assets_served_over_http(site_base_url: str):
-    paths = {"index.html", "pyscript.toml", "static/theme.css", "static/img/dark-pack-logo.svg"}
+    paths = {
+        "index.html",
+        "pyscript.toml",
+        "static/theme.css",
+        "static/img/dark-pack-logo.png",
+        "static/img/dark-pack-favicon-32.png",
+    }
     paths |= collect_pyscript_paths(ROOT)
     for rel in sorted(paths):
         url = f"{site_base_url}/{rel}"

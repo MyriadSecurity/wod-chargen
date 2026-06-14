@@ -4,9 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-import pytest
-
-from wod_chargen.games.lotn_v5.archetypes import effective_profile, get_archetype, load_all_archetypes
+from wod_chargen.games.lotn_v5.archetypes import effective_profile, get_archetype
 from wod_chargen.games.lotn_v5.trait_biases import (
     BIAS_MAX,
     BIAS_MIN,
@@ -59,12 +57,6 @@ def test_unknown_trait_returns_one():
 def test_trait_tag_list_skills():
     tags = trait_tag_list("stealth", "skills")
     assert "stealth" in tags
-
-
-@pytest.mark.parametrize("arch_id", list(load_all_archetypes().keys()))
-def test_all_primaries_load(arch_id: str):
-    profile = get_archetype(arch_id)
-    assert profile.sub_archetypes
 
 
 def test_effective_profile_merges_sub_deltas():

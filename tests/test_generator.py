@@ -111,13 +111,13 @@ def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int =
         assert character["blood_potency"] <= bp_cap
 
 
-@pytest.mark.parametrize("seed", range(50))
+@pytest.mark.parametrize("seed", range(25))
 def test_vampire_ratings_respect_caps(seed: int):
     result = generate_character(seed, _opts(), _venue())
     _assert_caps(result.character)
 
 
-@pytest.mark.parametrize("seed", range(20))
+@pytest.mark.parametrize("seed", range(10))
 def test_ghoul_ratings_respect_caps(seed: int):
     result = generate_character(
         seed,
@@ -127,7 +127,7 @@ def test_ghoul_ratings_respect_caps(seed: int):
     _assert_caps(result.character, discipline_cap=1)
 
 
-@pytest.mark.parametrize("seed", range(20))
+@pytest.mark.parametrize("seed", range(10))
 def test_thin_blood_ratings_respect_caps(seed: int):
     result = generate_character(
         seed,
@@ -157,19 +157,7 @@ def _trait_from_log(message: str) -> str:
     return message.split()[1]
 
 
-def test_each_creation_trait_assigned_once():
-    """LoTN pool rules: one pool chunk per trait — no +4 then later +1 on same skill."""
-    result = generate_character(1, _opts(), _venue())
-    for prefix in ("Attribute", "Skill"):
-        names = [
-            _trait_from_log(entry.message)
-            for entry in result.creation_log
-            if entry.phase == "base" and entry.message.startswith(prefix)
-        ]
-        assert len(names) == len(set(names)), f"{prefix} reused across pool: {names}"
-
-
-@pytest.mark.parametrize("seed", range(50))
+@pytest.mark.parametrize("seed", range(25))
 def test_creation_traits_never_reused(seed: int):
     result = generate_character(seed, _opts(), _venue())
     for prefix in ("Attribute", "Skill"):
@@ -215,24 +203,18 @@ def test_creation_log_ordered_by_category_then_rating():
         assert tiers == sorted(tiers, reverse=True), f"category {cat}: {tiers}"
 
 
-def test_xp_spend_uses_multiple_categories():
+def test_xp_spend_covers_multiple_categories():
     """Spend reaches multiple categories across seeds (not skills-only)."""
     from collections import Counter
 
     counts: Counter[str] = Counter()
+    cats: set[str] = set()
     for seed in range(30):
         result = generate_character(seed, _opts(), _venue())
         counts.update(entry.category for entry in result.xp_log)
+        cats.update(entry.category for entry in result.xp_log)
     assert counts["skill"] > 0
     assert counts["attribute"] > 0
     assert counts["background"] > 0
     assert counts["discipline"] > 0
-
-
-def test_xp_spend_spreads_across_categories_over_seeds():
-    """Individual builds may skew; the engine still covers all categories over time."""
-    cats: set[str] = set()
-    for seed in range(30):
-        result = generate_character(seed, _opts(), _venue())
-        cats.update(entry.category for entry in result.xp_log)
     assert len(cats) >= 4

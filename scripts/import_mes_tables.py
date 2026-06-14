@@ -470,32 +470,30 @@ def _merge_discipline_power_enrichment(discipline_data: dict[str, Any]) -> None:
     enrich(discipline_data)
 
 
-def sync_legacy_merits(merits_flaws: dict[str, list[dict[str, Any]]], source_ref: dict[str, Any]) -> None:
+def sync_legacy_merits(merits_flaws: dict[str, list[dict[str, Any]]]) -> None:
     """Keep merits.json compatible with generator until it loads merits_flaws.json."""
     write_json(
         DATA / "merits.json",
         {
-            "source_ref": source_ref,
             "merits": [m["id"] for m in merits_flaws["merits"] if not m.get("thin_blood_only")],
             "flaws": [f["id"] for f in merits_flaws["flaws"] if not f.get("thin_blood_only")],
         },
     )
 
 
-def sync_thin_blood_merits(merits_flaws: dict[str, list[dict[str, Any]]], source_ref: dict[str, Any]) -> None:
+def sync_thin_blood_merits(merits_flaws: dict[str, list[dict[str, Any]]]) -> None:
     thin_merits = [m for m in merits_flaws["merits"] if m.get("thin_blood_only")]
     thin_flaws = [f for f in merits_flaws["flaws"] if f.get("thin_blood_only")]
     write_json(
         DATA / "thin_blood_merits.json",
         {
-            "source_ref": source_ref,
             "merits": [{"id": m["id"], "label": m["label"]} for m in thin_merits],
             "flaws": [{"id": f["id"], "label": f["label"]} for f in thin_flaws],
         },
     )
 
 
-def sync_thin_blood_formulas(discipline_data: dict[str, Any], source_ref: dict[str, Any]) -> None:
+def sync_thin_blood_formulas(discipline_data: dict[str, Any]) -> None:
     tba = next((d for d in discipline_data["disciplines"] if d.get("id") == "thin_blood_alchemy"), None)
     formulas: list[dict[str, Any]] = []
     if tba:
@@ -511,7 +509,7 @@ def sync_thin_blood_formulas(discipline_data: dict[str, Any], source_ref: dict[s
             )
     write_json(
         DATA / "thin_blood_formulas.json",
-        {"source_ref": source_ref, "formulas": formulas},
+        {"formulas": formulas},
     )
 
 
@@ -531,13 +529,6 @@ def main(argv: list[str] | None = None) -> int:
     wb = openpyxl.load_workbook(xlsx, read_only=True, data_only=True)
     version = sheet_version(wb)
     imported_at = datetime.now(UTC).isoformat()
-    source_ref = {
-        "mes_sheet_version": version,
-        "mes_workbook": xlsx.name,
-        "imported_at": imported_at,
-        "import_script": "scripts/import_mes_tables.py",
-        "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/",
-    }
 
     tables = wb["tables"]
     clans = import_clans(tables)
@@ -547,23 +538,22 @@ def main(argv: list[str] | None = None) -> int:
     background_catalog = import_background_catalog(tables)
     merits_flaws = import_merits_flaws(tables)
     _merge_merit_flaw_descriptions(merits_flaws)
-    merits_flaws["source_ref"] = source_ref
-    loresheets = {"source_ref": source_ref, "loresheets": import_loresheets(tables)}
-    xp_matrix = {"source_ref": source_ref, **import_xp_matrix(tables)}
-    equipment = {"source_ref": source_ref, "qualities": import_equipment(tables)}
-    predator_catalog = {"source_ref": source_ref, "predators": predators}
-    clans_table = {"source_ref": source_ref, "clans": clans}
-    generation_data = {"source_ref": source_ref, **generation}
-    dyscrasia_data = {"source_ref": source_ref, "resonances": import_dyscrasias(tables)}
+    loresheets = {"loresheets": import_loresheets(tables)}
+    xp_matrix = import_xp_matrix(tables)
+    equipment = {"qualities": import_equipment(tables)}
+    predator_catalog = {"predators": predators}
+    clans_table = {"clans": clans}
+    generation_data = generation
+    dyscrasia_data = {"resonances": import_dyscrasias(tables)}
 
     discipline_data = import_discipline_tables(wb["discipline_tables"])
-    discipline_data["source_ref"] = source_ref
     _merge_discipline_power_enrichment(discipline_data)
 
-    background_data = {"source_ref": source_ref, "entries": background_catalog}
+    background_data = {"entries": background_catalog}
 
     manifest = {
-        "source_ref": source_ref,
+        "imported_at": imported_at,
+        "mes_sheet_version": version,
         "files": {
             "merits_flaws.json": {
                 "merits": len(merits_flaws["merits"]),
@@ -609,9 +599,9 @@ def main(argv: list[str] | None = None) -> int:
     for filename, payload in outputs.items():
         write_json(DATA / filename, payload)
 
-    sync_legacy_merits(merits_flaws, source_ref)
-    sync_thin_blood_merits(merits_flaws, source_ref)
-    sync_thin_blood_formulas(discipline_data, source_ref)
+    sync_legacy_merits(merits_flaws)
+    sync_thin_blood_merits(merits_flaws)
+    sync_thin_blood_formulas(discipline_data)
 
     wb.close()
     print(f"Imported from {xlsx} (sheet {version})")
