@@ -309,7 +309,7 @@
       "category": "thin_blood",
       "category_label": "Thin-Blood",
       "dot_cost": 0,
-      "max_dots": null,
+      "max_dots": 1,
       "thin_blood_only": true,
       "ghoul_only": false
     },

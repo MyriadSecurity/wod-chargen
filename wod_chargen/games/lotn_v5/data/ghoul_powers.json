@@ -1,9 +1,4 @@
 {
-  "powers": [
-    { "id": "potence", "label": "Potence" },
-    { "id": "celerity", "label": "Celerity" },
-    { "id": "fortitude", "label": "Fortitude" },
-    { "id": "presence", "label": "Presence" },
-    { "id": "dominate", "label": "Dominate" }
-  ]
+  "source": "dynamic",
+  "note": "Ghoul XP power candidates are enumerated at runtime from domitor in-clan level-1 discipline powers."
 }

@@ -112,6 +112,7 @@ def assign_generation_and_blood_potency(
     if ctype == "ghoul":
         char["blood_potency"] = 0
         char.pop("generation_meta", None)
+        char.pop("generation", None)
         return
 
     explicit = options.get("generation")

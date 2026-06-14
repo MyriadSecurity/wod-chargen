@@ -115,11 +115,12 @@ def test_reproducibility_includes_powers():
 
 def test_thin_blood_discipline_and_formulas():
     result = generate_character(
-        77,
+        1,
         _opts(type="thin_blood", arch="alchemist", sub="distiller"),
         _venue(),
     )
     char = result.character
+    assert char["thin_blood_merits"].get("thin_blood_alchemist")
     assert char["disciplines"].get("thin_blood_alchemy", 0) >= 1
     tba_picks = char.get("discipline_powers", {}).get("thin_blood_alchemy", {})
     assert tba_picks

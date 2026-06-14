@@ -19,6 +19,8 @@ SPEND_GROUP_MACRO = {
     "mental_attrs": "attributes",
     "skills": "skills",
     "in_clan_disciplines": "disciplines",
+    "thin_blood_disciplines": "disciplines",
+    "affinity_discipline": "disciplines",
     "ghoul_powers": "disciplines",
     "thin_blood_formulas": "disciplines",
     "background_connections": "backgrounds",
@@ -46,6 +48,24 @@ def roll_category_targets(rng: SeededRng) -> dict[str, float]:
     }
     total = sum(jittered.values())
     return {key: value / total for key, value in jittered.items()}
+
+
+def thin_blood_discipline_category_targets(
+    rng: SeededRng,
+    char: dict[str, Any],
+) -> dict[str, float]:
+    """Favor disciplines when thin-blood merits signal discipline intent."""
+    from wod_chargen.games.lotn_v5.thin_blood_merits import has_merit_driven_disciplines
+
+    targets = roll_category_targets(rng)
+    if char.get("character_type") != "thin_blood" or not has_merit_driven_disciplines(char):
+        return targets
+    boosted = dict(targets)
+    boosted["disciplines"] = max(boosted.get("disciplines", 0.34), 0.48)
+    boosted["attributes"] = boosted.get("attributes", 0.20) * 0.55
+    boosted["skills"] = boosted.get("skills", 0.20) * 0.55
+    total = sum(boosted.values())
+    return {key: value / total for key, value in boosted.items()}
 
 
 def efficiency_item_bias(current_level: int, new_level: int) -> float:

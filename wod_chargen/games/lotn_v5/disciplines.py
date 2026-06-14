@@ -453,14 +453,41 @@ def validate_discipline_selections(char: dict[str, Any]) -> list[str]:
     return errors
 
 
+def caitiff_discipline_pool() -> list[str]:
+    """All vampire disciplines available to Caitiff (any three at creation)."""
+    catalog = load_json_cached(DATA, "disciplines.json")
+    return [d for d in catalog.get("all", []) if d != "thin_blood_alchemy"]
+
+
 def discipline_pool_for_char(char: dict[str, Any], ctype: str) -> list[str]:
     if ctype == "thin_blood":
-        return ["thin_blood_alchemy"]
+        if int(char.get("thin_blood_merits", {}).get("thin_blood_alchemist", 0)) > 0:
+            return ["thin_blood_alchemy"]
+        return []
     clan = char.get("clan") or char.get("domitor_clan")
     if not clan:
         return []
+    if clan == "caitiff":
+        return caitiff_discipline_pool()
     clans = load_json_cached(DATA, "clans.json")
     return list(clans.get(clan, {}).get("disciplines", []))
+
+
+def enumerate_ghoul_power_candidates(char: dict[str, Any]) -> list[dict[str, Any]]:
+    """Level-1 powers from domitor in-clan disciplines not already owned."""
+    if char.get("character_type") != "ghoul":
+        return []
+    pool = discipline_pool_for_char(char, "ghoul")
+    owned = owned_power_ids(char) | set(char.get("ghoul_powers", {}).keys())
+    out: list[dict[str, Any]] = []
+    for disc_id in pool:
+        for power in powers_for_level(disc_id, 1):
+            if power["id"] in owned:
+                continue
+            entry = dict(power)
+            entry["discipline_id"] = disc_id
+            out.append(entry)
+    return out
 
 
 def enumerate_ritual_candidates(char: dict[str, Any]) -> list[dict[str, Any]]:

@@ -9,7 +9,8 @@ from pyscript import document
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
-from wod_chargen.games.lotn_v5.merits_flaws import trait_display_label
+from wod_chargen.games.lotn_v5.merits_flaws import trait_base_id, trait_def, trait_display_label
+from wod_chargen.games.lotn_v5.thin_blood_merits import thin_blood_trait_label
 from wod_chargen.games.lotn_v5.disciplines import power_label
 from wod_chargen.games.lotn_v5.backgrounds import (
     background_defs,
@@ -119,8 +120,9 @@ def _trait_panel(
     return panel
 
 
-def _disciplines_section(character: dict[str, Any]) -> Any | None:
-    discs = {k: v for k, v in character.get("disciplines", {}).items() if v > 0}
+def _disciplines_section(character: dict[str, Any], *, exclude: set[str] | None = None) -> Any | None:
+    skip = exclude or set()
+    discs = {k: v for k, v in character.get("disciplines", {}).items() if v > 0 and k not in skip}
     if not discs:
         return None
     picks = character.get("discipline_powers", {})
@@ -152,6 +154,39 @@ def _disciplines_section(character: dict[str, Any]) -> Any | None:
             card.appendChild(powers)
         list_el.appendChild(card)
     section.appendChild(list_el)
+    return section
+
+
+def _resonance_discipline_section(character: dict[str, Any]) -> Any | None:
+    if character.get("character_type") != "thin_blood":
+        return None
+    disc_id = (character.get("discipline_meta") or {}).get("resonance_discipline")
+    if not disc_id:
+        return None
+    rating = int((character.get("discipline_meta") or {}).get("resonance_rating", 1))
+    picks = character.get("discipline_powers", {}).get(disc_id, {})
+    level_one = picks.get("1")
+    section = document.createElement("section")
+    section.className = "sheet-disciplines sheet-disciplines--resonance"
+    section.appendChild(_section_heading("Resonance Discipline"))
+    card = document.createElement("div")
+    card.className = "sheet-discipline-card"
+    head = document.createElement("div")
+    head.className = "sheet-discipline-card__head"
+    name = document.createElement("span")
+    name.className = "sheet-stat__name"
+    name.innerText = _title(disc_id)
+    head.appendChild(name)
+    head.appendChild(_dot_row(rating, max_dots=5))
+    card.appendChild(head)
+    if level_one:
+        powers = document.createElement("ul")
+        powers.className = "sheet-discipline-card__powers"
+        item = document.createElement("li")
+        item.innerText = f"•1 {power_label(level_one)}"
+        powers.appendChild(item)
+        card.appendChild(powers)
+    section.appendChild(card)
     return section
 
 
@@ -209,6 +244,55 @@ def _rated_traits_section(title: str, items: dict[str, int], *, kind: str | None
     for key, value in sorted(rated.items()):
         label = trait_display_label(key, kind) if kind in ("merit", "flaw") else _title(key)
         grid.appendChild(_stat_line(label, value))
+    section.appendChild(grid)
+    return section
+
+
+def _is_thin_blood_trait_key(trait_key: str, kind: str) -> bool:
+    entry = trait_def(trait_base_id(trait_key), kind)  # type: ignore[arg-type]
+    return bool(entry and entry.get("thin_blood_only"))
+
+
+def _standard_traits(items: dict[str, int], kind: str) -> dict[str, int]:
+    return {
+        key: value
+        for key, value in items.items()
+        if value > 0 and not _is_thin_blood_trait_key(key, kind)
+    }
+
+
+def _thin_blood_traits_section(
+    title: str,
+    items: dict[str, int],
+    *,
+    kind: str,
+) -> Any | None:
+    rated = {k: v for k, v in items.items() if v > 0}
+    if not rated:
+        return None
+    section = document.createElement("section")
+    section.className = "sheet-rated-traits sheet-rated-traits--thin-blood"
+    section.appendChild(_section_heading(title))
+    grid = document.createElement("div")
+    grid.className = "sheet-rated-traits__grid"
+    for key in sorted(rated):
+        grid.appendChild(_stat_line(thin_blood_trait_label(key, kind), 1))  # type: ignore[arg-type]
+    section.appendChild(grid)
+    return section
+
+
+def _ghoul_powers_section(character: dict[str, Any]) -> Any | None:
+    powers = character.get("ghoul_powers") or {}
+    rated = {k: v for k, v in powers.items() if v > 0}
+    if not rated:
+        return None
+    section = document.createElement("section")
+    section.className = "sheet-rated-traits"
+    section.appendChild(_section_heading("Ghoul Powers"))
+    grid = document.createElement("div")
+    grid.className = "sheet-rated-traits__grid"
+    for power_id, value in sorted(rated.items()):
+        grid.appendChild(_stat_line(power_label(power_id), value))
     section.appendChild(grid)
     return section
 
@@ -467,19 +551,36 @@ def render_lotn_v5_sheet(
     )
 
     for section_title, block, trait_kind in (
-        ("Merits", character.get("merits", {}), "merit"),
-        ("Flaws", character.get("flaws", {}), "flaw"),
-        ("Ghoul Powers", character.get("ghoul_powers", {}), None),
+        ("Merits", _standard_traits(character.get("merits", {}), "merit"), "merit"),
+        ("Flaws", _standard_traits(character.get("flaws", {}), "flaw"), "flaw"),
     ):
         section = _rated_traits_section(section_title, block, kind=trait_kind)
         if section:
             sheet.appendChild(section)
 
+    for section_title, block, trait_kind in (
+        ("Thin-Blood Merits", character.get("thin_blood_merits", {}), "merit"),
+        ("Thin-Blood Flaws", character.get("thin_blood_flaws", {}), "flaw"),
+    ):
+        section = _thin_blood_traits_section(section_title, block, kind=trait_kind)
+        if section:
+            sheet.appendChild(section)
+
+    ghoul_section = _ghoul_powers_section(character)
+    if ghoul_section:
+        sheet.appendChild(ghoul_section)
+
     ls_section = _loresheet_section(character)
     if ls_section:
         sheet.appendChild(ls_section)
 
-    disc_section = _disciplines_section(character)
+    resonance_section = _resonance_discipline_section(character)
+    if resonance_section:
+        sheet.appendChild(resonance_section)
+
+    resonance_id = (character.get("discipline_meta") or {}).get("resonance_discipline")
+    disc_exclude = {resonance_id} if resonance_id else set()
+    disc_section = _disciplines_section(character, exclude=disc_exclude)
     if disc_section:
         sheet.appendChild(disc_section)
 

@@ -77,7 +77,7 @@ def trait_label(trait_id: str, kind: TraitKind) -> str:
 
 
 def _eligible_for_type(entry: dict[str, Any], ctype: str) -> bool:
-    if entry.get("thin_blood_only") and ctype != "thin_blood":
+    if entry.get("thin_blood_only"):
         return False
     if entry.get("ghoul_only") and ctype != "ghoul":
         return False
@@ -309,10 +309,17 @@ def _background_type_dots(char: dict[str, Any], bg_type: str) -> int:
 def _trait_present(char: dict[str, Any], trait_id: str) -> bool:
     merits = char.get("merits", {})
     flaws = char.get("flaws", {})
-    if int(merits.get(trait_id, 0)) > 0 or int(flaws.get(trait_id, 0)) > 0:
+    tb_merits = char.get("thin_blood_merits", {})
+    tb_flaws = char.get("thin_blood_flaws", {})
+    if (
+        int(merits.get(trait_id, 0)) > 0
+        or int(flaws.get(trait_id, 0)) > 0
+        or int(tb_merits.get(trait_id, 0)) > 0
+        or int(tb_flaws.get(trait_id, 0)) > 0
+    ):
         return True
     prefix = f"{trait_id}:"
-    for bucket in (merits, flaws):
+    for bucket in (merits, flaws, tb_merits, tb_flaws):
         for key, rating in bucket.items():
             if (key == trait_id or key.startswith(prefix)) and int(rating) > 0:
                 return True
@@ -347,7 +354,8 @@ def _conflicts_with_present(
 
     for check_kind in ("merit", "flaw"):
         traits = char.get("merits" if check_kind == "merit" else "flaws", {})
-        for trait_id, rating in traits.items():
+        tb_traits = char.get("thin_blood_merits" if check_kind == "merit" else "thin_blood_flaws", {})
+        for trait_id, rating in {**traits, **tb_traits}.items():
             if int(rating) <= 0:
                 continue
             other = trait_def(trait_base_id(trait_id), check_kind)  # type: ignore[arg-type]

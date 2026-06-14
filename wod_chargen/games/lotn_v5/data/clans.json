@@ -247,7 +247,7 @@
   },
   "caitiff": {
     "label": "Caitiff",
-    "kind": "clan",
+    "kind": "caitiff",
     "description": "No clan. Pick three Disciplines and make your own luck.",
     "disciplines": [],
     "discipline_note": "Choose any three disciplines at creation",

@@ -110,12 +110,13 @@ def spend_xp(
     enumerate_fn: Callable[[], list[PurchaseCandidate]],
     *,
     source: str = "archetype",
+    category_targets: dict[str, float] | None = None,
 ) -> tuple[int, list[XpLogEntry], list[LogEntry]]:
     remaining = budget
     xp_log: list[XpLogEntry] = []
     logs: list[LogEntry] = []
     iterations = 0
-    category_targets = roll_category_targets(rng)
+    category_targets = category_targets or roll_category_targets(rng)
     spent_by_macro: dict[str, int] = defaultdict(int)
     xp_spent = 0
 

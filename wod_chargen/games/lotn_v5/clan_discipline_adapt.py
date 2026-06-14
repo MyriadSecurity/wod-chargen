@@ -7,6 +7,7 @@ from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.archetypes import ArchetypeProfile
+from wod_chargen.games.lotn_v5.disciplines import caitiff_discipline_pool
 
 DATA = "wod_chargen.games.lotn_v5.data"
 
@@ -20,6 +21,8 @@ SIGNATURE_DISCIPLINE_MIN_BIAS = 1.05
 def clan_discipline_pool(clan_id: str | None) -> frozenset[str]:
     if not clan_id:
         return frozenset()
+    if clan_id == "caitiff":
+        return frozenset(caitiff_discipline_pool())
     clans = load_json_cached(DATA, "clans.json")
     return frozenset(clans.get(clan_id, {}).get("disciplines", []))
 
@@ -110,5 +113,10 @@ def char_clan_pool(char: dict[str, Any]) -> frozenset[str]:
     if ctype == "ghoul":
         return clan_discipline_pool(char.get("domitor_clan"))
     if ctype == "thin_blood":
-        return frozenset({"thin_blood_alchemy"})
-    return clan_discipline_pool(char.get("clan"))
+        if int(char.get("thin_blood_merits", {}).get("thin_blood_alchemist", 0)) > 0:
+            return frozenset({"thin_blood_alchemy"})
+        return frozenset()
+    clan = char.get("clan")
+    if clan == "caitiff":
+        return frozenset(caitiff_discipline_pool())
+    return clan_discipline_pool(clan)

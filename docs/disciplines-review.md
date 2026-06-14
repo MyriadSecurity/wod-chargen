@@ -62,10 +62,13 @@ Legacy shares without `discipline_powers` display dots only.
 ## Deferred (not v1)
 
 - Counterfeit thin-blood formulas (~101)
-- `discipline_affinity` merit
-- `discipline_caitiff` pricing
 - Predator package discipline grants
-- Per-power ghoul picks (keep ghoul discipline dots + ghoul_power stub)
+
+## Implemented (vtm/finish)
+
+- Caitiff: full discipline pool at creation; all discipline XP at `discipline_caitiff` (6×)
+- Ghoul: per-power XP picks from domitor in-clan level-1 powers
+- Thin-blood: zero-cost merit selection; `thin_blood_alchemist` and `discipline_affinity` effect hooks
 
 ## Thin-blood fix
 
