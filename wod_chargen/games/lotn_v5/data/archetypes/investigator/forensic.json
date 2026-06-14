@@ -17,11 +17,11 @@
       "police": 0.35
     },
     "discipline_power_biases": {
-      "heightened_senses": 2.1,
-      "scry_the_soul": 2.0,
-      "panacea": 1.85,
-      "sense_the_unseen": 1.8,
-      "premonition": 1.7
+      "heightened_senses": 0.3,
+      "scry_the_soul": 0.3,
+      "panacea": 0.5,
+      "sense_the_unseen": -0.05,
+      "premonition": 0.1
     },
     "tag_affinities": {
       "science": 0.4,

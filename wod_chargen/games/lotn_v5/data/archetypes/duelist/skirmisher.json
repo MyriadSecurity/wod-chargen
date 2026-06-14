@@ -15,11 +15,11 @@
       "celerity": 0.35
     },
     "discipline_power_biases": {
-      "blink": 2.1,
-      "nimble_departure": 2.0,
-      "fleetness": 1.95,
-      "soaring_leap": 1.85,
-      "rapid_reflexes": 1.75
+      "blink": 0.5,
+      "nimble_departure": 0.5,
+      "fleetness": 0.1,
+      "soaring_leap": 0.5,
+      "rapid_reflexes": 0.05
     },
     "tag_affinities": {
       "mobility": 0.4,

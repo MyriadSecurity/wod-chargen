@@ -26,10 +26,10 @@
       "reliable": 0.25
     },
     "discipline_power_biases": {
-      "compel": 1.9,
-      "cloud_memory": 1.85,
-      "mesmerize": 1.75,
-      "conceal": 1.65
+      "compel": 0.5,
+      "cloud_memory": 0.5,
+      "mesmerize": 0.5,
+      "conceal": -0.15
     },
     "tag_affinities": {
       "street": 0.4,

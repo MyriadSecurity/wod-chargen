@@ -27,10 +27,10 @@
       "diversity": 0.25
     },
     "discipline_power_biases": {
-      "monologue": 1.95,
-      "awe": 1.85,
-      "entrancement": 1.75,
-      "mesmerize": 1.7
+      "monologue": 0.4,
+      "awe": 0.1,
+      "entrancement": 0.1,
+      "mesmerize": -0.15
     },
     "tag_affinities": {
       "politics": 0.4,

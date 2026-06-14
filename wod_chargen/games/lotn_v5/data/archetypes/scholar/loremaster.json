@@ -18,10 +18,10 @@
       "university": 0.3
     },
     "discipline_power_biases": {
-      "scry_the_soul": 2.05,
-      "premonition": 1.95,
-      "heightened_senses": 1.85,
-      "collective_cognizance": 1.75
+      "scry_the_soul": 0.35,
+      "premonition": 0.3,
+      "heightened_senses": 0.05,
+      "collective_cognizance": 0.5
     },
     "tag_affinities": {
       "occult": 0.4,

@@ -115,6 +115,38 @@ def test_weight_map_page_renders(site_base_url: str):
 
 
 @pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
+def test_top_nav_switches_generator_and_weight_map(site_base_url: str):
+    """Top nav links must swap between wizard and weight map after PyScript boot."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--disable-http-cache"])
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto(site_base_url, wait_until="domcontentloaded", timeout=60_000)
+        _wait_for_app(page)
+        assert "Character Generator" in page.locator("#app-root h1").first.inner_text()
+
+        page.locator(".app-nav a").nth(1).click()
+        page.wait_for_function(
+            """() => {
+                const h1 = document.querySelector('#app-root h1');
+                return h1 && h1.textContent.toLowerCase().includes('weight map');
+            }""",
+            timeout=30_000,
+        )
+
+        page.locator(".app-nav a").first.click()
+        page.wait_for_function(
+            """() => {
+                const h1 = document.querySelector('#app-root h1');
+                return h1 && h1.textContent.includes('Character Generator');
+            }""",
+            timeout=30_000,
+        )
+        context.close()
+        browser.close()
+
+
+@pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
 def test_share_url_loads_results_sheet(site_base_url: str):
     share_path = (
         "/?schema=0.1&seed=424242&game=lotn_v5&venue=mes_end_to_dawn"

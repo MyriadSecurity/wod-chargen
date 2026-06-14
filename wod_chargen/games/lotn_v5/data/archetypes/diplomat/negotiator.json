@@ -25,10 +25,10 @@
       "reliable": 0.35
     },
     "discipline_power_biases": {
-      "compel": 2.05,
-      "mesmerize": 1.9,
-      "submerged_directive": 1.8,
-      "forgetful_mind": 1.65
+      "compel": 0.5,
+      "mesmerize": 0.05,
+      "submerged_directive": 0.5,
+      "forgetful_mind": 0.5
     },
     "tag_affinities": {
       "politics": 0.35,

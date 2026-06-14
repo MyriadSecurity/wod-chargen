@@ -16,10 +16,10 @@
       "health": 0.35
     },
     "discipline_power_biases": {
-      "panacea": 1.9,
-      "heightened_senses": 1.85,
-      "premonition": 1.75,
-      "scry_the_soul": 1.65
+      "panacea": 0.5,
+      "heightened_senses": 0.05,
+      "premonition": 0.1,
+      "scry_the_soul": -0.05
     },
     "tag_affinities": {
       "science": 0.45,

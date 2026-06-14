@@ -29,10 +29,10 @@
       "retainer": 0.3
     },
     "discipline_power_biases": {
-      "resiliency": 2.0,
-      "unyielding": 1.9,
-      "coagulate": 1.8,
-      "toughness": 1.7
+      "resiliency": 0.5,
+      "unyielding": 0.5,
+      "coagulate": 0.5,
+      "toughness": 0.1
     },
     "tag_affinities": {
       "defense": 0.4,

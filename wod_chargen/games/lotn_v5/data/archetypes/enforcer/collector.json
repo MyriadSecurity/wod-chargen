@@ -26,10 +26,10 @@
       "cash_money": 0.3
     },
     "discipline_power_biases": {
-      "daunt": 1.95,
-      "dread_gaze": 1.85,
-      "prowess": 1.8,
-      "compel": 1.65
+      "daunt": 0.5,
+      "dread_gaze": 0.1,
+      "prowess": -0.05,
+      "compel": 0.5
     },
     "tag_affinities": {
       "street": 0.35,

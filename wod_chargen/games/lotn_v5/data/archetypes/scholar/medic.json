@@ -18,10 +18,10 @@
       "welfare": 0.25
     },
     "discipline_power_biases": {
-      "panacea": 2.1,
-      "valeren": 1.95,
-      "coagulate": 1.85,
-      "heightened_senses": 1.7
+      "panacea": 0.5,
+      "valeren": 0.5,
+      "coagulate": 0.5,
+      "heightened_senses": -0.1
     },
     "tag_affinities": {
       "medicine": 0.45,

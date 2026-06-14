@@ -20,10 +20,10 @@
       "cash_money": 0.3
     },
     "discipline_power_biases": {
-      "mesmerize": 1.9,
-      "compel": 1.85,
-      "cloud_memory": 1.8,
-      "mask_of_a_thousand_faces": 1.7
+      "mesmerize": 0.5,
+      "compel": 0.5,
+      "cloud_memory": 0.5,
+      "mask_of_a_thousand_faces": 0.5
     },
     "tag_affinities": {
       "deception": 0.4,

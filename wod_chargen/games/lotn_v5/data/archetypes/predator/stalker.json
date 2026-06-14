@@ -16,11 +16,11 @@
       "paranoid": 0.3
     },
     "discipline_power_biases": {
-      "sense_the_unseen": 2.0,
-      "unseen_passage": 1.9,
-      "fleetness": 1.85,
-      "conceal": 1.75,
-      "heightened_senses": 1.7
+      "sense_the_unseen": 0.5,
+      "unseen_passage": 0.5,
+      "fleetness": 0.5,
+      "conceal": 0.5,
+      "heightened_senses": 0.5
     },
     "tag_affinities": {
       "stealth": 0.4,

@@ -19,10 +19,10 @@
       "walk_in_freezer": 0.3
     },
     "discipline_power_biases": {
-      "toughness": 2.05,
-      "resiliency": 2.0,
-      "unyielding": 1.85,
-      "roots_of_the_mountain": 1.75
+      "toughness": 0.45,
+      "resiliency": 0.5,
+      "unyielding": 0.5,
+      "roots_of_the_mountain": 0.5
     },
     "tag_affinities": {
       "endurance": 0.4,

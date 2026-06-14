@@ -10,6 +10,8 @@ from wod_chargen.games.lotn_v5.archetypes import effective_profile, get_archetyp
 from wod_chargen.games.lotn_v5.trait_biases import (
     BIAS_MAX,
     BIAS_MIN,
+    build_power_biases,
+    power_utility_bias,
     resolve_trait_bias,
     trait_tag_list,
 )
@@ -70,3 +72,19 @@ def test_effective_profile_merges_sub_deltas():
     sub = base.sub_archetypes[0]
     merged = effective_profile("diplomat", sub.id, "vampire")
     assert merged.skill_biases.get("persuasion", 0) >= base.skill_biases.get("persuasion", 1.0)
+
+
+def test_sub_power_bias_deltas_not_targets():
+    """Sub discipline_power_biases add to primary; merged values stay in sane range."""
+    merged = effective_profile("diplomat", "silver_tongue", "vampire")
+    assert merged.discipline_power_biases["mesmerize"] <= 2.5
+
+
+def test_power_utility_bias_staples():
+    assert power_utility_bias("fleetness") > power_utility_bias("nonexistent_power_xyz")
+
+
+def test_build_power_biases_includes_utility():
+    profile = _StubProfile(discipline_power_biases={"fleetness": 1.0})
+    biases = build_power_biases(profile, ["fleetness", "rapier"])
+    assert biases["fleetness"] > biases.get("rapier", 1.0)

@@ -28,10 +28,10 @@
       "jealousy": 0.3
     },
     "discipline_power_biases": {
-      "silencing_tongue": 2.1,
-      "dread_gaze": 2.0,
-      "monologue": 1.85,
-      "entrancement": 1.7
+      "silencing_tongue": 0.5,
+      "dread_gaze": 0.5,
+      "monologue": 0.3,
+      "entrancement": 0.05
     },
     "tag_affinities": {
       "politics": 0.35,

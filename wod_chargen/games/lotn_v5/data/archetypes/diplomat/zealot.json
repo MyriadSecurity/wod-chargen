@@ -27,10 +27,10 @@
       "political": 0.2
     },
     "discipline_power_biases": {
-      "dread_gaze": 2.0,
-      "monologue": 1.85,
-      "daunt": 1.75,
-      "awe": 1.7
+      "dread_gaze": 0.5,
+      "monologue": 0.3,
+      "daunt": 0.5,
+      "awe": -0.05
     },
     "tag_affinities": {
       "occult": 0.35,

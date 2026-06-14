@@ -18,11 +18,11 @@
       "reliable": 0.3
     },
     "discipline_power_biases": {
-      "sense_the_unseen": 2.05,
-      "heightened_senses": 1.95,
-      "premonition": 1.85,
-      "share_the_senses": 1.75,
-      "scry_the_soul": 1.7
+      "sense_the_unseen": 0.2,
+      "heightened_senses": 0.15,
+      "premonition": 0.25,
+      "share_the_senses": 0.5,
+      "scry_the_soul": 0.0
     },
     "tag_affinities": {
       "investigation": 0.45,

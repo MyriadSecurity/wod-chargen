@@ -27,10 +27,10 @@
       "diversity": 0.3
     },
     "discipline_power_biases": {
-      "daunt": 2.0,
-      "dread_gaze": 1.9,
-      "monologue": 1.8,
-      "awe": 1.65
+      "daunt": 0.5,
+      "dread_gaze": 0.5,
+      "monologue": 0.25,
+      "awe": -0.1
     },
     "tag_affinities": {
       "street": 0.35,

@@ -24,11 +24,11 @@
       "health": 0.25
     },
     "discipline_power_biases": {
-      "counterfeit_a_taste_for_blood": 2.1,
-      "counterfeit_blood_of_potency": 2.0,
-      "counterfeit_corrosive_vitae": 1.95,
-      "counterfeit_extinguish_vitae": 1.85,
-      "defractionate": 1.75
+      "counterfeit_a_taste_for_blood": 0.45,
+      "counterfeit_blood_of_potency": 0.5,
+      "counterfeit_corrosive_vitae": 0.5,
+      "counterfeit_extinguish_vitae": 0.5,
+      "defractionate": 0.5
     },
     "tag_affinities": {
       "alchemy": 0.45,

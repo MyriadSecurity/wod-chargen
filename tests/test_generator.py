@@ -6,6 +6,7 @@ from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.merits_flaws import max_trait_rating
 from wod_chargen.games.lotn_v5.archetypes import load_all_archetypes
+from wod_chargen.games.lotn_v5.disciplines import power_by_id
 
 
 def _venue():
@@ -103,14 +104,17 @@ def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int =
     assert all(0 <= v <= 3 for v in character["loresheets"].values())
     assert all(0 <= v <= formula_cap for v in character["thin_blood_formulas"].values())
     assert all(0 <= v <= 1 for v in character["ghoul_powers"].values())
+    for disc_id, rating in character.get("disciplines", {}).items():
+        picks = character.get("discipline_powers", {}).get(disc_id, {})
+        for level in range(1, int(rating) + 1):
+            assert str(level) in picks, f"missing power {disc_id}@{level}"
+            power = power_by_id(picks[str(level)])
+            assert power is not None
+            assert int(power["level"]) == level
     if character["character_type"] == "vampire":
         meta = character.get("generation_meta") or {}
         bp_cap = meta.get("max_blood_potency", 3)
         assert character["blood_potency"] <= bp_cap
-        for disc_id, rating in character.get("disciplines", {}).items():
-            picks = character.get("discipline_powers", {}).get(disc_id, {})
-            for level in range(1, int(rating) + 1):
-                assert str(level) in picks, f"seed missing power {disc_id}@{level}"
 
 
 @pytest.mark.parametrize("seed", range(50))

@@ -22,10 +22,10 @@
       "bestial_temper": 0.25
     },
     "discipline_power_biases": {
-      "dread_gaze": 2.15,
-      "daunt": 2.0,
-      "prowess": 1.85,
-      "lethal_body": 1.75
+      "dread_gaze": 0.4,
+      "daunt": 0.5,
+      "prowess": 0.0,
+      "lethal_body": 0.05
     },
     "tag_affinities": {
       "intimidation": 0.4,

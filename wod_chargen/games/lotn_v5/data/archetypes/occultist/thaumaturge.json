@@ -22,11 +22,11 @@
       "occult": 0.4
     },
     "discipline_power_biases": {
-      "blood_of_potency": 2.1,
-      "a_taste_for_blood": 2.05,
-      "scorpion_s_touch": 1.95,
-      "extinguish_vitae": 1.85,
-      "corrosive_vitae": 1.75
+      "blood_of_potency": 0.3,
+      "a_taste_for_blood": 0.15,
+      "scorpion_s_touch": 0.5,
+      "extinguish_vitae": 0.5,
+      "corrosive_vitae": 0.05
     },
     "tag_affinities": {
       "blood_sorcery": 0.45,

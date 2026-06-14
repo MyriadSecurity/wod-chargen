@@ -18,10 +18,10 @@
       "underworld": 0.25
     },
     "discipline_power_biases": {
-      "prowess": 2.1,
-      "lethal_body": 2.0,
-      "brutal_feed": 1.85,
-      "staggering_strike": 1.75
+      "prowess": 0.25,
+      "lethal_body": 0.3,
+      "brutal_feed": 0.5,
+      "staggering_strike": 0.5
     },
     "tag_affinities": {
       "combat": 0.4,

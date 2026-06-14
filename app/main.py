@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from pyscript import document, window
+from pyscript.ffi import create_proxy
 
 _weight_app = None
+_hash_handler = None
 
 
 def _hide_loading() -> None:
@@ -52,12 +54,14 @@ def _mount_app() -> None:
 
 
 def main() -> None:
+    global _hash_handler
     try:
 
         def on_hash_change(_=None):
             _mount_app()
 
-        window.addEventListener("hashchange", on_hash_change)
+        _hash_handler = create_proxy(on_hash_change)
+        window.addEventListener("hashchange", _hash_handler)
         _mount_app()
         _hide_loading()
     except Exception as exc:

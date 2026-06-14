@@ -19,11 +19,11 @@
       "death_sight": 0.3
     },
     "discipline_power_biases": {
-      "oblivion_s_sight": 2.05,
-      "shadow_cloak": 1.95,
-      "arms_of_ahriman": 1.9,
-      "masque_of_death": 1.85,
-      "aura_of_decay": 1.75
+      "oblivion_s_sight": 0.5,
+      "shadow_cloak": 0.5,
+      "arms_of_ahriman": 0.5,
+      "masque_of_death": 0.5,
+      "aura_of_decay": 0.5
     },
     "tag_affinities": {
       "necromancy": 0.45,

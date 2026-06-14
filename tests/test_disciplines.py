@@ -3,6 +3,7 @@
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.games.lotn_v5.disciplines import (
+    assign_power_at_level,
     assign_powers_for_discipline,
     enumerate_eligible_powers,
     load_power_catalog,
@@ -100,6 +101,9 @@ def test_creation_assigns_power_per_discipline_level():
         picks = char["discipline_powers"].get(disc_id, {})
         for level in range(1, int(rating) + 1):
             assert str(level) in picks, f"{disc_id} missing level {level}"
+            power = power_by_id(picks[str(level)])
+            assert power is not None
+            assert int(power["level"]) == level, f"{disc_id} slot {level} has {picks[str(level)]}"
     assert not validate_discipline_selections(char)
 
 
@@ -129,6 +133,11 @@ def test_xp_discipline_buy_adds_power():
     disc_xp = [e for e in result.xp_log if e.category == "discipline"]
     if disc_xp:
         assert result.character["discipline_powers"]
+    for buy in disc_xp:
+        disc = buy.item
+        level = buy.new_level
+        pid = result.character["discipline_powers"][disc][str(level)]
+        assert int(power_by_id(pid)["level"]) == level
 
 
 def test_pick_power_respects_bias():
@@ -184,3 +193,29 @@ def test_assign_powers_for_discipline():
     assign_powers_for_discipline(rng, char, "potence", 2, _Profile(), log)
     assert char["discipline_powers"]["potence"]["1"]
     assert char["discipline_powers"]["potence"]["2"]
+    for level_str, pid in char["discipline_powers"]["potence"].items():
+        assert int(power_by_id(pid)["level"]) == int(level_str)
+
+
+def test_xp_discipline_advancement_picks_matching_level_power():
+    """Each +1 discipline dot during XP must fill the slot at the new dot level."""
+    for seed in range(100):
+        result = generate_character(seed, _opts(clan="tremere", arch="occultist", sub="thaumaturge"), _venue())
+        for buy in [e for e in result.xp_log if e.category == "discipline"]:
+            pid = result.character["discipline_powers"][buy.item][str(buy.new_level)]
+            assert int(power_by_id(pid)["level"]) == buy.new_level
+
+
+def test_assign_power_at_level_rejects_wrong_catalog_level():
+    rng = SeededRng(1)
+    char = {
+        "disciplines": {"celerity": 2},
+        "discipline_powers": {"celerity": {"1": "fleetness"}},
+        "rituals": [],
+        "ceremonies": [],
+        "formula_powers": {},
+    }
+    log = []
+    assign_power_at_level(rng, char, "celerity", 2, _Profile(), log)
+    pid = char["discipline_powers"]["celerity"]["2"]
+    assert int(power_by_id(pid)["level"]) == 2

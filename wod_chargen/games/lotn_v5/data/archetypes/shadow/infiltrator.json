@@ -15,11 +15,11 @@
       "at_arms_length": 0.35
     },
     "discipline_power_biases": {
-      "unseen_passage": 2.1,
-      "conceal": 2.0,
-      "mask_of_a_thousand_faces": 1.9,
-      "cache": 1.8,
-      "blink": 1.7
+      "unseen_passage": 0.35,
+      "conceal": 0.15,
+      "mask_of_a_thousand_faces": 0.5,
+      "cache": 0.5,
+      "blink": 0.5
     },
     "tag_affinities": {
       "stealth": 0.4,

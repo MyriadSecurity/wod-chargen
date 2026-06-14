@@ -19,11 +19,11 @@
       "jealousy": 0.25
     },
     "discipline_power_biases": {
-      "monologue": 2.0,
-      "mesmerize": 1.9,
-      "compel": 1.85,
-      "dread_gaze": 1.75,
-      "awe": 1.7
+      "monologue": 0.3,
+      "mesmerize": 0.5,
+      "compel": 0.5,
+      "dread_gaze": 0.5,
+      "awe": -0.15
     },
     "tag_affinities": {
       "influence": 0.4,

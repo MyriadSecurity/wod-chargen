@@ -14,11 +14,11 @@
       "garage": 0.25
     },
     "discipline_power_biases": {
-      "rapid_reflexes": 2.05,
-      "fleetness": 1.95,
-      "heightened_senses": 1.85,
-      "cat_s_grace": 1.75,
-      "blink": 1.65
+      "rapid_reflexes": 0.35,
+      "fleetness": 0.1,
+      "heightened_senses": 0.5,
+      "cat_s_grace": 0.15,
+      "blink": 0.5
     },
     "tag_affinities": {
       "combat": 0.4,

@@ -19,11 +19,11 @@
       "garage": 0.3
     },
     "discipline_power_biases": {
-      "chimerstry": 1.9,
-      "ghost_in_the_machine": 1.85,
-      "fata_morgana": 1.8,
-      "cache": 1.7,
-      "conceal": 1.65
+      "chimerstry": 0.5,
+      "ghost_in_the_machine": 0.5,
+      "fata_morgana": 0.5,
+      "cache": 0.5,
+      "conceal": -0.2
     },
     "tag_affinities": {
       "crime": 0.35,

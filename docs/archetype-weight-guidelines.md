@@ -67,3 +67,25 @@ uv run python scripts/generate_trait_tags.py
 - **Over-tuning** — prefer soft tag affinities; floor is 0.05 so nothing is truly zero.
 - **Amalgam/prereq** — power bias never bypasses eligibility.
 - **Orphan keys** — validation script fails on unknown ids; run after JSON edits.
+- **Single-discipline tunnel vision** — explicit `discipline_power_biases` should name 3–5 signature picks, not every power in one discipline. Tag affinities already boost whole tag families (e.g. all `presence`-tagged powers).
+- **Sub power deltas** — subs add to primary via `effective_profile`; use **+0.2–0.5** deltas on subs, not target totals like `2.05`.
+- **Secondary in-clan** — clan pool forces 3 disciplines at creation; only one may match the archetype core. Review picks for the other two.
+
+## Discipline power layers
+
+Effective pick weight is the product of two layers:
+
+| Layer | Source | Purpose |
+|-------|--------|---------|
+| Archetype theme | `discipline_power_biases`, `tag_affinities` | On-concept flavor |
+| Neutral utility | `discipline_power_utility.json` | Broad LARP usefulness when a discipline is taken anyway |
+
+```
+effective_power_bias = clamp(archetype_bias × utility_bias)
+```
+
+- **Utility defaults** — level 1–2 powers slightly favored (more table time per dot); level 5 slightly deprioritized unless overridden.
+- **Utility overrides** — ~40 staple powers (Fleetness, Conceal, Sense the Unseen, etc.) get explicit scores.
+- **Review workflow** — for each primary, run `scripts/discipline_power_coverage_report.py --clan <typical>` and confirm in-clan disciplines without signature picks still produce sensible staples via utility.
+
+Do **not** rely on tag affinities alone for off-theme in-clan disciplines — broad tags like `combat` suppress entire Celerity/Potence pools for social archetypes.

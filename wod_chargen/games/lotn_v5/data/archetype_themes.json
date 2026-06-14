@@ -99,10 +99,10 @@
             "social": 0.25
           },
           "discipline_power_biases": {
-            "mesmerize": 2.05,
-            "awe": 1.95,
-            "entrancement": 1.85,
-            "monologue": 1.75
+            "mesmerize": 0.2,
+            "awe": 0.2,
+            "entrancement": 0.2,
+            "monologue": 0.2
           }
         },
         "socialite": {
@@ -130,10 +130,10 @@
             "social": 0.25
           },
           "discipline_power_biases": {
-            "awe": 2.0,
-            "entrancement": 1.9,
-            "silencing_tongue": 1.75,
-            "monologue": 1.7
+            "awe": 0.25,
+            "entrancement": 0.25,
+            "silencing_tongue": 0.5,
+            "monologue": 0.15
           }
         },
         "zealot": {
@@ -157,10 +157,10 @@
             "influence": 0.25
           },
           "discipline_power_biases": {
-            "dread_gaze": 2.0,
-            "monologue": 1.85,
-            "daunt": 1.75,
-            "awe": 1.7
+            "dread_gaze": 0.5,
+            "monologue": 0.3,
+            "daunt": 0.5,
+            "awe": -0.05
           }
         },
         "negotiator": {
@@ -187,10 +187,10 @@
             "control": 0.25
           },
           "discipline_power_biases": {
-            "compel": 2.05,
-            "mesmerize": 1.9,
-            "submerged_directive": 1.8,
-            "forgetful_mind": 1.65
+            "compel": 0.5,
+            "mesmerize": 0.05,
+            "submerged_directive": 0.5,
+            "forgetful_mind": 0.5
           }
         },
         "harpy": {
@@ -216,10 +216,10 @@
             "reputation": 0.25
           },
           "discipline_power_biases": {
-            "silencing_tongue": 2.1,
-            "dread_gaze": 2.0,
-            "monologue": 1.85,
-            "entrancement": 1.7
+            "silencing_tongue": 0.5,
+            "dread_gaze": 0.5,
+            "monologue": 0.3,
+            "entrancement": 0.05
           }
         },
         "courtier": {
@@ -245,10 +245,10 @@
             "influence": 0.25
           },
           "discipline_power_biases": {
-            "monologue": 1.95,
-            "awe": 1.85,
-            "entrancement": 1.75,
-            "mesmerize": 1.7
+            "monologue": 0.4,
+            "awe": 0.1,
+            "entrancement": 0.1,
+            "mesmerize": -0.15
           }
         },
         "agitator": {
@@ -273,10 +273,10 @@
             "influence": 0.3
           },
           "discipline_power_biases": {
-            "daunt": 2.0,
-            "dread_gaze": 1.9,
-            "monologue": 1.8,
-            "awe": 1.65
+            "daunt": 0.5,
+            "dread_gaze": 0.5,
+            "monologue": 0.25,
+            "awe": -0.1
           }
         }
       }
@@ -375,10 +375,10 @@
             "resilience": 0.35
           },
           "discipline_power_biases": {
-            "toughness": 2.05,
-            "resiliency": 2.0,
-            "unyielding": 1.85,
-            "roots_of_the_mountain": 1.75
+            "toughness": 0.45,
+            "resiliency": 0.5,
+            "unyielding": 0.5,
+            "roots_of_the_mountain": 0.5
           }
         },
         "brawler": {
@@ -398,10 +398,10 @@
             "physical": 0.3
           },
           "discipline_power_biases": {
-            "prowess": 2.1,
-            "lethal_body": 2.0,
-            "brutal_feed": 1.85,
-            "staggering_strike": 1.75
+            "prowess": 0.25,
+            "lethal_body": 0.3,
+            "brutal_feed": 0.5,
+            "staggering_strike": 0.5
           }
         },
         "collector": {
@@ -426,10 +426,10 @@
             "wealth": 0.3
           },
           "discipline_power_biases": {
-            "daunt": 1.95,
-            "dread_gaze": 1.85,
-            "prowess": 1.8,
-            "compel": 1.65
+            "daunt": 0.5,
+            "dread_gaze": 0.1,
+            "prowess": -0.05,
+            "compel": 0.5
           }
         },
         "guardian": {
@@ -450,10 +450,10 @@
             "support": 0.3
           },
           "discipline_power_biases": {
-            "resiliency": 2.0,
-            "unyielding": 1.9,
-            "coagulate": 1.8,
-            "toughness": 1.7
+            "resiliency": 0.5,
+            "unyielding": 0.5,
+            "coagulate": 0.5,
+            "toughness": 0.1
           }
         },
         "scourge": {
@@ -474,10 +474,10 @@
             "combat": 0.35
           },
           "discipline_power_biases": {
-            "dread_gaze": 2.15,
-            "daunt": 2.0,
-            "prowess": 1.85,
-            "lethal_body": 1.75
+            "dread_gaze": 0.4,
+            "daunt": 0.5,
+            "prowess": 0.0,
+            "lethal_body": 0.05
           }
         }
       }
@@ -581,11 +581,11 @@
             "perception": 0.3
           },
           "discipline_power_biases": {
-            "sense_the_unseen": 2.0,
-            "unseen_passage": 1.9,
-            "fleetness": 1.85,
-            "conceal": 1.75,
-            "heightened_senses": 1.7
+            "sense_the_unseen": 0.5,
+            "unseen_passage": 0.5,
+            "fleetness": 0.5,
+            "conceal": 0.5,
+            "heightened_senses": 0.5
           }
         },
         "feral": {
@@ -612,11 +612,11 @@
             "shapeshift": 0.35
           },
           "discipline_power_biases": {
-            "feral_weapons": 2.1,
-            "shapechange": 2.0,
-            "atavism": 1.9,
-            "quell_the_beast": 1.75,
-            "eyes_of_the_beast": 1.7
+            "feral_weapons": 0.45,
+            "shapechange": 0.5,
+            "atavism": 0.5,
+            "quell_the_beast": 0.5,
+            "eyes_of_the_beast": 0.0
           }
         }
       }
@@ -718,11 +718,11 @@
             "stealth": 0.35
           },
           "discipline_power_biases": {
-            "unseen_passage": 2.05,
-            "conceal": 2.0,
-            "cache": 1.85,
-            "fleetness": 1.75,
-            "silence_of_death": 1.65
+            "unseen_passage": 0.35,
+            "conceal": 0.2,
+            "cache": 0.5,
+            "fleetness": 0.1,
+            "silence_of_death": 0.1
           }
         },
         "hustler": {
@@ -743,10 +743,10 @@
             "street": 0.3
           },
           "discipline_power_biases": {
-            "mesmerize": 1.9,
-            "compel": 1.85,
-            "cloud_memory": 1.8,
-            "mask_of_a_thousand_faces": 1.7
+            "mesmerize": 0.5,
+            "compel": 0.5,
+            "cloud_memory": 0.5,
+            "mask_of_a_thousand_faces": 0.5
           }
         },
         "fence": {
@@ -772,10 +772,10 @@
             "crime": 0.3
           },
           "discipline_power_biases": {
-            "conceal": 1.85,
-            "chimerstry": 1.8,
-            "mask_of_a_thousand_faces": 1.75,
-            "cache": 1.65
+            "conceal": 0.05,
+            "chimerstry": 0.5,
+            "mask_of_a_thousand_faces": 0.5,
+            "cache": 0.5
           }
         },
         "fixer": {
@@ -801,10 +801,10 @@
             "support": 0.3
           },
           "discipline_power_biases": {
-            "compel": 1.9,
-            "cloud_memory": 1.85,
-            "mesmerize": 1.75,
-            "conceal": 1.65
+            "compel": 0.5,
+            "cloud_memory": 0.5,
+            "mesmerize": 0.5,
+            "conceal": -0.15
           }
         }
       }
@@ -910,11 +910,11 @@
             "perception": 0.35
           },
           "discipline_power_biases": {
-            "sense_the_unseen": 2.05,
-            "share_the_senses": 1.95,
-            "heightened_senses": 1.85,
-            "scry_the_soul": 1.75,
-            "conceal": 1.65
+            "sense_the_unseen": 0.4,
+            "share_the_senses": 0.5,
+            "heightened_senses": 0.5,
+            "scry_the_soul": 0.5,
+            "conceal": -0.2
           }
         },
         "infiltrator": {
@@ -934,11 +934,11 @@
             "crime": 0.3
           },
           "discipline_power_biases": {
-            "unseen_passage": 2.1,
-            "conceal": 2.0,
-            "mask_of_a_thousand_faces": 1.9,
-            "cache": 1.8,
-            "blink": 1.7
+            "unseen_passage": 0.35,
+            "conceal": 0.15,
+            "mask_of_a_thousand_faces": 0.5,
+            "cache": 0.5,
+            "blink": 0.5
           }
         },
         "saboteur": {
@@ -959,11 +959,11 @@
             "stealth": 0.3
           },
           "discipline_power_biases": {
-            "chimerstry": 1.9,
-            "ghost_in_the_machine": 1.85,
-            "fata_morgana": 1.8,
-            "cache": 1.7,
-            "conceal": 1.65
+            "chimerstry": 0.5,
+            "ghost_in_the_machine": 0.5,
+            "fata_morgana": 0.5,
+            "cache": 0.5,
+            "conceal": -0.2
           }
         }
       }
@@ -1066,10 +1066,10 @@
             "information": 0.3
           },
           "discipline_power_biases": {
-            "scry_the_soul": 2.05,
-            "premonition": 1.95,
-            "heightened_senses": 1.85,
-            "collective_cognizance": 1.75
+            "scry_the_soul": 0.35,
+            "premonition": 0.3,
+            "heightened_senses": 0.05,
+            "collective_cognizance": 0.5
           }
         },
         "scientist": {
@@ -1090,10 +1090,10 @@
             "mental": 0.3
           },
           "discipline_power_biases": {
-            "panacea": 1.9,
-            "heightened_senses": 1.85,
-            "premonition": 1.75,
-            "scry_the_soul": 1.65
+            "panacea": 0.5,
+            "heightened_senses": 0.05,
+            "premonition": 0.1,
+            "scry_the_soul": -0.05
           }
         },
         "archivist": {
@@ -1117,10 +1117,10 @@
             "investigation": 0.3
           },
           "discipline_power_biases": {
-            "heightened_senses": 1.9,
-            "sense_the_unseen": 1.85,
-            "premonition": 1.75,
-            "share_the_senses": 1.65
+            "heightened_senses": 0.1,
+            "sense_the_unseen": 0.3,
+            "premonition": 0.1,
+            "share_the_senses": 0.5
           }
         },
         "medic": {
@@ -1141,10 +1141,10 @@
             "science": 0.35
           },
           "discipline_power_biases": {
-            "panacea": 2.1,
-            "valeren": 1.95,
-            "coagulate": 1.85,
-            "heightened_senses": 1.7
+            "panacea": 0.5,
+            "valeren": 0.5,
+            "coagulate": 0.5,
+            "heightened_senses": -0.1
           }
         }
       }
@@ -1248,11 +1248,11 @@
             "politics": 0.35
           },
           "discipline_power_biases": {
-            "mesmerize": 2.1,
-            "submerged_directive": 2.0,
-            "compel": 1.95,
-            "forgetful_mind": 1.85,
-            "domitor_s_favor": 1.7
+            "mesmerize": 0.2,
+            "submerged_directive": 0.5,
+            "compel": 0.1,
+            "forgetful_mind": 0.2,
+            "domitor_s_favor": 0.5
           }
         },
         "gaslighter": {
@@ -1272,11 +1272,11 @@
             "control": 0.3
           },
           "discipline_power_biases": {
-            "forgetful_mind": 2.1,
-            "cloud_memory": 2.05,
-            "dementation": 1.9,
-            "mesmerize": 1.85,
-            "compel": 1.7
+            "forgetful_mind": 0.45,
+            "cloud_memory": 0.3,
+            "dementation": 0.5,
+            "mesmerize": -0.05,
+            "compel": -0.15
           }
         },
         "siren": {
@@ -1299,11 +1299,11 @@
             "presence": 0.35
           },
           "discipline_power_biases": {
-            "entrancement": 2.15,
-            "awe": 2.05,
-            "eyes_of_the_serpent": 1.9,
-            "monologue": 1.8,
-            "mesmerize": 1.7
+            "entrancement": 0.5,
+            "awe": 0.5,
+            "eyes_of_the_serpent": 0.5,
+            "monologue": 0.5,
+            "mesmerize": -0.2
           }
         }
       }
@@ -1401,11 +1401,11 @@
             "mobility": 0.35
           },
           "discipline_power_biases": {
-            "fleetness": 2.1,
-            "rapid_reflexes": 2.0,
-            "blink": 1.9,
-            "cat_s_grace": 1.85,
-            "nimble_departure": 1.75
+            "fleetness": 0.25,
+            "rapid_reflexes": 0.3,
+            "blink": 0.5,
+            "cat_s_grace": 0.25,
+            "nimble_departure": 0.5
           }
         },
         "marksman": {
@@ -1424,11 +1424,11 @@
             "perception": 0.3
           },
           "discipline_power_biases": {
-            "rapid_reflexes": 2.05,
-            "fleetness": 1.95,
-            "heightened_senses": 1.85,
-            "cat_s_grace": 1.75,
-            "blink": 1.65
+            "rapid_reflexes": 0.35,
+            "fleetness": 0.1,
+            "heightened_senses": 0.5,
+            "cat_s_grace": 0.15,
+            "blink": 0.5
           }
         },
         "skirmisher": {
@@ -1448,11 +1448,11 @@
             "combat": 0.35
           },
           "discipline_power_biases": {
-            "blink": 2.1,
-            "nimble_departure": 2.0,
-            "fleetness": 1.95,
-            "soaring_leap": 1.85,
-            "rapid_reflexes": 1.75
+            "blink": 0.5,
+            "nimble_departure": 0.5,
+            "fleetness": 0.1,
+            "soaring_leap": 0.5,
+            "rapid_reflexes": 0.05
           }
         }
       }
@@ -1555,11 +1555,11 @@
             "ritual": 0.4
           },
           "discipline_power_biases": {
-            "blood_of_potency": 2.1,
-            "a_taste_for_blood": 2.05,
-            "scorpion_s_touch": 1.95,
-            "extinguish_vitae": 1.85,
-            "corrosive_vitae": 1.75
+            "blood_of_potency": 0.3,
+            "a_taste_for_blood": 0.15,
+            "scorpion_s_touch": 0.5,
+            "extinguish_vitae": 0.5,
+            "corrosive_vitae": 0.05
           }
         },
         "ritualist": {
@@ -1582,11 +1582,11 @@
             "occult": 0.35
           },
           "discipline_power_biases": {
-            "blood_walk": 2.0,
-            "ward_against_ghouls": 1.95,
-            "phantom_whispers": 1.9,
-            "craft_bloodstone": 1.8,
-            "cling_of_the_arachnid": 1.7
+            "blood_walk": 0.5,
+            "ward_against_ghouls": 0.5,
+            "phantom_whispers": 0.5,
+            "craft_bloodstone": 0.5,
+            "cling_of_the_arachnid": 0.5
           }
         },
         "necromancer": {
@@ -1609,11 +1609,11 @@
             "oblivion": 0.4
           },
           "discipline_power_biases": {
-            "oblivion_s_sight": 2.05,
-            "shadow_cloak": 1.95,
-            "arms_of_ahriman": 1.9,
-            "masque_of_death": 1.85,
-            "aura_of_decay": 1.75
+            "oblivion_s_sight": 0.5,
+            "shadow_cloak": 0.5,
+            "arms_of_ahriman": 0.5,
+            "masque_of_death": 0.5,
+            "aura_of_decay": 0.5
           }
         }
       }
@@ -1716,11 +1716,11 @@
             "information": 0.35
           },
           "discipline_power_biases": {
-            "sense_the_unseen": 2.05,
-            "heightened_senses": 1.95,
-            "premonition": 1.85,
-            "share_the_senses": 1.75,
-            "scry_the_soul": 1.7
+            "sense_the_unseen": 0.2,
+            "heightened_senses": 0.15,
+            "premonition": 0.25,
+            "share_the_senses": 0.5,
+            "scry_the_soul": 0.0
           }
         },
         "forensic": {
@@ -1741,11 +1741,11 @@
             "investigation": 0.35
           },
           "discipline_power_biases": {
-            "heightened_senses": 2.1,
-            "scry_the_soul": 2.0,
-            "panacea": 1.85,
-            "sense_the_unseen": 1.8,
-            "premonition": 1.7
+            "heightened_senses": 0.3,
+            "scry_the_soul": 0.3,
+            "panacea": 0.5,
+            "sense_the_unseen": -0.05,
+            "premonition": 0.1
           }
         },
         "interrogator": {
@@ -1764,11 +1764,11 @@
             "control": 0.3
           },
           "discipline_power_biases": {
-            "compel": 2.05,
-            "mesmerize": 1.95,
-            "dread_gaze": 1.85,
-            "daunt": 1.8,
-            "forgetful_mind": 1.7
+            "compel": 0.5,
+            "mesmerize": 0.5,
+            "dread_gaze": 0.5,
+            "daunt": 0.5,
+            "forgetful_mind": 0.5
           }
         }
       }
@@ -1871,10 +1871,10 @@
             "mental": 0.3
           },
           "discipline_power_biases": {
-            "heightened_senses": 1.9,
-            "scry_the_soul": 1.85,
-            "premonition": 1.8,
-            "collective_cognizance": 1.7
+            "heightened_senses": 0.5,
+            "scry_the_soul": 0.5,
+            "premonition": 0.5,
+            "collective_cognizance": 0.5
           }
         },
         "performer": {
@@ -1897,11 +1897,11 @@
             "reputation": 0.35
           },
           "discipline_power_biases": {
-            "awe": 2.15,
-            "entrancement": 2.05,
-            "monologue": 1.9,
-            "eyes_of_the_serpent": 1.8,
-            "silencing_tongue": 1.7
+            "awe": 0.3,
+            "entrancement": 0.25,
+            "monologue": 0.2,
+            "eyes_of_the_serpent": 0.2,
+            "silencing_tongue": 0.5
           }
         },
         "patron": {
@@ -1926,10 +1926,10 @@
             "reputation": 0.35
           },
           "discipline_power_biases": {
-            "awe": 1.85,
-            "entrancement": 1.8,
-            "monologue": 1.75,
-            "mesmerize": 1.65
+            "awe": 0.0,
+            "entrancement": 0.0,
+            "monologue": 0.05,
+            "mesmerize": 0.5
           }
         },
         "director": {
@@ -1949,11 +1949,11 @@
             "control": 0.3
           },
           "discipline_power_biases": {
-            "monologue": 2.0,
-            "mesmerize": 1.9,
-            "compel": 1.85,
-            "dread_gaze": 1.75,
-            "awe": 1.7
+            "monologue": 0.3,
+            "mesmerize": 0.5,
+            "compel": 0.5,
+            "dread_gaze": 0.5,
+            "awe": -0.15
           }
         }
       }
@@ -2052,11 +2052,11 @@
             "medicine": 0.35
           },
           "discipline_power_biases": {
-            "counterfeit_panacea": 2.0,
-            "counterfeit_heightened_senses": 1.9,
-            "far_reach": 1.85,
-            "haze": 1.75,
-            "envelope": 1.7
+            "counterfeit_panacea": 0.5,
+            "counterfeit_heightened_senses": 0.5,
+            "far_reach": 0.0,
+            "haze": -0.05,
+            "envelope": 0.0
           }
         },
         "distiller": {
@@ -2076,11 +2076,11 @@
             "art": 0.35
           },
           "discipline_power_biases": {
-            "envelope": 2.05,
-            "defractionate": 2.0,
-            "haze": 1.9,
-            "far_reach": 1.8,
-            "counterfeit_corrosive_vitae": 1.7
+            "envelope": 0.35,
+            "defractionate": 0.5,
+            "haze": 0.1,
+            "far_reach": -0.05,
+            "counterfeit_corrosive_vitae": 0.5
           }
         },
         "blood_brewer": {
@@ -2106,11 +2106,11 @@
             "ritual": 0.25
           },
           "discipline_power_biases": {
-            "counterfeit_a_taste_for_blood": 2.1,
-            "counterfeit_blood_of_potency": 2.0,
-            "counterfeit_corrosive_vitae": 1.95,
-            "counterfeit_extinguish_vitae": 1.85,
-            "defractionate": 1.75
+            "counterfeit_a_taste_for_blood": 0.45,
+            "counterfeit_blood_of_potency": 0.5,
+            "counterfeit_corrosive_vitae": 0.5,
+            "counterfeit_extinguish_vitae": 0.5,
+            "defractionate": 0.5
           }
         }
       }

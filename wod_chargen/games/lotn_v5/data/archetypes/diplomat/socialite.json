@@ -24,10 +24,10 @@
       "fan_club": 0.3
     },
     "discipline_power_biases": {
-      "awe": 2.0,
-      "entrancement": 1.9,
-      "silencing_tongue": 1.75,
-      "monologue": 1.7
+      "awe": 0.25,
+      "entrancement": 0.25,
+      "silencing_tongue": 0.5,
+      "monologue": 0.15
     },
     "tag_affinities": {
       "reputation": 0.35,

@@ -1,4 +1,9 @@
-"""Discipline power catalog, eligibility, and procedural selection."""
+"""Discipline power catalog, eligibility, and procedural selection.
+
+Standard generation policy: each discipline dot at level *N* selects exactly one
+catalog power at level *N* (one power per dot level). Alternate picks (e.g. filling
+a missed lower-level slot when advancing) are not used during procedural generation.
+"""
 
 from __future__ import annotations
 
@@ -73,6 +78,16 @@ def track_kind(track_id: str) -> str:
 
 def _is_named_formula_power(power: dict[str, Any]) -> bool:
     return power["id"] in NAMED_FORMULA_IDS
+
+
+def _assert_standard_level_match(power: dict[str, Any], level: int) -> None:
+    """Ensure a picked power matches the purchased dot level (standard LoTN selection)."""
+    power_level = int(power["level"])
+    if power_level != int(level):
+        raise ValueError(
+            f"Discipline dot {level} requires a level-{level} power; "
+            f"got {power['id']} (catalog level {power_level})"
+        )
 
 
 def powers_for_level(disc_id: str, level: int, *, named_only: bool = False) -> list[dict[str, Any]]:
@@ -263,7 +278,12 @@ def assign_power_at_level(
                 )
             )
             return None
-        power = pick_power(rng, eligible, build_power_biases(profile, [p["id"] for p in eligible]))
+        power = pick_power(
+            rng,
+            eligible,
+            build_power_biases(profile, [p["id"] for p in eligible], char=char, track_id=track_id),
+        )
+        _assert_standard_level_match(power, level)
         record_formula_selection(char, power["id"])
         msg = f"Formula {power['label']} ({len(eligible)} options)"
     else:
@@ -279,7 +299,12 @@ def assign_power_at_level(
                 )
             )
             return None
-        power = pick_power(rng, eligible, build_power_biases(profile, [p["id"] for p in eligible]))
+        power = pick_power(
+            rng,
+            eligible,
+            build_power_biases(profile, [p["id"] for p in eligible], char=char, track_id=track_id),
+        )
+        _assert_standard_level_match(power, level)
         if kind == "ritual":
             char["rituals"].append(power["id"])
             msg = f"Ritual {power['label']} ({len(eligible)} options)"

@@ -28,10 +28,10 @@
       "cryptocurrency": 0.25
     },
     "discipline_power_biases": {
-      "conceal": 1.85,
-      "chimerstry": 1.8,
-      "mask_of_a_thousand_faces": 1.75,
-      "cache": 1.65
+      "conceal": 0.05,
+      "chimerstry": 0.5,
+      "mask_of_a_thousand_faces": 0.5,
+      "cache": 0.5
     },
     "tag_affinities": {
       "wealth": 0.4,

@@ -24,11 +24,11 @@
       "retainer": 0.3
     },
     "discipline_power_biases": {
-      "feral_weapons": 2.1,
-      "shapechange": 2.0,
-      "atavism": 1.9,
-      "quell_the_beast": 1.75,
-      "eyes_of_the_beast": 1.7
+      "feral_weapons": 0.45,
+      "shapechange": 0.5,
+      "atavism": 0.5,
+      "quell_the_beast": 0.5,
+      "eyes_of_the_beast": 0.0
     },
     "tag_affinities": {
       "animal": 0.45,

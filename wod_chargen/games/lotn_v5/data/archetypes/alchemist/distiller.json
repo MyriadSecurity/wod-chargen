@@ -18,11 +18,11 @@
       "walk_in_freezer": 0.3
     },
     "discipline_power_biases": {
-      "envelope": 2.05,
-      "defractionate": 2.0,
-      "haze": 1.9,
-      "far_reach": 1.8,
-      "counterfeit_corrosive_vitae": 1.7
+      "envelope": 0.35,
+      "defractionate": 0.5,
+      "haze": 0.1,
+      "far_reach": -0.05,
+      "counterfeit_corrosive_vitae": 0.5
     },
     "tag_affinities": {
       "alchemy": 0.45,

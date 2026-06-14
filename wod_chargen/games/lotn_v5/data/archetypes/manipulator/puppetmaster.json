@@ -22,11 +22,11 @@
       "at_arms_length": 0.35
     },
     "discipline_power_biases": {
-      "mesmerize": 2.1,
-      "submerged_directive": 2.0,
-      "compel": 1.95,
-      "forgetful_mind": 1.85,
-      "domitor_s_favor": 1.7
+      "mesmerize": 0.2,
+      "submerged_directive": 0.5,
+      "compel": 0.1,
+      "forgetful_mind": 0.2,
+      "domitor_s_favor": 0.5
     },
     "tag_affinities": {
       "control": 0.4,

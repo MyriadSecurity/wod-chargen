@@ -24,11 +24,11 @@
       "at_arms_length": 0.25
     },
     "discipline_power_biases": {
-      "sense_the_unseen": 2.05,
-      "share_the_senses": 1.95,
-      "heightened_senses": 1.85,
-      "scry_the_soul": 1.75,
-      "conceal": 1.65
+      "sense_the_unseen": 0.4,
+      "share_the_senses": 0.5,
+      "heightened_senses": 0.5,
+      "scry_the_soul": 0.5,
+      "conceal": -0.2
     },
     "tag_affinities": {
       "information": 0.4,

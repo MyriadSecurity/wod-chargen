@@ -17,11 +17,11 @@
       "at_arms_length": 0.3
     },
     "discipline_power_biases": {
-      "unseen_passage": 2.05,
-      "conceal": 2.0,
-      "cache": 1.85,
-      "fleetness": 1.75,
-      "silence_of_death": 1.65
+      "unseen_passage": 0.35,
+      "conceal": 0.2,
+      "cache": 0.5,
+      "fleetness": 0.1,
+      "silence_of_death": 0.1
     },
     "tag_affinities": {
       "crime": 0.4,

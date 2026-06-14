@@ -76,7 +76,15 @@ class MockLocation:
     search = ""
     pathname = "/"
     href = "http://127.0.0.1/"
-    hash = ""
+    _hash = ""
+
+    @property
+    def hash(self) -> str:
+        return self._hash
+
+    @hash.setter
+    def hash(self, value: str) -> None:
+        self._hash = value if value.startswith("#") or not value else f"#{value}"
 
 
 class MockWindow:
@@ -150,4 +158,13 @@ def install_pyscript_stubs() -> PyScriptStubs:
 
     sys.modules["pyscript"] = pyscript_mod
     sys.modules["js"] = js_mod
+
+    ffi_mod = types.ModuleType("pyscript.ffi")
+
+    def create_proxy(fn):  # noqa: ANN001
+        return fn
+
+    ffi_mod.create_proxy = create_proxy
+    sys.modules["pyscript.ffi"] = ffi_mod
+
     return handle

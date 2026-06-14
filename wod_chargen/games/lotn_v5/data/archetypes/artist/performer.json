@@ -19,11 +19,11 @@
       "star_power": 0.3
     },
     "discipline_power_biases": {
-      "awe": 2.15,
-      "entrancement": 2.05,
-      "monologue": 1.9,
-      "eyes_of_the_serpent": 1.8,
-      "silencing_tongue": 1.7
+      "awe": 0.3,
+      "entrancement": 0.25,
+      "monologue": 0.2,
+      "eyes_of_the_serpent": 0.2,
+      "silencing_tongue": 0.5
     },
     "tag_affinities": {
       "art": 0.45,

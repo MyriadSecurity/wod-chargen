@@ -14,11 +14,11 @@
       "ambidextrous": 0.35
     },
     "discipline_power_biases": {
-      "fleetness": 2.1,
-      "rapid_reflexes": 2.0,
-      "blink": 1.9,
-      "cat_s_grace": 1.85,
-      "nimble_departure": 1.75
+      "fleetness": 0.25,
+      "rapid_reflexes": 0.3,
+      "blink": 0.5,
+      "cat_s_grace": 0.25,
+      "nimble_departure": 0.5
     },
     "tag_affinities": {
       "combat": 0.4,

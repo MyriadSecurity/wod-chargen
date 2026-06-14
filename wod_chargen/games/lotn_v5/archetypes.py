@@ -67,6 +67,7 @@ class ArchetypeProfile:
     modifier_biases: dict[str, float] = field(default_factory=dict)
     discipline_power_biases: dict[str, float] = field(default_factory=dict)
     tag_affinities: dict[str, float] = field(default_factory=dict)
+    discipline_expressions: dict[str, Any] = field(default_factory=dict)
 
 
 def _registry_ids() -> dict[str, set[str]]:
@@ -228,6 +229,7 @@ def _parse_profile(raw: dict[str, Any]) -> ArchetypeProfile:
         modifier_biases=raw.get("modifier_biases", {}),
         discipline_power_biases=raw.get("discipline_power_biases", {}),
         tag_affinities=raw.get("tag_affinities", {}),
+        discipline_expressions=dict(raw.get("discipline_expressions") or {}),
     )
 
 
@@ -318,4 +320,5 @@ def effective_profile(
         modifier_biases=modifier_biases,
         discipline_power_biases=power_biases,
         tag_affinities=tag_affinities,
+        discipline_expressions=base.discipline_expressions,
     )

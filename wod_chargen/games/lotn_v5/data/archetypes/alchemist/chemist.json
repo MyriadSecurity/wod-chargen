@@ -18,11 +18,11 @@
       "health": 0.35
     },
     "discipline_power_biases": {
-      "counterfeit_panacea": 2.0,
-      "counterfeit_heightened_senses": 1.9,
-      "far_reach": 1.85,
-      "haze": 1.75,
-      "envelope": 1.7
+      "counterfeit_panacea": 0.5,
+      "counterfeit_heightened_senses": 0.5,
+      "far_reach": 0.0,
+      "haze": -0.05,
+      "envelope": 0.0
     },
     "tag_affinities": {
       "science": 0.45,

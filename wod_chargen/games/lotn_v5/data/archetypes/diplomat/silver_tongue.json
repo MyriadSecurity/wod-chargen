@@ -17,10 +17,10 @@
       "friendly": 0.3
     },
     "discipline_power_biases": {
-      "mesmerize": 2.05,
-      "awe": 1.95,
-      "entrancement": 1.85,
-      "monologue": 1.75
+      "mesmerize": 0.2,
+      "awe": 0.2,
+      "entrancement": 0.2,
+      "monologue": 0.2
     },
     "tag_affinities": {
       "influence": 0.35,

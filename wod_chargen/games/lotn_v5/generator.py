@@ -12,6 +12,11 @@ from wod_chargen.core.share import ENGINE_VERSION
 from wod_chargen.core.spender import PurchaseCandidate, spend_xp
 from wod_chargen.core.xp_strategy import creation_pick_weight
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
+from wod_chargen.games.lotn_v5.clan_discipline_adapt import (
+    adapt_profile_for_clan,
+    off_clan_signature_factor,
+    resolve_discipline_bias,
+)
 from wod_chargen.games.lotn_v5.predators import (
     apply_predator_biases,
     apply_predator_package,
@@ -214,6 +219,7 @@ def _assign_one_discipline_pick(
     max_rating: int,
 ) -> str | None:
     """Assign one free discipline slot to an unused in-clan discipline."""
+    pool = frozenset(clan_pool)
     eligible = [d for d in clan_pool if char["disciplines"].get(d, 0) == 0 and dots <= max_rating]
     if not eligible:
         log.append(
@@ -225,7 +231,10 @@ def _assign_one_discipline_pick(
         )
         return None
 
-    weights = [creation_pick_weight(profile.discipline_biases.get(d, 1.0), 0, max_rating, dots) for d in eligible]
+    weights = [
+        creation_pick_weight(resolve_discipline_bias(profile, d, pool), 0, max_rating, dots)
+        for d in eligible
+    ]
     disc = rng.weighted_choice(eligible, weights)
     char["disciplines"][disc] = dots
     log.append(
@@ -442,7 +451,7 @@ def _enumerate_purchases(
         if ctype == "thin_blood" and not in_clan:
             continue
         cost = lookup_cost(costs, cost_key, new_level=new_level)
-        clan_factor = 1.0 if in_clan else 0.3
+        clan_factor = 1.0 if in_clan else off_clan_signature_factor(profile, disc, clan_pool)
 
         def apply_disc(d=disc, nl=new_level) -> None:
             char["disciplines"][d] = nl
@@ -458,7 +467,7 @@ def _enumerate_purchases(
                 new_level=new_level,
                 cost=cost,
                 weight=dw,
-                item_bias=profile.discipline_biases.get(disc, 1.0),
+                item_bias=resolve_discipline_bias(profile, disc, clan_pool),
                 clan_factor=clan_factor,
                 source=source,
                 apply=apply_disc,
@@ -769,6 +778,9 @@ def generate_character(
         char["domitor_clan"] = options.get("domitor_clan", "tremere")
     elif ctype == "thin_blood":
         pass
+
+    clan_id = char.get("clan") or char.get("domitor_clan")
+    profile = adapt_profile_for_clan(profile, clan_id)
 
     assign_generation_and_blood_potency(rng, char, ctype, venue_config, creation, options, log)
     caps = _resolve_caps(creation, char)

@@ -22,10 +22,10 @@
       "reliable": 0.3
     },
     "discipline_power_biases": {
-      "heightened_senses": 1.9,
-      "sense_the_unseen": 1.85,
-      "premonition": 1.75,
-      "share_the_senses": 1.65
+      "heightened_senses": 0.1,
+      "sense_the_unseen": 0.3,
+      "premonition": 0.1,
+      "share_the_senses": 0.5
     },
     "tag_affinities": {
       "information": 0.4,

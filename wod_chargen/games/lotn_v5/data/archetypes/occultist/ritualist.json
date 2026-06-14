@@ -24,11 +24,11 @@
       "conspiracy_theorist": 0.3
     },
     "discipline_power_biases": {
-      "blood_walk": 2.0,
-      "ward_against_ghouls": 1.95,
-      "phantom_whispers": 1.9,
-      "craft_bloodstone": 1.8,
-      "cling_of_the_arachnid": 1.7
+      "blood_walk": 0.5,
+      "ward_against_ghouls": 0.5,
+      "phantom_whispers": 0.5,
+      "craft_bloodstone": 0.5,
+      "cling_of_the_arachnid": 0.5
     },
     "tag_affinities": {
       "ritual": 0.45,

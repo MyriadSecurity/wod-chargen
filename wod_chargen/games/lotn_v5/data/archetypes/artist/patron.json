@@ -26,10 +26,10 @@
       "open_bar": 0.3
     },
     "discipline_power_biases": {
-      "awe": 1.85,
-      "entrancement": 1.8,
-      "monologue": 1.75,
-      "mesmerize": 1.65
+      "awe": 0.0,
+      "entrancement": 0.0,
+      "monologue": 0.05,
+      "mesmerize": 0.5
     },
     "tag_affinities": {
       "wealth": 0.4,

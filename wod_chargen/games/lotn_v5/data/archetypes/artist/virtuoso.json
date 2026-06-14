@@ -23,10 +23,10 @@
       "star_power": 0.25
     },
     "discipline_power_biases": {
-      "heightened_senses": 1.9,
-      "scry_the_soul": 1.85,
-      "premonition": 1.8,
-      "collective_cognizance": 1.7
+      "heightened_senses": 0.5,
+      "scry_the_soul": 0.5,
+      "premonition": 0.5,
+      "collective_cognizance": 0.5
     },
     "tag_affinities": {
       "art": 0.45,
