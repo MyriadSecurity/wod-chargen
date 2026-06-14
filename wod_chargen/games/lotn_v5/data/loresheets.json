@@ -1,16 +1,26 @@
 {
   "source_ref": {
-    "mes_sheet_version": "5.2.9 MES",
-    "mes_workbook": "Monroe.xlsx",
-    "imported_at": "2026-06-13T20:56:47.806106+00:00",
-    "import_script": "scripts/import_mes_tables.py",
-    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
+    "book": "Laws of the Night pocket edition",
+    "chapter": 6,
+    "pages": "159-175",
+    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/loresheets",
+    "built_by": "scripts/build_loresheet_data.py"
+  },
+  "rules": {
+    "max_per_character": 1,
+    "cost_per_dot_xp": 3,
+    "max_dots": 3,
+    "levels_need_not_be_in_order": true
   },
   "loresheets": [
     {
       "id": "anarch_revolt",
       "label": "Anarch Revolt",
+      "category": "organization",
+      "description": "Student of the 14th–15th century Anarch Revolt who sees the same patterns in modern rebellion. Chronicles the past to steer the future and inspire gangmates under pressure.",
       "restriction": "Anarch Only",
+      "restriction_clan": null,
+      "restriction_sect": "anarch",
       "levels": [
         {
           "dots": 1,
@@ -32,7 +42,11 @@
     {
       "id": "the_cobweb",
       "label": "The Cobweb",
+      "category": "organization",
+      "description": "Tap the Malkavian Madness Network — sporadic psychic static connecting the clan. Ask the Cobweb questions, broadcast to other Malkavians, and pluck shared knowledge.",
       "restriction": "Malkavian Only",
+      "restriction_clan": "malkavian",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -54,7 +68,11 @@
     {
       "id": "the_church_of_set",
       "label": "The Church of Set",
+      "category": "organization",
+      "description": "Hardline Setite orthodox who weaken other clans to pave the way for Set's resurrection. Cult congregation, degenerative healing rites, and stain-shaving faith.",
       "restriction": "Ministry Only",
+      "restriction_clan": "ministry",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -76,7 +94,11 @@
     {
       "id": "the_circulatory_system",
       "label": "The Circulatory System",
+      "category": "organization",
+      "description": "Blood trafficking network tracking vessel Resonance — transporters, smugglers, scientists, and consumers. Secure transit, upstate farms, and sommelier secrets.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -98,7 +120,11 @@
     {
       "id": "convention_of_thorns",
       "label": "Convention of Thorns",
+      "category": "organization",
+      "description": "Historian of the Camarilla's founding treaty — signatory descendant or archivist who weaponizes Tradition lore in negotiations with Camarilla and Anarch alike.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -118,9 +144,13 @@
       ]
     },
     {
-      "id": "decendant_of_hardestadt",
-      "label": "Decendant of Hardestadt",
+      "id": "descendant_of_hardestadt",
+      "label": "Descendant of Hardestadt",
+      "category": "bloodline",
+      "description": "Scion of the destroyed Camarilla founder — limitless Ventrue wealth, leadership training, and domination that auto-succeeds on mortal targets.",
       "restriction": "Ventrue Only",
+      "restriction_clan": "ventrue",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -142,7 +172,11 @@
     {
       "id": "descendant_of_helena",
       "label": "Descendant of Helena",
+      "category": "bloodline",
+      "description": "Lineage of legendary Toreador beauty — master artist, forgiven social trespasses, and licensed Succubus Club franchise.",
       "restriction": "Toreador Only",
+      "restriction_clan": "toreador",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -164,7 +198,11 @@
     {
       "id": "descendant_of_karl_schrekt",
       "label": "Descendant of Karl Schrekt",
+      "category": "bloodline",
+      "description": "Heir to the former Justicar's paranoid ritual prep, supernatural archive, and surveillance tradecraft against sect enemies.",
       "restriction": "Tremere Only",
+      "restriction_clan": "tremere",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -178,15 +216,19 @@
         },
         {
           "dots": 3,
-          "label": "Surveilance",
-          "id": "surveilance"
+          "label": "Surveillance",
+          "id": "surveillance"
         }
       ]
     },
     {
       "id": "descendant_of_montano",
       "label": "Descendant of Montano",
+      "category": "bloodline",
+      "description": "Lasombra honor-lineage tied to the Abyss — clan resources, remorse-driven Humanity, and session-swap Oblivion powers under Montano's tutelage.",
       "restriction": "Lasombra Only",
+      "restriction_clan": "lasombra",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -208,7 +250,11 @@
     {
       "id": "descendant_of_tyler",
       "label": "Descendant of Tyler",
+      "category": "bloodline",
+      "description": "Tyler's lineage — rebellion funding, controlled Fury, and Furore strike teams against tyrannical elders.",
       "restriction": "Brujah Only",
+      "restriction_clan": "brujah",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -217,8 +263,8 @@
         },
         {
           "dots": 2,
-          "label": "Tyler´s Mercy",
-          "id": "tyler_s_mercy"
+          "label": "Tyler's Mercy",
+          "id": "tylers_mercy"
         },
         {
           "dots": 3,
@@ -230,7 +276,11 @@
     {
       "id": "descendant_of_vasantasena",
       "label": "Descendant of Vasantasena",
+      "category": "bloodline",
+      "description": "Anti–Blood Bond Malkavian zealot — scent Bonds, resist mental control, and ritually destroy thralls.",
       "restriction": "Malkavian Only",
+      "restriction_clan": "malkavian",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -250,9 +300,13 @@
       ]
     },
     {
-      "id": "descendant_of_xavier",
-      "label": "Descendant of Xavier",
+      "id": "descendant_of_xaviar",
+      "label": "Descendant of Xaviar",
+      "category": "bloodline",
+      "description": "Xaviar's guilt-ridden lineage — detect torpid Kindred, bat-hybrid flight, and Nomad Hounds against supernatural threats.",
       "restriction": "Gangrel Only",
+      "restriction_clan": "gangrel",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -274,7 +328,11 @@
     {
       "id": "descendant_of_zao_xue",
       "label": "Descendant of Zao-Xue",
+      "category": "bloodline",
+      "description": "Salubri Watcher — hidden scholar havens, supernatural encyclopedia, and rotating shadow contacts.",
       "restriction": "Salubri Only",
+      "restriction_clan": "salubri",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -296,7 +354,11 @@
     {
       "id": "descendant_of_zelios",
       "label": "Descendant of Zelios",
+      "category": "bloodline",
+      "description": "Nosferatu architect lineage — building schematics, fortress haven, and city Labyrinth travel.",
       "restriction": "Nosferatu Only",
+      "restriction_clan": "nosferatu",
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -318,7 +380,11 @@
     {
       "id": "the_first_inquisition",
       "label": "The First Inquisition",
+      "category": "organization",
+      "description": "Scholar of the First Inquisition who reads Society of St. Leopold patterns — faith sensitivity, Church mole, and Black Spot hideouts.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -340,7 +406,11 @@
     {
       "id": "firstlight",
       "label": "FIRSTLIGHT",
+      "category": "organization",
+      "description": "Target of the global intelligence hunt for Kindred — erased records, urban evasion, and a manipulated inside mole.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -362,7 +432,11 @@
     {
       "id": "golconda",
       "label": "Golconda",
+      "category": "organization",
+      "description": "Seeker (or debunker) of Saulot's path — efficient feeding, controlled Beast, and Bane suppression at high Humanity.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -371,8 +445,8 @@
         },
         {
           "dots": 2,
-          "label": "Saulot´s Disciple",
-          "id": "saulot_s_disciple"
+          "label": "Saulot's Disciple",
+          "id": "saulots_disciple"
         },
         {
           "dots": 3,
@@ -384,7 +458,11 @@
     {
       "id": "high_clan",
       "label": "High Clan",
+      "category": "organization",
+      "description": "Noblesse oblige High Clan pedigree — etiquette training, elite mortal connections, and treating your Bane as blessing.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -406,7 +484,11 @@
     {
       "id": "low_clan",
       "label": "Low Clan",
+      "category": "organization",
+      "description": "Fringe-clan solidarity — thick hide against High Clan slights, underworld kinship, and sabotaging rivals' mortal connections.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -428,7 +510,11 @@
     {
       "id": "scion_of_lucretia",
       "label": "Scion of Lucretia",
+      "category": "organization",
+      "description": "Student of Archon Lucretia Wright — political peacemaker, Camarilla city rebuilding, and guaranteed-safe parley Armistices.",
       "restriction": "Camarilla Only",
+      "restriction_clan": null,
+      "restriction_sect": "camarilla",
       "levels": [
         {
           "dots": 1,
@@ -450,7 +536,11 @@
     {
       "id": "sect_war_veteran",
       "label": "Sect War Veteran",
+      "category": "organization",
+      "description": "Survivor of the Camarilla–Sabbat wars — Masquerade-safe combat lore, sect rewards, out-of-clan discipline from old comrades, and fortress havens.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -472,7 +562,11 @@
     {
       "id": "the_society_of_heralds",
       "label": "The Society of Heralds",
+      "category": "organization",
+      "description": "Cross-domain Herald network — gossip on visiting Kindred, tenure protection, and social-elite Camarilla influence.",
       "restriction": "Camarilla Only",
+      "restriction_clan": null,
+      "restriction_sect": "camarilla",
       "levels": [
         {
           "dots": 1,
@@ -494,7 +588,11 @@
     {
       "id": "the_trinity",
       "label": "The Trinity",
+      "category": "organization",
+      "description": "Revivalist of Constantinople's Michael–Dracon–Antonius utopia — philosophical patrons, Frenzy aid, and a new Trinity that sheds Stains.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,
@@ -516,7 +614,11 @@
     {
       "id": "the_week_of_nightmares",
       "label": "The Week of Nightmares",
+      "category": "organization",
+      "description": "Student or survivor of the Ravnos Antediluvian's rampage — Night Network waystation, escape artist, and Red Star omens.",
       "restriction": null,
+      "restriction_clan": null,
+      "restriction_sect": null,
       "levels": [
         {
           "dots": 1,

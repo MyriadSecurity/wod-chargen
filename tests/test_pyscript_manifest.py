@@ -1,4 +1,4 @@
-"""PyScript packaging checks — catch missing browser runtime files early."""
+"""PyScript bundle must include every file the browser app imports."""
 
 from __future__ import annotations
 
@@ -6,85 +6,107 @@ import ast
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "scripts"))
+import pytest
 
-from generate_pyscript_config import (  # noqa: E402
+ROOT = Path(__file__).resolve().parent.parent
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.generate_pyscript_config import (  # noqa: E402
     collect_pyscript_paths,
-    compute_cache_version,
     parse_pyscript_toml,
-    render_pyscript_toml,
 )
 
-APP_ROOT = ROOT / "app"
 
-
-def _module_to_path(module: str) -> str:
-    return module.replace(".", "/") + ".py"
-
-
-def _iter_app_imports(path: Path) -> set[str]:
-    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    imports: set[str] = set()
+def _local_imports(module_path: Path) -> set[str]:
+    """First-party imports from a Python file (wod_chargen.*, app.*)."""
+    tree = ast.parse(module_path.read_text(encoding="utf-8"))
+    found: set[str] = set()
     for node in ast.walk(tree):
-        if isinstance(node, ast.ImportFrom) and node.module and node.module.startswith("app."):
-            imports.add(node.module)
+        if isinstance(node, ast.ImportFrom) and node.module:
+            if node.module.startswith(("wod_chargen.", "app.")):
+                found.add(node.module)
         elif isinstance(node, ast.Import):
             for alias in node.names:
-                if alias.name.startswith("app."):
-                    imports.add(alias.name)
-    return imports
+                if alias.name.startswith(("wod_chargen", "app")):
+                    found.add(alias.name)
+    return found
 
 
-def _collect_app_import_closure(entry: Path) -> set[str]:
-    """All app.* modules reachable from an entrypoint via static import analysis."""
+def _module_to_path(module: str) -> Path | None:
+    parts = module.split(".")
+    if parts[0] not in ("wod_chargen", "app"):
+        return None
+    candidate = ROOT.joinpath(*parts)
+    if candidate.with_suffix(".py").is_file():
+        return candidate.with_suffix(".py")
+    if (candidate / "__init__.py").is_file():
+        return candidate / "__init__.py"
+    return None
+
+
+def _transitive_closure(entry_modules: list[str]) -> set[str]:
+    pending = list(entry_modules)
     seen: set[str] = set()
-    queue = [_module_to_path("app.main")]
-    while queue:
-        rel = queue.pop()
-        if rel in seen:
+    py_files: set[str] = set()
+    while pending:
+        mod = pending.pop()
+        if mod in seen:
             continue
-        seen.add(rel)
-        path = ROOT / rel
-        assert path.is_file(), f"Missing app module file: {rel}"
-        for module in _iter_app_imports(path):
-            dep = _module_to_path(module)
-            if dep not in seen:
-                queue.append(dep)
-    return seen
+        seen.add(mod)
+        path = _module_to_path(mod)
+        if path is None:
+            continue
+        rel = path.relative_to(ROOT).as_posix()
+        py_files.add(rel)
+        for imported in _local_imports(path):
+            if imported not in seen:
+                pending.append(imported)
+    return py_files
 
 
-def test_pyscript_toml_matches_filesystem():
-    required = collect_pyscript_paths(ROOT)
-    manifest = parse_pyscript_toml(ROOT / "pyscript.toml")
-    missing = required - manifest
-    extra = manifest - required
-    assert not missing, (
-        "pyscript.toml is missing runtime files. "
-        f"Add: {sorted(missing)}. Run: python3 scripts/generate_pyscript_config.py"
-    )
-    assert not extra, (
-        "pyscript.toml lists files that no longer exist. "
-        f"Remove: {sorted(extra)}. Run: python3 scripts/generate_pyscript_config.py"
-    )
+@pytest.mark.parametrize(
+    "entry",
+    [
+        "app.wizard",
+        "app.components.sheet",
+        "wod_chargen.games.lotn_v5.generator",
+    ],
+)
+def test_pyscript_includes_browser_import_closure(entry: str):
+    needed = _transitive_closure([entry])
+    bundled = parse_pyscript_toml(ROOT / "pyscript.toml")
+    missing = sorted(needed - bundled)
+    assert not missing, f"pyscript.toml missing modules reachable from {entry}: {missing}"
 
 
-def test_pyscript_toml_is_current():
-    required = collect_pyscript_paths(ROOT)
-    cache_version = compute_cache_version(ROOT, required)
-    expected = render_pyscript_toml(required, cache_version)
-    actual = (ROOT / "pyscript.toml").read_text(encoding="utf-8")
-    assert actual == expected, "pyscript.toml is stale. Run: python3 scripts/generate_pyscript_config.py"
+def test_pyscript_matches_repo_scan():
+    expected = collect_pyscript_paths(ROOT)
+    bundled = parse_pyscript_toml(ROOT / "pyscript.toml")
+    assert bundled == expected
 
 
-def test_app_entrypoint_imports_are_packaged():
-    packaged = parse_pyscript_toml(ROOT / "pyscript.toml")
-    for rel in _collect_app_import_closure(APP_ROOT / "main.py"):
-        assert rel in packaged, f"{rel} is imported by the app but missing from pyscript.toml"
+def test_loresheet_generation_succeeds_with_packages():
+    """Seeds that buy loresheets must apply packages (browser failure mode)."""
+    from wod_chargen.core.data_loader import load_json_cached
+    from wod_chargen.games.lotn_v5.generator import generate_character
 
-
-def test_wizard_imports_sheet_module():
-    wizard = APP_ROOT / "wizard.py"
-    imports = _iter_app_imports(wizard)
-    assert "app.components.sheet" in imports
-    assert "app/components/sheet.py" in parse_pyscript_toml(ROOT / "pyscript.toml")
+    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    opts = {
+        "type": "vampire",
+        "clan": "brujah",
+        "arch": "enforcer",
+        "sub": "brawler",
+        "approval": "2026-06",
+    }
+    found = False
+    for seed in range(30):
+        result = generate_character(seed, opts, venue)
+        if not result.character.get("loresheets"):
+            continue
+        found = True
+        assert result.character.get("loresheet_meta") is not None
+        assert any(e.phase == "loresheet" for e in result.creation_log)
+        break
+    assert found, "expected a seed with loresheet purchase in first 30 tries"

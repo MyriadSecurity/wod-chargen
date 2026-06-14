@@ -357,6 +357,7 @@ def grant_background_rating(
     name: str | None = None,
     from_predator: bool = False,
     char: dict[str, Any] | None = None,
+    log_prefix: str = "Predator",
 ) -> str | None:
     """Grant background dots from predator packages (outside creation pool)."""
     if dots <= 0:
@@ -397,7 +398,7 @@ def grant_background_rating(
         entries.append(entry)
         sphere_txt = f" ({sphere_label(sphere_id)})" if sphere_id else ""
         return (
-            f"Predator: {background_label(bg_type)}{sphere_txt} → {grant} "
+            f"{log_prefix}: {background_label(bg_type)}{sphere_txt} → {grant} "
             f"({level_label(bg_type, grant)})"
         )
 
@@ -428,7 +429,7 @@ def grant_background_rating(
     sphere_txt = f" ({sphere_label(entry['sphere'])})" if entry.get("sphere") else ""
     name_txt = entry_display_name(entry)
     return (
-        f"Predator: {background_label(bg_type)} {name_txt}{sphere_txt} +{added} "
+        f"{log_prefix}: {background_label(bg_type)} {name_txt}{sphere_txt} +{added} "
         f"→ {entry['dots']} ({level_label(bg_type, entry['dots'])})"
     )
 

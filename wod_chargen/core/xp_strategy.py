@@ -6,11 +6,11 @@ from wod_chargen.core.rng import SeededRng
 
 # Macro buckets for budget tracking (values vary per character via roll_category_targets).
 BASE_CATEGORY_TARGETS = {
-    "disciplines": 0.38,
+    "disciplines": 0.34,
     "attributes": 0.20,
     "skills": 0.20,
     "backgrounds": 0.12,
-    "merits_flaws": 0.10,
+    "merits_flaws": 0.14,
 }
 
 SPEND_GROUP_MACRO = {
@@ -65,6 +65,17 @@ def efficiency_item_bias(current_level: int, new_level: int) -> float:
     if current_level == 3 and new_level == 4:
         return 1.1
     return 0.75
+
+
+def loresheet_efficiency_bias(current_level: int, new_level: int) -> float:
+    """Favor taking a loresheet and completing 2–3 dots."""
+    if current_level == 0 and new_level == 1:
+        return 3.2
+    if current_level == 1 and new_level == 2:
+        return 3.6
+    if current_level == 2 and new_level == 3:
+        return 2.8
+    return 1.0
 
 
 def budget_efficiency_scale(

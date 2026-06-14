@@ -32,7 +32,7 @@ See `reference/lotn_v5/CURSOR_DOCS.md` for details and troubleshooting.
 | Clans | [/clans](https://www.oneworldofdarkness.com/laws-of-the-night/clans) | 17 clans + Caitiff + thin-bloods |
 | Backgrounds | [/backgrounds](https://www.oneworldofdarkness.com/laws-of-the-night/backgrounds) | 9 backgrounds |
 | Dramatic Systems | [/dramatic-systems](https://www.oneworldofdarkness.com/laws-of-the-night/dramatic-systems) | Creation, ghouls, hunger, frenzy, etc. |
-| Loresheets | [/loresheets](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets) | 24 loresheets |
+| Loresheets | [/loresheets](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets) | 24 loresheets in `loresheets.json` + `loresheet_themes.json` |
 | Vampire Society | [/vampire-society](https://www.oneworldofdarkness.com/laws-of-the-night/vampire-society) | Sects, status, boons, coteries |
 | Predator Types | [/predator-types](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types) | Predator type options |
 | Thin-Blood | [/thin-blood](https://www.oneworldofdarkness.com/laws-of-the-night/thin-blood) | Formulas, merits, flaws |
@@ -113,7 +113,7 @@ Formulas and thin-blood merits/flaws — cross-check `thin_blood_formulas.json`,
 
 [Full list](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets)
 
-24 entries — cross-check future `loresheets` data if expanded beyond `loresheet_a` / `loresheet_b` stubs.
+24 entries — see `loresheets.json` (pocket Ch. 6) and `loresheet_themes.json` for procedural weights. One loresheet per character.
 
 ---
 

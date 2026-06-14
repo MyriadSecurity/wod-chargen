@@ -11,6 +11,7 @@ from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.xp_strategy import (
     budget_efficiency_scale,
     efficiency_item_bias,
+    loresheet_efficiency_bias,
     macro_deficit_boost,
     macro_for_spend_group,
     roll_category_targets,
@@ -85,7 +86,11 @@ def _pick_candidate(
     pool = by_group[chosen_group]
     scored: list[tuple[PurchaseCandidate, float, float, float]] = []
     for cand in pool:
-        eff = efficiency_item_bias(cand.new_level - 1, cand.new_level)
+        cur = cand.new_level - 1
+        if cand.category == "loresheet":
+            eff = loresheet_efficiency_bias(cur, cand.new_level)
+        else:
+            eff = efficiency_item_bias(cur, cand.new_level)
         eff *= budget_efficiency_scale(
             cand.spend_group,
             category_targets=category_targets,

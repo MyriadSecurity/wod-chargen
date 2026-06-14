@@ -24,6 +24,7 @@ BIAS_MODIFIER_KEYS = (
     "modifier_biases",
     "discipline_power_biases",
     "tag_affinities",
+    "loresheet_biases",
 )
 
 # Legacy alias for tests importing MODIFIER_KEYS
@@ -46,6 +47,7 @@ class SubArchetypeProfile:
     modifier_bias_deltas: dict[str, float] = field(default_factory=dict)
     discipline_power_bias_deltas: dict[str, float] = field(default_factory=dict)
     tag_affinity_deltas: dict[str, float] = field(default_factory=dict)
+    loresheet_bias_deltas: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -68,6 +70,7 @@ class ArchetypeProfile:
     discipline_power_biases: dict[str, float] = field(default_factory=dict)
     tag_affinities: dict[str, float] = field(default_factory=dict)
     discipline_expressions: dict[str, Any] = field(default_factory=dict)
+    loresheet_biases: dict[str, float] = field(default_factory=dict)
 
 
 def _registry_ids() -> dict[str, set[str]]:
@@ -89,6 +92,7 @@ def _registry_ids() -> dict[str, set[str]]:
     for disc in load_json_cached(DATA_PKG, "discipline_powers.json")["disciplines"]:
         for p in disc.get("powers", []):
             powers.add(p["id"])
+    loresheets = {ls["id"] for ls in load_json_cached(DATA_PKG, "loresheets.json")["loresheets"]}
     return {
         "attribute_biases": attrs,
         "skill_biases": skills,
@@ -100,6 +104,7 @@ def _registry_ids() -> dict[str, set[str]]:
         "modifier_biases": modifiers,
         "discipline_power_biases": powers,
         "tag_affinities": tags,
+        "loresheet_biases": loresheets,
     }
 
 
@@ -157,6 +162,7 @@ def _parse_sub(raw: dict[str, Any], arch_id: str) -> SubArchetypeProfile:
         modifier_bias_deltas=mods["modifier_biases"],
         discipline_power_bias_deltas=mods["discipline_power_biases"],
         tag_affinity_deltas=mods["tag_affinities"],
+        loresheet_bias_deltas=mods["loresheet_biases"],
     )
 
 
@@ -192,6 +198,7 @@ def _parse_profile(raw: dict[str, Any]) -> ArchetypeProfile:
         "modifier_biases",
         "discipline_power_biases",
         "tag_affinities",
+        "loresheet_biases",
     ):
         block = {k: float(v) for k, v in raw.get(key, {}).items()}
         registry = registries.get(key)
@@ -230,6 +237,7 @@ def _parse_profile(raw: dict[str, Any]) -> ArchetypeProfile:
         discipline_power_biases=raw.get("discipline_power_biases", {}),
         tag_affinities=raw.get("tag_affinities", {}),
         discipline_expressions=dict(raw.get("discipline_expressions") or {}),
+        loresheet_biases=raw.get("loresheet_biases", {}),
     )
 
 
@@ -296,6 +304,7 @@ def effective_profile(
     modifier_biases = _apply_deltas(base.modifier_biases, sub.modifier_bias_deltas)
     power_biases = _apply_deltas(base.discipline_power_biases, sub.discipline_power_bias_deltas)
     tag_affinities = _apply_deltas(base.tag_affinities, sub.tag_affinity_deltas)
+    loresheet_biases = _apply_deltas(base.loresheet_biases, sub.loresheet_bias_deltas)
 
     if venue_overrides and arch_id in venue_overrides:
         vo = venue_overrides[arch_id]
@@ -321,4 +330,5 @@ def effective_profile(
         discipline_power_biases=power_biases,
         tag_affinities=tag_affinities,
         discipline_expressions=base.discipline_expressions,
+        loresheet_biases=loresheet_biases,
     )

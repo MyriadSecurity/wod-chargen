@@ -249,7 +249,7 @@ class WizardApp:
         map_link = document.createElement("a")
         map_link.href = "#weights"
         map_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
-        map_link.innerText = "Explore archetype weight map →"
+        map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
 
         from app.nav import _nav_click

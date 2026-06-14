@@ -61,6 +61,11 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     enumerate_xp_merit_purchases,
     run_merit_flaw_creation,
 )
+from wod_chargen.games.lotn_v5.loresheets import (
+    apply_loresheet_benefits,
+    enumerate_loresheet_purchases,
+    resolve_loresheet_bias,
+)
 from wod_chargen.venues import resolve_xp_budget
 
 DATA = "wod_chargen.games.lotn_v5.data"
@@ -691,25 +696,26 @@ def _enumerate_purchases(
         )
 
     if ctype in ("vampire", "thin_blood"):
-        for ls in ("loresheet_a", "loresheet_b"):
-            cur = char["loresheets"].get(ls, 0)
-            if cur >= caps["loresheet"]:
-                continue
-            new_level = cur + 1
+        sect = char.get("sect")
+        ls_w = profile.weights.get(
+            "loresheets",
+            max(profile.weights.get("merits", 0.5) * 2.0, 1.4),
+        )
+        for ls_id, new_level in enumerate_loresheet_purchases(char, profile, sect=sect):
             cost = lookup_cost(costs, "loresheet", new_level=new_level)
 
-            def apply_ls(l=ls, nl=new_level) -> None:
+            def apply_ls(l=ls_id, nl=new_level) -> None:
                 char["loresheets"][l] = nl
 
             candidates.append(
                 PurchaseCandidate(
-                    item_id=ls,
+                    item_id=ls_id,
                     category="loresheet",
                     spend_group="loresheets",
                     new_level=new_level,
                     cost=cost,
-                    weight=profile.weights.get("merits", 0.5),
-                    item_bias=1.0,
+                    weight=ls_w,
+                    item_bias=resolve_loresheet_bias(ls_id, profile, char, sect=sect),
                     clan_factor=1.0,
                     source=source,
                     apply=apply_ls,
@@ -837,6 +843,9 @@ def generate_character(
     log.extend(spend_logs)
     log.extend(discipline_logs)
     xp_spent = spent_before - remaining
+
+    for line in apply_loresheet_benefits(char, rng, profile, caps=caps):
+        log.append(LogEntry(phase="loresheet", message=line, detail={}))
 
     bg_meta = char.setdefault("background_meta", {})
     for item_id, category, new_level, trade_source in apply_xp_background_disadv_trade(

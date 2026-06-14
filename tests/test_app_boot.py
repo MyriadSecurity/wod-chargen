@@ -62,10 +62,15 @@ def test_wizard_generate_vampire(stubs):
     wizard = _fresh_wizard_module()
     app = wizard.WizardApp(stubs.elements["app-root"])
     app.state["step"] = "generate"
+    app.state["seed"] = 0  # buys loresheet + exercises apply_loresheet_benefits
+    app.state["clan"] = "brujah"
+    app.state["arch"] = "enforcer"
+    app.state["sub"] = "brawler"
     app._generate()
     assert app.state["error"] is None, app.state.get("error")
     assert app.state["result"] is not None
     assert app.state["result"].seed == app.state["seed"]
+    assert app.state["result"].character.get("loresheets"), "seed 0 should purchase a loresheet"
 
 
 def test_wizard_results_view_renders_sheet(stubs):

@@ -9,7 +9,8 @@
     "skills": 1.6,
     "in_clan_disciplines": 1.1,
     "backgrounds": 1.5,
-    "merits": 0.8
+    "merits": 0.8,
+    "loresheets": 1.6
   },
   "attribute_biases": {
     "charisma": 1.1,
@@ -90,5 +91,31 @@
     "combat": 0.45,
     "stealth": 0.5,
     "crime": 0.45
+  },
+  "loresheet_biases": {
+    "anarch_revolt": 0.55,
+    "convention_of_thorns": 0.85,
+    "descendant_of_hardestadt": 0.65,
+    "descendant_of_helena": 1.95,
+    "descendant_of_karl_schrekt": 0.4,
+    "descendant_of_montano": 0.75,
+    "descendant_of_tyler": 0.55,
+    "descendant_of_vasantasena": 0.85,
+    "descendant_of_xaviar": 0.45,
+    "descendant_of_zao_xue": 0.7,
+    "descendant_of_zelios": 0.45,
+    "firstlight": 0.5,
+    "golconda": 0.85,
+    "high_clan": 1.65,
+    "low_clan": 0.5,
+    "scion_of_lucretia": 1.0,
+    "sect_war_veteran": 0.45,
+    "the_church_of_set": 0.85,
+    "the_circulatory_system": 0.5,
+    "the_cobweb": 1.1,
+    "the_first_inquisition": 0.45,
+    "the_society_of_heralds": 1.65,
+    "the_trinity": 1.55,
+    "the_week_of_nightmares": 0.75
   }
 }

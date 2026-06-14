@@ -22,6 +22,7 @@ TRAIT_CATEGORIES = (
     "backgrounds",
     "spheres",
     "modifiers",
+    "loresheets",
 )
 
 _EXPLICIT_FIELD: dict[str, str] = {
@@ -34,6 +35,7 @@ _EXPLICIT_FIELD: dict[str, str] = {
     "backgrounds": "background_biases",
     "spheres": "sphere_biases",
     "modifiers": "modifier_biases",
+    "loresheets": "loresheet_biases",
 }
 
 

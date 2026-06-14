@@ -119,8 +119,19 @@
         { "dots": 3, "label": "Elite haven", "summary": "Excellent security and amenities." }
       ],
       "advantages": [
+        { "id": "armory", "label": "Armory", "dots": 1, "max_dots": 3 },
+        { "id": "cell", "label": "Cell", "dots": 1, "max_dots": 3 },
         { "id": "garage", "label": "Garage", "dots": 1, "max_dots": 3 },
+        { "id": "laboratory", "label": "Laboratory", "dots": 1, "max_dots": 3 },
+        { "id": "library", "label": "Library", "dots": 1, "max_dots": 3 },
+        { "id": "location", "label": "Location", "dots": 1, "max_dots": 3 },
+        { "id": "luxury", "label": "Luxury", "dots": 1, "max_dots": 3 },
+        { "id": "elaborate", "label": "Elaborate", "dots": 1, "max_dots": 3 },
+        { "id": "security", "label": "Security", "dots": 1, "max_dots": 3 },
+        { "id": "guards", "label": "Guards", "dots": 1, "max_dots": 3 },
+        { "id": "surgical_ward", "label": "Surgical Ward", "dots": 1, "max_dots": 3 },
         { "id": "walk_in_freezer", "label": "Walk-In Freezer", "dots": 1, "max_dots": 3 },
+        { "id": "workshop", "label": "Workshop", "dots": 1, "max_dots": 3 },
         { "id": "zoo", "label": "Zoo", "dots": 1, "max_dots": 3 }
       ],
       "disadvantages": []

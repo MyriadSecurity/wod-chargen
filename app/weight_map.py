@@ -99,7 +99,7 @@ class WeightMapApp:
         header.className = "mb-4"
         h1 = document.createElement("h1")
         h1.className = "text-2xl font-bold text-blood"
-        h1.innerText = "Generation weight map"
+        h1.innerText = "Weight Map"
         header.appendChild(h1)
         blurb = document.createElement("p")
         blurb.className = "text-stone-400 text-sm mt-2 max-w-3xl"

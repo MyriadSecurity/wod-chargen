@@ -104,6 +104,7 @@ def build_archetype_profile_tree(arch_id: str, sub_id: str, character_type: str 
         _section("Modifiers", profile.modifier_biases, "modifier"),
         _section("Merits", profile.merit_biases, "merit"),
         _section("Flaws", profile.flaw_biases, "flaw"),
+        _section("Loresheets", profile.loresheet_biases, "loresheet"),
         _section("Discipline powers", profile.discipline_power_biases, "power"),
     ]
     return {
@@ -293,6 +294,7 @@ def build_clan_profile_tree(clan_id: str) -> dict[str, Any]:
         _section("In-clan disciplines (pick pool)", in_clan, "discipline"),
         _section("Out-of-clan (XP factor)", dict(list(out_clan.items())[:6]), "discipline"),
         _section("In-clan theme tags", disc_tags, "tag"),
+        _section("Loresheets", clan.get("loresheet_biases", {}), "loresheet"),
     ]
     if clan.get("discipline_note"):
         sections.insert(
@@ -578,6 +580,7 @@ def build_combo_profile_tree(
         _section("Modifiers", merged.modifier_biases, "modifier"),
         _section("Merits", merged.merit_biases, "merit"),
         _section("Flaws", merged.flaw_biases, "flaw"),
+        _section("Loresheets", merged.loresheet_biases, "loresheet"),
     ]
     return {
         "name": f"{base.label} · {sub.label} · {clan['label']} · {pred['label']}",

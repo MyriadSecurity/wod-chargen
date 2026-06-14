@@ -36,6 +36,8 @@ Explicit keys on the merged profile (primary + sub deltas) take precedence over 
 | `background_biases` | allies, contacts, … | creation + XP backgrounds |
 | `sphere_biases` | church, underworld, … | sphere pick on new entries |
 | `modifier_biases` | flaky, reliable, … | adv/disadv modifier picks |
+| `loresheet_biases` | loresheet id | XP loresheet pick (one per character) |
+| `weights.loresheets` | spend group | XP weight within merits/flaws bucket (typically ~2× merits) |
 | `discipline_power_biases` | power id | power pick in disciplines |
 | `tag_affinities` | tag slug → multiplier | all tagged traits |
 

@@ -24,6 +24,7 @@ PRIMARY_BIAS_KEYS = (
     "modifier_biases",
     "discipline_power_biases",
     "tag_affinities",
+    "loresheet_biases",
 )
 
 

@@ -15,6 +15,7 @@
     "modifier_biases": "per background adv/disadv modifier id",
     "discipline_power_biases": "per discipline power id",
     "tag_affinities": "tag slug → multiplier for all tagged traits",
+    "loresheet_biases": "per loresheet id (pocket book Ch. 6)",
     "type_weights": "optional per-character-type weight multipliers"
   },
   "sub_archetype": {
@@ -34,7 +35,8 @@
       "sphere_biases": "additive deltas on parent sphere_biases",
       "modifier_biases": "additive deltas on parent modifier_biases",
       "discipline_power_biases": "additive deltas on parent discipline_power_biases",
-      "tag_affinities": "additive deltas on parent tag_affinities"
+      "tag_affinities": "additive deltas on parent tag_affinities",
+      "loresheet_biases": "additive deltas on parent loresheet_biases"
     }
   }
 }

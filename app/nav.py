@@ -27,7 +27,7 @@ def app_nav(active: str) -> Any:
 
     for href, label, key in (
         ("#", "Character generator", "generator"),
-        ("#weights", "Archetype weight map", "weights"),
+        ("#weights", "Weight Map", "weights"),
     ):
         link = document.createElement("a")
         link.href = href

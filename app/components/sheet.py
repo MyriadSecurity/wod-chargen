@@ -213,6 +213,38 @@ def _rated_traits_section(title: str, items: dict[str, int], *, kind: str | None
     return section
 
 
+def _loresheet_section(character: dict[str, Any]) -> Any | None:
+    sheets = character.get("loresheets") or {}
+    rated = {k: v for k, v in sheets.items() if int(v) > 0}
+    if not rated:
+        return None
+    catalog = {
+        ls["id"]: ls["label"]
+        for ls in load_json_cached(DATA, "loresheets.json").get("loresheets", [])
+    }
+    section = document.createElement("section")
+    section.className = "sheet-rated-traits"
+    section.appendChild(_section_heading("Loresheet"))
+    grid = document.createElement("div")
+    grid.className = "sheet-rated-traits__grid"
+    for ls_id, dots in sorted(rated.items()):
+        label = catalog.get(ls_id, _title(ls_id))
+        grid.appendChild(_stat_line(label, int(dots)))
+    section.appendChild(grid)
+    meta = character.get("loresheet_meta") or {}
+    narratives = meta.get("narratives") or []
+    if narratives:
+        notes = document.createElement("div")
+        notes.className = "sheet-loresheet-notes"
+        for entry in narratives:
+            p = document.createElement("p")
+            p.className = "sheet-loresheet-notes__item"
+            p.textContent = f"{entry.get('label', entry.get('id', ''))}: {entry.get('narrative', '')}"
+            notes.appendChild(p)
+        section.appendChild(notes)
+    return section
+
+
 def _modifier_list(items: list[Any], catalog: list[dict[str, Any]], css: str) -> Any:
     wrap = document.createElement("div")
     wrap.className = f"sheet-bg-modifiers sheet-bg-modifiers--{css}"
@@ -424,12 +456,15 @@ def render_lotn_v5_sheet(
     for section_title, block, trait_kind in (
         ("Merits", character.get("merits", {}), "merit"),
         ("Flaws", character.get("flaws", {}), "flaw"),
-        ("Loresheets", character.get("loresheets", {}), None),
         ("Ghoul Powers", character.get("ghoul_powers", {}), None),
     ):
         section = _rated_traits_section(section_title, block, kind=trait_kind)
         if section:
             sheet.appendChild(section)
+
+    ls_section = _loresheet_section(character)
+    if ls_section:
+        sheet.appendChild(ls_section)
 
     disc_section = _disciplines_section(character)
     if disc_section:

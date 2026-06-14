@@ -10,6 +10,7 @@ from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.xp_strategy import (
     BASE_CATEGORY_TARGETS,
     efficiency_item_bias,
+    loresheet_efficiency_bias,
     macro_for_spend_group,
     roll_category_targets,
 )
@@ -82,7 +83,28 @@ def test_xp_spend_rough_category_mix_with_variance():
     }
     assert avg["disciplines"] > avg["backgrounds"]
     assert avg["disciplines"] > 0.20
-    assert avg["backgrounds"] + avg["merits_flaws"] < 0.25
+    assert avg["backgrounds"] + avg["merits_flaws"] < 0.30
+
+
+def test_loresheet_efficiency_favors_track_completion():
+    assert loresheet_efficiency_bias(0, 1) >= 2.0
+    assert loresheet_efficiency_bias(1, 2) >= loresheet_efficiency_bias(0, 1)
+    assert loresheet_efficiency_bias(2, 3) > efficiency_item_bias(2, 3)
+
+
+def test_most_vampires_take_loresheets_with_multi_dots():
+    venue = _venue()
+    has_sheet = 0
+    two_plus = 0
+    for seed in range(120):
+        result = generate_character(seed, _opts(clan="brujah", arch="enforcer", sub="brawler"), venue)
+        dots = sum(result.character.get("loresheets", {}).values())
+        if dots:
+            has_sheet += 1
+            if dots >= 2:
+                two_plus += 1
+    assert has_sheet / 120 >= 0.65
+    assert two_plus / max(has_sheet, 1) >= 0.45
 
 
 def test_xp_prefers_dot_five_and_shallow_buys():

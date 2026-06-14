@@ -1,0 +1,582 @@
+{
+  "source_ref": {
+    "book": "Laws of the Night pocket edition",
+    "chapter": 6,
+    "pages": "159-175"
+  },
+  "notes": "Procedural pick weights for one loresheet per character. Clan-restricted sheets use 2.0 on-clan; wrong clan is ineligible in generator. Sect restrictions are soft-biased until sect is a wizard input.",
+  "loresheets": {
+    "anarch_revolt": {
+      "label": "Anarch Revolt",
+      "weight_notes": "Revolt historian and street agitator; Anarch sect; Brujah and outcast clans.",
+      "archetype_biases": {
+        "criminal": 1.65,
+        "enforcer": 1.55,
+        "predator": 1.25,
+        "scholar": 1.35,
+        "duelist": 1.2,
+        "diplomat": 0.75,
+        "manipulator": 0.85,
+        "shadow": 0.9,
+        "investigator": 0.8,
+        "occultist": 0.65,
+        "artist": 0.55,
+        "alchemist": 0.45
+      },
+      "clan_biases": {
+        "brujah": 1.85,
+        "gangrel": 1.55,
+        "caitiff": 1.45,
+        "nosferatu": 1.2,
+        "malkavian": 1.1,
+        "ventrue": 0.45,
+        "tremere": 0.5,
+        "toreador": 0.55
+      }
+    },
+    "the_cobweb": {
+      "label": "The Cobweb",
+      "weight_notes": "Malkavian-only; lore-seeker and oracle archetypes.",
+      "archetype_biases": {
+        "scholar": 1.65,
+        "occultist": 1.55,
+        "manipulator": 1.45,
+        "shadow": 1.25,
+        "investigator": 1.15,
+        "diplomat": 0.7,
+        "enforcer": 0.5,
+        "duelist": 0.45,
+        "predator": 0.5,
+        "criminal": 0.55,
+        "artist": 1.1,
+        "alchemist": 0.6
+      },
+      "clan_biases": {
+        "malkavian": 2.0
+      }
+    },
+    "the_church_of_set": {
+      "label": "The Church of Set",
+      "weight_notes": "Ministry-only; corruptor and cult-leader builds.",
+      "archetype_biases": {
+        "manipulator": 1.75,
+        "occultist": 1.65,
+        "criminal": 1.35,
+        "diplomat": 1.15,
+        "shadow": 1.2,
+        "scholar": 1.1,
+        "predator": 1.0,
+        "artist": 0.85,
+        "investigator": 0.75,
+        "enforcer": 0.7,
+        "duelist": 0.55,
+        "alchemist": 0.6
+      },
+      "clan_biases": {
+        "ministry": 2.0
+      }
+    },
+    "the_circulatory_system": {
+      "label": "The Circulatory System",
+      "weight_notes": "Blood commerce and resonance science; thin-blood alchemist peak fit.",
+      "archetype_biases": {
+        "alchemist": 1.85,
+        "criminal": 1.7,
+        "predator": 1.6,
+        "scholar": 1.45,
+        "shadow": 1.35,
+        "manipulator": 1.2,
+        "investigator": 1.0,
+        "diplomat": 0.75,
+        "occultist": 0.9,
+        "enforcer": 0.85,
+        "artist": 0.5,
+        "duelist": 0.45
+      },
+      "clan_biases": {
+        "tremere": 1.35,
+        "ministry": 1.3,
+        "nosferatu": 1.25,
+        "ventrue": 1.15,
+        "hecata": 1.2,
+        "toreador": 1.0
+      }
+    },
+    "convention_of_thorns": {
+      "label": "Convention of Thorns",
+      "weight_notes": "Camarilla historian and negotiator; court and archive themes.",
+      "archetype_biases": {
+        "diplomat": 1.85,
+        "scholar": 1.75,
+        "shadow": 1.35,
+        "investigator": 1.25,
+        "manipulator": 1.2,
+        "occultist": 1.0,
+        "artist": 0.85,
+        "enforcer": 0.55,
+        "criminal": 0.5,
+        "predator": 0.45,
+        "duelist": 0.5,
+        "alchemist": 0.4
+      },
+      "clan_biases": {
+        "ventrue": 1.55,
+        "tremere": 1.45,
+        "toreador": 1.35,
+        "lasombra": 1.2,
+        "nosferatu": 1.15,
+        "brujah": 0.7
+      }
+    },
+    "descendant_of_hardestadt": {
+      "label": "Descendant of Hardestadt",
+      "weight_notes": "Ventrue-only; Ivory Tower prince-in-waiting.",
+      "archetype_biases": {
+        "diplomat": 1.85,
+        "manipulator": 1.5,
+        "enforcer": 1.25,
+        "scholar": 1.0,
+        "investigator": 0.9,
+        "shadow": 0.75,
+        "duelist": 0.7,
+        "artist": 0.65,
+        "predator": 0.55,
+        "criminal": 0.4,
+        "occultist": 0.45,
+        "alchemist": 0.35
+      },
+      "clan_biases": {
+        "ventrue": 2.0
+      }
+    },
+    "descendant_of_helena": {
+      "label": "Descendant of Helena",
+      "weight_notes": "Toreador-only; fame, performance, and nightclub patron.",
+      "archetype_biases": {
+        "artist": 1.95,
+        "diplomat": 1.65,
+        "manipulator": 1.55,
+        "scholar": 0.9,
+        "shadow": 0.65,
+        "enforcer": 0.45,
+        "predator": 0.5,
+        "criminal": 0.55,
+        "duelist": 0.7,
+        "investigator": 0.6,
+        "occultist": 0.5,
+        "alchemist": 0.45
+      },
+      "clan_biases": {
+        "toreador": 2.0
+      }
+    },
+    "descendant_of_karl_schrekt": {
+      "label": "Descendant of Karl Schrekt",
+      "weight_notes": "Tremere-only; blood sorcery, lore, and hunter mindset.",
+      "archetype_biases": {
+        "occultist": 1.85,
+        "scholar": 1.65,
+        "investigator": 1.55,
+        "shadow": 1.45,
+        "diplomat": 1.0,
+        "manipulator": 1.05,
+        "enforcer": 0.75,
+        "criminal": 0.55,
+        "predator": 0.5,
+        "duelist": 0.45,
+        "artist": 0.4,
+        "alchemist": 0.65
+      },
+      "clan_biases": {
+        "tremere": 2.0
+      }
+    },
+    "descendant_of_montano": {
+      "label": "Descendant of Montano",
+      "weight_notes": "Lasombra-only; Camarilla loyalist shadow courtier.",
+      "archetype_biases": {
+        "shadow": 1.85,
+        "manipulator": 1.65,
+        "diplomat": 1.45,
+        "occultist": 1.35,
+        "enforcer": 1.15,
+        "investigator": 1.0,
+        "scholar": 0.95,
+        "duelist": 0.85,
+        "predator": 0.7,
+        "criminal": 0.65,
+        "artist": 0.75,
+        "alchemist": 0.45
+      },
+      "clan_biases": {
+        "lasombra": 2.0
+      }
+    },
+    "descendant_of_tyler": {
+      "label": "Descendant of Tyler",
+      "weight_notes": "Brujah-only; Anarch champion and street revolutionary.",
+      "archetype_biases": {
+        "enforcer": 1.75,
+        "criminal": 1.6,
+        "duelist": 1.35,
+        "predator": 1.25,
+        "diplomat": 0.85,
+        "scholar": 0.9,
+        "shadow": 0.75,
+        "manipulator": 0.7,
+        "investigator": 0.65,
+        "occultist": 0.5,
+        "artist": 0.55,
+        "alchemist": 0.4
+      },
+      "clan_biases": {
+        "brujah": 2.0
+      }
+    },
+    "descendant_of_vasantasena": {
+      "label": "Descendant of Vasantasena",
+      "weight_notes": "Malkavian-only; freedom fighter against Bonds and hierarchy.",
+      "archetype_biases": {
+        "manipulator": 1.75,
+        "shadow": 1.55,
+        "occultist": 1.45,
+        "investigator": 1.25,
+        "scholar": 1.15,
+        "diplomat": 1.0,
+        "criminal": 0.9,
+        "enforcer": 0.75,
+        "predator": 0.65,
+        "duelist": 0.55,
+        "artist": 0.85,
+        "alchemist": 0.5
+      },
+      "clan_biases": {
+        "malkavian": 2.0
+      }
+    },
+    "descendant_of_xaviar": {
+      "label": "Descendant of Xaviar",
+      "weight_notes": "Gangrel-only; Antediluvian truth-seeker and wilderness defender.",
+      "archetype_biases": {
+        "predator": 1.85,
+        "enforcer": 1.45,
+        "shadow": 1.35,
+        "duelist": 1.1,
+        "investigator": 1.05,
+        "scholar": 0.85,
+        "criminal": 0.75,
+        "occultist": 0.7,
+        "diplomat": 0.55,
+        "manipulator": 0.5,
+        "artist": 0.45,
+        "alchemist": 0.4
+      },
+      "clan_biases": {
+        "gangrel": 2.0
+      }
+    },
+    "descendant_of_zao_xue": {
+      "label": "Descendant of Zao-Xue",
+      "weight_notes": "Salubri-only; lore hunter and supernatural threat analyst.",
+      "archetype_biases": {
+        "scholar": 1.85,
+        "occultist": 1.55,
+        "investigator": 1.45,
+        "diplomat": 1.25,
+        "shadow": 1.2,
+        "manipulator": 1.0,
+        "artist": 0.7,
+        "predator": 0.55,
+        "enforcer": 0.5,
+        "criminal": 0.45,
+        "duelist": 0.4,
+        "alchemist": 0.65
+      },
+      "clan_biases": {
+        "salubri": 2.0
+      }
+    },
+    "descendant_of_zelios": {
+      "label": "Descendant of Zelios",
+      "weight_notes": "Nosferatu-only; warren master and urban planner.",
+      "archetype_biases": {
+        "shadow": 1.85,
+        "investigator": 1.55,
+        "criminal": 1.45,
+        "scholar": 1.25,
+        "occultist": 1.0,
+        "enforcer": 0.85,
+        "predator": 0.8,
+        "manipulator": 0.75,
+        "diplomat": 0.55,
+        "duelist": 0.5,
+        "artist": 0.45,
+        "alchemist": 0.5
+      },
+      "clan_biases": {
+        "nosferatu": 2.0
+      }
+    },
+    "the_first_inquisition": {
+      "label": "The First Inquisition",
+      "weight_notes": "Hunter-evasion and Church infiltration; paranoid survivor.",
+      "archetype_biases": {
+        "investigator": 1.85,
+        "shadow": 1.75,
+        "scholar": 1.55,
+        "occultist": 1.35,
+        "manipulator": 1.15,
+        "diplomat": 0.9,
+        "criminal": 0.85,
+        "enforcer": 0.7,
+        "predator": 0.65,
+        "duelist": 0.5,
+        "artist": 0.45,
+        "alchemist": 0.55
+      },
+      "clan_biases": {
+        "nosferatu": 1.45,
+        "tremere": 1.35,
+        "lasombra": 1.25,
+        "malkavian": 1.15,
+        "ventrue": 1.1
+      }
+    },
+    "firstlight": {
+      "label": "FIRSTLIGHT",
+      "weight_notes": "Second Inquisition survival; spy and fixer archetypes.",
+      "archetype_biases": {
+        "shadow": 1.85,
+        "investigator": 1.75,
+        "criminal": 1.55,
+        "manipulator": 1.45,
+        "scholar": 1.1,
+        "occultist": 0.95,
+        "predator": 0.85,
+        "diplomat": 0.75,
+        "enforcer": 0.65,
+        "duelist": 0.55,
+        "artist": 0.5,
+        "alchemist": 0.7
+      },
+      "clan_biases": {
+        "nosferatu": 1.5,
+        "lasombra": 1.45,
+        "malkavian": 1.2,
+        "gangrel": 1.15,
+        "tremere": 1.1,
+        "ventrue": 0.85
+      }
+    },
+    "golconda": {
+      "label": "Golconda",
+      "weight_notes": "Humanity-focused mystic path; Salubri natural fit.",
+      "archetype_biases": {
+        "scholar": 1.75,
+        "diplomat": 1.55,
+        "occultist": 1.45,
+        "investigator": 1.15,
+        "artist": 0.85,
+        "manipulator": 0.75,
+        "shadow": 0.7,
+        "predator": 0.55,
+        "enforcer": 0.45,
+        "criminal": 0.4,
+        "duelist": 0.4,
+        "alchemist": 0.6
+      },
+      "clan_biases": {
+        "salubri": 1.85,
+        "gangrel": 1.35,
+        "malkavian": 1.2,
+        "toreador": 1.1,
+        "ventrue": 1.0
+      }
+    },
+    "high_clan": {
+      "label": "High Clan",
+      "weight_notes": "Court aristocrat; Toreador/Ventrue/Lasombra/Tzimisce peak.",
+      "archetype_biases": {
+        "diplomat": 1.85,
+        "artist": 1.65,
+        "manipulator": 1.55,
+        "scholar": 1.05,
+        "duelist": 0.85,
+        "investigator": 0.65,
+        "shadow": 0.55,
+        "enforcer": 0.5,
+        "predator": 0.45,
+        "criminal": 0.35,
+        "occultist": 0.55,
+        "alchemist": 0.4
+      },
+      "clan_biases": {
+        "ventrue": 1.75,
+        "toreador": 1.7,
+        "lasombra": 1.55,
+        "tzimisce": 1.5,
+        "ministry": 1.25,
+        "tremere": 1.15,
+        "brujah": 0.65,
+        "nosferatu": 0.45,
+        "gangrel": 0.45
+      }
+    },
+    "low_clan": {
+      "label": "Low Clan",
+      "weight_notes": "Street and counter-culture; Low Clan solidarity.",
+      "archetype_biases": {
+        "criminal": 1.65,
+        "enforcer": 1.55,
+        "shadow": 1.5,
+        "predator": 1.4,
+        "investigator": 1.05,
+        "duelist": 1.0,
+        "manipulator": 0.85,
+        "scholar": 0.75,
+        "occultist": 0.7,
+        "diplomat": 0.45,
+        "artist": 0.5,
+        "alchemist": 0.55
+      },
+      "clan_biases": {
+        "nosferatu": 1.65,
+        "gangrel": 1.6,
+        "malkavian": 1.55,
+        "brujah": 1.45,
+        "caitiff": 1.5,
+        "tremere": 1.15,
+        "ventrue": 0.35,
+        "toreador": 0.4
+      }
+    },
+    "scion_of_lucretia": {
+      "label": "Scion of Lucretia",
+      "weight_notes": "Camarilla-only; diplomat and archon peacemaker.",
+      "archetype_biases": {
+        "diplomat": 1.95,
+        "scholar": 1.45,
+        "manipulator": 1.35,
+        "investigator": 1.05,
+        "artist": 1.0,
+        "shadow": 0.65,
+        "enforcer": 0.55,
+        "occultist": 0.6,
+        "criminal": 0.45,
+        "predator": 0.4,
+        "duelist": 0.45,
+        "alchemist": 0.35
+      },
+      "clan_biases": {
+        "ventrue": 1.65,
+        "tremere": 1.45,
+        "toreador": 1.35,
+        "lasombra": 1.25,
+        "nosferatu": 1.15,
+        "brujah": 0.55
+      }
+    },
+    "sect_war_veteran": {
+      "label": "Sect War Veteran",
+      "weight_notes": "Combat veteran and siege strategist; cross-sect war stories.",
+      "archetype_biases": {
+        "enforcer": 1.85,
+        "predator": 1.65,
+        "duelist": 1.55,
+        "shadow": 1.5,
+        "criminal": 1.25,
+        "investigator": 1.1,
+        "scholar": 0.85,
+        "manipulator": 0.75,
+        "diplomat": 0.65,
+        "occultist": 0.7,
+        "artist": 0.45,
+        "alchemist": 0.4
+      },
+      "clan_biases": {
+        "brujah": 1.45,
+        "gangrel": 1.4,
+        "nosferatu": 1.35,
+        "tremere": 1.25,
+        "ventrue": 1.2,
+        "lasombra": 1.15,
+        "malkavian": 1.1
+      }
+    },
+    "the_society_of_heralds": {
+      "label": "The Society of Heralds",
+      "weight_notes": "Camarilla-only; Harpy-adjacent social intelligence.",
+      "archetype_biases": {
+        "diplomat": 1.9,
+        "artist": 1.65,
+        "manipulator": 1.55,
+        "scholar": 1.15,
+        "investigator": 1.1,
+        "shadow": 0.85,
+        "enforcer": 0.45,
+        "predator": 0.4,
+        "criminal": 0.45,
+        "duelist": 0.5,
+        "occultist": 0.55,
+        "alchemist": 0.35
+      },
+      "clan_biases": {
+        "toreador": 1.65,
+        "ventrue": 1.55,
+        "tremere": 1.4,
+        "lasombra": 1.25,
+        "nosferatu": 1.1
+      }
+    },
+    "the_trinity": {
+      "label": "The Trinity",
+      "weight_notes": "Utopian philosopher; Toreador/Ventrue/Tzimisce trinity echo.",
+      "archetype_biases": {
+        "diplomat": 1.75,
+        "scholar": 1.65,
+        "artist": 1.55,
+        "occultist": 1.45,
+        "manipulator": 1.2,
+        "investigator": 0.85,
+        "shadow": 0.75,
+        "enforcer": 0.55,
+        "predator": 0.45,
+        "criminal": 0.4,
+        "duelist": 0.5,
+        "alchemist": 0.45
+      },
+      "clan_biases": {
+        "toreador": 1.55,
+        "ventrue": 1.5,
+        "tzimisce": 1.65,
+        "lasombra": 1.2,
+        "salubri": 1.15
+      }
+    },
+    "the_week_of_nightmares": {
+      "label": "The Week of Nightmares",
+      "weight_notes": "Apocalyptic omen-watcher; Ravnos network hub.",
+      "archetype_biases": {
+        "occultist": 1.65,
+        "scholar": 1.55,
+        "shadow": 1.5,
+        "predator": 1.35,
+        "criminal": 1.25,
+        "investigator": 1.15,
+        "manipulator": 1.05,
+        "enforcer": 0.85,
+        "diplomat": 0.65,
+        "artist": 0.75,
+        "duelist": 0.7,
+        "alchemist": 0.6
+      },
+      "clan_biases": {
+        "ravnos": 1.9,
+        "malkavian": 1.4,
+        "gangrel": 1.15,
+        "nosferatu": 1.1,
+        "tzimisce": 1.05
+      }
+    }
+  }
+}

@@ -28,7 +28,7 @@ cp "/path/to/laws_of_the_night_pocket.pdf" reference/lotn_v5/
 | Backgrounds | [/backgrounds](https://www.oneworldofdarkness.com/laws-of-the-night/backgrounds) | backgrounds | `backgrounds.json` (connections, spheres, modifiers) |
 | Merits & flaws | [/merits-flaws](https://www.oneworldofdarkness.com/laws-of-the-night/merits-flaws) | merits | `merits.json` → `merits`, `flaws` |
 | Predator types | [/predator-types](https://www.oneworldofdarkness.com/laws-of-the-night/predator-types) | creation | `predator_types.json` |
-| Loresheets | [/loresheets](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets) | loresheets | (partial — generator stubs) |
+| Loresheets | [/loresheets](https://www.oneworldofdarkness.com/laws-of-the-night/loresheets) | Ch. 6 (pp. 159–175) | `loresheets.json`, `loresheet_themes.json` |
 | Attributes & skills | character-creation | Ch. 3 | `attributes.json`, `skills.json` |
 | Archetype weights | — (house procedure) | — | `archetypes/*.json` |
 
