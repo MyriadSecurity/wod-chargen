@@ -11,6 +11,7 @@ from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags
 
 DATA_PKG = "wod_chargen.games.lotn_v5.data"
 VALID_TYPES = {"vampire", "ghoul", "thin_blood"}
+THIN_BLOOD_ONLY_SUFFIX = " *** Thin-Blood Only ***"
 
 BIAS_MODIFIER_KEYS = (
     "weights",
@@ -257,6 +258,16 @@ def get_archetype(arch_id: str) -> ArchetypeProfile:
     if arch_id not in profiles:
         raise ValueError(f"Unknown archetype: {arch_id}")
     return profiles[arch_id]
+
+
+def is_thin_blood_only(profile: ArchetypeProfile) -> bool:
+    return profile.allowed_types == ("thin_blood",)
+
+
+def archetype_display_label(profile: ArchetypeProfile) -> str:
+    if is_thin_blood_only(profile):
+        return f"{profile.label}{THIN_BLOOD_ONLY_SUFFIX}"
+    return profile.label
 
 
 def archetypes_for_type(character_type: str) -> list[ArchetypeProfile]:

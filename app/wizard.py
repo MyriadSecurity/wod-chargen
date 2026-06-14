@@ -19,7 +19,13 @@ from wod_chargen.core.share import (
     wizard_share_options,
 )
 from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type, get_archetype
+from wod_chargen.games.lotn_v5.archetypes import (
+    THIN_BLOOD_ONLY_SUFFIX,
+    archetypes_for_type,
+    archetype_display_label,
+    get_archetype,
+    is_thin_blood_only,
+)
 from wod_chargen.games.lotn_v5.convictions import pick_convictions
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.system import LotnV5System
@@ -216,7 +222,7 @@ class WizardApp:
             return labels.get(self.state.get(key, ""), self.state.get(key, ""))
         if step == "archetype":
             profile = get_archetype(self.state["arch"])
-            return profile.label
+            return archetype_display_label(profile)
         if step == "sub_archetype":
             profile = get_archetype(self.state["arch"])
             for sub in profile.sub_archetypes:
@@ -721,6 +727,19 @@ class WizardApp:
         el.appendChild(grid)
         return el
 
+    def _append_archetype_label(self, parent: Any, profile: Any) -> None:
+        label = document.createElement("span")
+        label.className = "archetype-card__label"
+        name = document.createElement("span")
+        name.innerText = profile.label
+        label.appendChild(name)
+        if is_thin_blood_only(profile):
+            note = document.createElement("span")
+            note.className = "archetype-card__type-note"
+            note.innerText = THIN_BLOOD_ONLY_SUFFIX
+            label.appendChild(note)
+        parent.appendChild(label)
+
     def _view_archetype(self) -> Any:
         el = document.createElement("div")
         profiles = archetypes_for_type(self.state["type"])
@@ -733,10 +752,7 @@ class WizardApp:
             btn.className = f"archetype-card archetype-card--pickable {'archetype-card--active' if active else ''}"
             btn.setAttribute("type", "button")
 
-            label = document.createElement("span")
-            label.className = "archetype-card__label"
-            label.innerText = p.label
-            btn.appendChild(label)
+            self._append_archetype_label(btn, p)
 
             desc = document.createElement("p")
             desc.className = "archetype-card__desc"
@@ -773,7 +789,7 @@ class WizardApp:
 
         picked = document.createElement("p")
         picked.className = "text-stone-500 text-sm mb-4"
-        picked.innerText = profile.label
+        picked.innerText = archetype_display_label(profile)
         el.appendChild(picked)
 
         grid = document.createElement("div")

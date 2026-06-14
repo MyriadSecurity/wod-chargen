@@ -224,6 +224,15 @@ body {
   font-weight: 600;
 }
 
+.archetype-card__type-note {
+  color: #f87171;
+  font-weight: 600;
+}
+
+.archetype-card--active .archetype-card__type-note {
+  color: #fca5a5;
+}
+
 .archetype-card__desc {
   margin: 0;
   font-size: 0.78rem;

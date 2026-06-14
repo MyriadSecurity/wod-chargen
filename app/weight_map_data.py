@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.games.lotn_v5.archetypes import ArchetypeProfile, effective_profile, get_archetype, load_all_archetypes
+from wod_chargen.games.lotn_v5.archetypes import ArchetypeProfile, archetype_display_label, effective_profile, get_archetype, load_all_archetypes
 from wod_chargen.games.lotn_v5.clan_discipline_adapt import adapt_profile_for_clan
 from wod_chargen.games.lotn_v5.predators import apply_predator_biases, load_predator_types, predator_by_id
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags, resolve_trait_bias
@@ -108,7 +108,7 @@ def build_archetype_profile_tree(arch_id: str, sub_id: str, character_type: str 
         _section("Discipline powers", profile.discipline_power_biases, "power"),
     ]
     return {
-        "name": f"{base.label} · {sub.label}",
+        "name": f"{archetype_display_label(base)} · {sub.label}",
         "kind": "root",
         "lens": "archetype",
         "arch": arch_id,
@@ -136,7 +136,7 @@ def build_archetype_overview_tree() -> dict[str, Any]:
                 branches.append(sec)
         children.append(
             _nav_node(
-                profile.label,
+                archetype_display_label(profile),
                 "archetype",
                 arch_id,
                 lens="archetype",
@@ -155,7 +155,7 @@ def archetype_picker_options() -> list[dict[str, Any]]:
             options.append(
                 {
                     "id": f"{profile.id}:{sub.id}",
-                    "label": f"{profile.label} — {sub.label}",
+                    "label": f"{archetype_display_label(profile)} — {sub.label}",
                     "arch": profile.id,
                     "sub": sub.id,
                     "type": ctype,
@@ -583,7 +583,7 @@ def build_combo_profile_tree(
         _section("Loresheets", merged.loresheet_biases, "loresheet"),
     ]
     return {
-        "name": f"{base.label} · {sub.label} · {clan['label']} · {pred['label']}",
+        "name": f"{archetype_display_label(base)} · {sub.label} · {clan['label']} · {pred['label']}",
         "kind": "root",
         "lens": "combo",
         "arch": arch_id,
