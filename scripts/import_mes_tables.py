@@ -20,7 +20,10 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS = ROOT / "scripts"
 DATA = ROOT / "wod_chargen" / "games" / "lotn_v5" / "data"
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
 DEFAULT_XLSX = Path("/var/home/gscott/Downloads/Monroe.xlsx")
 FALLBACK_XLSX = Path.home() / "Downloads" / "Monroe.xlsx"
 
@@ -470,17 +473,6 @@ def _merge_discipline_power_enrichment(discipline_data: dict[str, Any]) -> None:
     enrich(discipline_data)
 
 
-def sync_legacy_merits(merits_flaws: dict[str, list[dict[str, Any]]]) -> None:
-    """Keep merits.json compatible with generator until it loads merits_flaws.json."""
-    write_json(
-        DATA / "merits.json",
-        {
-            "merits": [m["id"] for m in merits_flaws["merits"] if not m.get("thin_blood_only")],
-            "flaws": [f["id"] for f in merits_flaws["flaws"] if not f.get("thin_blood_only")],
-        },
-    )
-
-
 def sync_thin_blood_merits(merits_flaws: dict[str, list[dict[str, Any]]]) -> None:
     thin_merits = [m for m in merits_flaws["merits"] if m.get("thin_blood_only")]
     thin_flaws = [f for f in merits_flaws["flaws"] if f.get("thin_blood_only")]
@@ -531,25 +523,13 @@ def main(argv: list[str] | None = None) -> int:
     imported_at = datetime.now(UTC).isoformat()
 
     tables = wb["tables"]
-    clans = import_clans(tables)
     generation = import_generation(tables)
-    predators = import_predators(tables)
-    dyscrasias = import_dyscrasias(tables)
-    background_catalog = import_background_catalog(tables)
     merits_flaws = import_merits_flaws(tables)
     _merge_merit_flaw_descriptions(merits_flaws)
     loresheets = {"loresheets": import_loresheets(tables)}
-    xp_matrix = import_xp_matrix(tables)
-    equipment = {"qualities": import_equipment(tables)}
-    predator_catalog = {"predators": predators}
-    clans_table = {"clans": clans}
-    generation_data = generation
-    dyscrasia_data = {"resonances": import_dyscrasias(tables)}
 
     discipline_data = import_discipline_tables(wb["discipline_tables"])
     _merge_discipline_power_enrichment(discipline_data)
-
-    background_data = {"entries": background_catalog}
 
     manifest = {
         "imported_at": imported_at,
@@ -560,16 +540,10 @@ def main(argv: list[str] | None = None) -> int:
                 "flaws": len(merits_flaws["flaws"]),
             },
             "loresheets.json": {"loresheets": len(loresheets["loresheets"])},
-            "background_catalog.json": {"entries": len(background_catalog)},
             "generation_blood_potency.json": {
                 "generations": len(generation["generations"]),
                 "blood_potency_rows": len(generation["blood_potency"]),
             },
-            "dyscrasias.json": {"resonances": len(dyscrasia_data["resonances"])},
-            "predator_catalog.json": {"predators": len(predators)},
-            "xp_matrix.json": {"rows": len(xp_matrix["rows"])},
-            "equipment_qualities.json": {"qualities": len(equipment["qualities"])},
-            "clans_table.json": {"clans": len(clans)},
             "discipline_powers.json": {
                 "disciplines": len(discipline_data["disciplines"]),
                 "powers": sum(d["power_count"] for d in discipline_data["disciplines"]),
@@ -586,20 +560,12 @@ def main(argv: list[str] | None = None) -> int:
     outputs = {
         "merits_flaws.json": merits_flaws,
         "loresheets.json": loresheets,
-        "background_catalog.json": background_data,
-        "generation_blood_potency.json": generation_data,
-        "dyscrasias.json": dyscrasia_data,
-        "predator_catalog.json": predator_catalog,
-        "xp_matrix.json": xp_matrix,
-        "equipment_qualities.json": equipment,
-        "clans_table.json": clans_table,
+        "generation_blood_potency.json": generation,
         "discipline_powers.json": discipline_data,
-        "import_manifest.json": manifest,
     }
     for filename, payload in outputs.items():
         write_json(DATA / filename, payload)
 
-    sync_legacy_merits(merits_flaws)
     sync_thin_blood_merits(merits_flaws)
     sync_thin_blood_formulas(discipline_data)
 

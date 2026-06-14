@@ -13,17 +13,6 @@ INDEX = ROOT / "index.html"
 
 INCLUDE_DIRS = ("wod_chargen", "app")
 EXTENSIONS = {".py", ".json"}
-# Import/migration artifacts — not loaded at runtime in app or engine.
-EXCLUDE_NAMES = frozenset({
-    "merits.json",
-    "background_catalog.json",
-    "predator_catalog.json",
-    "clans_table.json",
-    "dyscrasias.json",
-    "equipment_qualities.json",
-    "xp_matrix.json",
-    "import_manifest.json",
-})
 
 
 def collect_pyscript_paths(root: Path | None = None) -> set[str]:
@@ -33,8 +22,6 @@ def collect_pyscript_paths(root: Path | None = None) -> set[str]:
     for dirname in INCLUDE_DIRS:
         for path in sorted((base / dirname).rglob("*")):
             if path.suffix not in EXTENSIONS or path.name.startswith("."):
-                continue
-            if path.name in EXCLUDE_NAMES:
                 continue
             paths.add(path.relative_to(base).as_posix())
     return paths

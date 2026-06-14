@@ -25,6 +25,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use [Se
 ### Changed
 
 - Share URLs omit optional `schema` param by default; missing `schema` decodes as `0.1`
+- Removed one-time migration scripts and unused MES import artifact JSON; import now writes only canonical runtime data
 - Generator split into focused modules (`merits_flaws`, `xp_purchases`, `predators`, `loresheets`, `trait_biases`, `sheet_model`, and others)
 - Wizard navigation, archetype labels, and subtype presentation polish
 - Ghoul power mechanics and discipline handling
