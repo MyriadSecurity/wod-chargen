@@ -17,7 +17,3 @@ def test_clan_symbol_paths_resolve_to_existing_files():
         assert clan_symbol_path(clan_id) == rel
         assert (ROOT / rel).is_file()
         assert (ROOT / rel).read_bytes()[:4] == b"\x89PNG"
-
-    thin = clan_symbol_path("thin_blood")
-    assert thin.endswith(".svg")
-    assert (ROOT / thin).is_file()

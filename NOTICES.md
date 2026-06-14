@@ -19,7 +19,7 @@ Official V5 clan symbol PNGs in `static/img/clans/` were sourced from the
 [VTM Wiki](https://vtm.paradoxwikis.com/Category:Clan_symbols) (Paradox Interactive).
 Re-fetch with `uv run python scripts/fetch_clan_symbols_wiki.py` (requires Playwright).
 Symbols are inverted for the dark UI via `uv run python scripts/invert_clan_symbols.py`.
-Thin-blood uses a local SVG placeholder (`scripts/generate_clan_symbols.py`) — no wiki asset exists.
+Thin-blood uses [Thinblood_symbol.png](https://vtm.paradoxwikis.com/thumb.php?f=Thinblood_symbol.png&width=1280) on the same wiki.
 
 ## Notice text (footer)
 

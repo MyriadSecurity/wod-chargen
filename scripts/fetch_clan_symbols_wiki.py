@@ -14,28 +14,28 @@ OUT = ROOT / "static" / "img" / "clans"
 WIKI = "https://vtm.paradoxwikis.com"
 CATEGORY = f"{WIKI}/Category:Clan_symbols"
 
-# App clan id -> wiki file title stem (before " symbol.png")
-CLAN_WIKI_NAMES: dict[str, str] = {
-    "brujah": "Brujah",
-    "gangrel": "Gangrel",
-    "malkavian": "Malkavian",
-    "nosferatu": "Nosferatu",
-    "toreador": "Toreador",
-    "tremere": "Tremere",
-    "ventrue": "Ventrue",
-    "lasombra": "Lasombra",
-    "ministry": "Ministry",
-    "hecata": "Hecata",
-    "ravnos": "Ravnos",
-    "tzimisce": "Tzimisce",
-    "salubri": "Salubri",
-    "caitiff": "Caitiff",
-    "thin_blood": "Thin-blooded",
+# App clan id -> wiki File: page title
+CLAN_WIKI_FILES: dict[str, str] = {
+    "brujah": "Brujah symbol.png",
+    "gangrel": "Gangrel symbol.png",
+    "malkavian": "Malkavian symbol.png",
+    "nosferatu": "Nosferatu symbol.png",
+    "toreador": "Toreador symbol.png",
+    "tremere": "Tremere symbol.png",
+    "ventrue": "Ventrue symbol.png",
+    "lasombra": "Lasombra symbol.png",
+    "ministry": "Ministry symbol.png",
+    "hecata": "Hecata symbol.png",
+    "ravnos": "Ravnos symbol.png",
+    "tzimisce": "Tzimisce symbol.png",
+    "salubri": "Salubri symbol.png",
+    "caitiff": "Caitiff symbol.png",
+    "thin_blood": "Thinblood_symbol.png",
 }
 
 
-def _wiki_file_title(clan_name: str) -> str:
-    return f"File:{clan_name} symbol.png"
+def _wiki_file_title(filename: str) -> str:
+    return f"File:{filename}"
 
 
 def _slug_from_url(url: str) -> str | None:
@@ -50,7 +50,7 @@ def _slug_from_url(url: str) -> str | None:
 
 def fetch_via_api(page) -> dict[str, str]:
     """Resolve download URLs through MediaWiki API using the browser session."""
-    titles = "|".join(_wiki_file_title(v) for v in CLAN_WIKI_NAMES.values())
+    titles = "|".join(_wiki_file_title(v) for v in CLAN_WIKI_FILES.values())
     api_url = (
         f"{WIKI}/api.php?action=query&format=json&prop=imageinfo"
         f"&iiprop=url&iiurlwidth=512&titles={titles}"
@@ -62,17 +62,21 @@ def fetch_via_api(page) -> dict[str, str]:
         }""",
         api_url,
     )
+    file_to_clan = {v.lower(): k for k, v in CLAN_WIKI_FILES.items()}
     urls: dict[str, str] = {}
     for page_data in data.get("query", {}).get("pages", {}).values():
         title = page_data.get("title", "")
-        m = re.match(r"File:(.+?) symbol\.png", title, re.I)
+        m = re.match(r"File:(.+)\.png", title, re.I)
         if not m:
             continue
-        wiki_name = m.group(1).lower().replace(" ", "_").replace("-", "_")
+        wiki_file = f"{m.group(1)}.png".lower()
+        clan_id = file_to_clan.get(wiki_file)
+        if not clan_id:
+            continue
         info = (page_data.get("imageinfo") or [{}])[0]
         url = info.get("thumburl") or info.get("url")
         if url:
-            urls[wiki_name] = url
+            urls[clan_id] = url
     return urls
 
 
@@ -110,18 +114,9 @@ def download_symbols(page, url_map: dict[str, str]) -> list[str]:
     manifest: dict[str, str] = {}
     written: list[str] = []
 
-    reverse = {v.lower().replace(" ", "_").replace("-", "_"): k for k, v in CLAN_WIKI_NAMES.items()}
-
-    for wiki_slug, url in sorted(url_map.items()):
-        clan_id = reverse.get(wiki_slug)
-        if not clan_id:
-            # try partial match (e.g. "the_ministry" -> ministry)
-            for w, cid in reverse.items():
-                if wiki_slug.endswith(w) or w.endswith(wiki_slug):
-                    clan_id = cid
-                    break
-        if not clan_id:
-            print(f"skip unmapped wiki slug: {wiki_slug}", file=sys.stderr)
+    for clan_id, url in sorted(url_map.items()):
+        if clan_id not in CLAN_WIKI_FILES:
+            print(f"skip unmapped clan id: {clan_id}", file=sys.stderr)
             continue
 
         resp = page.request.get(url)
@@ -140,7 +135,7 @@ def download_symbols(page, url_map: dict[str, str]) -> list[str]:
         print(f"wrote {out_path.name} ({len(body)} bytes)")
 
     manifest_path = OUT / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return written
 
 
@@ -157,7 +152,7 @@ def main() -> int:
         page.goto(WIKI, wait_until="networkidle", timeout=120_000)
 
         url_map = fetch_via_api(page)
-        if len(url_map) < len(CLAN_WIKI_NAMES) - 2:
+        if len(url_map) < len(CLAN_WIKI_FILES):
             print(f"API returned {len(url_map)} symbols; trying category scrape…", file=sys.stderr)
             cat_map = fetch_via_category(page)
             url_map = {**cat_map, **url_map}
@@ -176,11 +171,11 @@ def main() -> int:
         invert_script = Path(__file__).resolve().parent / "invert_clan_symbols.py"
         subprocess.run([sys.executable, str(invert_script)], check=True)
 
-    missing = set(CLAN_WIKI_NAMES) - set(written)
+    missing = set(CLAN_WIKI_FILES) - set(written)
     if missing:
         print(f"missing: {', '.join(sorted(missing))}", file=sys.stderr)
-    print(f"Downloaded {len(written)}/{len(CLAN_WIKI_NAMES)} clan symbols.")
-    return 0 if len(written) >= 13 else 1
+    print(f"Downloaded {len(written)}/{len(CLAN_WIKI_FILES)} clan symbols.")
+    return 0 if len(written) == len(CLAN_WIKI_FILES) else 1
 
 
 if __name__ == "__main__":

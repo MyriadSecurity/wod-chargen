@@ -1,4 +1,4 @@
-"""Clan symbol asset paths (official VTM wiki PNGs; thin-blood stays generated SVG)."""
+"""Clan symbol asset paths (official VTM wiki PNGs, inverted for dark UI)."""
 
 from __future__ import annotations
 
@@ -7,6 +7,4 @@ from __future__ import annotations
 
 
 def clan_symbol_path(clan_id: str) -> str:
-    if clan_id == "thin_blood":
-        return "static/img/clans/thin_blood.svg"
     return f"static/img/clans/{clan_id}.png"
