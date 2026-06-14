@@ -41,8 +41,26 @@ def test_share_round_trip():
     assert decoded.options["clan"] == "brujah"
 
 
+def test_decode_without_schema_defaults_to_current():
+    decoded = decode_query("?seed=482910&game=lotn_v5&venue=mes_end_to_dawn&type=vampire")
+    assert decoded.schema == "0.1"
+    assert decoded.seed == 482910
+    assert decoded.options["type"] == "vampire"
+
+
+def test_encode_omits_schema_by_default():
+    qs = encode_payload(SharePayload(seed=1))
+    assert "schema=" not in qs
+
+
+def test_decode_accepts_explicit_schema():
+    decoded = decode_query("?schema=0.1&seed=99")
+    assert decoded.schema == "0.1"
+    assert decoded.seed == 99
+
+
 def test_unsupported_schema():
-    with pytest.raises(ValueError, match="schema"):
+    with pytest.raises(ValueError, match="Unsupported schema"):
         decode_query("?schema=9.9&seed=1")
 
 
@@ -111,7 +129,7 @@ def test_wizard_share_options_omits_approval_when_not_required():
     assert "approval" not in opts
 
 
-def test_browser_share_url_includes_schema_and_seed():
+def test_browser_share_url_omits_schema_by_default():
     payload = SharePayload(
         seed=123,
         options=wizard_share_options(
@@ -125,9 +143,11 @@ def test_browser_share_url_includes_schema_and_seed():
     )
     url = browser_share_url("/", payload)
     assert url.startswith("/?")
+    assert "schema=" not in url
     parsed = urlparse(url)
     decoded = decode_query(parsed.query)
     assert decoded.seed == 123
+    assert decoded.schema == "0.1"
     assert decoded.options["arch"] == "diplomat"
 
 
