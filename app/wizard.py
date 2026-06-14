@@ -426,7 +426,7 @@ class WizardApp:
 
         map_link = document.createElement("a")
         map_link.href = "#weights"
-        map_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
         map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
 
@@ -434,6 +434,13 @@ class WizardApp:
 
         map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
         el.appendChild(map_link)
+
+        strat_link = document.createElement("a")
+        strat_link.href = "#strategy"
+        strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        strat_link.innerText = "Build guide →"
+        strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
+        el.appendChild(strat_link)
 
         copy = self.system.get_wizard_copy()
         sections: list[tuple[str, str, Any]] = [
@@ -489,7 +496,7 @@ class WizardApp:
 
         map_link = document.createElement("a")
         map_link.href = "#weights"
-        map_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
         map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
 
@@ -497,6 +504,13 @@ class WizardApp:
 
         map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
         el.appendChild(map_link)
+
+        strat_link = document.createElement("a")
+        strat_link.href = "#strategy"
+        strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        strat_link.innerText = "Build guide →"
+        strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
+        el.appendChild(strat_link)
 
         catalog = load_game_catalog()
         for game_id, game in catalog.items():

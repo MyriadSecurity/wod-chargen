@@ -6,6 +6,7 @@ from pyscript import document, window
 from pyscript.ffi import create_proxy
 
 _weight_app = None
+_strategy_app = None
 _hash_handler = None
 
 
@@ -27,11 +28,13 @@ def _current_page() -> str:
     raw = (window.location.hash or "").lstrip("#")
     if raw.startswith("weights"):
         return "weights"
+    if raw.startswith("strategy"):
+        return "strategy"
     return "generator"
 
 
 def _mount_app() -> None:
-    global _weight_app
+    global _weight_app, _strategy_app
     root = document.getElementById("app-root")
     if not root:
         return
@@ -39,6 +42,7 @@ def _mount_app() -> None:
     if page == "weights":
         from app.weight_map import WeightMapApp
 
+        _strategy_app = None
         if _weight_app is None:
             _weight_app = WeightMapApp(root)
             _weight_app.mount()
@@ -46,8 +50,20 @@ def _mount_app() -> None:
             _weight_app.root = root
             _weight_app._parse_hash()
             _weight_app._render()
+    elif page == "strategy":
+        from app.strategy_page import StrategyPageApp
+
+        _weight_app = None
+        if _strategy_app is None:
+            _strategy_app = StrategyPageApp(root)
+            _strategy_app.mount()
+        else:
+            _strategy_app.root = root
+            _strategy_app._parse_hash()
+            _strategy_app._render()
     else:
         _weight_app = None
+        _strategy_app = None
         from app.wizard import WizardApp
 
         WizardApp(root).mount()

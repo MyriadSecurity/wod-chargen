@@ -7,7 +7,7 @@ Weights live in:
 - `wod_chargen/games/lotn_v5/data/archetype_themes.json` — central theme source
 - `wod_chargen/games/lotn_v5/data/archetypes/` — merged primary + sub JSON (see `_schema.json`)
 
-Workflow: `docs/archetype-weight-guidelines.md`
+Workflow: `docs/archetype-weight-guidelines.md`, `docs/creation-weighting-strategy.md`
 
 ```bash
 source .venv/bin/activate
