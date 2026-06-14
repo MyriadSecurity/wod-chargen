@@ -66,8 +66,8 @@ Legacy shares without `discipline_powers` display dots only.
 
 ## Implemented (vtm/finish)
 
-- Caitiff: full discipline pool at creation; all discipline XP at `discipline_caitiff` (6×)
-- Ghoul: per-power XP picks from domitor in-clan level-1 powers
+- Caitiff: full discipline pool at creation (pick three); XP only deepens those three at `discipline_caitiff` (6×)
+- Ghoul: creation picks two domitor in-clan disciplines at •1 each (`discipline_max: 1`); XP buys extra level-1 powers only via `ghoul_power` (10 XP flat), recorded under `discipline_powers` extras (not a separate sheet section). Caitiff domitors roll three initial disciplines, not the full Caitiff catalog.
 - Thin-blood: zero-cost merit selection; `thin_blood_alchemist` and `discipline_affinity` effect hooks
 
 ## Thin-blood fix

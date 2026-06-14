@@ -42,9 +42,12 @@ from wod_chargen.games.lotn_v5.backgrounds import (
 from wod_chargen.games.lotn_v5.disciplines import (
     assign_power_at_level,
     assign_powers_for_discipline,
+    caitiff_owned_disciplines,
     discipline_pool_for_char,
     enumerate_ceremony_candidates,
     enumerate_ghoul_power_candidates,
+    initialize_ghoul_domitor_disciplines,
+    record_ghoul_power,
     enumerate_ritual_candidates,
     owned_power_ids,
     record_formula_selection,
@@ -456,73 +459,76 @@ def _enumerate_purchases(
     dw = profile.weights.get("in_clan_disciplines", 1.0)
     tb_dw = profile.weights.get("thin_blood_disciplines", dw)
     affinity_dw = profile.weights.get("affinity_discipline", tb_dw)
-    for disc in sorted(set(char["disciplines"]) | clan_pool):
-        cur = char["disciplines"].get(disc, 0)
-        if cur >= caps["discipline"]:
-            continue
-        new_level = cur + 1
-        in_clan = disc in clan_pool
-        if ctype == "ghoul" and not in_clan:
-            continue
-        is_caitiff = char.get("clan") == "caitiff"
-        if ctype == "thin_blood" and disc == "thin_blood_alchemy" and not has_thin_blood_alchemist(char):
-            continue
-        if ctype == "thin_blood" and not in_clan:
-            meta = char.get("discipline_meta") or {}
-            affinity = meta.get("affinity_discipline")
-            resonance = meta.get("resonance_discipline")
-            if disc != affinity or disc == resonance:
+    is_caitiff = char.get("clan") == "caitiff"
+    if ctype != "ghoul":
+        if is_caitiff:
+            disc_iter = caitiff_owned_disciplines(char)
+        else:
+            disc_iter = sorted(set(char["disciplines"]) | clan_pool)
+        for disc in disc_iter:
+            cur = char["disciplines"].get(disc, 0)
+            if cur >= caps["discipline"]:
                 continue
-            cost_key = "discipline_out_of_clan"
-            clan_factor = off_clan_signature_factor(profile, disc, clan_pool)
-        elif is_caitiff:
-            cost_key = "discipline_caitiff"
-            clan_factor = 1.0
-        else:
-            cost_key = "discipline_in_clan" if in_clan else "discipline_out_of_clan"
-            clan_factor = 1.0 if in_clan else off_clan_signature_factor(profile, disc, clan_pool)
-        cost = lookup_cost(costs, cost_key, new_level=new_level)
+            new_level = cur + 1
+            in_clan = disc in clan_pool
+            if ctype == "thin_blood" and disc == "thin_blood_alchemy" and not has_thin_blood_alchemist(char):
+                continue
+            if ctype == "thin_blood" and not in_clan:
+                meta = char.get("discipline_meta") or {}
+                affinity = meta.get("affinity_discipline")
+                resonance = meta.get("resonance_discipline")
+                if disc != affinity or disc == resonance:
+                    continue
+                cost_key = "discipline_out_of_clan"
+                clan_factor = off_clan_signature_factor(profile, disc, clan_pool)
+            elif is_caitiff:
+                cost_key = "discipline_caitiff"
+                clan_factor = 1.0
+            else:
+                cost_key = "discipline_in_clan" if in_clan else "discipline_out_of_clan"
+                clan_factor = 1.0 if in_clan else off_clan_signature_factor(profile, disc, clan_pool)
+            cost = lookup_cost(costs, cost_key, new_level=new_level)
 
-        if ctype == "thin_blood" and not in_clan:
-            disc_weight = affinity_dw
-            spend_group = "affinity_discipline"
-        elif ctype == "thin_blood":
-            disc_weight = tb_dw
-            spend_group = "thin_blood_disciplines"
-        else:
-            disc_weight = dw
-            spend_group = "in_clan_disciplines"
+            if ctype == "thin_blood" and not in_clan:
+                disc_weight = affinity_dw
+                spend_group = "affinity_discipline"
+            elif ctype == "thin_blood":
+                disc_weight = tb_dw
+                spend_group = "thin_blood_disciplines"
+            else:
+                disc_weight = dw
+                spend_group = "in_clan_disciplines"
 
-        if ctype == "thin_blood" and cur >= 3:
-            affinity_id = (char.get("discipline_meta") or {}).get("affinity_discipline")
-            merit_gated = (disc == "thin_blood_alchemy" and has_thin_blood_alchemist(char)) or (
-                has_discipline_affinity(char) and disc == affinity_id
+            if ctype == "thin_blood" and cur >= 3:
+                affinity_id = (char.get("discipline_meta") or {}).get("affinity_discipline")
+                merit_gated = (disc == "thin_blood_alchemy" and has_thin_blood_alchemist(char)) or (
+                    has_discipline_affinity(char) and disc == affinity_id
+                )
+                if merit_gated:
+                    disc_weight *= 0.35
+
+            def apply_disc(d=disc, nl=new_level) -> None:
+                char["disciplines"][d] = nl
+                assign_power_at_level(
+                    rng, char, d, nl, profile, dlogs, phase="xp", source=source
+                )
+
+            item_bias = resolve_discipline_bias(profile, disc, clan_pool)
+
+            candidates.append(
+                PurchaseCandidate(
+                    item_id=disc,
+                    category="discipline",
+                    spend_group=spend_group,
+                    new_level=new_level,
+                    cost=cost,
+                    weight=disc_weight,
+                    item_bias=item_bias,
+                    clan_factor=clan_factor,
+                    source=source,
+                    apply=apply_disc,
+                )
             )
-            if merit_gated:
-                disc_weight *= 0.35
-
-        def apply_disc(d=disc, nl=new_level) -> None:
-            char["disciplines"][d] = nl
-            assign_power_at_level(
-                rng, char, d, nl, profile, dlogs, phase="xp", source=source
-            )
-
-        item_bias = resolve_discipline_bias(profile, disc, clan_pool)
-
-        candidates.append(
-            PurchaseCandidate(
-                item_id=disc,
-                category="discipline",
-                spend_group=spend_group,
-                new_level=new_level,
-                cost=cost,
-                weight=disc_weight,
-                item_bias=item_bias,
-                clan_factor=clan_factor,
-                source=source,
-                apply=apply_disc,
-            )
-        )
 
     bw = profile.weights.get("backgrounds", 1.0)
     conn_w = bw * 0.55
@@ -638,13 +644,13 @@ def _enumerate_purchases(
     if ctype == "ghoul":
         for power in enumerate_ghoul_power_candidates(char):
             pid = power["id"]
-            if char["ghoul_powers"].get(pid, 0) >= caps["ghoul_power"]:
+            if pid in owned_power_ids(char):
                 continue
             cost = lookup_cost(costs, "ghoul_power")
             disc_id = power.get("discipline_id", "")
 
-            def apply_power(p=pid) -> None:
-                char["ghoul_powers"][p] = 1
+            def apply_power(p=pid, d=disc_id) -> None:
+                record_ghoul_power(char, p, d)
 
             power_bias = float(profile.discipline_power_biases.get(pid, 1.0))
             disc_bias = float(profile.discipline_biases.get(disc_id, 1.0))
@@ -697,52 +703,53 @@ def _enumerate_purchases(
                 )
             )
 
-    rw = profile.weights.get("in_clan_disciplines", 0.5)
-    for power in enumerate_ritual_candidates(char):
-        pid = power["id"]
-        level = int(power["level"])
-        cost = lookup_cost(costs, "ritual", new_level=level)
+    if ctype == "vampire":
+        rw = profile.weights.get("in_clan_disciplines", 0.5)
+        for power in enumerate_ritual_candidates(char):
+            pid = power["id"]
+            level = int(power["level"])
+            cost = lookup_cost(costs, "ritual", new_level=level)
 
-        def apply_ritual(p=pid) -> None:
-            record_ritual(char, p, dlogs, phase="xp", source=source)
+            def apply_ritual(p=pid) -> None:
+                record_ritual(char, p, dlogs, phase="xp", source=source)
 
-        candidates.append(
-            PurchaseCandidate(
-                item_id=pid,
-                category="ritual",
-                spend_group="in_clan_disciplines",
-                new_level=level,
-                cost=cost,
-                weight=rw,
-                item_bias=1.0,
-                clan_factor=1.0,
-                source=source,
-                apply=apply_ritual,
+            candidates.append(
+                PurchaseCandidate(
+                    item_id=pid,
+                    category="ritual",
+                    spend_group="in_clan_disciplines",
+                    new_level=level,
+                    cost=cost,
+                    weight=rw,
+                    item_bias=1.0,
+                    clan_factor=1.0,
+                    source=source,
+                    apply=apply_ritual,
+                )
             )
-        )
 
-    for power in enumerate_ceremony_candidates(char):
-        pid = power["id"]
-        level = int(power["level"])
-        cost = lookup_cost(costs, "ceremony", new_level=level)
+        for power in enumerate_ceremony_candidates(char):
+            pid = power["id"]
+            level = int(power["level"])
+            cost = lookup_cost(costs, "ceremony", new_level=level)
 
-        def apply_ceremony(p=pid) -> None:
-            record_ceremony(char, p, dlogs, phase="xp", source=source)
+            def apply_ceremony(p=pid) -> None:
+                record_ceremony(char, p, dlogs, phase="xp", source=source)
 
-        candidates.append(
-            PurchaseCandidate(
-                item_id=pid,
-                category="ceremony",
-                spend_group="in_clan_disciplines",
-                new_level=level,
-                cost=cost,
-                weight=rw,
-                item_bias=1.0,
-                clan_factor=1.0,
-                source=source,
-                apply=apply_ceremony,
+            candidates.append(
+                PurchaseCandidate(
+                    item_id=pid,
+                    category="ceremony",
+                    spend_group="in_clan_disciplines",
+                    new_level=level,
+                    cost=cost,
+                    weight=rw,
+                    item_bias=1.0,
+                    clan_factor=1.0,
+                    source=source,
+                    apply=apply_ceremony,
+                )
             )
-        )
 
     if ctype in ("vampire", "thin_blood"):
         sect = char.get("sect")
@@ -831,6 +838,15 @@ def generate_character(
         char["clan"] = options.get("clan", "brujah")
     elif ctype == "ghoul":
         char["domitor_clan"] = options.get("domitor_clan", "tremere")
+        picked = initialize_ghoul_domitor_disciplines(rng, char)
+        if picked:
+            log.append(
+                LogEntry(
+                    phase="base",
+                    message=f"Domitor disciplines (Caitiff): {', '.join(picked)}",
+                    detail={"domitor_disciplines": picked},
+                )
+            )
     elif ctype == "thin_blood":
         pass
 

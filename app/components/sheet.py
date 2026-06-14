@@ -11,7 +11,7 @@ from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
 from wod_chargen.games.lotn_v5.merits_flaws import trait_base_id, trait_def, trait_display_label
 from wod_chargen.games.lotn_v5.thin_blood_merits import thin_blood_trait_label
-from wod_chargen.games.lotn_v5.disciplines import power_label
+from wod_chargen.games.lotn_v5.disciplines import discipline_power_ids_for_track, power_label
 from wod_chargen.games.lotn_v5.backgrounds import (
     background_defs,
     background_label,
@@ -142,13 +142,25 @@ def _disciplines_section(character: dict[str, Any], *, exclude: set[str] | None 
         head.appendChild(name)
         head.appendChild(_dot_row(int(rating), max_dots=5))
         card.appendChild(head)
-        levels = picks.get(disc_id, {})
-        if levels:
+        picks_for_disc = picks.get(disc_id, {})
+        if character.get("character_type") == "ghoul":
+            power_ids = discipline_power_ids_for_track(character, disc_id)
+            if power_ids:
+                powers = document.createElement("ul")
+                powers.className = "sheet-discipline-card__powers sheet-discipline-card__powers--ghoul"
+                for pid in power_ids:
+                    item = document.createElement("li")
+                    item.innerText = power_label(pid)
+                    powers.appendChild(item)
+                card.appendChild(powers)
+        elif picks_for_disc:
             powers = document.createElement("ul")
             powers.className = "sheet-discipline-card__powers"
-            for level in sorted(levels.keys(), key=lambda x: int(x)):
+            for level in sorted(picks_for_disc.keys(), key=lambda x: int(x) if x.isdigit() else 0):
+                if level == "extra":
+                    continue
                 item = document.createElement("li")
-                pid = levels[level]
+                pid = picks_for_disc[level]
                 item.innerText = f"•{level} {power_label(pid)}"
                 powers.appendChild(item)
             card.appendChild(powers)
@@ -282,16 +294,17 @@ def _thin_blood_traits_section(
 
 
 def _ghoul_powers_section(character: dict[str, Any]) -> Any | None:
+    """Legacy bucket — XP-bought powers now live under discipline_powers."""
     powers = character.get("ghoul_powers") or {}
-    rated = {k: v for k, v in powers.items() if v > 0}
-    if not rated:
+    legacy = {k: v for k, v in powers.items() if v > 0}
+    if not legacy:
         return None
     section = document.createElement("section")
     section.className = "sheet-rated-traits"
     section.appendChild(_section_heading("Ghoul Powers"))
     grid = document.createElement("div")
     grid.className = "sheet-rated-traits__grid"
-    for power_id, value in sorted(rated.items()):
+    for power_id, value in sorted(legacy.items()):
         grid.appendChild(_stat_line(power_label(power_id), value))
     section.appendChild(grid)
     return section

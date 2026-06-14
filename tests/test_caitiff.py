@@ -70,3 +70,19 @@ def test_caitiff_discipline_xp_uses_six_times_multiplier():
         new_level = entry.new_level
         expected = lookup_cost(costs, "discipline_caitiff", new_level=new_level)
         assert entry.cost == expected
+
+
+def test_caitiff_xp_only_deepens_creation_disciplines():
+    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    opts = {
+        "type": "vampire",
+        "clan": "caitiff",
+        "arch": "diplomat",
+        "sub": "silver_tongue",
+        "approval": "2026-06",
+    }
+    for seed in range(50):
+        creation = generate_character(seed, {**opts, "xp": "0"}, venue)
+        full = generate_character(seed, opts, venue)
+        assert set(full.character["disciplines"]) == set(creation.character["disciplines"])
+        assert len(full.character["disciplines"]) == 3

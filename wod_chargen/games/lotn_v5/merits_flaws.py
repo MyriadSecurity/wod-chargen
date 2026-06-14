@@ -23,6 +23,20 @@ _TAKE_FLAWS_CHANCE = 0.55
 TraitKind = Literal["merit", "flaw"]
 TraitPhase = Literal["creation", "xp"]
 
+# Merits/flaws in these categories assume Kindred identity or mechanics ghouls lack.
+_GHOUL_FORBIDDEN_CATEGORIES = frozenset({"bonding", "connection", "thin_blood"})
+
+
+def _ghoul_trait_allowed(entry: dict[str, Any]) -> bool:
+    """Pocket book: ghouls skip most Feeding traits; Bloodhound and Weak Stomach are exceptions."""
+    if entry.get("category") in _GHOUL_FORBIDDEN_CATEGORIES:
+        return False
+    if entry.get("category") == "feeding" and not entry.get("ghoul_eligible"):
+        return False
+    if trait_rules(entry).get("kindred_only"):
+        return False
+    return True
+
 
 @dataclass
 class MeritFlawCreationLedger:
@@ -82,6 +96,8 @@ def _eligible_for_type(entry: dict[str, Any], ctype: str) -> bool:
     if entry.get("ghoul_only") and ctype != "ghoul":
         return False
     if ctype == "thin_blood" and entry.get("category") == "ghoul":
+        return False
+    if ctype == "ghoul" and not _ghoul_trait_allowed(entry):
         return False
     return True
 
@@ -382,7 +398,14 @@ def trait_eligible(
     if ignore_rules:
         return True
 
+    ctype = str(char.get("character_type", "vampire"))
+    if not _eligible_for_type(entry, ctype):
+        return False
+
     rules = trait_rules(entry)
+    if char.get("character_type") == "ghoul" and rules.get("requires_max_generation") is not None:
+        return False
+
     if rules.get("creation_only") and phase == "xp":
         return False
 

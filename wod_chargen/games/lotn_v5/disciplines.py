@@ -101,14 +101,25 @@ def owned_power_ids(char: dict[str, Any]) -> set[str]:
     return _owned_power_ids(char)
 
 
+def _power_ids_from_discipline_slots(slots: dict[str, Any]) -> set[str]:
+    owned: set[str] = set()
+    for key, value in slots.items():
+        if key == "extra":
+            owned.update(str(pid) for pid in value)
+        elif isinstance(value, str):
+            owned.add(value)
+    return owned
+
+
 def _owned_power_ids(char: dict[str, Any]) -> set[str]:
     owned: set[str] = set()
     for levels in char.get("discipline_powers", {}).values():
-        owned.update(levels.values())
+        owned.update(_power_ids_from_discipline_slots(levels))
     for levels in char.get("formula_powers", {}).values():
-        owned.update(levels.values())
+        owned.update(_power_ids_from_discipline_slots(levels))
     owned.update(char.get("rituals", []))
     owned.update(char.get("ceremonies", []))
+    owned.update(char.get("ghoul_powers", {}))
     return owned
 
 
@@ -410,10 +421,15 @@ def validate_discipline_selections(char: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     _ensure_char_discipline_fields(char)
 
+    is_ghoul = char.get("character_type") == "ghoul"
     for disc_id, rating in char.get("disciplines", {}).items():
         if track_kind(disc_id) not in ("discipline", "formula"):
             continue
         picks = char.get("discipline_powers", {}).get(disc_id, {})
+        if is_ghoul:
+            if "1" not in picks:
+                errors.append(f"{disc_id}: missing primary level-1 power")
+            continue
         for level in range(1, int(rating) + 1):
             if str(level) not in picks:
                 errors.append(f"{disc_id}: missing power pick at level {level}")
@@ -425,14 +441,22 @@ def validate_discipline_selections(char: dict[str, Any]) -> list[str]:
 
     for disc_id, levels in char.get("discipline_powers", {}).items():
         for level_str, pid in levels.items():
+            if level_str == "extra":
+                for extra_pid in pid:
+                    power = power_by_id(extra_pid)
+                    if power is None:
+                        errors.append(f"unknown power id {extra_pid}")
+                continue
+            if not isinstance(pid, str):
+                continue
             power = power_by_id(pid)
             if power is None:
                 errors.append(f"unknown power id {pid}")
                 continue
-            if int(power["level"]) != int(level_str):
+            if not is_ghoul and int(power["level"]) != int(level_str):
                 errors.append(f"{pid} at wrong level slot {level_str}")
             if not power_eligible(
-                power, char, track_id=disc_id, buying_level=int(level_str), verify_existing=True
+                power, char, track_id=disc_id, buying_level=int(power["level"]), verify_existing=True
             ):
                 errors.append(f"{pid} fails eligibility at assignment time")
 
@@ -459,11 +483,42 @@ def caitiff_discipline_pool() -> list[str]:
     return [d for d in catalog.get("all", []) if d != "thin_blood_alchemy"]
 
 
+def caitiff_owned_disciplines(char: dict[str, Any]) -> list[str]:
+    """Disciplines a Caitiff may raise with XP — only those already on the sheet."""
+    return sorted(d for d, rating in char.get("disciplines", {}).items() if int(rating) > 0)
+
+
+def initialize_ghoul_domitor_disciplines(rng: SeededRng, char: dict[str, Any]) -> list[str]:
+    """Caitiff domitors expose three initial disciplines, not the full Caitiff catalog."""
+    if char.get("domitor_clan") != "caitiff":
+        return []
+    existing = char.get("domitor_disciplines")
+    if existing:
+        return list(existing)
+    full = caitiff_discipline_pool()
+    picked = rng.shuffle(list(full))[:3]
+    char["domitor_disciplines"] = picked
+    return picked
+
+
+def ghoul_domitor_discipline_pool(char: dict[str, Any]) -> list[str]:
+    """In-clan pool for a ghoul's domitor (Caitiff uses three picked disciplines)."""
+    domitor = char.get("domitor_clan")
+    if not domitor:
+        return []
+    if domitor == "caitiff":
+        return list(char.get("domitor_disciplines") or [])
+    clans = load_json_cached(DATA, "clans.json")
+    return list(clans.get(domitor, {}).get("disciplines", []))
+
+
 def discipline_pool_for_char(char: dict[str, Any], ctype: str) -> list[str]:
     if ctype == "thin_blood":
         if int(char.get("thin_blood_merits", {}).get("thin_blood_alchemist", 0)) > 0:
             return ["thin_blood_alchemy"]
         return []
+    if ctype == "ghoul":
+        return ghoul_domitor_discipline_pool(char)
     clan = char.get("clan") or char.get("domitor_clan")
     if not clan:
         return []
@@ -473,12 +528,43 @@ def discipline_pool_for_char(char: dict[str, Any], ctype: str) -> list[str]:
     return list(clans.get(clan, {}).get("disciplines", []))
 
 
+def discipline_power_ids_for_track(char: dict[str, Any], disc_id: str) -> list[str]:
+    """All selected powers on a ghoul discipline track (multiple level-1 picks allowed)."""
+    slots = char.get("discipline_powers", {}).get(disc_id, {})
+    ordered: list[str] = []
+    primary = slots.get("1")
+    if isinstance(primary, str):
+        ordered.append(primary)
+    for pid in slots.get("extra", []):
+        if pid not in ordered:
+            ordered.append(pid)
+    return ordered
+
+
+def record_ghoul_power(char: dict[str, Any], power_id: str, discipline_id: str) -> None:
+    """Record an extra level-1 domitor power under the owning discipline track."""
+    _ensure_char_discipline_fields(char)
+    if power_id in _owned_power_ids(char):
+        return
+    char["disciplines"][discipline_id] = 1
+    slots = char["discipline_powers"].setdefault(discipline_id, {})
+    primary = slots.get("1")
+    if not isinstance(primary, str):
+        slots["1"] = power_id
+        return
+    if primary == power_id:
+        return
+    extras = slots.setdefault("extra", [])
+    if power_id not in extras:
+        extras.append(power_id)
+
+
 def enumerate_ghoul_power_candidates(char: dict[str, Any]) -> list[dict[str, Any]]:
     """Level-1 powers from domitor in-clan disciplines not already owned."""
     if char.get("character_type") != "ghoul":
         return []
-    pool = discipline_pool_for_char(char, "ghoul")
-    owned = owned_power_ids(char) | set(char.get("ghoul_powers", {}).keys())
+    pool = ghoul_domitor_discipline_pool(char)
+    owned = _owned_power_ids(char)
     out: list[dict[str, Any]] = []
     for disc_id in pool:
         for power in powers_for_level(disc_id, 1):

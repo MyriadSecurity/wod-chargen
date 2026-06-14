@@ -5,5 +5,6 @@
   "humanity": 7,
   "backgrounds": 5,
   "disciplines": { "primary": 1, "secondary": 1 },
+  "discipline_max": 1,
   "blood_potency": 0
 }

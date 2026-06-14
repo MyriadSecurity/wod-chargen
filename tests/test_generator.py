@@ -104,14 +104,18 @@ def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int =
     assert all(0 <= v <= 3 for v in character["loresheets"].values())
     assert len(character["loresheets"]) <= 1, "pocket book allows one loresheet per character"
     assert all(0 <= v <= formula_cap for v in character["thin_blood_formulas"].values())
-    assert all(0 <= v <= 1 for v in character["ghoul_powers"].values())
+    assert not character.get("ghoul_powers"), "ghoul XP powers belong in discipline_powers"
     for disc_id, rating in character.get("disciplines", {}).items():
         picks = character.get("discipline_powers", {}).get(disc_id, {})
-        for level in range(1, int(rating) + 1):
-            assert str(level) in picks, f"missing power {disc_id}@{level}"
-            power = power_by_id(picks[str(level)])
-            assert power is not None
-            assert int(power["level"]) == level
+        assert "1" in picks, f"missing primary power {disc_id}"
+        power = power_by_id(picks["1"])
+        assert power is not None
+        if character["character_type"] != "ghoul":
+            for level in range(1, int(rating) + 1):
+                assert str(level) in picks, f"missing power {disc_id}@{level}"
+                level_power = power_by_id(picks[str(level)])
+                assert level_power is not None
+                assert int(level_power["level"]) == level
     if character["character_type"] == "vampire":
         meta = character.get("generation_meta") or {}
         bp_cap = meta.get("max_blood_potency", 3)
@@ -131,7 +135,7 @@ def test_ghoul_ratings_respect_caps(seed: int):
         _opts(type="ghoul", domitor_clan="tremere", arch="shadow", sub="spy"),
         _venue(),
     )
-    _assert_caps(result.character)
+    _assert_caps(result.character, discipline_cap=1)
 
 
 @pytest.mark.parametrize("seed", range(20))
