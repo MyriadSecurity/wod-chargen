@@ -6,6 +6,7 @@ from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.models import GenerationResult
+from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type
 from wod_chargen.games.lotn_v5.generator import generate_character
 
@@ -65,7 +66,7 @@ class LotnV5System:
             "description": raw.get("description", ""),
             "disciplines": raw.get("disciplines", []),
             "discipline_note": raw.get("discipline_note", ""),
-            "symbol": raw.get("symbol", f"static/img/clans/{entry_id}.svg"),
+            "symbol": raw.get("symbol", clan_symbol_path(entry_id)),
             "kind": raw.get("kind", "clan"),
         }
 

@@ -19,6 +19,16 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
+.card.card--selected {
+  border: 2px solid var(--blood);
+  box-shadow:
+    0 0 0 2px rgba(139, 21, 56, 0.35),
+    0 6px 28px rgba(139, 21, 56, 0.35);
+  background: linear-gradient(145deg, #221018, #16101a);
+  color: #fff;
+  font-weight: 700;
+}
+
 .btn-primary {
   background: var(--blood);
   color: white;
@@ -91,8 +101,11 @@ body {
 }
 
 .clan-card--active {
-  border-color: var(--blood);
-  box-shadow: 0 0 0 1px var(--blood), 0 4px 20px rgba(139, 21, 56, 0.25);
+  border: 2px solid var(--blood);
+  box-shadow:
+    0 0 0 2px rgba(139, 21, 56, 0.4),
+    0 6px 28px rgba(139, 21, 56, 0.35);
+  background: linear-gradient(145deg, #221018, #16101a);
 }
 
 .clan-card__symbol {
@@ -112,6 +125,11 @@ body {
   line-height: 1.2;
   color: var(--parchment);
   font-weight: 600;
+}
+
+.clan-card--active .clan-card__label {
+  font-weight: 700;
+  color: #fff;
 }
 
 .clan-card__desc {
@@ -187,8 +205,16 @@ body {
 }
 
 .archetype-card--active {
-  border-color: var(--blood);
-  box-shadow: 0 0 0 1px var(--blood), 0 4px 20px rgba(139, 21, 56, 0.2);
+  border: 2px solid var(--blood);
+  box-shadow:
+    0 0 0 2px rgba(139, 21, 56, 0.4),
+    0 6px 28px rgba(139, 21, 56, 0.35);
+  background: linear-gradient(145deg, #221018, #16101a);
+}
+
+.archetype-card--active .archetype-card__label {
+  font-weight: 700;
+  color: #fff;
 }
 
 .archetype-card__label {

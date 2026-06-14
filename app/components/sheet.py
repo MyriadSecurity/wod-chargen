@@ -7,6 +7,7 @@ from typing import Any
 from pyscript import document
 
 from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
 from wod_chargen.games.lotn_v5.merits_flaws import trait_display_label
 from wod_chargen.games.lotn_v5.disciplines import power_label
@@ -413,7 +414,7 @@ def render_lotn_v5_sheet(
     if clan_id and clan_id in clans:
         symbol = document.createElement("img")
         symbol.className = "sheet-header__clan"
-        symbol.src = clans[clan_id].get("symbol", f"static/img/clans/{clan_id}.svg")
+        symbol.src = clans[clan_id].get("symbol", clan_symbol_path(clan_id))
         symbol.alt = clans[clan_id]["label"]
         title_row.appendChild(symbol)
 

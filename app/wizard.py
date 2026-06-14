@@ -512,7 +512,7 @@ class WizardApp:
             label = entry["label"]
             btn = document.createElement("button")
             active = (tid == "vampire" and self.state["type"] in ("vampire", "thin_blood")) or self.state["type"] == tid
-            btn.className = f"card p-4 w-full text-left mb-3 {'border-blood' if active else ''}"
+            btn.className = f"card p-4 w-full text-left mb-3 {'card--selected' if active else ''}"
 
             def pick(e, t=tid):
                 if self.state.get("full_random"):
@@ -756,7 +756,7 @@ class WizardApp:
             vid = venue["id"]
             label = venue["label"]
             btn = document.createElement("button")
-            btn.className = f"card p-4 w-full text-left mb-3 {'border-blood' if self.state['venue'] == vid else ''}"
+            btn.className = f"card p-4 w-full text-left mb-3 {'card--selected' if self.state['venue'] == vid else ''}"
 
             def pick(e, v=vid):
                 self.state["venue"] = v

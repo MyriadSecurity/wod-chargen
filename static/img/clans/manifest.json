@@ -1,0 +1,16 @@
+{
+  "brujah": "static/img/clans/brujah.png",
+  "caitiff": "static/img/clans/caitiff.png",
+  "gangrel": "static/img/clans/gangrel.png",
+  "hecata": "static/img/clans/hecata.png",
+  "lasombra": "static/img/clans/lasombra.png",
+  "malkavian": "static/img/clans/malkavian.png",
+  "ministry": "static/img/clans/ministry.png",
+  "nosferatu": "static/img/clans/nosferatu.png",
+  "ravnos": "static/img/clans/ravnos.png",
+  "salubri": "static/img/clans/salubri.png",
+  "toreador": "static/img/clans/toreador.png",
+  "tremere": "static/img/clans/tremere.png",
+  "tzimisce": "static/img/clans/tzimisce.png",
+  "ventrue": "static/img/clans/ventrue.png"
+}
