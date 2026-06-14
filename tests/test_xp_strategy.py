@@ -15,24 +15,11 @@ from wod_chargen.core.xp_strategy import (
     roll_category_targets,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    from wod_chargen.core.data_loader import load_json_cached
-
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_efficiency_item_bias_favors_finish_and_shallow_new():

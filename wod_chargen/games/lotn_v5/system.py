@@ -9,10 +9,7 @@ from wod_chargen.core.models import GenerationResult
 from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type
 from wod_chargen.games.lotn_v5.generator import generate_character
-
-DATA_PKG = "wod_chargen.games.lotn_v5.data"
-GAMES_PKG = "wod_chargen.games"
-VENUE_PKG = "wod_chargen.venues"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG, GAMES_PKG, VENUE_PKG
 
 
 class LotnV5System:
@@ -91,7 +88,7 @@ class LotnV5System:
     def get_character_type_picker(self) -> list[dict[str, Any]]:
         picker_ids = self._wizard_ui()["character_type_picker"]
         types = load_json_cached(DATA_PKG, "character_types.json")
-        return [{"id": tid, "label": types[tid]["label"]} for tid in picker_ids]
+        return [{"id": tid, "label": types[tid]["label"], "summary": types[tid].get("summary", "")} for tid in picker_ids]
 
     def get_venue_picker(self) -> list[dict[str, Any]]:
         from wod_chargen.venues import load_venue

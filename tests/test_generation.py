@@ -8,22 +8,11 @@ from wod_chargen.games.lotn_v5.generation import (
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.core.rng import SeededRng
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_vampire_generation_varies_across_seeds():

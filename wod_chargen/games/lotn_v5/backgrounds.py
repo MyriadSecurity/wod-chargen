@@ -8,7 +8,7 @@ from typing import Any, Literal
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 ModifierKind = Literal["advantage", "disadvantage"]
 ModifierSource = Literal["creation_pool", "disadv_trade", "xp", "free"]

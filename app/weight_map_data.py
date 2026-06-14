@@ -10,7 +10,7 @@ from wod_chargen.games.lotn_v5.clan_discipline_adapt import adapt_profile_for_cl
 from wod_chargen.games.lotn_v5.predators import apply_predator_biases, load_predator_types, predator_by_id
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags, resolve_trait_bias
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 LENSES: dict[str, str] = {
     "archetype": "Archetypes",

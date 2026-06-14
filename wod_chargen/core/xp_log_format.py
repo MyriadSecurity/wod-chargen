@@ -28,7 +28,7 @@ CATEGORY_LABELS = {
     "background_modifier": "Background Modifiers",
     "background_disadvantage": "Background Disadvantages",
     "merit": "Merits",
-    "ghoul_power": "Ghoul Powers",
+    "ghoul_power": "Discipline Powers",
     "thin_blood_formula": "Thin-Blood Formulas",
     "loresheet": "Loresheets",
     "blood_potency": "Blood Potency",
@@ -49,6 +49,21 @@ def _format_cost(entry: XpLogEntry) -> str:
     return "0 XP"
 
 
+def _format_item(entry: XpLogEntry) -> str:
+    if entry.category == "ghoul_power":
+        from wod_chargen.games.lotn_v5.disciplines import power_by_id, power_label
+
+        power = power_by_id(entry.item)
+        if power:
+            disc_id = power.get("discipline_id", "")
+            label = power_label(entry.item)
+            if disc_id:
+                disc = disc_id.replace("_", " ").title()
+                return f"{label} ({disc})"
+            return label
+    return entry.item
+
+
 def format_xp_log(entries: list[XpLogEntry]) -> str:
     if not entries:
         return "No XP purchases."
@@ -67,7 +82,7 @@ def format_xp_log(entries: list[XpLogEntry]) -> str:
         label = CATEGORY_LABELS.get(category, category.replace("_", " ").title())
         purchase_lines.append(f"── {label} " + "─" * max(0, 36 - len(label)))
         for entry in group:
-            purchase_lines.append(f"  {entry.item} → {entry.new_level} ({_format_cost(entry)})")
+            purchase_lines.append(f"  {_format_item(entry)} → {entry.new_level} ({_format_cost(entry)})")
         purchase_lines.append("")
 
     return "\n".join(purchase_lines).rstrip()

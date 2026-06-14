@@ -6,8 +6,7 @@ from functools import lru_cache
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
-
-DATA_PKG = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG
 
 BIAS_MIN = 0.05
 BIAS_MAX = 3.0

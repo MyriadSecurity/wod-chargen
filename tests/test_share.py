@@ -13,10 +13,11 @@ from wod_chargen.core.share import (
     wizard_share_options,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def test_share_round_trip():

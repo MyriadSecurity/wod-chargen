@@ -10,6 +10,11 @@ from pathlib import Path
 
 import pytest
 
+from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.defaults import DEFAULT_VENUE_ID
+from wod_chargen.games.lotn_v5.paths import VENUE_PKG
+from tests.support.fixtures import CUSTOM_XP_VENUE, opts as default_opts
+
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -38,3 +43,18 @@ def site_base_url() -> str:
     thread.start()
     yield f"http://127.0.0.1:{port}"
     server.shutdown()
+
+
+@pytest.fixture
+def venue():
+    return load_json_cached(VENUE_PKG, f"{DEFAULT_VENUE_ID}.json")
+
+
+@pytest.fixture
+def custom_xp_venue():
+    return load_json_cached(VENUE_PKG, f"{CUSTOM_XP_VENUE}.json")
+
+
+@pytest.fixture
+def opts_factory():
+    return default_opts

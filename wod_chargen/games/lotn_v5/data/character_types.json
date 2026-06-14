@@ -1,11 +1,13 @@
 {
   "vampire": {
     "label": "Vampire",
+    "summary": "Kindred — clan, predator type, Generation, and Disciplines.",
     "creation_ref": "creation.json",
     "predator": true
   },
   "ghoul": {
     "label": "Ghoul",
+    "summary": "Domitor's servant — domitor disciplines and level-1 powers only; no predator type.",
     "creation_ref": "ghoul_creation.json",
     "predator": false,
     "requires": ["domitor_clan"],
@@ -13,7 +15,7 @@
   },
   "thin_blood": {
     "label": "Thin-Blood",
-    "creation_ref": "thin_blood_creation.json",
+    "summary": "Duskborn — choose on the lineage step; thin-blood merits and alchemy.",
     "predator": true,
     "bp_fixed": 0
   }

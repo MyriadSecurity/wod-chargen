@@ -21,7 +21,7 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     trait_rules,
 )
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 TraitKind = Literal["merit", "flaw"]
 

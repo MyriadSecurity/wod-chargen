@@ -19,7 +19,7 @@ from wod_chargen.games.lotn_v5.backgrounds import (
 )
 from wod_chargen.games.lotn_v5.merits_flaws import apply_enemy_flaw, apply_trait_dots, trait_display_label, trait_label
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 
 def load_predator_types() -> list[dict[str, Any]]:

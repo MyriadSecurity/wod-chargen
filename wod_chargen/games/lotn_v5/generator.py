@@ -70,6 +70,7 @@ from wod_chargen.games.lotn_v5.loresheets import (
     enumerate_loresheet_purchases,
     resolve_loresheet_bias,
 )
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 from wod_chargen.games.lotn_v5.thin_blood_merits import (
     assign_resonance_discipline,
     has_discipline_affinity,
@@ -79,7 +80,6 @@ from wod_chargen.games.lotn_v5.thin_blood_merits import (
 )
 from wod_chargen.venues import resolve_xp_budget
 
-DATA = "wod_chargen.games.lotn_v5.data"
 DEFAULT_CAP = 5
 
 

@@ -11,19 +11,18 @@ from wod_chargen.games.lotn_v5.archetypes import effective_profile, load_all_arc
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
+from tests.support.fixtures import load_venue, opts
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "wod_chargen/games/lotn_v5/data/archetypes/_manifest.json"
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def _opts(**kwargs):
-    base = {"type": "vampire", "clan": "brujah", "arch": "diplomat", "sub": "courtier", "approval": "2026-06"}
-    base.update(kwargs)
-    return base
+    return opts(arch="diplomat", sub="courtier", **kwargs)
 
 
 def test_all_profiles_load_without_orphans():

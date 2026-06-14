@@ -34,6 +34,26 @@ def _fresh_wizard_module():
     return importlib.import_module("app.wizard")
 
 
+def _find_by_class(root, class_name: str):
+    """Depth-first search for first element whose className contains class_name."""
+    if class_name in getattr(root, "className", ""):
+        return root
+    for child in getattr(root, "children", []):
+        found = _find_by_class(child, class_name)
+        if found is not None:
+            return found
+    return None
+
+
+def _find_all_by_class(root, class_name: str) -> list:
+    found = []
+    if class_name in getattr(root, "className", ""):
+        found.append(root)
+    for child in getattr(root, "children", []):
+        found.extend(_find_all_by_class(child, class_name))
+    return found
+
+
 @pytest.fixture
 def stubs():
     return install_pyscript_stubs()
@@ -82,6 +102,37 @@ def test_wizard_results_view_renders_sheet(stubs):
     app.mount()
     assert app.state["result"] is not None
     assert stubs.elements["app-root"].children
+
+
+def test_wizard_results_include_logs_for_print(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app._generate()
+    app.state["phase"] = "results"
+    app.state["tab"] = "sheet"
+    app.mount()
+    root = stubs.elements["app-root"]
+    log_panel = _find_by_class(root, "results-log-panel")
+    xp_panel = _find_by_class(root, "results-xp-panel")
+    recreate_panel = _find_by_class(root, "results-recreate-panel")
+    assert log_panel is not None
+    assert xp_panel is not None
+    assert recreate_panel is not None
+    log_body = _find_by_class(log_panel, "results-log-body")
+    xp_body = _find_by_class(xp_panel, "results-log-body")
+    recreate_body = _find_by_class(recreate_panel, "results-recreate-body")
+    assert log_body is not None and ("[base]" in log_body.innerText or log_body.children)
+    assert xp_body is not None and "Purchases" in xp_body.innerText
+    assert recreate_body is not None
+    assert "Share link:" in recreate_body.innerText
+    assert "seed=" in recreate_body.innerText
+
+
+def test_print_styles_include_all_results_sections():
+    css = (ROOT / "static" / "theme.css").read_text(encoding="utf-8")
+    assert ".results-print-root .results-tab-hidden" in css
+    assert ".results-log-panel" in css
+    assert ".results-recreate-panel" in css
 
 
 def test_wizard_share_sync_uses_null_state(stubs):

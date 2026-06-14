@@ -6,22 +6,11 @@ from wod_chargen.core.costs import lookup_cost
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.disciplines import caitiff_discipline_pool, discipline_pool_for_char
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import CUSTOM_XP_VENUE, caitiff_opts as _opts, load_venue
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "custom_xp.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "caitiff",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "xp": "500",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue(CUSTOM_XP_VENUE)
 
 
 def test_caitiff_discipline_pool_excludes_thin_blood_alchemy():
@@ -73,7 +62,7 @@ def test_caitiff_discipline_xp_uses_six_times_multiplier():
 
 
 def test_caitiff_xp_only_deepens_creation_disciplines():
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    venue = load_venue()
     opts = {
         "type": "vampire",
         "clan": "caitiff",

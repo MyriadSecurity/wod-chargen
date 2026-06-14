@@ -19,22 +19,15 @@ from wod_chargen.games.lotn_v5.clan_discipline_adapt import (
 from wod_chargen.games.lotn_v5.disciplines import load_power_catalog
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.trait_biases import build_power_biases
+from tests.support.fixtures import load_venue, opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "toreador",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return opts(clan="toreador", **kwargs)
 
 
 def _toreador_pool() -> frozenset[str]:

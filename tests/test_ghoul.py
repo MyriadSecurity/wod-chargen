@@ -12,22 +12,11 @@ from wod_chargen.games.lotn_v5.disciplines import (
     powers_for_level,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import CUSTOM_XP_VENUE, ghoul_opts as _opts, load_venue
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "custom_xp.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "ghoul",
-        "domitor_clan": "tremere",
-        "arch": "shadow",
-        "sub": "spy",
-        "xp": "200",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue(CUSTOM_XP_VENUE)
 
 
 def test_ghoul_has_no_generation_field():

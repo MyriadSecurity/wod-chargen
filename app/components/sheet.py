@@ -11,7 +11,7 @@ from wod_chargen.games.lotn_v5.clan_symbols import clan_symbol_path
 from wod_chargen.games.lotn_v5.archetypes import get_archetype
 from wod_chargen.games.lotn_v5.merits_flaws import trait_base_id, trait_def, trait_display_label
 from wod_chargen.games.lotn_v5.thin_blood_merits import thin_blood_trait_label
-from wod_chargen.games.lotn_v5.disciplines import discipline_power_ids_for_track, power_label
+from wod_chargen.games.lotn_v5.disciplines import discipline_power_ids_for_track, ghoul_domitor_discipline_pool, power_label
 from wod_chargen.games.lotn_v5.backgrounds import (
     background_defs,
     background_label,
@@ -21,7 +21,16 @@ from wod_chargen.games.lotn_v5.backgrounds import (
     sphere_label,
 )
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
+
+
+def _discipline_labels() -> dict[str, str]:
+    catalog = load_json_cached(DATA, "discipline_powers.json")
+    return {disc["id"]: disc["label"] for disc in catalog.get("disciplines", [])}
+
+
+def _discipline_label(disc_id: str) -> str:
+    return _discipline_labels().get(disc_id, _title(disc_id))
 
 
 def _title(key: str) -> str:
@@ -122,15 +131,17 @@ def _trait_panel(
 
 def _disciplines_section(character: dict[str, Any], *, exclude: set[str] | None = None) -> Any | None:
     skip = exclude or set()
+    is_ghoul = character.get("character_type") == "ghoul"
     discs = {k: v for k, v in character.get("disciplines", {}).items() if v > 0 and k not in skip}
     if not discs:
         return None
     picks = character.get("discipline_powers", {})
     section = document.createElement("section")
     section.className = "sheet-disciplines"
-    section.appendChild(_section_heading("Disciplines"))
+    section.appendChild(_section_heading("Domitor Disciplines" if is_ghoul else "Disciplines"))
     list_el = document.createElement("div")
     list_el.className = "sheet-discipline-list"
+    dot_cap = 1 if is_ghoul else 5
     for disc_id, rating in sorted(discs.items()):
         card = document.createElement("div")
         card.className = "sheet-discipline-card"
@@ -138,12 +149,12 @@ def _disciplines_section(character: dict[str, Any], *, exclude: set[str] | None 
         head.className = "sheet-discipline-card__head"
         name = document.createElement("span")
         name.className = "sheet-stat__name"
-        name.innerText = _title(disc_id)
+        name.innerText = _discipline_label(disc_id)
         head.appendChild(name)
-        head.appendChild(_dot_row(int(rating), max_dots=5))
+        head.appendChild(_dot_row(int(rating), max_dots=dot_cap))
         card.appendChild(head)
         picks_for_disc = picks.get(disc_id, {})
-        if character.get("character_type") == "ghoul":
+        if is_ghoul:
             power_ids = discipline_power_ids_for_track(character, disc_id)
             if power_ids:
                 powers = document.createElement("ul")
@@ -187,7 +198,7 @@ def _resonance_discipline_section(character: dict[str, Any]) -> Any | None:
     head.className = "sheet-discipline-card__head"
     name = document.createElement("span")
     name.className = "sheet-stat__name"
-    name.innerText = _title(disc_id)
+    name.innerText = _discipline_label(disc_id)
     head.appendChild(name)
     head.appendChild(_dot_row(rating, max_dots=5))
     card.appendChild(head)
@@ -289,23 +300,6 @@ def _thin_blood_traits_section(
     grid.className = "sheet-rated-traits__grid"
     for key in sorted(rated):
         grid.appendChild(_stat_line(thin_blood_trait_label(key, kind), 1))  # type: ignore[arg-type]
-    section.appendChild(grid)
-    return section
-
-
-def _ghoul_powers_section(character: dict[str, Any]) -> Any | None:
-    """Legacy bucket — XP-bought powers now live under discipline_powers."""
-    powers = character.get("ghoul_powers") or {}
-    legacy = {k: v for k, v in powers.items() if v > 0}
-    if not legacy:
-        return None
-    section = document.createElement("section")
-    section.className = "sheet-rated-traits"
-    section.appendChild(_section_heading("Ghoul Powers"))
-    grid = document.createElement("div")
-    grid.className = "sheet-rated-traits__grid"
-    for power_id, value in sorted(legacy.items()):
-        grid.appendChild(_stat_line(power_label(power_id), value))
     section.appendChild(grid)
     return section
 
@@ -528,8 +522,17 @@ def render_lotn_v5_sheet(
         meta.appendChild(_meta_item("Subtype", sub.label))
     if character.get("predator"):
         meta.appendChild(_meta_item("Predator", predators.get(character["predator"], _title(character["predator"]))))
-    meta.appendChild(_meta_item("Generation", str(character.get("generation", "—"))))
-    meta.appendChild(_meta_item("Blood Potency", str(character.get("blood_potency", 0))))
+    if ctype == "ghoul":
+        domitor_pool = character.get("domitor_disciplines") or ghoul_domitor_discipline_pool(character)
+        if domitor_pool:
+            pool_text = ", ".join(_discipline_label(d) for d in domitor_pool)
+            meta.appendChild(_meta_item("Domitor pool", pool_text))
+    elif ctype == "vampire":
+        meta.appendChild(_meta_item("Generation", str(character.get("generation", "—"))))
+        meta.appendChild(_meta_item("Blood Potency", str(character.get("blood_potency", 0))))
+    elif ctype == "thin_blood":
+        meta.appendChild(_meta_item("Generation", str(character.get("generation", "—"))))
+        meta.appendChild(_meta_item("Blood Potency", str(character.get("blood_potency", 0))))
     meta.appendChild(_meta_item("Humanity", str(character.get("humanity", "—"))))
     header.appendChild(meta)
     sheet.appendChild(header)
@@ -578,10 +581,6 @@ def render_lotn_v5_sheet(
         section = _thin_blood_traits_section(section_title, block, kind=trait_kind)
         if section:
             sheet.appendChild(section)
-
-    ghoul_section = _ghoul_powers_section(character)
-    if ghoul_section:
-        sheet.appendChild(ghoul_section)
 
     ls_section = _loresheet_section(character)
     if ls_section:

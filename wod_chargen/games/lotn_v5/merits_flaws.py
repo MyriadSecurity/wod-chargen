@@ -15,7 +15,7 @@ from wod_chargen.games.lotn_v5.backgrounds import (
     total_modifier_dots,
 )
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 _MAX_FREE_MERIT_FROM_FLAWS = 10
 _TAKE_FLAWS_CHANCE = 0.55

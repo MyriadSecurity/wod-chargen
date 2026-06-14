@@ -18,22 +18,11 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     xp_merit_purchase_cost,
 )
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_trait_increment_rated_and_fixed():

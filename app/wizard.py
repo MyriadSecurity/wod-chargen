@@ -26,13 +26,11 @@ from wod_chargen.games.lotn_v5.archetypes import (
     get_archetype,
     is_thin_blood_only,
 )
+from wod_chargen.defaults import DEFAULT_GAME_ID
 from wod_chargen.games.lotn_v5.convictions import pick_convictions
 from wod_chargen.games.lotn_v5.generator import generate_character
-from wod_chargen.games.lotn_v5.system import LotnV5System
-from wod_chargen.games.registry import load_game_catalog
+from wod_chargen.games.registry import get_game, load_game_catalog
 from wod_chargen.venues import load_venue
-
-BUILD_STEPS = ["venue", "type", "faction", "archetype", "sub_archetype", "predator", "generate"]
 
 
 def _format_disciplines(entry: dict[str, Any]) -> str:
@@ -44,13 +42,42 @@ def _format_disciplines(entry: dict[str, Any]) -> str:
     return " · ".join(d.replace("_", " ").title() for d in discipline_ids)
 
 
+def _flash_button(btn, message: str = "Copied!", *, reset_ms: int = 1600) -> None:
+    original = btn.innerText
+    btn.innerText = message
+    if "btn-secondary--flash" not in btn.className:
+        btn.className += " btn-secondary--flash"
+
+    def reset() -> None:
+        btn.innerText = original
+        btn.className = btn.className.replace(" btn-secondary--flash", "").strip()
+
+    from pyscript.ffi import create_proxy
+
+    window.setTimeout(create_proxy(reset), reset_ms)
+
+
+def _render_generation_error(el, err: str) -> None:
+    box = document.createElement("div")
+    box.className = "results-error"
+    lines = err.strip().splitlines()
+    summary = document.createElement("p")
+    summary.className = "results-error__summary"
+    summary.innerText = lines[0] if lines else "Generation failed."
+    box.appendChild(summary)
+    if len(lines) > 1:
+        details = document.createElement("pre")
+        details.className = "results-error__details"
+        details.innerText = err.strip()
+        box.appendChild(details)
+    el.appendChild(box)
+
+
 class WizardApp:
     def __init__(self, root) -> None:
         self.root = root
-        self.system = LotnV5System()
-        self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
         self.state: dict[str, Any] = {
-            "game": "lotn_v5",
+            "game": DEFAULT_GAME_ID,
             "type": "vampire",
             "clan": "brujah",
             "domitor_clan": "tremere",
@@ -71,7 +98,12 @@ class WizardApp:
             "tab": "sheet",
             "full_random": False,
         }
+        self.system = get_game(self.state["game"])
+        self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
         self._parse_url()
+
+    def _build_steps(self) -> list[str]:
+        return self.system.get_wizard_steps()
 
     def _parse_url(self) -> None:
         try:
@@ -83,6 +115,8 @@ class WizardApp:
             if payload.convictions_seed is not None:
                 self.state["convictions_seed"] = payload.convictions_seed
             self.state["game"] = payload.game
+            self.system = get_game(payload.game)
+            self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
             self.state["venue"] = payload.venue
             opts = payload.options
             for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
@@ -140,7 +174,7 @@ class WizardApp:
         return None
 
     def _step_index(self, step: str) -> int:
-        return BUILD_STEPS.index(step)
+        return self._build_steps().index(step)
 
     def _is_unlocked(self, step: str) -> bool:
         through = self.state.get("unlocked_through", "venue")
@@ -157,10 +191,11 @@ class WizardApp:
             self.state["unlocked_through"] = step
 
     def _next_step_after(self, step: str) -> str:
+        steps = self._build_steps()
         idx = self._step_index(step)
-        while idx + 1 < len(BUILD_STEPS):
+        while idx + 1 < len(steps):
             idx += 1
-            candidate = BUILD_STEPS[idx]
+            candidate = steps[idx]
             if not self._step_visible(candidate):
                 continue
             return candidate
@@ -361,6 +396,23 @@ class WizardApp:
 
     def _share_url(self) -> str:
         return browser_share_url(window.location.pathname, self._share_payload())
+
+    def _recreate_summary_lines(self, result) -> list[str]:
+        """Build options + seeds needed to regenerate this character from a share URL."""
+        lines = [
+            f"Share link: {self._share_url()}",
+            f"Seed: {result.seed}",
+            f"Convictions seed: {self.state['convictions_seed']}",
+            f"Venue: {self._step_summary('venue')}",
+            f"Type: {self._step_summary('type')}",
+            f"Lineage: {self._step_summary('faction')}",
+            f"Archetype: {self._step_summary('archetype')}",
+            f"Subtype: {self._step_summary('sub_archetype')}",
+        ]
+        if self._type_uses_predator():
+            lines.append(f"Predator: {self._step_summary('predator')}")
+        lines.append(f"XP: {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked")
+        return lines
 
     def _sync_url(self) -> None:
         window.history.replaceState(None, "", self._share_url())
@@ -590,6 +642,8 @@ class WizardApp:
 
                 def start(_=None, gid=game_id):
                     self.state["game"] = gid
+                    self.system = get_game(gid)
+                    self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
                     self._start_build()
                     self._render()
 
@@ -639,12 +693,25 @@ class WizardApp:
         random_wrap.appendChild(random_text)
         el.appendChild(random_wrap)
 
+        grid = document.createElement("div")
+        grid.className = "wizard-type-grid"
         for entry in self.system.get_character_type_picker():
             tid = entry["id"]
-            label = entry["label"]
             btn = document.createElement("button")
-            active = (tid == "vampire" and self.state["type"] in ("vampire", "thin_blood")) or self.state["type"] == tid
-            btn.className = f"card p-4 w-full text-left mb-3 {'card--selected' if active else ''}"
+            btn.type = "button"
+            active = self.state["type"] == tid
+            btn.className = f"wizard-type-card {'wizard-type-card--active' if active else ''}"
+
+            label_el = document.createElement("span")
+            label_el.className = "wizard-type-card__label"
+            label_el.innerText = entry["label"]
+            btn.appendChild(label_el)
+            summary = entry.get("summary")
+            if summary:
+                summary_el = document.createElement("p")
+                summary_el.className = "wizard-type-card__summary"
+                summary_el.innerText = summary
+                btn.appendChild(summary_el)
 
             def pick(e, t=tid):
                 if self.state.get("full_random"):
@@ -659,9 +726,9 @@ class WizardApp:
                     self._on_type_selected(t)
                 self._render()
 
-            btn.innerText = label
             btn.onclick = pick
-            el.appendChild(btn)
+            grid.appendChild(btn)
+        el.appendChild(grid)
         return el
 
     def _faction_role(self) -> str:
@@ -1037,10 +1104,7 @@ class WizardApp:
         if not result:
             err = self.state.get("error")
             if err:
-                msg = document.createElement("pre")
-                msg.className = "text-red-400 mb-4 text-sm whitespace-pre-wrap font-mono"
-                msg.innerText = f"Generation failed:\n{err}"
-                el.appendChild(msg)
+                _render_generation_error(el, err)
             else:
                 msg = document.createElement("p")
                 msg.className = "text-red-400 mb-4"
@@ -1061,10 +1125,14 @@ class WizardApp:
             return el
 
         tabs = document.createElement("div")
-        tabs.className = "flex gap-4 mb-4 border-b border-stone-800 no-print"
-        for tid, label in [("sheet", "Sheet"), ("log", "Creation Log"), ("xp", "XP Log")]:
+        tabs.className = "flex gap-2 mb-4 border-b border-stone-800 no-print"
+        tab_ids = [("sheet", "Sheet"), ("log", "Creation Log"), ("xp", "XP Log")]
+        for tid, label in tab_ids:
             tbtn = document.createElement("button")
-            tbtn.className = f"pb-2 px-2 {'tab-active' if self.state['tab'] == tid else 'text-stone-500'}"
+            tbtn.type = "button"
+            tbtn.className = f"results-tab {'results-tab--active' if self.state['tab'] == tid else ''}"
+            tbtn.setAttribute("role", "tab")
+            tbtn.setAttribute("aria-selected", "true" if self.state["tab"] == tid else "false")
 
             def switch(e, t=tid):
                 self.state["tab"] = t
@@ -1121,6 +1189,18 @@ class WizardApp:
         xp_panel.appendChild(xp_body)
         panel.appendChild(xp_panel)
 
+        recreate_panel = document.createElement("section")
+        recreate_panel.className = "results-recreate-panel"
+        recreate_heading = document.createElement("h2")
+        recreate_heading.className = "results-print-heading"
+        recreate_heading.innerText = "Recreation"
+        recreate_panel.appendChild(recreate_heading)
+        recreate_body = document.createElement("pre")
+        recreate_body.className = "results-log-body results-recreate-body whitespace-pre-wrap"
+        recreate_body.innerText = "\n".join(self._recreate_summary_lines(result))
+        recreate_panel.appendChild(recreate_body)
+        panel.appendChild(recreate_panel)
+
         el.appendChild(panel)
 
         actions = document.createElement("div")
@@ -1133,6 +1213,7 @@ class WizardApp:
             except Exception:
                 pass
             window.navigator.clipboard.writeText(link)
+            _flash_button(copy_btn, "Link copied!")
 
         def reroll(_=None):
             self._reroll_character()
@@ -1144,21 +1225,34 @@ class WizardApp:
             payload["convictions"] = self._convictions()
             blob = json.dumps(payload, indent=2)
             window.navigator.clipboard.writeText(blob)
+            _flash_button(json_btn, "JSON copied!")
 
-        for label, fn in [("Copy Share Link", copy_link), ("Re-roll", reroll), ("Copy JSON", export_json)]:
-            b = document.createElement("button")
-            b.className = "btn-secondary"
-            b.innerText = label
-            b.onclick = fn
-            actions.appendChild(b)
+        copy_btn = document.createElement("button")
+        copy_btn.className = "btn-secondary"
+        copy_btn.type = "button"
+        copy_btn.innerText = "Copy Share Link"
+        copy_btn.onclick = copy_link
+        actions.appendChild(copy_btn)
+
+        reroll_btn = document.createElement("button")
+        reroll_btn.className = "btn-secondary"
+        reroll_btn.type = "button"
+        reroll_btn.innerText = "Re-roll"
+        reroll_btn.onclick = reroll
+        actions.appendChild(reroll_btn)
+
+        json_btn = document.createElement("button")
+        json_btn.className = "btn-secondary"
+        json_btn.type = "button"
+        json_btn.innerText = "Copy JSON"
+        json_btn.onclick = export_json
+        actions.appendChild(json_btn)
 
         print_btn = document.createElement("button")
         print_btn.className = "btn-secondary"
+        print_btn.type = "button"
 
         def print_sheet(_=None):
-            if self.state.get("tab") != "sheet":
-                self.state["tab"] = "sheet"
-                self._render()
             from pyscript.ffi import create_proxy
 
             window.setTimeout(create_proxy(lambda: window.print()), 50)
@@ -1168,11 +1262,4 @@ class WizardApp:
         actions.appendChild(print_btn)
         el.appendChild(actions)
 
-        meta = document.createElement("p")
-        meta.className = "text-stone-500 text-sm mt-4"
-        meta.innerText = (
-            f"Seed {result.seed} · Convictions seed {self.state['convictions_seed']} · "
-            f"XP {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked"
-        )
-        el.appendChild(meta)
         return el

@@ -7,9 +7,9 @@ from functools import lru_cache
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.games.lotn_v5.paths import DATA_PKG
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags
 
-DATA_PKG = "wod_chargen.games.lotn_v5.data"
 VALID_TYPES = {"vampire", "ghoul", "thin_blood"}
 THIN_BLOOD_ONLY_SUFFIX = " *** Thin-Blood Only ***"
 

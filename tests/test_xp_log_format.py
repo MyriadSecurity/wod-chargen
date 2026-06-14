@@ -45,6 +45,24 @@ def test_format_xp_log_groups_by_category_and_shows_level():
     assert "Debug (internal weights)" not in text
 
 
+def test_format_xp_log_ghoul_power_uses_display_label():
+    text = format_xp_log(
+        [
+            _entry(
+                item="feral_whispers",
+                category="ghoul_power",
+                spend_group="disciplines",
+                new_level=1,
+                cost=10,
+            ),
+        ]
+    )
+    assert "── Discipline Powers" in text
+    assert "feral_whispers" not in text
+    assert "Feral Whispers" in text
+    assert "(Animalism)" in text
+
+
 def test_xp_log_entries_include_new_level():
     from wod_chargen.core.data_loader import load_json_cached
 

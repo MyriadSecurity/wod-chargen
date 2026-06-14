@@ -6,21 +6,11 @@ from wod_chargen.core.costs import lookup_cost
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.thin_blood_merits import has_thin_blood_alchemist
+from tests.support.fixtures import load_venue, thin_blood_opts as _opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "custom_xp.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "thin_blood",
-        "arch": "alchemist",
-        "sub": "distiller",
-        "xp": "300",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue("custom_xp")
 
 
 def _tb_merit_flaw_counts(char: dict) -> tuple[int, int]:
@@ -137,7 +127,7 @@ def test_thin_blood_xp_prioritizes_disciplines():
         has_discipline_affinity,
     )
 
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    venue = load_venue()
     opts = {
         "type": "thin_blood",
         "arch": "alchemist",
@@ -197,7 +187,7 @@ def test_resonance_discipline_reproducible():
 
 
 def test_thin_blood_merit_chars_do_not_always_max_disciplines():
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    venue = load_venue()
     opts = {
         "type": "thin_blood",
         "arch": "alchemist",
@@ -219,7 +209,7 @@ def test_thin_blood_merit_chars_do_not_always_max_disciplines():
 
 
 def test_thin_blood_xp_budget_accounts_correctly():
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    venue = load_venue()
     opts = {
         "type": "thin_blood",
         "arch": "alchemist",
@@ -235,7 +225,7 @@ def test_thin_blood_xp_budget_accounts_correctly():
 
 
 def test_seed_712885_mes_thin_blood_max_three_pairs():
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    venue = load_venue()
     opts = {
         "type": "thin_blood",
         "arch": "alchemist",

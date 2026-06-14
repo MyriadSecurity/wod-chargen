@@ -16,22 +16,15 @@ from wod_chargen.games.lotn_v5.disciplines import (
     validate_discipline_selections,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue, opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "tremere",
-        "arch": "occultist",
-        "sub": "thaumaturge",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return opts(clan="tremere", arch="occultist", sub="thaumaturge", **kwargs)
 
 
 class _Profile:
