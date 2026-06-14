@@ -149,6 +149,36 @@ def test_wizard_custom_xp_generation(stubs):
     assert app.state["result"].xp_budget == 120
 
 
+def test_wizard_finish_step_scrolls_and_collapses(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["phase"] = "build"
+    app.state["unlocked_through"] = "venue"
+    app._finish_step("venue")
+    assert app.state["unlocked_through"] == "type"
+    assert app.state["scroll_to_step"] == "type"
+    assert app.state["expanded_sections"] == []
+    assert app._is_section_collapsed("venue")
+    assert not app._is_section_collapsed("type")
+
+
+def test_wizard_step_summary_venue_custom_xp(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["venue"] = "custom_xp"
+    app.state["xp_custom"] = "150"
+    assert app._step_summary("venue") == "150 XP"
+
+
+def test_wizard_expanded_section_reopens(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["unlocked_through"] = "faction"
+    assert app._is_section_collapsed("venue")
+    app.state["expanded_sections"] = ["venue"]
+    assert not app._is_section_collapsed("venue")
+
+
 def test_wizard_reset_to_landing(stubs):
     wizard = _fresh_wizard_module()
     app = wizard.WizardApp(stubs.elements["app-root"])
@@ -157,6 +187,8 @@ def test_wizard_reset_to_landing(stubs):
     app._reset_to_landing()
     assert app.state["phase"] == "landing"
     assert app.state["result"] is None
+    assert app.state["scroll_to_step"] is None
+    assert app.state["expanded_sections"] == []
     assert stubs.window.history.replace_calls
 
 

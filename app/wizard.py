@@ -58,6 +58,8 @@ class WizardApp:
             "convictions_seed": random.randint(1, 999_999),
             "phase": "landing",
             "unlocked_through": "venue",
+            "scroll_to_step": None,
+            "expanded_sections": [],
             "result": None,
             "error": None,
             "tab": "sheet",
@@ -161,15 +163,100 @@ class WizardApp:
     def _advance_from(self, step: str) -> None:
         self._advance_unlock(self._next_step_after(step))
 
+    def _active_step(self) -> str:
+        return self.state.get("unlocked_through", "venue")
+
+    def _finish_step(self, completed_step: str) -> None:
+        """Unlock the next step, collapse prior choices, and scroll into view."""
+        self._advance_from(completed_step)
+        self.state["scroll_to_step"] = self._active_step()
+        self.state["expanded_sections"] = []
+
+    def _is_section_collapsed(self, step: str) -> bool:
+        if step == self._active_step():
+            return False
+        if step in self.state.get("expanded_sections", []):
+            return False
+        return self._step_index(step) < self._step_index(self._active_step())
+
+    def _toggle_section(self, step: str) -> None:
+        if step == self._active_step():
+            return
+        expanded = list(self.state.get("expanded_sections", []))
+        if step in expanded:
+            expanded.remove(step)
+        else:
+            expanded.append(step)
+            self.state["scroll_to_step"] = step
+        self.state["expanded_sections"] = expanded
+        self._render()
+
+    def _step_summary(self, step: str) -> str:
+        if step == "venue":
+            venue_id = self.state.get("venue", "")
+            if venue_id == "custom_xp":
+                xp = str(self.state.get("xp_custom", "")).strip()
+                return f"{xp} XP" if xp else "Custom XP"
+            label = self._venue_picker.get(venue_id, {}).get("label", venue_id)
+            approval = str(self.state.get("approval", "")).strip()
+            if self._venue_picker.get(venue_id, {}).get("requires_approval_month") and approval:
+                return f"{label} · {approval}"
+            return label
+        if step == "type":
+            labels = {entry["id"]: entry["label"] for entry in self.system.get_character_type_picker()}
+            if self.state.get("type") == "thin_blood":
+                return "Thin-Blood"
+            return labels.get(self.state.get("type", ""), self.state.get("type", ""))
+        if step == "faction":
+            role = self._faction_role()
+            if self.state.get("type") == "thin_blood":
+                return "Thin-Blood"
+            key = "clan" if role == "vampire" else "domitor_clan"
+            labels = {entry["id"]: entry["label"] for entry in self.system.get_faction_options(role)}
+            return labels.get(self.state.get(key, ""), self.state.get(key, ""))
+        if step == "archetype":
+            profile = get_archetype(self.state["arch"])
+            return profile.label
+        if step == "sub_archetype":
+            profile = get_archetype(self.state["arch"])
+            for sub in profile.sub_archetypes:
+                if sub.id == self.state["sub"]:
+                    return sub.label
+            return self.state.get("sub", "")
+        if step == "predator":
+            labels = {entry["id"]: entry["label"] for entry in self.system.get_predator_picker()}
+            pred = self.state.get("predator") or ""
+            return labels.get(pred, pred.replace("_", " ").title())
+        if step == "generate":
+            return f"Seed {self.state.get('seed', '')}"
+        return ""
+
+    def _perform_pending_scroll(self) -> None:
+        target = self.state.pop("scroll_to_step", None)
+        if not target:
+            return
+        from pyscript.ffi import create_proxy
+
+        def do_scroll() -> None:
+            el = document.getElementById(f"wizard-step-{target}")
+            if el is not None and hasattr(el, "scrollIntoView"):
+                el.scrollIntoView({"behavior": "smooth", "block": "start"})
+
+        window.setTimeout(create_proxy(do_scroll), 50)
+
     def _start_build(self) -> None:
         self.state["phase"] = "build"
         self.state["unlocked_through"] = "venue"
+        self.state["scroll_to_step"] = "venue"
+        self.state["expanded_sections"] = []
         self.state["error"] = None
 
     def _reset_to_landing(self) -> None:
         """Clear share state and return to game pick for a fresh character."""
         self.state["phase"] = "landing"
         self.state["unlocked_through"] = "venue"
+        self.state["scroll_to_step"] = None
+        self.state["expanded_sections"] = []
         self.state["result"] = None
         self.state["error"] = None
         self.state["seed"] = random.randint(1, 999_999)
@@ -182,21 +269,58 @@ class WizardApp:
         self.state["phase"] = "results"
 
     def _wrap_section(self, step: str, title: str, body: Any) -> Any:
+        collapsed = self._is_section_collapsed(step)
         section = document.createElement("section")
         section.className = "wizard-section"
+        if collapsed:
+            section.className += " wizard-section--collapsed"
+        elif step == self._active_step():
+            section.className += " wizard-section--active"
         section.id = f"wizard-step-{step}"
-        head = document.createElement("div")
+
+        head = document.createElement("button")
+        head.type = "button"
         head.className = "wizard-section__head"
+        head.setAttribute("aria-expanded", "false" if collapsed else "true")
+        head.setAttribute("aria-controls", f"wizard-step-{step}-body")
+
+        title_row = document.createElement("div")
+        title_row.className = "wizard-section__title-row"
         h2 = document.createElement("h2")
         h2.className = "wizard-section__title"
         h2.innerText = title
-        head.appendChild(h2)
+        chevron = document.createElement("span")
+        chevron.className = "wizard-section__chevron"
+        chevron.innerText = "▾" if not collapsed else "▸"
+        chevron.setAttribute("aria-hidden", "true")
+        title_row.appendChild(h2)
+        title_row.appendChild(chevron)
+        head.appendChild(title_row)
+
+        if collapsed:
+            summary = document.createElement("p")
+            summary.className = "wizard-section__summary"
+            summary.innerText = self._step_summary(step)
+            head.appendChild(summary)
+
+        def toggle(_=None, s=step):
+            self._toggle_section(s)
+
+        head.onclick = toggle
         section.appendChild(head)
+
+        body_wrap = document.createElement("div")
+        body_wrap.id = f"wizard-step-{step}-body"
+        body_wrap.className = "wizard-section__body"
+        if collapsed:
+            body_wrap.className += " wizard-section__body--hidden"
+            body_wrap.setAttribute("hidden", "")
         if body.className:
-            body.className += " wizard-section__body"
+            body.className += " wizard-section__content"
         else:
-            body.className = "wizard-section__body"
-        section.appendChild(body)
+            body.className = "wizard-section__content"
+        body_wrap.appendChild(body)
+        section.appendChild(body_wrap)
         return section
 
     def _on_type_selected(self, character_type: str) -> None:
@@ -207,7 +331,7 @@ class WizardApp:
             self.state["sub"] = profiles[0].sub_archetypes[0].id
         if not self.system.type_uses_predator(character_type):
             self.state["predator"] = ""
-        self._advance_from("type")
+        self._finish_step("type")
 
     def _share_payload(self) -> SharePayload:
         return SharePayload(
@@ -334,6 +458,8 @@ class WizardApp:
 
         self.root.appendChild(container)
         dark_pack_footer()
+        if phase == "build":
+            self._perform_pending_scroll()
 
     def _home_link(self) -> Any:
         copy = self.system.get_wizard_copy()
@@ -587,7 +713,7 @@ class WizardApp:
                 else:
                     self.state["type"] = r
                     self.state[k] = entry["id"]
-                self._advance_from("faction")
+                self._finish_step("faction")
                 self._render()
 
             btn.onclick = pick
@@ -627,7 +753,7 @@ class WizardApp:
                 profile = get_archetype(aid)
                 if profile.sub_archetypes:
                     self.state["sub"] = profile.sub_archetypes[0].id
-                self._advance_from("archetype")
+                self._finish_step("archetype")
                 self._render()
 
             btn.onclick = pick
@@ -671,7 +797,7 @@ class WizardApp:
 
             def pick(e, sid=s.id):
                 self.state["sub"] = sid
-                self._advance_from("sub_archetype")
+                self._finish_step("sub_archetype")
                 self._render()
 
             btn.onclick = pick
@@ -732,7 +858,7 @@ class WizardApp:
 
             def pick(e, p=pid):
                 self.state["predator"] = p
-                self._advance_from("predator")
+                self._finish_step("predator")
                 self._render()
 
             btn.onclick = pick
@@ -814,7 +940,7 @@ class WizardApp:
                 self._render()
                 return
             self.state["error"] = None
-            self._advance_from("venue")
+            self._finish_step("venue")
             self._render()
 
         go.innerText = "Continue"
@@ -875,6 +1001,8 @@ class WizardApp:
         def edit_build(_=None):
             self.state["phase"] = "build"
             self.state["unlocked_through"] = "generate"
+            self.state["scroll_to_step"] = "generate"
+            self.state["expanded_sections"] = []
             self.state["error"] = None
             self._render()
 
