@@ -85,39 +85,38 @@ def _meta_item(label: str, value: str) -> Any:
     return wrap
 
 
-def _trait_column(title: str, attrs: list[str], skills: list[str], character: dict[str, Any]) -> Any:
-    col = document.createElement("section")
-    col.className = "sheet-column"
+def _category_stat_column(title: str, trait_ids: list[str], values: dict[str, int]) -> Any:
+    col = document.createElement("div")
+    col.className = "sheet-trait-col"
 
-    col.appendChild(_section_heading(title))
+    head = document.createElement("h4")
+    head.className = "sheet-trait-col__title"
+    head.innerText = title
+    col.appendChild(head)
 
-    attr_block = document.createElement("div")
-    attr_block.className = "sheet-block"
-    attr_head = document.createElement("h4")
-    attr_head.className = "sheet-block__title"
-    attr_head.innerText = "Attributes"
-    attr_block.appendChild(attr_head)
-    attr_list = document.createElement("div")
-    attr_list.className = "sheet-stat-list"
-    for attr in attrs:
-        attr_list.appendChild(_stat_line(attr, character["attributes"].get(attr, 0)))
-    attr_block.appendChild(attr_list)
-    col.appendChild(attr_block)
-
-    skill_block = document.createElement("div")
-    skill_block.className = "sheet-block"
-    skill_head = document.createElement("h4")
-    skill_head.className = "sheet-block__title"
-    skill_head.innerText = "Skills"
-    skill_block.appendChild(skill_head)
-    skill_list = document.createElement("div")
-    skill_list.className = "sheet-stat-list"
-    for skill in skills:
-        skill_list.appendChild(_stat_line(skill, character["skills"].get(skill, 0)))
-    skill_block.appendChild(skill_list)
-    col.appendChild(skill_block)
-
+    stat_list = document.createElement("div")
+    stat_list.className = "sheet-stat-list"
+    for trait_id in trait_ids:
+        stat_list.appendChild(_stat_line(trait_id, values.get(trait_id, 0)))
+    col.appendChild(stat_list)
     return col
+
+
+def _trait_panel(
+    panel_title: str,
+    categories: list[tuple[str, list[str]]],
+    values: dict[str, int],
+) -> Any:
+    panel = document.createElement("section")
+    panel.className = "sheet-trait-panel"
+    panel.appendChild(_section_heading(panel_title))
+
+    columns = document.createElement("div")
+    columns.className = "sheet-trait-panel__columns"
+    for category_title, trait_ids in categories:
+        columns.appendChild(_category_stat_column(category_title, trait_ids, values))
+    panel.appendChild(columns)
+    return panel
 
 
 def _disciplines_section(character: dict[str, Any]) -> Any | None:
@@ -447,12 +446,25 @@ def render_lotn_v5_sheet(
             )
         )
 
-    columns = document.createElement("div")
-    columns.className = "sheet-columns"
-    columns.appendChild(_trait_column("Physical", attrs["physical"], skills["physical"], character))
-    columns.appendChild(_trait_column("Social", attrs["social"], skills["social"], character))
-    columns.appendChild(_trait_column("Mental", attrs["mental"], skills["mental"], character))
-    sheet.appendChild(columns)
+    trait_categories = [
+        ("Physical", "physical"),
+        ("Social", "social"),
+        ("Mental", "mental"),
+    ]
+    sheet.appendChild(
+        _trait_panel(
+            "Attributes",
+            [(label, attrs[cat_id]) for label, cat_id in trait_categories],
+            character["attributes"],
+        )
+    )
+    sheet.appendChild(
+        _trait_panel(
+            "Skills",
+            [(label, skills[cat_id]) for label, cat_id in trait_categories],
+            character["skills"],
+        )
+    )
 
     for section_title, block, trait_kind in (
         ("Merits", character.get("merits", {}), "merit"),

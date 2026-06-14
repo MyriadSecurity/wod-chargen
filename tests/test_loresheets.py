@@ -135,6 +135,30 @@ def test_firstlight_grants_mask_and_zeroed():
     assert char["merits"].get("zeroed", 0) >= 1
 
 
+def test_firstlight_zeroed_log_matches_character_rating():
+    """Loresheet merit log must not add a stray bullet before the rating display."""
+    from wod_chargen.games.lotn_v5.generator import generate_character
+    from wod_chargen.venues import load_venue
+
+    result = generate_character(
+        379019,
+        {
+            "type": "vampire",
+            "clan": "caitiff",
+            "arch": "shadow",
+            "sub": "infiltrator",
+            "predator": "graverobber",
+            "approval": "2026-06",
+        },
+        load_venue("mes_end_to_dawn"),
+    )
+    zeroed = int(result.character["merits"]["zeroed"])
+    assert zeroed == 2
+    zeroed_logs = [e.message for e in result.creation_log if "Merit Zeroed" in e.message]
+    assert len(zeroed_logs) == 1
+    assert zeroed_logs[0].endswith(f"→ {'•' * zeroed}")
+
+
 def test_generated_characters_apply_loresheet_packages():
     venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
     found = False

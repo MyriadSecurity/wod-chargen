@@ -1154,8 +1154,17 @@ class WizardApp:
 
         print_btn = document.createElement("button")
         print_btn.className = "btn-secondary"
-        print_btn.innerText = "Print"
-        print_btn.onclick = lambda _: window.print()
+
+        def print_sheet(_=None):
+            if self.state.get("tab") != "sheet":
+                self.state["tab"] = "sheet"
+                self._render()
+            from pyscript.ffi import create_proxy
+
+            window.setTimeout(create_proxy(lambda: window.print()), 50)
+
+        print_btn.innerText = "Print sheet"
+        print_btn.onclick = print_sheet
         actions.appendChild(print_btn)
         el.appendChild(actions)
 

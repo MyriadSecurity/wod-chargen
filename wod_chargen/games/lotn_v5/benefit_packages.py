@@ -15,6 +15,7 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     apply_trait_dots,
     trait_display_label,
     trait_label,
+    _dots_display,
 )
 from wod_chargen.games.lotn_v5.predators import (
     _apply_flaw_grant,
@@ -146,9 +147,14 @@ def apply_benefit_package(
         merit_id = merit["id"]
         dots = int(merit.get("dots", 1))
         merits = char.setdefault("merits", {})
-        apply_trait_dots(merits, merit_id, "merit", dots, char, ignore_rules=True)
-        label = trait_label(merit_id, "merit")
-        lines.append(f"{log_prefix}: Merit {label} •{'•' * merits[merit_id]}")
+        before = int(merits.get(merit_id, 0))
+        added = apply_trait_dots(merits, merit_id, "merit", dots, char, ignore_rules=True)
+        if added:
+            label = trait_label(merit_id, "merit")
+            lines.append(
+                f"{log_prefix}: Merit {label} +{merits[merit_id] - before} "
+                f"→ {_dots_display(merits[merit_id])}"
+            )
 
     lines.extend(_apply_skill_grants(char, package, rng, log_prefix=log_prefix))
 

@@ -418,59 +418,162 @@ body {
   .no-print {
     display: none !important;
   }
+
   body {
-    background: white;
-    color: black;
+    background: #fff !important;
+    color: #000 !important;
   }
+
+  .card.sheet-panel,
+  .card.results-print-root {
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* Print only the active results tab (usually the character sheet). */
   .results-tab-hidden {
-    display: block !important;
+    display: none !important;
   }
+
   .results-print-heading {
-    display: block !important;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0 0 0.75rem;
-    color: #111;
+    display: none !important;
   }
+
+  .character-sheet {
+    color: #000 !important;
+    max-width: none;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* High-contrast paper sheet: black type, white fields, crisp rules. */
+  .character-sheet :where(
+    .sheet-header__title,
+    .sheet-header__subtitle,
+    .sheet-meta__label,
+    .sheet-meta__value,
+    .sheet-section__title,
+    .sheet-block__title,
+    .sheet-stat__name,
+    .sheet-stat,
+    .sheet-convictions__item,
+    .sheet-background-card__title,
+    .sheet-background-card__type,
+    .sheet-background-card__sphere,
+    .sheet-background-card__level,
+    .sheet-background-card__sep,
+    .sheet-bg-modifier,
+    .sheet-bg-modifier__label,
+    .sheet-discipline-card__powers,
+    .sheet-loresheet-notes,
+    .sheet-loresheet-notes__item,
+    .sheet-dot-extra
+  ) {
+    color: #000 !important;
+  }
+
+  .sheet-header {
+    border-bottom: 2px solid #000 !important;
+  }
+
+  .sheet-header__clan {
+    filter: invert(1) brightness(0) !important;
+  }
+
+  .sheet-column,
+  .sheet-trait-panel,
+  .sheet-convictions,
+  .sheet-background-card {
+    background: #fff !important;
+    border: 1.5px solid #000 !important;
+    box-shadow: none !important;
+  }
+
+  .sheet-trait-col__title,
+  .sheet-block__title {
+    color: #000 !important;
+    border-bottom-color: #000 !important;
+  }
+
+  .sheet-section__title {
+    border-bottom: 1px solid #000 !important;
+  }
+
+  .sheet-rated-traits,
+  .sheet-backgrounds,
+  .sheet-disciplines {
+    border-top: 1px solid #000 !important;
+  }
+
+  .sheet-bg-modifier,
+  .sheet-bg-modifier--adv,
+  .sheet-bg-modifier--dis {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+
+  .sheet-dots {
+    gap: 0.24rem;
+  }
+
+  .sheet-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 1.5px solid #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .sheet-dot--filled {
+    background: #000 !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  .sheet-dots--compact .sheet-dot {
+    width: 0.54rem;
+    height: 0.54rem;
+  }
+
+  .sheet-trait-panel__columns {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+  }
+
+  .sheet-trait-panel {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sheet-trait-col {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sheet-stat {
+    font-size: 0.72rem;
+  }
+
   .results-log-panel,
   .results-xp-panel {
     break-before: page;
     page-break-before: always;
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #000;
   }
+
   .results-log-body {
-    color: #111;
+    color: #000 !important;
     font-size: 0.75rem;
     white-space: pre-wrap;
     font-family: ui-monospace, monospace;
-  }
-  .card.sheet-panel,
-  .card.results-print-root {
-    background: white;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-  }
-  .character-sheet {
-    color: #111;
-  }
-  .sheet-dot {
-    border-color: #333;
-  }
-  .sheet-dot--filled {
-    background: #111;
-    border-color: #111;
-  }
-  .sheet-section__title,
-  .sheet-block__title,
-  .sheet-header__title {
-    color: #111;
-  }
-  .sheet-meta__label,
-  .sheet-stat__name {
-    color: #333;
   }
 }
 
@@ -551,6 +654,36 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 1.25rem;
+}
+
+.sheet-trait-panel {
+  margin-bottom: 1.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #2a2a35;
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.85rem 0.85rem;
+}
+
+.sheet-trait-panel .sheet-section__title {
+  margin-bottom: 0.75rem;
+}
+
+.sheet-trait-panel__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sheet-trait-col__title {
+  margin: 0 0 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8a8090;
+  text-align: center;
+  border-bottom: 1px solid #3a3040;
+  padding-bottom: 0.3rem;
 }
 
 .sheet-column {
@@ -768,8 +901,9 @@ body {
   margin-left: 0.1rem;
 }
 
-@media (max-width: 900px) {
-  .sheet-columns {
+@media (max-width: 900px) and not print {
+  .sheet-columns,
+  .sheet-trait-panel__columns {
     grid-template-columns: 1fr;
   }
 }
