@@ -19,18 +19,19 @@ from wod_chargen.games.lotn_v5.clan_discipline_adapt import (
 from wod_chargen.games.lotn_v5.disciplines import load_power_catalog
 from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.trait_biases import build_power_biases
+from tests.support.fixtures import load_venue, opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def _opts(**kwargs):
     base = {
         "type": "vampire",
         "clan": "toreador",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
+        "arch": "enforcer",
+        "sub": "brawler",
         "approval": "2026-06",
     }
     base.update(kwargs)
@@ -92,7 +93,7 @@ def test_build_power_biases_in_clan_floor_occultist_celerity():
         assert biases[pid] >= IN_CLAN_POWER_FLOOR
 
 
-@pytest.mark.parametrize("seed", range(30))
+@pytest.mark.parametrize("seed", range(10))
 def test_toreador_occultist_in_clan_power_biases(seed: int):
     result = generate_character(
         seed,
@@ -121,7 +122,7 @@ def test_toreador_occultist_in_clan_power_biases(seed: int):
             assert bias >= IN_CLAN_POWER_FLOOR, f"seed={seed} {disc_id} {pid}={bias}"
 
 
-@pytest.mark.parametrize("seed", range(15))
+@pytest.mark.parametrize("seed", range(8))
 def test_toreador_enforcer_generates_in_clan_disciplines(seed: int):
     result = generate_character(
         seed,

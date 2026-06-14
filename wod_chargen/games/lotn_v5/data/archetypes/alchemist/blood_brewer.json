@@ -4,8 +4,7 @@
   "description": "Vitae in the mix. Gloves on. Prayers optional.",
   "modifiers": {
     "weights": {
-      "thin_blood_formulas": 0.25,
-      "in_clan_disciplines": 0.1
+      "thin_blood_formulas": 0.25
     },
     "skill_biases": {
       "occult": 0.35,

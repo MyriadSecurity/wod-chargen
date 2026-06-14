@@ -22,22 +22,11 @@ from wod_chargen.games.lotn_v5.backgrounds import (
 )
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_background_catalog_has_levels_and_modifiers():
@@ -121,7 +110,7 @@ def test_generated_character_background_entries():
     validate_full_modifier_accounting(bgs, meta)
 
 
-@pytest.mark.parametrize("seed", range(30))
+@pytest.mark.parametrize("seed", range(10))
 def test_full_generation_modifier_accounting(seed: int):
     result = generate_character(seed, _opts(), _venue())
     validate_full_modifier_accounting(

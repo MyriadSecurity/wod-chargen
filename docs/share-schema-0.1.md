@@ -4,10 +4,15 @@
 
 | Param | Description |
 |-------|-------------|
-| `schema` | Must be `0.1` |
 | `seed` | Integer RNG seed |
 | `game` | Game pack id (`lotn_v5`) |
 | `venue` | Venue profile id (`mes_end_to_dawn`, `fixed_100`) |
+
+## Optional query parameters
+
+| Param | Description |
+|-------|-------------|
+| `schema` | Share URL format version; omitted by default, decodes as `0.1` |
 
 ## lotn_v5 options
 
@@ -23,9 +28,11 @@
 ## Example
 
 ```
-?schema=0.1&seed=482910&game=lotn_v5&venue=mes_end_to_dawn&type=vampire&clan=brujah&arch=diplomat&sub=silver_tongue&approval=2026-06
+?seed=482910&game=lotn_v5&venue=mes_end_to_dawn&type=vampire&clan=brujah&arch=diplomat&sub=silver_tongue&approval=2026-06
 ```
+
+Older links that include `schema=0.1` still decode normally.
 
 ## Errors
 
-Unknown `schema` values produce a user-visible error — never silent fallback.
+Unknown `schema` values produce a user-visible error — never silent fallback to a different format.

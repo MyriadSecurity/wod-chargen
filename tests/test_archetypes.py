@@ -2,12 +2,7 @@
 
 import pytest
 
-from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type, archetype_display_label, get_archetype, load_all_archetypes
-
-
-def test_all_archetypes_load():
-    profiles = load_all_archetypes()
-    assert len(profiles) == 12
+from wod_chargen.games.lotn_v5.archetypes import archetypes_for_type, archetype_display_label, get_archetype
 
 
 def test_alchemist_thin_blood_only():

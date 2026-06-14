@@ -1,10 +1,4 @@
 {
-  "source_ref": {
-    "book": "Laws of the Night pocket edition",
-    "chapter": 6,
-    "pages": "159-175"
-  },
-  "notes": "Procedural pick weights for one loresheet per character. Clan-restricted sheets use 2.0 on-clan; wrong clan is ineligible in generator. Sect restrictions are soft-biased until sect is a wizard input.",
   "loresheets": {
     "anarch_revolt": {
       "label": "Anarch Revolt",

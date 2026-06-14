@@ -13,13 +13,23 @@ This project uses World of Darkness intellectual property under the [Dark Pack A
 
 - LoTN pocket PDF under `reference/lotn_v5/` — **not** distributed in the public repository
 
+## Dark Pack logo
+
+Official asset from Paradox Contentful CDN. Re-fetch:
+
+```bash
+curl -sL "https://images.ctfassets.net/u73tyf0fa8v1/3oBTHBZk9XmfcBlUPylvFh/673e4a6b14566548c03424ddf627b944/darkpack_logo2.png?w=400" \
+  -o static/img/dark-pack-logo.png
+```
+
+Favicons (`dark-pack-favicon-32.png`, etc.) are resized from the main logo.
+
 ## Clan symbols
 
-Official V5 clan symbol PNGs in `static/img/clans/` were sourced from the
-[VTM Wiki](https://vtm.paradoxwikis.com/Category:Clan_symbols) (Paradox Interactive).
+Official V5 clan symbol PNGs in `static/img/clans/` from the
+[VTM Wiki](https://vtm.paradoxwikis.com/Category:Clan_symbols).
 Re-fetch with `uv run python scripts/fetch_clan_symbols_wiki.py` (requires Playwright).
-Symbols are inverted for the dark UI via `uv run python scripts/invert_clan_symbols.py`.
-Thin-blood uses [Thinblood_symbol.png](https://vtm.paradoxwikis.com/thumb.php?f=Thinblood_symbol.png&width=1280) on the same wiki.
+Invert for dark UI: `uv run python scripts/invert_clan_symbols.py`.
 
 ## Notice text (footer)
 

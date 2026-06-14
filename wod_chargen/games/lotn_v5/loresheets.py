@@ -8,7 +8,7 @@ from typing import Any
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 INELIGIBLE = 0.05
 

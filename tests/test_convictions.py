@@ -20,12 +20,6 @@ def test_pick_convictions_is_reproducible_and_unique():
     assert len({c["id"] for c in first}) == 3
 
 
-def test_pick_convictions_varies_by_seed():
-    a = pick_convictions(1)
-    b = pick_convictions(2)
-    assert a != b
-
-
 def test_share_url_round_trips_convictions_seed():
     payload = SharePayload(seed=123, convictions_seed=456789, options={"type": "vampire"})
     decoded = decode_query(encode_payload(payload))

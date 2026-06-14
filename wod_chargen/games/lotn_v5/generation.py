@@ -8,9 +8,9 @@ from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.models import LogEntry
 from wod_chargen.core.rng import SeededRng
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
-# Neonate-heavy defaults; Storyteller may override via creation.json or options.
+# Neonate-heavy defaults; override via creation.json or options.
 _DEFAULT_WEIGHTS: dict[str, dict[int, float]] = {
     "vampire": {13: 4.0, 12: 3.0, 11: 1.5, 10: 0.5, 9: 0.2},
     "thin_blood": {14: 2.0, 15: 2.0, 16: 1.0},
@@ -112,6 +112,7 @@ def assign_generation_and_blood_potency(
     if ctype == "ghoul":
         char["blood_potency"] = 0
         char.pop("generation_meta", None)
+        char.pop("generation", None)
         return
 
     explicit = options.get("generation")

@@ -19,6 +19,8 @@ jobs:
           pip install -e ".[dev]"
           playwright install chromium --with-deps
       - name: Validate archetypes
-        run: python scripts/validate_archetypes.py
+        run: |
+          python scripts/validate_archetypes.py
+          python scripts/validate_archetype_biases.py
       - name: Pytest
         run: pytest -q

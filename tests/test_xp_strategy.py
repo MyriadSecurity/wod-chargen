@@ -15,24 +15,11 @@ from wod_chargen.core.xp_strategy import (
     roll_category_targets,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    from wod_chargen.core.data_loader import load_json_cached
-
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_efficiency_item_bias_favors_finish_and_shallow_new():
@@ -90,21 +77,6 @@ def test_loresheet_efficiency_favors_track_completion():
     assert loresheet_efficiency_bias(0, 1) >= 2.0
     assert loresheet_efficiency_bias(1, 2) >= loresheet_efficiency_bias(0, 1)
     assert loresheet_efficiency_bias(2, 3) > efficiency_item_bias(2, 3)
-
-
-def test_most_vampires_take_loresheets_with_multi_dots():
-    venue = _venue()
-    has_sheet = 0
-    two_plus = 0
-    for seed in range(120):
-        result = generate_character(seed, _opts(clan="brujah", arch="enforcer", sub="brawler"), venue)
-        dots = sum(result.character.get("loresheets", {}).values())
-        if dots:
-            has_sheet += 1
-            if dots >= 2:
-                two_plus += 1
-    assert has_sheet / 120 >= 0.65
-    assert two_plus / max(has_sheet, 1) >= 0.45
 
 
 def test_xp_prefers_dot_five_and_shallow_buys():

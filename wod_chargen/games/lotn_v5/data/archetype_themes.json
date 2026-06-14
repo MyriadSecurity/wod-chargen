@@ -2,7 +2,6 @@
   "primaries": {
     "diplomat": {
       "label": "The Diplomat",
-      "notes": "Court voice and faction broker — persuasion, etiquette, and political leverage over raw violence.",
       "tag_affinities": {
         "social": 1.85,
         "influence": 1.75,
@@ -283,7 +282,6 @@
     },
     "enforcer": {
       "label": "The Enforcer",
-      "notes": "Violence as profession — intimidation, brawling, and disciplines that end fights fast.",
       "tag_affinities": {
         "combat": 1.9,
         "physical": 1.75,
@@ -358,7 +356,10 @@
         "toughness": 1.6
       },
       "discipline_expressions": {
-        "signature": ["potence", "fortitude"],
+        "signature": [
+          "potence",
+          "fortitude"
+        ],
         "alternates": {
           "celerity": {
             "discipline_bias": 1.12,
@@ -511,7 +512,6 @@
     },
     "predator": {
       "label": "The Predator",
-      "notes": "Hunter and territory reader — stealth, survival, animal bonds, and feral disciplines.",
       "tag_affinities": {
         "predation": 1.9,
         "animal": 1.7,
@@ -650,7 +650,6 @@
     },
     "criminal": {
       "label": "The Criminal",
-      "notes": "Street economy operator — larceny, streetwise networks, and staying unseen when deals go bad.",
       "tag_affinities": {
         "crime": 1.85,
         "street": 1.75,
@@ -838,7 +837,6 @@
     },
     "shadow": {
       "label": "The Shadow",
-      "notes": "Covert operator — stealth, subterfuge, obfuscate, and intelligence gathering without a trace.",
       "tag_affinities": {
         "stealth": 1.9,
         "deception": 1.7,
@@ -997,7 +995,6 @@
     },
     "scholar": {
       "label": "The Scholar",
-      "notes": "Knowledge worker — academics, occult theory, investigation, and measured mental attributes.",
       "tag_affinities": {
         "mental": 1.85,
         "science": 1.6,
@@ -1178,7 +1175,6 @@
     },
     "manipulator": {
       "label": "The Manipulator",
-      "notes": "Behind-the-throne schemer — subterfuge, dominate, and reading motives before anyone speaks.",
       "tag_affinities": {
         "deception": 1.85,
         "control": 1.8,
@@ -1337,7 +1333,6 @@
     },
     "duelist": {
       "label": "The Duelist",
-      "notes": "Trained combatant — melee, athletics, celerity, and winning fights that become public spectacle.",
       "tag_affinities": {
         "combat": 1.9,
         "physical": 1.75,
@@ -1486,7 +1481,6 @@
     },
     "occultist": {
       "label": "The Occultist",
-      "notes": "Blood sorcerer and ritual worker — occult lore, thaumaturgy, and forbidden texts as tools.",
       "tag_affinities": {
         "occult": 1.9,
         "ritual": 1.85,
@@ -1562,7 +1556,9 @@
         "scry_the_soul": 1.6
       },
       "discipline_expressions": {
-        "signature": ["blood_sorcery"],
+        "signature": [
+          "blood_sorcery"
+        ],
         "alternates": {
           "auspex": {
             "discipline_bias": 1.15,
@@ -1674,7 +1670,6 @@
     },
     "investigator": {
       "label": "The Investigator",
-      "notes": "Case solver — investigation, insight, awareness, and auspex to reconstruct what happened.",
       "tag_affinities": {
         "investigation": 1.9,
         "information": 1.75,
@@ -1829,7 +1824,6 @@
     },
     "artist": {
       "label": "The Artist",
-      "notes": "Public creative — performance, presence, fame, and turning attention into leverage.",
       "tag_affinities": {
         "art": 1.9,
         "reputation": 1.8,
@@ -2014,7 +2008,6 @@
     },
     "alchemist": {
       "label": "The Alchemist",
-      "notes": "Thin-blood innovator — science, craft, thin-blood alchemy formulas, and improvised miracles.",
       "tag_affinities": {
         "alchemy": 1.95,
         "thin_blood": 1.9,

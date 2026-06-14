@@ -8,7 +8,12 @@ from typing import Any, Literal
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.background_rules import (
+    background_connection_blocked,
+    haven_advantage_blocked,
+    max_haven_connection_dots_allowed,
+)
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 ModifierKind = Literal["advantage", "disadvantage"]
 ModifierSource = Literal["creation_pool", "disadv_trade", "xp", "free"]
@@ -26,7 +31,7 @@ _MAX_FREE_ADV_FROM_DISADV = 5
 
 @dataclass
 class BackgroundCreationLedger:
-    """Tracks creation pool and disadvantage-trade accounting (SRD)."""
+    """Tracks creation pool and disadvantage-trade accounting."""
 
     pool_total: int
     pool_spent_connection: int = 0
@@ -221,8 +226,6 @@ def can_add_modifier_dot(
     if int(entry.get("dots", 0)) < required_bg:
         return False
     if char and kind == "advantage" and entry.get("type") == "haven":
-        from wod_chargen.games.lotn_v5.merits_flaws import haven_advantage_blocked
-
         if haven_advantage_blocked(char):
             return False
     return True
@@ -304,18 +307,13 @@ def _can_add_new_instance(entries: list[dict[str, Any]], bg_type: str, spec: dic
     return True
 
 
-def _can_add_dot(
+def can_add_dot(
     entries: list[dict[str, Any]],
     bg_type: str,
     spec: dict[str, Any],
     char: dict[str, Any] | None = None,
 ) -> bool:
     if char is not None:
-        from wod_chargen.games.lotn_v5.merits_flaws import (
-            background_connection_blocked,
-            max_haven_connection_dots_allowed,
-        )
-
         if background_connection_blocked(char, bg_type):
             return False
         if bg_type == "haven":
@@ -366,11 +364,6 @@ def grant_background_rating(
     if not spec:
         return None
     if char is not None:
-        from wod_chargen.games.lotn_v5.merits_flaws import (
-            background_connection_blocked,
-            max_haven_connection_dots_allowed,
-        )
-
         if background_connection_blocked(char, bg_type):
             return None
         if bg_type == "haven":
@@ -444,7 +437,7 @@ def _assign_one_background_dot(
     char: dict[str, Any] | None = None,
 ) -> str | None:
     defs = background_defs()
-    eligible_types = [t for t in defs if _can_add_dot(entries, t, defs[t], char)]
+    eligible_types = [t for t in defs if can_add_dot(entries, t, defs[t], char)]
     if not eligible_types:
         return None
     from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
@@ -597,7 +590,7 @@ def run_background_creation(
     ledger = BackgroundCreationLedger(pool_total=pool_dots)
 
     while ledger.pool_remaining > 0:
-        can_bg = any(_can_add_dot(entries, t, background_defs()[t], char) for t in background_defs())
+        can_bg = any(can_add_dot(entries, t, background_defs()[t], char) for t in background_defs())
         can_mod = bool(_eligible_modifier_targets(entries, "advantage", char))
         spent = False
 
@@ -761,7 +754,7 @@ def enumerate_xp_background_types(char: dict[str, Any], max_rating: int) -> list
     entries = char.get("backgrounds", [])
     available: list[str] = []
     for bg_type, spec in background_defs().items():
-        if _can_add_dot(entries, bg_type, spec, char):
+        if can_add_dot(entries, bg_type, spec, char):
             cap = min(int(spec.get("max_dots", 3)), max_rating)
             typed = entries_for_type(entries, bg_type)
             if spec.get("purchase_mode") == "single_rating":
@@ -769,7 +762,7 @@ def enumerate_xp_background_types(char: dict[str, Any], max_rating: int) -> list
                 if cur < cap:
                     available.append(bg_type)
             else:
-                if any(e["dots"] < cap for e in typed) or _can_add_dot(entries, bg_type, spec, char):
+                if any(e["dots"] < cap for e in typed) or can_add_dot(entries, bg_type, spec, char):
                     available.append(bg_type)
     return available
 

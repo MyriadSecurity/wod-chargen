@@ -19,6 +19,8 @@ SPEND_GROUP_MACRO = {
     "mental_attrs": "attributes",
     "skills": "skills",
     "in_clan_disciplines": "disciplines",
+    "thin_blood_disciplines": "disciplines",
+    "affinity_discipline": "disciplines",
     "ghoul_powers": "disciplines",
     "thin_blood_formulas": "disciplines",
     "background_connections": "backgrounds",

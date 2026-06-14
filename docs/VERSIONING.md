@@ -12,7 +12,7 @@ __version__ = "0.1.0"
 `pyproject.toml` reads it via Hatch (`[tool.hatch.version]`).  
 `wod_chargen.core.share.ENGINE_VERSION` and generation results use the same value.
 
-Share URL **schema** (`0.1`) is separate from app semver — bump schema only when share payload shape changes.
+Share URL **schema** (`0.1`) is separate from app semver — bump schema only when share payload shape changes. Generated share links omit `schema` by default; decode treats a missing param as `0.1`.
 
 ## Release checklist
 

@@ -15,7 +15,7 @@
     "modifier_biases": "per background adv/disadv modifier id",
     "discipline_power_biases": "per discipline power id",
     "tag_affinities": "tag slug → multiplier for all tagged traits",
-    "loresheet_biases": "per loresheet id (pocket book Ch. 6)",
+    "loresheet_biases": "per loresheet id",
     "type_weights": "optional per-character-type weight multipliers"
   },
   "sub_archetype": {

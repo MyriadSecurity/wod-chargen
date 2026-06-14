@@ -9,19 +9,42 @@ from wod_chargen.core.costs import lookup_cost
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.spender import PurchaseCandidate
+from wod_chargen.games.lotn_v5.background_rules import (
+    background_connection_blocked,
+    background_type_dots,
+    haven_advantage_blocked,
+    max_haven_connection_dots_allowed,
+    poor_level,
+    poor_rating_eligible,
+    total_haven_advantage_dots,
+)
 from wod_chargen.games.lotn_v5.backgrounds import (
     entries_for_type,
     total_background_dots,
     total_modifier_dots,
 )
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 _MAX_FREE_MERIT_FROM_FLAWS = 10
 _TAKE_FLAWS_CHANCE = 0.55
 
 TraitKind = Literal["merit", "flaw"]
 TraitPhase = Literal["creation", "xp"]
+
+# Kindred-only merit/flaw categories
+_GHOUL_FORBIDDEN_CATEGORIES = frozenset({"bonding", "connection", "thin_blood"})
+
+
+def _ghoul_trait_allowed(entry: dict[str, Any]) -> bool:
+    """Pocket book: ghouls skip most Feeding traits; Bloodhound and Weak Stomach are exceptions."""
+    if entry.get("category") in _GHOUL_FORBIDDEN_CATEGORIES:
+        return False
+    if entry.get("category") == "feeding" and not entry.get("ghoul_eligible"):
+        return False
+    if trait_rules(entry).get("kindred_only"):
+        return False
+    return True
 
 
 @dataclass
@@ -76,12 +99,19 @@ def trait_label(trait_id: str, kind: TraitKind) -> str:
     return trait_id.replace("_", " ").title()
 
 
-def _eligible_for_type(entry: dict[str, Any], ctype: str) -> bool:
-    if entry.get("thin_blood_only") and ctype != "thin_blood":
-        return False
+def _eligible_for_type(
+    entry: dict[str, Any],
+    ctype: str,
+    *,
+    for_thin_blood_catalog: bool = False,
+) -> bool:
+    if entry.get("thin_blood_only"):
+        return for_thin_blood_catalog and ctype == "thin_blood"
     if entry.get("ghoul_only") and ctype != "ghoul":
         return False
     if ctype == "thin_blood" and entry.get("category") == "ghoul":
+        return False
+    if ctype == "ghoul" and not _ghoul_trait_allowed(entry):
         return False
     return True
 
@@ -120,67 +150,6 @@ def trait_display_label(trait_key: str, kind: TraitKind) -> str:
 
         return f"{label} ({sphere_label(detail)})"
     return label
-
-
-def poor_level(char: dict[str, Any]) -> int:
-    return int(char.get("flaws", {}).get("poor", 0))
-
-
-def no_haven_flaw_active(char: dict[str, Any]) -> bool:
-    return int(char.get("flaws", {}).get("no_haven", 0)) > 0
-
-
-def total_haven_advantage_dots(char: dict[str, Any]) -> int:
-    return total_modifier_dots(entries_for_type(char.get("backgrounds", []), "haven"), "advantage")
-
-
-def max_haven_connection_dots_allowed(char: dict[str, Any]) -> int | None:
-    """Total Haven connection dots allowed while Poor/No Haven apply; None = no Poor cap."""
-    if no_haven_flaw_active(char) or poor_level(char) >= 3:
-        return 0
-    if poor_level(char) >= 1:
-        return 1
-    return None
-
-
-def max_haven_advantage_dots_allowed(char: dict[str, Any]) -> int | None:
-    """Total Haven advantage dots allowed; None = no Poor cap."""
-    if no_haven_flaw_active(char) or poor_level(char) >= 2:
-        return 0
-    if poor_level(char) >= 1:
-        return 1
-    return None
-
-
-def background_connection_blocked(char: dict[str, Any], bg_type: str) -> bool:
-    if bg_type == "resources" and poor_level(char) > 0:
-        return True
-    if bg_type == "haven" and (no_haven_flaw_active(char) or poor_level(char) >= 3):
-        return True
-    return False
-
-
-def poor_rating_eligible(char: dict[str, Any], new_rating: int) -> bool:
-    if _background_type_dots(char, "resources") > 0:
-        return False
-    haven_dots = _background_type_dots(char, "haven")
-    haven_adv = total_haven_advantage_dots(char)
-    if new_rating >= 3 and haven_dots > 0:
-        return False
-    if new_rating >= 1 and haven_dots > 1:
-        return False
-    if new_rating >= 2 and haven_adv > 0:
-        return False
-    if new_rating >= 1 and haven_adv > 1:
-        return False
-    return True
-
-
-def haven_advantage_blocked(char: dict[str, Any]) -> bool:
-    cap = max_haven_advantage_dots_allowed(char)
-    if cap is None:
-        return False
-    return total_haven_advantage_dots(char) >= cap
 
 
 def _used_instance_details(char: dict[str, Any], base_id: str) -> set[str]:
@@ -303,16 +272,23 @@ def apply_enemy_flaw(
 
 
 def _background_type_dots(char: dict[str, Any], bg_type: str) -> int:
-    return total_background_dots(entries_for_type(char.get("backgrounds", []), bg_type))
+    return background_type_dots(char, bg_type)
 
 
 def _trait_present(char: dict[str, Any], trait_id: str) -> bool:
     merits = char.get("merits", {})
     flaws = char.get("flaws", {})
-    if int(merits.get(trait_id, 0)) > 0 or int(flaws.get(trait_id, 0)) > 0:
+    tb_merits = char.get("thin_blood_merits", {})
+    tb_flaws = char.get("thin_blood_flaws", {})
+    if (
+        int(merits.get(trait_id, 0)) > 0
+        or int(flaws.get(trait_id, 0)) > 0
+        or int(tb_merits.get(trait_id, 0)) > 0
+        or int(tb_flaws.get(trait_id, 0)) > 0
+    ):
         return True
     prefix = f"{trait_id}:"
-    for bucket in (merits, flaws):
+    for bucket in (merits, flaws, tb_merits, tb_flaws):
         for key, rating in bucket.items():
             if (key == trait_id or key.startswith(prefix)) and int(rating) > 0:
                 return True
@@ -347,7 +323,8 @@ def _conflicts_with_present(
 
     for check_kind in ("merit", "flaw"):
         traits = char.get("merits" if check_kind == "merit" else "flaws", {})
-        for trait_id, rating in traits.items():
+        tb_traits = char.get("thin_blood_merits" if check_kind == "merit" else "thin_blood_flaws", {})
+        for trait_id, rating in {**traits, **tb_traits}.items():
             if int(rating) <= 0:
                 continue
             other = trait_def(trait_base_id(trait_id), check_kind)  # type: ignore[arg-type]
@@ -369,12 +346,20 @@ def trait_eligible(
     *,
     phase: TraitPhase = "creation",
     ignore_rules: bool = False,
+    for_thin_blood_catalog: bool = False,
 ) -> bool:
     """Whether a merit/flaw may be assigned given current character state."""
     if ignore_rules:
         return True
 
+    ctype = str(char.get("character_type", "vampire"))
+    if not _eligible_for_type(entry, ctype, for_thin_blood_catalog=for_thin_blood_catalog):
+        return False
+
     rules = trait_rules(entry)
+    if char.get("character_type") == "ghoul" and rules.get("requires_max_generation") is not None:
+        return False
+
     if rules.get("creation_only") and phase == "xp":
         return False
 

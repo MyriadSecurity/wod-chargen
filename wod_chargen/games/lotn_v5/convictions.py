@@ -1,8 +1,4 @@
-"""Humanity convictions — pick from master list using an independent seed.
-
-Conviction text sourced from the r/vtm community master list:
-https://www.reddit.com/r/vtm/comments/1ecdulq/convictions_master_list/
-"""
+"""Humanity convictions — pick from master list using an independent seed."""
 
 from __future__ import annotations
 
@@ -11,7 +7,7 @@ from typing import Any
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
 
-DATA = "wod_chargen.games.lotn_v5.data"
+from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
 
 
 def load_convictions_catalog() -> dict[str, Any]:

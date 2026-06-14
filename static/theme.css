@@ -4,6 +4,9 @@
   --ash: #1a1a22;
   --mist: #9ca3af;
   --parchment: #e8e4dc;
+  --border: #2a2a35;
+  --text: var(--parchment);
+  --muted: #7a7080;
 }
 
 body {
@@ -406,11 +409,172 @@ body {
   padding: 0.35rem 0.75rem;
 }
 
+.sheet-disciplines {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.sheet-disciplines .sheet-section__title {
+  text-align: left;
+  border-bottom: none;
+  margin-bottom: 0.65rem;
+}
+
+.sheet-discipline-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.65rem;
+}
+
+.sheet-discipline-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid #3a3040;
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.65rem;
+}
+
+.sheet-discipline-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.sheet-discipline-card__powers {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  color: var(--mist);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.sheet-discipline-card__powers--ghoul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sheet-discipline-card__powers--ghoul li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.sheet-discipline-card__powers--ghoul li::before {
+  content: "◦";
+  position: absolute;
+  left: 0;
+  color: #b87a8a;
+}
+
+.sheet-disciplines--resonance .sheet-discipline-card {
+  border-color: #4a3048;
+}
+
+.btn-secondary--flash {
+  border-color: #6a9a7a;
+  color: #a8d4b8;
+}
+
+.wizard-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+.wizard-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  cursor: pointer;
+  background: linear-gradient(145deg, #14141c, #0f0f14);
+  border: 1px solid #2a2a35;
+  border-radius: 0.75rem;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  color: inherit;
+  font: inherit;
+}
+
+.wizard-type-card:hover {
+  border-color: #4a2030;
+  transform: translateY(-1px);
+}
+
+.wizard-type-card--active {
+  border: 2px solid var(--blood);
+  box-shadow:
+    0 0 0 2px rgba(139, 21, 56, 0.35),
+    0 6px 28px rgba(139, 21, 56, 0.35);
+  background: linear-gradient(145deg, #221018, #16101a);
+}
+
+.wizard-type-card__label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--parchment);
+}
+
+.wizard-type-card--active .wizard-type-card__label {
+  color: #fff;
+}
+
+.wizard-type-card__summary {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--mist);
+}
+
+.results-tab {
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--mist);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.results-tab--active {
+  border-bottom-color: var(--blood);
+  color: var(--parchment);
+}
+
+.results-error {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 0.5rem;
+  background: rgba(80, 20, 30, 0.25);
+  color: #fca5a5;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.results-error__details {
+  margin-top: 0.65rem;
+  font-size: 0.72rem;
+  white-space: pre-wrap;
+  font-family: ui-monospace, monospace;
+  color: #f87171;
+  opacity: 0.85;
+}
+
 .results-tab-hidden {
   display: none;
 }
 
 .results-print-heading {
+  display: none;
+}
+
+.results-recreate-panel {
   display: none;
 }
 
@@ -432,13 +596,36 @@ body {
     padding: 0 !important;
   }
 
-  /* Print only the active results tab (usually the character sheet). */
-  .results-tab-hidden {
-    display: none !important;
+  /* Print sheet plus creation/XP logs and recreation block (not screen tabs). */
+  .results-print-root .results-tab-hidden {
+    display: block !important;
   }
 
   .results-print-heading {
-    display: none !important;
+    display: block !important;
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000 !important;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.25rem;
+  }
+
+  .results-log-panel,
+  .results-xp-panel,
+  .results-recreate-panel {
+    display: block !important;
+    page-break-before: always;
+  }
+
+  .results-log-body,
+  .results-recreate-body {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: #111 !important;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .character-sheet {

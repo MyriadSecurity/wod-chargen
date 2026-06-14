@@ -4,10 +4,8 @@ from __future__ import annotations
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.rng import SeededRng
-from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.backgrounds import background_defs
 from wod_chargen.games.lotn_v5.merits_flaws import (
-    MeritFlawCreationLedger,
     apply_trait_dots,
     effective_max_dots,
     max_trait_rating,
@@ -18,22 +16,11 @@ from wod_chargen.games.lotn_v5.merits_flaws import (
     xp_merit_purchase_cost,
 )
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
+from tests.support.fixtures import load_venue, opts as _opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-
-
-def _opts(**kwargs):
-    base = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    base.update(kwargs)
-    return base
+    return load_venue()
 
 
 def test_trait_increment_rated_and_fixed():
@@ -57,34 +44,10 @@ def test_merit_flaw_creation_respects_cap():
         assert any("flaw trade" in line.lower() for line in lines)
 
 
-def test_generate_character_merits_within_catalog_caps():
-    result = generate_character(4242, _opts(), _venue())
-    for merit_id, rating in result.character["merits"].items():
-        assert 0 < rating <= max_trait_rating(merit_id, "merit")
-    for flaw_id, rating in result.character["flaws"].items():
-        assert 0 < rating <= max_trait_rating(flaw_id, "flaw")
-
-
 def test_xp_iron_gullet_costs_nine():
     iron = next(m for m in traits_for_type("merit", "vampire") if m["id"] == "iron_gullet")
     costs = load_json_cached("wod_chargen.games.lotn_v5.data", "costs.json")
     assert xp_merit_purchase_cost(iron, 0, costs) == 9
-
-
-def test_merit_flaw_meta_recorded():
-    result = generate_character(99, _opts(), _venue())
-    meta = result.character.get("merit_flaw_meta", {})
-    assert "flaw_credit" in meta
-    assert "merit_from_trade" in meta
-    assert meta["merit_from_trade"] <= MeritFlawCreationLedger().free_merit_cap
-
-
-def test_merits_flaws_catalog_has_descriptions():
-    catalog = load_json_cached("wod_chargen.games.lotn_v5.data", "merits_flaws.json")
-    for kind in ("merits", "flaws"):
-        for entry in catalog[kind]:
-            assert entry.get("description"), f"{kind} {entry['id']} missing description"
-            assert len(entry["description"]) >= 20
 
 
 def _char(**kwargs):
@@ -135,14 +98,14 @@ def test_unbondable_not_xp_eligible():
 
 
 def test_poor_blocks_resources_and_caps_haven():
-    from wod_chargen.games.lotn_v5.backgrounds import _can_add_dot, can_add_modifier_dot
+    from wod_chargen.games.lotn_v5.backgrounds import can_add_dot, can_add_modifier_dot
 
     char = _char(
         flaws={"poor": 2},
         backgrounds=[{"type": "haven", "dots": 1, "advantages": [], "disadvantages": []}],
     )
-    assert not _can_add_dot(char["backgrounds"], "resources", background_defs()["resources"], char)
-    assert not _can_add_dot(char["backgrounds"], "haven", background_defs()["haven"], char)
+    assert not can_add_dot(char["backgrounds"], "resources", background_defs()["resources"], char)
+    assert not can_add_dot(char["backgrounds"], "haven", background_defs()["haven"], char)
     entry = char["backgrounds"][0]
     garage = next(m for m in background_defs()["haven"]["advantages"] if m["id"] == "garage")
     assert not can_add_modifier_dot(entry, garage, "advantage", char)

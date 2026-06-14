@@ -6,13 +6,15 @@ from dataclasses import dataclass, field
 from typing import Any
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
-SUPPORTED_SCHEMAS = {"0.1"}
+DEFAULT_SCHEMA = "0.1"
+SUPPORTED_SCHEMAS = {DEFAULT_SCHEMA}
 from wod_chargen import __version__ as ENGINE_VERSION
 
 
 @dataclass
 class SharePayload:
-    schema: str = "0.1"
+    schema: str = DEFAULT_SCHEMA
+    include_schema: bool = False
     seed: int = 0
     convictions_seed: int | None = None
     game: str = "lotn_v5"
@@ -21,11 +23,12 @@ class SharePayload:
 
     def to_query_params(self) -> dict[str, str]:
         params: dict[str, str] = {
-            "schema": self.schema,
             "seed": str(self.seed),
             "game": self.game,
             "venue": self.venue,
         }
+        if self.include_schema:
+            params["schema"] = self.schema
         if self.convictions_seed is not None:
             params["convictions_seed"] = str(self.convictions_seed)
         for key, value in sorted(self.options.items()):
@@ -46,9 +49,9 @@ def decode_query(query: str) -> SharePayload:
     raw = parse_qs(query.lstrip("?"), keep_blank_values=False)
     flat = {k: v[0] for k, v in raw.items()}
 
-    schema = flat.get("schema", "")
+    schema = flat.get("schema") or DEFAULT_SCHEMA
     if schema not in SUPPORTED_SCHEMAS:
-        raise ValueError(f"Unsupported or missing schema: {schema!r}")
+        raise ValueError(f"Unsupported schema: {schema!r}")
 
     reserved = {"schema", "seed", "convictions_seed", "game", "venue"}
     options = {k: v for k, v in flat.items() if k not in reserved}

@@ -19,7 +19,7 @@ python scripts/dev_server.py
 # Open http://localhost:8080/
 ```
 
-Versioning policy: `docs/VERSIONING.md`.
+Versioning: `docs/VERSIONING.md`. Contributing: `CONTRIBUTING.md`.
 
 ## PyScript version
 
@@ -28,7 +28,3 @@ Pinned in `pyscript.json`. Re-test after bumping the CDN version.
 ## Dark Pack
 
 This project uses World of Darkness material under the [Dark Pack Agreement](https://www.paradoxinteractive.com/games/world-of-darkness/community/dark-pack-agreement). See `NOTICES.md`.
-
-## Reference PDF
-
-Copy `laws_of_the_night_pocket.pdf` to `reference/lotn_v5/` locally (gitignored). See `reference/README.md`.

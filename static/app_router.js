@@ -9,7 +9,8 @@
   }
 
   function navigate(page) {
-    const target = page === "weights" ? "weights" : "";
+    const target =
+      page === "weights" ? "weights" : page === "strategy" ? "strategy" : "";
     if (!target) {
       const base = location.pathname;
       if (location.search || location.hash) {

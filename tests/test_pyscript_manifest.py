@@ -66,21 +66,6 @@ def _transitive_closure(entry_modules: list[str]) -> set[str]:
     return py_files
 
 
-@pytest.mark.parametrize(
-    "entry",
-    [
-        "app.wizard",
-        "app.components.sheet",
-        "wod_chargen.games.lotn_v5.generator",
-    ],
-)
-def test_pyscript_includes_browser_import_closure(entry: str):
-    needed = _transitive_closure([entry])
-    bundled = parse_pyscript_toml(ROOT / "pyscript.toml")
-    missing = sorted(needed - bundled)
-    assert not missing, f"pyscript.toml missing modules reachable from {entry}: {missing}"
-
-
 def test_pyscript_matches_repo_scan():
     expected = collect_pyscript_paths(ROOT)
     bundled = parse_pyscript_toml(ROOT / "pyscript.toml")

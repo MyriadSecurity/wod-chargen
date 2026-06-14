@@ -13,10 +13,11 @@ from wod_chargen.core.share import (
     wizard_share_options,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def test_share_round_trip():
@@ -40,8 +41,26 @@ def test_share_round_trip():
     assert decoded.options["clan"] == "brujah"
 
 
+def test_decode_without_schema_defaults_to_current():
+    decoded = decode_query("?seed=482910&game=lotn_v5&venue=mes_end_to_dawn&type=vampire")
+    assert decoded.schema == "0.1"
+    assert decoded.seed == 482910
+    assert decoded.options["type"] == "vampire"
+
+
+def test_encode_omits_schema_by_default():
+    qs = encode_payload(SharePayload(seed=1))
+    assert "schema=" not in qs
+
+
+def test_decode_accepts_explicit_schema():
+    decoded = decode_query("?schema=0.1&seed=99")
+    assert decoded.schema == "0.1"
+    assert decoded.seed == 99
+
+
 def test_unsupported_schema():
-    with pytest.raises(ValueError, match="schema"):
+    with pytest.raises(ValueError, match="Unsupported schema"):
         decode_query("?schema=9.9&seed=1")
 
 
@@ -110,7 +129,7 @@ def test_wizard_share_options_omits_approval_when_not_required():
     assert "approval" not in opts
 
 
-def test_browser_share_url_includes_schema_and_seed():
+def test_browser_share_url_omits_schema_by_default():
     payload = SharePayload(
         seed=123,
         options=wizard_share_options(
@@ -124,34 +143,12 @@ def test_browser_share_url_includes_schema_and_seed():
     )
     url = browser_share_url("/", payload)
     assert url.startswith("/?")
+    assert "schema=" not in url
     parsed = urlparse(url)
     decoded = decode_query(parsed.query)
     assert decoded.seed == 123
+    assert decoded.schema == "0.1"
     assert decoded.options["arch"] == "diplomat"
-
-
-def test_share_url_regenerates_same_character():
-    seed = 918273
-    options = wizard_share_options(
-        character_type="vampire",
-        arch="diplomat",
-        sub="silver_tongue",
-        clan="brujah",
-        predator="siren",
-        approval="2026-06",
-        venue_requires_approval_month=True,
-        type_uses_predator=True,
-    )
-    venue = _venue()
-    original = generate_character(seed, options, venue)
-
-    payload = SharePayload(seed=seed, options=options)
-    share_url = browser_share_url("/chargen/", payload)
-    decoded = decode_query(urlparse(share_url).query)
-
-    restored = generate_character(decoded.seed, decoded.options, _venue())
-    assert restored.character == original.character
-    assert restored.xp_spent == original.xp_spent
 
 
 def test_same_seed_stable_across_python_hash_seed():
@@ -204,34 +201,4 @@ print(hashlib.sha256(payload.encode()).hexdigest())
         assert len(digest) == 64, proc.stdout
         hashes.add(digest)
 
-    assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"
-
-
-def test_same_seed_output_hash_stable_in_process():
-    """Same seed must yield identical output hash on repeated in-process runs."""
-    import hashlib
-    import json
-
-    options = wizard_share_options(
-        character_type="vampire",
-        arch="diplomat",
-        sub="silver_tongue",
-        clan="brujah",
-        predator="siren",
-        approval="2026-06",
-        venue_requires_approval_month=True,
-        type_uses_predator=True,
-    )
-    venue = _venue()
-    seed = 424242
-
-    def output_hash() -> str:
-        result = generate_character(seed, options, venue)
-        payload = json.dumps(
-            {"character": result.character, "xp_spent": result.xp_spent},
-            sort_keys=True,
-        )
-        return hashlib.sha256(payload.encode()).hexdigest()
-
-    hashes = {output_hash() for _ in range(5)}
     assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"

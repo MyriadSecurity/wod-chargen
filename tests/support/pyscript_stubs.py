@@ -26,7 +26,7 @@ class MockElement:
         self.tagName = tag.upper()
         self.id = element_id
         self.className = ""
-        self.innerHTML = ""
+        self._innerHTML = ""
         self.innerText = ""
         self.textContent = ""
         self.classList = _ClassList()
@@ -39,6 +39,16 @@ class MockElement:
         self.href = ""
         self.rel = ""
         self._attrs: dict[str, str] = {}
+
+    @property
+    def innerHTML(self) -> str:
+        return self._innerHTML
+
+    @innerHTML.setter
+    def innerHTML(self, value: str) -> None:
+        self._innerHTML = value
+        if value == "":
+            self.children.clear()
 
     def appendChild(self, child: MockElement) -> MockElement:
         self.children.append(child)

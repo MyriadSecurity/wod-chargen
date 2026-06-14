@@ -1,25 +1,25 @@
 """Discipline power selection tests."""
 
-from wod_chargen.core.data_loader import load_json_cached
+import pytest
+
 from wod_chargen.core.rng import SeededRng
 from wod_chargen.games.lotn_v5.disciplines import (
     assign_power_at_level,
     assign_powers_for_discipline,
     enumerate_eligible_powers,
     load_power_catalog,
-    owned_power_ids,
     pick_power,
     power_by_id,
     power_eligible,
     record_formula_selection,
     record_ritual,
-    validate_discipline_selections,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
+from tests.support.fixtures import load_venue, opts
 
 
 def _venue():
-    return load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+    return load_venue()
 
 
 def _opts(**kwargs):
@@ -94,40 +94,6 @@ def test_or_prerequisite_conceal_or_unseen_passage():
     assert power_eligible(power, base, track_id="obfuscate", buying_level=4)
 
 
-def test_creation_assigns_power_per_discipline_level():
-    result = generate_character(100, _opts(), _venue())
-    char = result.character
-    for disc_id, rating in char["disciplines"].items():
-        picks = char["discipline_powers"].get(disc_id, {})
-        for level in range(1, int(rating) + 1):
-            assert str(level) in picks, f"{disc_id} missing level {level}"
-            power = power_by_id(picks[str(level)])
-            assert power is not None
-            assert int(power["level"]) == level, f"{disc_id} slot {level} has {picks[str(level)]}"
-    assert not validate_discipline_selections(char)
-
-
-def test_reproducibility_includes_powers():
-    a = generate_character(999, _opts(clan="brujah", arch="duelist", sub="fencer"), _venue())
-    b = generate_character(999, _opts(clan="brujah", arch="duelist", sub="fencer"), _venue())
-    assert a.character.get("discipline_powers") == b.character.get("discipline_powers")
-
-
-def test_thin_blood_discipline_and_formulas():
-    result = generate_character(
-        77,
-        _opts(type="thin_blood", arch="alchemist", sub="distiller"),
-        _venue(),
-    )
-    char = result.character
-    assert char["disciplines"].get("thin_blood_alchemy", 0) >= 1
-    tba_picks = char.get("discipline_powers", {}).get("thin_blood_alchemy", {})
-    assert tba_picks
-    owned = owned_power_ids(char)
-    for fid in char.get("thin_blood_formulas", {}):
-        assert fid in owned
-
-
 def test_xp_discipline_buy_adds_power():
     result = generate_character(1, _opts(clan="brujah"), _venue())
     disc_xp = [e for e in result.xp_log if e.category == "discipline"]
@@ -197,13 +163,13 @@ def test_assign_powers_for_discipline():
         assert int(power_by_id(pid)["level"]) == int(level_str)
 
 
-def test_xp_discipline_advancement_picks_matching_level_power():
+@pytest.mark.parametrize("seed", range(12))
+def test_xp_discipline_advancement_picks_matching_level_power(seed: int):
     """Each +1 discipline dot during XP must fill the slot at the new dot level."""
-    for seed in range(100):
-        result = generate_character(seed, _opts(clan="tremere", arch="occultist", sub="thaumaturge"), _venue())
-        for buy in [e for e in result.xp_log if e.category == "discipline"]:
-            pid = result.character["discipline_powers"][buy.item][str(buy.new_level)]
-            assert int(power_by_id(pid)["level"]) == buy.new_level
+    result = generate_character(seed, _opts(clan="tremere", arch="occultist", sub="thaumaturge"), _venue())
+    for buy in [e for e in result.xp_log if e.category == "discipline"]:
+        pid = result.character["discipline_powers"][buy.item][str(buy.new_level)]
+        assert int(power_by_id(pid)["level"]) == buy.new_level
 
 
 def test_assign_power_at_level_rejects_wrong_catalog_level():

@@ -5,9 +5,8 @@ from __future__ import annotations
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.games.lotn_v5.paths import GAMES_PKG
 from wod_chargen.games.lotn_v5.system import LotnV5System
-
-GAMES_PKG = "wod_chargen.games"
 
 _SYSTEMS = {
     "lotn_v5": LotnV5System(),

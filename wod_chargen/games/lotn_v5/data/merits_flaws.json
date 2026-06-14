@@ -124,7 +124,8 @@
       "dot_cost": 1,
       "max_dots": null,
       "thin_blood_only": false,
-      "ghoul_only": false
+      "ghoul_only": false,
+      "ghoul_eligible": true
     },
     {
       "id": "iron_gullet",
@@ -213,6 +214,9 @@
       "id": "eat_food",
       "label": "Eat Food",
       "description": "May consume food and drink (not blood) regardless of Humanity; provides no nourishment and must be expelled before resting.",
+      "rules": {
+        "kindred_only": true
+      },
       "category": "physical",
       "category_label": "Physical",
       "dot_cost": 2,
@@ -235,6 +239,9 @@
       "id": "calm_heart",
       "label": "Calm Heart",
       "description": "Great emotional control; reduce all Frenzy trigger difficulty by two (Brujah gain no benefit vs. Fury Frenzy).",
+      "rules": {
+        "kindred_only": true
+      },
       "category": "psychological",
       "category_label": "Psychological",
       "dot_cost": 3,
@@ -309,7 +316,7 @@
       "category": "thin_blood",
       "category_label": "Thin-Blood",
       "dot_cost": 0,
-      "max_dots": null,
+      "max_dots": 1,
       "thin_blood_only": true,
       "ghoul_only": false
     },
@@ -584,7 +591,8 @@
       "dot_cost": 3,
       "max_dots": null,
       "thin_blood_only": false,
-      "ghoul_only": false
+      "ghoul_only": false,
+      "ghoul_eligible": true
     },
     {
       "id": "baneful_blood",
@@ -929,12 +937,5 @@
       "thin_blood_only": true,
       "ghoul_only": false
     }
-  ],
-  "source_ref": {
-    "mes_sheet_version": "5.2.9 MES",
-    "mes_workbook": "Monroe.xlsx",
-    "imported_at": "2026-06-13T20:56:47.806106+00:00",
-    "import_script": "scripts/import_mes_tables.py",
-    "srd": "https://www.oneworldofdarkness.com/laws-of-the-night/"
-  }
+  ]
 }
