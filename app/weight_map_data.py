@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.games.lotn_v5.archetypes import effective_profile, get_archetype, load_all_archetypes
+from wod_chargen.games.lotn_v5.archetypes import ArchetypeProfile, effective_profile, get_archetype, load_all_archetypes
+from wod_chargen.games.lotn_v5.clan_discipline_adapt import adapt_profile_for_clan
 from wod_chargen.games.lotn_v5.predators import apply_predator_biases, load_predator_types, predator_by_id
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags, resolve_trait_bias
 
@@ -17,7 +18,7 @@ LENSES: dict[str, str] = {
     "clan": "Clans",
     "catalog": "Catalog defaults",
     "category": "Trait categories",
-    "combo": "Archetype + feed",
+    "combo": "Archetype + feed + clan",
 }
 
 CATEGORY_IDS: dict[str, str] = {
@@ -529,40 +530,63 @@ def category_picker_options() -> list[dict[str, Any]]:
     return [{"id": k, "label": v} for k, v in CATEGORY_IDS.items()]
 
 
-# --- Combined archetype + predator ---
+# --- Combined archetype + predator + clan (generation profile) ---
+
+
+def generation_profile(
+    arch_id: str,
+    sub_id: str,
+    predator_id: str,
+    clan_id: str,
+    character_type: str = "vampire",
+) -> ArchetypeProfile:
+    """Merged profile matching generator order: archetype → clan → predator."""
+    profile = effective_profile(arch_id, sub_id, character_type)
+    profile = adapt_profile_for_clan(profile, clan_id or None)
+    pred = predator_by_id(predator_id)
+    return apply_predator_biases(profile, pred)
 
 
 def build_combo_profile_tree(
     arch_id: str,
     sub_id: str,
     predator_id: str,
+    clan_id: str = "brujah",
     character_type: str = "vampire",
 ) -> dict[str, Any]:
     base = get_archetype(arch_id)
     sub = next(s for s in base.sub_archetypes if s.id == sub_id)
-    profile = effective_profile(arch_id, sub_id, character_type)
     pred = predator_by_id(predator_id)
-    merged = apply_predator_biases(profile, pred)
+    clans = load_json_cached(DATA, "clans.json")
+    clan = clans.get(clan_id, {"label": clan_id.replace("_", " ").title()})
+    merged = generation_profile(arch_id, sub_id, predator_id, clan_id, character_type)
 
     sections: list[dict[str, Any] | None] = [
-        _section("Archetype spend weights", merged.weights, "weight"),
+        _section("Spend weights", merged.weights, "weight"),
+        _section("Tag affinities", merged.tag_affinities, "tag"),
         _section("Combined attributes", merged.attribute_biases, "attribute"),
         _section("Combined skills", merged.skill_biases, "skill"),
         _section("Combined disciplines", merged.discipline_biases, "discipline"),
+        _section("Combined discipline powers", merged.discipline_power_biases, "power"),
         _section("Archetype backgrounds", merged.background_biases, "background"),
         _section(
             "Predator background boost",
             (pred.get("benefit_weights") or {}).get("backgrounds", {}),
             "background",
         ),
+        _section("Spheres", merged.sphere_biases, "sphere"),
+        _section("Modifiers", merged.modifier_biases, "modifier"),
+        _section("Merits", merged.merit_biases, "merit"),
+        _section("Flaws", merged.flaw_biases, "flaw"),
     ]
     return {
-        "name": f"{base.label} · {sub.label} + {pred['label']}",
+        "name": f"{base.label} · {sub.label} · {clan['label']} · {pred['label']}",
         "kind": "root",
         "lens": "combo",
         "arch": arch_id,
         "sub": sub_id,
         "predator": predator_id,
+        "clan": clan_id,
         "type": character_type,
         "children": [s for s in sections if s],
     }
@@ -570,7 +594,7 @@ def build_combo_profile_tree(
 
 def build_combo_overview_tree() -> dict[str, Any]:
     return {
-        "name": "Archetype + feed combo",
+        "name": "Archetype + feed + clan",
         "kind": "root",
         "lens": "combo",
         "children": [
@@ -578,7 +602,7 @@ def build_combo_overview_tree() -> dict[str, Any]:
                 "How to use",
                 [
                     _leaf(
-                        "Pick an archetype profile and predator type in Single profile mode",
+                        "Single profile: pick archetype, feed type, and clan to see the merged generation weights",
                         1.0,
                         "weight",
                         "hint",
@@ -626,6 +650,7 @@ def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
             params.get("arch", "diplomat"),
             params.get("sub", "silver_tongue"),
             params.get("predator", "alleycat"),
+            params.get("clan", "brujah"),
             params.get("type", "vampire"),
         )
     raise ValueError(f"Unknown lens: {lens}")

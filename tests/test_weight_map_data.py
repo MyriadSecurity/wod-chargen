@@ -56,17 +56,33 @@ def test_category_skills_peak_bias():
     assert stealth["value"] >= 2.0
 
 
-def test_combo_merges_archetype_and_predator():
+def test_combo_merges_archetype_predator_and_clan():
     tree = build_tree(
         "combo",
         "profile",
         arch="diplomat",
         sub="courtier",
         predator="alleycat",
+        clan="brujah",
         type="vampire",
     )
     assert "Alleycat" in tree["name"]
-    assert "Combined skills" in {c["name"] for c in tree["children"]}
+    assert "Brujah" in tree["name"]
+    section_names = {c["name"] for c in tree["children"]}
+    assert "Combined skills" in section_names
+    assert "Combined disciplines" in section_names
+    assert "Combined discipline powers" in section_names
+    assert "Tag affinities" in section_names
+
+
+def test_combo_clan_adapts_off_clan_signatures():
+    from app.weight_map_data import generation_profile
+
+    tremere = generation_profile("scholar", "loremaster", "alleycat", "tremere", "vampire")
+    brujah = generation_profile("scholar", "loremaster", "alleycat", "brujah", "vampire")
+    assert tremere.discipline_biases.get("blood_sorcery", 0) >= 0.85
+    assert brujah.discipline_biases.get("celerity", 0) >= 0.85
+    assert tremere.discipline_biases != brujah.discipline_biases
 
 
 def test_picker_counts():

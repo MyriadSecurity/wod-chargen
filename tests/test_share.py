@@ -152,3 +152,86 @@ def test_share_url_regenerates_same_character():
     restored = generate_character(decoded.seed, decoded.options, _venue())
     assert restored.character == original.character
     assert restored.xp_spent == original.xp_spent
+
+
+def test_same_seed_stable_across_python_hash_seed():
+    """Same seed must yield identical output across fresh interpreter runs."""
+    import hashlib
+    import json
+    import os
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    script = """
+import hashlib
+import json
+from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.games.lotn_v5.generator import generate_character
+from wod_chargen.core.share import wizard_share_options
+
+venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
+opts = wizard_share_options(
+    character_type="vampire",
+    arch="diplomat",
+    sub="silver_tongue",
+    clan="brujah",
+    predator="siren",
+    approval="2026-06",
+    venue_requires_approval_month=True,
+    type_uses_predator=True,
+)
+result = generate_character(424242, opts, venue)
+payload = json.dumps(
+    {"character": result.character, "xp_spent": result.xp_spent},
+    sort_keys=True,
+)
+print(hashlib.sha256(payload.encode()).hexdigest())
+"""
+    hashes: set[str] = set()
+    for hash_seed in ("0", "1", "42", "999", "random"):
+        env = {**os.environ, "PYTHONHASHSEED": hash_seed}
+        proc = subprocess.run(
+            [sys.executable, "-c", script],
+            capture_output=True,
+            text=True,
+            env=env,
+            cwd=root,
+            check=True,
+        )
+        digest = proc.stdout.strip()
+        assert len(digest) == 64, proc.stdout
+        hashes.add(digest)
+
+    assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"
+
+
+def test_same_seed_output_hash_stable_in_process():
+    """Same seed must yield identical output hash on repeated in-process runs."""
+    import hashlib
+    import json
+
+    options = wizard_share_options(
+        character_type="vampire",
+        arch="diplomat",
+        sub="silver_tongue",
+        clan="brujah",
+        predator="siren",
+        approval="2026-06",
+        venue_requires_approval_month=True,
+        type_uses_predator=True,
+    )
+    venue = _venue()
+    seed = 424242
+
+    def output_hash() -> str:
+        result = generate_character(seed, options, venue)
+        payload = json.dumps(
+            {"character": result.character, "xp_spent": result.xp_spent},
+            sort_keys=True,
+        )
+        return hashlib.sha256(payload.encode()).hexdigest()
+
+    hashes = {output_hash() for _ in range(5)}
+    assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"

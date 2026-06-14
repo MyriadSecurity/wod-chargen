@@ -58,7 +58,6 @@ def format_xp_log(entries: list[XpLogEntry]) -> str:
         by_category[entry.category].append(entry)
 
     purchase_lines: list[str] = ["Purchases", ""]
-    debug_lines: list[str] = ["Debug (internal weights)", ""]
 
     ordered_categories = [c for c in CATEGORY_ORDER if c in by_category]
     ordered_categories.extend(sorted(c for c in by_category if c not in CATEGORY_ORDER))
@@ -69,13 +68,6 @@ def format_xp_log(entries: list[XpLogEntry]) -> str:
         purchase_lines.append(f"── {label} " + "─" * max(0, 36 - len(label)))
         for entry in group:
             purchase_lines.append(f"  {entry.item} → {entry.new_level} ({_format_cost(entry)})")
-            debug_lines.append(
-                f"  [{category}] {entry.item} → {entry.new_level} | "
-                f"group_w={entry.group_weight:.2f} item_bias={entry.item_bias:.2f} "
-                f"clan={entry.clan_factor:.2f} eff={entry.efficiency_bias:.2f} "
-                f"roll={entry.roll:.2f} score={entry.score:.2f}"
-            )
         purchase_lines.append("")
-        debug_lines.append("")
 
-    return "\n".join(purchase_lines + debug_lines).rstrip()
+    return "\n".join(purchase_lines).rstrip()

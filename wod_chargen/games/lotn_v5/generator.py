@@ -439,7 +439,7 @@ def _enumerate_purchases(
         )
 
     dw = profile.weights.get("in_clan_disciplines", 1.0)
-    for disc in set(char["disciplines"]) | clan_pool:
+    for disc in sorted(set(char["disciplines"]) | clan_pool):
         cur = char["disciplines"].get(disc, 0)
         if cur >= caps["discipline"]:
             continue

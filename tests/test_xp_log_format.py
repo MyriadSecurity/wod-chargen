@@ -41,10 +41,8 @@ def test_format_xp_log_groups_by_category_and_shows_level():
     assert "── Attributes" in text
     assert "  strength → 3 (4 XP)" in text
     assert text.index("── Attributes") < text.index("── Skills")
-    assert "Debug (internal weights)" in text
-    assert "group_w=" in text
-    assert "item_bias=" in text
-    assert text.index("Debug (internal weights)") > text.index("strength → 3")
+    assert "group_w=" not in text
+    assert "Debug (internal weights)" not in text
 
 
 def test_xp_log_entries_include_new_level():

@@ -111,6 +111,7 @@ def test_tree_payload_json_serializable():
             arch="enforcer",
             sub="brawler",
             predator="farmer",
+            clan="brujah",
             type="vampire",
         )
     )

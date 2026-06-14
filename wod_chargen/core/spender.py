@@ -56,13 +56,15 @@ def _pick_candidate(
 
     macro_strength: dict[str, float] = defaultdict(float)
     macro_group_count: dict[str, int] = defaultdict(int)
-    for spend_group, pool in by_group.items():
+    for spend_group in sorted(by_group):
+        pool = by_group[spend_group]
         macro = macro_for_spend_group(spend_group)
         macro_strength[macro] += pool[0].weight
         macro_group_count[macro] += 1
 
     macro_weights: dict[str, float] = {}
-    for macro, total_strength in macro_strength.items():
+    for macro in sorted(macro_strength):
+        total_strength = macro_strength[macro]
         avg_strength = total_strength / macro_group_count[macro]
         target = category_targets.get(macro, 0.1)
         deficit = macro_deficit_boost(
@@ -74,10 +76,10 @@ def _pick_candidate(
         )
         macro_weights[macro] = target * avg_strength * deficit
 
-    macros = list(macro_weights.keys())
+    macros = sorted(macro_weights.keys())
     chosen_macro = rng.weighted_choice(macros, [macro_weights[m] for m in macros])
 
-    eligible_groups = [g for g in by_group if macro_for_spend_group(g) == chosen_macro]
+    eligible_groups = sorted(g for g in by_group if macro_for_spend_group(g) == chosen_macro)
     group_weights = [by_group[g][0].weight for g in eligible_groups]
     chosen_group = rng.weighted_choice(eligible_groups, group_weights)
     pool = by_group[chosen_group]
@@ -93,7 +95,7 @@ def _pick_candidate(
         item_roll = rng.uniform()
         score = cand.item_weight() * eff * item_roll
         scored.append((cand, eff, score, item_roll))
-    best, eff, score, roll = max(scored, key=lambda pair: pair[2])
+    best, eff, score, roll = max(scored, key=lambda pair: (pair[2], pair[0].item_id))
     return best, roll, score, eff
 
 

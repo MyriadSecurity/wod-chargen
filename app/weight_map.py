@@ -32,6 +32,7 @@ class WeightMapApp:
             "type": "vampire",
             "id": "brujah",
             "predator": "alleycat",
+            "clan": "brujah",
         }
         self._render_attempts = 0
         self._parse_hash()
@@ -53,6 +54,7 @@ class WeightMapApp:
                 "type",
                 "id",
                 "predator",
+                "clan",
             ):
                 self.state[key] = val
 
@@ -74,6 +76,7 @@ class WeightMapApp:
                         f"sub={quote(self.state['sub'])}",
                         f"type={quote(self.state['type'])}",
                         f"predator={quote(self.state['predator'])}",
+                        f"clan={quote(self.state['clan'])}",
                     ]
                 )
             elif self.state["lens"] in ("predator", "clan", "category"):
@@ -102,7 +105,8 @@ class WeightMapApp:
         blurb.className = "text-stone-400 text-sm mt-2 max-w-3xl"
         blurb.innerText = (
             "Explore procedural bias weights by source: archetypes, predator feed types, clans, "
-            "catalog defaults, and trait categories. Values show boosts (green) and suppressions (red). "
+            "catalog defaults, and trait categories. Use Archetype + feed + clan for the merged "
+            "profile the generator applies. Values show boosts (green) and suppressions (red). "
             "Click nodes in overview to drill down. Scroll to zoom, drag to pan."
         )
         header.appendChild(blurb)
@@ -230,6 +234,26 @@ class WeightMapApp:
             plabel.appendChild(psel)
             wrap.appendChild(plabel)
 
+            clabel = document.createElement("label")
+            clabel.innerText = "Domitor clan" if self.state.get("type") == "ghoul" else "Clan"
+            csel = document.createElement("select")
+            for opt in picker_for_lens("clan"):
+                o = document.createElement("option")
+                o.value = opt["id"]
+                o.innerText = opt["label"]
+                if o.value == self.state["clan"]:
+                    o.selected = True
+                csel.appendChild(o)
+
+            def on_clan_change(_=None):
+                self.state["clan"] = csel.value
+                self._sync_hash()
+                self._render()
+
+            csel.onchange = on_clan_change
+            clabel.appendChild(csel)
+            wrap.appendChild(clabel)
+
         if lens in ("predator", "clan", "category"):
             label = document.createElement("label")
             labels = {"predator": "Feed type", "clan": "Clan", "category": "Category"}
@@ -274,6 +298,7 @@ class WeightMapApp:
             "type": str(self.state.get("type", "vampire")),
             "id": str(self.state.get("id", "")),
             "predator": str(self.state.get("predator", "")),
+            "clan": str(self.state.get("clan", "")),
         }
 
     def _show_draw_error(self, canvas: Any, message: str) -> None:
