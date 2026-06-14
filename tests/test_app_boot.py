@@ -53,7 +53,7 @@ def test_wizard_app_mounts_game_step(stubs):
     root = stubs.elements["app-root"]
     app = wizard.WizardApp(root)
     app.mount()
-    assert app.state["step"] == "game"
+    assert app.state["phase"] == "landing"
     assert root.children
     assert any(child.children for child in root.children)
 
@@ -61,7 +61,8 @@ def test_wizard_app_mounts_game_step(stubs):
 def test_wizard_generate_vampire(stubs):
     wizard = _fresh_wizard_module()
     app = wizard.WizardApp(stubs.elements["app-root"])
-    app.state["step"] = "generate"
+    app.state["phase"] = "build"
+    app.state["unlocked_through"] = "generate"
     app.state["seed"] = 0  # buys loresheet + exercises apply_loresheet_benefits
     app.state["clan"] = "brujah"
     app.state["arch"] = "enforcer"
@@ -77,7 +78,7 @@ def test_wizard_results_view_renders_sheet(stubs):
     wizard = _fresh_wizard_module()
     app = wizard.WizardApp(stubs.elements["app-root"])
     app._generate()
-    app.state["step"] = "results"
+    app.state["phase"] = "results"
     app.mount()
     assert app.state["result"] is not None
     assert stubs.elements["app-root"].children
@@ -103,7 +104,60 @@ def test_wizard_parse_url_regenerates_character(stubs):
     app = wizard.WizardApp(stubs.elements["app-root"])
     assert app.state["seed"] == 424242
     assert app.state["result"] is not None
-    assert app.state["step"] == "results"
+    assert app.state["phase"] == "results"
+
+
+def test_wizard_full_random_vampire(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["phase"] = "build"
+    app.state["full_random"] = True
+    app._apply_full_random("vampire")
+    app._generate()
+    assert app.state["error"] is None, app.state.get("error")
+    assert app.state["result"] is not None
+    char = app.state["result"].character
+    assert char["character_type"] == "vampire"
+    assert char.get("clan")
+    assert char.get("archetype")
+    assert char.get("sub_archetype")
+    assert app.state.get("predator")
+
+
+def test_wizard_full_random_ghoul(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["full_random"] = True
+    app._apply_full_random("ghoul")
+    app._generate()
+    assert app.state["error"] is None, app.state.get("error")
+    assert app.state["result"] is not None
+    char = app.state["result"].character
+    assert char["character_type"] == "ghoul"
+    assert char.get("domitor_clan")
+    assert not app.state.get("predator")
+
+
+def test_wizard_custom_xp_generation(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["venue"] = "custom_xp"
+    app.state["xp_custom"] = "120"
+    app._generate()
+    assert app.state["error"] is None, app.state.get("error")
+    assert app.state["result"] is not None
+    assert app.state["result"].xp_budget == 120
+
+
+def test_wizard_reset_to_landing(stubs):
+    wizard = _fresh_wizard_module()
+    app = wizard.WizardApp(stubs.elements["app-root"])
+    app.state["phase"] = "results"
+    app.state["result"] = object()
+    app._reset_to_landing()
+    assert app.state["phase"] == "landing"
+    assert app.state["result"] is None
+    assert stubs.window.history.replace_calls
 
 
 def test_wizard_stale_share_url_recovers(stubs):

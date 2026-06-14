@@ -1,5 +1,5 @@
 {
-  "wizard_steps": ["game", "type", "faction", "archetype", "sub_archetype", "predator", "venue", "generate", "results"],
+  "wizard_steps": ["game", "venue", "type", "faction", "archetype", "sub_archetype", "predator", "generate", "results"],
   "character_type_picker": ["vampire", "ghoul"],
   "mes_approval_venue": "mes_end_to_dawn",
   "copy": {
@@ -8,6 +8,12 @@
     "sub_archetype_title": "Subtype",
     "sub_archetype_intro": "Narrow the build. Same archetype, different emphasis.",
     "predator_title": "Predator type",
-    "predator_intro": "How your character hunts — affects creation options and flaws."
+    "predator_intro": "How your character hunts — affects creation options and flaws.",
+    "full_random_label": "Full random",
+    "full_random_hint": "Skip the build steps — randomly pick clan, archetype, subtype, and predator type (vampire), then generate immediately.",
+    "xp_title": "Starting XP",
+    "xp_intro": "Choose how much experience the character has to spend. You can pick a venue chart, a fixed amount, or enter any value.",
+    "xp_custom_label": "XP amount",
+    "home_link_label": "← New character"
   }
 }

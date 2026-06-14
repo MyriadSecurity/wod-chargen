@@ -26,6 +26,8 @@ from wod_chargen.games.lotn_v5.system import LotnV5System
 from wod_chargen.games.registry import load_game_catalog
 from wod_chargen.venues import load_venue
 
+BUILD_STEPS = ["venue", "type", "faction", "archetype", "sub_archetype", "predator", "generate"]
+
 
 def _format_disciplines(entry: dict[str, Any]) -> str:
     if entry.get("discipline_note"):
@@ -51,12 +53,15 @@ class WizardApp:
             "predator": "",
             "venue": "mes_end_to_dawn",
             "approval": "2026-06",
+            "xp_custom": "100",
             "seed": random.randint(1, 999_999),
             "convictions_seed": random.randint(1, 999_999),
-            "step": "game",
+            "phase": "landing",
+            "unlocked_through": "venue",
             "result": None,
             "error": None,
             "tab": "sheet",
+            "full_random": False,
         }
         self._parse_url()
 
@@ -75,18 +80,22 @@ class WizardApp:
             for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
                 if key in opts:
                     self.state[key] = opts[key]
+            if "xp" in opts:
+                self.state["xp_custom"] = opts["xp"]
+                self.state["venue"] = "custom_xp"
             self._validate_selection()
             self._generate()
-            self.state["step"] = "results" if self.state.get("result") else "generate"
+            self.state["phase"] = "results" if self.state.get("result") else "build"
+            self.state["unlocked_through"] = "generate"
         except Exception as exc:
             self.state["error"] = str(exc)
-            self.state["step"] = "game"
+            self.state["phase"] = "landing"
 
     def _type_uses_predator(self) -> bool:
         return self.system.type_uses_predator(self.state["type"])
 
     def _options(self) -> dict[str, str]:
-        return wizard_share_options(
+        opts = wizard_share_options(
             character_type=self.state["type"],
             arch=self.state["arch"],
             sub=self.state["sub"],
@@ -99,6 +108,106 @@ class WizardApp:
             ),
             type_uses_predator=self._type_uses_predator(),
         )
+        if self.state.get("venue") == "custom_xp":
+            opts["xp"] = str(self.state.get("xp_custom", "")).strip()
+        return opts
+
+    def _venue_continue_error(self) -> str | None:
+        venue_id = self.state.get("venue", "")
+        if venue_id == "custom_xp":
+            raw = str(self.state.get("xp_custom", "")).strip()
+            if not raw:
+                return "Enter an XP amount."
+            try:
+                xp = int(raw)
+            except ValueError:
+                return "XP must be a whole number."
+            if xp < 0:
+                return "XP must be zero or greater."
+            return None
+        if self._venue_picker.get(venue_id, {}).get("requires_approval_month"):
+            approval = str(self.state.get("approval", "")).strip()
+            if not approval:
+                return "Enter an approval month (YYYY-MM)."
+        return None
+
+    def _step_index(self, step: str) -> int:
+        return BUILD_STEPS.index(step)
+
+    def _is_unlocked(self, step: str) -> bool:
+        through = self.state.get("unlocked_through", "venue")
+        return self._step_index(step) <= self._step_index(through)
+
+    def _step_visible(self, step: str) -> bool:
+        if step == "predator":
+            return self._type_uses_predator()
+        return True
+
+    def _advance_unlock(self, step: str) -> None:
+        through = self.state.get("unlocked_through", "venue")
+        if self._step_index(step) > self._step_index(through):
+            self.state["unlocked_through"] = step
+
+    def _next_step_after(self, step: str) -> str:
+        idx = self._step_index(step)
+        while idx + 1 < len(BUILD_STEPS):
+            idx += 1
+            candidate = BUILD_STEPS[idx]
+            if not self._step_visible(candidate):
+                continue
+            return candidate
+        return "generate"
+
+    def _advance_from(self, step: str) -> None:
+        self._advance_unlock(self._next_step_after(step))
+
+    def _start_build(self) -> None:
+        self.state["phase"] = "build"
+        self.state["unlocked_through"] = "venue"
+        self.state["error"] = None
+
+    def _reset_to_landing(self) -> None:
+        """Clear share state and return to game pick for a fresh character."""
+        self.state["phase"] = "landing"
+        self.state["unlocked_through"] = "venue"
+        self.state["result"] = None
+        self.state["error"] = None
+        self.state["seed"] = random.randint(1, 999_999)
+        self.state["convictions_seed"] = random.randint(1, 999_999)
+        path = window.location.pathname or "/"
+        hash_part = window.location.hash or ""
+        window.history.replaceState(None, "", f"{path}{hash_part}")
+
+    def _goto_results(self) -> None:
+        self.state["phase"] = "results"
+
+    def _wrap_section(self, step: str, title: str, body: Any) -> Any:
+        section = document.createElement("section")
+        section.className = "wizard-section"
+        section.id = f"wizard-step-{step}"
+        head = document.createElement("div")
+        head.className = "wizard-section__head"
+        h2 = document.createElement("h2")
+        h2.className = "wizard-section__title"
+        h2.innerText = title
+        head.appendChild(h2)
+        section.appendChild(head)
+        if body.className:
+            body.className += " wizard-section__body"
+        else:
+            body.className = "wizard-section__body"
+        section.appendChild(body)
+        return section
+
+    def _on_type_selected(self, character_type: str) -> None:
+        self.state["type"] = character_type
+        profiles = archetypes_for_type(character_type)
+        if profiles:
+            self.state["arch"] = profiles[0].id
+            self.state["sub"] = profiles[0].sub_archetypes[0].id
+        if not self.system.type_uses_predator(character_type):
+            self.state["predator"] = ""
+        self._advance_from("type")
 
     def _share_payload(self) -> SharePayload:
         return SharePayload(
@@ -142,6 +251,47 @@ class WizardApp:
             if pred and pred not in valid_pred:
                 self.state["predator"] = self.system.get_predator_picker()[0]["id"]
 
+    def _apply_full_random(self, character_type: str) -> None:
+        """Pick clan, archetype, subtype, and predator (vampire) at random."""
+        self.state["type"] = character_type
+        profiles = archetypes_for_type(character_type)
+        if not profiles:
+            raise ValueError(f"No archetypes for {character_type!r}")
+
+        profile = random.choice(profiles)
+        self.state["arch"] = profile.id
+        self.state["sub"] = random.choice(profile.sub_archetypes).id
+
+        role = "ghoul" if character_type == "ghoul" else "vampire"
+        faction_options = [
+            entry
+            for entry in self.system.get_faction_options(role)
+            if character_type != "vampire" or entry.get("kind") != "thin_blood"
+        ]
+        if not faction_options:
+            raise ValueError(f"No faction options for {character_type!r}")
+        faction = random.choice(faction_options)
+        if character_type == "ghoul":
+            self.state["domitor_clan"] = faction["id"]
+        else:
+            self.state["clan"] = faction["id"]
+
+        if self.system.type_uses_predator(character_type):
+            preds = self.system.get_predator_picker()
+            self.state["predator"] = random.choice(preds)["id"]
+        else:
+            self.state["predator"] = ""
+
+        self.state["seed"] = random.randint(1, 999_999)
+        self._validate_selection()
+
+    def _reroll_character(self) -> None:
+        if self.state.get("full_random"):
+            self._apply_full_random(self.state["type"])
+        else:
+            self.state["seed"] = random.randint(1, 999_999)
+        self._generate()
+
     def _generate(self) -> None:
         import traceback
 
@@ -169,50 +319,89 @@ class WizardApp:
     def _render(self) -> None:
         self.root.innerHTML = ""
         self.root.appendChild(app_nav("generator"))
-        step = self.state["step"]
+        phase = self.state["phase"]
         container = document.createElement("div")
-        container.className = "flex-1 mx-auto w-full px-4 py-8"
-        if step in ("faction", "archetype", "sub_archetype"):
-            container.className += " max-w-6xl"
-        else:
-            container.className += " max-w-4xl"
+        container.className = "flex-1 mx-auto w-full px-4 py-8 max-w-6xl wizard-page"
 
-        if step == "game":
+        if phase == "landing":
             container.appendChild(self._view_game())
-        elif step == "type":
-            container.appendChild(self._view_type())
-        elif step == "faction":
-            container.appendChild(self._view_faction())
-        elif step == "archetype":
-            container.appendChild(self._view_archetype())
-        elif step == "sub_archetype":
-            container.appendChild(self._view_sub_archetype())
-        elif step == "predator":
-            container.appendChild(self._view_predator())
-        elif step == "venue":
-            container.appendChild(self._view_venue())
-        elif step == "generate":
-            container.appendChild(self._view_generate())
-        elif step == "results":
-            container.appendChild(self._view_results())
+        else:
+            container.appendChild(self._home_link())
+            if phase == "build":
+                container.appendChild(self._view_build())
+            elif phase == "results":
+                container.appendChild(self._view_results())
 
         self.root.appendChild(container)
         dark_pack_footer()
 
-    def _header(self, title: str, back_step: str | None = None) -> Any:
+    def _home_link(self) -> Any:
+        copy = self.system.get_wizard_copy()
+        link = document.createElement("a")
+        link.href = "#"
+        link.className = "wizard-home-link no-print"
+        link.innerText = copy.get("home_link_label", "← New character")
+
+        def go_home(e=None):
+            if e is not None:
+                e.preventDefault()
+            self._reset_to_landing()
+            self._render()
+
+        link.onclick = go_home
+        return link
+
+    def _view_build(self) -> Any:
+        el = document.createElement("div")
+        el.className = "wizard-build"
+        el.appendChild(self._page_header("WoD Character Generator"))
+
+        map_link = document.createElement("a")
+        map_link.href = "#weights"
+        map_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
+        map_link.innerText = "Explore weight map →"
+        from pyscript.ffi import create_proxy
+
+        from app.nav import _nav_click
+
+        map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
+        el.appendChild(map_link)
+
+        copy = self.system.get_wizard_copy()
+        sections: list[tuple[str, str, Any]] = [
+            ("venue", copy.get("xp_title", "Starting XP"), self._view_venue()),
+            ("type", "Character type", self._view_type()),
+            ("faction", self.system.get_faction_picker_title(self._faction_role()), self._view_faction()),
+            (
+                "archetype",
+                copy.get("archetype_title", "Archetype"),
+                self._view_archetype(),
+            ),
+            (
+                "sub_archetype",
+                copy.get("sub_archetype_title", "Subtype"),
+                self._view_sub_archetype(),
+            ),
+            ("predator", copy.get("predator_title", "Predator type"), self._view_predator()),
+            ("generate", "Generate", self._view_generate()),
+        ]
+        for step, title, body in sections:
+            if not self._step_visible(step):
+                continue
+            if not self._is_unlocked(step):
+                continue
+            el.appendChild(self._wrap_section(step, title, body))
+
+        if self.state.get("error") and self.state.get("phase") == "build":
+            err = document.createElement("p")
+            err.className = "text-red-400 mt-4"
+            err.innerText = self.state["error"]
+            el.appendChild(err)
+        return el
+
+    def _page_header(self, title: str) -> Any:
         wrap = document.createElement("div")
         wrap.className = "mb-6"
-        if back_step:
-
-            def go_back(_=None):
-                self.state["step"] = back_step
-                self._render()
-
-            btn = document.createElement("button")
-            btn.className = "btn-secondary mb-4 text-sm"
-            btn.innerText = "← Back"
-            btn.onclick = go_back
-            wrap.appendChild(btn)
         h = document.createElement("h1")
         h.className = "text-2xl font-bold text-blood"
         h.innerText = title
@@ -237,7 +426,7 @@ class WizardApp:
 
     def _view_game(self) -> Any:
         el = document.createElement("div")
-        el.appendChild(self._header("WoD Character Generator"))
+        el.appendChild(self._page_header("WoD Character Generator"))
         p = document.createElement("p")
         p.className = "text-stone-400 mb-6"
         p.innerText = self.system.get_wizard_copy().get(
@@ -269,7 +458,7 @@ class WizardApp:
 
                 def start(_=None, gid=game_id):
                     self.state["game"] = gid
-                    self.state["step"] = "type"
+                    self._start_build()
                     self._render()
 
                 card.onclick = start
@@ -290,7 +479,34 @@ class WizardApp:
 
     def _view_type(self) -> Any:
         el = document.createElement("div")
-        el.appendChild(self._header("Character type", "game"))
+        copy = self.system.get_wizard_copy()
+        random_wrap = document.createElement("label")
+        random_wrap.className = "card p-4 mb-4 flex items-start gap-3 cursor-pointer"
+        random_cb = document.createElement("input")
+        random_cb.type = "checkbox"
+        random_cb.className = "mt-1"
+        random_cb.checked = bool(self.state.get("full_random"))
+
+        def on_random_toggle(_=None):
+            self.state["full_random"] = bool(random_cb.checked)
+
+        random_cb.onchange = on_random_toggle
+        random_wrap.appendChild(random_cb)
+        random_text = document.createElement("div")
+        random_title = document.createElement("div")
+        random_title.className = "font-semibold"
+        random_title.innerText = copy.get("full_random_label", "Full random")
+        random_hint = document.createElement("p")
+        random_hint.className = "text-stone-400 text-sm mt-1"
+        random_hint.innerText = copy.get(
+            "full_random_hint",
+            "Skip the build steps — randomly pick clan, archetype, subtype, and predator type, then generate.",
+        )
+        random_text.appendChild(random_title)
+        random_text.appendChild(random_hint)
+        random_wrap.appendChild(random_text)
+        el.appendChild(random_wrap)
+
         for entry in self.system.get_character_type_picker():
             tid = entry["id"]
             label = entry["label"]
@@ -299,12 +515,16 @@ class WizardApp:
             btn.className = f"card p-4 w-full text-left mb-3 {'border-blood' if active else ''}"
 
             def pick(e, t=tid):
-                self.state["type"] = t
-                profiles = archetypes_for_type(t)
-                if profiles:
-                    self.state["arch"] = profiles[0].id
-                    self.state["sub"] = profiles[0].sub_archetypes[0].id
-                self.state["step"] = "faction"
+                if self.state.get("full_random"):
+                    self._apply_full_random(t)
+                    self._generate()
+                    if self.state.get("result"):
+                        self._goto_results()
+                    else:
+                        self.state["phase"] = "build"
+                        self.state["unlocked_through"] = "generate"
+                else:
+                    self._on_type_selected(t)
                 self._render()
 
             btn.innerText = label
@@ -318,7 +538,6 @@ class WizardApp:
     def _view_faction(self) -> Any:
         el = document.createElement("div")
         role = self._faction_role()
-        el.appendChild(self._header(self.system.get_faction_picker_title(role), "type"))
         options = self.system.get_faction_options(role)
         clan_key = "clan" if role == "vampire" else "domitor_clan"
 
@@ -368,7 +587,7 @@ class WizardApp:
                 else:
                     self.state["type"] = r
                     self.state[k] = entry["id"]
-                self.state["step"] = "archetype"
+                self._advance_from("faction")
                 self._render()
 
             btn.onclick = pick
@@ -378,8 +597,6 @@ class WizardApp:
 
     def _view_archetype(self) -> Any:
         el = document.createElement("div")
-        copy = self.system.get_wizard_copy()
-        el.appendChild(self._header(copy.get("archetype_title", "Archetype"), "faction"))
         profiles = archetypes_for_type(self.state["type"])
 
         grid = document.createElement("div")
@@ -410,7 +627,7 @@ class WizardApp:
                 profile = get_archetype(aid)
                 if profile.sub_archetypes:
                     self.state["sub"] = profile.sub_archetypes[0].id
-                self.state["step"] = "sub_archetype"
+                self._advance_from("archetype")
                 self._render()
 
             btn.onclick = pick
@@ -421,7 +638,6 @@ class WizardApp:
     def _view_sub_archetype(self) -> Any:
         el = document.createElement("div")
         copy = self.system.get_wizard_copy()
-        el.appendChild(self._header(copy.get("sub_archetype_title", "Subtype"), "archetype"))
         profile = get_archetype(self.state["arch"])
 
         intro = document.createElement("p")
@@ -455,7 +671,7 @@ class WizardApp:
 
             def pick(e, sid=s.id):
                 self.state["sub"] = sid
-                self.state["step"] = "predator" if self._type_uses_predator() else "venue"
+                self._advance_from("sub_archetype")
                 self._render()
 
             btn.onclick = pick
@@ -466,7 +682,6 @@ class WizardApp:
     def _view_predator(self) -> Any:
         el = document.createElement("div")
         copy = self.system.get_wizard_copy()
-        el.appendChild(self._header(copy.get("predator_title", "Predator type"), "sub_archetype"))
 
         intro = document.createElement("p")
         intro.className = "text-stone-400 mb-4"
@@ -517,7 +732,7 @@ class WizardApp:
 
             def pick(e, p=pid):
                 self.state["predator"] = p
-                self.state["step"] = "venue"
+                self._advance_from("predator")
                 self._render()
 
             btn.onclick = pick
@@ -527,8 +742,16 @@ class WizardApp:
 
     def _view_venue(self) -> Any:
         el = document.createElement("div")
-        back = "predator" if self._type_uses_predator() else "sub_archetype"
-        el.appendChild(self._header("Venue & XP", back))
+        copy = self.system.get_wizard_copy()
+
+        intro = document.createElement("p")
+        intro.className = "text-stone-400 mb-4"
+        intro.innerText = copy.get(
+            "xp_intro",
+            "Choose how much experience the character has to spend.",
+        )
+        el.appendChild(intro)
+
         for venue in self.system.get_venue_picker():
             vid = venue["id"]
             label = venue["label"]
@@ -537,6 +760,7 @@ class WizardApp:
 
             def pick(e, v=vid):
                 self.state["venue"] = v
+                self.state["error"] = None
                 self._render()
 
             btn.innerText = label
@@ -559,11 +783,38 @@ class WizardApp:
             el.appendChild(lbl)
             el.appendChild(inp)
 
+        xp_inp: Any | None = None
+        if self.state.get("venue") == "custom_xp":
+            lbl = document.createElement("label")
+            lbl.className = "block mt-4 text-stone-400"
+            lbl.innerText = copy.get("xp_custom_label", "XP amount")
+            xp_inp = document.createElement("input")
+            xp_inp.type = "number"
+            xp_inp.min = "0"
+            xp_inp.step = "1"
+            xp_inp.value = str(self.state.get("xp_custom", "100"))
+            xp_inp.className = "bg-ash border border-stone-700 rounded px-3 py-2 w-full mt-1"
+
+            def on_xp_change(e):
+                self.state["xp_custom"] = xp_inp.value
+
+            xp_inp.oninput = on_xp_change
+            el.appendChild(lbl)
+            el.appendChild(xp_inp)
+
         go = document.createElement("button")
         go.className = "btn-primary mt-6"
 
         def next_step(_=None):
-            self.state["step"] = "generate"
+            if xp_inp is not None:
+                self.state["xp_custom"] = str(xp_inp.value).strip()
+            err = self._venue_continue_error()
+            if err:
+                self.state["error"] = err
+                self._render()
+                return
+            self.state["error"] = None
+            self._advance_from("venue")
             self._render()
 
         go.innerText = "Continue"
@@ -573,7 +824,6 @@ class WizardApp:
 
     def _view_generate(self) -> Any:
         el = document.createElement("div")
-        el.appendChild(self._header("Generate", "venue"))
         seed_lbl = document.createElement("label")
         seed_lbl.className = "block text-stone-400"
         seed_lbl.innerText = "Seed (reproducible)"
@@ -601,7 +851,7 @@ class WizardApp:
                 return
             self._generate()
             if self.state.get("result"):
-                self.state["step"] = "results"
+                self._goto_results()
             self._render()
 
         gen.innerText = "Generate character"
@@ -617,8 +867,23 @@ class WizardApp:
 
     def _view_results(self) -> Any:
         el = document.createElement("div")
-        header = self._header("Results", "generate")
+        header = self._page_header("Results")
         header.className += " no-print"
+        actions_top = document.createElement("div")
+        actions_top.className = "flex flex-wrap gap-3 mb-4 no-print"
+
+        def edit_build(_=None):
+            self.state["phase"] = "build"
+            self.state["unlocked_through"] = "generate"
+            self.state["error"] = None
+            self._render()
+
+        edit_btn = document.createElement("button")
+        edit_btn.className = "btn-secondary text-sm"
+        edit_btn.innerText = "← Edit build"
+        edit_btn.onclick = edit_build
+        actions_top.appendChild(edit_btn)
+        header.appendChild(actions_top)
         el.appendChild(header)
         result = self.state.get("result")
         if not result:
@@ -726,8 +991,7 @@ class WizardApp:
             window.navigator.clipboard.writeText(link)
 
         def reroll(_=None):
-            self.state["seed"] = random.randint(1, 999_999)
-            self._generate()
+            self._reroll_character()
             self._render()
 
         def export_json(_=None):

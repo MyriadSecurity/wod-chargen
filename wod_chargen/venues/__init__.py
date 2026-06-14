@@ -52,4 +52,17 @@ def resolve_xp_budget(venue_id: str, options: dict[str, Any]) -> tuple[int, list
         log_lines.append(f"Fixed starting XP: {total}")
         return total, log_lines
 
+    if method == "custom":
+        raw = options.get("xp")
+        if raw is None or str(raw).strip() == "":
+            raise ValueError("XP amount required for custom XP")
+        try:
+            xp = int(raw)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("XP must be a whole number") from exc
+        if xp < 0:
+            raise ValueError("XP must be zero or greater")
+        log_lines.append(f"Custom starting XP: {xp}")
+        return xp, log_lines
+
     raise ValueError(f"Unknown xp_method: {method}")

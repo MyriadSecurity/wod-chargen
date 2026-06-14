@@ -1,0 +1,8 @@
+{
+  "id": "custom_xp",
+  "label": "Custom XP amount",
+  "game_id": "lotn_v5",
+  "xp_method": "custom",
+  "house_rules": { "min_generation": 9, "max_generation": 13 },
+  "archetype_pack": "default"
+}
