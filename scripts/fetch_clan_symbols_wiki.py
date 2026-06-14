@@ -170,6 +170,12 @@ def main() -> int:
         written = download_symbols(page, url_map)
         browser.close()
 
+    if written:
+        import subprocess
+
+        invert_script = Path(__file__).resolve().parent / "invert_clan_symbols.py"
+        subprocess.run([sys.executable, str(invert_script)], check=True)
+
     missing = set(CLAN_WIKI_NAMES) - set(written)
     if missing:
         print(f"missing: {', '.join(sorted(missing))}", file=sys.stderr)
