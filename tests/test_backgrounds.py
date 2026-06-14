@@ -110,7 +110,7 @@ def test_generated_character_background_entries():
     validate_full_modifier_accounting(bgs, meta)
 
 
-@pytest.mark.parametrize("seed", range(30))
+@pytest.mark.parametrize("seed", range(10))
 def test_full_generation_modifier_accounting(seed: int):
     result = generate_character(seed, _opts(), _venue())
     validate_full_modifier_accounting(

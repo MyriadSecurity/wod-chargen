@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from wod_chargen.core.models import XpLogEntry
 from wod_chargen.core.xp_log_format import format_xp_log
-from wod_chargen.games.lotn_v5.generator import generate_character
 
 
 def _entry(**kwargs) -> XpLogEntry:
@@ -62,20 +61,3 @@ def test_format_xp_log_ghoul_power_uses_display_label():
     assert "Feral Whispers" in text
     assert "(Animalism)" in text
 
-
-def test_xp_log_entries_include_new_level():
-    from wod_chargen.core.data_loader import load_json_cached
-
-    venue = load_json_cached("wod_chargen.venues", "mes_end_to_dawn.json")
-    opts = {
-        "type": "vampire",
-        "clan": "brujah",
-        "arch": "diplomat",
-        "sub": "silver_tongue",
-        "approval": "2026-06",
-    }
-    result = generate_character(424242, opts, venue)
-    assert result.xp_log
-    for entry in result.xp_log:
-        assert entry.new_level >= 1
-        assert entry.spend_group

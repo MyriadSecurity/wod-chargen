@@ -6,16 +6,20 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from wod_chargen.core.data_loader import load_json_cached  # noqa: E402
 from wod_chargen.games.lotn_v5.archetypes import (  # noqa: E402
     BIAS_MODIFIER_KEYS,
     _registry_ids,
     load_all_archetypes,
 )
 from wod_chargen.games.lotn_v5.trait_biases import load_trait_tags  # noqa: E402
+
+DATA = ROOT / "wod_chargen/games/lotn_v5/data"
 
 BIAS_MIN = 0.05
 BIAS_MAX = 3.0
@@ -59,6 +63,32 @@ def _validate_discipline_expressions(
         for pid in (spec.get("power_biases") or {}):
             if pid not in power_ids:
                 errors.append(f"{arch_path}: discipline_expressions alternate unknown power {pid!r}")
+
+
+def _validate_loresheet_bias_coverage(errors: list[str]) -> None:
+    themes = json.loads((DATA / "loresheet_themes.json").read_text())
+    theme_ids = set(themes["loresheets"])
+    for arch_id in load_all_archetypes():
+        raw = json.loads((DATA / "archetypes" / f"{arch_id}.json").read_text())
+        bias_ids = set(raw.get("loresheet_biases", {}))
+        if bias_ids != theme_ids:
+            errors.append(f"{arch_id}: loresheet_biases keys mismatch theme catalog")
+
+    clans = load_json_cached("wod_chargen.games.lotn_v5.data", "clans.json")
+    for clan_id, clan in clans.items():
+        if clan_id == "thin_blood":
+            continue
+        if "loresheet_biases" not in clan or not isinstance(clan["loresheet_biases"], dict):
+            errors.append(f"clans.json[{clan_id}]: missing loresheet_biases")
+
+
+def _validate_merits_flaws_descriptions(errors: list[str]) -> None:
+    catalog = load_json_cached("wod_chargen.games.lotn_v5.data", "merits_flaws.json")
+    for kind in ("merits", "flaws"):
+        for entry in catalog[kind]:
+            desc = entry.get("description") or ""
+            if len(desc) < 20:
+                errors.append(f"{kind} {entry['id']}: missing or short description")
 
 
 def main() -> int:
@@ -111,6 +141,9 @@ def main() -> int:
                     errors,
                     warnings,
                 )
+
+    _validate_loresheet_bias_coverage(errors)
+    _validate_merits_flaws_descriptions(errors)
 
     try:
         profiles = load_all_archetypes()

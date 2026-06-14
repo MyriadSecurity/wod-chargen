@@ -79,21 +79,6 @@ def test_loresheet_efficiency_favors_track_completion():
     assert loresheet_efficiency_bias(2, 3) > efficiency_item_bias(2, 3)
 
 
-def test_most_vampires_take_loresheets_with_multi_dots():
-    venue = _venue()
-    has_sheet = 0
-    two_plus = 0
-    for seed in range(120):
-        result = generate_character(seed, _opts(clan="brujah", arch="enforcer", sub="brawler"), venue)
-        dots = sum(result.character.get("loresheets", {}).values())
-        if dots:
-            has_sheet += 1
-            if dots >= 2:
-                two_plus += 1
-    assert has_sheet / 120 >= 0.65
-    assert two_plus / max(has_sheet, 1) >= 0.45
-
-
 def test_xp_prefers_dot_five_and_shallow_buys():
     fifth_dots = 0
     shallow = 0

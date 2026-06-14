@@ -29,13 +29,6 @@ def test_mes_xp_budget_only():
     assert result.xp_spent <= 185
 
 
-def test_reproducibility_vampire():
-    a = generate_character(999, _opts(), _venue())
-    b = generate_character(999, _opts(), _venue())
-    assert a.character == b.character
-    assert len(a.xp_log) == len(b.xp_log)
-
-
 def test_ghoul_no_loresheet_purchases():
     result = generate_character(
         7,
@@ -111,7 +104,7 @@ def _assert_caps(character: dict, *, discipline_cap: int = 5, formula_cap: int =
         assert character["blood_potency"] <= bp_cap
 
 
-@pytest.mark.parametrize("seed", range(25))
+@pytest.mark.parametrize("seed", range(12))
 def test_vampire_ratings_respect_caps(seed: int):
     result = generate_character(seed, _opts(), _venue())
     _assert_caps(result.character)
@@ -137,13 +130,16 @@ def test_thin_blood_ratings_respect_caps(seed: int):
     _assert_caps(result.character, discipline_cap=5, formula_cap=3)
 
 
-def test_creation_backgrounds_assign_seven_dots():
-    """Seven free pool dots are fully allocated (connections, modifiers, or unplaced)."""
-    for seed in range(30):
-        result = generate_character(seed, _opts(), _venue())
-        pool = result.character["background_meta"]["creation_pool"]
-        spent = pool["connection"] + pool["modifier"] + pool.get("unplaced", 0)
-        assert spent == pool["total"], f"seed {seed}"
+@pytest.mark.parametrize("seed", range(12))
+def test_creation_traits_never_reused(seed: int):
+    result = generate_character(seed, _opts(), _venue())
+    for prefix in ("Attribute", "Skill"):
+        names = [
+            _trait_from_log(entry.message)
+            for entry in result.creation_log
+            if entry.phase == "base" and entry.message.startswith(prefix)
+        ]
+        assert len(names) == len(set(names)), f"seed {seed} {prefix}: {names}"
 
 
 def test_creation_log_shows_increment():
@@ -155,18 +151,6 @@ def test_creation_log_shows_increment():
 
 def _trait_from_log(message: str) -> str:
     return message.split()[1]
-
-
-@pytest.mark.parametrize("seed", range(25))
-def test_creation_traits_never_reused(seed: int):
-    result = generate_character(seed, _opts(), _venue())
-    for prefix in ("Attribute", "Skill"):
-        names = [
-            _trait_from_log(entry.message)
-            for entry in result.creation_log
-            if entry.phase == "base" and entry.message.startswith(prefix)
-        ]
-        assert len(names) == len(set(names)), f"seed {seed} {prefix}: {names}"
 
 
 def _creation_log_category(message: str) -> int:

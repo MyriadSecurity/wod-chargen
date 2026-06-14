@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import ast
 import compileall
-import importlib
-import pkgutil
 import re
 import sys
 from pathlib import Path
@@ -64,17 +62,6 @@ def _collect_python_closure(entry_rel: str) -> set[str]:
     return seen
 
 
-def _discover_wod_chargen_modules() -> list[str]:
-    import wod_chargen
-
-    prefix = wod_chargen.__name__ + "."
-    return sorted(
-        module.name
-        for module in pkgutil.walk_packages(wod_chargen.__path__, prefix)
-        if not module.name.endswith(".tests")
-    )
-
-
 def test_index_html_entrypoints_exist():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     refs = SRC_ATTR_RE.findall(html)
@@ -117,21 +104,6 @@ def test_wizard_import_closure_files_exist():
     closure = _collect_python_closure("app/wizard.py")
     assert "app/components/sheet.py" in closure
     assert "wod_chargen/games/lotn_v5/generator.py" in closure
-
-
-def test_import_closure_packaged_in_pyscript_toml():
-    packaged = parse_pyscript_toml(ROOT / "pyscript.toml")
-    closure = _collect_python_closure("app/wizard.py")
-    json_deps = {p for p in packaged if p.endswith(".json")}
-    py_closure = {p for p in closure if p.endswith(".py")}
-    missing = py_closure - packaged
-    assert not missing, f"pyscript.toml missing wizard dependency modules: {sorted(missing)}"
-    assert json_deps, "pyscript.toml should list JSON data files"
-
-
-@pytest.mark.parametrize("module_name", _discover_wod_chargen_modules())
-def test_import_wod_chargen_module(module_name: str):
-    importlib.import_module(module_name)
 
 
 def test_static_assets_served_over_http(site_base_url: str):

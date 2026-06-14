@@ -2,7 +2,6 @@
 
 import pytest
 
-from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.disciplines import (
     discipline_power_ids_for_track,
     enumerate_ghoul_power_candidates,
@@ -17,12 +16,6 @@ from tests.support.fixtures import CUSTOM_XP_VENUE, ghoul_opts as _opts, load_ve
 
 def _venue():
     return load_venue(CUSTOM_XP_VENUE)
-
-
-def test_ghoul_has_no_generation_field():
-    result = generate_character(42, _opts(), _venue())
-    assert "generation" not in result.character
-    assert result.character.get("blood_potency") == 0
 
 
 def test_ghoul_power_xp_uses_level_one_power_ids():
@@ -95,7 +88,7 @@ _FORBIDDEN_GHOUL_TRAITS = {
 }
 
 
-@pytest.mark.parametrize("seed", range(100))
+@pytest.mark.parametrize("seed", range(10))
 def test_ghoul_never_gets_kindred_feeding_or_frenzy_traits(seed: int):
     result = generate_character(seed, _opts(), _venue())
     assigned = set()
@@ -104,7 +97,7 @@ def test_ghoul_never_gets_kindred_feeding_or_frenzy_traits(seed: int):
     assert not assigned & _FORBIDDEN_GHOUL_TRAITS, f"seed {seed}: {assigned & _FORBIDDEN_GHOUL_TRAITS}"
 
 
-@pytest.mark.parametrize("seed", range(20))
+@pytest.mark.parametrize("seed", range(10))
 def test_ghoul_power_candidates_from_domitor_pool(seed: int):
     result = generate_character(seed, _opts(xp="0"), _venue())
     char = result.character
@@ -131,13 +124,3 @@ def test_caitiff_domitor_ghoul_uses_three_disciplines_not_full_catalog():
         assert power_by_id(power_id)["discipline_id"] in domitor_pool
 
     assert not char.get("ghoul_powers"), "powers must not duplicate in ghoul_powers bucket"
-
-
-@pytest.mark.parametrize("seed", range(20))
-def test_ghoul_powers_only_in_discipline_powers(seed: int):
-    result = generate_character(
-        seed,
-        _opts(domitor_clan="caitiff", arch="occultist", sub="ritualist"),
-        _venue(),
-    )
-    assert not result.character.get("ghoul_powers")

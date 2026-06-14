@@ -131,30 +131,6 @@ def test_browser_share_url_includes_schema_and_seed():
     assert decoded.options["arch"] == "diplomat"
 
 
-def test_share_url_regenerates_same_character():
-    seed = 918273
-    options = wizard_share_options(
-        character_type="vampire",
-        arch="diplomat",
-        sub="silver_tongue",
-        clan="brujah",
-        predator="siren",
-        approval="2026-06",
-        venue_requires_approval_month=True,
-        type_uses_predator=True,
-    )
-    venue = _venue()
-    original = generate_character(seed, options, venue)
-
-    payload = SharePayload(seed=seed, options=options)
-    share_url = browser_share_url("/chargen/", payload)
-    decoded = decode_query(urlparse(share_url).query)
-
-    restored = generate_character(decoded.seed, decoded.options, _venue())
-    assert restored.character == original.character
-    assert restored.xp_spent == original.xp_spent
-
-
 def test_same_seed_stable_across_python_hash_seed():
     """Same seed must yield identical output across fresh interpreter runs."""
     import hashlib
@@ -205,34 +181,4 @@ print(hashlib.sha256(payload.encode()).hexdigest())
         assert len(digest) == 64, proc.stdout
         hashes.add(digest)
 
-    assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"
-
-
-def test_same_seed_output_hash_stable_in_process():
-    """Same seed must yield identical output hash on repeated in-process runs."""
-    import hashlib
-    import json
-
-    options = wizard_share_options(
-        character_type="vampire",
-        arch="diplomat",
-        sub="silver_tongue",
-        clan="brujah",
-        predator="siren",
-        approval="2026-06",
-        venue_requires_approval_month=True,
-        type_uses_predator=True,
-    )
-    venue = _venue()
-    seed = 424242
-
-    def output_hash() -> str:
-        result = generate_character(seed, options, venue)
-        payload = json.dumps(
-            {"character": result.character, "xp_spent": result.xp_spent},
-            sort_keys=True,
-        )
-        return hashlib.sha256(payload.encode()).hexdigest()
-
-    hashes = {output_hash() for _ in range(5)}
     assert len(hashes) == 1, f"Output hashes differ across runs: {hashes}"

@@ -1,9 +1,10 @@
 """Generation and Blood Potency assignment tests."""
 
+import pytest
+
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.generation import (
     apply_mandatory_blood_potency,
-    assign_generation_and_blood_potency,
     pick_generation_number,
 )
 from wod_chargen.games.lotn_v5.generator import generate_character
@@ -28,16 +29,6 @@ def test_explicit_generation_option():
     result = generate_character(1, _opts(generation=11), _venue())
     assert result.character["generation"] == 11
     assert result.character["generation_meta"]["max_blood_potency"] == 4
-
-
-def test_ninth_generation_mandatory_blood_potency():
-    result = generate_character(1, _opts(generation=9), _venue())
-    assert result.character["generation"] == 9
-    assert result.character["blood_potency"] >= 2
-    mandatory = [e for e in result.xp_log if e.source == "mandatory"]
-    assert mandatory
-    assert mandatory[0].category == "blood_potency"
-    assert mandatory[0].cost == 20
 
 
 def test_thin_blood_generation_range():
@@ -80,8 +71,6 @@ def test_pick_generation_respects_venue_bounds():
 
 
 def test_generation_below_venue_minimum_rejected():
-    import pytest
-
     with pytest.raises(ValueError, match="not allowed"):
         generate_character(1, _opts(generation=8), _venue())
 
@@ -103,8 +92,10 @@ def test_apply_mandatory_blood_potency_shortfall():
 def test_mandatory_blood_potency_only_for_ninth_gen_pcs():
     """9th is the PC floor at MES; only eligible gen with min BP 2."""
     result = generate_character(1, _opts(generation=9), _venue())
+    assert result.character["blood_potency"] >= 2
     mandatory = [e for e in result.xp_log if e.source == "mandatory"]
     assert mandatory
+    assert mandatory[0].category == "blood_potency"
     assert mandatory[0].cost == 20
 
     result = generate_character(1, _opts(generation=10), _venue())

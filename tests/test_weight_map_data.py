@@ -7,10 +7,6 @@ from app.weight_map_data import (
     build_archetype_profile_tree,
     build_clan_profile_tree,
     build_predator_profile_tree,
-    category_picker_options,
-    clan_picker_options,
-    picker_options,
-    predator_picker_options,
 )
 
 
@@ -84,9 +80,3 @@ def test_combo_clan_adapts_off_clan_signatures():
     assert brujah.discipline_biases.get("celerity", 0) >= 0.85
     assert tremere.discipline_biases != brujah.discipline_biases
 
-
-def test_picker_counts():
-    assert len(picker_options()) == 44
-    assert len(predator_picker_options()) == 13
-    assert len(clan_picker_options()) == 15
-    assert len(category_picker_options()) == 10

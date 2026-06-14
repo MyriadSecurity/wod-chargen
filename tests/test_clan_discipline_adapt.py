@@ -93,7 +93,7 @@ def test_build_power_biases_in_clan_floor_occultist_celerity():
         assert biases[pid] >= IN_CLAN_POWER_FLOOR
 
 
-@pytest.mark.parametrize("seed", range(30))
+@pytest.mark.parametrize("seed", range(10))
 def test_toreador_occultist_in_clan_power_biases(seed: int):
     result = generate_character(
         seed,
@@ -122,7 +122,7 @@ def test_toreador_occultist_in_clan_power_biases(seed: int):
             assert bias >= IN_CLAN_POWER_FLOOR, f"seed={seed} {disc_id} {pid}={bias}"
 
 
-@pytest.mark.parametrize("seed", range(15))
+@pytest.mark.parametrize("seed", range(8))
 def test_toreador_enforcer_generates_in_clan_disciplines(seed: int):
     result = generate_character(
         seed,

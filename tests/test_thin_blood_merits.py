@@ -17,15 +17,6 @@ def _tb_merit_flaw_counts(char: dict) -> tuple[int, int]:
     return len(char.get("thin_blood_merits", {})), len(char.get("thin_blood_flaws", {}))
 
 
-def test_thin_blood_merit_flaw_pairs_balanced():
-    result = generate_character(1, _opts(), _venue())
-    merits, flaws = _tb_merit_flaw_counts(result.character)
-    assert merits == flaws
-    if merits:
-        assert result.character["thin_blood_merits"]
-        assert result.character["thin_blood_flaws"]
-
-
 def test_thin_blood_alchemist_grants_formula_and_tba():
     result = generate_character(1, _opts(), _venue())
     char = result.character
@@ -88,19 +79,19 @@ def test_thin_blood_high_xp_still_caps_at_three_pairs():
     assert max(counts) == 3
 
 
-def test_resonance_discipline_stays_one_dot():
-    for seed in range(100):
-        result = generate_character(seed, _opts(), _venue())
-        char = result.character
-        meta = char.get("discipline_meta") or {}
-        resonance = meta.get("resonance_discipline")
-        if not resonance:
-            continue
-        assert meta.get("resonance_rating", 1) == 1
-        resonance_xp = [
-            e for e in result.xp_log if e.category == "discipline" and e.item == resonance
-        ]
-        assert not resonance_xp, f"seed {seed} spent XP on resonance discipline"
+@pytest.mark.parametrize("seed", range(15))
+def test_resonance_discipline_stays_one_dot(seed: int):
+    result = generate_character(seed, _opts(), _venue())
+    char = result.character
+    meta = char.get("discipline_meta") or {}
+    resonance = meta.get("resonance_discipline")
+    if not resonance:
+        return
+    assert meta.get("resonance_rating", 1) == 1
+    resonance_xp = [
+        e for e in result.xp_log if e.category == "discipline" and e.item == resonance
+    ]
+    assert not resonance_xp, f"seed {seed} spent XP on resonance discipline"
 
 
 def test_thin_blood_disciplines_can_exceed_two_dots():

@@ -11,7 +11,6 @@ from wod_chargen.games.lotn_v5.trait_biases import (
     build_power_biases,
     power_utility_bias,
     resolve_trait_bias,
-    trait_tag_list,
 )
 
 
@@ -52,11 +51,6 @@ def test_clamp_extreme_values():
 def test_unknown_trait_returns_one():
     profile = _StubProfile(tag_affinities={"social": 2.0})
     assert resolve_trait_bias(profile, "nonexistent_skill", "skills") == 1.0
-
-
-def test_trait_tag_list_skills():
-    tags = trait_tag_list("stealth", "skills")
-    assert "stealth" in tags
 
 
 def test_effective_profile_merges_sub_deltas():

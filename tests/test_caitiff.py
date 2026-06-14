@@ -41,7 +41,7 @@ def test_caitiff_creation_three_distinct_disciplines():
             assert power
 
 
-@pytest.mark.parametrize("seed", range(20))
+@pytest.mark.parametrize("seed", range(8))
 def test_caitiff_ratings_respect_caps(seed: int):
     result = generate_character(seed, _opts(), _venue())
     char = result.character

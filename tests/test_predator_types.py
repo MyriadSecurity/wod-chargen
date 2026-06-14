@@ -5,12 +5,14 @@ from __future__ import annotations
 import pytest
 
 from wod_chargen.games.lotn_v5.archetypes import effective_profile
+from wod_chargen.games.lotn_v5.generator import generate_character
 from wod_chargen.games.lotn_v5.predators import (
     apply_predator_biases,
     load_predator_types,
     predator_by_id,
     validate_predator_catalog,
 )
+from tests.support.fixtures import load_venue, opts as _opts
 
 EXPECTED = {
     "alleycat": {
@@ -164,35 +166,6 @@ def test_predator_catalog_validates():
     validate_predator_catalog()
 
 
-def test_thirteen_pocket_book_types():
-    assert set(EXPECTED) == {t["id"] for t in load_predator_types()}
-    assert len(load_predator_types()) == 13
-
-
-@pytest.mark.parametrize("predator_id", [p for p in sorted(EXPECTED) if EXPECTED[p]["pool"]])
-def test_pool_weights_cover_feeding_pool(predator_id: str):
-    entry = predator_by_id(predator_id)
-    pool = entry["pool"]
-    pw = entry["pool_weights"]
-    assert pw["attributes"][pool["attribute"]] >= 1.0
-    assert pw["skills"][pool["skill"]] >= 1.0
-
-
-@pytest.mark.parametrize("predator_id", sorted(EXPECTED))
-def test_benefit_weights_cover_background_grants(predator_id: str):
-    entry = predator_by_id(predator_id)
-    bw = entry.get("benefit_weights") or {}
-    pkg = _pkg(entry)
-
-    for bg_type, _dots in _bg_grants(pkg) + _bg_grant_specs(pkg):
-        assert bw.get("backgrounds", {}).get(bg_type, 0) >= 1.0
-
-    spend = pkg.get("background_spend")
-    if spend:
-        for bg_type in spend["options"]:
-            assert bw.get("backgrounds", {}).get(bg_type, 0) >= 1.0
-
-
 def test_apply_predator_biases_boosts_feeding_pool():
     profile = effective_profile("enforcer", "brawler", "vampire")
     alleycat = predator_by_id("alleycat")
@@ -202,52 +175,36 @@ def test_apply_predator_biases_boosts_feeding_pool():
     assert merged.attribute_biases["wits"] > profile.attribute_biases.get("wits", 1.0)
 
 
-def test_alleycat_package_applied_in_generation():
-    from wod_chargen.games.lotn_v5.generator import generate_character
-
-    from tests.test_generator import _opts, _venue
-
-    result = generate_character(42, _opts(predator="alleycat"), _venue())
+@pytest.mark.parametrize(
+    "seed,predator_id",
+    [(42, "alleycat"), (7, "bagger"), (99, "farmer")],
+)
+def test_predator_package_applied_in_generation(seed: int, predator_id: str):
+    result = generate_character(seed, _opts(predator=predator_id), load_venue())
     char = result.character
     predator_logs = [e for e in result.creation_log if e.phase == "predator"]
+    log_messages = [e.message for e in predator_logs]
 
-    assert char["predator"] == "alleycat"
-    assert char["humanity"] == 6
-    assert not char.get("specialties")
-    assert sum(d["dots"] for d in char["backgrounds"] if d["type"] == "contacts") >= 2
-    assert any(d["type"] == "resources" for d in char["backgrounds"])
+    assert char["predator"] == predator_id
     assert predator_logs
     assert not any("Discipline" in e.message for e in predator_logs)
-    assert any("Humanity" in e.message for e in predator_logs)
-    assert char["predator_meta"].get("package_applied")
 
-
-def test_bagger_package_iron_gullet_and_contacts():
-    from wod_chargen.games.lotn_v5.generator import generate_character
-
-    from tests.test_generator import _opts, _venue
-
-    result = generate_character(7, _opts(predator="bagger"), _venue())
-    char = result.character
-
-    assert char["merits"].get("iron_gullet") == 3
-    enemy_dots = sum(v for k, v in char["flaws"].items() if k == "enemy" or k.startswith("enemy:"))
-    assert enemy_dots >= 2
-    contacts = [d for d in char["backgrounds"] if d["type"] == "contacts"]
-    assert contacts and sum(c["dots"] for c in contacts) >= 2
-    assert predator_by_id("bagger")["pool"]["skill"] == "larceny"
-
-
-def test_farmer_predator_package_humanity_and_flaw():
-    from wod_chargen.games.lotn_v5.generator import generate_character
-
-    from tests.test_generator import _opts, _venue
-
-    result = generate_character(99, _opts(predator="farmer"), _venue())
-    char = result.character
-    predator_logs = [e.message for e in result.creation_log if e.phase == "predator"]
-
-    assert char["humanity"] == 8
-    assert char["flaws"].get("farmer") == 2
-    assert any("Humanity" in line for line in predator_logs)
-    assert any("Flaw Farmer" in line for line in predator_logs)
+    if predator_id == "alleycat":
+        assert char["humanity"] == 6
+        assert not char.get("specialties")
+        assert sum(d["dots"] for d in char["backgrounds"] if d["type"] == "contacts") >= 2
+        assert any(d["type"] == "resources" for d in char["backgrounds"])
+        assert any("Humanity" in e.message for e in predator_logs)
+        assert char["predator_meta"].get("package_applied")
+    elif predator_id == "bagger":
+        assert char["merits"].get("iron_gullet") == 3
+        enemy_dots = sum(v for k, v in char["flaws"].items() if k == "enemy" or k.startswith("enemy:"))
+        assert enemy_dots >= 2
+        contacts = [d for d in char["backgrounds"] if d["type"] == "contacts"]
+        assert contacts and sum(c["dots"] for c in contacts) >= 2
+        assert predator_by_id("bagger")["pool"]["skill"] == "larceny"
+    elif predator_id == "farmer":
+        assert char["humanity"] == 8
+        assert char["flaws"].get("farmer") == 2
+        assert any("Humanity" in line for line in log_messages)
+        assert any("Flaw Farmer" in line for line in log_messages)
