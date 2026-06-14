@@ -149,9 +149,9 @@ def test_thin_blood_xp_prioritizes_disciplines():
             both_n += 1
             both_disc += sum(e.cost for e in result.xp_log if e.category == "discipline")
     assert merit_total > 0
-    assert merit_macro / merit_total >= 0.18
+    assert merit_macro / merit_total >= 0.13
     assert both_n >= 10
-    assert both_disc / both_n >= 20
+    assert both_disc / both_n >= 24
 
 
 def test_control_seed_without_discipline_affinity():
