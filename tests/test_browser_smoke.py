@@ -125,7 +125,8 @@ def test_top_nav_switches_generator_and_weight_map(site_base_url: str):
         _wait_for_app(page)
         assert "Character Generator" in page.locator("#app-root h1").first.inner_text()
 
-        page.locator(".app-nav a").nth(1).click()
+        nav = page.locator(".app-nav")
+        nav.get_by_role("link", name="Weight Map", exact=True).click()
         page.wait_for_function(
             """() => {
                 const h1 = document.querySelector('#app-root h1');
@@ -134,7 +135,7 @@ def test_top_nav_switches_generator_and_weight_map(site_base_url: str):
             timeout=30_000,
         )
 
-        page.locator(".app-nav a").first.click()
+        nav.get_by_role("link", name="Character generator", exact=True).click()
         page.wait_for_function(
             """() => {
                 const h1 = document.querySelector('#app-root h1');
