@@ -44,10 +44,12 @@ from wod_chargen.games.lotn_v5.loresheets import (
 )
 from wod_chargen.games.lotn_v5.merits_flaws import enumerate_xp_merit_purchases
 from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
+from wod_chargen.games.lotn_v5.signature_skills import signature_skill_candidates
 from wod_chargen.games.lotn_v5.thin_blood_merits import (
     has_discipline_affinity,
     has_thin_blood_alchemist,
 )
+from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
 
 
 def enumerate_purchases(
@@ -100,6 +102,7 @@ def enumerate_purchases(
 
     skills_data = load_json_cached(DATA, "skills.json")
     sw = profile.weights.get("skills", 1.0)
+    signature_ids = frozenset(signature_skill_candidates(profile, skills_data["all"]))
     for skill in skills_data["all"]:
         cur = char["skills"].get(skill, 0)
         if cur >= caps["skill"]:
@@ -118,10 +121,11 @@ def enumerate_purchases(
                 new_level=new_level,
                 cost=cost,
                 weight=sw,
-                item_bias=profile.skill_biases.get(skill, 1.0),
+                item_bias=resolve_trait_bias(profile, skill, "skills"),
                 clan_factor=1.0,
                 source=source,
                 apply=apply_skill,
+                is_signature=skill in signature_ids,
             )
         )
 
@@ -287,8 +291,6 @@ def enumerate_purchases(
         ) -> None:
             apply_modifier_purchase(e, mid, "advantage")
             record_xp_modifier_purchase(char.setdefault("background_meta", {}))
-
-        from wod_chargen.games.lotn_v5.trait_biases import resolve_trait_bias
 
         candidates.append(
             PurchaseCandidate(

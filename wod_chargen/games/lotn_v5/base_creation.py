@@ -12,12 +12,21 @@ from wod_chargen.games.lotn_v5.backgrounds import run_background_creation
 from wod_chargen.games.lotn_v5.clan_discipline_adapt import resolve_discipline_bias
 from wod_chargen.games.lotn_v5.disciplines import assign_powers_for_discipline, discipline_pool_for_char
 from wod_chargen.games.lotn_v5.paths import DATA_PKG as DATA
+from wod_chargen.games.lotn_v5.signature_skills import (
+    SIGNATURE_SKILL_BIAS_THRESHOLD,
+    assign_reserved_signature_skill,
+    skill_biases,
+)
 
 DEFAULT_CAP = 5
 
 
-def _pool_count(pool: dict[str, int], rating: int) -> int:
-    return int(pool.get(str(rating), pool.get(rating, 0)))
+def _pool_count(pool: dict[str, int] | dict[int, int], rating: int) -> int:
+    return int(pool.get(str(rating), pool.get(rating, 0)))  # type: ignore[arg-type]
+
+
+def _mutable_pool(pool: dict[str, int]) -> dict[int, int]:
+    return {int(k): _pool_count(pool, int(k)) for k in pool}
 
 
 def _assign_one_dot_pick(
@@ -82,7 +91,7 @@ def _assign_dots_at_rating(
 
 def _assign_dots(
     rng: SeededRng,
-    pool: dict[str, int],
+    pool: dict[str, int] | dict[int, int],
     items: list[str],
     biases: dict[str, float],
     target: dict[str, int],
@@ -170,15 +179,10 @@ def apply_base_creation(
             char["attributes"],
             caps["attribute"],
         ),
-        (
-            "Skill",
-            creation["skills"],
-            all_skills,
-            profile.skill_biases,
-            char["skills"],
-            caps["skill"],
-        ),
     ]
+    skill_threshold = float(
+        creation.get("signature_skill_bias_threshold", SIGNATURE_SKILL_BIAS_THRESHOLD)
+    )
     disc_spec = creation.get("disciplines", {})
     discipline_slots_by_rating: dict[int, list[str]] = {}
     for slot_key in ("primary", "secondary", "tertiary"):
@@ -204,6 +208,29 @@ def apply_base_creation(
                     label,
                     max_rating=max_rating,
                 )
+
+    skill_pool = _mutable_pool(creation["skills"])
+    assign_reserved_signature_skill(
+        rng,
+        profile,
+        all_skills,
+        char["skills"],
+        log,
+        skill_pool,
+        max_rating=caps["skill"],
+        threshold=skill_threshold,
+    )
+    _assign_dots(
+        rng,
+        skill_pool,
+        all_skills,
+        skill_biases(profile, all_skills),
+        char["skills"],
+        log,
+        "base",
+        "Skill",
+        max_rating=caps["skill"],
+    )
 
     for rating in sorted(discipline_slots_by_rating.keys(), reverse=True):
         for slot_key in discipline_slots_by_rating[rating]:

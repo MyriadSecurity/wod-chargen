@@ -44,16 +44,34 @@ merged profile = archetype + subtype
 
 ## Creation
 
-### Attributes, skills, disciplines
+### Attributes and disciplines
 
-One free chunk per attribute/skill. +4 before +1.
+One free pool chunk per attribute. Larger pool chunks assign first (+4 before +1).
 
 ```
 pick weight = bias × (max − current)
 +4 → ×2.0   +3 → ×1.3   +1/+2 → ×1.15
 ```
 
+Attributes use explicit `attribute_biases` on the merged profile.
+
 In-clan disciplines only for free dots. Off-clan signatures at XP: ×0.6 weight.
+
+### Skills (book Balanced spread)
+
+Skills follow LoTN V5 **Balanced** creation: **0×@4, 3×@3, 5×@2, 7×@1** (15 skills with dots). No skill receives a free +4 at creation.
+
+Before the general skill pass, **one @3 slot is reserved** for a **signature skill**:
+
+```
+signature set = top 3 skills by merged bias (resolve_trait_bias)
+                with bias ≥ signature_skill_bias_threshold (default 1.35)
+                else top 3 overall if none qualify
+pick = weighted choice among unused signature candidates for the @3 reserve
+remaining pool = normal skill assignment (same merged bias)
+```
+
+Merged bias = explicit `skill_biases` **or** tag-affinity product (arch + sub + clan + predator). The reserve is logged as `(signature reserve)` in the creation log.
 
 ### Backgrounds
 
@@ -100,12 +118,17 @@ boost = clamp(1 + 4.5 × deficit, 0.25 … 4.0)
 
 ### Efficiency (selected)
 
-| Buy | × |
-|-----|---|
-| •••• → ••••• | 5.0 |
-| none → • | 2.5 |
-| none → •• | 1.6 |
-| none → ••• | 0.1 |
+| Buy | × | Signature skills |
+|-----|---|------------------|
+| •••• → ••••• | 5.0 | ×5.0 (floor) |
+| none → • | 2.5 | (default) |
+| none → •• | 1.6 | (default) |
+| • → •• | 1.4 | (default) |
+| •• → ••• | 0.35 | **×2.5** (floor) |
+| ••• → •••• | 1.1 | **×3.5** (floor) |
+| none → ••• | 0.1 | (default) |
+
+Signature skills are the same top-3 merged-bias set used at creation (`signature_skills.py`). XP pushes them toward •3–•5 because creation rarely yields •4 skills.
 
 Loresheets: 0→1 ×3.2, 1→2 ×3.6, 2→3 ×2.8.
 

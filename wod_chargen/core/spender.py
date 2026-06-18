@@ -15,6 +15,7 @@ from wod_chargen.core.xp_strategy import (
     macro_deficit_boost,
     macro_for_spend_group,
     roll_category_targets,
+    signature_skill_efficiency_bias,
 )
 
 MAX_ITERATIONS = 500
@@ -32,6 +33,7 @@ class PurchaseCandidate:
     clan_factor: float
     source: str
     apply: Callable[[], None]
+    is_signature: bool = False
 
     @property
     def effective_weight(self) -> float:
@@ -89,6 +91,8 @@ def _pick_candidate(
         cur = cand.new_level - 1
         if cand.category == "loresheet":
             eff = loresheet_efficiency_bias(cur, cand.new_level)
+        elif cand.is_signature:
+            eff = signature_skill_efficiency_bias(cur, cand.new_level)
         else:
             eff = efficiency_item_bias(cur, cand.new_level)
         eff *= budget_efficiency_scale(
