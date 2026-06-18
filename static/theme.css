@@ -923,6 +923,9 @@ body {
   color: var(--mist);
   flex: 1;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sheet-dots {
@@ -1088,10 +1091,11 @@ body {
   margin-left: 0.1rem;
 }
 
-@media (max-width: 900px) and not print {
+@media screen and (max-width: 900px) {
   .sheet-columns,
   .sheet-trait-panel__columns {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
@@ -1103,6 +1107,28 @@ body {
   .sheet-header__top {
     flex-direction: column-reverse;
     align-items: flex-start;
+  }
+
+  .sheet-trait-panel {
+    padding: 0.65rem 0.7rem 0.75rem;
+  }
+
+  .sheet-trait-panel__columns {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .sheet-trait-col .sheet-stat {
+    font-size: 0.74rem;
+  }
+
+  .sheet-trait-col .sheet-dot {
+    width: 0.48rem;
+    height: 0.48rem;
+  }
+
+  .sheet-trait-col .sheet-dots {
+    gap: 0.12rem;
   }
 }
 
