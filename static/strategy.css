@@ -45,6 +45,11 @@
   margin-bottom: 0.65rem;
 }
 
+.strategy-section strong {
+  color: var(--parchment);
+  font-weight: 600;
+}
+
 .strategy-section ul,
 .strategy-section ol {
   color: var(--mist);

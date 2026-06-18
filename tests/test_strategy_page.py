@@ -70,6 +70,29 @@ def test_strategy_page_tab_hash(stubs):
     assert "Choosing XP spends" in h2_titles
 
 
+def test_inline_html_renders_bold_markers():
+    mod = _fresh_strategy_module()
+    assert mod._inline_html("**Signature skills** (same set)") == (
+        "<strong>Signature skills</strong> (same set)"
+    )
+    assert mod._inline_html("plain text") == "plain text"
+
+
+def test_strategy_page_renders_bold_in_creation_tab(stubs):
+    mod = _fresh_strategy_module()
+    stubs.window.location.hash = "#strategy?tab=creation"
+    app = mod.StrategyPageApp(stubs.elements["app-root"])
+    app.mount()
+    body = _find_by_class(stubs.elements["app-root"], "strategy-body")
+    assert body is not None
+    paragraphs = [
+        getattr(n, "innerHTML", "")
+        for n in _walk(body)
+        if getattr(n, "tagName", "") == "P"
+    ]
+    assert any("<strong>one @3 slot is reserved</strong>" in html for html in paragraphs)
+
+
 def test_strategy_content_covers_all_tabs():
     from app.strategy_content import STRATEGY_TABS, strategy_sections
 
