@@ -123,16 +123,17 @@ def _overview_sections() -> list[dict[str, Any]]:
 def _creation_sections() -> list[dict[str, Any]]:
     return [
         {
-            "title": "Attributes, skills, and disciplines",
+            "title": "Attributes and disciplines",
             "paragraphs": [
-                "One free pool assignment per attribute or skill; no stacking +4 and +1 on "
+                "One free pool assignment per attribute; no stacking +4 and +1 on "
                 "the same trait from creation.",
-                "Larger pool chunks go first (+4 before +1). On-theme traits weigh higher; "
-                "+4 chunks get ×2.0 so a •••• creation dot often pairs with a cheap fifth dot at XP.",
+                "Larger pool chunks go first (+4 before +1). On-theme attributes weigh "
+                "higher; +4 chunks get ×2.0 so a •••• creation dot often pairs with a "
+                "cheap fifth dot at XP.",
             ],
             "formulas": [
                 {
-                    "caption": "Creation pool pick",
+                    "caption": "Creation pool pick (attributes)",
                     "body": (
                         "pick weight = trait bias × room to grow\n"
                         "room = max rating − current rating\n"
@@ -145,10 +146,37 @@ def _creation_sections() -> list[dict[str, Any]]:
                 },
             ],
             "bullets": [
-                "Dots spread across traits; single-stat maxing in creation is unlikely.",
                 "Free discipline dots land on unused in-clan disciplines; powers assign with each dot.",
                 "Power bias = archetype theme × general utility rating.",
                 "Off-clan signature disciplines: legal at XP, ×0.6 pick weight vs in-clan.",
+            ],
+        },
+        {
+            "title": "Skills and signature reserve",
+            "paragraphs": [
+                "Before the rest of the skill pool is assigned, **one @3 slot is reserved** "
+                "for a **signature skill** — a weighted pick among the top on-theme skills "
+                "for your merged profile (archetype + subtype + clan + predator). "
+                "The remaining skill dots assign normally from the creation pool.",
+            ],
+            "formulas": [
+                {
+                    "caption": "Signature skill set",
+                    "body": (
+                        "merged bias = resolve_trait_bias(skill)\n"
+                        "  explicit skill_biases OR tag-affinity product\n"
+                        "\n"
+                        "signature candidates = top 3 skills with bias ≥ 1.35\n"
+                        "  (threshold in creation.json; else top 3 overall)\n"
+                        "\n"
+                        "@3 reserve = weighted pick among unused signature candidates\n"
+                        "remaining skill pool = same merged bias, normal assignment"
+                    ),
+                },
+            ],
+            "bullets": [
+                "Creation log marks the reserve: Skill … +3 → 3 (signature reserve).",
+                "Other skills still spread broadly; single-stat skill maxing at creation is unlikely.",
             ],
         },
         {
@@ -294,6 +322,8 @@ def _xp_sections() -> list[dict[str, Any]]:
             "paragraphs": [
                 "Efficiency multipliers favor cheap, typical buys (finish •••••, open skills at • or ••). "
                 "Areas already over their target share get dampened so XP doesn't pile into one bucket.",
+                "**Signature skills** (same top-3 on-theme set as creation) get higher efficiency "
+                "when pushing to •3–•5.",
             ],
             "formulas": [
                 {
@@ -303,7 +333,8 @@ def _xp_sections() -> list[dict[str, Any]]:
                         "none → •         ×2.5\n"
                         "none → ••        ×1.6\n"
                         "• → ••           ×1.4\n"
-                        "••• → ••••       ×1.1\n"
+                        "•• → •••         ×0.35  (signature floor ×2.5)\n"
+                        "••• → ••••       ×1.1   (signature floor ×3.5)\n"
                         "none → •••       ×0.1\n"
                         "\n"
                         "Loresheets:\n"
@@ -321,6 +352,7 @@ def _xp_sections() -> list[dict[str, Any]]:
                 },
             ],
             "bullets": [
+                "Skill item bias uses merged resolve_trait_bias (explicit + tags), not explicit keys alone.",
                 "In-clan disciplines: normal XP cost and weight. Off-clan signatures: ×0.6 weight.",
                 "Blood Potency above generation minimum: group weight 0.4 (uncommon).",
                 "Loresheet benefits apply after dots are paid — the benefit itself costs no XP.",
@@ -329,7 +361,8 @@ def _xp_sections() -> list[dict[str, Any]]:
         {
             "title": "Typical sheet",
             "bullets": [
-                "Attrs and skills aligned with archetype and predator.",
+                "At least one signature skill at •3 from creation; often •4–•5 after XP.",
+                "Attrs and other skills aligned with archetype and predator.",
                 "Disciplines that fit clan costs and concept.",
                 "Background entries with modifiers on key contacts.",
                 "Some merits; often a loresheet at 2–3 dots.",
@@ -363,6 +396,7 @@ def _reference_sections() -> list[dict[str, Any]]:
                     ["Generation and Blood Potency caps", "Which attrs and skills rise"],
                     ["Power and merit prerequisites", "Which disciplines and powers"],
                     ["Dot caps per category", "Backgrounds and spheres"],
+                    ["Skill creation pool", "Signature @3 reserve + XP pushes to •3–•5"],
                     ["In-clan vs out-of-clan XP cost", "Merits, flaws, loresheets"],
                     ["Thin-blood and ghoul limits", "Overall XP allocation"],
                 ],

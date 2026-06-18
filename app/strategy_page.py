@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import html
+import re
 from typing import Any
 from urllib.parse import quote
 
@@ -16,6 +18,27 @@ from app.strategy_content import (
     STRATEGY_TABS,
     strategy_sections,
 )
+
+_INLINE_BOLD_RE = re.compile(r"\*\*(.+?)\*\*")
+
+
+def _inline_html(text: str) -> str:
+    """Render **bold** markers in strategy copy as <strong> tags."""
+    parts: list[str] = []
+    last = 0
+    for match in _INLINE_BOLD_RE.finditer(text):
+        parts.append(html.escape(text[last : match.start()]))
+        parts.append(f"<strong>{html.escape(match.group(1))}</strong>")
+        last = match.end()
+    parts.append(html.escape(text[last:]))
+    return "".join(parts)
+
+
+def _set_rich_text(element: Any, text: str) -> None:
+    if "**" in text:
+        element.innerHTML = _inline_html(text)
+    else:
+        element.innerText = text
 
 
 class StrategyPageApp:
@@ -107,7 +130,7 @@ class StrategyPageApp:
 
         for para in block.get("paragraphs", []):
             p = document.createElement("p")
-            p.innerText = para
+            _set_rich_text(p, para)
             sec.appendChild(p)
 
         for spec in block.get("formulas", []):
@@ -120,7 +143,7 @@ class StrategyPageApp:
             ul = document.createElement("ul")
             for item in block["bullets"]:
                 li = document.createElement("li")
-                li.innerText = item
+                _set_rich_text(li, item)
                 ul.appendChild(li)
             sec.appendChild(ul)
 
@@ -128,7 +151,7 @@ class StrategyPageApp:
             ol = document.createElement("ol")
             for item in block["steps"]:
                 li = document.createElement("li")
-                li.innerText = item
+                _set_rich_text(li, item)
                 ol.appendChild(li)
             sec.appendChild(ol)
 
@@ -183,7 +206,7 @@ class StrategyPageApp:
             tr = document.createElement("tr")
             for cell in row:
                 td = document.createElement("td")
-                td.innerText = cell
+                _set_rich_text(td, cell)
                 tr.appendChild(td)
             tbody.appendChild(tr)
         table.appendChild(tbody)

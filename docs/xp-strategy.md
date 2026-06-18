@@ -50,27 +50,31 @@ Archetype `weights.*` keys scale entire spend groups before item-level bias:
 | `merits` | XP merit purchases |
 | `loresheets` | Loresheet dot track (defaults high vs merits) |
 
-Item-level **`item_bias`** comes from the merged profile (`attribute_biases`, `skill_biases`, `discipline_biases`, `merit_biases`, `loresheet_biases`, background/modifier resolution, etc.). **`clan_factor`** applies to out-of-clan signature disciplines (typically 0.6) via `clan_discipline_adapt.py`.
+Item-level **`item_bias`** comes from the merged profile. Skills use **`resolve_trait_bias`** (explicit keys + tag affinities), not raw `skill_biases` alone. Attributes and other categories use their respective bias maps. **`clan_factor`** applies to out-of-clan signature disciplines (typically 0.6) via `clan_discipline_adapt.py`.
 
 ## Efficiency biases (dot economics)
 
 XP favors purchases that match LoTN cost curves:
 
-| Transition | Bias | Rationale |
-|------------|------|-----------|
-| 4 → 5 | 5.0 | Cheapest way to finish a trait |
-| 0 → 1 | 2.5 | Cheap first dot on new trait |
-| 0 → 2 | 1.6 | Shallow spread |
-| 1 → 2 | 1.4 | Second dot still efficient |
-| 3 → 4 | 1.1 | Moderate push toward cap |
-| 2 → 3 | 0.35 | Expensive middle dot — deprioritized |
-| 0 → 3+ | 0.1 | Deep single-trait buys avoided |
+| Transition | Bias | Signature skill (floor) |
+|------------|------|-------------------------|
+| 4 → 5 | 5.0 | 5.0 |
+| 0 → 1 | 2.5 | — |
+| 0 → 2 | 1.6 | — |
+| 1 → 2 | 1.4 | — |
+| 2 → 3 | 0.35 | **2.5** |
+| 3 → 4 | 1.1 | **3.5** |
+| 0 → 3+ | 0.1 | — |
+
+**Signature skills** — top 3 skills by merged bias ≥ threshold (default 1.35), same set as creation — use `signature_skill_efficiency_bias` so XP can finish •3–•5 spikes after the creation @3 reserve.
 
 **Loresheets** use a separate curve favoring taking a sheet and completing 2–3 dots (0→1: 3.2, 1→2: 3.6, 2→3: 2.8).
 
 ## Creation setup (pre-XP)
 
-Free creation uses **`creation_pick_weight`**: among unused traits, +4 pool chunks are strongly favored (×2.0) so characters often start at •4, setting up cheap fifth-dot XP buys. +3 gets ×1.3; +1/+2 get ×1.15.
+**Attributes** use `creation_pick_weight`: +4 pool chunks favored (×2.0) for cheap fifth-dot XP buys; +3 gets ×1.3; +1/+2 get ×1.15.
+
+**Skills:** one @3 slot is reserved for a signature skill before the remaining pool is assigned; see `wod_chargen/games/lotn_v5/signature_skills.py` and `creation.json` (`signature_skill_bias_threshold`).
 
 ## Purchase catalog (by character type)
 
@@ -97,5 +101,6 @@ Free creation uses **`creation_pick_weight`**: among unused traits, +4 pool chun
 | `wod_chargen/core/xp_strategy.py` | Targets, efficiency, deficit/creation helpers |
 | `wod_chargen/core/spender.py` | Three-stage weighted pick loop |
 | `wod_chargen/games/lotn_v5/xp_purchases.py` | Enumerate legal candidates per character state |
+| `wod_chargen/games/lotn_v5/signature_skills.py` | Signature skill set, creation @3 reserve |
 | `wod_chargen/games/lotn_v5/generation.py` | Mandatory Blood Potency |
 | `wod_chargen/venues/` | XP budget resolution |

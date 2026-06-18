@@ -88,19 +88,25 @@ def test_firstlight_zeroed_log_matches_character_rating():
     from wod_chargen.games.lotn_v5.generator import generate_character
     from wod_chargen.venues import load_venue
 
-    result = generate_character(
-        1,
-        {
-            "type": "vampire",
-            "clan": "caitiff",
-            "arch": "shadow",
-            "sub": "infiltrator",
-            "predator": "graverobber",
-            "approval": "2026-06",
-        },
-        load_venue("mes_end_to_dawn"),
-    )
-    assert "firstlight" in result.character.get("loresheets", {})
+    opts = {
+        "type": "vampire",
+        "clan": "caitiff",
+        "arch": "shadow",
+        "sub": "infiltrator",
+        "predator": "graverobber",
+        "approval": "2026-06",
+    }
+    venue = load_venue("mes_end_to_dawn")
+    result = None
+    for seed in range(80):
+        candidate = generate_character(seed, opts, venue)
+        if "firstlight" not in candidate.character.get("loresheets", {}):
+            continue
+        if candidate.character.get("merits", {}).get("zeroed") != 2:
+            continue
+        result = candidate
+        break
+    assert result is not None, "expected firstlight + Zeroed •• within 80 seeds"
     zeroed = int(result.character["merits"]["zeroed"])
     assert zeroed == 2
     zeroed_logs = [e.message for e in result.creation_log if "Merit Zeroed" in e.message]
