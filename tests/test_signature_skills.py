@@ -33,7 +33,7 @@ def test_signature_skill_candidates_use_merged_bias():
     )
 
 
-def test_creation_reserves_one_signature_at_three_not_four():
+def test_creation_reserves_signature_skill_at_three():
     creation = load_json_cached(DATA, "creation.json")
     profile = effective_profile("diplomat", "silver_tongue", "vampire")
     signatures = set(_signatures(profile))

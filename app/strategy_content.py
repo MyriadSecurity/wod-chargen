@@ -154,11 +154,10 @@ def _creation_sections() -> list[dict[str, Any]]:
         {
             "title": "Skills and signature reserve",
             "paragraphs": [
-                "Skills use the book **Balanced** spread: 0×@4, 3×@3, 5×@2, 7×@1 "
-                "(15 skills with dots). No skill gets a free +4 at creation.",
                 "Before the rest of the skill pool is assigned, **one @3 slot is reserved** "
                 "for a **signature skill** — a weighted pick among the top on-theme skills "
-                "for your merged profile (archetype + subtype + clan + predator).",
+                "for your merged profile (archetype + subtype + clan + predator). "
+                "The remaining skill dots assign normally from the creation pool.",
             ],
             "formulas": [
                 {
@@ -178,7 +177,6 @@ def _creation_sections() -> list[dict[str, Any]]:
             "bullets": [
                 "Creation log marks the reserve: Skill … +3 → 3 (signature reserve).",
                 "Other skills still spread broadly; single-stat skill maxing at creation is unlikely.",
-                "Signature •4–•5 usually come from XP, not creation.",
             ],
         },
         {
@@ -325,7 +323,7 @@ def _xp_sections() -> list[dict[str, Any]]:
                 "Efficiency multipliers favor cheap, typical buys (finish •••••, open skills at • or ••). "
                 "Areas already over their target share get dampened so XP doesn't pile into one bucket.",
                 "**Signature skills** (same top-3 on-theme set as creation) get higher efficiency "
-                "when pushing to •3–•5, since creation rarely grants •4 skills.",
+                "when pushing to •3–•5.",
             ],
             "formulas": [
                 {
@@ -398,7 +396,7 @@ def _reference_sections() -> list[dict[str, Any]]:
                     ["Generation and Blood Potency caps", "Which attrs and skills rise"],
                     ["Power and merit prerequisites", "Which disciplines and powers"],
                     ["Dot caps per category", "Backgrounds and spheres"],
-                    ["Book skill spread (Balanced; no @4 skill)", "Signature @3 reserve + XP pushes"],
+                    ["Skill creation pool", "Signature @3 reserve + XP pushes to •3–•5"],
                     ["In-clan vs out-of-clan XP cost", "Merits, flaws, loresheets"],
                     ["Thin-blood and ghoul limits", "Overall XP allocation"],
                 ],

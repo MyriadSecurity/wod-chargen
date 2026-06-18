@@ -70,7 +70,7 @@ def efficiency_item_bias(current_level: int, new_level: int) -> float:
 
 
 def signature_skill_efficiency_bias(current_level: int, new_level: int) -> float:
-    """Favor pushing signature skills to •3–•5; creation rarely yields •4 skills."""
+    """Favor pushing signature skills to •3–•5."""
     base = efficiency_item_bias(current_level, new_level)
     if new_level == 3 and current_level <= 2:
         return max(base, 2.5)

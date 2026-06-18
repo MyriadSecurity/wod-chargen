@@ -74,7 +74,7 @@ XP favors purchases that match LoTN cost curves:
 
 **Attributes** use `creation_pick_weight`: +4 pool chunks favored (×2.0) for cheap fifth-dot XP buys; +3 gets ×1.3; +1/+2 get ×1.15.
 
-**Skills** use book Balanced spread (no @4). One @3 slot is reserved for a signature skill before the remaining pool is assigned; see `wod_chargen/games/lotn_v5/signature_skills.py` and `creation.json` (`signature_skill_bias_threshold`).
+**Skills:** one @3 slot is reserved for a signature skill before the remaining pool is assigned; see `wod_chargen/games/lotn_v5/signature_skills.py` and `creation.json` (`signature_skill_bias_threshold`).
 
 ## Purchase catalog (by character type)
 

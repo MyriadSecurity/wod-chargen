@@ -57,9 +57,7 @@ Attributes use explicit `attribute_biases` on the merged profile.
 
 In-clan disciplines only for free dots. Off-clan signatures at XP: ×0.6 weight.
 
-### Skills (book Balanced spread)
-
-Skills follow LoTN V5 **Balanced** creation: **0×@4, 3×@3, 5×@2, 7×@1** (15 skills with dots). No skill receives a free +4 at creation.
+### Skills and signature reserve
 
 Before the general skill pass, **one @3 slot is reserved** for a **signature skill**:
 
@@ -128,7 +126,7 @@ boost = clamp(1 + 4.5 × deficit, 0.25 … 4.0)
 | ••• → •••• | 1.1 | **×3.5** (floor) |
 | none → ••• | 0.1 | (default) |
 
-Signature skills are the same top-3 merged-bias set used at creation (`signature_skills.py`). XP pushes them toward •3–•5 because creation rarely yields •4 skills.
+Signature skills are the same top-3 merged-bias set used at creation (`signature_skills.py`). XP uses higher efficiency floors on that set for •3–•5 buys.
 
 Loresheets: 0→1 ×3.2, 1→2 ×3.6, 2→3 ×2.8.
 
