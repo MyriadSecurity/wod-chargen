@@ -4,8 +4,10 @@
   "description": "Distance, sight lines, one clean shot.",
   "modifiers": {
     "skill_biases": {
-      "firearms": 0.45,
-      "awareness": 0.25
+      "firearms": 0.55,
+      "awareness": 0.25,
+      "melee": -1.9,
+      "brawl": -0.9
     },
     "discipline_biases": {
       "celerity": 0.2
