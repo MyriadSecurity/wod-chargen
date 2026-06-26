@@ -32,3 +32,14 @@ def test_diplomat_tag_bias_skews_social_skills():
 def test_shadow_suppresses_fame_background():
     profile = effective_profile("shadow", "spy", "vampire")
     assert resolve_trait_bias(profile, "fame", "backgrounds") < 1.0
+
+
+def test_marksman_skews_firearms_over_melee_and_brawl():
+    profile = effective_profile("duelist", "marksman", "vampire")
+    firearms = resolve_trait_bias(profile, "firearms", "skills")
+    melee = resolve_trait_bias(profile, "melee", "skills")
+    brawl = resolve_trait_bias(profile, "brawl", "skills")
+    assert firearms > melee > brawl
+    assert firearms >= 1.35  # signature threshold
+    assert melee <= 0.15
+    assert brawl <= 0.15
