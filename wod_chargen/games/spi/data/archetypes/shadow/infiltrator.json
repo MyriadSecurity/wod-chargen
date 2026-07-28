@@ -1,0 +1,24 @@
+{
+  "id": "infiltrator",
+  "label": "Infiltrator",
+  "description": "Doors, locks, and rooms that were never yours.",
+  "modifiers": {
+    "skill_biases": {
+      "larceny": 0.45,
+      "stealth": 0.35,
+      "athletics": 0.2
+    },
+    "attribute_biases": {
+      "dexterity": 0.35
+    },
+    "tag_affinities": {
+      "infiltration": 0.45,
+      "stealth": 0.35,
+      "athletics": 0.2
+    },
+    "merit_biases": {
+      "sleight_of_hand": 0.4,
+      "double_jointed": 0.3
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "pathfinder",
+  "label": "Pathfinder",
+  "description": "Wilderness routes, endurance, and coming back alive.",
+  "modifiers": {
+    "skill_biases": {
+      "survival": 0.45,
+      "athletics": 0.3,
+      "animal_ken": 0.25
+    },
+    "attribute_biases": {
+      "stamina": 0.35,
+      "wits": 0.2
+    },
+    "tag_affinities": {
+      "survival": 0.45,
+      "athletics": 0.3,
+      "physical": 0.25
+    },
+    "merit_biases": {
+      "hardy": 0.35,
+      "relentless": 0.35,
+      "survivalist": 0.3
+    }
+  }
+}

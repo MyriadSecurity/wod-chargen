@@ -1,0 +1,27 @@
+{
+  "id": "ritualist",
+  "label": "Ritualist",
+  "description": "Formal practice \u2014 circles, tools, and careful power.",
+  "modifiers": {
+    "skill_biases": {
+      "occult": 0.35,
+      "crafts": 0.3,
+      "academics": 0.25
+    },
+    "attribute_biases": {
+      "resolve": 0.3,
+      "intelligence": 0.2
+    },
+    "tag_affinities": {
+      "ritual": 0.45,
+      "occult": 0.3,
+      "supernatural": 0.25
+    },
+    "affinity_biases": {
+      "mage": 0.25
+    },
+    "merit_biases": {
+      "library": 0.3
+    }
+  }
+}

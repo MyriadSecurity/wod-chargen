@@ -1,0 +1,26 @@
+{
+  "id": "exorcist",
+  "label": "Exorcist",
+  "description": "Drive out what doesn\u2019t belong \u2014 Affinity as a weapon of will.",
+  "modifiers": {
+    "skill_biases": {
+      "occult": 0.3,
+      "intimidation": 0.35,
+      "weaponry": 0.25
+    },
+    "attribute_biases": {
+      "resolve": 0.35,
+      "composure": 0.2
+    },
+    "tag_affinities": {
+      "occult": 0.3,
+      "ritual": 0.35,
+      "combat": 0.25,
+      "protection": 0.3
+    },
+    "merit_biases": {
+      "hardened_exorcist": 0.4,
+      "indomitable": 0.3
+    }
+  }
+}

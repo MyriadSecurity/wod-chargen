@@ -1,0 +1,24 @@
+{
+  "id": "scientist",
+  "label": "Scientist",
+  "description": "Hypothesis, instrument, and reproducible wonder.",
+  "modifiers": {
+    "skill_biases": {
+      "science": 0.45,
+      "computer": 0.3,
+      "academics": 0.25
+    },
+    "attribute_biases": {
+      "intelligence": 0.35
+    },
+    "tag_affinities": {
+      "academia": 0.4,
+      "tech": 0.4,
+      "information": 0.25
+    },
+    "merit_biases": {
+      "natural_tinkerer": 0.35,
+      "area_of_expertise": 0.3
+    }
+  }
+}

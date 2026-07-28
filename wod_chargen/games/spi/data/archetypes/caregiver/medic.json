@@ -1,0 +1,26 @@
+{
+  "id": "medic",
+  "label": "Medic",
+  "description": "Triage, trauma care, and keeping bodies in the fight.",
+  "modifiers": {
+    "skill_biases": {
+      "medicine": 0.5,
+      "science": 0.25,
+      "empathy": 0.2
+    },
+    "attribute_biases": {
+      "intelligence": 0.25,
+      "dexterity": 0.2,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "medicine": 0.5,
+      "care": 0.3,
+      "protection": 0.2
+    },
+    "merit_biases": {
+      "holistic_awareness": 0.4,
+      "tolerance_for_biology": 0.3
+    }
+  }
+}

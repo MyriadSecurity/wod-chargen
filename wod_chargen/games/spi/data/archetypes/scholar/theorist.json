@@ -1,0 +1,25 @@
+{
+  "id": "theorist",
+  "label": "Theorist",
+  "description": "Models of the impossible \u2014 pattern, paradox, and proof.",
+  "modifiers": {
+    "skill_biases": {
+      "academics": 0.35,
+      "occult": 0.35,
+      "science": 0.25
+    },
+    "attribute_biases": {
+      "intelligence": 0.3,
+      "wits": 0.25
+    },
+    "tag_affinities": {
+      "academia": 0.35,
+      "occult": 0.35,
+      "mental": 0.25
+    },
+    "merit_biases": {
+      "interdisciplinary_specialty": 0.35,
+      "patient": 0.25
+    }
+  }
+}

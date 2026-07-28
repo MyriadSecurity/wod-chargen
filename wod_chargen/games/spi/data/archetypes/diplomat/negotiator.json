@@ -1,0 +1,26 @@
+{
+  "id": "negotiator",
+  "label": "Negotiator",
+  "description": "Talk first, talk last \u2014 close the deal without blood.",
+  "modifiers": {
+    "skill_biases": {
+      "persuasion": 0.45,
+      "empathy": 0.3,
+      "politics": 0.25
+    },
+    "attribute_biases": {
+      "presence": 0.35,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "influence": 0.45,
+      "social": 0.3,
+      "care": 0.2,
+      "combat": -0.2
+    },
+    "merit_biases": {
+      "inspiring": 0.35,
+      "spin_doctor": 0.3
+    }
+  }
+}

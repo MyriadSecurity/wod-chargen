@@ -1,0 +1,26 @@
+{
+  "id": "interviewer",
+  "label": "Interviewer",
+  "description": "Read people, pry gently, turn testimony into leads.",
+  "modifiers": {
+    "skill_biases": {
+      "empathy": 0.4,
+      "persuasion": 0.3,
+      "investigation": 0.25
+    },
+    "attribute_biases": {
+      "composure": 0.25,
+      "presence": 0.2
+    },
+    "tag_affinities": {
+      "investigation": 0.25,
+      "influence": 0.3,
+      "perception": 0.3,
+      "care": 0.2
+    },
+    "merit_biases": {
+      "patient": 0.3,
+      "empath": 0.35
+    }
+  }
+}

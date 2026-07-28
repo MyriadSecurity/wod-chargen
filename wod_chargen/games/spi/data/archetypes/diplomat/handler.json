@@ -1,0 +1,26 @@
+{
+  "id": "handler",
+  "label": "Handler",
+  "description": "Manage assets, leverage favors, keep secrets circulating.",
+  "modifiers": {
+    "skill_biases": {
+      "subterfuge": 0.35,
+      "persuasion": 0.3,
+      "empathy": 0.25
+    },
+    "attribute_biases": {
+      "manipulation": 0.4,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "influence": 0.35,
+      "deception": 0.35,
+      "information": 0.25
+    },
+    "merit_biases": {
+      "fixer": 0.4,
+      "closed_book": 0.3,
+      "retainer": 0.3
+    }
+  }
+}

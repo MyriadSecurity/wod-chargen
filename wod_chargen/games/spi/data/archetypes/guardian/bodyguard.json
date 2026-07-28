@@ -1,0 +1,25 @@
+{
+  "id": "bodyguard",
+  "label": "Bodyguard",
+  "description": "Stay between the threat and the principal.",
+  "modifiers": {
+    "skill_biases": {
+      "brawl": 0.35,
+      "athletics": 0.3,
+      "medicine": 0.25
+    },
+    "attribute_biases": {
+      "stamina": 0.3,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "protection": 0.45,
+      "combat": 0.3,
+      "medicine": 0.2
+    },
+    "merit_biases": {
+      "defensive_combat_brawl": 0.35,
+      "iron_stamina": 0.3
+    }
+  }
+}

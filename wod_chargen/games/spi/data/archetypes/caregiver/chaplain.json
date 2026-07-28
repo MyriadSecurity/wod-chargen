@@ -1,0 +1,31 @@
+{
+  "id": "chaplain",
+  "label": "Chaplain",
+  "description": "Moral ballast \u2014 resolve, comfort, and quiet courage.",
+  "modifiers": {
+    "skill_biases": {
+      "empathy": 0.3,
+      "academics": 0.3,
+      "persuasion": 0.25
+    },
+    "attribute_biases": {
+      "resolve": 0.4,
+      "composure": 0.3
+    },
+    "tag_affinities": {
+      "care": 0.4,
+      "protection": 0.3,
+      "academia": 0.2,
+      "occult": 0.2
+    },
+    "affinity_biases": {
+      "ghost": 0.2,
+      "spirit": 0.2
+    },
+    "merit_biases": {
+      "indomitable": 0.4,
+      "patient": 0.3,
+      "extra_touchstone": 0.3
+    }
+  }
+}

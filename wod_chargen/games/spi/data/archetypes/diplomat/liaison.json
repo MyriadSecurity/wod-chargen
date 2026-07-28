@@ -1,0 +1,26 @@
+{
+  "id": "liaison",
+  "label": "Liaison",
+  "description": "Bridge Divisions, Factions, and uneasy allies.",
+  "modifiers": {
+    "skill_biases": {
+      "politics": 0.4,
+      "socialize": 0.35,
+      "persuasion": 0.25
+    },
+    "attribute_biases": {
+      "presence": 0.3,
+      "manipulation": 0.25
+    },
+    "tag_affinities": {
+      "influence": 0.35,
+      "status": 0.4,
+      "social": 0.3
+    },
+    "merit_biases": {
+      "contacts": 0.35,
+      "allies": 0.35,
+      "division_liason": 0.4
+    }
+  }
+}
