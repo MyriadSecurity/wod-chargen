@@ -4,8 +4,7 @@
   "description": "Fireteams, fields of fire, and coordinated takedowns.",
   "modifiers": {
     "skill_biases": {
-      "firearms": 0.4,
-      "weaponry": 0.3,
+      "firearms": 0.9,
       "athletics": 0.25
     },
     "attribute_biases": {

@@ -4,9 +4,9 @@
   "description": "Stay between the threat and the principal.",
   "modifiers": {
     "skill_biases": {
-      "brawl": 0.35,
-      "athletics": 0.3,
-      "medicine": 0.25
+      "brawl": 0.8,
+      "athletics": 0.25,
+      "medicine": 0.2
     },
     "attribute_biases": {
       "stamina": 0.3,
@@ -18,7 +18,7 @@
       "medicine": 0.2
     },
     "merit_biases": {
-      "defensive_combat_brawl": 0.35,
+      "defensive_combat_brawl": 0.4,
       "iron_stamina": 0.3
     }
   }

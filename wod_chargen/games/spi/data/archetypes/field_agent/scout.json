@@ -4,9 +4,9 @@
   "description": "Go first, see first, report before the team commits.",
   "modifiers": {
     "skill_biases": {
+      "survival": 0.75,
       "stealth": 0.35,
-      "survival": 0.35,
-      "athletics": 0.25
+      "athletics": 0.2
     },
     "attribute_biases": {
       "wits": 0.3,
@@ -16,7 +16,7 @@
       "survival": 0.35,
       "stealth": 0.35,
       "perception": 0.3,
-      "athletics": 0.25
+      "athletics": 0.2
     },
     "merit_biases": {
       "fleet_of_foot": 0.3,

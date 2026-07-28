@@ -13,13 +13,20 @@ from wod_chargen.games.spi.trait_biases import (
 from wod_chargen.venues import load_venue
 
 
-def test_resolve_explicit_overrides_tags():
+def test_resolve_explicit_is_floor():
     clear_trait_tags_cache()
     profile = {
         "merit_biases": {"library": 2.0},
         "tag_affinities": {"academia": 1.5, "combat": 1.8},
     }
+    # library theme tags do not include combat; explicit 2.0 remains the floor.
     assert resolve_merit_bias(profile, "library") == 2.0
+    # Weak explicit must not undercut a strong tag product.
+    combat_profile = {
+        "merit_biases": {"defensive_combat_brawl": 1.4},
+        "tag_affinities": {"combat": 1.85, "protection": 1.8},
+    }
+    assert resolve_merit_bias(combat_profile, "defensive_combat_brawl") == 3.0
 
 
 def test_resolve_tag_product_and_default():

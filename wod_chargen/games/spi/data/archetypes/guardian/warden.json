@@ -4,9 +4,9 @@
   "description": "Hold ground, harden the perimeter, endure the night.",
   "modifiers": {
     "skill_biases": {
-      "weaponry": 0.3,
-      "intimidation": 0.3,
-      "survival": 0.3
+      "weaponry": 0.9,
+      "intimidation": 0.25,
+      "survival": 0.25
     },
     "attribute_biases": {
       "strength": 0.3,

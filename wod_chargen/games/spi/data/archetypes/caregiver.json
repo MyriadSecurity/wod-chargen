@@ -19,16 +19,17 @@
     "persuasion": 1.15
   },
   "merit_biases": {
-    "holistic_awareness": 1.65,
-    "empath": 1.55,
-    "patient": 1.45,
-    "indomitable": 1.35,
-    "safe_place": 1.3
+    "holistic_awareness": 2.5,
+    "empath": 2.4,
+    "patient": 2.0,
+    "indomitable": 1.8,
+    "safe_place": 1.5,
+    "reconciler": 2.0
   },
   "tag_affinities": {
     "medicine": 1.95,
     "care": 1.85,
-    "protection": 1.35,
+    "protection": 0.95,
     "social": 1.25,
     "academia": 1.2,
     "combat": 0.45,

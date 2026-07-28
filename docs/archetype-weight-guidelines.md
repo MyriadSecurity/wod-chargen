@@ -135,7 +135,8 @@ Clamp via `wod_chargen.games.spi.trait_biases` (0.05–3.0).
 - Catalog extract tags on `merits.json` stay metadata (sheet category / Affinity type).
 - Judgment **theme** tags (1–3 per merit) in `trait_tags.json` drive weighting via
   archetype / Division / Faction `tag_affinities`.
-- Explicit `merit_biases` on those packs override the tag product.
+- Explicit `merit_biases` on those packs set a **floor** via
+  `max(explicit, tag_product)` (they no longer fully replace tags).
 - Resolver: `wod_chargen.games.spi.trait_biases.resolve_merit_bias`.
 
 ### Subtypes

@@ -75,8 +75,9 @@ def _tag_product(affinities: dict[str, float], merit_id: str) -> float:
 
 
 def resolve_merit_bias(profile: Mapping[str, Any] | Any, merit_id: str) -> float:
-    """Effective merit bias: explicit override, else tag product, else 1.0."""
+    """Effective merit bias: max(explicit floor, tag product), else 1.0."""
     explicit, affinities = _as_bias_maps(profile)
+    tag = _tag_product(affinities, merit_id)
     if merit_id in explicit:
-        return _clamp(float(explicit[merit_id]))
-    return _tag_product(affinities, merit_id)
+        return _clamp(max(float(explicit[merit_id]), tag))
+    return tag

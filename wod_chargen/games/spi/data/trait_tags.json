@@ -71,6 +71,9 @@
     },
     "care": {
       "label": "Support, welfare, and emotional aid"
+    },
+    "organization": {
+      "label": "Institutional bridging and Division liaison work"
     }
   },
   "merits": {
@@ -468,8 +471,8 @@
       "occult"
     ],
     "division_liason": [
-      "status",
-      "influence"
+      "influence",
+      "organization"
     ],
     "doppelganger": [
       "supernatural",
@@ -574,9 +577,7 @@
       "infiltration"
     ],
     "fae_mount": [
-      "supernatural",
-      "athletics",
-      "survival"
+      "supernatural"
     ],
     "fame": [
       "status",

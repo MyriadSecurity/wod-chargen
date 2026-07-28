@@ -4,22 +4,23 @@
   "description": "Move people and packages through hostile ground.",
   "modifiers": {
     "skill_biases": {
-      "drive": 0.45,
-      "athletics": 0.3,
-      "streetwise": 0.25
+      "drive": 0.9,
+      "athletics": 0.25,
+      "streetwise": 0.2
     },
     "attribute_biases": {
       "dexterity": 0.3,
       "stamina": 0.25
     },
     "tag_affinities": {
-      "athletics": 0.4,
+      "athletics": 0.35,
       "equipment": 0.3,
-      "survival": 0.25
+      "survival": 0.2
     },
     "merit_biases": {
-      "greyhound": 0.35,
-      "crack_driver": 0.35
+      "greyhound": 0.4,
+      "crack_driver": 0.4,
+      "fleet_of_foot": 0.25
     }
   }
 }

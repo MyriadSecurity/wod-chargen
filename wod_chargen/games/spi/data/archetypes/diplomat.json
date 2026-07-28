@@ -19,12 +19,12 @@
     "subterfuge": 1.15
   },
   "merit_biases": {
-    "inspiring": 1.6,
-    "spin_doctor": 1.5,
-    "fixer": 1.45,
-    "allies": 1.4,
-    "contacts": 1.35,
-    "fast_talking": 1.3
+    "inspiring": 2.5,
+    "spin_doctor": 2.0,
+    "fixer": 1.8,
+    "allies": 1.7,
+    "contacts": 1.6,
+    "fast_talking": 1.4
   },
   "tag_affinities": {
     "influence": 1.9,

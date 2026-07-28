@@ -18,11 +18,11 @@
       "supernatural": 0.3
     },
     "affinity_biases": {
-      "ghost": 0.3,
-      "spirit": 0.2
+      "ghost": 0.7,
+      "spirit": 0.15
     },
     "merit_biases": {
-      "medium": 0.45,
+      "medium": 0.5,
       "aura_reading": 0.3,
       "omen_sensitivity": 0.3
     }
