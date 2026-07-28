@@ -1,0 +1,22 @@
+{
+  "id": "caregiver",
+  "label": "Caregiver",
+  "description": "Medicine and Integrity support — Health and Welfare lean.",
+  "affinity_biases": {
+    "ghost": 1.25,
+    "spirit": 1.2
+  },
+  "attribute_biases": {
+    "composure": 1.25,
+    "resolve": 1.2,
+    "intelligence": 1.15
+  },
+  "skill_biases": {
+    "medicine": 1.8,
+    "empathy": 1.55,
+    "academics": 1.2,
+    "science": 1.15,
+    "persuasion": 1.15
+  },
+  "merit_biases": {}
+}

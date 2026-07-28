@@ -1,0 +1,22 @@
+{
+  "id": "scholar",
+  "label": "Scholar",
+  "description": "Research, Academics, and Science — R&D energy for the Society.",
+  "affinity_biases": {
+    "mage": 1.35,
+    "spirit": 1.25
+  },
+  "attribute_biases": {
+    "intelligence": 1.4,
+    "wits": 1.15,
+    "resolve": 1.1
+  },
+  "skill_biases": {
+    "academics": 1.8,
+    "science": 1.7,
+    "computer": 1.3,
+    "occult": 1.35,
+    "investigation": 1.2
+  },
+  "merit_biases": {}
+}

@@ -1,0 +1,34 @@
+{
+  "affinity": {
+    "kind": "flat_per_dot",
+    "per_dot": 5
+  },
+  "attribute": {
+    "kind": "flat_per_dot",
+    "per_dot": 4
+  },
+  "skill": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "integrity": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "supernatural_resistance": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "specialty": {
+    "kind": "flat",
+    "amount": 1
+  },
+  "merit": {
+    "kind": "flat_per_dot",
+    "per_dot": 1
+  },
+  "willpower_dot_regain": {
+    "kind": "flat",
+    "amount": 1
+  }
+}

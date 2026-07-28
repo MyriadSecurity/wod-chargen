@@ -1,0 +1,42 @@
+{
+  "ghost": {
+    "id": "ghost",
+    "label": "Ghost",
+    "fuel": "plasm",
+    "place_merit": "cenote",
+    "unseen_sense": "ghost",
+    "sense_mode": "hear"
+  },
+  "spirit": {
+    "id": "spirit",
+    "label": "Spirit",
+    "fuel": "essence",
+    "place_merit": "locus",
+    "unseen_sense": "werewolf",
+    "sense_mode": "smell"
+  },
+  "mage": {
+    "id": "mage",
+    "label": "Mage",
+    "fuel": "mana",
+    "place_merit": "hallow",
+    "unseen_sense": "mage",
+    "sense_mode": "see"
+  },
+  "fae": {
+    "id": "fae",
+    "label": "Fae",
+    "fuel": "glamour",
+    "place_merit": "goblin_bounty",
+    "unseen_sense": "changeling",
+    "sense_mode": "feel"
+  },
+  "vampire": {
+    "id": "vampire",
+    "label": "Vampire",
+    "fuel": "vitae_bonus",
+    "place_merit": "feeding_grounds",
+    "unseen_sense": "vampire",
+    "sense_mode": "taste"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "shadow",
+  "label": "Shadow",
+  "description": "Spy and infiltrate — quiet approaches, stolen answers.",
+  "affinity_biases": {
+    "ghost": 1.3,
+    "fae": 1.2
+  },
+  "attribute_biases": {
+    "dexterity": 1.25,
+    "wits": 1.25,
+    "manipulation": 1.15
+  },
+  "skill_biases": {
+    "stealth": 1.7,
+    "larceny": 1.6,
+    "subterfuge": 1.45,
+    "investigation": 1.2,
+    "streetwise": 1.2
+  },
+  "merit_biases": {}
+}

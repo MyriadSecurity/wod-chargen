@@ -1,0 +1,28 @@
+{
+  "mental": [
+    "intelligence",
+    "wits",
+    "resolve"
+  ],
+  "physical": [
+    "strength",
+    "dexterity",
+    "stamina"
+  ],
+  "social": [
+    "presence",
+    "manipulation",
+    "composure"
+  ],
+  "all": [
+    "intelligence",
+    "wits",
+    "resolve",
+    "strength",
+    "dexterity",
+    "stamina",
+    "presence",
+    "manipulation",
+    "composure"
+  ]
+}

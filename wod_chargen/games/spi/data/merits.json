@@ -1,0 +1,8137 @@
+{
+  "notes": "SPI merit/affinity catalog (ids, dots, prereqs, tags). No Codex blurbs.",
+  "merits": [
+    {
+      "id": "dream_shaper",
+      "label": "Dream Shaper",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Lucid Dreamer",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "lucid_dreamer",
+          "label": "Lucid Dreamer",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "dream_warrior",
+      "label": "Dream Warrior",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "1 Social Attribute 3+, specialty in brawl or weaponry",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "specialty_in_brawl_or_weaponry",
+          "label": "specialty in brawl or weaponry",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "dreamweaver",
+      "label": "Dreamweaver",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "enchanting_performance",
+      "label": "Enchanting Performance",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Presence 3. Expression 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "presence",
+          "label": "Presence",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "expression",
+          "label": "Expression",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "changeling",
+        "style"
+      ],
+      "style_steps": [
+        "Limerick",
+        "Poem",
+        "Sonnet"
+      ]
+    },
+    {
+      "id": "etiquette",
+      "label": "Etiquette",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Composure 3, Socialize 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "socialize",
+          "label": "Socialize",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "changeling",
+        "style"
+      ],
+      "style_steps": [
+        "Bless His Heart",
+        "Losing Your Religion",
+        "In High Cotton",
+        "Half-Cocked",
+        "Grace Under Fire"
+      ]
+    },
+    {
+      "id": "expressive",
+      "label": "Expressive",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "goblin_bounty",
+      "label": "Goblin Bounty",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Fae Affinity 4",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 4
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "goblin_contract",
+      "label": "Goblin Contract",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Fae Affinity 1",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "lucid_dreamer",
+      "label": "Lucid Dreamer",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "oathkeeper",
+      "label": "Oathkeeper",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "token",
+      "label": "Token",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Fae Affinity 1",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "warded_dreams",
+      "label": "Warded Dreams",
+      "category": "general",
+      "sheet_category": "Changeling",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "changeling"
+      ]
+    },
+    {
+      "id": "loaded_for_bear",
+      "label": "Loaded for Bear",
+      "category": "general",
+      "sheet_category": "Equipment",
+      "dots_min": 1,
+      "dots_max": 2,
+      "prereq_text": "Athletics 1, Survival 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 1
+        },
+        {
+          "kind": "skill",
+          "id": "survival",
+          "label": "Survival",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "equipment"
+      ]
+    },
+    {
+      "id": "trigger_discipline",
+      "label": "Trigger Discipline",
+      "category": "general",
+      "sheet_category": "Equipment",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Wits 2, Firearms 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "equipment"
+      ]
+    },
+    {
+      "id": "armed_defense",
+      "label": "Armed Defense",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Dexterity 3, Weaponry 2, Defensive Combat: Weaponry",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "defensive_combat_weaponry",
+          "label": "Defensive Combat: Weaponry",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Cover the Angles",
+        "Weak Spot",
+        "Aggresive Defense",
+        "Iron Guard",
+        "Press the Advantage"
+      ]
+    },
+    {
+      "id": "avoidance",
+      "label": "Avoidance",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Manipulation 3, Athletics 2, Stealth 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "stealth",
+          "label": "Stealth",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Insignifigance",
+        "Coattails",
+        "Whack-a-Mole",
+        "Play Dead"
+      ]
+    },
+    {
+      "id": "berserker",
+      "label": "Berserker",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Strength 3, Iron Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "iron",
+          "label": "Iron",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "The Red Mist",
+        "War Cry",
+        "Manic Brutality"
+      ]
+    },
+    {
+      "id": "boot_party",
+      "label": "Boot Party",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "bowmanship",
+      "label": "Bowmanship",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Dexterity 3, Firearms 2, Trained Observer",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "trained_observer",
+          "label": "Trained Observer",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Arcing Fire",
+        "Bullseye",
+        "Out of Nowhere",
+        "Death from Above"
+      ]
+    },
+    {
+      "id": "boxing",
+      "label": "Boxing",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Stength 2, Dexterity 2, Stamina 2, Brawl 2, Athletics 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 2
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "stength",
+          "label": "Stength",
+          "dots": 2,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Head Protection",
+        "Defensive Jab",
+        "Knockout Artist",
+        "Combination",
+        "Out for the Count"
+      ]
+    },
+    {
+      "id": "chain_weapons",
+      "label": "Chain Weapons",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 2,
+      "prereq_text": "Strength 3, Dexterity 3, Athletics 2, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Imposing Defense",
+        "Bring Down the House"
+      ]
+    },
+    {
+      "id": "cheap_shot",
+      "label": "Cheap Shot",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Street Fighting 3, Subterfuge 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "subterfuge",
+          "label": "Subterfuge",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "street_fighting",
+          "label": "Street Fighting",
+          "dots": 3,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "choke_hold",
+      "label": "Choke Hold",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "clinch_strike",
+      "label": "Clinch Strike",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "close_quarters_combat",
+      "label": "Close Quarters Combat",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Wits 3, Athletics 2, Brawl 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Firing Lines",
+        "Hard Surfaces",
+        "Armored Coffin",
+        "Prep Work",
+        "Turnabout"
+      ]
+    },
+    {
+      "id": "combat_archery",
+      "label": "Combat Archery",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Strength 3, Athletics 2, Quick Draw (Bow)",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "quick_draw_bow",
+          "label": "Quick Draw (Bow)",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Rapid Nock",
+        "Reflex Aiming",
+        "Parthian Shot",
+        "Rain of Arrows",
+        "Trick Shot"
+      ]
+    },
+    {
+      "id": "covert_operative",
+      "label": "Covert Operative",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Wits 3, Dexterity 3, Stealth 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "stealth",
+          "label": "Stealth",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "defensive_combat_brawl",
+      "label": "Defensive Combat: Brawl",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Brawl 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "defensive_combat_weaponry",
+      "label": "Defensive Combat: Weaponry",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Weaponry 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "falconry",
+      "label": "Falconry",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Wits 3, Animal Ken 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "animal_ken",
+          "label": "Animal Ken",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Predator's Vigil",
+        "Flyby",
+        "Retrieve Item",
+        "Rake the Eyes"
+      ]
+    },
+    {
+      "id": "fighting_finesse",
+      "label": "Fighting Finesse",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Dexterity 3, Specialty in Weaponry or Brawl",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "specialty_in_weaponry_or_brawl",
+          "label": "Specialty in Weaponry or Brawl",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "firefight",
+      "label": "Firefight",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Composure 3, Dexterity 3, Athletics 2, Firearms 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Shoot First",
+        "Suppresive Fire",
+        "Secondary Target"
+      ]
+    },
+    {
+      "id": "grappling",
+      "label": "Grappling",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Stamina 3, Strength 2, Athletics 2, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Sprawl",
+        "Takedown",
+        "Joint Lock"
+      ]
+    },
+    {
+      "id": "ground_and_pound",
+      "label": "Ground and Pound",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "ground_fighter",
+      "label": "Ground Fighter",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "Wits 3, Dexterity 3, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "headbutt",
+      "label": "Headbutt",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "heavy_weaponry",
+      "label": "Heavy Weaponry",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Stamina 3, Strength 3, Athletics 2, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Sure Strike",
+        "Threat Range",
+        "Bring the Pain",
+        "Warding Stance",
+        "Rending"
+      ]
+    },
+    {
+      "id": "improvised_weaponry",
+      "label": "Improvised Weaponry",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Wits 3, Weaponry 1",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Always Armed",
+        "In Harm's Way",
+        "Breaking Point"
+      ]
+    },
+    {
+      "id": "iron_chin",
+      "label": "Iron Chin",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Resolve 3, Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "iron_skin",
+      "label": "Iron Skin",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Martial Arts 2 or Street Fighting 2, Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "martial_arts_2_or_street_fighting",
+          "label": "Martial Arts 2 or Street Fighting",
+          "dots": 2,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "k_9",
+      "label": "K-9",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Wits 3, Animal Ken 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "animal_ken",
+          "label": "Animal Ken",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Detection",
+        "Targeted Bite",
+        "Tactical Positioning",
+        "Takedown Bite"
+      ]
+    },
+    {
+      "id": "kindred_dueling",
+      "label": "Kindred Dueling",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Composure 3, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Hamstring",
+        "Taunt",
+        "Carving",
+        "Pincushion",
+        "Spray"
+      ]
+    },
+    {
+      "id": "kino_mutai",
+      "label": "Kino Mutai",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Dexterity 3, Resolve 3, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Trained Bite",
+        "Ripping",
+        "Trained Gouge",
+        "Continuous Bite"
+      ]
+    },
+    {
+      "id": "light_weapons",
+      "label": "Light Weapons",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Wits 3 or Fighting Finesse, Dexterity 3, Athletics 2, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "or_fighting_finesse",
+          "label": "or Fighting Finesse",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Rapidity",
+        "Thrust",
+        "Feint",
+        "Flurry",
+        "Vital Shot"
+      ]
+    },
+    {
+      "id": "marksmanship",
+      "label": "Marksmanship",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Composure 3, Resolve 3, Firearms 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Through the Crosshairs",
+        "Precision Shot",
+        "A Shot Rings Out",
+        "Ghost"
+      ]
+    },
+    {
+      "id": "martial_arts",
+      "label": "Martial Arts",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Resolve 3, Dexterity 3, Athletics 2, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Focused Attack",
+        "Defensive Strike",
+        "Whirlwind Strike",
+        "The Hand as Weapon",
+        "The Touch of Death"
+      ]
+    },
+    {
+      "id": "mounted_combat",
+      "label": "Mounted Combat",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Dexterity 3, Athletics 2, Animal Ken 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "animal_ken",
+          "label": "Animal Ken",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Steady Saddle",
+        "Fixed Charge",
+        "Skirmishing",
+        "Rearing Beast"
+      ]
+    },
+    {
+      "id": "police_tactics",
+      "label": "Police Tactics",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Brawl 2, Weaponry 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Compliance Hold",
+        "Weapon Retention",
+        "Speed Cuff"
+      ]
+    },
+    {
+      "id": "powered_projectile",
+      "label": "Powered Projectile",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Dexterity 3, Athletics 2, Firearms 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Quick Reload",
+        "Intercept Shot",
+        "Penetration",
+        "Skewer"
+      ]
+    },
+    {
+      "id": "psychokinetic_warrior",
+      "label": "Psychokinetic Warrior",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Dexterity or Wits 3, Brawl, Firearms or Weaponry 2, Psychokinesis 3 or 5",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "dexterity_or",
+          "label": "Dexterity or",
+          "dots": 1,
+          "unresolved": true
+        },
+        {
+          "kind": "merit",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 1,
+          "unresolved": true
+        },
+        {
+          "kind": "merit",
+          "id": "firearms_or",
+          "label": "Firearms or",
+          "dots": 1,
+          "unresolved": true
+        },
+        {
+          "kind": "merit",
+          "id": "psychokinesis_3_or",
+          "label": "Psychokinesis 3 or",
+          "dots": 5,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Mind Over Matter",
+        "Defensive Flurry",
+        "Hungry Leaping Flames"
+      ]
+    },
+    {
+      "id": "retain_weapon",
+      "label": "Retain Weapon",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Wits 2, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "shiv",
+      "label": "Shiv",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Street Fighting 2, Weaponry 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 1
+        },
+        {
+          "kind": "merit",
+          "id": "street_fighting",
+          "label": "Street Fighting",
+          "dots": 2,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "spear_and_bayonet",
+      "label": "Spear and Bayonet",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Strength 3, Dexterity 2, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Firm Footing",
+        "Keep at Bay",
+        "Strike and Develop"
+      ]
+    },
+    {
+      "id": "staff_fighting",
+      "label": "Staff Fighting",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Strength 2, Dexterity 3, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 2
+        },
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Short Grip",
+        "Thwack Weapon",
+        "Vaulting Defense",
+        "Tornado Strike"
+      ]
+    },
+    {
+      "id": "street_fighting",
+      "label": "Street Fighting",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Stamina 3, Composure 3, Brawl 2, Streetwise 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "streetwise",
+          "label": "Streetwise",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Duck and Weave",
+        "Knocking the Wind Out",
+        "Kick 'Em While They're Down",
+        "One-Two Punch",
+        "Last-Ditch Effort"
+      ]
+    },
+    {
+      "id": "strength_performance",
+      "label": "Strength Performance",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Strength 3,  Stamina 2, Athletics 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Strength Tricks",
+        "Lifting",
+        "Push/Pull",
+        "Stronger Than You"
+      ]
+    },
+    {
+      "id": "thrown_weapons",
+      "label": "Thrown Weapons",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 2,
+      "prereq_text": "Dexterity 3, Athletics 2, Quick Draw 1",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "quick_draw",
+          "label": "Quick Draw",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Practiced Toss",
+        "Impalement Arts"
+      ]
+    },
+    {
+      "id": "trunk_squeeze",
+      "label": "Trunk Squeeze",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Brawl 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "two_weapon_fighting",
+      "label": "Two Weapon Fighting",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Wits 3, Fighting Finesse 2, Weaponry 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "fighting_finesse",
+          "label": "Fighting Finesse",
+          "dots": 2,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "unarmed_defense",
+      "label": "Unarmed Defense",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Dexterity 3, Brawl, Defensive Combat: Brawl",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 1,
+          "unresolved": true
+        },
+        {
+          "kind": "merit",
+          "id": "defensive_combat_brawl",
+          "label": "Defensive Combat: Brawl",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "fighting",
+        "fighting_style"
+      ],
+      "style_steps": [
+        "Like a Book",
+        "Studied Style",
+        "Redirect",
+        "Joint Strike",
+        "Like the Breeze"
+      ]
+    },
+    {
+      "id": "weapon_and_shield",
+      "label": "Weapon and Shield",
+      "category": "general",
+      "sheet_category": "Fighting",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Strength 3, Stamina 3, Weaponry 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "strength",
+          "label": "Strength",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "weaponry",
+          "label": "Weaponry",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "fighting"
+      ]
+    },
+    {
+      "id": "architect",
+      "label": "Architect",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "cenonte",
+      "label": "Cenonte",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Safe Place 1, Ghost Affinity 4",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 4
+        },
+        {
+          "kind": "merit",
+          "id": "safe_place",
+          "label": "Safe Place",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "ceremonies",
+      "label": "Ceremonies",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Ghost Affinity",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "ghost_affinity",
+          "label": "Ghost Affinity",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "grave_goods",
+      "label": "Grave Goods",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Ghost Affinity",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "ghost_affinity",
+          "label": "Ghost Affinity",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "memento",
+      "label": "Memento",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "phantom_limb",
+      "label": "Phantom Limb",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Ghost Affinity",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "ghost_affinity",
+          "label": "Ghost Affinity",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "reconciler",
+      "label": "Reconciler",
+      "category": "general",
+      "sheet_category": "Geist",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "geist"
+      ]
+    },
+    {
+      "id": "air_of_menace",
+      "label": "Air of Menace",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Intimidation 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "intimidation",
+          "label": "Intimidation",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "animal_companion",
+      "label": "Animal Companion",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "body_as_weapon",
+      "label": "Body as Weapon",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Stamina 3, Brawl 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "brawl",
+          "label": "Brawl",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "cohesive_unit",
+      "label": "Cohesive Unit",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Presence 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "presence",
+          "label": "Presence",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "compartimentalization",
+      "label": "Compartimentalization",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "creature_clothing",
+      "label": "Creature Clothing",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "defender",
+      "label": "Defender",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "division_liason",
+      "label": "Division Liason",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "empath",
+      "label": "Empath",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Empathy 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "empathy",
+          "label": "Empathy",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "ghostly_companion",
+      "label": "Ghostly Companion",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "goetic_companion",
+      "label": "Goetic Companion",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "hedgebeast_companion",
+      "label": "Hedgebeast Companion",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "kindness_begets_kindness",
+      "label": "Kindness Begets Kindness",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "object_fetishism",
+      "label": "Object Fetishism",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "peacemaker",
+      "label": "Peacemaker",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 3,
+      "prereq_text": "Wits 3, Empathy 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "empathy",
+          "label": "Empathy",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "punch_drunk",
+      "label": "Punch Drunk",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "WIllpower 6",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "willpower",
+          "label": "WIllpower",
+          "dots": 6,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "scarred",
+      "label": "Scarred",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Integrity 5 or lower",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "integrity_5_or_lower",
+          "label": "Integrity 5 or lower",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "scrying",
+      "label": "Scrying",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 4,
+      "dots_max": 4,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "spirit_companion",
+      "label": "Spirit Companion",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "spook",
+      "label": "Spook",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "support_network",
+      "label": "Support Network",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "survivalist",
+      "label": "Survivalist",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Survival 3, Iron Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "survival",
+          "label": "Survival",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "iron",
+          "label": "Iron",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "the_bold",
+      "label": "The Bold",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "vibrant_soul",
+      "label": "Vibrant Soul",
+      "category": "general",
+      "sheet_category": "General",
+      "dots_min": 4,
+      "dots_max": 4,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "general"
+      ]
+    },
+    {
+      "id": "artifact",
+      "label": "Artifact",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 3,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "deadpan",
+      "label": "Deadpan",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "destiny",
+      "label": "Destiny",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "enhanced_items",
+      "label": "Enhanced Items",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "hallow",
+      "label": "Hallow",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Mage Affinity 4",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 4
+        }
+      ],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "imbued_item",
+      "label": "Imbued Item",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "loved",
+      "label": "Loved",
+      "category": "general",
+      "sheet_category": "Mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mage"
+      ]
+    },
+    {
+      "id": "area_of_expertise",
+      "label": "Area of Expertise",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Resolve 2 and 1 skill specialty",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "back_road_atlas",
+      "label": "Back Road Atlas",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Wits 2, Drive or Athletics 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "drive_or",
+          "label": "Drive or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "common_sense",
+      "label": "Common Sense",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "danger_sense",
+      "label": "Danger Sense",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "direction_sense",
+      "label": "Direction Sense",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "eidetic_memory",
+      "label": "Eidetic Memory",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "encyclopedic_knowledge",
+      "label": "Encyclopedic Knowledge",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "eye_for_the_strange",
+      "label": "Eye for the Strange",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve 2, Occult 1",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "fast_reflexes",
+      "label": "Fast Reflexes",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Wits or Dexterity 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "wits_or",
+          "label": "Wits or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "good_time_management",
+      "label": "Good Time Management",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Academics or Science 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "science",
+          "label": "Science",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "academics_or",
+          "label": "Academics or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "gut_feeling",
+      "label": "Gut Feeling",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Occult 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "holistic_awareness",
+      "label": "Holistic Awareness",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "indomitable",
+      "label": "Indomitable",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "interdisciplinary_specialty",
+      "label": "Interdisciplinary Specialty",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Skill 3 with Specialty",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "skill_3_with_specialty",
+          "label": "Skill 3 with Specialty",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "investigative_aide",
+      "label": "Investigative Aide",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Chosen Skill at 3+",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "chosen_skill_at_3",
+          "label": "Chosen Skill at 3+",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "investigative_prodigy",
+      "label": "Investigative Prodigy",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Wits 3, Investigation 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "investigation",
+          "label": "Investigation",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "language",
+      "label": "Language",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "library",
+      "label": "Library",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "meditative_mind",
+      "label": "Meditative Mind",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "multilingual",
+      "label": "Multilingual",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "natural_tinkerer",
+      "label": "Natural Tinkerer",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Wits 2, Crafts 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 2
+        },
+        {
+          "kind": "skill",
+          "id": "crafts",
+          "label": "Crafts",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "patient",
+      "label": "Patient",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "professional_training",
+      "label": "Professional Training",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "tactical_insight",
+      "label": "Tactical Insight",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Wits 3, Survival or Streetwise 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "streetwise",
+          "label": "Streetwise",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "survival_or",
+          "label": "Survival or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "tolerance_for_biology",
+      "label": "Tolerance for Biology",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "trained_observer",
+      "label": "Trained Observer",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Wits or Composure 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "wits_or",
+          "label": "Wits or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "vice_ridden",
+      "label": "Vice-Ridden",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "virtuous",
+      "label": "Virtuous",
+      "category": "general",
+      "sheet_category": "Mental",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "mental"
+      ]
+    },
+    {
+      "id": "ambidextrous",
+      "label": "Ambidextrous",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "automotive_genius",
+      "label": "Automotive Genius",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Crafts 3, Drive 1, Science 1",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "crafts",
+          "label": "Crafts",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "drive",
+          "label": "Drive",
+          "dots": 1
+        },
+        {
+          "kind": "skill",
+          "id": "science",
+          "label": "Science",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "cover_tracks",
+      "label": "Cover Tracks",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Survival or Stealth 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "stealth",
+          "label": "Stealth",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "survival_or",
+          "label": "Survival or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "crack_driver",
+      "label": "Crack Driver",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Drive 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "drive",
+          "label": "Drive",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "demolisher",
+      "label": "Demolisher",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Strength or Intelligence 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "intelligence",
+          "label": "Intelligence",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "strength_or",
+          "label": "Strength or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "double_jointed",
+      "label": "Double Jointed",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Dexterity 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "dexterity",
+          "label": "Dexterity",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "face_in_the_crowd",
+      "label": "Face in the Crowd",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "fleet_of_foot",
+      "label": "Fleet of Foot",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Athletics 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "giant",
+      "label": "Giant",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "greyhound",
+      "label": "Greyhound",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Athletics 3, Wits 3, Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "hardy",
+      "label": "Hardy",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "iron_stamina",
+      "label": "Iron Stamina",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Stamina or Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "stamina_or",
+          "label": "Stamina or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "last_stand",
+      "label": "Last Stand",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve or Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "resolve_or",
+          "label": "Resolve or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "lucky_charm",
+      "label": "Lucky Charm",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Resolve 1 and Occult or Academics 1",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 1
+        },
+        {
+          "kind": "skill",
+          "id": "academics",
+          "label": "Academics",
+          "dots": 1
+        },
+        {
+          "kind": "merit",
+          "id": "occult_or",
+          "label": "Occult or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "masked_scent",
+      "label": "Masked Scent",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Survival or Streetwise 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "streetwise",
+          "label": "Streetwise",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "survival_or",
+          "label": "Survival or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "parkour",
+      "label": "Parkour",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Dexterity3, Athletics 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "dexterity3",
+          "label": "Dexterity3",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical",
+        "style"
+      ],
+      "style_steps": [
+        "Flow",
+        "Cat Leap",
+        "Wall Run",
+        "Expert Traceur"
+      ]
+    },
+    {
+      "id": "quick_draw",
+      "label": "Quick Draw",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Wits 3, Specialty in Weapon",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "specialty_in_weapon",
+          "label": "Specialty in Weapon",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "relentless",
+      "label": "Relentless",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Athletics 2, Stamina 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "stamina",
+          "label": "Stamina",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "athletics",
+          "label": "Athletics",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "robust_health",
+      "label": "Robust Health",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Survival 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "survival",
+          "label": "Survival",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "seizing_the_edge",
+      "label": "Seizing the Edge",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Wits 3, Composure 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "sleight_of_hand",
+      "label": "Sleight of Hand",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Larceny 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "larceny",
+          "label": "Larceny",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "small_framed",
+      "label": "Small-Framed",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "physical"
+      ]
+    },
+    {
+      "id": "stunt_driver",
+      "label": "Stunt Driver",
+      "category": "general",
+      "sheet_category": "Physical",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "physical",
+        "style"
+      ],
+      "style_steps": [
+        "Defensive Driving",
+        "Speed Demon",
+        "Drift",
+        "Clipping"
+      ]
+    },
+    {
+      "id": "allies",
+      "label": "Allies",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "alternate_identity",
+      "label": "Alternate Identity",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "anonymity",
+      "label": "Anonymity",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "No Fame",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "no_fame",
+          "label": "No Fame",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "barfly",
+      "label": "Barfly",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Socialize 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "socialize",
+          "label": "Socialize",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "closed_book",
+      "label": "Closed Book",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Manipulation 3, Resolve 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "contacts",
+      "label": "Contacts",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "custom_gear_broker",
+      "label": "Custom Gear Broker",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Socialize 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "socialize",
+          "label": "Socialize",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "extra_touchstone",
+      "label": "Extra Touchstone",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "fame",
+      "label": "Fame",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "No Anonymity",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "no_anonymity",
+          "label": "No Anonymity",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "fast_talking",
+      "label": "Fast-Talking",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Manipulation 3, Subterfuge 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "subterfuge",
+          "label": "Subterfuge",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social",
+        "style"
+      ],
+      "style_steps": [
+        "Always Be Closing",
+        "Jargon",
+        "Devil's Advocacy",
+        "Salting",
+        "The Nigerian Scam"
+      ]
+    },
+    {
+      "id": "fixer",
+      "label": "Fixer",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Contacts 2, Wits 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        },
+        {
+          "kind": "merit",
+          "id": "contacts",
+          "label": "Contacts",
+          "dots": 2,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "hobbyist_clique",
+      "label": "Hobbyist Clique",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Skill 2+",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "skill_2",
+          "label": "Skill 2+",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "inspiring",
+      "label": "Inspiring",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "Presence 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "presence",
+          "label": "Presence",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "iron_will",
+      "label": "Iron Will",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve 4",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 4
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "mentor",
+      "label": "Mentor",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "mystery_cult_initiation",
+      "label": "Mystery Cult Initiation",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "pusher",
+      "label": "Pusher",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Persuasion 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "persuasion",
+          "label": "Persuasion",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "resources",
+      "label": "Resources",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "retainer",
+      "label": "Retainer",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "safe_place",
+      "label": "Safe Place",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "s_ance_devotee",
+      "label": "Séance Devotee",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Occult 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "small_unit_tactics",
+      "label": "Small Unit Tactics",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Presence 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "presence",
+          "label": "Presence",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "spin_doctor",
+      "label": "Spin Doctor",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Manipulation 3, Subterfuge 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "subterfuge",
+          "label": "Subterfuge",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "staff",
+      "label": "Staff",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "status",
+      "label": "Status",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "striking_looks",
+      "label": "Striking Looks",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "sympathetic",
+      "label": "Sympathetic",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "table_turner",
+      "label": "Table Turner",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Composure 3, Manipulation 3, Wits 3",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "composure",
+          "label": "Composure",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "attribute",
+          "id": "wits",
+          "label": "Wits",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "takes_one_to_know_one",
+      "label": "Takes One to Know One",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "taste",
+      "label": "Taste",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Crafts, Specialty in Crafts or Expression",
+      "prereqs": [
+        {
+          "kind": "merit",
+          "id": "crafts",
+          "label": "Crafts",
+          "dots": 1,
+          "unresolved": true
+        },
+        {
+          "kind": "merit",
+          "id": "specialty_in_crafts_or_expression",
+          "label": "Specialty in Crafts or Expression",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "tight_lipped",
+      "label": "Tight Lipped",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Resolve 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "true_friend",
+      "label": "True Friend",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "untouchable",
+      "label": "Untouchable",
+      "category": "general",
+      "sheet_category": "Social",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "Manipulation 3, subterfuge 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "subterfuge",
+          "label": "subterfuge",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "id": "assertive_implement",
+      "label": "Assertive Implement",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 4,
+      "prereq_text": "Manipulation 3, Occult 3, Weaponry or Firearms 2",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "manipulation",
+          "label": "Manipulation",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "firearms",
+          "label": "Firearms",
+          "dots": 2
+        },
+        {
+          "kind": "merit",
+          "id": "weaponry_or",
+          "label": "Weaponry or",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "aura_reading",
+      "label": "Aura Reading",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "automatic_writing",
+      "label": "Automatic Writing",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "biokinesis",
+      "label": "Biokinesis",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "bless_amulet",
+      "label": "Bless Amulet",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 3,
+      "prereq_text": "Occult 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "clairvoyance",
+      "label": "Clairvoyance",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "consecrate_weapon",
+      "label": "Consecrate Weapon",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 4,
+      "dots_max": 4,
+      "prereq_text": "Resolve 3, Occult 4",
+      "prereqs": [
+        {
+          "kind": "attribute",
+          "id": "resolve",
+          "label": "Resolve",
+          "dots": 3
+        },
+        {
+          "kind": "skill",
+          "id": "occult",
+          "label": "Occult",
+          "dots": 4
+        }
+      ],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "cursed",
+      "label": "Cursed",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "esoteric_armory",
+      "label": "Esoteric Armory",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "hardened_exorcist",
+      "label": "Hardened Exorcist",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "laying_on_hands",
+      "label": "Laying on Hands",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "Empathy 2",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "empathy",
+          "label": "Empathy",
+          "dots": 2
+        }
+      ],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "mind_of_a_madman",
+      "label": "Mind of a Madman",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "Empathy 3",
+      "prereqs": [
+        {
+          "kind": "skill",
+          "id": "empathy",
+          "label": "Empathy",
+          "dots": 3
+        }
+      ],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "numbing_touch",
+      "label": "Numbing Touch",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "omen_sensitivity",
+      "label": "Omen Sensitivity",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "psychokinesis",
+      "label": "Psychokinesis",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "psychometry",
+      "label": "Psychometry",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "supernatural_resistance",
+      "label": "Supernatural Resistance",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "telekinesis",
+      "label": "Telekinesis",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "telepathy",
+      "label": "Telepathy",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "thief_of_fate",
+      "label": "Thief of Fate",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 3,
+      "dots_max": 3,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "unseen_sense",
+      "label": "Unseen Sense",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "vengeful_soul",
+      "label": "Vengeful Soul",
+      "category": "general",
+      "sheet_category": "Supernatural",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "supernatural"
+      ]
+    },
+    {
+      "id": "clear_sighted",
+      "label": "Clear-Sighted",
+      "category": "general",
+      "sheet_category": "Vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "vampire"
+      ]
+    },
+    {
+      "id": "producer",
+      "label": "Producer",
+      "category": "general",
+      "sheet_category": "Vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "vampire"
+      ]
+    },
+    {
+      "id": "code_of_honor",
+      "label": "Code of Honor",
+      "category": "general",
+      "sheet_category": "Werewolf",
+      "dots_min": 2,
+      "dots_max": 2,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "werewolf"
+      ]
+    },
+    {
+      "id": "fetish",
+      "label": "Fetish",
+      "category": "general",
+      "sheet_category": "Werewolf",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Spirit Affinity 1",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "werewolf"
+      ]
+    },
+    {
+      "id": "locus",
+      "label": "Locus",
+      "category": "general",
+      "sheet_category": "Werewolf",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Safe Place 1, Spirit Affinity 4",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 4
+        },
+        {
+          "kind": "merit",
+          "id": "safe_place",
+          "label": "Safe Place",
+          "dots": 1,
+          "unresolved": true
+        }
+      ],
+      "tags": [
+        "werewolf"
+      ]
+    },
+    {
+      "id": "rites",
+      "label": "Rites",
+      "category": "general",
+      "sheet_category": "Werewolf",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "",
+      "prereqs": [],
+      "tags": [
+        "werewolf"
+      ]
+    },
+    {
+      "id": "talon",
+      "label": "Talon",
+      "category": "general",
+      "sheet_category": "Werewolf",
+      "dots_min": 1,
+      "dots_max": 5,
+      "prereq_text": "Spirit Affinity 1",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "werewolf"
+      ]
+    },
+    {
+      "id": "arcadian_metabolism",
+      "label": "Arcadian Metabolism",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "bottle_emotion",
+      "label": "Bottle Emotion",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "bountiful_harvest",
+      "label": "Bountiful Harvest",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "brownie_s_boon",
+      "label": "Brownie’s Boon",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "clotho_s_sight",
+      "label": "Clotho’s Sight",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "creature_caretaker",
+      "label": "Creature Caretaker",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "defensive_dreamscaping",
+      "label": "Defensive Dreamscaping",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "demesne_domain",
+      "label": "Demesne Domain",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "diviner",
+      "label": "Diviner",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "fae_mount",
+      "label": "Fae Mount",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "find_the_oathbreaker",
+      "label": "Find the Oathbreaker",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "good_impressions",
+      "label": "Good Impressions",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "hedge_brawler",
+      "label": "Hedge Brawler",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "hedge_delver",
+      "label": "Hedge Delver",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "hedge_sense",
+      "label": "Hedge Sense",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "hedgebeast_hoarder",
+      "label": "Hedgebeast Hoarder",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "hoster_with_the_moster",
+      "label": "Hoster with the Moster",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "keepers_of_the_hidden_fae",
+      "label": "Keepers of the Hidden: Fae",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "lucky_bastard",
+      "label": "Lucky Bastard",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "momentary_flux",
+      "label": "Momentary Flux",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "my_old_friend",
+      "label": "My Old Friend",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "oneiromancier",
+      "label": "Oneiromancier",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "oracular_ability",
+      "label": "Oracular Ability",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "promise_keeper",
+      "label": "Promise Keeper",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 3,
+      "cost_special": true,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "see_the_matrix",
+      "label": "See the Matrix",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "sense_vows",
+      "label": "Sense Vows",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "sharing_is_caring",
+      "label": "Sharing is Caring",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "stifling",
+      "label": "Stifling",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "thief_of_fate",
+      "label": "Thief of Fate",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "weal_and_woe",
+      "label": "Weal and Woe",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "wyrd_attunement",
+      "label": "Wyrd Attunement",
+      "category": "affinity",
+      "affinity_type": "fae",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "fae",
+          "label": "Fae",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "fae"
+      ]
+    },
+    {
+      "id": "and_taxes",
+      "label": "And Taxes",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "automatic_writing_ghost",
+      "label": "Automatic Writing: Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "bastion_of_the_self",
+      "label": "Bastion of the Self",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "blessing_of_the_mundane_ghost",
+      "label": "Blessing of the Mundane: Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "bottle_memory",
+      "label": "Bottle Memory",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "ceremony_savant",
+      "label": "Ceremony Savant",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "chthonic_navigator",
+      "label": "Chthonic Navigator",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "devoid",
+      "label": "Devoid",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "echo_agony",
+      "label": "Echo Agony",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "forensic_gaze",
+      "label": "Forensic Gaze",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "haunted",
+      "label": "Haunted",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "keepers_of_the_hidden_ghost",
+      "label": "Keepers of the Hidden: Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "know_ghost",
+      "label": "Know Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "last_will",
+      "label": "Last Will",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "let_them_in_ghost",
+      "label": "Let Them In: Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "locate_object",
+      "label": "Locate Object",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "memory_lock",
+      "label": "Memory Lock",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "nexus_of_memories",
+      "label": "Nexus of Memories",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "one_hundred_eyes",
+      "label": "One Hundred Eyes",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "persephone_s_grace",
+      "label": "Persephone’s Grace",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "picking_the_lock",
+      "label": "Picking the Lock",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "piercing_eyes_ghost",
+      "label": "Piercing Eyes: Ghost",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "psychic_onslaught",
+      "label": "Psychic Onslaught",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 5,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "psychic_poltergeist",
+      "label": "Psychic Poltergeist",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "psychometry",
+      "label": "Psychometry",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "sense_anchor",
+      "label": "Sense Anchor",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "so_below_custom",
+      "label": "So Below (Custom)",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 4,
+      "dots_max": 4,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "telekinesis",
+      "label": "Telekinesis",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "telekinetic_evasion",
+      "label": "Telekinetic Evasion",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "weight_of_a_feather",
+      "label": "Weight of a Feather",
+      "category": "affinity",
+      "affinity_type": "ghost",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "ghost",
+          "label": "Ghost",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "ghost"
+      ]
+    },
+    {
+      "id": "allure_of_danger",
+      "label": "Allure of Danger",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "apportation",
+      "label": "Apportation",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 5,
+      "cost_special": true,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "arcane_senses",
+      "label": "Arcane Senses",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "aura_reading",
+      "label": "Aura Reading",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "clairvoyance",
+      "label": "Clairvoyance",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "copy_cat",
+      "label": "Copy Cat",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "dream",
+      "label": "Dream",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 4,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "echoes_of_perfection",
+      "label": "Echoes of Perfection",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "fool_me_once",
+      "label": "Fool Me Once",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "forked_tongue",
+      "label": "Forked Tongue",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "goetic_mastery",
+      "label": "Goetic Mastery",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "high_speech_scholar",
+      "label": "High Speech Scholar",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "keepers_of_the_hidden_mage",
+      "label": "Keepers of the Hidden: Mage",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "mage_mote",
+      "label": "Mage Mote",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "mind_control",
+      "label": "Mind Control",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "mind_s_eye",
+      "label": "Mind’s Eye",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "owl_s_wisdom",
+      "label": "Owl’s Wisdom",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "phantasmagoria",
+      "label": "Phantasmagoria",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "psychic_concealment",
+      "label": "Psychic Concealment",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "psychic_onslaught_2",
+      "label": "Psychic Onslaught",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 5,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "reality_anchor",
+      "label": "Reality Anchor",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "reality_staunch",
+      "label": "Reality Staunch",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "see_no_evil",
+      "label": "See No Evil",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "sojourner",
+      "label": "Sojourner",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "soul_sense",
+      "label": "Soul Sense",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "speed_of_thought",
+      "label": "Speed of Thought",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "tarab",
+      "label": "Tarab",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "telekinesis_2",
+      "label": "Telekinesis",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "telekinetic_evasion_2",
+      "label": "Telekinetic Evasion",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "telepathy",
+      "label": "Telepathy",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 3,
+      "dots_max": 5,
+      "cost_special": true,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "voice_of_reason",
+      "label": "Voice of Reason",
+      "category": "affinity",
+      "affinity_type": "mage",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "mage",
+          "label": "Mage",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "mage"
+      ]
+    },
+    {
+      "id": "a_light_in_the_dark",
+      "label": "A Light in the Dark",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "a_wolf_s_meat",
+      "label": "A Wolf’s Meat",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "abhorrent",
+      "label": "Abhorrent",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 4,
+      "dots_max": 4,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "animal_possession",
+      "label": "Animal Possession",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 4,
+      "cost_special": true,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "animist",
+      "label": "Animist",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "automatic_writing_spirit",
+      "label": "Automatic Writing: Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "blessing_of_the_mundane_spirit",
+      "label": "Blessing of the Mundane: Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "citywalker",
+      "label": "Citywalker",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 5,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "curse_effigy",
+      "label": "Curse Effigy",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "discern_composition",
+      "label": "Discern Composition",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "durability_control",
+      "label": "Durability Control",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "evil_eye_tell",
+      "label": "Evil Eye Tell",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "frequency_attunement",
+      "label": "Frequency Attunement",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "horse",
+      "label": "Horse",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "incite_ecosystem",
+      "label": "Incite Ecosystem",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "just_a_peek",
+      "label": "Just a Peek",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "keepers_of_the_hidden_spirit",
+      "label": "Keepers of the Hidden: Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "know_spirit",
+      "label": "Know Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "let_them_in_spirit",
+      "label": "Let Them In: Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "omen_sensitivity",
+      "label": "Omen Sensitivity",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "piercing_eyes_spirit",
+      "label": "Piercing Eyes: Spirit",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "psychic_onslaught_3",
+      "label": "Psychic Onslaught",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 5,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "psychokinesis",
+      "label": "Psychokinesis",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 3,
+      "dots_max": 5,
+      "cost_special": true,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "raven_s_cunning",
+      "label": "Raven’s Cunning",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "rip_the_veil",
+      "label": "Rip the Veil",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "sounds_of_the_city",
+      "label": "Sounds of the City",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "spirit_s_friend",
+      "label": "Spirit’s Friend",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "spiritual_blockage",
+      "label": "Spiritual Blockage",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "technopathy",
+      "label": "Technopathy",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "waystone",
+      "label": "Waystone",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "weakest_link",
+      "label": "Weakest Link",
+      "category": "affinity",
+      "affinity_type": "spirit",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "spirit",
+          "label": "Spirit",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "spirit"
+      ]
+    },
+    {
+      "id": "acute_senses",
+      "label": "Acute Senses",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "alacrity",
+      "label": "Alacrity",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "beast_speech",
+      "label": "Beast Speech",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "beast_tamer",
+      "label": "Beast Tamer",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "beast_whispers",
+      "label": "Beast Whispers",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "beastlord",
+      "label": "Beastlord",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "biokinesis",
+      "label": "Biokinesis",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "biomimicry",
+      "label": "Biomimicry",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "bloodhound",
+      "label": "Bloodhound",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "cleanse_the_body",
+      "label": "Cleanse the Body",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "creature_tailor",
+      "label": "Creature Tailor",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "dam_the_heartflood",
+      "label": "Dam the Heartflood",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "dark_passenger",
+      "label": "Dark Passenger",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "doppelganger",
+      "label": "Doppelganger",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "evil_eye",
+      "label": "Evil Eye",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "fortitude",
+      "label": "Fortitude",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "grow_gills",
+      "label": "Grow Gills",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "keepers_of_the_hidden_vampire",
+      "label": "Keepers of the Hidden: Vampire",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "laying_on_hands",
+      "label": "Laying on Hands",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "liar_s_game",
+      "label": "Liar’s Game",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "my_body_a_temple",
+      "label": "My Body, A Temple",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 5,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "numbing_touch",
+      "label": "Numbing Touch",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 5,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "owl_s_eyes",
+      "label": "Owl’s Eyes",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "puissance",
+      "label": "Puissance",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "sculpted_by_the_masters",
+      "label": "Sculpted by the Masters",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 4,
+      "dots_max": 4,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "shift_body",
+      "label": "Shift Body",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 1,
+      "dots_max": 1,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "shift_face",
+      "label": "Shift Face",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "slow_the_lifeblood",
+      "label": "Slow the Lifeblood",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "spirit_of_the_prey",
+      "label": "Spirit of the Prey",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 2,
+      "dots_max": 2,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "the_spirit_s_touch",
+      "label": "The Spirit’s Touch",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    },
+    {
+      "id": "touch_of_deprivation",
+      "label": "Touch of Deprivation",
+      "category": "affinity",
+      "affinity_type": "vampire",
+      "dots_min": 3,
+      "dots_max": 3,
+      "cost_special": false,
+      "prereq_text": "",
+      "prereqs": [
+        {
+          "kind": "affinity",
+          "id": "vampire",
+          "label": "Vampire",
+          "dots": 1
+        }
+      ],
+      "tags": [
+        "affinity_power",
+        "vampire"
+      ]
+    }
+  ]
+}

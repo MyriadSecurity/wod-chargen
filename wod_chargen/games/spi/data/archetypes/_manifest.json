@@ -1,0 +1,13 @@
+{
+  "primaries": [
+    "investigator",
+    "occultist",
+    "scholar",
+    "guardian",
+    "field_agent",
+    "shadow",
+    "diplomat",
+    "caregiver"
+  ],
+  "subtypes": {}
+}

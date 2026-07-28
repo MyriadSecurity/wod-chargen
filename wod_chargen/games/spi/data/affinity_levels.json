@@ -1,0 +1,50 @@
+{
+  "levels": {
+    "1": {
+      "id": 1,
+      "label": "Affinity 1",
+      "keys": [
+        "unlock_affinity_powers",
+        "powers_per_level_cap_3",
+        "clash_bonus_vs_affinity"
+      ]
+    },
+    "2": {
+      "id": 2,
+      "label": "Affinity 2",
+      "keys": [
+        "unseen_sense"
+      ]
+    },
+    "3": {
+      "id": 3,
+      "label": "Affinity 3",
+      "keys": [
+        "sense_affinity_and_ikons",
+        "sense_places",
+        "interact_with_fuel",
+        "fuel_cap_per_round_2"
+      ]
+    },
+    "4": {
+      "id": 4,
+      "label": "Affinity 4",
+      "keys": [
+        "detect_places_of_power",
+        "place_merit_eligible",
+        "resonant_to_ikons",
+        "minor_ban"
+      ]
+    },
+    "5": {
+      "id": 5,
+      "label": "Affinity 5",
+      "keys": [
+        "open_to_ikons",
+        "moderate_ban",
+        "downtime_penalty_1",
+        "expanded_fuel_use"
+      ]
+    }
+  }
+}

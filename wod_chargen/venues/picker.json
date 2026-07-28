@@ -1,3 +1,4 @@
 {
-  "lotn_v5": ["mes_end_to_dawn", "fixed_100", "custom_xp"]
+  "lotn_v5": ["mes_end_to_dawn", "fixed_100", "custom_xp"],
+  "spi": ["mes_spi", "fixed_35", "spi_custom_xp"]
 }
