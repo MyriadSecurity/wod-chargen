@@ -16,10 +16,7 @@ def dark_pack_footer() -> None:
       <p>Portions of the materials are fictitious and claimed under the Dark Pack license.
       This is an <strong>unofficial</strong> fan project, not affiliated with Paradox Interactive.</p>
       <a class="text-blood hover:underline" href="https://www.paradoxinteractive.com/games/world-of-darkness/community/dark-pack-agreement" target="_blank" rel="noopener">Dark Pack Agreement</a>
-      <p class="flex flex-wrap gap-x-4 gap-y-1 justify-center text-stone-400">
-        <a class="text-blood hover:underline" href="https://github.com/MyriadSecurity/wod-chargen" target="_blank" rel="noopener">GitHub</a>
-        <a class="text-blood hover:underline" href="mailto:contact.gsco@gmail.com">contact.gsco@gmail.com</a>
-      </p>
+      <a class="text-blood hover:underline" href="https://github.com/MyriadSecurity/wod-chargen" target="_blank" rel="noopener">GitHub</a>
       <p class="text-stone-500 text-xs">wod-chargen v{__version__}</p>
     </div>
     """
