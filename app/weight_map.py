@@ -465,6 +465,11 @@ class WeightMapApp:
             else:
                 self.state["arch"] = default_arch
 
+        # Keep LotN `sub` from overriding SPI arch:sub ids in build_tree.
+        arch = str(self.state.get("arch") or "")
+        if ":" in arch:
+            self.state["sub"] = arch.split(":", 1)[1]
+
         lens = str(self.state.get("lens") or "archetype")
         if lens in ("archetype", "division", "faction", "affinity"):
             opts = data.picker_for_lens(lens)
@@ -473,6 +478,11 @@ class WeightMapApp:
             if lens == "archetype":
                 if current not in valid:
                     self.state["id"] = self.state["arch"]
+                elif current in valid:
+                    # Prefer the explicit profile id (dropdown) over a stale arch.
+                    self.state["arch"] = current
+                    if ":" in current:
+                        self.state["sub"] = current.split(":", 1)[1]
             elif current not in valid:
                 self.state["id"] = opts[0]["id"] if opts else current
 

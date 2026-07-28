@@ -166,3 +166,33 @@ def test_spi_weight_map_resets_invalid_ids(stubs):
     assert app.state["id"] in {o["id"] for o in app._data().picker_for_lens("division")}
     tree = app._data().build_tree(app.state["lens"], app.state["mode"], **app._tree_params())
     assert tree.get("children")
+
+
+def test_spi_subtype_dropdown_updates_tree(stubs):
+    """LotN leftover sub= must not pin the SPI profile to the default subtype."""
+    mod = _fresh_weight_map_module()
+    stubs.window.location.hash = (
+        "#weights?game=spi&lens=archetype&mode=profile&id=investigator:detective"
+    )
+    app = mod.WeightMapApp(stubs.elements["app-root"])
+    app.mount()
+    app.state["id"] = "investigator:forensic"
+    app.state["arch"] = "investigator:forensic"
+    # Simulate stale LotN sub still present in state / tree params.
+    app.state["sub"] = "silver_tongue"
+    tree = app._data().build_tree(app.state["lens"], app.state["mode"], **app._tree_params())
+    assert "Forensic" in tree["name"]
+    assert "Detective" not in tree["name"]
+
+
+def test_spi_build_tree_ignores_lotn_sub_when_id_has_subtype():
+    from app.weight_map_data_spi import build_tree
+
+    tree = build_tree(
+        "archetype",
+        "profile",
+        id="guardian:tactical",
+        arch="guardian:tactical",
+        sub="silver_tongue",
+    )
+    assert "Tactical" in tree["name"]

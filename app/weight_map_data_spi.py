@@ -244,7 +244,8 @@ def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
 
         raw = params.get("id") or params.get("arch") or default_arch_picker_id()
         arch_id, sub_id = _parse_arch_sub(raw)
-        if params.get("sub"):
+        # Ignore leftover LotN `sub` when id/arch already encodes arch:sub.
+        if params.get("sub") and ":" not in str(raw):
             sub_id = params["sub"]
         try:
             merged = effective_profile(arch_id, sub_id)
@@ -354,7 +355,7 @@ def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
             }
         arch_raw = params.get("arch") or params.get("id") or default_arch_picker_id()
         arch_id, sub_id = _parse_arch_sub(arch_raw)
-        if params.get("sub"):
+        if params.get("sub") and ":" not in str(arch_raw):
             sub_id = params["sub"]
         try:
             arch = effective_profile(arch_id, sub_id)
