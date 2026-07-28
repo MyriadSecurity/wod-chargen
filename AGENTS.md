@@ -6,8 +6,11 @@
 `wod-chargen` is a **browser-only** World of Darkness / MET character generator. There is **no backend, no database, and no external API** at runtime. The UI runs entirely client-side via **PyScript** (Python in the browser via WebAssembly). The Python engine lives in `wod_chargen/` and the PyScript UI in `app/`. See `README.md` and `CONTRIBUTING.md` for the standard commands.
 
 ### Environment
-- Python is managed in a local virtualenv at `.venv` (gitignored). The startup update script creates it and installs `.[dev]` plus the Playwright Chromium browser. Prefix commands with `.venv/bin/` (e.g. `.venv/bin/pytest`) or activate with `source .venv/bin/activate`.
+- Treat this like a normal local Python project. Dependencies are managed with **uv** (see `uv.lock`) into `.venv` (gitignored).
+- Cloud install (`.cursor/environment.json`) only runs: `uv sync --extra dev --group dev`. No Playwright browser download at install time.
+- Prefix commands with `.venv/bin/` (e.g. `.venv/bin/pytest`) or `uv run …`, or activate with `source .venv/bin/activate`.
 - Runtime `dependencies` in `pyproject.toml` are intentionally empty — everything the app needs at runtime is loaded in-browser from CDNs.
+- For browser smoke tests only, install Chromium once: `.venv/bin/playwright install chromium`
 
 ### Running the app (dev)
 - Start the static no-cache dev server, then open `http://localhost:8080/`:
