@@ -1,0 +1,26 @@
+{
+  "id": "warden",
+  "label": "Warden",
+  "description": "Hold ground, harden the perimeter, endure the night.",
+  "modifiers": {
+    "skill_biases": {
+      "weaponry": 0.3,
+      "intimidation": 0.3,
+      "survival": 0.3
+    },
+    "attribute_biases": {
+      "strength": 0.3,
+      "resolve": 0.3
+    },
+    "tag_affinities": {
+      "protection": 0.4,
+      "combat": 0.3,
+      "survival": 0.25
+    },
+    "merit_biases": {
+      "hardy": 0.35,
+      "iron_chin": 0.3,
+      "safe_place": 0.25
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "courier",
+  "label": "Courier",
+  "description": "Move people and packages through hostile ground.",
+  "modifiers": {
+    "skill_biases": {
+      "drive": 0.45,
+      "athletics": 0.3,
+      "streetwise": 0.25
+    },
+    "attribute_biases": {
+      "dexterity": 0.3,
+      "stamina": 0.25
+    },
+    "tag_affinities": {
+      "athletics": 0.4,
+      "equipment": 0.3,
+      "survival": 0.25
+    },
+    "merit_biases": {
+      "greyhound": 0.35,
+      "crack_driver": 0.35
+    }
+  }
+}

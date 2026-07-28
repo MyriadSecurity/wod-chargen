@@ -56,7 +56,9 @@ def render_venue(app: WizardApp) -> Any:
         el.appendChild(inp)
 
     xp_inp: Any | None = None
-    if app.state.get("venue") == "custom_xp":
+    if app._venue_picker.get(app.state["venue"], {}).get("requires_custom_xp") or app.state.get(
+        "venue"
+    ) in ("custom_xp", "spi_custom_xp"):
         lbl = document.createElement("label")
         lbl.className = "block mt-4 text-stone-400"
         lbl.innerText = copy.get("xp_custom_label", "XP amount")

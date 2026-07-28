@@ -1,0 +1,16 @@
+{
+  "wizard_steps": ["venue", "division", "faction", "archetype", "sub_archetype", "affinity", "generate"],
+  "affinity_default": "any",
+  "copy": {
+    "landing_blurb": "Build a Society investigator sheet for oneshots or NPCs.",
+    "division_title": "Division",
+    "faction_title": "Faction",
+    "archetype_title": "Archetype",
+    "sub_archetype_title": "Subtype",
+    "affinity_title": "Affinity",
+    "affinity_any_label": "Any (from archetype)",
+    "multi_affinity_label": "Allow multiple Affinities",
+    "xp_title": "Starting XP",
+    "home_link_label": "← New character"
+  }
+}

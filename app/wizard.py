@@ -9,19 +9,22 @@ from typing import Any
 from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
-from app.components.sheet import render_lotn_v5_sheet
+from app.components.sheet_dispatch import render_sheet_for_game
 from app.formatting import titleize_id
-from app.nav import app_nav
+from app.nav import app_nav, _nav_click
 from app.views import archetype as archetype_view
 from app.views import faction as faction_view
 from app.views import generate as generate_view
 from app.views import predator as predator_view
+from app.views import spi_pickers as spi_view
 from app.views import type as type_view
 from app.views import venue as venue_view
 from app.wizard_state import (
+    apply_spi_defaults,
     build_share_options,
     default_state,
     generate,
+    is_spi,
     parse_url,
     share_payload,
     share_url,
@@ -30,6 +33,7 @@ from app.wizard_state import (
     validate_selection,
     venue_continue_error,
 )
+from app.venue_dispatch import IMPLEMENTED_UI_GAMES
 from wod_chargen.core.xp_log_format import format_xp_log
 from wod_chargen.games.lotn_v5.archetypes import (
     archetypes_for_type,
@@ -156,7 +160,9 @@ class WizardApp:
     def _step_summary(self, step: str) -> str:
         if step == "venue":
             venue_id = self.state.get("venue", "")
-            if venue_id == "custom_xp":
+            if venue_id in ("custom_xp", "spi_custom_xp") or self._venue_picker.get(
+                venue_id, {}
+            ).get("requires_custom_xp"):
                 xp = str(self.state.get("xp_custom", "")).strip()
                 return f"{xp} XP" if xp else "Custom XP"
             label = self._venue_picker.get(venue_id, {}).get("label", venue_id)
@@ -164,6 +170,29 @@ class WizardApp:
             if self._venue_picker.get(venue_id, {}).get("requires_approval_month") and approval:
                 return f"{label} · {approval}"
             return label
+        if is_spi(self):
+            if step == "division":
+                labels = {e["id"]: e["label"] for e in self.system.get_division_options()}
+                return labels.get(self.state.get("division", ""), self.state.get("division", ""))
+            if step == "faction":
+                labels = {e["id"]: e["label"] for e in self.system.get_faction_options()}
+                return labels.get(self.state.get("faction", ""), self.state.get("faction", ""))
+            if step == "archetype":
+                labels = {e["id"]: e["label"] for e in self.system.get_archetypes()}
+                return labels.get(self.state.get("archetype", ""), self.state.get("archetype", ""))
+            if step == "sub_archetype":
+                arch_id = str(self.state.get("archetype") or "")
+                for s in self.system.get_sub_archetypes(arch_id):
+                    if s["id"] == self.state.get("sub"):
+                        return s["label"]
+                return str(self.state.get("sub", ""))
+            if step == "affinity":
+                labels = {e["id"]: e["label"] for e in self.system.get_affinity_options()}
+                return labels.get(self.state.get("affinity", "any"), self.state.get("affinity", ""))
+            if step == "generate":
+                multi = " · multi-Affinity" if self.state.get("multi_affinity") else ""
+                return f"Seed {self.state.get('seed', '')}{multi}"
+            return ""
         if step == "type":
             labels = {entry["id"]: entry["label"] for entry in self.system.get_character_type_picker()}
             if self.state.get("type") == "thin_blood":
@@ -207,6 +236,9 @@ class WizardApp:
         window.setTimeout(create_proxy(do_scroll), 50)
 
     def _start_build(self) -> None:
+        if is_spi(self):
+            apply_spi_defaults(self)
+            self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
         self.state["phase"] = "build"
         self.state["unlocked_through"] = "venue"
         self.state["scroll_to_step"] = "venue"
@@ -317,15 +349,33 @@ class WizardApp:
         lines = [
             f"Share link: {self._share_url()}",
             f"Seed: {result.seed}",
-            f"Convictions seed: {self.state['convictions_seed']}",
-            f"Venue: {self._step_summary('venue')}",
-            f"Type: {self._step_summary('type')}",
-            f"Lineage: {self._step_summary('faction')}",
-            f"Archetype: {self._step_summary('archetype')}",
-            f"Subtype: {self._step_summary('sub_archetype')}",
         ]
-        if self._type_uses_predator():
-            lines.append(f"Predator: {self._step_summary('predator')}")
+        if is_spi(self):
+            lines.extend(
+                [
+                    f"Starting XP: {self._step_summary('venue')}",
+                    f"Division: {self._step_summary('division')}",
+                    f"Faction: {self._step_summary('faction')}",
+                    f"Archetype: {self._step_summary('archetype')}",
+                    f"Subtype: {self._step_summary('sub_archetype')}",
+                    f"Affinity: {self._step_summary('affinity')}",
+                ]
+            )
+            if self.state.get("multi_affinity"):
+                lines.append("Multi-Affinity: on")
+        else:
+            lines.extend(
+                [
+                    f"Convictions seed: {self.state['convictions_seed']}",
+                    f"Venue: {self._step_summary('venue')}",
+                    f"Type: {self._step_summary('type')}",
+                    f"Lineage: {self._step_summary('faction')}",
+                    f"Archetype: {self._step_summary('archetype')}",
+                    f"Subtype: {self._step_summary('sub_archetype')}",
+                ]
+            )
+            if self._type_uses_predator():
+                lines.append(f"Predator: {self._step_summary('predator')}")
         lines.append(f"XP: {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked")
         return lines
 
@@ -422,44 +472,66 @@ class WizardApp:
     def _view_build(self) -> Any:
         el = document.createElement("div")
         el.className = "wizard-build"
-        el.appendChild(self._page_header("WoD Character Generator"))
+        title = self.system.label if is_spi(self) else "WoD Character Generator"
+        el.appendChild(self._page_header(title))
 
         map_link = document.createElement("a")
-        map_link.href = "#weights"
+        map_link.href = f"#weights?game={self.state['game']}"
         map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
         map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
-
-        from app.nav import _nav_click
 
         map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
         el.appendChild(map_link)
 
         strat_link = document.createElement("a")
-        strat_link.href = "#strategy"
+        strat_link.href = f"#strategy?game={self.state['game']}"
         strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
         strat_link.innerText = "Build guide →"
         strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
         el.appendChild(strat_link)
 
         copy = self.system.get_wizard_copy()
-        sections: list[tuple[str, str, Any]] = [
-            ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
-            ("type", "Character type", type_view.render_type(self)),
-            ("faction", self.system.get_faction_picker_title(self._faction_role()), faction_view.render_faction(self)),
-            (
-                "archetype",
-                copy.get("archetype_title", "Archetype"),
-                archetype_view.render_archetype(self),
-            ),
-            (
-                "sub_archetype",
-                copy.get("sub_archetype_title", "Subtype"),
-                archetype_view.render_sub_archetype(self),
-            ),
-            ("predator", copy.get("predator_title", "Predator type"), predator_view.render_predator(self)),
-            ("generate", "Generate", generate_view.render_generate(self)),
-        ]
+        if is_spi(self):
+            sections: list[tuple[str, str, Any]] = [
+                ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
+                ("division", copy.get("division_title", "Division"), spi_view.render_division(self)),
+                ("faction", copy.get("faction_title", "Faction"), spi_view.render_faction(self)),
+                (
+                    "archetype",
+                    copy.get("archetype_title", "Archetype"),
+                    spi_view.render_archetype(self),
+                ),
+                (
+                    "sub_archetype",
+                    copy.get("sub_archetype_title", "Subtype"),
+                    spi_view.render_sub_archetype(self),
+                ),
+                ("affinity", copy.get("affinity_title", "Affinity"), spi_view.render_affinity(self)),
+                ("generate", "Generate", spi_view.render_generate_options(self)),
+            ]
+        else:
+            sections = [
+                ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
+                ("type", "Character type", type_view.render_type(self)),
+                (
+                    "faction",
+                    self.system.get_faction_picker_title(self._faction_role()),
+                    faction_view.render_faction(self),
+                ),
+                (
+                    "archetype",
+                    copy.get("archetype_title", "Archetype"),
+                    archetype_view.render_archetype(self),
+                ),
+                (
+                    "sub_archetype",
+                    copy.get("sub_archetype_title", "Subtype"),
+                    archetype_view.render_sub_archetype(self),
+                ),
+                ("predator", copy.get("predator_title", "Predator type"), predator_view.render_predator(self)),
+                ("generate", "Generate", generate_view.render_generate(self)),
+            ]
         for step, title, body in sections:
             if not self._step_visible(step):
                 continue
@@ -488,54 +560,81 @@ class WizardApp:
         el.appendChild(self._page_header("WoD Character Generator"))
         p = document.createElement("p")
         p.className = "text-stone-400 mb-6"
-        p.innerText = self.system.get_wizard_copy().get(
-            "landing_blurb",
-            "Pick lineage and build. Same seed gives the same sheet.",
-        )
+        p.innerText = "Pick a Venue, then generate a sheet, open its build guide, or explore its weight map."
         el.appendChild(p)
 
-        map_link = document.createElement("a")
-        map_link.href = "#weights"
-        map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
-        map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
-
-        from app.nav import _nav_click
-
-        map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
-        el.appendChild(map_link)
-
-        strat_link = document.createElement("a")
-        strat_link.href = "#strategy"
-        strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
-        strat_link.innerText = "Build guide →"
-        strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
-        el.appendChild(strat_link)
 
         catalog = load_game_catalog()
         for game_id, game in catalog.items():
             card = document.createElement("div")
-            if game.get("implemented"):
-                card.className = "card p-6 cursor-pointer hover:border-blood transition"
-                card.innerHTML = (
-                    f"<h2 class='text-xl font-semibold'>{game['label']}</h2>"
-                    f"<p class='text-stone-400 mt-2'>{game['tagline']}</p>"
-                )
+            card.className = "card p-6 mb-4"
+            heading = document.createElement("h2")
+            heading.className = "text-xl font-semibold"
+            heading.innerText = game["label"]
+            card.appendChild(heading)
 
-                def start(_=None, gid=game_id):
+            if game.get("under_construction") or game.get("maturity") == "alpha":
+                badge = document.createElement("p")
+                badge.className = "text-amber-400 text-sm font-semibold mt-2 uppercase tracking-wide"
+                badge.innerText = "Under Construction · Alpha"
+                card.appendChild(badge)
+
+            tag = document.createElement("p")
+            tag.className = "text-stone-400 mt-2"
+            tag.innerText = game["tagline"]
+            card.appendChild(tag)
+
+            status_note = str(game.get("status_note") or "").strip()
+            if status_note:
+                note = document.createElement("p")
+                note.className = "text-amber-200/90 text-sm mt-3 border border-amber-700/50 bg-amber-950/40 rounded px-3 py-2"
+                note.innerText = status_note
+                card.appendChild(note)
+
+            if game.get("implemented"):
+                actions = document.createElement("div")
+                actions.className = "flex flex-wrap gap-2 mt-4"
+
+                def start_generate(_=None, gid=game_id):
                     self.state["game"] = gid
                     self.system = get_game(gid)
                     self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
                     self._start_build()
                     self._render()
 
-                card.onclick = start
-            else:
-                card.className = "card p-6 mt-4 opacity-50"
-                card.innerHTML = (
-                    f"<h2 class='text-lg font-semibold'>{game['label']}</h2>"
-                    f"<p class='text-stone-500 mt-2'>{game['tagline']}</p>"
+                gen_btn = document.createElement("button")
+                gen_btn.type = "button"
+                gen_btn.className = "btn-primary text-sm"
+                gen_btn.innerText = "Generate"
+                gen_btn.onclick = create_proxy(start_generate)
+                actions.appendChild(gen_btn)
+
+                guide_btn = document.createElement("button")
+                guide_btn.type = "button"
+                guide_btn.className = "btn-secondary text-sm"
+                guide_btn.innerText = "Build guide"
+                guide_btn.onclick = create_proxy(
+                    lambda e, gid=game_id: self._open_venue_page("strategy", gid)
                 )
+                actions.appendChild(guide_btn)
+
+                map_btn = document.createElement("button")
+                map_btn.type = "button"
+                map_btn.className = "btn-secondary text-sm"
+                map_btn.innerText = "Weight map"
+                map_btn.onclick = create_proxy(
+                    lambda e, gid=game_id: self._open_venue_page("weights", gid)
+                )
+                actions.appendChild(map_btn)
+                card.appendChild(actions)
+            else:
+                card.className += " opacity-50"
+                soon = document.createElement("p")
+                soon.className = "text-stone-500 text-sm mt-3"
+                soon.innerText = "Coming soon"
+                card.appendChild(soon)
+
             el.appendChild(card)
 
         if self.state.get("error"):
@@ -544,6 +643,10 @@ class WizardApp:
             err.innerText = f"URL error: {self.state['error']}"
             el.appendChild(err)
         return el
+
+    def _open_venue_page(self, page: str, game_id: str) -> None:
+        window.location.hash = f"{page}?game={game_id}"
+        _nav_click(page)
 
     def _faction_role(self) -> str:
         return faction_view.faction_role(self)
@@ -563,11 +666,22 @@ class WizardApp:
             self.state["error"] = None
             self._render()
 
+        def reroll(_=None):
+            self._reroll_character()
+            self._render()
+
         edit_btn = document.createElement("button")
         edit_btn.className = "btn-secondary text-sm"
         edit_btn.innerText = "← Edit build"
         edit_btn.onclick = edit_build
         actions_top.appendChild(edit_btn)
+
+        reroll_top_btn = document.createElement("button")
+        reroll_top_btn.className = "btn-secondary text-sm"
+        reroll_top_btn.type = "button"
+        reroll_top_btn.innerText = "Re-roll"
+        reroll_top_btn.onclick = reroll
+        actions_top.appendChild(reroll_top_btn)
         header.appendChild(actions_top)
         el.appendChild(header)
         result = self.state.get("result")
@@ -624,17 +738,22 @@ class WizardApp:
         sheet_panel.className = "results-tab-panel sheet-panel"
         if self.state["tab"] != "sheet":
             sheet_panel.className += " results-tab-hidden"
-        sheet_model = self.system.build_sheet_model(
-            result,
-            convictions=self._convictions(),
-            convictions_seed=int(self.state["convictions_seed"]),
-        )
-        sheet_panel.appendChild(
-            render_lotn_v5_sheet(
-                sheet_model,
-                on_reroll_convictions=self._reroll_convictions,
+        if is_spi(self):
+            sheet_model = self.system.build_sheet_model(result)
+            sheet_panel.appendChild(render_sheet_for_game(self.state["game"], sheet_model))
+        else:
+            sheet_model = self.system.build_sheet_model(
+                result,
+                convictions=self._convictions(),
+                convictions_seed=int(self.state["convictions_seed"]),
             )
-        )
+            sheet_panel.appendChild(
+                render_sheet_for_game(
+                    self.state["game"],
+                    sheet_model,
+                    on_reroll_convictions=self._reroll_convictions,
+                )
+            )
         panel.appendChild(sheet_panel)
 
         creation_lines = [f"[{e.phase}] {e.message}" for e in result.creation_log]
@@ -691,10 +810,6 @@ class WizardApp:
                 pass
             window.navigator.clipboard.writeText(link)
             _flash_button(copy_btn, "Link copied!")
-
-        def reroll(_=None):
-            self._reroll_character()
-            self._render()
 
         def export_json(_=None):
             payload = result.to_dict()

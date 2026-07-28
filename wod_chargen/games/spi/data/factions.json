@@ -1,0 +1,149 @@
+{
+  "higher_ground": {
+    "id": "higher_ground",
+    "label": "The Higher Ground",
+    "summary": "Keep the Society and the supernatural secret; maintain the status quo.",
+    "attribute_biases": {
+      "composure": 1.15,
+      "manipulation": 1.1
+    },
+    "skill_biases": {
+      "subterfuge": 1.25,
+      "socialize": 1.1,
+      "politics": 1.15
+    },
+    "affinity_biases": {},
+    "tag_affinities": {
+      "deception": 1.35,
+      "status": 1.3,
+      "social": 1.2,
+      "influence": 1.15
+    },
+    "merit_biases": {
+      "closed_book": 1.35,
+      "status": 1.3,
+      "anonymity": 1.25
+    }
+  },
+  "humanity_first": {
+    "id": "humanity_first",
+    "label": "Humanity First",
+    "summary": "Supernaturals are dangerous; contain and control threats to humanity.",
+    "attribute_biases": {
+      "resolve": 1.15,
+      "stamina": 1.1
+    },
+    "skill_biases": {
+      "firearms": 1.3,
+      "brawl": 1.2,
+      "intimidation": 1.15,
+      "survival": 1.1
+    },
+    "affinity_biases": {
+      "vampire": 0.85,
+      "spirit": 0.9
+    },
+    "tag_affinities": {
+      "combat": 1.4,
+      "protection": 1.3,
+      "physical": 1.2,
+      "supernatural": 0.55,
+      "ritual": 0.6,
+      "occult": 0.7
+    },
+    "merit_biases": {
+      "iron_stamina": 1.3,
+      "hardy": 1.25
+    }
+  },
+  "order_of_the_everlight": {
+    "id": "order_of_the_everlight",
+    "label": "The Order of the Everlight",
+    "summary": "Human Affinity power is the greatest threat; responsibility and control.",
+    "attribute_biases": {
+      "resolve": 1.25,
+      "composure": 1.15
+    },
+    "skill_biases": {
+      "weaponry": 1.2,
+      "occult": 1.15,
+      "academics": 1.1
+    },
+    "affinity_biases": {
+      "mage": 1.1
+    },
+    "tag_affinities": {
+      "occult": 1.35,
+      "ritual": 1.3,
+      "academia": 1.2,
+      "combat": 1.2,
+      "protection": 1.15
+    },
+    "merit_biases": {
+      "indomitable": 1.35,
+      "iron_will": 1.3,
+      "library": 1.25
+    }
+  },
+  "diplomats": {
+    "id": "diplomats",
+    "label": "The Diplomats",
+    "summary": "Talk first; bargain with sentient supernaturals when possible.",
+    "attribute_biases": {
+      "presence": 1.2,
+      "manipulation": 1.15
+    },
+    "skill_biases": {
+      "persuasion": 1.35,
+      "empathy": 1.3,
+      "socialize": 1.15,
+      "politics": 1.1
+    },
+    "affinity_biases": {
+      "fae": 1.15,
+      "mage": 1.1
+    },
+    "tag_affinities": {
+      "influence": 1.5,
+      "social": 1.35,
+      "care": 1.2,
+      "status": 1.15,
+      "combat": 0.55
+    },
+    "merit_biases": {
+      "inspiring": 1.4,
+      "contacts": 1.3,
+      "allies": 1.25
+    }
+  },
+  "veritas": {
+    "id": "veritas",
+    "label": "Veritas",
+    "summary": "Learn and share the truth; uneasy with Society secrecy.",
+    "attribute_biases": {
+      "intelligence": 1.2,
+      "wits": 1.15
+    },
+    "skill_biases": {
+      "investigation": 1.35,
+      "academics": 1.25,
+      "occult": 1.25,
+      "expression": 1.1
+    },
+    "affinity_biases": {
+      "mage": 1.15,
+      "ghost": 1.1
+    },
+    "tag_affinities": {
+      "investigation": 1.5,
+      "information": 1.45,
+      "academia": 1.3,
+      "occult": 1.25
+    },
+    "merit_biases": {
+      "library": 1.35,
+      "eye_for_the_strange": 1.3,
+      "patient": 1.2
+    }
+  }
+}

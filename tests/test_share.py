@@ -41,6 +41,39 @@ def test_share_round_trip():
     assert decoded.options["clan"] == "brujah"
 
 
+def test_spi_share_round_trip_and_regenerate():
+    payload = SharePayload(
+        seed=4242,
+        game="spi",
+        venue="fixed_35",
+        options={
+            "division": "defense",
+            "faction": "humanity_first",
+            "archetype": "guardian",
+            "affinity": "vampire",
+            "multi_affinity": "1",
+        },
+    )
+    qs = encode_payload(payload)
+    decoded = decode_query(qs)
+    assert decoded.game == "spi"
+    assert decoded.venue == "fixed_35"
+    assert decoded.options["division"] == "defense"
+    assert decoded.options["archetype"] == "guardian"
+    assert decoded.options["affinity"] == "vampire"
+    assert decoded.options["multi_affinity"] == "1"
+
+    from wod_chargen.games.spi.generator import generate_character
+
+    opts = dict(decoded.options)
+    opts["multi_affinity"] = opts.get("multi_affinity") in ("1", "true", "True")
+    result = generate_character(decoded.seed, opts, load_venue("fixed_35"))
+    assert result.game_id == "spi"
+    assert result.character["division"] == "defense"
+    assert result.character["archetype"] == "guardian"
+    assert result.character["affinities"]["vampire"] >= 1
+
+
 def test_decode_without_schema_defaults_to_current():
     decoded = decode_query("?seed=482910&game=lotn_v5&venue=mes_end_to_dawn&type=vampire")
     assert decoded.schema == "0.1"

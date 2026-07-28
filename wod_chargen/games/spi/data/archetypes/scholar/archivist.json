@@ -1,0 +1,25 @@
+{
+  "id": "archivist",
+  "label": "Archivist",
+  "description": "Catalogs, libraries, and the paper trail of the strange.",
+  "modifiers": {
+    "skill_biases": {
+      "academics": 0.4,
+      "investigation": 0.3,
+      "occult": 0.25
+    },
+    "attribute_biases": {
+      "intelligence": 0.3,
+      "resolve": 0.2
+    },
+    "tag_affinities": {
+      "academia": 0.4,
+      "information": 0.4,
+      "occult": 0.25
+    },
+    "merit_biases": {
+      "library": 0.45,
+      "eidetic_memory": 0.3
+    }
+  }
+}

@@ -109,3 +109,51 @@ When signature disciplines are off-clan, define `discipline_expressions` on the 
 - `alternates` — merged only for in-clan disciplines when a signature is missing.
 - Alternate `discipline_bias` values are targets (max with current); `power_biases` are overrides.
 - Runtime floors via `clan_discipline_adapt.py`; off-clan signatures use XP `clan_factor` 0.6.
+
+## SPI (Society of Paranormal Investigators)
+
+SPI has **no** `archetype_themes.json` apply pipeline — edit packs directly under
+`wod_chargen/games/spi/data/`. Task index: [`where-to-edit.md`](where-to-edit.md).
+In-tree map: `wod_chargen/games/spi/data/README.md`.
+
+Same value ranges and opposition policy as LotN (`opposed:` / `hard_opposed:` on theme lists).
+Clamp via `wod_chargen.games.spi.trait_biases` (0.05–3.0).
+
+### Data locations
+
+| Path | Role |
+|------|------|
+| `archetypes/<id>.json` | Primary **absolute** bias maps |
+| `archetypes/<id>/<sub>.json` | Subtype `modifiers` — **additive** deltas |
+| `archetypes/_manifest.json` | Register primaries + subtypes |
+| `archetypes/_schema.json` | Field cheat sheet |
+| `divisions.json` / `factions.json` | Soft multiplicative layers |
+| `trait_tags.json` | Judgment theme tags for merits |
+
+### Merits (theme tags)
+
+- Catalog extract tags on `merits.json` stay metadata (sheet category / Affinity type).
+- Judgment **theme** tags (1–3 per merit) in `trait_tags.json` drive weighting via
+  archetype / Division / Faction `tag_affinities`.
+- Explicit `merit_biases` on those packs override the tag product.
+- Resolver: `wod_chargen.games.spi.trait_biases.resolve_merit_bias`.
+
+### Subtypes
+
+Layout mirrors LotN. Merge: `effective_profile(arch, sub)` in
+`wod_chargen/games/spi/archetypes.py` (`base.get(k, 1.0) + delta`).
+Wizard keys: `archetype` + `sub` (not LotN `arch` / `sub` alone).
+
+### Content workflow
+
+1. Edit the primary and/or subtype JSON (deltas typically +0.2–0.5).
+2. If merit themes changed, update `trait_tags.json`.
+3. Validate:
+
+```bash
+uv run python scripts/validate_spi_archetypes.py
+uv run python scripts/validate_spi_merit_biases.py
+```
+
+4. Spot-check Weight Map (`#weights?game=spi`) and a few generator seeds.
+5. After adding files: `uv run python scripts/generate_pyscript_config.py`.

@@ -35,10 +35,10 @@ def test_format_xp_log_groups_by_category_and_shows_level():
     )
     assert "Purchases" in text
     assert "── Skills" in text
-    assert "  persuasion → 2 (2 XP)" in text
-    assert "  persuasion → 3 (6 XP)" in text
+    assert "  Persuasion → 2 (2 XP)" in text
+    assert "  Persuasion → 3 (6 XP)" in text
     assert "── Attributes" in text
-    assert "  strength → 3 (4 XP)" in text
+    assert "  Strength → 3 (4 XP)" in text
     assert text.index("── Attributes") < text.index("── Skills")
     assert "group_w=" not in text
     assert "Debug (internal weights)" not in text

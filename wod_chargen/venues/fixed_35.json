@@ -1,0 +1,8 @@
+{
+  "id": "fixed_35",
+  "label": "Fixed — 35 XP",
+  "game_id": "spi",
+  "xp_method": "fixed",
+  "xp_config": { "total": 35 },
+  "archetype_pack": "default"
+}

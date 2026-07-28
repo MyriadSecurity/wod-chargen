@@ -1,0 +1,58 @@
+{
+  "mental": [
+    "academics",
+    "computer",
+    "crafts",
+    "investigation",
+    "medicine",
+    "occult",
+    "politics",
+    "science"
+  ],
+  "physical": [
+    "athletics",
+    "brawl",
+    "drive",
+    "firearms",
+    "larceny",
+    "stealth",
+    "survival",
+    "weaponry"
+  ],
+  "social": [
+    "animal_ken",
+    "empathy",
+    "expression",
+    "intimidation",
+    "persuasion",
+    "socialize",
+    "streetwise",
+    "subterfuge"
+  ],
+  "all": [
+    "academics",
+    "computer",
+    "crafts",
+    "investigation",
+    "medicine",
+    "occult",
+    "politics",
+    "science",
+    "athletics",
+    "brawl",
+    "drive",
+    "firearms",
+    "larceny",
+    "stealth",
+    "survival",
+    "weaponry",
+    "animal_ken",
+    "empathy",
+    "expression",
+    "intimidation",
+    "persuasion",
+    "socialize",
+    "streetwise",
+    "subterfuge"
+  ]
+}

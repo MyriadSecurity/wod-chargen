@@ -4,6 +4,14 @@
     "tagline": "BNS MET (2023) — vampire, ghoul, thin-blood",
     "implemented": true
   },
+  "spi": {
+    "label": "Society of Paranormal Investigators",
+    "tagline": "MES CoD 2e — An Original Mortals+ Investigation Venue",
+    "implemented": true,
+    "under_construction": true,
+    "maturity": "alpha",
+    "status_note": "Under Construction — alpha preview. Sheets and rules coverage are incomplete and unreliable; use for experimentation only."
+  },
   "werewolf_apocalypse": {
     "label": "Werewolf: the Apocalypse",
     "tagline": "BNS MET — Coming soon",

@@ -1,0 +1,16 @@
+{
+  "health": "size + stamina",
+  "speed": "5 + strength + dexterity",
+  "willpower": "resolve + composure",
+  "initiative": "dexterity + composure",
+  "perception": "wits + composure",
+  "defense": "min(wits, dexterity) + athletics",
+  "clash_of_wills": "max_resistant_attribute + occult",
+  "downtimes": "resolve + 1",
+  "max_integrity": "11 - sum_top_two_affinities",
+  "resistant_attributes": [
+    "resolve",
+    "stamina",
+    "composure"
+  ]
+}

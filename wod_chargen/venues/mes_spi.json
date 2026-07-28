@@ -1,0 +1,10 @@
+{
+  "id": "mes_spi",
+  "label": "MES SPI — Game XP floor",
+  "game_id": "spi",
+  "xp_method": "mes_approval_month",
+  "xp_config": {
+    "chart_ref": "mes_spi_xp_chart.json"
+  },
+  "archetype_pack": "default"
+}

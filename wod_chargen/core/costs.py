@@ -11,7 +11,7 @@ def cost_for(entry: dict[str, Any], new_level: int = 1, *, current_level: int = 
         return new_level * int(entry["factor"])
     if kind == "flat":
         return int(entry.get("amount", entry.get("per_dot", 0)))
-    if kind == "per_dot":
+    if kind in ("per_dot", "flat_per_dot"):
         return int(entry["per_dot"])
     raise ValueError(f"Unknown cost kind: {kind}")
 

@@ -1,0 +1,25 @@
+{
+  "id": "detective",
+  "label": "Detective",
+  "description": "Street-level casework \u2014 interviews, trails, and dossiers.",
+  "modifiers": {
+    "skill_biases": {
+      "investigation": 0.35,
+      "streetwise": 0.3,
+      "subterfuge": 0.2
+    },
+    "attribute_biases": {
+      "wits": 0.25,
+      "composure": 0.2
+    },
+    "tag_affinities": {
+      "investigation": 0.35,
+      "information": 0.25,
+      "perception": 0.2
+    },
+    "merit_biases": {
+      "investigative_aide": 0.35,
+      "takes_one_to_know_one": 0.3
+    }
+  }
+}

@@ -4,7 +4,7 @@ Browser-only **World of Darkness / MET** procedural character generator.
 
 - **Stack:** PyScript + pyscript.web + Tailwind CSS
 - **Engine:** Python (`wod_chargen/`) — tested with pytest
-- **v1 game:** BNS Laws of the Night V5 (`lotn_v5`)
+- **Venues:** LotN V5 (`lotn_v5`), SPI (`spi`)
 - **Deploy:** GitHub Pages (static)
 - **Version:** see `CHANGELOG.md` and `wod_chargen/__init__.py` (`__version__`)
 
@@ -19,7 +19,17 @@ python scripts/dev_server.py
 # Open http://localhost:8080/
 ```
 
-Versioning: `docs/VERSIONING.md`. Contributing: `CONTRIBUTING.md`.
+## Docs
+
+| Doc | Use when |
+|-----|----------|
+| [`docs/where-to-edit.md`](docs/where-to-edit.md) | Finding which file to change |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Weights, UI JSON, validate commands |
+| [`docs/archetype-weight-guidelines.md`](docs/archetype-weight-guidelines.md) | Bias ranges and resolution |
+| [`docs/spi-structure.md`](docs/spi-structure.md) | SPI design / product decisions |
+| [`docs/creation-weighting-strategy.md`](docs/creation-weighting-strategy.md) | LotN creation + XP pipeline |
+| [`AGENTS.md`](AGENTS.md) | Agent / cloud environment notes |
+| [`docs/VERSIONING.md`](docs/VERSIONING.md) | Versioning |
 
 ## PyScript version
 

@@ -1,0 +1,7 @@
+{
+  "id": "spi_custom_xp",
+  "label": "Custom XP amount",
+  "game_id": "spi",
+  "xp_method": "custom",
+  "archetype_pack": "default"
+}

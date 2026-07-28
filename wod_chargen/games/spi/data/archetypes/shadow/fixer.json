@@ -1,0 +1,27 @@
+{
+  "id": "fixer",
+  "label": "Fixer",
+  "description": "Covers, contacts, and quiet problems solved socially.",
+  "modifiers": {
+    "skill_biases": {
+      "subterfuge": 0.4,
+      "persuasion": 0.3,
+      "streetwise": 0.3
+    },
+    "attribute_biases": {
+      "manipulation": 0.35,
+      "composure": 0.2
+    },
+    "tag_affinities": {
+      "deception": 0.4,
+      "influence": 0.3,
+      "infiltration": 0.25,
+      "combat": -0.25
+    },
+    "merit_biases": {
+      "alternate_identity": 0.4,
+      "fast_talking": 0.35,
+      "fixer": 0.35
+    }
+  }
+}

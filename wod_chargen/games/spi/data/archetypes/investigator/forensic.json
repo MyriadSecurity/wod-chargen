@@ -1,0 +1,25 @@
+{
+  "id": "forensic",
+  "label": "Forensic",
+  "description": "Labs, evidence, and cold science on hot scenes.",
+  "modifiers": {
+    "skill_biases": {
+      "investigation": 0.3,
+      "science": 0.4,
+      "medicine": 0.25
+    },
+    "attribute_biases": {
+      "intelligence": 0.3,
+      "wits": 0.2
+    },
+    "tag_affinities": {
+      "investigation": 0.3,
+      "academia": 0.35,
+      "medicine": 0.25
+    },
+    "merit_biases": {
+      "investigative_prodigy": 0.35,
+      "library": 0.25
+    }
+  }
+}

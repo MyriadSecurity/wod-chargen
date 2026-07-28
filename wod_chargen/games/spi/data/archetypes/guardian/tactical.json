@@ -1,0 +1,25 @@
+{
+  "id": "tactical",
+  "label": "Tactical",
+  "description": "Fireteams, fields of fire, and coordinated takedowns.",
+  "modifiers": {
+    "skill_biases": {
+      "firearms": 0.4,
+      "weaponry": 0.3,
+      "athletics": 0.25
+    },
+    "attribute_biases": {
+      "dexterity": 0.25,
+      "wits": 0.25
+    },
+    "tag_affinities": {
+      "combat": 0.45,
+      "protection": 0.25,
+      "athletics": 0.25
+    },
+    "merit_biases": {
+      "small_unit_tactics": 0.4,
+      "fast_reflexes": 0.3
+    }
+  }
+}

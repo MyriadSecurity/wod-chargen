@@ -1,0 +1,39 @@
+{
+  "affinity": {
+    "kind": "flat_per_dot",
+    "per_dot": 5
+  },
+  "attribute": {
+    "kind": "flat_per_dot",
+    "per_dot": 4
+  },
+  "skill": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "integrity": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "supernatural_resistance": {
+    "kind": "flat_per_dot",
+    "per_dot": 2
+  },
+  "specialty": {
+    "kind": "flat",
+    "amount": 1
+  },
+  "merit": {
+    "kind": "flat_per_dot",
+    "per_dot": 1
+  },
+  "extra_touchstone": {
+    "kind": "multiply",
+    "factor": 1,
+    "note": "Graduated exception: each new level costs that level in XP (1+2+…+5=15). Omitted from oneshot generation."
+  },
+  "willpower_dot_regain": {
+    "kind": "flat",
+    "amount": 1
+  }
+}

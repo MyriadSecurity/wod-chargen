@@ -23,6 +23,13 @@ if TYPE_CHECKING:
     from app.wizard import WizardApp
 
 
+from app.venue_dispatch import is_spi_game
+
+
+def is_spi(app: WizardApp) -> bool:
+    return is_spi_game(str(app.state.get("game") or ""))
+
+
 def default_state() -> dict[str, Any]:
     return {
         "game": DEFAULT_GAME_ID,
@@ -45,14 +52,53 @@ def default_state() -> dict[str, Any]:
         "error": None,
         "tab": "sheet",
         "full_random": False,
+        # SPI (sub is shared with LotN; apply_spi_defaults sets SPI subtype)
+        "division": "adventure",
+        "faction": "higher_ground",
+        "archetype": "investigator",
+        "affinity": "any",
+        "multi_affinity": False,
     }
 
 
+def apply_spi_defaults(app: WizardApp) -> None:
+    app.state["venue"] = "mes_spi"
+    app.state["approval"] = "2026-07"
+    app.state["xp_custom"] = "35"
+    app.state["division"] = "adventure"
+    app.state["faction"] = "higher_ground"
+    app.state["archetype"] = "investigator"
+    app.state["sub"] = "detective"
+    app.state["affinity"] = "any"
+    app.state["multi_affinity"] = False
+    app.state["unlocked_through"] = "venue"
+    app.state["type"] = "investigator"
+
+
 def type_uses_predator(app: WizardApp) -> bool:
+    if is_spi(app):
+        return False
     return app.system.type_uses_predator(app.state["type"])
 
 
 def build_share_options(app: WizardApp) -> dict[str, str]:
+    if is_spi(app):
+        opts: dict[str, str] = {
+            "division": str(app.state.get("division", "")),
+            "faction": str(app.state.get("faction", "")),
+            "archetype": str(app.state.get("archetype", "")),
+            "sub": str(app.state.get("sub", "")),
+            "affinity": str(app.state.get("affinity", "any")),
+        }
+        if app.state.get("multi_affinity"):
+            opts["multi_affinity"] = "1"
+        venue_meta = app._venue_picker.get(app.state["venue"], {})
+        if venue_meta.get("requires_approval_month"):
+            opts["approval"] = str(app.state.get("approval", "")).strip()
+        if venue_meta.get("requires_custom_xp"):
+            opts["xp"] = str(app.state.get("xp_custom", "")).strip()
+        return opts
+
     opts = wizard_share_options(
         character_type=app.state["type"],
         arch=app.state["arch"],
@@ -66,14 +112,17 @@ def build_share_options(app: WizardApp) -> dict[str, str]:
         ),
         type_uses_predator=type_uses_predator(app),
     )
-    if app.state.get("venue") == "custom_xp":
+    if app._venue_picker.get(app.state["venue"], {}).get("requires_custom_xp") or app.state.get(
+        "venue"
+    ) == "custom_xp":
         opts["xp"] = str(app.state.get("xp_custom", "")).strip()
     return opts
 
 
 def venue_continue_error(app: WizardApp) -> str | None:
     venue_id = app.state.get("venue", "")
-    if venue_id == "custom_xp":
+    venue_meta = app._venue_picker.get(venue_id, {})
+    if venue_meta.get("requires_custom_xp") or venue_id in ("custom_xp", "spi_custom_xp"):
         raw = str(app.state.get("xp_custom", "")).strip()
         if not raw:
             return "Enter an XP amount."
@@ -84,7 +133,7 @@ def venue_continue_error(app: WizardApp) -> str | None:
         if xp < 0:
             return "XP must be zero or greater."
         return None
-    if app._venue_picker.get(venue_id, {}).get("requires_approval_month"):
+    if venue_meta.get("requires_approval_month"):
         approval = str(app.state.get("approval", "")).strip()
         if not approval:
             return "Enter an approval month (YYYY-MM)."
@@ -93,6 +142,27 @@ def venue_continue_error(app: WizardApp) -> str | None:
 
 def validate_selection(app: WizardApp) -> None:
     """Ensure arch/sub still exist after data changes or stale share URLs."""
+    if is_spi(app):
+        divisions = {d["id"] for d in app.system.get_division_options()}
+        if app.state.get("division") not in divisions:
+            app.state["division"] = next(iter(divisions))
+        factions = {f["id"] for f in app.system.get_faction_options()}
+        if app.state.get("faction") not in factions:
+            app.state["faction"] = next(iter(factions))
+        arches = {a["id"]: a for a in app.system.get_archetypes()}
+        if app.state.get("archetype") not in arches:
+            app.state["archetype"] = next(iter(arches))
+        arch = arches[app.state["archetype"]]
+        valid_sub = {s["id"] for s in arch.get("sub_archetypes") or []}
+        if not valid_sub:
+            app.state["sub"] = ""
+        elif app.state.get("sub") not in valid_sub:
+            app.state["sub"] = next(iter(valid_sub))
+        affs = {a["id"] for a in app.system.get_affinity_options()}
+        if app.state.get("affinity") not in affs:
+            app.state["affinity"] = "any"
+        return
+
     profiles = archetypes_for_type(app.state["type"])
     valid_arch = {p.id for p in profiles}
     if app.state["arch"] not in valid_arch:
@@ -140,12 +210,21 @@ def parse_url(app: WizardApp) -> None:
         app._venue_picker = {v["id"]: v for v in app.system.get_venue_picker()}
         app.state["venue"] = payload.venue
         opts = payload.options
-        for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
-            if key in opts:
-                app.state[key] = opts[key]
-        if "xp" in opts:
-            app.state["xp_custom"] = opts["xp"]
-            app.state["venue"] = "custom_xp"
+        if payload.game == "spi":
+            for key in ("division", "faction", "archetype", "sub", "affinity", "approval"):
+                if key in opts:
+                    app.state[key] = opts[key]
+            app.state["multi_affinity"] = opts.get("multi_affinity") in ("1", "true", "True")
+            if "xp" in opts:
+                app.state["xp_custom"] = opts["xp"]
+                app.state["venue"] = "spi_custom_xp"
+        else:
+            for key in ("type", "clan", "domitor_clan", "arch", "sub", "predator", "approval"):
+                if key in opts:
+                    app.state[key] = opts[key]
+            if "xp" in opts:
+                app.state["xp_custom"] = opts["xp"]
+                app.state["venue"] = "custom_xp"
         validate_selection(app)
         generate(app)
         app.state["phase"] = "results" if app.state.get("result") else "build"
@@ -159,9 +238,12 @@ def generate(app: WizardApp) -> None:
     try:
         validate_selection(app)
         venue = load_venue(app.state["venue"])
+        opts: dict[str, Any] = dict(build_share_options(app))
+        if is_spi(app):
+            opts["multi_affinity"] = bool(app.state.get("multi_affinity"))
         result = app.system.generate(
             int(app.state["seed"]),
-            build_share_options(app),
+            opts,
             venue,
         )
         app.state["result"] = result

@@ -39,11 +39,51 @@ def test_spend_xp_stops_at_budget():
     assert isinstance(logs[0], LogEntry)
 
 
-def test_spend_xp_respects_max_iterations():
-    rng = SeededRng(99)
+def test_package_merit_uses_opening_efficiency():
+    """Fixed-rating multi-dot buys should not inherit jump / finish-5 heuristics."""
+    from wod_chargen.core.xp_strategy import efficiency_item_bias
 
     def enumerate() -> list[PurchaseCandidate]:
-        return [_candidate("cheap", 1)]
+        return [
+            PurchaseCandidate(
+                item_id="fixed_three",
+                category="merit",
+                spend_group="merits",
+                new_level=3,
+                cost=3,
+                weight=1.0,
+                item_bias=1.0,
+                clan_factor=1.0,
+                source="test",
+                apply=lambda: None,
+                current_level=0,
+                package=True,
+            ),
+            PurchaseCandidate(
+                item_id="range_one",
+                category="merit",
+                spend_group="merits",
+                new_level=1,
+                cost=1,
+                weight=1.0,
+                item_bias=1.0,
+                clan_factor=1.0,
+                source="test",
+                apply=lambda: None,
+                current_level=0,
+            ),
+        ]
 
-    remaining, _, _ = spend_xp(rng, MAX_ITERATIONS + 50, enumerate, source="test")
-    assert remaining >= 0
+    # Without package=True, cur would be inferred as 2 and efficiency_item_bias(2,3)=0.35
+    assert efficiency_item_bias(2, 3) == 0.35
+    assert efficiency_item_bias(0, 1) == 2.5
+
+    saw_package = False
+    for seed in range(30):
+        remaining, xp_log, _ = spend_xp(SeededRng(seed), 3, enumerate, source="test")
+        if any(e.item == "fixed_three" for e in xp_log):
+            saw_package = True
+            assert next(e.cost for e in xp_log if e.item == "fixed_three") == 3
+            assert remaining == 0
+            break
+    assert saw_package

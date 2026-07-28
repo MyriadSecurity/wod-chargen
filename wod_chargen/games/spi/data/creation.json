@@ -1,0 +1,21 @@
+{
+  "attributes": {
+    "base_dots": 1,
+    "primary": 5,
+    "secondary": 4,
+    "tertiary": 3
+  },
+  "skills": {
+    "primary": 11,
+    "secondary": 7,
+    "tertiary": 4
+  },
+  "specialties": 3,
+  "free_affinity_dots": 1,
+  "merit_dots": 7,
+  "max_affinity_merit_dots_at_creation": 3,
+  "integrity_default": 7,
+  "size_default": 5,
+  "affinity_merit_dots_per_affinity_level": 3,
+  "division_status_default": 1
+}

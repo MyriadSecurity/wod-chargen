@@ -1,0 +1,54 @@
+{
+  "primaries": [
+    "investigator",
+    "occultist",
+    "scholar",
+    "guardian",
+    "field_agent",
+    "shadow",
+    "diplomat",
+    "caregiver"
+  ],
+  "subtypes": {
+    "investigator": [
+      "detective",
+      "forensic",
+      "interviewer"
+    ],
+    "occultist": [
+      "ritualist",
+      "exorcist",
+      "medium"
+    ],
+    "scholar": [
+      "scientist",
+      "archivist",
+      "theorist"
+    ],
+    "guardian": [
+      "bodyguard",
+      "tactical",
+      "warden"
+    ],
+    "field_agent": [
+      "scout",
+      "courier",
+      "pathfinder"
+    ],
+    "shadow": [
+      "infiltrator",
+      "watcher",
+      "fixer"
+    ],
+    "diplomat": [
+      "negotiator",
+      "liaison",
+      "handler"
+    ],
+    "caregiver": [
+      "medic",
+      "counselor",
+      "chaplain"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "watcher",
+  "label": "Watcher",
+  "description": "Observe without being observed; intel over action.",
+  "modifiers": {
+    "skill_biases": {
+      "stealth": 0.35,
+      "investigation": 0.35,
+      "subterfuge": 0.25
+    },
+    "attribute_biases": {
+      "wits": 0.35,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "stealth": 0.35,
+      "investigation": 0.35,
+      "perception": 0.35,
+      "infiltration": 0.25
+    },
+    "merit_biases": {
+      "anonymity": 0.35,
+      "trained_observer": 0.35
+    }
+  }
+}

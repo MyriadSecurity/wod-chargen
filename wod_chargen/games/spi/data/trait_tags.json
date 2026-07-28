@@ -1,0 +1,1502 @@
+{
+  "tags": {
+    "physical": {
+      "label": "Physical prowess"
+    },
+    "social": {
+      "label": "Social presence and rapport"
+    },
+    "mental": {
+      "label": "Mental acuity and analysis"
+    },
+    "combat": {
+      "label": "Direct violence and fighting"
+    },
+    "stealth": {
+      "label": "Hidden action and quiet movement"
+    },
+    "deception": {
+      "label": "Lies, covers, and misdirection"
+    },
+    "influence": {
+      "label": "Persuasion, sway, and negotiation"
+    },
+    "investigation": {
+      "label": "Clues, forensics, and deduction"
+    },
+    "information": {
+      "label": "Intel gathering and research"
+    },
+    "perception": {
+      "label": "Senses, awareness, and insight"
+    },
+    "medicine": {
+      "label": "Healing, triage, and body science"
+    },
+    "occult": {
+      "label": "Supernatural lore and paranormal study"
+    },
+    "ritual": {
+      "label": "Rites, ceremonies, and formal practice"
+    },
+    "supernatural": {
+      "label": "Innate or overt supernatural edge"
+    },
+    "equipment": {
+      "label": "Gear, tools, and kit"
+    },
+    "survival": {
+      "label": "Fieldcraft, endurance, and outdoors"
+    },
+    "athletics": {
+      "label": "Speed, mobility, and physical feats"
+    },
+    "tech": {
+      "label": "Computers, devices, and modern systems"
+    },
+    "academia": {
+      "label": "Scholarship, science, and formal study"
+    },
+    "resources": {
+      "label": "Wealth, assets, and procurement"
+    },
+    "status": {
+      "label": "Rank, reputation, and institutional clout"
+    },
+    "protection": {
+      "label": "Defense of people and places"
+    },
+    "infiltration": {
+      "label": "Breaking in and operating behind lines"
+    },
+    "care": {
+      "label": "Support, welfare, and emotional aid"
+    }
+  },
+  "merits": {
+    "a_light_in_the_dark": [
+      "supernatural",
+      "protection",
+      "occult"
+    ],
+    "a_wolf_s_meat": [
+      "supernatural",
+      "medicine",
+      "survival"
+    ],
+    "abhorrent": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "acute_senses": [
+      "supernatural",
+      "perception"
+    ],
+    "air_of_menace": [
+      "influence",
+      "combat",
+      "opposed:care"
+    ],
+    "alacrity": [
+      "supernatural",
+      "athletics",
+      "physical"
+    ],
+    "allies": [
+      "influence",
+      "status"
+    ],
+    "allure_of_danger": [
+      "supernatural",
+      "influence",
+      "social"
+    ],
+    "alternate_identity": [
+      "deception",
+      "infiltration"
+    ],
+    "ambidextrous": [
+      "combat",
+      "physical"
+    ],
+    "and_taxes": [
+      "supernatural",
+      "perception",
+      "investigation"
+    ],
+    "animal_companion": [
+      "supernatural",
+      "survival"
+    ],
+    "animal_possession": [
+      "supernatural",
+      "infiltration",
+      "stealth"
+    ],
+    "animist": [
+      "supernatural",
+      "occult"
+    ],
+    "anonymity": [
+      "stealth",
+      "infiltration",
+      "hard_opposed:status"
+    ],
+    "apportation": [
+      "supernatural",
+      "occult"
+    ],
+    "arcadian_metabolism": [
+      "supernatural",
+      "medicine",
+      "physical"
+    ],
+    "arcane_senses": [
+      "supernatural",
+      "perception",
+      "occult"
+    ],
+    "architect": [
+      "care",
+      "mental",
+      "supernatural"
+    ],
+    "area_of_expertise": [
+      "academia",
+      "information"
+    ],
+    "assertive_implement": [
+      "combat",
+      "equipment",
+      "occult"
+    ],
+    "aura_reading": [
+      "perception",
+      "supernatural",
+      "occult"
+    ],
+    "automatic_writing_ghost": [
+      "supernatural",
+      "occult",
+      "information"
+    ],
+    "automatic_writing_spirit": [
+      "supernatural",
+      "occult",
+      "information"
+    ],
+    "automotive_genius": [
+      "tech",
+      "equipment"
+    ],
+    "back_road_atlas": [
+      "survival",
+      "information"
+    ],
+    "barfly": [
+      "social",
+      "influence"
+    ],
+    "bastion_of_the_self": [
+      "supernatural",
+      "protection"
+    ],
+    "beast_speech": [
+      "supernatural",
+      "social",
+      "care"
+    ],
+    "beast_tamer": [
+      "supernatural",
+      "care"
+    ],
+    "beast_whispers": [
+      "supernatural",
+      "influence",
+      "care"
+    ],
+    "beastlord": [
+      "supernatural",
+      "care"
+    ],
+    "biokinesis": [
+      "physical",
+      "medicine",
+      "supernatural"
+    ],
+    "biomimicry": [
+      "supernatural",
+      "combat",
+      "physical"
+    ],
+    "bless_amulet": [
+      "ritual",
+      "protection",
+      "occult"
+    ],
+    "blessing_of_the_mundane_ghost": [
+      "supernatural",
+      "stealth"
+    ],
+    "blessing_of_the_mundane_spirit": [
+      "supernatural",
+      "stealth"
+    ],
+    "bloodhound": [
+      "supernatural",
+      "investigation",
+      "perception"
+    ],
+    "body_as_weapon": [
+      "combat",
+      "physical"
+    ],
+    "boot_party": [
+      "combat"
+    ],
+    "bottle_emotion": [
+      "supernatural",
+      "influence",
+      "social"
+    ],
+    "bottle_memory": [
+      "supernatural",
+      "information",
+      "occult"
+    ],
+    "bountiful_harvest": [
+      "supernatural",
+      "resources",
+      "occult"
+    ],
+    "brownie_s_boon": [
+      "supernatural",
+      "occult"
+    ],
+    "cenonte": [
+      "resources",
+      "supernatural",
+      "occult"
+    ],
+    "ceremonies": [
+      "ritual",
+      "occult",
+      "supernatural"
+    ],
+    "ceremony_savant": [
+      "supernatural",
+      "ritual",
+      "occult"
+    ],
+    "choke_hold": [
+      "combat"
+    ],
+    "chthonic_navigator": [
+      "supernatural",
+      "survival",
+      "occult"
+    ],
+    "citywalker": [
+      "supernatural",
+      "athletics",
+      "infiltration"
+    ],
+    "clairvoyance": [
+      "perception",
+      "occult",
+      "supernatural"
+    ],
+    "cleanse_the_body": [
+      "supernatural",
+      "medicine"
+    ],
+    "clear_sighted": [
+      "perception",
+      "supernatural",
+      "hard_opposed:deception"
+    ],
+    "clinch_strike": [
+      "combat"
+    ],
+    "closed_book": [
+      "deception",
+      "protection"
+    ],
+    "clotho_s_sight": [
+      "supernatural",
+      "investigation",
+      "occult"
+    ],
+    "code_of_honor": [
+      "mental",
+      "protection"
+    ],
+    "cohesive_unit": [
+      "social",
+      "influence",
+      "protection"
+    ],
+    "common_sense": [
+      "mental",
+      "perception"
+    ],
+    "compartimentalization": [
+      "mental",
+      "deception"
+    ],
+    "consecrate_weapon": [
+      "combat",
+      "ritual",
+      "occult"
+    ],
+    "contacts": [
+      "information",
+      "investigation"
+    ],
+    "copy_cat": [
+      "supernatural",
+      "mental"
+    ],
+    "cover_tracks": [
+      "stealth",
+      "survival"
+    ],
+    "covert_operative": [
+      "combat",
+      "stealth",
+      "infiltration"
+    ],
+    "crack_driver": [
+      "athletics",
+      "tech"
+    ],
+    "creature_caretaker": [
+      "supernatural",
+      "care"
+    ],
+    "creature_clothing": [
+      "supernatural",
+      "equipment"
+    ],
+    "creature_tailor": [
+      "supernatural",
+      "ritual",
+      "occult"
+    ],
+    "curse_effigy": [
+      "supernatural",
+      "combat",
+      "ritual"
+    ],
+    "cursed": [
+      "supernatural",
+      "occult",
+      "mental"
+    ],
+    "custom_gear_broker": [
+      "equipment",
+      "resources",
+      "influence"
+    ],
+    "dam_the_heartflood": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "danger_sense": [
+      "perception",
+      "combat",
+      "protection"
+    ],
+    "dark_passenger": [
+      "supernatural",
+      "occult",
+      "information"
+    ],
+    "deadpan": [
+      "protection",
+      "mental",
+      "supernatural"
+    ],
+    "defender": [
+      "protection",
+      "care"
+    ],
+    "defensive_combat_brawl": [
+      "combat",
+      "protection"
+    ],
+    "defensive_combat_weaponry": [
+      "combat",
+      "protection"
+    ],
+    "defensive_dreamscaping": [
+      "supernatural",
+      "protection"
+    ],
+    "demesne_domain": [
+      "supernatural",
+      "influence",
+      "status"
+    ],
+    "demolisher": [
+      "physical",
+      "combat"
+    ],
+    "destiny": [
+      "supernatural",
+      "occult"
+    ],
+    "devoid": [
+      "supernatural",
+      "stealth",
+      "tech"
+    ],
+    "direction_sense": [
+      "survival",
+      "perception"
+    ],
+    "discern_composition": [
+      "supernatural",
+      "investigation",
+      "perception"
+    ],
+    "diviner": [
+      "supernatural",
+      "information",
+      "occult"
+    ],
+    "division_liason": [
+      "status",
+      "influence"
+    ],
+    "doppelganger": [
+      "supernatural",
+      "deception",
+      "infiltration"
+    ],
+    "double_jointed": [
+      "athletics",
+      "infiltration"
+    ],
+    "dream": [
+      "supernatural",
+      "occult",
+      "information"
+    ],
+    "dream_shaper": [
+      "supernatural",
+      "occult",
+      "mental"
+    ],
+    "dream_warrior": [
+      "combat",
+      "supernatural",
+      "occult"
+    ],
+    "dreamweaver": [
+      "supernatural",
+      "occult",
+      "mental"
+    ],
+    "durability_control": [
+      "supernatural",
+      "equipment",
+      "physical"
+    ],
+    "echo_agony": [
+      "supernatural",
+      "combat"
+    ],
+    "echoes_of_perfection": [
+      "supernatural",
+      "occult",
+      "care"
+    ],
+    "eidetic_memory": [
+      "information",
+      "academia"
+    ],
+    "empath": [
+      "perception",
+      "care",
+      "social"
+    ],
+    "enchanting_performance": [
+      "social",
+      "influence",
+      "deception"
+    ],
+    "encyclopedic_knowledge": [
+      "information",
+      "academia"
+    ],
+    "enhanced_items": [
+      "equipment",
+      "supernatural"
+    ],
+    "esoteric_armory": [
+      "equipment",
+      "occult",
+      "combat"
+    ],
+    "etiquette": [
+      "social",
+      "influence",
+      "status"
+    ],
+    "evil_eye": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "evil_eye_tell": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "expressive": [
+      "supernatural",
+      "resources"
+    ],
+    "extra_touchstone": [
+      "care",
+      "protection"
+    ],
+    "eye_for_the_strange": [
+      "occult",
+      "investigation",
+      "perception"
+    ],
+    "face_in_the_crowd": [
+      "stealth",
+      "infiltration"
+    ],
+    "fae_mount": [
+      "supernatural",
+      "athletics",
+      "survival"
+    ],
+    "fame": [
+      "status",
+      "influence",
+      "opposed:stealth"
+    ],
+    "fast_reflexes": [
+      "combat",
+      "athletics"
+    ],
+    "fast_talking": [
+      "social",
+      "deception",
+      "influence"
+    ],
+    "fetish": [
+      "equipment",
+      "occult",
+      "supernatural"
+    ],
+    "fighting_finesse": [
+      "combat",
+      "athletics"
+    ],
+    "find_the_oathbreaker": [
+      "supernatural",
+      "investigation"
+    ],
+    "fixer": [
+      "influence",
+      "resources",
+      "information"
+    ],
+    "fleet_of_foot": [
+      "athletics"
+    ],
+    "fool_me_once": [
+      "supernatural",
+      "perception",
+      "protection"
+    ],
+    "forensic_gaze": [
+      "supernatural",
+      "investigation",
+      "medicine"
+    ],
+    "forked_tongue": [
+      "supernatural",
+      "deception",
+      "influence"
+    ],
+    "fortitude": [
+      "supernatural",
+      "physical",
+      "protection"
+    ],
+    "frequency_attunement": [
+      "supernatural",
+      "tech",
+      "information"
+    ],
+    "ghostly_companion": [
+      "supernatural",
+      "occult"
+    ],
+    "giant": [
+      "physical",
+      "combat"
+    ],
+    "goblin_bounty": [
+      "resources",
+      "supernatural",
+      "equipment"
+    ],
+    "goblin_contract": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "goetic_companion": [
+      "supernatural",
+      "occult"
+    ],
+    "goetic_mastery": [
+      "supernatural",
+      "occult",
+      "care"
+    ],
+    "good_impressions": [
+      "supernatural",
+      "social",
+      "influence"
+    ],
+    "good_time_management": [
+      "academia",
+      "mental"
+    ],
+    "grave_goods": [
+      "equipment",
+      "resources",
+      "supernatural"
+    ],
+    "greyhound": [
+      "athletics",
+      "survival"
+    ],
+    "ground_and_pound": [
+      "combat"
+    ],
+    "ground_fighter": [
+      "combat"
+    ],
+    "grow_gills": [
+      "supernatural",
+      "survival",
+      "physical"
+    ],
+    "gut_feeling": [
+      "occult",
+      "perception"
+    ],
+    "hallow": [
+      "resources",
+      "supernatural",
+      "occult"
+    ],
+    "hardened_exorcist": [
+      "ritual",
+      "occult",
+      "protection"
+    ],
+    "hardy": [
+      "survival",
+      "physical"
+    ],
+    "haunted": [
+      "supernatural",
+      "occult"
+    ],
+    "headbutt": [
+      "combat"
+    ],
+    "hedge_brawler": [
+      "supernatural",
+      "combat"
+    ],
+    "hedge_delver": [
+      "supernatural",
+      "survival",
+      "occult"
+    ],
+    "hedge_sense": [
+      "supernatural",
+      "perception"
+    ],
+    "hedgebeast_companion": [
+      "supernatural",
+      "occult"
+    ],
+    "hedgebeast_hoarder": [
+      "supernatural",
+      "care"
+    ],
+    "high_speech_scholar": [
+      "supernatural",
+      "academia",
+      "occult"
+    ],
+    "hobbyist_clique": [
+      "social",
+      "academia"
+    ],
+    "holistic_awareness": [
+      "medicine",
+      "care"
+    ],
+    "horse": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "hoster_with_the_moster": [
+      "supernatural",
+      "social",
+      "status"
+    ],
+    "imbued_item": [
+      "equipment",
+      "supernatural",
+      "occult"
+    ],
+    "incite_ecosystem": [
+      "supernatural",
+      "combat",
+      "survival"
+    ],
+    "indomitable": [
+      "protection",
+      "mental"
+    ],
+    "inspiring": [
+      "influence",
+      "care"
+    ],
+    "interdisciplinary_specialty": [
+      "academia",
+      "information"
+    ],
+    "investigative_aide": [
+      "investigation",
+      "information"
+    ],
+    "investigative_prodigy": [
+      "investigation",
+      "information"
+    ],
+    "iron_chin": [
+      "combat",
+      "protection"
+    ],
+    "iron_stamina": [
+      "survival",
+      "combat"
+    ],
+    "iron_will": [
+      "mental",
+      "protection"
+    ],
+    "just_a_peek": [
+      "supernatural",
+      "perception"
+    ],
+    "keepers_of_the_hidden_fae": [
+      "supernatural",
+      "protection"
+    ],
+    "keepers_of_the_hidden_ghost": [
+      "supernatural",
+      "protection",
+      "occult"
+    ],
+    "keepers_of_the_hidden_mage": [
+      "supernatural",
+      "protection"
+    ],
+    "keepers_of_the_hidden_spirit": [
+      "supernatural",
+      "protection",
+      "occult"
+    ],
+    "keepers_of_the_hidden_vampire": [
+      "supernatural",
+      "protection"
+    ],
+    "kindness_begets_kindness": [
+      "care",
+      "social"
+    ],
+    "know_ghost": [
+      "supernatural",
+      "investigation",
+      "occult"
+    ],
+    "know_spirit": [
+      "supernatural",
+      "investigation",
+      "occult"
+    ],
+    "language": [
+      "academia",
+      "information"
+    ],
+    "last_stand": [
+      "combat",
+      "protection"
+    ],
+    "last_will": [
+      "supernatural",
+      "care",
+      "influence"
+    ],
+    "laying_on_hands": [
+      "medicine",
+      "care",
+      "supernatural"
+    ],
+    "let_them_in_ghost": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "let_them_in_spirit": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "liar_s_game": [
+      "supernatural",
+      "deception"
+    ],
+    "library": [
+      "academia",
+      "information"
+    ],
+    "loaded_for_bear": [
+      "equipment",
+      "combat"
+    ],
+    "locate_object": [
+      "supernatural",
+      "investigation",
+      "perception"
+    ],
+    "locus": [
+      "resources",
+      "supernatural",
+      "occult"
+    ],
+    "loved": [
+      "social",
+      "protection",
+      "care"
+    ],
+    "lucid_dreamer": [
+      "mental",
+      "supernatural",
+      "perception"
+    ],
+    "lucky_bastard": [
+      "supernatural",
+      "protection"
+    ],
+    "lucky_charm": [
+      "occult",
+      "equipment"
+    ],
+    "mage_mote": [
+      "supernatural",
+      "occult"
+    ],
+    "masked_scent": [
+      "stealth",
+      "survival"
+    ],
+    "meditative_mind": [
+      "mental",
+      "protection"
+    ],
+    "medium": [
+      "occult",
+      "supernatural",
+      "perception"
+    ],
+    "memento": [
+      "equipment",
+      "occult",
+      "supernatural"
+    ],
+    "memory_lock": [
+      "supernatural",
+      "occult",
+      "combat"
+    ],
+    "mentor": [
+      "academia",
+      "information",
+      "care"
+    ],
+    "mind_control": [
+      "supernatural",
+      "influence",
+      "mental"
+    ],
+    "mind_of_a_madman": [
+      "investigation",
+      "mental"
+    ],
+    "mind_s_eye": [
+      "supernatural",
+      "perception",
+      "occult"
+    ],
+    "momentary_flux": [
+      "supernatural",
+      "information",
+      "perception"
+    ],
+    "multilingual": [
+      "academia",
+      "information"
+    ],
+    "my_body_a_temple": [
+      "supernatural",
+      "protection"
+    ],
+    "my_old_friend": [
+      "supernatural",
+      "social",
+      "influence"
+    ],
+    "natural_tinkerer": [
+      "tech",
+      "equipment"
+    ],
+    "nexus_of_memories": [
+      "supernatural",
+      "occult"
+    ],
+    "numbing_touch": [
+      "physical",
+      "supernatural",
+      "combat"
+    ],
+    "oathkeeper": [
+      "supernatural",
+      "protection",
+      "mental"
+    ],
+    "object_fetishism": [
+      "mental",
+      "equipment"
+    ],
+    "omen_sensitivity": [
+      "perception",
+      "occult",
+      "supernatural"
+    ],
+    "one_hundred_eyes": [
+      "supernatural",
+      "perception"
+    ],
+    "oneiromancier": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "oracular_ability": [
+      "supernatural",
+      "occult",
+      "information"
+    ],
+    "owl_s_eyes": [
+      "supernatural",
+      "perception"
+    ],
+    "owl_s_wisdom": [
+      "supernatural",
+      "academia",
+      "mental"
+    ],
+    "parkour": [
+      "athletics",
+      "stealth",
+      "infiltration"
+    ],
+    "patient": [
+      "mental"
+    ],
+    "peacemaker": [
+      "influence",
+      "care",
+      "opposed:combat"
+    ],
+    "persephone_s_grace": [
+      "supernatural",
+      "survival"
+    ],
+    "phantasmagoria": [
+      "supernatural",
+      "deception"
+    ],
+    "phantom_limb": [
+      "perception",
+      "supernatural",
+      "occult"
+    ],
+    "picking_the_lock": [
+      "supernatural",
+      "occult",
+      "infiltration"
+    ],
+    "piercing_eyes_ghost": [
+      "supernatural",
+      "perception"
+    ],
+    "piercing_eyes_spirit": [
+      "supernatural",
+      "perception"
+    ],
+    "producer": [
+      "resources",
+      "supernatural"
+    ],
+    "professional_training": [
+      "academia",
+      "status"
+    ],
+    "promise_keeper": [
+      "supernatural",
+      "ritual",
+      "influence"
+    ],
+    "psychic_concealment": [
+      "supernatural",
+      "stealth"
+    ],
+    "psychic_onslaught": [
+      "supernatural",
+      "combat",
+      "mental"
+    ],
+    "psychic_onslaught_2": [
+      "supernatural",
+      "combat"
+    ],
+    "psychic_onslaught_3": [
+      "supernatural",
+      "combat",
+      "mental"
+    ],
+    "psychic_poltergeist": [
+      "supernatural",
+      "combat",
+      "physical"
+    ],
+    "psychokinesis": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "psychometry": [
+      "investigation",
+      "occult",
+      "perception"
+    ],
+    "puissance": [
+      "supernatural",
+      "physical",
+      "athletics"
+    ],
+    "punch_drunk": [
+      "combat",
+      "protection"
+    ],
+    "pusher": [
+      "influence",
+      "deception"
+    ],
+    "quick_draw": [
+      "combat",
+      "equipment"
+    ],
+    "raven_s_cunning": [
+      "supernatural",
+      "mental",
+      "perception"
+    ],
+    "reality_anchor": [
+      "supernatural",
+      "protection",
+      "occult"
+    ],
+    "reality_staunch": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "reconciler": [
+      "social",
+      "care",
+      "supernatural"
+    ],
+    "relentless": [
+      "athletics",
+      "survival"
+    ],
+    "resources": [
+      "resources"
+    ],
+    "retain_weapon": [
+      "combat",
+      "protection"
+    ],
+    "retainer": [
+      "status",
+      "resources"
+    ],
+    "rip_the_veil": [
+      "supernatural",
+      "occult",
+      "infiltration"
+    ],
+    "rites": [
+      "ritual",
+      "occult",
+      "supernatural"
+    ],
+    "robust_health": [
+      "survival",
+      "medicine"
+    ],
+    "s_ance_devotee": [
+      "occult",
+      "ritual"
+    ],
+    "safe_place": [
+      "protection",
+      "resources"
+    ],
+    "scarred": [
+      "mental",
+      "protection"
+    ],
+    "scrying": [
+      "occult",
+      "ritual",
+      "information"
+    ],
+    "sculpted_by_the_masters": [
+      "supernatural",
+      "social",
+      "influence"
+    ],
+    "see_no_evil": [
+      "supernatural",
+      "stealth",
+      "protection"
+    ],
+    "see_the_matrix": [
+      "supernatural",
+      "perception"
+    ],
+    "seizing_the_edge": [
+      "athletics",
+      "perception"
+    ],
+    "sense_anchor": [
+      "supernatural",
+      "perception",
+      "investigation"
+    ],
+    "sense_vows": [
+      "supernatural",
+      "perception",
+      "investigation"
+    ],
+    "sharing_is_caring": [
+      "supernatural",
+      "care",
+      "social"
+    ],
+    "shift_body": [
+      "supernatural",
+      "deception",
+      "physical"
+    ],
+    "shift_face": [
+      "supernatural",
+      "deception",
+      "infiltration"
+    ],
+    "sleight_of_hand": [
+      "stealth",
+      "infiltration"
+    ],
+    "slow_the_lifeblood": [
+      "supernatural",
+      "stealth",
+      "physical"
+    ],
+    "small_framed": [
+      "stealth",
+      "infiltration"
+    ],
+    "small_unit_tactics": [
+      "combat",
+      "influence"
+    ],
+    "so_below_custom": [
+      "supernatural",
+      "influence",
+      "academia"
+    ],
+    "sojourner": [
+      "supernatural",
+      "survival"
+    ],
+    "soul_sense": [
+      "supernatural",
+      "investigation",
+      "perception"
+    ],
+    "sounds_of_the_city": [
+      "supernatural",
+      "perception",
+      "information"
+    ],
+    "speed_of_thought": [
+      "supernatural",
+      "perception"
+    ],
+    "spin_doctor": [
+      "deception",
+      "influence"
+    ],
+    "spirit_companion": [
+      "supernatural",
+      "occult"
+    ],
+    "spirit_of_the_prey": [
+      "supernatural",
+      "perception",
+      "survival"
+    ],
+    "spirit_s_friend": [
+      "supernatural",
+      "occult"
+    ],
+    "spiritual_blockage": [
+      "supernatural",
+      "occult",
+      "combat"
+    ],
+    "spook": [
+      "occult",
+      "information",
+      "status"
+    ],
+    "staff": [
+      "resources",
+      "status"
+    ],
+    "status": [
+      "status",
+      "influence"
+    ],
+    "stifling": [
+      "supernatural",
+      "combat",
+      "occult"
+    ],
+    "striking_looks": [
+      "social",
+      "influence"
+    ],
+    "stunt_driver": [
+      "athletics",
+      "tech"
+    ],
+    "supernatural_resistance": [
+      "protection",
+      "supernatural"
+    ],
+    "support_network": [
+      "care",
+      "social"
+    ],
+    "survivalist": [
+      "survival"
+    ],
+    "sympathetic": [
+      "care",
+      "influence"
+    ],
+    "table_turner": [
+      "influence",
+      "deception"
+    ],
+    "tactical_insight": [
+      "combat",
+      "perception",
+      "survival"
+    ],
+    "takes_one_to_know_one": [
+      "investigation",
+      "perception",
+      "deception"
+    ],
+    "talon": [
+      "equipment",
+      "combat",
+      "occult"
+    ],
+    "tarab": [
+      "supernatural",
+      "ritual",
+      "mental"
+    ],
+    "taste": [
+      "perception",
+      "information"
+    ],
+    "technopathy": [
+      "supernatural",
+      "tech"
+    ],
+    "telekinesis": [
+      "physical",
+      "supernatural",
+      "combat"
+    ],
+    "telekinesis_2": [
+      "supernatural",
+      "combat",
+      "physical"
+    ],
+    "telekinetic_evasion": [
+      "supernatural",
+      "combat",
+      "athletics"
+    ],
+    "telekinetic_evasion_2": [
+      "supernatural",
+      "combat",
+      "protection"
+    ],
+    "telepathy": [
+      "mental",
+      "perception",
+      "supernatural"
+    ],
+    "the_bold": [
+      "mental"
+    ],
+    "the_spirit_s_touch": [
+      "supernatural",
+      "investigation",
+      "occult"
+    ],
+    "thief_of_fate": [
+      "supernatural",
+      "occult",
+      "deception"
+    ],
+    "tight_lipped": [
+      "deception",
+      "protection"
+    ],
+    "token": [
+      "equipment",
+      "supernatural",
+      "occult"
+    ],
+    "tolerance_for_biology": [
+      "medicine",
+      "mental"
+    ],
+    "touch_of_deprivation": [
+      "supernatural",
+      "combat",
+      "perception"
+    ],
+    "trained_observer": [
+      "perception",
+      "investigation"
+    ],
+    "trigger_discipline": [
+      "equipment",
+      "combat"
+    ],
+    "true_friend": [
+      "care",
+      "protection"
+    ],
+    "trunk_squeeze": [
+      "combat"
+    ],
+    "untouchable": [
+      "deception",
+      "status"
+    ],
+    "vengeful_soul": [
+      "combat",
+      "care"
+    ],
+    "vibrant_soul": [
+      "occult",
+      "supernatural",
+      "ritual"
+    ],
+    "vice_ridden": [
+      "social",
+      "mental"
+    ],
+    "virtuous": [
+      "care",
+      "mental"
+    ],
+    "voice_of_reason": [
+      "supernatural",
+      "influence",
+      "social"
+    ],
+    "warded_dreams": [
+      "protection",
+      "supernatural"
+    ],
+    "waystone": [
+      "supernatural",
+      "occult",
+      "ritual"
+    ],
+    "weakest_link": [
+      "supernatural",
+      "social",
+      "investigation"
+    ],
+    "weal_and_woe": [
+      "supernatural",
+      "combat"
+    ],
+    "weight_of_a_feather": [
+      "supernatural",
+      "influence",
+      "social"
+    ],
+    "wyrd_attunement": [
+      "supernatural",
+      "perception",
+      "occult"
+    ]
+  }
+}

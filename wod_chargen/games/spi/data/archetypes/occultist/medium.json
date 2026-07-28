@@ -1,0 +1,30 @@
+{
+  "id": "medium",
+  "label": "Medium",
+  "description": "Listen across the veil; ghosts and omens speak first.",
+  "modifiers": {
+    "skill_biases": {
+      "occult": 0.3,
+      "empathy": 0.3,
+      "investigation": 0.25
+    },
+    "attribute_biases": {
+      "wits": 0.25,
+      "composure": 0.25
+    },
+    "tag_affinities": {
+      "occult": 0.3,
+      "perception": 0.4,
+      "supernatural": 0.3
+    },
+    "affinity_biases": {
+      "ghost": 0.3,
+      "spirit": 0.2
+    },
+    "merit_biases": {
+      "medium": 0.45,
+      "aura_reading": 0.3,
+      "omen_sensitivity": 0.3
+    }
+  }
+}

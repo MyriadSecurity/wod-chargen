@@ -1,0 +1,26 @@
+{
+  "id": "counselor",
+  "label": "Counselor",
+  "description": "Integrity support, listening, and putting people back together.",
+  "modifiers": {
+    "skill_biases": {
+      "empathy": 0.45,
+      "persuasion": 0.3,
+      "medicine": 0.2
+    },
+    "attribute_biases": {
+      "composure": 0.35,
+      "presence": 0.25
+    },
+    "tag_affinities": {
+      "care": 0.5,
+      "social": 0.3,
+      "medicine": 0.2
+    },
+    "merit_biases": {
+      "empath": 0.4,
+      "support_network": 0.35,
+      "sympathetic": 0.3
+    }
+  }
+}

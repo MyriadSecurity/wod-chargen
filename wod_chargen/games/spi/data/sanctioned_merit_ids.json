@@ -1,0 +1,1856 @@
+{
+  "notes": "SPI merits allowed in chargen. Built from character_sheet.xlsx extract filtered by Rules Addendum. Affinity: all sheet affinity rows. General: Addendum allowlist (+ typo aliases). Matching is (id, category) because some powers exist as both general (dropped) and affinity (kept).",
+  "source": {
+    "addendum": "reference/spi/rules_addendum.txt",
+    "sheet_extract": "reference/spi/extracted/merits.json"
+  },
+  "keep_all_affinity": true,
+  "general_ids": [
+    "dream_shaper",
+    "dream_warrior",
+    "dreamweaver",
+    "enchanting_performance",
+    "etiquette",
+    "expressive",
+    "goblin_bounty",
+    "goblin_contract",
+    "lucid_dreamer",
+    "oathkeeper",
+    "token",
+    "warded_dreams",
+    "loaded_for_bear",
+    "trigger_discipline",
+    "boot_party",
+    "choke_hold",
+    "clinch_strike",
+    "covert_operative",
+    "defensive_combat_brawl",
+    "defensive_combat_weaponry",
+    "fighting_finesse",
+    "ground_and_pound",
+    "ground_fighter",
+    "headbutt",
+    "iron_chin",
+    "retain_weapon",
+    "trunk_squeeze",
+    "architect",
+    "cenonte",
+    "ceremonies",
+    "grave_goods",
+    "memento",
+    "phantom_limb",
+    "reconciler",
+    "air_of_menace",
+    "animal_companion",
+    "body_as_weapon",
+    "cohesive_unit",
+    "compartimentalization",
+    "creature_clothing",
+    "defender",
+    "division_liason",
+    "empath",
+    "ghostly_companion",
+    "goetic_companion",
+    "hedgebeast_companion",
+    "kindness_begets_kindness",
+    "object_fetishism",
+    "peacemaker",
+    "punch_drunk",
+    "scarred",
+    "scrying",
+    "spirit_companion",
+    "spook",
+    "support_network",
+    "survivalist",
+    "the_bold",
+    "vibrant_soul",
+    "deadpan",
+    "destiny",
+    "enhanced_items",
+    "hallow",
+    "imbued_item",
+    "loved",
+    "area_of_expertise",
+    "back_road_atlas",
+    "common_sense",
+    "danger_sense",
+    "direction_sense",
+    "eidetic_memory",
+    "encyclopedic_knowledge",
+    "eye_for_the_strange",
+    "fast_reflexes",
+    "good_time_management",
+    "gut_feeling",
+    "holistic_awareness",
+    "indomitable",
+    "interdisciplinary_specialty",
+    "investigative_aide",
+    "investigative_prodigy",
+    "language",
+    "library",
+    "meditative_mind",
+    "multilingual",
+    "natural_tinkerer",
+    "patient",
+    "professional_training",
+    "tactical_insight",
+    "tolerance_for_biology",
+    "trained_observer",
+    "vice_ridden",
+    "virtuous",
+    "ambidextrous",
+    "automotive_genius",
+    "cover_tracks",
+    "crack_driver",
+    "demolisher",
+    "double_jointed",
+    "face_in_the_crowd",
+    "fleet_of_foot",
+    "giant",
+    "greyhound",
+    "hardy",
+    "iron_stamina",
+    "last_stand",
+    "lucky_charm",
+    "masked_scent",
+    "parkour",
+    "quick_draw",
+    "relentless",
+    "robust_health",
+    "seizing_the_edge",
+    "sleight_of_hand",
+    "small_framed",
+    "stunt_driver",
+    "allies",
+    "alternate_identity",
+    "anonymity",
+    "barfly",
+    "closed_book",
+    "contacts",
+    "custom_gear_broker",
+    "extra_touchstone",
+    "fame",
+    "fast_talking",
+    "fixer",
+    "hobbyist_clique",
+    "inspiring",
+    "iron_will",
+    "mentor",
+    "pusher",
+    "resources",
+    "retainer",
+    "safe_place",
+    "s_ance_devotee",
+    "small_unit_tactics",
+    "spin_doctor",
+    "staff",
+    "status",
+    "striking_looks",
+    "sympathetic",
+    "table_turner",
+    "takes_one_to_know_one",
+    "taste",
+    "tight_lipped",
+    "true_friend",
+    "untouchable",
+    "assertive_implement",
+    "bless_amulet",
+    "consecrate_weapon",
+    "cursed",
+    "esoteric_armory",
+    "hardened_exorcist",
+    "mind_of_a_madman",
+    "supernatural_resistance",
+    "vengeful_soul",
+    "clear_sighted",
+    "producer",
+    "code_of_honor",
+    "fetish",
+    "locus",
+    "rites",
+    "talon"
+  ],
+  "affinity_ids": [
+    "arcadian_metabolism",
+    "bottle_emotion",
+    "bountiful_harvest",
+    "brownie_s_boon",
+    "clotho_s_sight",
+    "creature_caretaker",
+    "defensive_dreamscaping",
+    "demesne_domain",
+    "diviner",
+    "fae_mount",
+    "find_the_oathbreaker",
+    "good_impressions",
+    "hedge_brawler",
+    "hedge_delver",
+    "hedge_sense",
+    "hedgebeast_hoarder",
+    "hoster_with_the_moster",
+    "keepers_of_the_hidden_fae",
+    "lucky_bastard",
+    "momentary_flux",
+    "my_old_friend",
+    "oneiromancier",
+    "oracular_ability",
+    "promise_keeper",
+    "see_the_matrix",
+    "sense_vows",
+    "sharing_is_caring",
+    "stifling",
+    "thief_of_fate",
+    "weal_and_woe",
+    "wyrd_attunement",
+    "and_taxes",
+    "automatic_writing_ghost",
+    "bastion_of_the_self",
+    "blessing_of_the_mundane_ghost",
+    "bottle_memory",
+    "ceremony_savant",
+    "chthonic_navigator",
+    "devoid",
+    "echo_agony",
+    "forensic_gaze",
+    "haunted",
+    "keepers_of_the_hidden_ghost",
+    "know_ghost",
+    "last_will",
+    "let_them_in_ghost",
+    "locate_object",
+    "medium",
+    "memory_lock",
+    "nexus_of_memories",
+    "one_hundred_eyes",
+    "persephone_s_grace",
+    "picking_the_lock",
+    "piercing_eyes_ghost",
+    "psychic_onslaught",
+    "psychic_poltergeist",
+    "psychometry",
+    "sense_anchor",
+    "so_below_custom",
+    "telekinesis",
+    "telekinetic_evasion",
+    "weight_of_a_feather",
+    "allure_of_danger",
+    "apportation",
+    "arcane_senses",
+    "aura_reading",
+    "clairvoyance",
+    "copy_cat",
+    "dream",
+    "echoes_of_perfection",
+    "fool_me_once",
+    "forked_tongue",
+    "goetic_mastery",
+    "high_speech_scholar",
+    "keepers_of_the_hidden_mage",
+    "mage_mote",
+    "mind_control",
+    "mind_s_eye",
+    "owl_s_wisdom",
+    "phantasmagoria",
+    "psychic_concealment",
+    "psychic_onslaught_2",
+    "reality_anchor",
+    "reality_staunch",
+    "see_no_evil",
+    "sojourner",
+    "soul_sense",
+    "speed_of_thought",
+    "tarab",
+    "telekinesis_2",
+    "telekinetic_evasion_2",
+    "telepathy",
+    "voice_of_reason",
+    "a_light_in_the_dark",
+    "a_wolf_s_meat",
+    "abhorrent",
+    "animal_possession",
+    "animist",
+    "automatic_writing_spirit",
+    "blessing_of_the_mundane_spirit",
+    "citywalker",
+    "curse_effigy",
+    "discern_composition",
+    "durability_control",
+    "evil_eye_tell",
+    "frequency_attunement",
+    "horse",
+    "incite_ecosystem",
+    "just_a_peek",
+    "keepers_of_the_hidden_spirit",
+    "know_spirit",
+    "let_them_in_spirit",
+    "omen_sensitivity",
+    "piercing_eyes_spirit",
+    "psychic_onslaught_3",
+    "psychokinesis",
+    "raven_s_cunning",
+    "rip_the_veil",
+    "sounds_of_the_city",
+    "spirit_s_friend",
+    "spiritual_blockage",
+    "technopathy",
+    "waystone",
+    "weakest_link",
+    "acute_senses",
+    "alacrity",
+    "beast_speech",
+    "beast_tamer",
+    "beast_whispers",
+    "beastlord",
+    "biokinesis",
+    "biomimicry",
+    "bloodhound",
+    "cleanse_the_body",
+    "creature_tailor",
+    "dam_the_heartflood",
+    "dark_passenger",
+    "doppelganger",
+    "evil_eye",
+    "fortitude",
+    "grow_gills",
+    "keepers_of_the_hidden_vampire",
+    "laying_on_hands",
+    "liar_s_game",
+    "my_body_a_temple",
+    "numbing_touch",
+    "owl_s_eyes",
+    "puissance",
+    "sculpted_by_the_masters",
+    "shift_body",
+    "shift_face",
+    "slow_the_lifeblood",
+    "spirit_of_the_prey",
+    "the_spirit_s_touch",
+    "touch_of_deprivation"
+  ],
+  "entries": [
+    {
+      "id": "dream_shaper",
+      "category": "general"
+    },
+    {
+      "id": "dream_warrior",
+      "category": "general"
+    },
+    {
+      "id": "dreamweaver",
+      "category": "general"
+    },
+    {
+      "id": "enchanting_performance",
+      "category": "general"
+    },
+    {
+      "id": "etiquette",
+      "category": "general"
+    },
+    {
+      "id": "expressive",
+      "category": "general"
+    },
+    {
+      "id": "goblin_bounty",
+      "category": "general"
+    },
+    {
+      "id": "goblin_contract",
+      "category": "general"
+    },
+    {
+      "id": "lucid_dreamer",
+      "category": "general"
+    },
+    {
+      "id": "oathkeeper",
+      "category": "general"
+    },
+    {
+      "id": "token",
+      "category": "general"
+    },
+    {
+      "id": "warded_dreams",
+      "category": "general"
+    },
+    {
+      "id": "loaded_for_bear",
+      "category": "general"
+    },
+    {
+      "id": "trigger_discipline",
+      "category": "general"
+    },
+    {
+      "id": "boot_party",
+      "category": "general"
+    },
+    {
+      "id": "choke_hold",
+      "category": "general"
+    },
+    {
+      "id": "clinch_strike",
+      "category": "general"
+    },
+    {
+      "id": "covert_operative",
+      "category": "general"
+    },
+    {
+      "id": "defensive_combat_brawl",
+      "category": "general"
+    },
+    {
+      "id": "defensive_combat_weaponry",
+      "category": "general"
+    },
+    {
+      "id": "fighting_finesse",
+      "category": "general"
+    },
+    {
+      "id": "ground_and_pound",
+      "category": "general"
+    },
+    {
+      "id": "ground_fighter",
+      "category": "general"
+    },
+    {
+      "id": "headbutt",
+      "category": "general"
+    },
+    {
+      "id": "iron_chin",
+      "category": "general"
+    },
+    {
+      "id": "retain_weapon",
+      "category": "general"
+    },
+    {
+      "id": "trunk_squeeze",
+      "category": "general"
+    },
+    {
+      "id": "architect",
+      "category": "general"
+    },
+    {
+      "id": "cenonte",
+      "category": "general"
+    },
+    {
+      "id": "ceremonies",
+      "category": "general"
+    },
+    {
+      "id": "grave_goods",
+      "category": "general"
+    },
+    {
+      "id": "memento",
+      "category": "general"
+    },
+    {
+      "id": "phantom_limb",
+      "category": "general"
+    },
+    {
+      "id": "reconciler",
+      "category": "general"
+    },
+    {
+      "id": "air_of_menace",
+      "category": "general"
+    },
+    {
+      "id": "animal_companion",
+      "category": "general"
+    },
+    {
+      "id": "body_as_weapon",
+      "category": "general"
+    },
+    {
+      "id": "cohesive_unit",
+      "category": "general"
+    },
+    {
+      "id": "compartimentalization",
+      "category": "general"
+    },
+    {
+      "id": "creature_clothing",
+      "category": "general"
+    },
+    {
+      "id": "defender",
+      "category": "general"
+    },
+    {
+      "id": "division_liason",
+      "category": "general"
+    },
+    {
+      "id": "empath",
+      "category": "general"
+    },
+    {
+      "id": "ghostly_companion",
+      "category": "general"
+    },
+    {
+      "id": "goetic_companion",
+      "category": "general"
+    },
+    {
+      "id": "hedgebeast_companion",
+      "category": "general"
+    },
+    {
+      "id": "kindness_begets_kindness",
+      "category": "general"
+    },
+    {
+      "id": "object_fetishism",
+      "category": "general"
+    },
+    {
+      "id": "peacemaker",
+      "category": "general"
+    },
+    {
+      "id": "punch_drunk",
+      "category": "general"
+    },
+    {
+      "id": "scarred",
+      "category": "general"
+    },
+    {
+      "id": "scrying",
+      "category": "general"
+    },
+    {
+      "id": "spirit_companion",
+      "category": "general"
+    },
+    {
+      "id": "spook",
+      "category": "general"
+    },
+    {
+      "id": "support_network",
+      "category": "general"
+    },
+    {
+      "id": "survivalist",
+      "category": "general"
+    },
+    {
+      "id": "the_bold",
+      "category": "general"
+    },
+    {
+      "id": "vibrant_soul",
+      "category": "general"
+    },
+    {
+      "id": "deadpan",
+      "category": "general"
+    },
+    {
+      "id": "destiny",
+      "category": "general"
+    },
+    {
+      "id": "enhanced_items",
+      "category": "general"
+    },
+    {
+      "id": "hallow",
+      "category": "general"
+    },
+    {
+      "id": "imbued_item",
+      "category": "general"
+    },
+    {
+      "id": "loved",
+      "category": "general"
+    },
+    {
+      "id": "area_of_expertise",
+      "category": "general"
+    },
+    {
+      "id": "back_road_atlas",
+      "category": "general"
+    },
+    {
+      "id": "common_sense",
+      "category": "general"
+    },
+    {
+      "id": "danger_sense",
+      "category": "general"
+    },
+    {
+      "id": "direction_sense",
+      "category": "general"
+    },
+    {
+      "id": "eidetic_memory",
+      "category": "general"
+    },
+    {
+      "id": "encyclopedic_knowledge",
+      "category": "general"
+    },
+    {
+      "id": "eye_for_the_strange",
+      "category": "general"
+    },
+    {
+      "id": "fast_reflexes",
+      "category": "general"
+    },
+    {
+      "id": "good_time_management",
+      "category": "general"
+    },
+    {
+      "id": "gut_feeling",
+      "category": "general"
+    },
+    {
+      "id": "holistic_awareness",
+      "category": "general"
+    },
+    {
+      "id": "indomitable",
+      "category": "general"
+    },
+    {
+      "id": "interdisciplinary_specialty",
+      "category": "general"
+    },
+    {
+      "id": "investigative_aide",
+      "category": "general"
+    },
+    {
+      "id": "investigative_prodigy",
+      "category": "general"
+    },
+    {
+      "id": "language",
+      "category": "general"
+    },
+    {
+      "id": "library",
+      "category": "general"
+    },
+    {
+      "id": "meditative_mind",
+      "category": "general"
+    },
+    {
+      "id": "multilingual",
+      "category": "general"
+    },
+    {
+      "id": "natural_tinkerer",
+      "category": "general"
+    },
+    {
+      "id": "patient",
+      "category": "general"
+    },
+    {
+      "id": "professional_training",
+      "category": "general"
+    },
+    {
+      "id": "tactical_insight",
+      "category": "general"
+    },
+    {
+      "id": "tolerance_for_biology",
+      "category": "general"
+    },
+    {
+      "id": "trained_observer",
+      "category": "general"
+    },
+    {
+      "id": "vice_ridden",
+      "category": "general"
+    },
+    {
+      "id": "virtuous",
+      "category": "general"
+    },
+    {
+      "id": "ambidextrous",
+      "category": "general"
+    },
+    {
+      "id": "automotive_genius",
+      "category": "general"
+    },
+    {
+      "id": "cover_tracks",
+      "category": "general"
+    },
+    {
+      "id": "crack_driver",
+      "category": "general"
+    },
+    {
+      "id": "demolisher",
+      "category": "general"
+    },
+    {
+      "id": "double_jointed",
+      "category": "general"
+    },
+    {
+      "id": "face_in_the_crowd",
+      "category": "general"
+    },
+    {
+      "id": "fleet_of_foot",
+      "category": "general"
+    },
+    {
+      "id": "giant",
+      "category": "general"
+    },
+    {
+      "id": "greyhound",
+      "category": "general"
+    },
+    {
+      "id": "hardy",
+      "category": "general"
+    },
+    {
+      "id": "iron_stamina",
+      "category": "general"
+    },
+    {
+      "id": "last_stand",
+      "category": "general"
+    },
+    {
+      "id": "lucky_charm",
+      "category": "general"
+    },
+    {
+      "id": "masked_scent",
+      "category": "general"
+    },
+    {
+      "id": "parkour",
+      "category": "general"
+    },
+    {
+      "id": "quick_draw",
+      "category": "general"
+    },
+    {
+      "id": "relentless",
+      "category": "general"
+    },
+    {
+      "id": "robust_health",
+      "category": "general"
+    },
+    {
+      "id": "seizing_the_edge",
+      "category": "general"
+    },
+    {
+      "id": "sleight_of_hand",
+      "category": "general"
+    },
+    {
+      "id": "small_framed",
+      "category": "general"
+    },
+    {
+      "id": "stunt_driver",
+      "category": "general"
+    },
+    {
+      "id": "allies",
+      "category": "general"
+    },
+    {
+      "id": "alternate_identity",
+      "category": "general"
+    },
+    {
+      "id": "anonymity",
+      "category": "general"
+    },
+    {
+      "id": "barfly",
+      "category": "general"
+    },
+    {
+      "id": "closed_book",
+      "category": "general"
+    },
+    {
+      "id": "contacts",
+      "category": "general"
+    },
+    {
+      "id": "custom_gear_broker",
+      "category": "general"
+    },
+    {
+      "id": "extra_touchstone",
+      "category": "general"
+    },
+    {
+      "id": "fame",
+      "category": "general"
+    },
+    {
+      "id": "fast_talking",
+      "category": "general"
+    },
+    {
+      "id": "fixer",
+      "category": "general"
+    },
+    {
+      "id": "hobbyist_clique",
+      "category": "general"
+    },
+    {
+      "id": "inspiring",
+      "category": "general"
+    },
+    {
+      "id": "iron_will",
+      "category": "general"
+    },
+    {
+      "id": "mentor",
+      "category": "general"
+    },
+    {
+      "id": "pusher",
+      "category": "general"
+    },
+    {
+      "id": "resources",
+      "category": "general"
+    },
+    {
+      "id": "retainer",
+      "category": "general"
+    },
+    {
+      "id": "safe_place",
+      "category": "general"
+    },
+    {
+      "id": "s_ance_devotee",
+      "category": "general"
+    },
+    {
+      "id": "small_unit_tactics",
+      "category": "general"
+    },
+    {
+      "id": "spin_doctor",
+      "category": "general"
+    },
+    {
+      "id": "staff",
+      "category": "general"
+    },
+    {
+      "id": "status",
+      "category": "general"
+    },
+    {
+      "id": "striking_looks",
+      "category": "general"
+    },
+    {
+      "id": "sympathetic",
+      "category": "general"
+    },
+    {
+      "id": "table_turner",
+      "category": "general"
+    },
+    {
+      "id": "takes_one_to_know_one",
+      "category": "general"
+    },
+    {
+      "id": "taste",
+      "category": "general"
+    },
+    {
+      "id": "tight_lipped",
+      "category": "general"
+    },
+    {
+      "id": "true_friend",
+      "category": "general"
+    },
+    {
+      "id": "untouchable",
+      "category": "general"
+    },
+    {
+      "id": "assertive_implement",
+      "category": "general"
+    },
+    {
+      "id": "bless_amulet",
+      "category": "general"
+    },
+    {
+      "id": "consecrate_weapon",
+      "category": "general"
+    },
+    {
+      "id": "cursed",
+      "category": "general"
+    },
+    {
+      "id": "esoteric_armory",
+      "category": "general"
+    },
+    {
+      "id": "hardened_exorcist",
+      "category": "general"
+    },
+    {
+      "id": "mind_of_a_madman",
+      "category": "general"
+    },
+    {
+      "id": "supernatural_resistance",
+      "category": "general"
+    },
+    {
+      "id": "vengeful_soul",
+      "category": "general"
+    },
+    {
+      "id": "clear_sighted",
+      "category": "general"
+    },
+    {
+      "id": "producer",
+      "category": "general"
+    },
+    {
+      "id": "code_of_honor",
+      "category": "general"
+    },
+    {
+      "id": "fetish",
+      "category": "general"
+    },
+    {
+      "id": "locus",
+      "category": "general"
+    },
+    {
+      "id": "rites",
+      "category": "general"
+    },
+    {
+      "id": "talon",
+      "category": "general"
+    },
+    {
+      "id": "arcadian_metabolism",
+      "category": "affinity"
+    },
+    {
+      "id": "bottle_emotion",
+      "category": "affinity"
+    },
+    {
+      "id": "bountiful_harvest",
+      "category": "affinity"
+    },
+    {
+      "id": "brownie_s_boon",
+      "category": "affinity"
+    },
+    {
+      "id": "clotho_s_sight",
+      "category": "affinity"
+    },
+    {
+      "id": "creature_caretaker",
+      "category": "affinity"
+    },
+    {
+      "id": "defensive_dreamscaping",
+      "category": "affinity"
+    },
+    {
+      "id": "demesne_domain",
+      "category": "affinity"
+    },
+    {
+      "id": "diviner",
+      "category": "affinity"
+    },
+    {
+      "id": "fae_mount",
+      "category": "affinity"
+    },
+    {
+      "id": "find_the_oathbreaker",
+      "category": "affinity"
+    },
+    {
+      "id": "good_impressions",
+      "category": "affinity"
+    },
+    {
+      "id": "hedge_brawler",
+      "category": "affinity"
+    },
+    {
+      "id": "hedge_delver",
+      "category": "affinity"
+    },
+    {
+      "id": "hedge_sense",
+      "category": "affinity"
+    },
+    {
+      "id": "hedgebeast_hoarder",
+      "category": "affinity"
+    },
+    {
+      "id": "hoster_with_the_moster",
+      "category": "affinity"
+    },
+    {
+      "id": "keepers_of_the_hidden_fae",
+      "category": "affinity"
+    },
+    {
+      "id": "lucky_bastard",
+      "category": "affinity"
+    },
+    {
+      "id": "momentary_flux",
+      "category": "affinity"
+    },
+    {
+      "id": "my_old_friend",
+      "category": "affinity"
+    },
+    {
+      "id": "oneiromancier",
+      "category": "affinity"
+    },
+    {
+      "id": "oracular_ability",
+      "category": "affinity"
+    },
+    {
+      "id": "promise_keeper",
+      "category": "affinity"
+    },
+    {
+      "id": "see_the_matrix",
+      "category": "affinity"
+    },
+    {
+      "id": "sense_vows",
+      "category": "affinity"
+    },
+    {
+      "id": "sharing_is_caring",
+      "category": "affinity"
+    },
+    {
+      "id": "stifling",
+      "category": "affinity"
+    },
+    {
+      "id": "thief_of_fate",
+      "category": "affinity"
+    },
+    {
+      "id": "weal_and_woe",
+      "category": "affinity"
+    },
+    {
+      "id": "wyrd_attunement",
+      "category": "affinity"
+    },
+    {
+      "id": "and_taxes",
+      "category": "affinity"
+    },
+    {
+      "id": "automatic_writing_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "bastion_of_the_self",
+      "category": "affinity"
+    },
+    {
+      "id": "blessing_of_the_mundane_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "bottle_memory",
+      "category": "affinity"
+    },
+    {
+      "id": "ceremony_savant",
+      "category": "affinity"
+    },
+    {
+      "id": "chthonic_navigator",
+      "category": "affinity"
+    },
+    {
+      "id": "devoid",
+      "category": "affinity"
+    },
+    {
+      "id": "echo_agony",
+      "category": "affinity"
+    },
+    {
+      "id": "forensic_gaze",
+      "category": "affinity"
+    },
+    {
+      "id": "haunted",
+      "category": "affinity"
+    },
+    {
+      "id": "keepers_of_the_hidden_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "know_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "last_will",
+      "category": "affinity"
+    },
+    {
+      "id": "let_them_in_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "locate_object",
+      "category": "affinity"
+    },
+    {
+      "id": "medium",
+      "category": "affinity"
+    },
+    {
+      "id": "memory_lock",
+      "category": "affinity"
+    },
+    {
+      "id": "nexus_of_memories",
+      "category": "affinity"
+    },
+    {
+      "id": "one_hundred_eyes",
+      "category": "affinity"
+    },
+    {
+      "id": "persephone_s_grace",
+      "category": "affinity"
+    },
+    {
+      "id": "picking_the_lock",
+      "category": "affinity"
+    },
+    {
+      "id": "piercing_eyes_ghost",
+      "category": "affinity"
+    },
+    {
+      "id": "psychic_onslaught",
+      "category": "affinity"
+    },
+    {
+      "id": "psychic_poltergeist",
+      "category": "affinity"
+    },
+    {
+      "id": "psychometry",
+      "category": "affinity"
+    },
+    {
+      "id": "sense_anchor",
+      "category": "affinity"
+    },
+    {
+      "id": "so_below_custom",
+      "category": "affinity"
+    },
+    {
+      "id": "telekinesis",
+      "category": "affinity"
+    },
+    {
+      "id": "telekinetic_evasion",
+      "category": "affinity"
+    },
+    {
+      "id": "weight_of_a_feather",
+      "category": "affinity"
+    },
+    {
+      "id": "allure_of_danger",
+      "category": "affinity"
+    },
+    {
+      "id": "apportation",
+      "category": "affinity"
+    },
+    {
+      "id": "arcane_senses",
+      "category": "affinity"
+    },
+    {
+      "id": "aura_reading",
+      "category": "affinity"
+    },
+    {
+      "id": "clairvoyance",
+      "category": "affinity"
+    },
+    {
+      "id": "copy_cat",
+      "category": "affinity"
+    },
+    {
+      "id": "dream",
+      "category": "affinity"
+    },
+    {
+      "id": "echoes_of_perfection",
+      "category": "affinity"
+    },
+    {
+      "id": "fool_me_once",
+      "category": "affinity"
+    },
+    {
+      "id": "forked_tongue",
+      "category": "affinity"
+    },
+    {
+      "id": "goetic_mastery",
+      "category": "affinity"
+    },
+    {
+      "id": "high_speech_scholar",
+      "category": "affinity"
+    },
+    {
+      "id": "keepers_of_the_hidden_mage",
+      "category": "affinity"
+    },
+    {
+      "id": "mage_mote",
+      "category": "affinity"
+    },
+    {
+      "id": "mind_control",
+      "category": "affinity"
+    },
+    {
+      "id": "mind_s_eye",
+      "category": "affinity"
+    },
+    {
+      "id": "owl_s_wisdom",
+      "category": "affinity"
+    },
+    {
+      "id": "phantasmagoria",
+      "category": "affinity"
+    },
+    {
+      "id": "psychic_concealment",
+      "category": "affinity"
+    },
+    {
+      "id": "psychic_onslaught_2",
+      "category": "affinity"
+    },
+    {
+      "id": "reality_anchor",
+      "category": "affinity"
+    },
+    {
+      "id": "reality_staunch",
+      "category": "affinity"
+    },
+    {
+      "id": "see_no_evil",
+      "category": "affinity"
+    },
+    {
+      "id": "sojourner",
+      "category": "affinity"
+    },
+    {
+      "id": "soul_sense",
+      "category": "affinity"
+    },
+    {
+      "id": "speed_of_thought",
+      "category": "affinity"
+    },
+    {
+      "id": "tarab",
+      "category": "affinity"
+    },
+    {
+      "id": "telekinesis_2",
+      "category": "affinity"
+    },
+    {
+      "id": "telekinetic_evasion_2",
+      "category": "affinity"
+    },
+    {
+      "id": "telepathy",
+      "category": "affinity"
+    },
+    {
+      "id": "voice_of_reason",
+      "category": "affinity"
+    },
+    {
+      "id": "a_light_in_the_dark",
+      "category": "affinity"
+    },
+    {
+      "id": "a_wolf_s_meat",
+      "category": "affinity"
+    },
+    {
+      "id": "abhorrent",
+      "category": "affinity"
+    },
+    {
+      "id": "animal_possession",
+      "category": "affinity"
+    },
+    {
+      "id": "animist",
+      "category": "affinity"
+    },
+    {
+      "id": "automatic_writing_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "blessing_of_the_mundane_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "citywalker",
+      "category": "affinity"
+    },
+    {
+      "id": "curse_effigy",
+      "category": "affinity"
+    },
+    {
+      "id": "discern_composition",
+      "category": "affinity"
+    },
+    {
+      "id": "durability_control",
+      "category": "affinity"
+    },
+    {
+      "id": "evil_eye_tell",
+      "category": "affinity"
+    },
+    {
+      "id": "frequency_attunement",
+      "category": "affinity"
+    },
+    {
+      "id": "horse",
+      "category": "affinity"
+    },
+    {
+      "id": "incite_ecosystem",
+      "category": "affinity"
+    },
+    {
+      "id": "just_a_peek",
+      "category": "affinity"
+    },
+    {
+      "id": "keepers_of_the_hidden_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "know_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "let_them_in_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "omen_sensitivity",
+      "category": "affinity"
+    },
+    {
+      "id": "piercing_eyes_spirit",
+      "category": "affinity"
+    },
+    {
+      "id": "psychic_onslaught_3",
+      "category": "affinity"
+    },
+    {
+      "id": "psychokinesis",
+      "category": "affinity"
+    },
+    {
+      "id": "raven_s_cunning",
+      "category": "affinity"
+    },
+    {
+      "id": "rip_the_veil",
+      "category": "affinity"
+    },
+    {
+      "id": "sounds_of_the_city",
+      "category": "affinity"
+    },
+    {
+      "id": "spirit_s_friend",
+      "category": "affinity"
+    },
+    {
+      "id": "spiritual_blockage",
+      "category": "affinity"
+    },
+    {
+      "id": "technopathy",
+      "category": "affinity"
+    },
+    {
+      "id": "waystone",
+      "category": "affinity"
+    },
+    {
+      "id": "weakest_link",
+      "category": "affinity"
+    },
+    {
+      "id": "acute_senses",
+      "category": "affinity"
+    },
+    {
+      "id": "alacrity",
+      "category": "affinity"
+    },
+    {
+      "id": "beast_speech",
+      "category": "affinity"
+    },
+    {
+      "id": "beast_tamer",
+      "category": "affinity"
+    },
+    {
+      "id": "beast_whispers",
+      "category": "affinity"
+    },
+    {
+      "id": "beastlord",
+      "category": "affinity"
+    },
+    {
+      "id": "biokinesis",
+      "category": "affinity"
+    },
+    {
+      "id": "biomimicry",
+      "category": "affinity"
+    },
+    {
+      "id": "bloodhound",
+      "category": "affinity"
+    },
+    {
+      "id": "cleanse_the_body",
+      "category": "affinity"
+    },
+    {
+      "id": "creature_tailor",
+      "category": "affinity"
+    },
+    {
+      "id": "dam_the_heartflood",
+      "category": "affinity"
+    },
+    {
+      "id": "dark_passenger",
+      "category": "affinity"
+    },
+    {
+      "id": "doppelganger",
+      "category": "affinity"
+    },
+    {
+      "id": "evil_eye",
+      "category": "affinity"
+    },
+    {
+      "id": "fortitude",
+      "category": "affinity"
+    },
+    {
+      "id": "grow_gills",
+      "category": "affinity"
+    },
+    {
+      "id": "keepers_of_the_hidden_vampire",
+      "category": "affinity"
+    },
+    {
+      "id": "laying_on_hands",
+      "category": "affinity"
+    },
+    {
+      "id": "liar_s_game",
+      "category": "affinity"
+    },
+    {
+      "id": "my_body_a_temple",
+      "category": "affinity"
+    },
+    {
+      "id": "numbing_touch",
+      "category": "affinity"
+    },
+    {
+      "id": "owl_s_eyes",
+      "category": "affinity"
+    },
+    {
+      "id": "puissance",
+      "category": "affinity"
+    },
+    {
+      "id": "sculpted_by_the_masters",
+      "category": "affinity"
+    },
+    {
+      "id": "shift_body",
+      "category": "affinity"
+    },
+    {
+      "id": "shift_face",
+      "category": "affinity"
+    },
+    {
+      "id": "slow_the_lifeblood",
+      "category": "affinity"
+    },
+    {
+      "id": "spirit_of_the_prey",
+      "category": "affinity"
+    },
+    {
+      "id": "the_spirit_s_touch",
+      "category": "affinity"
+    },
+    {
+      "id": "touch_of_deprivation",
+      "category": "affinity"
+    }
+  ],
+  "dropped_general": [
+    {
+      "id": "armed_defense",
+      "label": "Armed Defense",
+      "reason": "force_drop"
+    },
+    {
+      "id": "avoidance",
+      "label": "Avoidance",
+      "reason": "force_drop"
+    },
+    {
+      "id": "berserker",
+      "label": "Berserker",
+      "reason": "force_drop"
+    },
+    {
+      "id": "bowmanship",
+      "label": "Bowmanship",
+      "reason": "force_drop"
+    },
+    {
+      "id": "boxing",
+      "label": "Boxing",
+      "reason": "force_drop"
+    },
+    {
+      "id": "chain_weapons",
+      "label": "Chain Weapons",
+      "reason": "force_drop"
+    },
+    {
+      "id": "cheap_shot",
+      "label": "Cheap Shot",
+      "reason": "force_drop"
+    },
+    {
+      "id": "close_quarters_combat",
+      "label": "Close Quarters Combat",
+      "reason": "force_drop"
+    },
+    {
+      "id": "combat_archery",
+      "label": "Combat Archery",
+      "reason": "force_drop"
+    },
+    {
+      "id": "falconry",
+      "label": "Falconry",
+      "reason": "force_drop"
+    },
+    {
+      "id": "firefight",
+      "label": "Firefight",
+      "reason": "force_drop"
+    },
+    {
+      "id": "grappling",
+      "label": "Grappling",
+      "reason": "force_drop"
+    },
+    {
+      "id": "heavy_weaponry",
+      "label": "Heavy Weaponry",
+      "reason": "force_drop"
+    },
+    {
+      "id": "improvised_weaponry",
+      "label": "Improvised Weaponry",
+      "reason": "force_drop"
+    },
+    {
+      "id": "iron_skin",
+      "label": "Iron Skin",
+      "reason": "force_drop"
+    },
+    {
+      "id": "k_9",
+      "label": "K-9",
+      "reason": "force_drop"
+    },
+    {
+      "id": "kindred_dueling",
+      "label": "Kindred Dueling",
+      "reason": "force_drop"
+    },
+    {
+      "id": "kino_mutai",
+      "label": "Kino Mutai",
+      "reason": "force_drop"
+    },
+    {
+      "id": "light_weapons",
+      "label": "Light Weapons",
+      "reason": "force_drop"
+    },
+    {
+      "id": "marksmanship",
+      "label": "Marksmanship",
+      "reason": "force_drop"
+    },
+    {
+      "id": "martial_arts",
+      "label": "Martial Arts",
+      "reason": "force_drop"
+    },
+    {
+      "id": "mounted_combat",
+      "label": "Mounted Combat",
+      "reason": "force_drop"
+    },
+    {
+      "id": "police_tactics",
+      "label": "Police Tactics",
+      "reason": "force_drop"
+    },
+    {
+      "id": "powered_projectile",
+      "label": "Powered Projectile",
+      "reason": "force_drop"
+    },
+    {
+      "id": "psychokinetic_warrior",
+      "label": "Psychokinetic Warrior",
+      "reason": "force_drop"
+    },
+    {
+      "id": "shiv",
+      "label": "Shiv",
+      "reason": "force_drop"
+    },
+    {
+      "id": "spear_and_bayonet",
+      "label": "Spear and Bayonet",
+      "reason": "force_drop"
+    },
+    {
+      "id": "staff_fighting",
+      "label": "Staff Fighting",
+      "reason": "force_drop"
+    },
+    {
+      "id": "street_fighting",
+      "label": "Street Fighting",
+      "reason": "force_drop"
+    },
+    {
+      "id": "strength_performance",
+      "label": "Strength Performance",
+      "reason": "force_drop"
+    },
+    {
+      "id": "thrown_weapons",
+      "label": "Thrown Weapons",
+      "reason": "force_drop"
+    },
+    {
+      "id": "two_weapon_fighting",
+      "label": "Two Weapon Fighting",
+      "reason": "force_drop"
+    },
+    {
+      "id": "unarmed_defense",
+      "label": "Unarmed Defense",
+      "reason": "force_drop"
+    },
+    {
+      "id": "weapon_and_shield",
+      "label": "Weapon and Shield",
+      "reason": "force_drop"
+    },
+    {
+      "id": "artifact",
+      "label": "Artifact",
+      "reason": "force_drop"
+    },
+    {
+      "id": "mystery_cult_initiation",
+      "label": "Mystery Cult Initiation",
+      "reason": "force_drop"
+    },
+    {
+      "id": "aura_reading",
+      "label": "Aura Reading",
+      "reason": "force_drop"
+    },
+    {
+      "id": "automatic_writing",
+      "label": "Automatic Writing",
+      "reason": "force_drop"
+    },
+    {
+      "id": "biokinesis",
+      "label": "Biokinesis",
+      "reason": "force_drop"
+    },
+    {
+      "id": "clairvoyance",
+      "label": "Clairvoyance",
+      "reason": "force_drop"
+    },
+    {
+      "id": "laying_on_hands",
+      "label": "Laying on Hands",
+      "reason": "force_drop"
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "reason": "force_drop"
+    },
+    {
+      "id": "numbing_touch",
+      "label": "Numbing Touch",
+      "reason": "force_drop"
+    },
+    {
+      "id": "omen_sensitivity",
+      "label": "Omen Sensitivity",
+      "reason": "force_drop"
+    },
+    {
+      "id": "psychokinesis",
+      "label": "Psychokinesis",
+      "reason": "force_drop"
+    },
+    {
+      "id": "psychometry",
+      "label": "Psychometry",
+      "reason": "force_drop"
+    },
+    {
+      "id": "telekinesis",
+      "label": "Telekinesis",
+      "reason": "force_drop"
+    },
+    {
+      "id": "telepathy",
+      "label": "Telepathy",
+      "reason": "force_drop"
+    },
+    {
+      "id": "thief_of_fate",
+      "label": "Thief of Fate",
+      "reason": "force_drop"
+    },
+    {
+      "id": "unseen_sense",
+      "label": "Unseen Sense",
+      "reason": "force_drop"
+    }
+  ]
+}
