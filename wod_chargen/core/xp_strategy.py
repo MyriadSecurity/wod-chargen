@@ -13,6 +13,14 @@ BASE_CATEGORY_TARGETS = {
     "merits_flaws": 0.14,
 }
 
+# SPI oneshot mix (no disciplines/backgrounds).
+SPI_CATEGORY_TARGETS = {
+    "attributes": 0.28,
+    "skills": 0.30,
+    "merits_flaws": 0.27,
+    "affinity": 0.15,
+}
+
 SPEND_GROUP_MACRO = {
     "physical_attrs": "attributes",
     "social_attrs": "attributes",
@@ -30,6 +38,10 @@ SPEND_GROUP_MACRO = {
     "merits": "merits_flaws",
     "loresheets": "merits_flaws",
     "blood_potency": "merits_flaws",
+    # SPI / CoD
+    "affinity": "affinity",
+    "affinity_merits": "merits_flaws",
+    "specialties": "skills",
 }
 
 DEFICIT_SCALE = 4.5

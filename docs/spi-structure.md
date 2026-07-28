@@ -378,11 +378,11 @@ Approvals, VIP, CCD, Touchstones/Aspirations UI, Conditions, Status politics, Ik
 ## 10. Next phases
 
 1. ~~Extract catalogs~~ (done: `scripts/extract_spi_sheet_catalogs.py`)  
-2. Scaffold `games/spi/` + catalog stub + XP profiles (`mes_spi` floor, `fixed_35`, `custom_xp`)  
-3. Seed factions §2.5 + starter archetypes §2.6 (manifest extensible)  
+2. ~~Scaffold `games/spi/` + catalog stub + XP profiles~~ (done: seed via `scripts/seed_spi_data_from_extract.py`)  
+3. ~~Seed factions §2.5 + starter archetypes §2.6~~  
 4. VenueSystem Protocol when wiring UI  
 5. Generator MVP: biases + prereq bundling + multi-affinity toggle  
-6. `SpiSheetModel` + wizard  
+6. `SpiSheetModel` + wizard + Venue-scoped Build guide / Weight Map  
 
 ---
 
