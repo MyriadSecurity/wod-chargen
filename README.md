@@ -10,13 +10,20 @@ Browser-only **World of Darkness / MET** procedural character generator.
 
 ## Local development
 
+Run the app (no install needed — stdlib only):
+
+```bash
+python3 scripts/dev_server.py
+# Open http://localhost:8080/
+```
+
+Optional (tests / lint):
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 pytest
-python scripts/dev_server.py
-# Open http://localhost:8080/
 ```
 
 Versioning: `docs/VERSIONING.md`. Contributing: `CONTRIBUTING.md`.

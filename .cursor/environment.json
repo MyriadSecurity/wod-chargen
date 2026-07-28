@@ -1,3 +1,9 @@
 {
-  "install": "command -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh; export PATH=\"$HOME/.local/bin:$PATH\"; uv sync --extra dev --group dev"
+  "install": "true",
+  "terminals": [
+    {
+      "name": "dev server",
+      "command": "python3 scripts/dev_server.py --bind 0.0.0.0 --port 8080"
+    }
+  ]
 }

@@ -5,27 +5,27 @@
 ### What this project is
 `wod-chargen` is a **browser-only** World of Darkness / MET character generator. There is **no backend, no database, and no external API** at runtime. The UI runs entirely client-side via **PyScript** (Python in the browser via WebAssembly). The Python engine lives in `wod_chargen/` and the PyScript UI in `app/`. See `README.md` and `CONTRIBUTING.md` for the standard commands.
 
-### Environment
-- Treat this like a normal local Python project. Dependencies are managed with **uv** (see `uv.lock`) into `.venv` (gitignored).
-- Cloud install (`.cursor/environment.json`) only runs: `uv sync --extra dev --group dev`. No Playwright browser download at install time.
-- Prefix commands with `.venv/bin/` (e.g. `.venv/bin/pytest`) or `uv run …`, or activate with `source .venv/bin/activate`.
-- Runtime `dependencies` in `pyproject.toml` are intentionally empty — everything the app needs at runtime is loaded in-browser from CDNs.
-- For browser smoke tests only, install Chromium once: `.venv/bin/playwright install chromium`
+### Environment (keep it simple)
+- Running the app needs **only system Python** — `scripts/dev_server.py` is stdlib-only.
+- Cloud install is a no-op (`.cursor/environment.json`). A terminal auto-starts:
+  `python3 scripts/dev_server.py --bind 0.0.0.0 --port 8080` → http://localhost:8080/
+- Optional for tests/lint: `uv sync --extra dev --group dev` (or `python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"`).
+- For browser smoke tests only: `.venv/bin/playwright install chromium`
+- Runtime `dependencies` in `pyproject.toml` are empty — the browser loads PyScript/Tailwind/D3 from CDNs.
 
 ### Running the app (dev)
-- Start the static no-cache dev server, then open `http://localhost:8080/`:
-  `.venv/bin/python scripts/dev_server.py`
-- The dev server exists only to serve static files with `Cache-Control: no-store`; PyScript caches `.py`/`.json` modules aggressively and `file://` will not work.
-- **Internet access is required on first browser load**: the page pulls PyScript 2024.11.1, Tailwind, and D3 from CDNs (pinned in `pyscript.json` / `index.html`). PyScript takes ~15s to boot in the browser before the wizard appears.
+- `python3 scripts/dev_server.py` then open `http://localhost:8080/`
+- The server only adds `Cache-Control: no-store`; PyScript caches aggressively and `file://` will not work.
+- **Internet access is required on first browser load** (CDN assets). PyScript takes ~15s to boot before the wizard appears.
 
 ### Testing
-- Full suite: `.venv/bin/pytest -q` (pure-Python logic tests + Playwright browser smoke tests).
-- Browser smoke tests (`tests/test_browser_smoke.py`) auto-start their own in-process HTTP server via the `site_base_url` fixture — no manual dev server needed — and require the Playwright Chromium browser to be installed.
-- CI (`.github/workflows/test.yml`) runs `scripts/validate_archetypes.py`, `scripts/validate_archetype_biases.py`, then `pytest -q`. The validate scripts print many `WARN:` lines about "extreme" biases; these are expected and non-fatal (exit 0).
+- After installing the `dev` extra: `.venv/bin/pytest -q`
+- Browser smoke tests (`tests/test_browser_smoke.py`) start their own HTTP server via `site_base_url` and need Playwright Chromium.
+- CI runs `scripts/validate_archetypes.py`, `scripts/validate_archetype_biases.py`, then `pytest -q`. `WARN:` lines about extreme biases are expected (exit 0).
 
 ### Linting
-- `ruff` is installed via the `dev` extra but is **not** run in CI, and the current tree has pre-existing ruff findings. Run `.venv/bin/ruff check .` if needed, but do not treat existing findings as regressions from your changes.
+- `ruff` is in the `dev` extra but not CI. Pre-existing findings exist; do not treat them as regressions.
 
 ### Editing packaged data/code
-- After adding or changing any `.py`/`.json` under `app/` or `wod_chargen/`, regenerate the PyScript file manifest or `tests/test_pyscript_manifest.py` will fail:
-  `.venv/bin/python scripts/generate_pyscript_config.py`
+- After adding/changing `.py`/`.json` under `app/` or `wod_chargen/`, regenerate the manifest:
+  `python3 scripts/generate_pyscript_config.py`
