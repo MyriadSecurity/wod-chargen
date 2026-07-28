@@ -160,7 +160,9 @@ class WizardApp:
     def _step_summary(self, step: str) -> str:
         if step == "venue":
             venue_id = self.state.get("venue", "")
-            if venue_id == "custom_xp":
+            if venue_id in ("custom_xp", "spi_custom_xp") or self._venue_picker.get(
+                venue_id, {}
+            ).get("requires_custom_xp"):
                 xp = str(self.state.get("xp_custom", "")).strip()
                 return f"{xp} XP" if xp else "Custom XP"
             label = self._venue_picker.get(venue_id, {}).get("label", venue_id)
@@ -168,6 +170,23 @@ class WizardApp:
             if self._venue_picker.get(venue_id, {}).get("requires_approval_month") and approval:
                 return f"{label} · {approval}"
             return label
+        if is_spi(self):
+            if step == "division":
+                labels = {e["id"]: e["label"] for e in self.system.get_division_options()}
+                return labels.get(self.state.get("division", ""), self.state.get("division", ""))
+            if step == "faction":
+                labels = {e["id"]: e["label"] for e in self.system.get_faction_options()}
+                return labels.get(self.state.get("faction", ""), self.state.get("faction", ""))
+            if step == "archetype":
+                labels = {e["id"]: e["label"] for e in self.system.get_archetypes()}
+                return labels.get(self.state.get("archetype", ""), self.state.get("archetype", ""))
+            if step == "affinity":
+                labels = {e["id"]: e["label"] for e in self.system.get_affinity_options()}
+                return labels.get(self.state.get("affinity", "any"), self.state.get("affinity", ""))
+            if step == "generate":
+                multi = " · multi-Affinity" if self.state.get("multi_affinity") else ""
+                return f"Seed {self.state.get('seed', '')}{multi}"
+            return ""
         if step == "type":
             labels = {entry["id"]: entry["label"] for entry in self.system.get_character_type_picker()}
             if self.state.get("type") == "thin_blood":
@@ -324,15 +343,32 @@ class WizardApp:
         lines = [
             f"Share link: {self._share_url()}",
             f"Seed: {result.seed}",
-            f"Convictions seed: {self.state['convictions_seed']}",
-            f"Venue: {self._step_summary('venue')}",
-            f"Type: {self._step_summary('type')}",
-            f"Lineage: {self._step_summary('faction')}",
-            f"Archetype: {self._step_summary('archetype')}",
-            f"Subtype: {self._step_summary('sub_archetype')}",
         ]
-        if self._type_uses_predator():
-            lines.append(f"Predator: {self._step_summary('predator')}")
+        if is_spi(self):
+            lines.extend(
+                [
+                    f"Starting XP: {self._step_summary('venue')}",
+                    f"Division: {self._step_summary('division')}",
+                    f"Faction: {self._step_summary('faction')}",
+                    f"Archetype: {self._step_summary('archetype')}",
+                    f"Affinity: {self._step_summary('affinity')}",
+                ]
+            )
+            if self.state.get("multi_affinity"):
+                lines.append("Multi-Affinity: on")
+        else:
+            lines.extend(
+                [
+                    f"Convictions seed: {self.state['convictions_seed']}",
+                    f"Venue: {self._step_summary('venue')}",
+                    f"Type: {self._step_summary('type')}",
+                    f"Lineage: {self._step_summary('faction')}",
+                    f"Archetype: {self._step_summary('archetype')}",
+                    f"Subtype: {self._step_summary('sub_archetype')}",
+                ]
+            )
+            if self._type_uses_predator():
+                lines.append(f"Predator: {self._step_summary('predator')}")
         lines.append(f"XP: {result.xp_spent}/{result.xp_budget} spent · {result.xp_remaining} banked")
         return lines
 
