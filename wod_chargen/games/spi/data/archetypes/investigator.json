@@ -20,7 +20,7 @@
   },
   "merit_biases": {
     "eye_for_the_strange": 1.7,
-    "unseen_sense": 1.55,
+    "trained_observer": 1.55,
     "patient": 1.45,
     "holistic_awareness": 1.4,
     "library": 1.35

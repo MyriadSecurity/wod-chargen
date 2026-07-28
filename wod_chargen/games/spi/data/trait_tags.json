@@ -166,15 +166,6 @@
       "academia",
       "information"
     ],
-    "armed_defense": [
-      "combat",
-      "protection"
-    ],
-    "artifact": [
-      "equipment",
-      "supernatural",
-      "occult"
-    ],
     "assertive_implement": [
       "combat",
       "equipment",
@@ -184,11 +175,6 @@
       "perception",
       "supernatural",
       "occult"
-    ],
-    "automatic_writing": [
-      "investigation",
-      "occult",
-      "supernatural"
     ],
     "automatic_writing_ghost": [
       "supernatural",
@@ -203,11 +189,6 @@
     "automotive_genius": [
       "tech",
       "equipment"
-    ],
-    "avoidance": [
-      "combat",
-      "stealth",
-      "athletics"
     ],
     "back_road_atlas": [
       "survival",
@@ -238,10 +219,6 @@
     "beastlord": [
       "supernatural",
       "care"
-    ],
-    "berserker": [
-      "combat",
-      "physical"
     ],
     "biokinesis": [
       "physical",
@@ -293,14 +270,6 @@
       "resources",
       "occult"
     ],
-    "bowmanship": [
-      "combat",
-      "perception"
-    ],
-    "boxing": [
-      "combat",
-      "athletics"
-    ],
     "brownie_s_boon": [
       "supernatural",
       "occult"
@@ -319,14 +288,6 @@
       "supernatural",
       "ritual",
       "occult"
-    ],
-    "chain_weapons": [
-      "combat",
-      "athletics"
-    ],
-    "cheap_shot": [
-      "combat",
-      "deception"
     ],
     "choke_hold": [
       "combat"
@@ -358,10 +319,6 @@
     "clinch_strike": [
       "combat"
     ],
-    "close_quarters_combat": [
-      "combat",
-      "athletics"
-    ],
     "closed_book": [
       "deception",
       "protection"
@@ -379,10 +336,6 @@
       "social",
       "influence",
       "protection"
-    ],
-    "combat_archery": [
-      "combat",
-      "athletics"
     ],
     "common_sense": [
       "mental",
@@ -625,10 +578,6 @@
       "athletics",
       "survival"
     ],
-    "falconry": [
-      "combat",
-      "survival"
-    ],
     "fame": [
       "status",
       "influence",
@@ -655,10 +604,6 @@
     "find_the_oathbreaker": [
       "supernatural",
       "investigation"
-    ],
-    "firefight": [
-      "combat",
-      "athletics"
     ],
     "fixer": [
       "influence",
@@ -729,10 +674,6 @@
       "academia",
       "mental"
     ],
-    "grappling": [
-      "combat",
-      "athletics"
-    ],
     "grave_goods": [
       "equipment",
       "resources",
@@ -777,10 +718,6 @@
     ],
     "headbutt": [
       "combat"
-    ],
-    "heavy_weaponry": [
-      "combat",
-      "physical"
     ],
     "hedge_brawler": [
       "supernatural",
@@ -831,10 +768,6 @@
       "supernatural",
       "occult"
     ],
-    "improvised_weaponry": [
-      "combat",
-      "equipment"
-    ],
     "incite_ecosystem": [
       "supernatural",
       "combat",
@@ -864,10 +797,6 @@
       "combat",
       "protection"
     ],
-    "iron_skin": [
-      "combat",
-      "protection"
-    ],
     "iron_stamina": [
       "survival",
       "combat"
@@ -879,10 +808,6 @@
     "just_a_peek": [
       "supernatural",
       "perception"
-    ],
-    "k_9": [
-      "combat",
-      "survival"
     ],
     "keepers_of_the_hidden_fae": [
       "supernatural",
@@ -909,13 +834,6 @@
     "kindness_begets_kindness": [
       "care",
       "social"
-    ],
-    "kindred_dueling": [
-      "combat",
-      "supernatural"
-    ],
-    "kino_mutai": [
-      "combat"
     ],
     "know_ghost": [
       "supernatural",
@@ -963,10 +881,6 @@
       "academia",
       "information"
     ],
-    "light_weapons": [
-      "combat",
-      "athletics"
-    ],
     "loaded_for_bear": [
       "equipment",
       "combat"
@@ -1002,14 +916,6 @@
     "mage_mote": [
       "supernatural",
       "occult"
-    ],
-    "marksmanship": [
-      "combat",
-      "perception"
-    ],
-    "martial_arts": [
-      "combat",
-      "athletics"
     ],
     "masked_scent": [
       "stealth",
@@ -1058,11 +964,6 @@
       "information",
       "perception"
     ],
-    "mounted_combat": [
-      "combat",
-      "athletics",
-      "survival"
-    ],
     "multilingual": [
       "academia",
       "information"
@@ -1075,11 +976,6 @@
       "supernatural",
       "social",
       "influence"
-    ],
-    "mystery_cult_initiation": [
-      "occult",
-      "status",
-      "ritual"
     ],
     "natural_tinkerer": [
       "tech",
@@ -1170,15 +1066,6 @@
       "supernatural",
       "perception"
     ],
-    "police_tactics": [
-      "combat",
-      "protection",
-      "investigation"
-    ],
-    "powered_projectile": [
-      "combat",
-      "equipment"
-    ],
     "producer": [
       "resources",
       "supernatural"
@@ -1219,10 +1106,6 @@
       "supernatural",
       "combat",
       "occult"
-    ],
-    "psychokinetic_warrior": [
-      "combat",
-      "supernatural"
     ],
     "psychometry": [
       "investigation",
@@ -1355,11 +1238,6 @@
       "deception",
       "infiltration"
     ],
-    "shiv": [
-      "combat",
-      "deception",
-      "stealth"
-    ],
     "sleight_of_hand": [
       "stealth",
       "infiltration"
@@ -1396,9 +1274,6 @@
       "perception",
       "information"
     ],
-    "spear_and_bayonet": [
-      "combat"
-    ],
     "speed_of_thought": [
       "supernatural",
       "perception"
@@ -1434,10 +1309,6 @@
       "resources",
       "status"
     ],
-    "staff_fighting": [
-      "combat",
-      "athletics"
-    ],
     "status": [
       "status",
       "influence"
@@ -1446,14 +1317,6 @@
       "supernatural",
       "combat",
       "occult"
-    ],
-    "street_fighting": [
-      "combat",
-      "deception"
-    ],
-    "strength_performance": [
-      "physical",
-      "athletics"
     ],
     "striking_looks": [
       "social",
@@ -1548,10 +1411,6 @@
       "occult",
       "deception"
     ],
-    "thrown_weapons": [
-      "combat",
-      "athletics"
-    ],
     "tight_lipped": [
       "deception",
       "protection"
@@ -1584,17 +1443,6 @@
     ],
     "trunk_squeeze": [
       "combat"
-    ],
-    "two_weapon_fighting": [
-      "combat"
-    ],
-    "unarmed_defense": [
-      "combat",
-      "protection"
-    ],
-    "unseen_sense": [
-      "perception",
-      "supernatural"
     ],
     "untouchable": [
       "deception",
@@ -1639,10 +1487,6 @@
     "weal_and_woe": [
       "supernatural",
       "combat"
-    ],
-    "weapon_and_shield": [
-      "combat",
-      "protection"
     ],
     "weight_of_a_feather": [
       "supernatural",

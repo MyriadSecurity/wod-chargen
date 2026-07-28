@@ -308,7 +308,11 @@ Affinity 5 · Attribute 4 · Skill 2 · Integrity 2 · Supernatural Resistance 2
 
 ### 6.6 `merits.json`
 
-Extract from sheet `merit-table` + `affinity-table`:
+Extract from sheet `merit-table` + `affinity-table`, then **filtered to Rules Addendum–sanctioned material** via `sanctioned_merit_ids.json` (rebuild: `scripts/build_spi_sanctioned_merit_ids.py`, then `scripts/seed_spi_data_from_extract.py`).
+
+- **Affinity:** all sheet affinity-tab rows (MES Affinity Powers catalog).
+- **General:** only Addendum-allowlisted names (plus typo aliases). Dropped from the sheet include unsanctioned Fighting Styles, Mystery Cult Initiation, Artifacts, and CoD supernatural rows that are Affinity-only or not listed as General.
+- Same `id` may exist as Affinity after its General twin was dropped (e.g. `medium`, `telekinesis`).
 
 ```json
 {

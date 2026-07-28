@@ -86,6 +86,34 @@ def test_merits_have_no_codex_blurbs():
         assert "label" in entry
 
 
+def test_merits_are_sanctioned_only():
+    """Catalog excludes sheet rows that are not Rules Addendum–sanctioned."""
+    merits = json.loads((SPI_DATA / "merits.json").read_text(encoding="utf-8"))
+    allow = json.loads((SPI_DATA / "sanctioned_merit_ids.json").read_text(encoding="utf-8"))
+    general_ok = set(allow["general_ids"])
+    banned_general = {
+        "mystery_cult_initiation",
+        "boxing",
+        "marksmanship",
+        "martial_arts",
+        "iron_skin",
+        "unseen_sense",
+        "artifact",
+    }
+    for entry in merits["merits"]:
+        if entry["category"] == "general":
+            assert entry["id"] in general_ok
+            assert entry["id"] not in banned_general
+        else:
+            assert entry["category"] == "affinity"
+    # Dual-catalog powers: Affinity kept, General twin removed
+    by_id = {}
+    for entry in merits["merits"]:
+        by_id.setdefault(entry["id"], set()).add(entry["category"])
+    assert by_id.get("medium") == {"affinity"}
+    assert "mystery_cult_initiation" not in by_id
+
+
 def test_archetype_manifest_has_eight_primaries():
     manifest = json.loads((SPI_DATA / "archetypes" / "_manifest.json").read_text(encoding="utf-8"))
     assert len(manifest["primaries"]) == 8

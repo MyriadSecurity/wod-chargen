@@ -34,6 +34,10 @@ class PurchaseCandidate:
     source: str
     apply: Callable[[], None]
     is_signature: bool = False
+    # When set, efficiency uses this instead of assuming a one-dot step.
+    current_level: int | None = None
+    # Fixed-rating (min==max) multi-dot package: score like opening a trait.
+    package: bool = False
 
     @property
     def effective_weight(self) -> float:
@@ -88,11 +92,14 @@ def _pick_candidate(
     pool = by_group[chosen_group]
     scored: list[tuple[PurchaseCandidate, float, float, float]] = []
     for cand in pool:
-        cur = cand.new_level - 1
+        cur = cand.new_level - 1 if cand.current_level is None else cand.current_level
         if cand.category == "loresheet":
             eff = loresheet_efficiency_bias(cur, cand.new_level)
         elif cand.is_signature:
             eff = signature_skill_efficiency_bias(cur, cand.new_level)
+        elif cand.package and cur == 0 and cand.new_level > 1:
+            # CoD flat-rate fixed merits are one purchase of N dots, not a jump.
+            eff = efficiency_item_bias(0, 1)
         else:
             eff = efficiency_item_bias(cur, cand.new_level)
         eff *= budget_efficiency_scale(

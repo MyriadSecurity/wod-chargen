@@ -27,6 +27,31 @@ AFFINITY_TYPES = ("ghost", "spirit", "mage", "fae", "vampire")
 MAX_ATTR = 5
 MAX_SKILL = 5
 MAX_AFFINITY = 5
+# Touchstones are omitted on oneshot sheets; do not spend free dots / XP here.
+OMITTED_MERIT_IDS = frozenset({"extra_touchstone"})
+
+
+def _merit_xp_cost(
+    costs: dict[str, Any],
+    merit_id: str,
+    *,
+    current: int,
+    target: int,
+) -> int:
+    """XP for raising a merit from ``current`` to ``target`` (SPI flat rate + exceptions).
+
+    Default merits: 1 XP per dot. Supernatural Resistance: 2 XP per dot.
+    Extra Touchstone (if ever enabled): graduated — each new level costs that level.
+    """
+    dots = max(0, target - current)
+    if dots <= 0:
+        return 0
+    if merit_id == "supernatural_resistance":
+        return dots * lookup_cost(costs, "supernatural_resistance", new_level=1)
+    if merit_id == "extra_touchstone":
+        # Graduated: buy levels current+1 .. target at cost = level each.
+        return sum(range(current + 1, target + 1))
+    return dots * lookup_cost(costs, "merit", new_level=1)
 
 
 def _data(name: str) -> dict[str, Any]:
