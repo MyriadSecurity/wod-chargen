@@ -20,5 +20,12 @@
     "intimidation": 1.2,
     "medicine": 1.1
   },
-  "merit_biases": {}
+  "merit_biases": {
+    "defender": 1.5,
+    "iron_chin": 1.35,
+    "defensive_combat_brawl": 1.3,
+    "defensive_combat_weaponry": 1.3,
+    "air_of_menace": 1.25,
+    "cohesive_unit": 1.2
+  }
 }

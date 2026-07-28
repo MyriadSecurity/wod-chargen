@@ -9,6 +9,8 @@ from wod_chargen.core.models import XpLogEntry
 CATEGORY_ORDER = (
     "attribute",
     "skill",
+    "specialty",
+    "affinity",
     "discipline",
     "background",
     "background_modifier",
@@ -23,6 +25,8 @@ CATEGORY_ORDER = (
 CATEGORY_LABELS = {
     "attribute": "Attributes",
     "skill": "Skills",
+    "specialty": "Specialties",
+    "affinity": "Affinities",
     "discipline": "Disciplines",
     "background": "Backgrounds",
     "background_modifier": "Background Modifiers",
@@ -49,6 +53,10 @@ def _format_cost(entry: XpLogEntry) -> str:
     return "0 XP"
 
 
+def _titleize(item_id: str) -> str:
+    return item_id.replace("_", " ").title()
+
+
 def _format_item(entry: XpLogEntry) -> str:
     if entry.category == "ghoul_power":
         from wod_chargen.games.lotn_v5.disciplines import power_by_id, power_label
@@ -61,6 +69,10 @@ def _format_item(entry: XpLogEntry) -> str:
                 disc = disc_id.replace("_", " ").title()
                 return f"{label} ({disc})"
             return label
+    if entry.category in ("affinity", "specialty", "merit", "attribute", "skill"):
+        if entry.category == "specialty":
+            return entry.item if ":" in entry.item else _titleize(entry.item)
+        return _titleize(entry.item)
     return entry.item
 
 

@@ -113,9 +113,14 @@ class LotnV5System:
                 "id": vid,
                 "label": load_venue(vid)["label"],
                 "requires_approval_month": vid == self._wizard_ui()["mes_approval_venue"],
+                "requires_custom_xp": load_venue(vid).get("xp_method") == "custom",
             }
             for vid in venue_ids
         ]
+
+    def get_xp_profile_picker(self) -> list[dict[str, Any]]:
+        """Alias for get_venue_picker — starting XP profiles (not Venues)."""
+        return self.get_venue_picker()
 
     def get_character_types(self) -> list[dict[str, Any]]:
         types = load_json_cached(DATA_PKG, "character_types.json")

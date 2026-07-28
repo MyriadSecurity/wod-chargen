@@ -18,5 +18,12 @@
     "politics": 1.25,
     "subterfuge": 1.15
   },
-  "merit_biases": {}
+  "merit_biases": {
+    "inspiring": 1.45,
+    "allies": 1.4,
+    "contacts": 1.35,
+    "barfly": 1.25,
+    "empath": 1.4,
+    "kindness_begets_kindness": 1.2
+  }
 }

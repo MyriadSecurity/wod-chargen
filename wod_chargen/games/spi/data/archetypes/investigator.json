@@ -18,5 +18,11 @@
     "science": 1.15,
     "subterfuge": 1.1
   },
-  "merit_biases": {}
+  "merit_biases": {
+    "common_sense": 1.4,
+    "eidetic_memory": 1.35,
+    "eye_for_the_strange": 1.5,
+    "encyclopedic_knowledge": 1.25,
+    "danger_sense": 1.2
+  }
 }

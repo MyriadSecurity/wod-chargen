@@ -177,3 +177,60 @@ def test_share_url_loads_results_sheet(site_base_url: str):
         assert has_sheet, "Share URL should render a character sheet, not an empty or error state"
         context.close()
         browser.close()
+
+
+@pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
+def test_spi_share_url_loads_results_sheet(site_base_url: str):
+    share_path = (
+        "/?seed=4242&game=spi&venue=fixed_35"
+        "&division=defense&faction=humanity_first&archetype=guardian&affinity=vampire"
+    )
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--disable-http-cache"])
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto(f"{site_base_url}{share_path}", wait_until="domcontentloaded", timeout=60_000)
+        _wait_for_app(page)
+        has_sheet = page.evaluate(
+            """() => {
+                const root = document.getElementById('app-root');
+                if (!root) return false;
+                return Boolean(
+                    root.querySelector('.character-sheet')
+                    || root.textContent.includes('Attributes')
+                );
+            }"""
+        )
+        assert has_sheet, "SPI share URL should render a character sheet"
+        context.close()
+        browser.close()
+
+
+@pytest.mark.skipif(not HAS_PLAYWRIGHT, reason="playwright not installed")
+def test_spi_strategy_and_weight_map_pages(site_base_url: str):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--disable-http-cache"])
+        context = browser.new_context()
+        page = context.new_page()
+
+        page.goto(f"{site_base_url}/#strategy?game=spi", wait_until="domcontentloaded", timeout=60_000)
+        _wait_for_app(page)
+        title = page.locator("#app-root h1").first.inner_text()
+        assert "SPI" in title
+
+        page.goto(f"{site_base_url}/#weights?game=spi", wait_until="domcontentloaded", timeout=60_000)
+        _wait_for_app(page)
+        page.wait_for_selector("#weight-map-canvas", timeout=60_000)
+
+        page.goto(
+            f"{site_base_url}/#strategy?game=werewolf_apocalypse",
+            wait_until="domcontentloaded",
+            timeout=60_000,
+        )
+        _wait_for_app(page)
+        body = page.locator("#app-root").inner_text()
+        assert "Unknown Venue" in body
+        assert "How Characters Are Built" not in body
+
+        context.close()
+        browser.close()

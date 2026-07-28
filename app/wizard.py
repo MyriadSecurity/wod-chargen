@@ -9,8 +9,7 @@ from typing import Any
 from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
-from app.components.sheet import render_lotn_v5_sheet
-from app.components.sheet_spi import render_spi_sheet
+from app.components.sheet_dispatch import render_sheet_for_game
 from app.formatting import titleize_id
 from app.nav import app_nav, _nav_click
 from app.views import archetype as archetype_view
@@ -34,6 +33,7 @@ from app.wizard_state import (
     validate_selection,
     venue_continue_error,
 )
+from app.venue_dispatch import IMPLEMENTED_UI_GAMES
 from wod_chargen.core.xp_log_format import format_xp_log
 from wod_chargen.games.lotn_v5.archetypes import (
     archetypes_for_type,
@@ -703,7 +703,7 @@ class WizardApp:
             sheet_panel.className += " results-tab-hidden"
         if is_spi(self):
             sheet_model = self.system.build_sheet_model(result)
-            sheet_panel.appendChild(render_spi_sheet(sheet_model))
+            sheet_panel.appendChild(render_sheet_for_game(self.state["game"], sheet_model))
         else:
             sheet_model = self.system.build_sheet_model(
                 result,
@@ -711,7 +711,8 @@ class WizardApp:
                 convictions_seed=int(self.state["convictions_seed"]),
             )
             sheet_panel.appendChild(
-                render_lotn_v5_sheet(
+                render_sheet_for_game(
+                    self.state["game"],
                     sheet_model,
                     on_reroll_convictions=self._reroll_convictions,
                 )

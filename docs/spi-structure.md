@@ -108,7 +108,7 @@ Primaries only for MVP — **no subtypes**. Empty `archetypes/` pack layout so S
 | `diplomat` | Diplomat | Talk first; Social | Fae / Mage |
 | `caregiver` | Caregiver | Medicine, Integrity support, H&W | Ghost / Spirit |
 
-Bias packs: soft Affinity weights + skill/merit tags. Staff handoff = drop new JSON under `data/archetypes/` and register in manifest.
+Bias packs: soft Affinity / attribute / skill / merit **flat maps** only (no tag resolver). Staff handoff = drop new JSON under `data/archetypes/` and register in manifest.
 
 ---
 
@@ -120,7 +120,11 @@ Bias packs: soft Affinity weights + skill/merit tags. Staff handoff = drop new J
 | **VSS** | Local Venue Style Sheet | Deferred |
 | **Starting XP profile** | XP budget source | MES datetime, fixed 35, custom |
 
-**Repo naming debt:** catalog/registry say `game`; `wod_chargen/venues/` holds XP profiles; wizard step `venue` means XP profile. Design/UI copy uses Venue correctly; code rename is a later pass.
+**Repo naming debt:** catalog/registry say `game`; `wod_chargen/venues/` holds **starting XP profiles** (not Venues); wizard state key `venue` means XP profile. Prefer `get_xp_profile_picker()` in new call sites (aliases `get_venue_picker()`). Product/UI copy uses **Venue** for the game line. On-disk `venues/` rename is deferred.
+
+**SPI bias model:** flat multiplicative maps on archetype / Division / Faction (`attribute_biases`, `skill_biases`, `affinity_biases`, `merit_biases`). Merit `tags` in the catalog are metadata only — not bias inputs (LotN tag resolution is not ported).
+
+`VenueSystem` protocol: [`wod_chargen/games/protocol.py`](../wod_chargen/games/protocol.py). UI adapters fail closed via [`app/venue_dispatch.py`](../app/venue_dispatch.py).
 
 ```mermaid
 flowchart LR
@@ -360,9 +364,10 @@ Landing: pick **Venue** first, then that Venue’s wizard.
 
 | Area | Issue |
 |------|--------|
-| [`registry.py`](../wod_chargen/games/registry.py) | Only `LotnV5System` |
-| [`app/wizard.py`](../app/wizard.py), sheet, views | Venue-branched; LotN + SPI pickers/sheets |
-| [`app/strategy_page.py`](../app/strategy_page.py) / weight map | Venue-scoped via `?game=` |
+| [`registry.py`](../wod_chargen/games/registry.py) | `VenueSystem` protocol; LotN + SPI registered |
+| [`app/venue_dispatch.py`](../app/venue_dispatch.py) | Fail-closed guide/weight adapters |
+| [`app/wizard.py`](../app/wizard.py), sheet, views | Venue-branched via dispatch + `is_spi_game` |
+| [`app/strategy_page.py`](../app/strategy_page.py) / weight map | Venue-scoped via `?game=`; unknown fails closed |
 | [`core/share.py`](../wod_chargen/core/share.py) | LotN option keys; SPI options built in wizard_state |
 | [`core/xp_log_format.py`](../wod_chargen/core/xp_log_format.py) | LotN discipline labels |
 | [`venues/picker.json`](../wod_chargen/venues/picker.json) | No `spi` XP profiles yet |

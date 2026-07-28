@@ -18,5 +18,11 @@
     "occult": 1.35,
     "investigation": 1.2
   },
-  "merit_biases": {}
+  "merit_biases": {
+    "encyclopedic_knowledge": 1.5,
+    "eidetic_memory": 1.4,
+    "area_of_expertise": 1.35,
+    "common_sense": 1.2,
+    "architect": 1.25
+  }
 }

@@ -10,8 +10,7 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.nav import app_nav
-from app import weight_map_data as lotn_data
-from app import weight_map_data_spi as spi_data
+from app.venue_dispatch import IMPLEMENTED_UI_GAMES, UnknownVenueError, weight_data_for
 from wod_chargen.games.registry import load_game_catalog
 
 _MAX_RENDER_ATTEMPTS = 40
@@ -38,7 +37,7 @@ class WeightMapApp:
         self._parse_hash()
 
     def _data(self):
-        return spi_data if self.state.get("game") == "spi" else lotn_data
+        return weight_data_for(str(self.state.get("game") or ""))
 
     def _parse_hash(self) -> None:
         raw = (window.location.hash or "").lstrip("#")
@@ -63,10 +62,17 @@ class WeightMapApp:
                 "faction",
             ):
                 self.state[key] = val
-        if self.state.get("game") == "spi" and self.state["lens"] not in spi_data.LENSES:
-            self.state["lens"] = "archetype"
-            self.state["arch"] = "investigator"
-            self.state["id"] = "investigator"
+        game = str(self.state.get("game") or "")
+        if game and game in IMPLEMENTED_UI_GAMES:
+            try:
+                data = weight_data_for(game)
+            except UnknownVenueError:
+                return
+            if self.state["lens"] not in data.LENSES:
+                self.state["lens"] = "archetype"
+                if game == "spi":
+                    self.state["arch"] = "investigator"
+                    self.state["id"] = "investigator"
 
     def _sync_hash(self) -> None:
         parts = [f"lens={quote(self.state['lens'])}", f"mode={quote(self.state['mode'])}"]
@@ -126,7 +132,15 @@ class WeightMapApp:
             dark_pack_footer()
             return
 
-        data = self._data()
+        try:
+            data = self._data()
+        except UnknownVenueError:
+            wrap.appendChild(self._unknown_venue_message(str(self.state.get("game"))))
+            wrap.appendChild(self._venue_picker())
+            self.root.appendChild(wrap)
+            dark_pack_footer()
+            return
+
         header = document.createElement("div")
         header.className = "mb-4"
         h1 = document.createElement("h1")
@@ -165,6 +179,19 @@ class WeightMapApp:
         self._render_attempts = 0
         self._draw(canvas)
 
+    def _unknown_venue_message(self, game_id: str) -> Any:
+        box = document.createElement("div")
+        box.className = "mb-4"
+        h1 = document.createElement("h1")
+        h1.className = "text-2xl font-bold text-blood mb-2"
+        h1.innerText = "Weight Map"
+        box.appendChild(h1)
+        p = document.createElement("p")
+        p.className = "text-red-400 text-sm mb-2"
+        p.innerText = f"Unknown Venue {game_id!r}. Pick an implemented Venue below."
+        box.appendChild(p)
+        return box
+
     def _venue_picker(self) -> Any:
         from pyscript.ffi import create_proxy
 
@@ -179,7 +206,7 @@ class WeightMapApp:
         box.appendChild(p)
         catalog = load_game_catalog()
         for gid, game in catalog.items():
-            if not game.get("implemented"):
+            if not game.get("implemented") or gid not in IMPLEMENTED_UI_GAMES:
                 continue
             btn = document.createElement("button")
             btn.type = "button"

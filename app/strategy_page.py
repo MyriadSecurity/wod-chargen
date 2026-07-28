@@ -12,8 +12,9 @@ from pyscript.ffi import create_proxy
 
 from app.components.footer import dark_pack_footer
 from app.nav import app_nav
-from app.strategy_content import resolve_guide
+from app.strategy_content import UnknownVenueError, resolve_guide
 from wod_chargen.games.registry import load_game_catalog
+from app.venue_dispatch import IMPLEMENTED_UI_GAMES
 
 _INLINE_BOLD_RE = re.compile(r"\*\*(.+?)\*\*")
 
@@ -81,7 +82,15 @@ class StrategyPageApp:
             dark_pack_footer()
             return
 
-        guide = resolve_guide(self.state["game"])
+        try:
+            guide = resolve_guide(self.state["game"])
+        except UnknownVenueError:
+            wrap.appendChild(self._unknown_venue_message(self.state["game"]))
+            wrap.appendChild(self._venue_picker())
+            self.root.appendChild(wrap)
+            dark_pack_footer()
+            return
+
         header = document.createElement("div")
         header.className = "mb-4"
         h1 = document.createElement("h1")
@@ -99,6 +108,19 @@ class StrategyPageApp:
         self.root.appendChild(wrap)
         dark_pack_footer()
 
+    def _unknown_venue_message(self, game_id: str) -> Any:
+        box = document.createElement("div")
+        box.className = "mb-4"
+        h1 = document.createElement("h1")
+        h1.className = "text-2xl font-bold text-blood mb-2"
+        h1.innerText = "Build guide"
+        box.appendChild(h1)
+        p = document.createElement("p")
+        p.className = "text-red-400 text-sm"
+        p.innerText = f"Unknown Venue {game_id!r}. Pick an implemented Venue below."
+        box.appendChild(p)
+        return box
+
     def _venue_picker(self) -> Any:
         box = document.createElement("div")
         h1 = document.createElement("h1")
@@ -111,7 +133,7 @@ class StrategyPageApp:
         box.appendChild(p)
         catalog = load_game_catalog()
         for gid, game in catalog.items():
-            if not game.get("implemented"):
+            if not game.get("implemented") or gid not in IMPLEMENTED_UI_GAMES:
                 continue
             btn = document.createElement("button")
             btn.type = "button"

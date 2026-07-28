@@ -23,8 +23,11 @@ if TYPE_CHECKING:
     from app.wizard import WizardApp
 
 
+from app.venue_dispatch import is_spi_game
+
+
 def is_spi(app: WizardApp) -> bool:
-    return app.state.get("game") == "spi"
+    return is_spi_game(str(app.state.get("game") or ""))
 
 
 def default_state() -> dict[str, Any]:

@@ -55,6 +55,10 @@ class SpiSystem:
             )
         return out
 
+    def get_xp_profile_picker(self) -> list[dict[str, Any]]:
+        """Alias for get_venue_picker — starting XP profiles (not Venues)."""
+        return self.get_venue_picker()
+
     def get_division_options(self) -> list[dict[str, str]]:
         divisions = load_json_cached(DATA_PKG, "divisions.json")
         return [

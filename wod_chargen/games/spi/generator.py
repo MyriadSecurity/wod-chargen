@@ -123,21 +123,33 @@ def _spend_merit_dots(
     biases: dict[str, float],
     *,
     max_affinity_merits: int,
+    primary_affinity: str,
     log: list[LogEntry],
 ) -> None:
-    """Spend free creation merit dots (general only; affinity merits via XP/affinity pool)."""
-    general = [
+    """Spend free creation merit dots.
+
+    General merits unrestricted within the pool. Affinity merits may be bought
+    only for the primary Affinity and only up to ``max_affinity_merits`` dots.
+    """
+    eligible = [
         m
         for m in merit_defs
-        if m.get("category") == "general"
-        and not m.get("style_steps")
+        if not m.get("style_steps")
         and not any(p.get("unresolved") for p in m.get("prereqs", []))
+        and (
+            m.get("category") == "general"
+            or (
+                m.get("category") == "affinity"
+                and m.get("affinity_type") == primary_affinity
+            )
+        )
     ]
     remaining = dots
-    while remaining > 0 and general:
+    affinity_spent = 0
+    while remaining > 0 and eligible:
         cands = []
         weights = []
-        for m in general:
+        for m in eligible:
             mid = m["id"]
             cur = int(char["merits"].get(mid, 0))
             dmin = int(m.get("dots_min", 1))
@@ -147,7 +159,8 @@ def _spend_merit_dots(
             need = dmin if cur == 0 else 1
             if need > remaining:
                 continue
-            # Skip if simple prereqs unmet (attributes/skills only at creation)
+            if m.get("category") == "affinity" and affinity_spent + need > max_affinity_merits:
+                continue
             if not _prereqs_met(char, m.get("prereqs", []), soft=True):
                 continue
             cands.append((m, need))
@@ -162,13 +175,17 @@ def _spend_merit_dots(
             need = new_level
             if need > remaining:
                 continue
+            if m.get("category") == "affinity" and affinity_spent + need > max_affinity_merits:
+                continue
         char["merits"][mid] = new_level
         remaining -= need
+        if m.get("category") == "affinity":
+            affinity_spent += need
         log.append(
             LogEntry(
                 phase="creation_merits",
                 message=f"Merit {_title(mid)} → {new_level} ({need} dots)",
-                detail={"merit": mid, "dots": need},
+                detail={"merit": mid, "dots": need, "category": m.get("category")},
             )
         )
 
@@ -643,6 +660,7 @@ def generate_character(
         int(creation.get("merit_dots", 7)),
         merit_biases,
         max_affinity_merits=int(creation.get("max_affinity_merit_dots_at_creation", 3)),
+        primary_affinity=primary_affinity,
         log=log,
     )
 

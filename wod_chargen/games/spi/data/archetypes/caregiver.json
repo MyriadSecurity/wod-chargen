@@ -18,5 +18,11 @@
     "science": 1.15,
     "persuasion": 1.15
   },
-  "merit_biases": {}
+  "merit_biases": {
+    "empath": 1.5,
+    "kindness_begets_kindness": 1.4,
+    "extra_touchstone": 1.35,
+    "common_sense": 1.25,
+    "inspiring": 1.3
+  }
 }

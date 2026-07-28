@@ -114,3 +114,66 @@ def test_system_generate_via_facade():
     assert result.xp_budget == 35
     sheet = system.build_sheet_model(result)
     assert sheet.affinities.title == "Affinities"
+
+
+def test_creation_affinity_merit_cap():
+    venue = load_venue("fixed_35")
+    result = generate_character(
+        99,
+        {"archetype": "occultist", "affinity": "mage", "multi_affinity": False},
+        venue,
+    )
+    creation_affinity = 0
+    for entry in result.creation_log:
+        if entry.phase == "creation_merits" and entry.detail.get("category") == "affinity":
+            creation_affinity += int(entry.detail.get("dots", 0))
+    assert creation_affinity <= 3
+
+
+def test_prereq_bundle_can_raise_affinity_for_gated_merit():
+    """Buying a Fae-gated merit with multi on should allow Affinity in the bundle path."""
+    venue = load_venue("spi_custom_xp")
+    # High XP; multi on so Affinity prereqs can be purchased
+    bought = False
+    for seed in range(80):
+        result = generate_character(
+            seed,
+            {
+                "archetype": "occultist",
+                "affinity": "fae",
+                "multi_affinity": True,
+                "xp": "300",
+            },
+            venue,
+        )
+        if result.character["merits"].get("goblin_bounty"):
+            assert result.character["affinities"]["fae"] >= 4
+            bought = True
+            break
+    assert bought, "expected a seed to purchase goblin_bounty via prereq bundling"
+
+
+def test_xp_log_formats_affinity_labels():
+    from wod_chargen.core.models import XpLogEntry
+    from wod_chargen.core.xp_log_format import format_xp_log
+
+    text = format_xp_log(
+        [
+            XpLogEntry(
+                item="mage",
+                category="affinity",
+                spend_group="affinity",
+                new_level=2,
+                cost=5,
+                group_weight=1.0,
+                item_bias=1.0,
+                clan_factor=1.0,
+                efficiency_bias=1.0,
+                roll=0.5,
+                score=1.0,
+                source="test",
+            )
+        ]
+    )
+    assert "Affinities" in text
+    assert "Mage" in text
