@@ -13,6 +13,7 @@ from wod_chargen.core.spender import PurchaseCandidate, spend_xp
 from wod_chargen.core.xp_strategy import SPI_CATEGORY_TARGETS, creation_pick_weight
 from wod_chargen.games.spi.archetypes import get_archetype, list_archetypes
 from wod_chargen.games.spi.paths import DATA_PKG
+from wod_chargen.games.spi.trait_biases import resolve_merit_bias
 from wod_chargen.venues import resolve_xp_budget
 
 ATTR_CATS = ("mental", "physical", "social")
@@ -120,7 +121,7 @@ def _spend_merit_dots(
     char: dict[str, Any],
     merit_defs: list[dict[str, Any]],
     dots: int,
-    biases: dict[str, float],
+    bias_profile: dict[str, Any],
     *,
     max_affinity_merits: int,
     primary_affinity: str,
@@ -164,7 +165,7 @@ def _spend_merit_dots(
             if not _prereqs_met(char, m.get("prereqs", []), soft=True):
                 continue
             cands.append((m, need))
-            weights.append(biases.get(mid, 1.0) * (0.5 + rng.uniform()))
+            weights.append(resolve_merit_bias(bias_profile, mid) * (0.5 + rng.uniform()))
         if not cands:
             break
         m, need = rng.weighted_choice(cands, weights)
@@ -333,7 +334,10 @@ def _enumerate_purchases(
     cands: list[PurchaseCandidate] = []
     attr_biases = biases.get("attribute_biases", {})
     skill_biases = biases.get("skill_biases", {})
-    merit_biases = biases.get("merit_biases", {})
+    merit_bias_profile = {
+        "merit_biases": biases.get("merit_biases", {}),
+        "tag_affinities": biases.get("tag_affinities", {}),
+    }
     affinity_biases = biases.get("affinity_biases", {})
 
     for cat, traits in attr_cats.items():
@@ -476,7 +480,7 @@ def _enumerate_purchases(
                 new_level=target,
                 cost=total_cost,
                 weight=1.0,
-                item_bias=float(merit_biases.get(mid, 1.0)),
+                item_bias=resolve_merit_bias(merit_bias_profile, mid),
                 clan_factor=1.0,
                 source=source,
                 apply=apply,
@@ -587,7 +591,20 @@ def generate_character(
         div.get("skill_biases", {}),
         fac.get("skill_biases", {}),
     )
-    merit_biases = dict(arch.get("merit_biases") or {})
+    merit_biases = _merge_bias(
+        arch.get("merit_biases", {}),
+        div.get("merit_biases", {}),
+        fac.get("merit_biases", {}),
+    )
+    tag_affinities = _merge_bias(
+        arch.get("tag_affinities", {}),
+        div.get("tag_affinities", {}),
+        fac.get("tag_affinities", {}),
+    )
+    merit_bias_profile = {
+        "merit_biases": merit_biases,
+        "tag_affinities": tag_affinities,
+    }
     affinity_biases = _merge_bias(
         arch.get("affinity_biases", {}),
         fac.get("affinity_biases", {}),
@@ -658,7 +675,7 @@ def generate_character(
         char,
         merit_defs,
         int(creation.get("merit_dots", 7)),
-        merit_biases,
+        merit_bias_profile,
         max_affinity_merits=int(creation.get("max_affinity_merit_dots_at_creation", 3)),
         primary_affinity=primary_affinity,
         log=log,
@@ -673,6 +690,7 @@ def generate_character(
         "attribute_biases": attr_biases,
         "skill_biases": skill_biases,
         "merit_biases": merit_biases,
+        "tag_affinities": tag_affinities,
         "affinity_biases": affinity_biases,
     }
     source = f"archetype:{archetype_id}"

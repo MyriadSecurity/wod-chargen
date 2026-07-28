@@ -1,7 +1,7 @@
 {
   "id": "shadow",
   "label": "Shadow",
-  "description": "Spy and infiltrate — quiet approaches, stolen answers.",
+  "description": "Spy and infiltrate \u2014 quiet approaches, stolen answers.",
   "affinity_biases": {
     "ghost": 1.3,
     "fae": 1.2
@@ -19,10 +19,20 @@
     "streetwise": 1.2
   },
   "merit_biases": {
-    "face_in_the_crowd": 1.5,
-    "covert_operative": 1.45,
-    "closed_book": 1.3,
-    "alternate_identity": 1.35,
-    "double_jointed": 1.2
+    "anonymity": 1.65,
+    "sleight_of_hand": 1.5,
+    "alternate_identity": 1.45,
+    "closed_book": 1.35,
+    "fast_talking": 1.3
+  },
+  "tag_affinities": {
+    "stealth": 1.95,
+    "infiltration": 1.9,
+    "deception": 1.65,
+    "investigation": 1.3,
+    "combat": 0.55,
+    "status": 0.45,
+    "academia": 0.55,
+    "resources": 0.6
   }
 }

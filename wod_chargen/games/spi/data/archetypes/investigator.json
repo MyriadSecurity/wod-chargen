@@ -1,7 +1,7 @@
 {
   "id": "investigator",
   "label": "Investigator",
-  "description": "Clues, interviews, and forensics — you rebuild the timeline until it holds.",
+  "description": "Clues, interviews, and forensics \u2014 you rebuild the timeline until it holds.",
   "affinity_biases": {
     "mage": 1.35,
     "ghost": 1.25
@@ -19,10 +19,19 @@
     "subterfuge": 1.1
   },
   "merit_biases": {
-    "common_sense": 1.4,
-    "eidetic_memory": 1.35,
-    "eye_for_the_strange": 1.5,
-    "encyclopedic_knowledge": 1.25,
-    "danger_sense": 1.2
+    "eye_for_the_strange": 1.7,
+    "unseen_sense": 1.55,
+    "patient": 1.45,
+    "holistic_awareness": 1.4,
+    "library": 1.35
+  },
+  "tag_affinities": {
+    "investigation": 1.9,
+    "perception": 1.6,
+    "information": 1.55,
+    "mental": 1.35,
+    "occult": 1.25,
+    "stealth": 1.15,
+    "combat": 0.55
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "guardian",
   "label": "Guardian",
-  "description": "Protect people first — Defense Division lean, ready for a fight.",
+  "description": "Protect people first \u2014 Defense Division lean, ready for a fight.",
   "affinity_biases": {
     "vampire": 1.25,
     "spirit": 1.2
@@ -21,11 +21,20 @@
     "medicine": 1.1
   },
   "merit_biases": {
-    "defender": 1.5,
-    "iron_chin": 1.35,
-    "defensive_combat_brawl": 1.3,
-    "defensive_combat_weaponry": 1.3,
-    "air_of_menace": 1.25,
-    "cohesive_unit": 1.2
+    "iron_stamina": 1.55,
+    "hardy": 1.5,
+    "defensive_combat_brawl": 1.45,
+    "iron_skin": 1.4,
+    "small_unit_tactics": 1.35,
+    "fast_reflexes": 1.3
+  },
+  "tag_affinities": {
+    "combat": 1.85,
+    "protection": 1.8,
+    "physical": 1.4,
+    "athletics": 1.3,
+    "medicine": 1.2,
+    "stealth": 0.55,
+    "deception": 0.5
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "caregiver",
   "label": "Caregiver",
-  "description": "Medicine and Integrity support — Health and Welfare lean.",
+  "description": "Medicine and Integrity support \u2014 Health and Welfare lean.",
   "affinity_biases": {
     "ghost": 1.25,
     "spirit": 1.2
@@ -19,10 +19,19 @@
     "persuasion": 1.15
   },
   "merit_biases": {
-    "empath": 1.5,
-    "kindness_begets_kindness": 1.4,
-    "extra_touchstone": 1.35,
-    "common_sense": 1.25,
-    "inspiring": 1.3
+    "holistic_awareness": 1.65,
+    "empath": 1.55,
+    "patient": 1.45,
+    "indomitable": 1.35,
+    "safe_place": 1.3
+  },
+  "tag_affinities": {
+    "medicine": 1.95,
+    "care": 1.85,
+    "protection": 1.35,
+    "social": 1.25,
+    "academia": 1.2,
+    "combat": 0.45,
+    "deception": 0.5
   }
 }

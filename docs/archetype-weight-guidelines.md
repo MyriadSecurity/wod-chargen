@@ -109,3 +109,16 @@ When signature disciplines are off-clan, define `discipline_expressions` on the 
 - `alternates` — merged only for in-clan disciplines when a signature is missing.
 - Alternate `discipline_bias` values are targets (max with current); `power_biases` are overrides.
 - Runtime floors via `clan_discipline_adapt.py`; off-clan signatures use XP `clan_factor` 0.6.
+
+## SPI merits (theme tags)
+
+SPI uses a separate index: `wod_chargen/games/spi/data/trait_tags.json`.
+
+- Catalog extract tags on `merits.json` stay metadata (sheet category / affinity type).
+- Judgment **theme** tags (1–3 per merit) drive weighting via archetype / Division / Faction
+  `tag_affinities`, merged multiplicatively like skills.
+- Explicit `merit_biases` on those packs override the tag product.
+- Resolver: `wod_chargen.games.spi.trait_biases.resolve_merit_bias`.
+- Validate: `uv run python scripts/validate_spi_merit_biases.py`.
+
+Same value ranges and opposition policy as LotN (`opposed:` / `hard_opposed:` on theme lists).

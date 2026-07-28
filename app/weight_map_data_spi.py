@@ -51,6 +51,7 @@ def _profile_children(profile: dict[str, Any]) -> list[dict[str, Any]]:
         ("Attributes", "attribute_biases", "attribute"),
         ("Skills", "skill_biases", "skill"),
         ("Affinities", "affinity_biases", "affinity"),
+        ("Tag affinities", "tag_affinities", "tag"),
         ("Merits", "merit_biases", "merit"),
     ):
         sec = _section(label, profile.get(key) or {}, kind)
@@ -157,6 +158,7 @@ def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
             "attribute_biases": {},
             "skill_biases": {},
             "affinity_biases": {},
+            "tag_affinities": {},
             "merit_biases": {},
         }
         for key in merged:

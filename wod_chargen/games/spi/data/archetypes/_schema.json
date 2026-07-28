@@ -1,0 +1,27 @@
+{
+  "archetype": {
+    "id": "primary archetype slug (filename without .json)",
+    "label": "display name",
+    "description": "player-facing pitch",
+    "attribute_biases": "absolute per-attribute multipliers",
+    "skill_biases": "absolute per-skill multipliers",
+    "affinity_biases": "absolute Affinity-type multipliers",
+    "merit_biases": "absolute per-merit multipliers (explicit override over tags)",
+    "tag_affinities": "theme tag slug → absolute multiplier"
+  },
+  "sub_archetype": {
+    "file": "archetypes/<archetype_id>/<sub_id>.json",
+    "count": "at least 2 per primary",
+    "id": "sub-archetype slug",
+    "label": "display name",
+    "description": "one-line flavor",
+    "modifiers": {
+      "attribute_biases": "additive deltas on parent attribute_biases",
+      "skill_biases": "additive deltas on parent skill_biases",
+      "affinity_biases": "additive deltas on parent affinity_biases",
+      "merit_biases": "additive deltas on parent merit_biases",
+      "tag_affinities": "additive deltas on parent tag_affinities"
+    },
+    "notes": "Merge: merged[key] = parent.get(key, 1.0) + delta. Typical deltas +0.2–0.5; soft downs −0.15–−0.3."
+  }
+}

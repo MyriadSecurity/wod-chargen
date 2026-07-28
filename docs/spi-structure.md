@@ -108,7 +108,9 @@ Primaries only for MVP — **no subtypes**. Empty `archetypes/` pack layout so S
 | `diplomat` | Diplomat | Talk first; Social | Fae / Mage |
 | `caregiver` | Caregiver | Medicine, Integrity support, H&W | Ghost / Spirit |
 
-Bias packs: soft Affinity / attribute / skill / merit **flat maps** only (no tag resolver). Staff handoff = drop new JSON under `data/archetypes/` and register in manifest.
+Bias packs: soft Affinity / attribute / skill / merit maps plus merit **theme**
+`tag_affinities` (LotN-style resolver). Staff handoff = drop new JSON under
+`data/archetypes/` and register in manifest.
 
 ---
 
@@ -122,7 +124,13 @@ Bias packs: soft Affinity / attribute / skill / merit **flat maps** only (no tag
 
 **Repo naming debt:** catalog/registry say `game`; `wod_chargen/venues/` holds **starting XP profiles** (not Venues); wizard state key `venue` means XP profile. Prefer `get_xp_profile_picker()` in new call sites (aliases `get_venue_picker()`). Product/UI copy uses **Venue** for the game line. On-disk `venues/` rename is deferred.
 
-**SPI bias model:** flat multiplicative maps on archetype / Division / Faction (`attribute_biases`, `skill_biases`, `affinity_biases`, `merit_biases`). Merit `tags` in the catalog are metadata only — not bias inputs (LotN tag resolution is not ported).
+**SPI bias model:** multiplicative maps on archetype / Division / Faction
+(`attribute_biases`, `skill_biases`, `affinity_biases`, `merit_biases`,
+`tag_affinities`). Catalog `merits.json` extract tags remain metadata.
+Judgment **theme** tags live in `data/trait_tags.json` and feed
+`wod_chargen.games.spi.trait_biases.resolve_merit_bias` (explicit id wins over
+tag product; clamp 0.05–3.0). See [archetype-weight-guidelines.md](archetype-weight-guidelines.md)
+(SPI merit subsection).
 
 `VenueSystem` protocol: [`wod_chargen/games/protocol.py`](../wod_chargen/games/protocol.py). UI adapters fail closed via [`app/venue_dispatch.py`](../app/venue_dispatch.py).
 
