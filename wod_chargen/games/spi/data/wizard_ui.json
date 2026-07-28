@@ -1,5 +1,5 @@
 {
-  "wizard_steps": ["xp_profile", "division", "faction", "archetype", "affinity", "generate"],
+  "wizard_steps": ["venue", "division", "faction", "archetype", "affinity", "generate"],
   "affinity_default": "any",
   "copy": {
     "landing_blurb": "Build a Society investigator sheet for oneshots or NPCs.",

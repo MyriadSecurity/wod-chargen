@@ -7,9 +7,11 @@ from typing import Any
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.games.lotn_v5.paths import GAMES_PKG
 from wod_chargen.games.lotn_v5.system import LotnV5System
+from wod_chargen.games.spi.system import SpiSystem
 
-_SYSTEMS = {
+_SYSTEMS: dict[str, LotnV5System | SpiSystem] = {
     "lotn_v5": LotnV5System(),
+    "spi": SpiSystem(),
 }
 
 
@@ -17,7 +19,7 @@ def load_game_catalog() -> dict[str, Any]:
     return load_json_cached(GAMES_PKG, "catalog.json")
 
 
-def get_game(game_id: str) -> LotnV5System:
+def get_game(game_id: str) -> LotnV5System | SpiSystem:
     if game_id not in _SYSTEMS:
         raise ValueError(f"Unknown game: {game_id}")
     return _SYSTEMS[game_id]

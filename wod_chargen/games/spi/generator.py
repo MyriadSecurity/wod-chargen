@@ -83,7 +83,6 @@ def _assign_category_pools(
 ) -> None:
     """Distribute fixed pools into trait categories (CoD primary/secondary/tertiary)."""
     cat_ids = list(categories.keys())
-    rng.shuffle(cat_ids)
     # Soft bias: prefer categories whose traits have higher average bias
     cat_scores = []
     for cid in cat_ids:
@@ -440,8 +439,6 @@ def _enumerate_purchases(
         else:
             spend_group = "merits"
 
-        base_cost = lookup_cost(costs, "merit", new_level=target) * max(1, target - cur)
-        # Flat per dot: each new dot costs per_dot
         base_cost = lookup_cost(costs, "merit", new_level=1) * max(1, target - cur)
         bundle_cost, bundle_applies = _bundle_prereq_cost(char, costs, m.get("prereqs", []))
         # Only bundle if prereqs not already met

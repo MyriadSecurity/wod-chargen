@@ -101,7 +101,7 @@ def test_spi_system_wizard_and_venue_picker():
     system = SpiSystem()
     assert system.id == "spi"
     assert system.get_wizard_steps() == [
-        "xp_profile",
+        "venue",
         "division",
         "faction",
         "archetype",

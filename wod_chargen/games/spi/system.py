@@ -1,11 +1,15 @@
-"""SPI Venue system facade (scaffold; generator lands in a later phase)."""
+"""SPI Venue system facade."""
 
 from __future__ import annotations
 
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
+from wod_chargen.core.models import GenerationResult
+from wod_chargen.games.spi.archetypes import archetype_picker
+from wod_chargen.games.spi.generator import generate_character
 from wod_chargen.games.spi.paths import DATA_PKG, GAMES_PKG, VENUE_PKG
+from wod_chargen.games.spi.sheet_model import SpiSheetModel, build_sheet_model
 from wod_chargen.venues import load_venue
 
 
@@ -50,3 +54,59 @@ class SpiSystem:
                 }
             )
         return out
+
+    def get_division_options(self) -> list[dict[str, str]]:
+        divisions = load_json_cached(DATA_PKG, "divisions.json")
+        return [
+            {
+                "id": d["id"],
+                "label": d.get("label", d["id"]),
+                "description": d.get("summary", ""),
+            }
+            for d in divisions.values()
+        ]
+
+    def get_faction_options(self) -> list[dict[str, str]]:
+        factions = load_json_cached(DATA_PKG, "factions.json")
+        return [
+            {
+                "id": f["id"],
+                "label": f.get("label", f["id"]),
+                "description": f.get("summary", ""),
+            }
+            for f in factions.values()
+        ]
+
+    def get_archetypes(self) -> list[dict[str, str]]:
+        return archetype_picker()
+
+    def get_affinity_options(self) -> list[dict[str, str]]:
+        copy = self.get_wizard_copy()
+        types = load_json_cached(DATA_PKG, "affinity_types.json")
+        out = [
+            {
+                "id": "any",
+                "label": copy.get("affinity_any_label", "Any (from archetype)"),
+                "description": "",
+            }
+        ]
+        for tid, entry in types.items():
+            out.append(
+                {
+                    "id": tid,
+                    "label": entry.get("label", tid),
+                    "description": "",
+                }
+            )
+        return out
+
+    def generate(
+        self,
+        seed: int,
+        options: dict[str, Any],
+        venue_config: dict[str, Any],
+    ) -> GenerationResult:
+        return generate_character(seed, options, venue_config)
+
+    def build_sheet_model(self, result: GenerationResult, **_kwargs: Any) -> SpiSheetModel:
+        return build_sheet_model(result)

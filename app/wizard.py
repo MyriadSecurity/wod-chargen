@@ -10,18 +10,22 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.components.sheet import render_lotn_v5_sheet
+from app.components.sheet_spi import render_spi_sheet
 from app.formatting import titleize_id
-from app.nav import app_nav
+from app.nav import app_nav, _nav_click
 from app.views import archetype as archetype_view
 from app.views import faction as faction_view
 from app.views import generate as generate_view
 from app.views import predator as predator_view
+from app.views import spi_pickers as spi_view
 from app.views import type as type_view
 from app.views import venue as venue_view
 from app.wizard_state import (
+    apply_spi_defaults,
     build_share_options,
     default_state,
     generate,
+    is_spi,
     parse_url,
     share_payload,
     share_url,
@@ -207,6 +211,9 @@ class WizardApp:
         window.setTimeout(create_proxy(do_scroll), 50)
 
     def _start_build(self) -> None:
+        if is_spi(self):
+            apply_spi_defaults(self)
+            self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
         self.state["phase"] = "build"
         self.state["unlocked_through"] = "venue"
         self.state["scroll_to_step"] = "venue"
@@ -422,44 +429,61 @@ class WizardApp:
     def _view_build(self) -> Any:
         el = document.createElement("div")
         el.className = "wizard-build"
-        el.appendChild(self._page_header("WoD Character Generator"))
+        title = self.system.label if is_spi(self) else "WoD Character Generator"
+        el.appendChild(self._page_header(title))
 
         map_link = document.createElement("a")
-        map_link.href = "#weights"
+        map_link.href = f"#weights?game={self.state['game']}"
         map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
         map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
-
-        from app.nav import _nav_click
 
         map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
         el.appendChild(map_link)
 
         strat_link = document.createElement("a")
-        strat_link.href = "#strategy"
+        strat_link.href = f"#strategy?game={self.state['game']}"
         strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
         strat_link.innerText = "Build guide →"
         strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
         el.appendChild(strat_link)
 
         copy = self.system.get_wizard_copy()
-        sections: list[tuple[str, str, Any]] = [
-            ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
-            ("type", "Character type", type_view.render_type(self)),
-            ("faction", self.system.get_faction_picker_title(self._faction_role()), faction_view.render_faction(self)),
-            (
-                "archetype",
-                copy.get("archetype_title", "Archetype"),
-                archetype_view.render_archetype(self),
-            ),
-            (
-                "sub_archetype",
-                copy.get("sub_archetype_title", "Subtype"),
-                archetype_view.render_sub_archetype(self),
-            ),
-            ("predator", copy.get("predator_title", "Predator type"), predator_view.render_predator(self)),
-            ("generate", "Generate", generate_view.render_generate(self)),
-        ]
+        if is_spi(self):
+            sections: list[tuple[str, str, Any]] = [
+                ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
+                ("division", copy.get("division_title", "Division"), spi_view.render_division(self)),
+                ("faction", copy.get("faction_title", "Faction"), spi_view.render_faction(self)),
+                (
+                    "archetype",
+                    copy.get("archetype_title", "Archetype"),
+                    spi_view.render_archetype(self),
+                ),
+                ("affinity", copy.get("affinity_title", "Affinity"), spi_view.render_affinity(self)),
+                ("generate", "Generate", spi_view.render_generate_options(self)),
+            ]
+        else:
+            sections = [
+                ("venue", copy.get("xp_title", "Starting XP"), venue_view.render_venue(self)),
+                ("type", "Character type", type_view.render_type(self)),
+                (
+                    "faction",
+                    self.system.get_faction_picker_title(self._faction_role()),
+                    faction_view.render_faction(self),
+                ),
+                (
+                    "archetype",
+                    copy.get("archetype_title", "Archetype"),
+                    archetype_view.render_archetype(self),
+                ),
+                (
+                    "sub_archetype",
+                    copy.get("sub_archetype_title", "Subtype"),
+                    archetype_view.render_sub_archetype(self),
+                ),
+                ("predator", copy.get("predator_title", "Predator type"), predator_view.render_predator(self)),
+                ("generate", "Generate", generate_view.render_generate(self)),
+            ]
         for step, title, body in sections:
             if not self._step_visible(step):
                 continue
