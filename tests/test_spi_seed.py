@@ -45,7 +45,10 @@ def test_catalog_includes_spi_stub():
     catalog = load_json_cached("wod_chargen.games", "catalog.json")
     assert "spi" in catalog
     assert catalog["spi"]["implemented"] is True
+    assert catalog["spi"]["under_construction"] is True
+    assert catalog["spi"]["maturity"] == "alpha"
     assert "Society" in catalog["spi"]["label"]
+    assert "unreliable" in catalog["spi"]["status_note"].lower()
 
 
 def test_picker_lists_spi_profiles():

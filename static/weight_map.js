@@ -18,9 +18,13 @@
     power: "#e879f9",
     section: "#9ca3af",
     archetype: "#8b1538",
+    subtype: "#a21caf",
     predator: "#dc2626",
     clan: "#6366f1",
     category: "#0891b2",
+    division: "#0ea5e9",
+    faction: "#f59e0b",
+    affinity: "#c084fc",
     root: "#e8e4dc",
   };
 
@@ -35,6 +39,8 @@
 
   function nodeRadius(d) {
     if (d.data.kind === "root" || d.data.kind === "archetype") return 10;
+    if (d.data.kind === "division" || d.data.kind === "faction" || d.data.kind === "affinity") return 9;
+    if (d.data.kind === "subtype") return 7;
     if (d.data.kind === "section") return 6;
     if (d.data.value != null) return 4 + Math.min(8, Math.abs(d.data.value - 1) * 6);
     return 5;
@@ -48,6 +54,10 @@
   }
 
   function navigateWeightMap(params) {
+    const current = new URLSearchParams((window.location.hash.split("?")[1] || ""));
+    if (current.has("game") && !params.game) {
+      params.game = current.get("game");
+    }
     const q = new URLSearchParams(params).toString();
     window.location.hash = q ? `weights?${q}` : "weights";
   }
@@ -57,10 +67,23 @@
     if (!data.nav || !data.lens) return;
     const params = { lens: data.lens, mode: "profile" };
     if (data.lens === "archetype") {
-      params.arch = data.id;
-      params.sub = data.sub || "";
-      params.type = data.type || "vampire";
-    } else if (data.lens === "predator" || data.lens === "clan" || data.lens === "category") {
+      // SPI uses arch:sub in id; LotN uses separate arch / sub / type fields.
+      if (data.id && String(data.id).includes(":")) {
+        params.id = data.id;
+        params.arch = data.id;
+      } else {
+        params.arch = data.id;
+        params.sub = data.sub || "";
+        params.type = data.type || "vampire";
+      }
+    } else if (
+      data.lens === "predator" ||
+      data.lens === "clan" ||
+      data.lens === "category" ||
+      data.lens === "division" ||
+      data.lens === "faction" ||
+      data.lens === "affinity"
+    ) {
       params.id = data.id;
     }
     navigateWeightMap(params);

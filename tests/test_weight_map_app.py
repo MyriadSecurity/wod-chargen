@@ -119,3 +119,50 @@ def test_tree_payload_json_serializable():
     )
     for lens in ("archetype", "division", "faction", "affinity", "catalog", "combo"):
         json.dumps(build_spi_tree(lens, "overview"))
+
+
+def test_spi_division_profile_tolerates_lotn_leftover_id():
+    from app.weight_map_data_spi import build_tree
+
+    tree = build_tree("division", "profile", id="brujah")
+    assert tree["name"] == "Adventure"
+    assert tree["children"]
+
+
+def test_spi_overview_nodes_are_navigable():
+    from app.weight_map_data_spi import build_tree
+
+    for lens in ("archetype", "division", "faction", "affinity"):
+        tree = build_tree(lens, "overview")
+        assert tree["children"]
+        for child in tree["children"]:
+            assert child.get("nav") is True
+            assert child.get("lens") == lens
+            assert child.get("id")
+
+
+def test_spi_affinity_profile_ranks_archetypes():
+    from app.weight_map_data_spi import build_tree
+
+    tree = build_tree("affinity", "profile", id="mage")
+    assert "Mage" in tree["name"]
+    assert len(tree["children"]) >= 8
+    assert tree["children"][0].get("nav") is True
+
+
+def test_spi_combo_overview_is_hint_not_silent_merge():
+    from app.weight_map_data_spi import build_tree
+
+    tree = build_tree("combo", "overview")
+    assert "How to use" in {c["name"] for c in tree["children"]}
+
+
+def test_spi_weight_map_resets_invalid_ids(stubs):
+    mod = _fresh_weight_map_module()
+    stubs.window.location.hash = "#weights?game=spi&lens=division&mode=profile&id=brujah"
+    app = mod.WeightMapApp(stubs.elements["app-root"])
+    assert app.state["lens"] == "division"
+    assert app.state["id"] != "brujah"
+    assert app.state["id"] in {o["id"] for o in app._data().picker_for_lens("division")}
+    tree = app._data().build_tree(app.state["lens"], app.state["mode"], **app._tree_params())
+    assert tree.get("children")

@@ -1,22 +1,20 @@
 {
   "virtues": [
-    "Charitable",
-    "Curious",
-    "Faithful",
-    "Honest",
-    "Hopeful",
-    "Just",
-    "Loyal",
-    "Patient"
+    "Charity",
+    "Faith",
+    "Fortitude",
+    "Hope",
+    "Justice",
+    "Prudence",
+    "Temperance"
   ],
   "vices": [
-    "Ambitious",
-    "Arrogant",
-    "Competitive",
-    "Greedy",
-    "Pessimistic",
-    "Suspicious",
-    "Violent",
-    "Wrathful"
+    "Envy",
+    "Gluttony",
+    "Greed",
+    "Lust",
+    "Pride",
+    "Sloth",
+    "Wrath"
   ]
 }

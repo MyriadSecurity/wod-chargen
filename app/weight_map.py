@@ -70,9 +70,8 @@ class WeightMapApp:
                 return
             if self.state["lens"] not in data.LENSES:
                 self.state["lens"] = "archetype"
-                if game == "spi":
-                    self.state["arch"] = "investigator"
-                    self.state["id"] = "investigator"
+            if game == "spi":
+                self._ensure_spi_defaults(data)
 
     def _sync_hash(self) -> None:
         parts = [f"lens={quote(self.state['lens'])}", f"mode={quote(self.state['mode'])}"]
@@ -216,8 +215,8 @@ class WeightMapApp:
                 self.state["game"] = game_id
                 if game_id == "spi":
                     self.state["lens"] = "archetype"
-                    self.state["arch"] = "investigator"
-                    self.state["id"] = "investigator"
+                    self.state["mode"] = "overview"
+                    self._ensure_spi_defaults(weight_data_for("spi"))
                 self._sync_hash()
                 self._render()
 
@@ -241,6 +240,8 @@ class WeightMapApp:
             self.state["lens"] = lens_sel.value
             if self.state["lens"] == "catalog":
                 self.state["mode"] = "overview"
+            if self.state.get("game") == "spi":
+                self._ensure_spi_defaults(data)
             self._sync_hash()
             self._render()
 
@@ -263,6 +264,8 @@ class WeightMapApp:
 
             def set_mode(mode: str) -> None:
                 self.state["mode"] = mode
+                if self.state.get("game") == "spi":
+                    self._ensure_spi_defaults(data)
                 self._sync_hash()
                 self._render()
 
@@ -445,6 +448,42 @@ class WeightMapApp:
             "<span><i style='background:#ef4444'></i> Hard suppress</span>"
         )
         return leg
+
+    def _ensure_spi_defaults(self, data: Any) -> None:
+        """Replace leftover LotN ids with valid SPI picker values."""
+        arch_opts = data.picker_for_lens("archetype")
+        default_arch = (
+            arch_opts[0]["id"]
+            if arch_opts
+            else getattr(data, "default_arch_picker_id", lambda: "investigator:detective")()
+        )
+        arch = str(self.state.get("arch") or "")
+        if not arch or ":" not in arch or not any(o["id"] == arch for o in arch_opts):
+            # Bare primary id (investigator) or LotN leftover (diplomat without SPI sub).
+            if arch and ":" not in arch and any(o["id"].startswith(f"{arch}:") for o in arch_opts):
+                self.state["arch"] = next(o["id"] for o in arch_opts if o["id"].startswith(f"{arch}:"))
+            else:
+                self.state["arch"] = default_arch
+
+        lens = str(self.state.get("lens") or "archetype")
+        if lens in ("archetype", "division", "faction", "affinity"):
+            opts = data.picker_for_lens(lens)
+            valid = {o["id"] for o in opts}
+            current = str(self.state.get("id") or "")
+            if lens == "archetype":
+                if current not in valid:
+                    self.state["id"] = self.state["arch"]
+            elif current not in valid:
+                self.state["id"] = opts[0]["id"] if opts else current
+
+        for key, lens_name, fallback in (
+            ("division", "division", "adventure"),
+            ("faction", "faction", "higher_ground"),
+        ):
+            opts = data.picker_for_lens(lens_name)
+            valid = {o["id"] for o in opts}
+            if str(self.state.get(key) or "") not in valid:
+                self.state[key] = opts[0]["id"] if opts else fallback
 
     def _tree_params(self) -> dict[str, str]:
         return {

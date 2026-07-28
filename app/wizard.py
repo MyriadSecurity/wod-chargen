@@ -573,10 +573,24 @@ class WizardApp:
             heading.className = "text-xl font-semibold"
             heading.innerText = game["label"]
             card.appendChild(heading)
+
+            if game.get("under_construction") or game.get("maturity") == "alpha":
+                badge = document.createElement("p")
+                badge.className = "text-amber-400 text-sm font-semibold mt-2 uppercase tracking-wide"
+                badge.innerText = "Under Construction · Alpha"
+                card.appendChild(badge)
+
             tag = document.createElement("p")
             tag.className = "text-stone-400 mt-2"
             tag.innerText = game["tagline"]
             card.appendChild(tag)
+
+            status_note = str(game.get("status_note") or "").strip()
+            if status_note:
+                note = document.createElement("p")
+                note.className = "text-amber-200/90 text-sm mt-3 border border-amber-700/50 bg-amber-950/40 rounded px-3 py-2"
+                note.innerText = status_note
+                card.appendChild(note)
 
             if game.get("implemented"):
                 actions = document.createElement("div")
@@ -652,11 +666,22 @@ class WizardApp:
             self.state["error"] = None
             self._render()
 
+        def reroll(_=None):
+            self._reroll_character()
+            self._render()
+
         edit_btn = document.createElement("button")
         edit_btn.className = "btn-secondary text-sm"
         edit_btn.innerText = "← Edit build"
         edit_btn.onclick = edit_build
         actions_top.appendChild(edit_btn)
+
+        reroll_top_btn = document.createElement("button")
+        reroll_top_btn.className = "btn-secondary text-sm"
+        reroll_top_btn.type = "button"
+        reroll_top_btn.innerText = "Re-roll"
+        reroll_top_btn.onclick = reroll
+        actions_top.appendChild(reroll_top_btn)
         header.appendChild(actions_top)
         el.appendChild(header)
         result = self.state.get("result")
@@ -785,10 +810,6 @@ class WizardApp:
                 pass
             window.navigator.clipboard.writeText(link)
             _flash_button(copy_btn, "Link copied!")
-
-        def reroll(_=None):
-            self._reroll_character()
-            self._render()
 
         def export_json(_=None):
             payload = result.to_dict()
