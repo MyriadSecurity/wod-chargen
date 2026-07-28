@@ -122,3 +122,13 @@ SPI uses a separate index: `wod_chargen/games/spi/data/trait_tags.json`.
 - Validate: `uv run python scripts/validate_spi_merit_biases.py`.
 
 Same value ranges and opposition policy as LotN (`opposed:` / `hard_opposed:` on theme lists).
+
+## SPI archetype subtypes
+
+Layout mirrors LotN under `wod_chargen/games/spi/data/archetypes/`:
+
+- Primary `{id}.json` — absolute bias maps.
+- Subtype `{id}/{sub}.json` — `modifiers` **additive deltas** (`base.get(k, 1.0) + delta`).
+- Merge: `effective_profile(arch, sub)` in `wod_chargen/games/spi/archetypes.py`.
+- Wizard keys: `archetype` + `sub` (not LotN `arch`/`sub`).
+- Validate: `uv run python scripts/validate_spi_archetypes.py`.

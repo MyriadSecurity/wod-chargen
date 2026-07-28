@@ -31,7 +31,7 @@ Sheet generator for oneshots and NPCs — not MES chronicle intake.
 | Topic | Decision |
 |-------|----------|
 | XP profiles | MES datetime floor (see §2.4), fixed **35**, **custom** |
-| Wizard order | `xp_profile → division → faction → archetype → affinity → generate` |
+| Wizard order | `xp_profile → division → faction → archetype → sub_archetype → affinity → generate` |
 | Division | Explicit pick (except full random) |
 | Faction | Wizard step + bias; seed list in §2.5 |
 | Archetypes | Pared starter set (§2.6); Affinity usually from biases; staff can add packs later |
@@ -61,7 +61,7 @@ When a desired trait’s prereqs are unmet, the generator may still select it: c
 ### 2.3 Wizard steps (detail)
 
 ```text
-xp_profile → division → faction → archetype → affinity → generate
+xp_profile → division → faction → archetype → sub_archetype → affinity → generate
 ```
 
 - Full random: may roll Division / Faction / Archetype; Affinity stays **Any** unless locked.
@@ -93,24 +93,28 @@ Starter list for `factions.json` (bias hooks TBD at scaffold):
 
 Faction membership is optional in play; generator always picks one for sheet flavor + bias (full random included).
 
-### 2.6 Starter archetypes (pared; extensible)
+### 2.6 Starter archetypes (extensible)
 
-Primaries only for MVP — **no subtypes**. Empty `archetypes/` pack layout so SPI staff can add parents/subtypes later without schema churn.
+Primaries plus **subtypes** (LotN-style additive deltas). Layout:
 
-| id | label | Role sketch | Default Affinity lean |
-|----|-------|-------------|------------------------|
-| `investigator` | Investigator | Clues, interviews, forensics | Mage / Ghost |
-| `occultist` | Occultist | Rituals, lore, Affinity powers | any (strong Affinity spend) |
-| `scholar` | Scholar | Research, Academics/Science, R&D | Mage / Spirit |
-| `guardian` | Guardian | Protect people; Defense lean | Vampire / Spirit |
-| `field_agent` | Field Agent | Adventure, athletics, travel | Spirit / Fae |
-| `shadow` | Shadow | Spy / infiltrate | Ghost / Fae |
-| `diplomat` | Diplomat | Talk first; Social | Fae / Mage |
-| `caregiver` | Caregiver | Medicine, Integrity support, H&W | Ghost / Spirit |
+`archetypes/{id}.json` (absolute baselines) and `archetypes/{id}/{sub}.json`
+(`modifiers` deltas). Register in `_manifest.json` `subtypes` map.
+
+| id | label | Role sketch | Default Affinity lean | Starter subtypes |
+|----|-------|-------------|------------------------|------------------|
+| `investigator` | Investigator | Clues, interviews, forensics | Mage / Ghost | detective, forensic, interviewer |
+| `occultist` | Occultist | Rituals, lore, Affinity powers | any (strong Affinity spend) | ritualist, exorcist, medium |
+| `scholar` | Scholar | Research, Academics/Science, R&D | Mage / Spirit | scientist, archivist, theorist |
+| `guardian` | Guardian | Protect people; Defense lean | Vampire / Spirit | bodyguard, tactical, warden |
+| `field_agent` | Field Agent | Adventure, athletics, travel | Spirit / Fae | scout, courier, pathfinder |
+| `shadow` | Shadow | Spy / infiltrate | Ghost / Fae | infiltrator, watcher, fixer |
+| `diplomat` | Diplomat | Talk first; Social | Fae / Mage | negotiator, liaison, handler |
+| `caregiver` | Caregiver | Medicine, Integrity support, H&W | Ghost / Spirit | medic, counselor, chaplain |
 
 Bias packs: soft Affinity / attribute / skill / merit maps plus merit **theme**
-`tag_affinities` (LotN-style resolver). Staff handoff = drop new JSON under
-`data/archetypes/` and register in manifest.
+`tag_affinities` (LotN-style resolver). Subtypes sharpen via additive deltas
+(+0.2–0.5 typical). Staff handoff = drop new JSON under `data/archetypes/` and
+register in manifest.
 
 ---
 
@@ -244,7 +248,8 @@ character {
   affinities: { ghost, spirit, mage, fae, vampire },  # 0..5; sum ≥ 1
   division, faction,
   division_status: 1,          # always for generator output
-  archetype,                   # starter set has no subtypes
+  archetype,
+  sub_archetype,
   options: { multi_affinity: bool, affinity_lock: "any"|AffinityType },
   merits: { "<id>": dots },
   integrity, size: 5,
@@ -336,7 +341,7 @@ Explicit CoD lists (§5.1). Do **not** reuse LotN `charisma` / `melee`.
 
 ```json
 {
-  "wizard_steps": ["xp_profile", "division", "faction", "archetype", "affinity", "generate"],
+  "wizard_steps": ["xp_profile", "division", "faction", "archetype", "sub_archetype", "affinity", "generate"],
   "affinity_default": "any",
   "copy": {
     "landing_blurb": "Build a Society investigator sheet for oneshots or NPCs.",

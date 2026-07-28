@@ -89,12 +89,20 @@ def test_merits_have_no_codex_blurbs():
 def test_archetype_manifest_has_eight_primaries():
     manifest = json.loads((SPI_DATA / "archetypes" / "_manifest.json").read_text(encoding="utf-8"))
     assert len(manifest["primaries"]) == 8
-    assert manifest.get("subtypes") == {}
+    subtypes = manifest.get("subtypes") or {}
     for aid in manifest["primaries"]:
         path = SPI_DATA / "archetypes" / f"{aid}.json"
         arch = json.loads(path.read_text(encoding="utf-8"))
         assert arch["id"] == aid
         assert "affinity_biases" in arch
+        subs = subtypes.get(aid) or []
+        assert len(subs) >= 2
+        for sid in subs:
+            spath = SPI_DATA / "archetypes" / aid / f"{sid}.json"
+            assert spath.exists()
+            sub = json.loads(spath.read_text(encoding="utf-8"))
+            assert sub["id"] == sid
+            assert sub.get("modifiers")
 
 
 def test_spi_system_wizard_and_venue_picker():
@@ -105,12 +113,18 @@ def test_spi_system_wizard_and_venue_picker():
         "division",
         "faction",
         "archetype",
+        "sub_archetype",
         "affinity",
         "generate",
     ]
     copy = system.get_wizard_copy()
     assert "multi_affinity_label" in copy
+    assert "sub_archetype_title" in copy
     venues = system.get_venue_picker()
     assert [v["id"] for v in venues] == ["mes_spi", "fixed_35", "spi_custom_xp"]
     assert venues[0]["requires_approval_month"] is True
     assert venues[2]["requires_custom_xp"] is True
+    arches = system.get_archetypes()
+    assert len(arches) == 8
+    assert len(arches[0]["sub_archetypes"]) >= 2
+    assert system.get_sub_archetypes("investigator")[0]["id"] == "detective"

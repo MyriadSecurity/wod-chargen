@@ -7,6 +7,7 @@ from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.models import GenerationResult
+from wod_chargen.games.spi.archetypes import get_archetype
 from wod_chargen.games.spi.paths import DATA_PKG
 
 
@@ -90,6 +91,19 @@ def build_sheet_model(result: GenerationResult) -> SpiSheetModel:
 
     division = divisions.get(char.get("division", ""), {})
     faction = factions.get(char.get("faction", ""), {})
+    arch_id = str(char.get("archetype", ""))
+    sub_id = str(char.get("sub_archetype", ""))
+    arch_label = _title(arch_id)
+    sub_label = _title(sub_id)
+    try:
+        arch = get_archetype(arch_id) if arch_id else {}
+        arch_label = str(arch.get("label", arch_label))
+        for s in arch.get("sub_archetypes") or []:
+            if s["id"] == sub_id:
+                sub_label = str(s.get("label", sub_label))
+                break
+    except Exception:
+        pass
     aff_summary = ", ".join(
         f"{_title(k)} {v}" for k, v in char.get("affinities", {}).items() if int(v) > 0
     ) or "—"
@@ -98,7 +112,8 @@ def build_sheet_model(result: GenerationResult) -> SpiSheetModel:
         meta=(
             MetaItem("Division", str(division.get("label", char.get("division", "")))),
             MetaItem("Faction", str(faction.get("label", char.get("faction", "")))),
-            MetaItem("Archetype", _title(str(char.get("archetype", "")))),
+            MetaItem("Archetype", arch_label),
+            MetaItem("Subtype", sub_label),
             MetaItem("Affinity", aff_summary),
             MetaItem("Virtue", str(char.get("virtue", ""))),
             MetaItem("Vice", str(char.get("vice", ""))),

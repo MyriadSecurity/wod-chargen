@@ -6,7 +6,7 @@ from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
 from wod_chargen.core.models import GenerationResult
-from wod_chargen.games.spi.archetypes import archetype_picker
+from wod_chargen.games.spi.archetypes import archetype_picker, get_archetype
 from wod_chargen.games.spi.generator import generate_character
 from wod_chargen.games.spi.paths import DATA_PKG, GAMES_PKG, VENUE_PKG
 from wod_chargen.games.spi.sheet_model import SpiSheetModel, build_sheet_model
@@ -81,9 +81,19 @@ class SpiSystem:
             for f in factions.values()
         ]
 
-    def get_archetypes(self) -> list[dict[str, str]]:
+    def get_archetypes(self) -> list[dict[str, Any]]:
         return archetype_picker()
 
+    def get_sub_archetypes(self, archetype_id: str) -> list[dict[str, str]]:
+        arch = get_archetype(archetype_id)
+        return [
+            {
+                "id": s["id"],
+                "label": s.get("label", s["id"]),
+                "description": s.get("description", ""),
+            }
+            for s in arch.get("sub_archetypes") or []
+        ]
     def get_affinity_options(self) -> list[dict[str, str]]:
         copy = self.get_wizard_copy()
         types = load_json_cached(DATA_PKG, "affinity_types.json")

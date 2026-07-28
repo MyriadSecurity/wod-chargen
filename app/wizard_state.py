@@ -52,7 +52,7 @@ def default_state() -> dict[str, Any]:
         "error": None,
         "tab": "sheet",
         "full_random": False,
-        # SPI
+        # SPI (sub is shared with LotN; apply_spi_defaults sets SPI subtype)
         "division": "adventure",
         "faction": "higher_ground",
         "archetype": "investigator",
@@ -68,6 +68,7 @@ def apply_spi_defaults(app: WizardApp) -> None:
     app.state["division"] = "adventure"
     app.state["faction"] = "higher_ground"
     app.state["archetype"] = "investigator"
+    app.state["sub"] = "detective"
     app.state["affinity"] = "any"
     app.state["multi_affinity"] = False
     app.state["unlocked_through"] = "venue"
@@ -86,6 +87,7 @@ def build_share_options(app: WizardApp) -> dict[str, str]:
             "division": str(app.state.get("division", "")),
             "faction": str(app.state.get("faction", "")),
             "archetype": str(app.state.get("archetype", "")),
+            "sub": str(app.state.get("sub", "")),
             "affinity": str(app.state.get("affinity", "any")),
         }
         if app.state.get("multi_affinity"):
@@ -147,9 +149,15 @@ def validate_selection(app: WizardApp) -> None:
         factions = {f["id"] for f in app.system.get_faction_options()}
         if app.state.get("faction") not in factions:
             app.state["faction"] = next(iter(factions))
-        arches = {a["id"] for a in app.system.get_archetypes()}
+        arches = {a["id"]: a for a in app.system.get_archetypes()}
         if app.state.get("archetype") not in arches:
             app.state["archetype"] = next(iter(arches))
+        arch = arches[app.state["archetype"]]
+        valid_sub = {s["id"] for s in arch.get("sub_archetypes") or []}
+        if not valid_sub:
+            app.state["sub"] = ""
+        elif app.state.get("sub") not in valid_sub:
+            app.state["sub"] = next(iter(valid_sub))
         affs = {a["id"] for a in app.system.get_affinity_options()}
         if app.state.get("affinity") not in affs:
             app.state["affinity"] = "any"
@@ -203,7 +211,7 @@ def parse_url(app: WizardApp) -> None:
         app.state["venue"] = payload.venue
         opts = payload.options
         if payload.game == "spi":
-            for key in ("division", "faction", "archetype", "affinity", "approval"):
+            for key in ("division", "faction", "archetype", "sub", "affinity", "approval"):
                 if key in opts:
                     app.state[key] = opts[key]
             app.state["multi_affinity"] = opts.get("multi_affinity") in ("1", "true", "True")

@@ -180,6 +180,12 @@ class WizardApp:
             if step == "archetype":
                 labels = {e["id"]: e["label"] for e in self.system.get_archetypes()}
                 return labels.get(self.state.get("archetype", ""), self.state.get("archetype", ""))
+            if step == "sub_archetype":
+                arch_id = str(self.state.get("archetype") or "")
+                for s in self.system.get_sub_archetypes(arch_id):
+                    if s["id"] == self.state.get("sub"):
+                        return s["label"]
+                return str(self.state.get("sub", ""))
             if step == "affinity":
                 labels = {e["id"]: e["label"] for e in self.system.get_affinity_options()}
                 return labels.get(self.state.get("affinity", "any"), self.state.get("affinity", ""))
@@ -351,6 +357,7 @@ class WizardApp:
                     f"Division: {self._step_summary('division')}",
                     f"Faction: {self._step_summary('faction')}",
                     f"Archetype: {self._step_summary('archetype')}",
+                    f"Subtype: {self._step_summary('sub_archetype')}",
                     f"Affinity: {self._step_summary('affinity')}",
                 ]
             )
@@ -494,6 +501,11 @@ class WizardApp:
                     "archetype",
                     copy.get("archetype_title", "Archetype"),
                     spi_view.render_archetype(self),
+                ),
+                (
+                    "sub_archetype",
+                    copy.get("sub_archetype_title", "Subtype"),
+                    spi_view.render_sub_archetype(self),
                 ),
                 ("affinity", copy.get("affinity_title", "Affinity"), spi_view.render_affinity(self)),
                 ("generate", "Generate", spi_view.render_generate_options(self)),

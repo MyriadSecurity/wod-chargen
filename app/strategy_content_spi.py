@@ -14,7 +14,7 @@ STRATEGY_TABS: tuple[tuple[str, str], ...] = (
 STRATEGY_PAGE_TITLE = "How SPI Investigators Are Built"
 
 STRATEGY_BLURB = (
-    "Pick Division, Faction, Archetype, and Affinity; the tool builds a CoD 2e "
+    "Pick Division, Faction, Archetype, Subtype, and Affinity; the tool builds a CoD 2e "
     "investigator sheet for oneshots or NPCs. Hard rules first — Affinity caps, "
     "prerequisites, flat XP costs. Weights break ties among legal options."
 )
@@ -47,6 +47,7 @@ def _overview_sections() -> list[dict[str, Any]]:
                 "Division",
                 "Faction",
                 "Archetype",
+                "Subtype",
                 "Affinity (Any from archetype, or lock Ghost/Spirit/Mage/Fae/Vampire)",
                 "Free creation: attributes, skills, specialties, merits, free Affinity 1",
                 "XP spends with bias + prereq bundling",
@@ -62,6 +63,7 @@ def _overview_sections() -> list[dict[str, Any]]:
                 "headers": ["Layer", "Effect"],
                 "rows": [
                     ["Archetype", "Attribute, skill, Affinity, and merit leans"],
+                    ["Subtype", "Additive deltas that sharpen the primary fantasy"],
                     ["Division", "Soft skill/attribute tilt toward Society role"],
                     ["Faction", "Political lean (secrecy, hunter, diplomacy, …)"],
                     ["Affinity lock", "Forces primary Affinity track when not Any"],
@@ -146,8 +148,10 @@ def _reference_sections() -> list[dict[str, Any]]:
         {
             "title": "Starter archetypes",
             "paragraphs": [
-                "Investigator, Occultist, Scholar, Guardian, Field Agent, Shadow, Diplomat, "
-                "Caregiver. SPI staff can add more packs under data/archetypes/ later.",
+                "Eight primaries (Investigator, Occultist, Scholar, Guardian, Field Agent, "
+                "Shadow, Diplomat, Caregiver), each with subtypes that sharpen the role "
+                "(e.g. Detective / Forensic / Interviewer). Staff can add packs under "
+                "data/archetypes/ and register them in the manifest.",
             ],
         },
         {

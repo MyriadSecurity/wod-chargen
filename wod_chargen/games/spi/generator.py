@@ -11,7 +11,12 @@ from wod_chargen.core.rng import SeededRng
 from wod_chargen.core.share import ENGINE_VERSION
 from wod_chargen.core.spender import PurchaseCandidate, spend_xp
 from wod_chargen.core.xp_strategy import SPI_CATEGORY_TARGETS, creation_pick_weight
-from wod_chargen.games.spi.archetypes import get_archetype, list_archetypes
+from wod_chargen.games.spi.archetypes import (
+    effective_profile,
+    get_archetype,
+    list_archetypes,
+    resolve_sub_id,
+)
 from wod_chargen.games.spi.paths import DATA_PKG
 from wod_chargen.games.spi.trait_biases import resolve_merit_bias
 from wod_chargen.venues import resolve_xp_budget
@@ -63,6 +68,7 @@ def _empty_character() -> dict[str, Any]:
         "faction": "",
         "division_status": 1,
         "archetype": "",
+        "sub_archetype": "",
         "options": {"multi_affinity": False, "affinity_lock": "any"},
         "merits": {},
         "integrity": 7,
@@ -545,14 +551,15 @@ def generate_character(
     division = _pick_id(rng, options, "division", division_ids)
     faction = _pick_id(rng, options, "faction", faction_ids)
     archetype_id = _pick_id(rng, options, "archetype", arch_ids)
-    arch = get_archetype(archetype_id)
+    sub_id = resolve_sub_id(archetype_id, options)
+    arch = effective_profile(archetype_id, sub_id)
 
     multi_affinity = bool(options.get("multi_affinity", False))
     affinity_lock = str(options.get("affinity", options.get("affinity_lock", "any")) or "any")
     if affinity_lock not in AFFINITY_TYPES:
         affinity_lock = "any"
 
-    # Primary affinity from lock or archetype biases
+    # Primary affinity from lock or merged archetype+subtype biases
     if affinity_lock != "any":
         primary_affinity = affinity_lock
     else:
@@ -567,6 +574,7 @@ def generate_character(
     char["division"] = division
     char["faction"] = faction
     char["archetype"] = archetype_id
+    char["sub_archetype"] = sub_id
     char["division_status"] = int(creation.get("division_status_default", 1))
     char["options"] = {"multi_affinity": multi_affinity, "affinity_lock": affinity_lock}
     char["virtue"] = str(rng.choice(vv["virtues"]))
@@ -576,7 +584,12 @@ def generate_character(
 
     log.append(LogEntry(phase="identity", message=f"Division: {divisions[division]['label']}"))
     log.append(LogEntry(phase="identity", message=f"Faction: {factions[faction]['label']}"))
-    log.append(LogEntry(phase="identity", message=f"Archetype: {arch.get('label', archetype_id)}"))
+    log.append(
+        LogEntry(
+            phase="identity",
+            message=f"Archetype: {arch.get('label', archetype_id)} / {arch.get('sub_label', sub_id)}",
+        )
+    )
     log.append(LogEntry(phase="identity", message=f"Primary Affinity: {_title(primary_affinity)}"))
 
     div = divisions[division]
@@ -693,7 +706,7 @@ def generate_character(
         "tag_affinities": tag_affinities,
         "affinity_biases": affinity_biases,
     }
-    source = f"archetype:{archetype_id}"
+    source = f"archetype:{archetype_id}/{sub_id}"
 
     def enumerate_fn() -> list[PurchaseCandidate]:
         return _enumerate_purchases(

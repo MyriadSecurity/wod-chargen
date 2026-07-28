@@ -5,7 +5,12 @@ from __future__ import annotations
 from typing import Any
 
 from wod_chargen.core.data_loader import load_json_cached
-from wod_chargen.games.spi.archetypes import get_archetype, list_archetypes
+from wod_chargen.games.spi.archetypes import (
+    default_sub_id,
+    effective_profile,
+    get_archetype,
+    list_archetypes,
+)
 from wod_chargen.games.spi.paths import DATA_PKG
 
 LENSES: dict[str, str] = {
@@ -62,7 +67,16 @@ def _profile_children(profile: dict[str, Any]) -> list[dict[str, Any]]:
 
 def picker_for_lens(lens: str) -> list[dict[str, str]]:
     if lens == "archetype":
-        return [{"id": a["id"], "label": a.get("label", a["id"])} for a in list_archetypes()]
+        out: list[dict[str, str]] = []
+        for a in list_archetypes():
+            for s in a.get("sub_archetypes") or []:
+                out.append(
+                    {
+                        "id": f"{a['id']}:{s['id']}",
+                        "label": f"{a.get('label', a['id'])} — {s.get('label', s['id'])}",
+                    }
+                )
+        return out
     if lens == "division":
         data = load_json_cached(DATA_PKG, "divisions.json")
         return [{"id": d["id"], "label": d.get("label", d["id"])} for d in data.values()]
@@ -75,29 +89,50 @@ def picker_for_lens(lens: str) -> list[dict[str, str]]:
     return []
 
 
+def _parse_arch_sub(raw: str) -> tuple[str, str]:
+    if ":" in raw:
+        arch, sub = raw.split(":", 1)
+        return arch, sub
+    return raw, default_sub_id(raw)
+
+
 def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
     if lens == "archetype":
         if mode == "overview":
-            return {
-                "name": "SPI Archetypes",
-                "kind": "root",
-                "children": [
+            children = []
+            for a in list_archetypes():
+                sub_children = []
+                for s in a.get("sub_archetypes") or []:
+                    merged = effective_profile(a["id"], s["id"])
+                    sub_children.append(
+                        {
+                            "name": s.get("label", s["id"]),
+                            "kind": "subtype",
+                            "id": f"{a['id']}:{s['id']}",
+                            "lens": "archetype",
+                            "children": _profile_children(merged),
+                        }
+                    )
+                children.append(
                     {
                         "name": a.get("label", a["id"]),
                         "kind": "archetype",
                         "id": a["id"],
                         "lens": "archetype",
-                        "children": _profile_children(a),
+                        "children": sub_children,
                     }
-                    for a in list_archetypes()
-                ],
-            }
-        arch = get_archetype(params.get("id") or params.get("arch") or "investigator")
+                )
+            return {"name": "SPI Archetypes", "kind": "root", "children": children}
+        raw = params.get("id") or params.get("arch") or "investigator"
+        arch_id, sub_id = _parse_arch_sub(raw)
+        if params.get("sub"):
+            sub_id = params["sub"]
+        merged = effective_profile(arch_id, sub_id)
         return {
-            "name": arch.get("label", arch["id"]),
+            "name": f"{merged.get('label', arch_id)} · {merged.get('sub_label', sub_id)}",
             "kind": "archetype",
-            "id": arch["id"],
-            "children": _profile_children(arch),
+            "id": f"{arch_id}:{sub_id}",
+            "children": _profile_children(merged),
         }
 
     if lens == "division":
@@ -149,7 +184,11 @@ def build_tree(lens: str, mode: str, **params: str) -> dict[str, Any]:
         return {"name": "Affinity types", "kind": "root", "children": children}
 
     if lens == "combo":
-        arch = get_archetype(params.get("arch", "investigator"))
+        arch_raw = params.get("arch", "investigator")
+        arch_id, sub_id = _parse_arch_sub(arch_raw)
+        if params.get("sub"):
+            sub_id = params["sub"]
+        arch = effective_profile(arch_id, sub_id)
         divisions = load_json_cached(DATA_PKG, "divisions.json")
         factions = load_json_cached(DATA_PKG, "factions.json")
         div = divisions.get(params.get("division", "adventure"), {})
