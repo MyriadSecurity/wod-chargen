@@ -1366,17 +1366,21 @@
       "prereq_text": "Wits or Dexterity 3",
       "prereqs": [
         {
-          "kind": "attribute",
-          "id": "dexterity",
-          "label": "Dexterity",
-          "dots": 3
-        },
-        {
-          "kind": "merit",
-          "id": "wits_or",
-          "label": "Wits or",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_of",
+          "options": [
+            {
+              "kind": "attribute",
+              "id": "wits",
+              "label": "Wits",
+              "dots": 3
+            },
+            {
+              "kind": "attribute",
+              "id": "dexterity",
+              "label": "Dexterity",
+              "dots": 3
+            }
+          ]
         }
       ],
       "tags": [
@@ -1698,17 +1702,21 @@
       "prereq_text": "Wits or Composure 3",
       "prereqs": [
         {
-          "kind": "attribute",
-          "id": "composure",
-          "label": "Composure",
-          "dots": 3
-        },
-        {
-          "kind": "merit",
-          "id": "wits_or",
-          "label": "Wits or",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_of",
+          "options": [
+            {
+              "kind": "attribute",
+              "id": "wits",
+              "label": "Wits",
+              "dots": 3
+            },
+            {
+              "kind": "attribute",
+              "id": "composure",
+              "label": "Composure",
+              "dots": 3
+            }
+          ]
         }
       ],
       "tags": [
@@ -1843,17 +1851,21 @@
       "prereq_text": "Strength or Intelligence 3",
       "prereqs": [
         {
-          "kind": "attribute",
-          "id": "intelligence",
-          "label": "Intelligence",
-          "dots": 3
-        },
-        {
-          "kind": "merit",
-          "id": "strength_or",
-          "label": "Strength or",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_of",
+          "options": [
+            {
+              "kind": "attribute",
+              "id": "strength",
+              "label": "Strength",
+              "dots": 3
+            },
+            {
+              "kind": "attribute",
+              "id": "intelligence",
+              "label": "Intelligence",
+              "dots": 3
+            }
+          ]
         }
       ],
       "tags": [
@@ -1988,17 +2000,21 @@
       "prereq_text": "Stamina or Resolve 3",
       "prereqs": [
         {
-          "kind": "attribute",
-          "id": "resolve",
-          "label": "Resolve",
-          "dots": 3
-        },
-        {
-          "kind": "merit",
-          "id": "stamina_or",
-          "label": "Stamina or",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_of",
+          "options": [
+            {
+              "kind": "attribute",
+              "id": "stamina",
+              "label": "Stamina",
+              "dots": 3
+            },
+            {
+              "kind": "attribute",
+              "id": "resolve",
+              "label": "Resolve",
+              "dots": 3
+            }
+          ]
         }
       ],
       "tags": [
@@ -2015,17 +2031,21 @@
       "prereq_text": "Resolve or Stamina 3",
       "prereqs": [
         {
-          "kind": "attribute",
-          "id": "stamina",
-          "label": "Stamina",
-          "dots": 3
-        },
-        {
-          "kind": "merit",
-          "id": "resolve_or",
-          "label": "Resolve or",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_of",
+          "options": [
+            {
+              "kind": "attribute",
+              "id": "resolve",
+              "label": "Resolve",
+              "dots": 3
+            },
+            {
+              "kind": "attribute",
+              "id": "stamina",
+              "label": "Stamina",
+              "dots": 3
+            }
+          ]
         }
       ],
       "tags": [
@@ -2314,11 +2334,9 @@
       "prereq_text": "No Fame",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "no_fame",
-          "label": "No Fame",
-          "dots": 1,
-          "unresolved": true
+          "kind": "merit_absent",
+          "id": "fame",
+          "label": "No Fame"
         }
       ],
       "tags": [
@@ -2427,11 +2445,9 @@
       "prereq_text": "No Anonymity",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "no_anonymity",
-          "label": "No Anonymity",
-          "dots": 1,
-          "unresolved": true
+          "kind": "merit_absent",
+          "id": "anonymity",
+          "label": "No Anonymity"
         }
       ],
       "tags": [
@@ -2634,7 +2650,7 @@
     },
     {
       "id": "s_ance_devotee",
-      "label": "Séance Devotee",
+      "label": "S\u00e9ance Devotee",
       "category": "general",
       "sheet_category": "Social",
       "dots_min": 1,
@@ -3239,7 +3255,7 @@
     },
     {
       "id": "brownie_s_boon",
-      "label": "Brownie’s Boon",
+      "label": "Brownie\u2019s Boon",
       "category": "affinity",
       "affinity_type": "fae",
       "dots_min": 1,
@@ -3261,7 +3277,7 @@
     },
     {
       "id": "clotho_s_sight",
-      "label": "Clotho’s Sight",
+      "label": "Clotho\u2019s Sight",
       "category": "affinity",
       "affinity_type": "fae",
       "dots_min": 2,
@@ -4295,7 +4311,7 @@
     },
     {
       "id": "persephone_s_grace",
-      "label": "Persephone’s Grace",
+      "label": "Persephone\u2019s Grace",
       "category": "affinity",
       "affinity_type": "ghost",
       "dots_min": 1,
@@ -4867,7 +4883,7 @@
     },
     {
       "id": "mind_s_eye",
-      "label": "Mind’s Eye",
+      "label": "Mind\u2019s Eye",
       "category": "affinity",
       "affinity_type": "mage",
       "dots_min": 2,
@@ -4889,7 +4905,7 @@
     },
     {
       "id": "owl_s_wisdom",
-      "label": "Owl’s Wisdom",
+      "label": "Owl\u2019s Wisdom",
       "category": "affinity",
       "affinity_type": "mage",
       "dots_min": 2,
@@ -5241,7 +5257,7 @@
     },
     {
       "id": "a_wolf_s_meat",
-      "label": "A Wolf’s Meat",
+      "label": "A Wolf\u2019s Meat",
       "category": "affinity",
       "affinity_type": "spirit",
       "dots_min": 2,
@@ -5725,7 +5741,7 @@
     },
     {
       "id": "raven_s_cunning",
-      "label": "Raven’s Cunning",
+      "label": "Raven\u2019s Cunning",
       "category": "affinity",
       "affinity_type": "spirit",
       "dots_min": 2,
@@ -5791,7 +5807,7 @@
     },
     {
       "id": "spirit_s_friend",
-      "label": "Spirit’s Friend",
+      "label": "Spirit\u2019s Friend",
       "category": "affinity",
       "affinity_type": "spirit",
       "dots_min": 1,
@@ -6319,7 +6335,7 @@
     },
     {
       "id": "liar_s_game",
-      "label": "Liar’s Game",
+      "label": "Liar\u2019s Game",
       "category": "affinity",
       "affinity_type": "vampire",
       "dots_min": 2,
@@ -6385,7 +6401,7 @@
     },
     {
       "id": "owl_s_eyes",
-      "label": "Owl’s Eyes",
+      "label": "Owl\u2019s Eyes",
       "category": "affinity",
       "affinity_type": "vampire",
       "dots_min": 2,
@@ -6539,7 +6555,7 @@
     },
     {
       "id": "the_spirit_s_touch",
-      "label": "The Spirit’s Touch",
+      "label": "The Spirit\u2019s Touch",
       "category": "affinity",
       "affinity_type": "vampire",
       "dots_min": 3,

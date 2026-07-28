@@ -18,6 +18,7 @@ from wod_chargen.games.spi.archetypes import (
     resolve_sub_id,
 )
 from wod_chargen.games.spi.paths import DATA_PKG
+from wod_chargen.games.spi.signature_skills import ensure_signature_skill_floor
 from wod_chargen.games.spi.trait_biases import resolve_merit_bias
 from wod_chargen.venues import resolve_xp_budget
 
@@ -60,6 +61,42 @@ def _data(name: str) -> dict[str, Any]:
 
 def _title(key: str) -> str:
     return key.replace("_", " ").title()
+
+
+def _pick_specialty_label(
+    rng: SeededRng,
+    skill: str,
+    catalog: dict[str, list[str]],
+    *,
+    used_labels: set[str] | None = None,
+) -> str:
+    """Choose an example specialty label for ``skill`` from the catalog."""
+    examples = list(catalog.get(skill) or [])
+    if not examples:
+        return "Focus"
+    if used_labels:
+        available = [e for e in examples if e not in used_labels]
+        if available:
+            examples = available
+    return str(rng.choice(examples))
+
+
+def _append_specialty(
+    rng: SeededRng,
+    char: dict[str, Any],
+    skill: str,
+    catalog: dict[str, list[str]],
+) -> str:
+    """Append ``skill:Label`` to ``char['specialties']``; return the entry."""
+    used = {
+        sp.split(":", 1)[1]
+        for sp in char.get("specialties", [])
+        if ":" in sp and sp.split(":", 1)[0] == skill
+    }
+    label = _pick_specialty_label(rng, skill, catalog, used_labels=used)
+    entry = f"{skill}:{label}"
+    char["specialties"].append(entry)
+    return entry
 
 
 def _merge_bias(*maps: dict[str, float]) -> dict[str, float]:
@@ -168,7 +205,7 @@ def _spend_merit_dots(
         for m in merit_defs
         if m["id"] not in OMITTED_MERIT_IDS
         and not m.get("style_steps")
-        and not any(p.get("unresolved") for p in m.get("prereqs", []))
+        and _merit_creation_eligible(m)
         and (
             m.get("category") == "general"
             or (
@@ -223,31 +260,71 @@ def _spend_merit_dots(
         )
 
 
+def _prereq_entry_met(char: dict[str, Any], p: dict[str, Any], *, soft: bool) -> bool:
+    """Evaluate a single prereq entry (including any_of / merit_absent)."""
+    kind = p.get("kind")
+    if kind == "any_of":
+        options = list(p.get("options") or [])
+        if not options:
+            return not soft
+        return any(_prereq_entry_met(char, opt, soft=soft) for opt in options)
+    if kind == "merit_absent":
+        pid = str(p.get("id") or "")
+        return int(char["merits"].get(pid, 0)) <= 0
+    pid = p.get("id")
+    need = int(p.get("dots", 1))
+    if kind == "attribute":
+        return int(char["attributes"].get(pid, 0)) >= need
+    if kind == "skill":
+        return int(char["skills"].get(pid, 0)) >= need
+    if kind == "merit":
+        return int(char["merits"].get(pid, 0)) >= need
+    if kind == "affinity":
+        return int(char["affinities"].get(pid, 0)) >= need
+    return not soft
+
+
 def _prereqs_met(char: dict[str, Any], prereqs: list[dict[str, Any]], *, soft: bool) -> bool:
+    """Check structured prereqs; unresolved stubs are ignored here.
+
+    Unresolved-only merits are gated by ``_merit_creation_eligible`` /
+    ``_merit_xp_prereqs_ok`` instead of free-riding.
+    """
     for p in prereqs or []:
         if p.get("unresolved"):
-            if soft:
-                return False
             continue
-        kind = p.get("kind")
-        pid = p.get("id")
-        need = int(p.get("dots", 1))
-        if kind == "attribute":
-            if int(char["attributes"].get(pid, 0)) < need:
-                return False
-        elif kind == "skill":
-            if int(char["skills"].get(pid, 0)) < need:
-                return False
-        elif kind == "merit":
-            if int(char["merits"].get(pid, 0)) < need:
-                return False
-        elif kind == "affinity":
-            if int(char["affinities"].get(pid, 0)) < need:
-                return False
-        else:
-            if soft:
-                return False
+        if not _prereq_entry_met(char, p, soft=soft):
+            return False
     return True
+
+
+def _prereq_is_evaluable(p: dict[str, Any]) -> bool:
+    """True when the generator can meaningfully check this prereq."""
+    if p.get("unresolved"):
+        return False
+    kind = p.get("kind")
+    if kind == "any_of":
+        return any(_prereq_is_evaluable(opt) for opt in (p.get("options") or []))
+    return kind in {"attribute", "skill", "merit", "affinity", "merit_absent"}
+
+
+def _merit_creation_eligible(m: dict[str, Any]) -> bool:
+    """Creation pool: allow merits with evaluable prereqs; drop unresolved-only stubs."""
+    prereqs = list(m.get("prereqs") or [])
+    if not prereqs:
+        return True
+    return any(_prereq_is_evaluable(p) for p in prereqs)
+
+
+def _merit_xp_prereqs_ok(char: dict[str, Any], m: dict[str, Any]) -> bool:
+    """XP eligibility: skip unresolved-only free rides; enforce structured halves."""
+    prereqs = list(m.get("prereqs") or [])
+    if not prereqs:
+        return True
+    if not any(_prereq_is_evaluable(p) for p in prereqs):
+        # All unresolved — do not treat as always-met.
+        return False
+    return _prereqs_met(char, prereqs, soft=False)
 
 
 def _bundle_prereq_cost(
@@ -259,7 +336,23 @@ def _bundle_prereq_cost(
     total = 0
     applies: list[Callable[[], None]] = []
     for p in prereqs or []:
-        if p.get("unresolved"):
+        if p.get("unresolved") or p.get("kind") == "merit_absent":
+            continue
+        if p.get("kind") == "any_of":
+            options = [opt for opt in (p.get("options") or []) if _prereq_is_evaluable(opt)]
+            if not options:
+                continue
+            if any(_prereq_entry_met(char, opt, soft=False) for opt in options):
+                continue
+            # Bundle the cheapest unmet option.
+            best: tuple[int, list[Callable[[], None]]] | None = None
+            for opt in options:
+                cost, fns = _bundle_prereq_cost(char, costs, [opt])
+                if best is None or cost < best[0]:
+                    best = (cost, fns)
+            if best:
+                total += best[0]
+                applies.extend(best[1])
             continue
         kind = p.get("kind")
         pid = p.get("id")
@@ -352,6 +445,7 @@ def _derive_advantages(char: dict[str, Any]) -> None:
 
 
 def _enumerate_purchases(
+    rng: SeededRng,
     char: dict[str, Any],
     costs: dict[str, Any],
     merit_defs: list[dict[str, Any]],
@@ -359,10 +453,12 @@ def _enumerate_purchases(
     attr_cats: dict[str, list[str]],
     skill_list: list[str],
     biases: dict[str, Any],
+    specialty_catalog: dict[str, list[str]],
     *,
     multi_affinity: bool,
     primary_affinity: str,
     source: str,
+    signature_skills: frozenset[str] | None = None,
 ) -> list[PurchaseCandidate]:
     cands: list[PurchaseCandidate] = []
     attr_biases = biases.get("attribute_biases", {})
@@ -372,6 +468,7 @@ def _enumerate_purchases(
         "tag_affinities": biases.get("tag_affinities", {}),
     }
     affinity_biases = biases.get("affinity_biases", {})
+    sig_skills = signature_skills or frozenset()
 
     for cat, traits in attr_cats.items():
         spend_group = f"{cat}_attrs"
@@ -422,6 +519,7 @@ def _enumerate_purchases(
                 clan_factor=1.0,
                 source=source,
                 apply=apply,
+                is_signature=skill in sig_skills,
             )
         )
 
@@ -469,12 +567,8 @@ def _enumerate_purchases(
         target = dmin if cur == 0 else cur + 1
         if target > dmax:
             continue
-        if any(p.get("unresolved") for p in m.get("prereqs", [])) and not _prereqs_met(
-            char, m.get("prereqs", []), soft=False
-        ):
-            # Soft-skip messy chains
-            if any(p.get("unresolved") for p in m.get("prereqs", [])):
-                continue
+        if not _merit_xp_prereqs_ok(char, m):
+            continue
 
         category = m.get("category", "general")
         aff_type = m.get("affinity_type")
@@ -530,13 +624,14 @@ def _enumerate_purchases(
         cost = lookup_cost(costs, "specialty", new_level=1)
 
         def apply_spec():
-            # Pick a skill with dots but no specialty yet
+            # Prefer a skill with dots but no specialty yet
             owned = {sp.split(":")[0] for sp in char["specialties"] if ":" in sp}
             for sk in skill_list:
                 if int(char["skills"].get(sk, 0)) >= 1 and sk not in owned:
-                    char["specialties"].append(f"{sk}:focus")
+                    _append_specialty(rng, char, sk, specialty_catalog)
                     return
-            char["specialties"].append("investigation:focus")
+            fallback = "investigation" if "investigation" in skill_list else skill_list[0]
+            _append_specialty(rng, char, fallback, specialty_catalog)
 
         cands.append(
             PurchaseCandidate(
@@ -568,6 +663,7 @@ def generate_character(
     creation = _data("creation.json")
     attrs_meta = _data("attributes.json")
     skills_meta = _data("skills.json")
+    specialty_catalog = _data("specialties.json")
     divisions = _data("divisions.json")
     factions = _data("factions.json")
     costs = _data("costs.json")
@@ -689,6 +785,15 @@ def generate_character(
         log=log,
         phase="creation_skills",
     )
+    signature_skills = ensure_signature_skill_floor(
+        rng,
+        char["skills"],
+        skill_biases,
+        skill_cats,
+        log,
+        floor=3,
+        max_rating=MAX_SKILL,
+    )
 
     # Free Affinity 1
     char["affinities"][primary_affinity] = 1
@@ -712,8 +817,8 @@ def generate_character(
             break
         if char["skills"][sk] <= 0:
             continue
-        char["specialties"].append(f"{sk}:focus")
-        log.append(LogEntry(phase="creation_specialties", message=f"Specialty: {sk}:focus"))
+        entry = _append_specialty(rng, char, sk, specialty_catalog)
+        log.append(LogEntry(phase="creation_specialties", message=f"Specialty: {entry}"))
 
     _spend_merit_dots(
         rng,
@@ -742,6 +847,7 @@ def generate_character(
 
     def enumerate_fn() -> list[PurchaseCandidate]:
         return _enumerate_purchases(
+            rng,
             char,
             costs,
             merit_defs,
@@ -749,9 +855,11 @@ def generate_character(
             attr_cats,
             list(skills_meta["all"]),
             biases_pack,
+            specialty_catalog,
             multi_affinity=multi_affinity,
             primary_affinity=primary_affinity,
             source=source,
+            signature_skills=signature_skills,
         )
 
     # Jitter SPI category targets

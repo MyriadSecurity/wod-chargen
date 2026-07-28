@@ -16,7 +16,7 @@
     "tag_affinities": {
       "medicine": 0.5,
       "care": 0.3,
-      "protection": 0.2
+      "protection": 0.05
     },
     "merit_biases": {
       "holistic_awareness": 0.4,

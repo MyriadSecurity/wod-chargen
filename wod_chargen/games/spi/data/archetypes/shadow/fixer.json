@@ -4,9 +4,9 @@
   "description": "Covers, contacts, and quiet problems solved socially.",
   "modifiers": {
     "skill_biases": {
-      "subterfuge": 0.4,
-      "persuasion": 0.3,
-      "streetwise": 0.3
+      "subterfuge": 0.85,
+      "persuasion": 0.25,
+      "streetwise": 0.25
     },
     "attribute_biases": {
       "manipulation": 0.35,
@@ -21,7 +21,7 @@
     "merit_biases": {
       "alternate_identity": 0.4,
       "fast_talking": 0.35,
-      "fixer": 0.35
+      "fixer": 0.4
     }
   }
 }

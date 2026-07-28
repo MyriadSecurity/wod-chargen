@@ -4,9 +4,9 @@
   "description": "Observe without being observed; intel over action.",
   "modifiers": {
     "skill_biases": {
-      "stealth": 0.35,
+      "stealth": 0.7,
       "investigation": 0.35,
-      "subterfuge": 0.25
+      "subterfuge": 0.2
     },
     "attribute_biases": {
       "wits": 0.35,
@@ -20,7 +20,7 @@
     },
     "merit_biases": {
       "anonymity": 0.35,
-      "trained_observer": 0.35
+      "trained_observer": 0.4
     }
   }
 }

@@ -6,5 +6,7 @@ __pycache__/
 dist/
 *.egg-info/
 
+reports/
+
 reference/lotn_v5/*.pdf
 reference/spi/*

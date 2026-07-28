@@ -4,9 +4,9 @@
   "description": "Wilderness routes, endurance, and coming back alive.",
   "modifiers": {
     "skill_biases": {
-      "survival": 0.45,
-      "athletics": 0.3,
-      "animal_ken": 0.25
+      "survival": 0.85,
+      "athletics": 0.2,
+      "animal_ken": 0.2
     },
     "attribute_biases": {
       "stamina": 0.35,
@@ -14,7 +14,7 @@
     },
     "tag_affinities": {
       "survival": 0.45,
-      "athletics": 0.3,
+      "athletics": 0.25,
       "physical": 0.25
     },
     "merit_biases": {

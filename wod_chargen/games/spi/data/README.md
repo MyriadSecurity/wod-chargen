@@ -19,6 +19,7 @@ Authoritative oneshot/NPC data for Society of Paranormal Investigators.
 | `costs.json` / `creation.json` | XP rates and free-creation pools |
 | `wizard_ui.json` | Wizard step ids and copy keys |
 | `attributes.json` / `skills.json` | CoD trait lists (Presence, Weaponry) |
+| `specialties.json` | Example specialty labels per skill (generator picks from these) |
 
 ## Edit checklist
 

@@ -13,20 +13,20 @@
     "composure": 1.15
   },
   "skill_biases": {
-    "brawl": 1.5,
-    "firearms": 1.4,
-    "weaponry": 1.35,
-    "athletics": 1.25,
+    "brawl": 1.4,
+    "firearms": 1.15,
+    "weaponry": 1.15,
+    "athletics": 1.2,
     "intimidation": 1.2,
     "medicine": 1.1
   },
   "merit_biases": {
-    "iron_stamina": 1.55,
-    "hardy": 1.5,
-    "defensive_combat_brawl": 1.45,
-    "iron_chin": 1.4,
-    "small_unit_tactics": 1.35,
-    "fast_reflexes": 1.3
+    "iron_stamina": 2.5,
+    "hardy": 2.2,
+    "defensive_combat_brawl": 2.2,
+    "iron_chin": 2.0,
+    "small_unit_tactics": 1.8,
+    "fast_reflexes": 1.6
   },
   "tag_affinities": {
     "combat": 1.85,
