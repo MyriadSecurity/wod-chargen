@@ -4,6 +4,31 @@ All notable changes to **wod-chargen** are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-07-28
+
+### Added
+
+- **SPI Venue** (`spi`): Society of Paranormal Investigators oneshot/NPC sheet generator
+  - Wizard: XP profile → Division → Faction → Archetype → Subtype → Affinity → generate
+  - CoD 2e traits (Presence, Weaponry), Affinity tracks, Integrity cap, derived advantages
+  - Eight primaries × subtypes with bias packs; Division / Faction soft leans
+  - Flat XP costs (incl. Supernatural Resistance 2/dot); prereq bundling; multi-Affinity toggle
+  - Sanctioned merit allowlist; merit theme tags (`trait_tags.json`)
+  - Venue-scoped Build guide and Weight Map
+- Maintainer docs: `docs/where-to-edit.md`, SPI/LotN data package READMEs, expanded weight guidelines
+
+### Changed
+
+- Venue dispatch for guide / weight-map / sheet rendering (fail-closed for unknown games)
+- SPI Weight Map: navigable overview nodes, safe id defaults, Affinity lean profiles
+- CONTRIBUTING / README / AGENTS point at the where-to-edit index
+
+### Fixed
+
+- SPI merit XP: Supernatural Resistance at 2 XP/dot; fixed-rating packages no longer crushed by jump efficiency
+- Extra Touchstone omitted from oneshot generation (Touchstones out of sheet scope)
+- Weight Map subtype dropdown ignored when LotN `sub` leftover overwrote SPI `arch:sub` ids
+
 ## [0.2.0] - 2026-06-13
 
 ### Added
@@ -57,5 +82,6 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use [Se
 - Rating caps (5 dots default; thin-blood discipline/formula limits)
 - PyScript boot issues (`js.null`, manifest sync, cache busting)
 
+[0.3.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.3.0
 [0.2.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.2.0
 [0.1.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.1.0
