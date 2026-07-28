@@ -7,3 +7,4 @@ dist/
 *.egg-info/
 
 reference/lotn_v5/*.pdf
+reference/spi/*
