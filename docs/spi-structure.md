@@ -30,12 +30,14 @@ Sheet generator for oneshots and NPCs — not MES chronicle intake.
 
 | Topic | Decision |
 |-------|----------|
-| XP profiles | MES datetime preset, fixed **35**, **custom** |
-| Wizard order | `xp_profile → division → faction → archetype → affinity? → generate` |
+| XP profiles | MES datetime floor (see §2.4), fixed **35**, **custom** |
+| Wizard order | `xp_profile → division → faction → archetype → affinity → generate` |
 | Division | Explicit pick (except full random) |
-| Faction | Division-like wizard step; **biases** spends |
-| Archetypes | Yes; Affinity usually from archetype biases |
-| Affinity | Optional pre-lock; otherwise downstream of archetype |
+| Faction | Wizard step + bias; seed list in §2.5 |
+| Archetypes | Pared starter set (§2.6); Affinity usually from biases; staff can add packs later |
+| Affinity step | Always shown; default **Any (from archetype)**; optional lock to one Affinity |
+| Multi-Affinity | Generator **toggle** (off = stay on one Affinity track; on = allow secondary via XP/bundle) |
+| Merit blurbs | Ship **without** Codex summaries (ids/costs/tags only) |
 | Virtue / Vice | Include on sheet |
 | Touchstones / Aspirations | Omit |
 | Conditions | Ignore (no live tracking) |
@@ -59,11 +61,54 @@ When a desired trait’s prereqs are unmet, the generator may still select it: c
 ### 2.3 Wizard steps (detail)
 
 ```text
-xp_profile → division → faction → archetype → [optional affinity lock] → generate
+xp_profile → division → faction → archetype → affinity → generate
 ```
 
-- Full random: may roll Division / Faction / Archetype.
-- Affinity step only when the user unlocks / pre-defines Affinity; default path leaves Affinity to archetype bias + free Affinity dot rules.
+- Full random: may roll Division / Faction / Archetype; Affinity stays **Any** unless locked.
+- Affinity picker options: **Any (from archetype)** (default) | Ghost | Spirit | Mage | Fae | Vampire.
+- Multi-Affinity toggle lives on the generate / options strip (with XP), not as its own wizard step.
+
+### 2.4 MES Game XP floor
+
+From SPI Character Creation Guide (`reference/spi/character_creation.txt`):
+
+- Chronicle start **2026-01-01**: Game XP floor = **35**
+- At the start of each subsequent calendar month: **+3** Game XP
+
+Formula: `floor = 35 + 3 * months_since_2026_01` (inclusive of chron start month as 0).
+
+Example: 2026-07 → `35 + 3*6 = 53`. MC / Event / Bonus XP are out of scope for oneshots (MES datetime profile = Game XP floor only).
+
+### 2.5 Factions (from Division Guide)
+
+Starter list for `factions.json` (bias hooks TBD at scaffold):
+
+| id | label | Bias sketch |
+|----|-------|-------------|
+| `higher_ground` | The Higher Ground | Secrecy, status quo, Social / Subterfuge soft bias |
+| `humanity_first` | Humanity First | Hunter lean: Firearms/Brawl, Defense-adjacent, anti-supernatural |
+| `order_of_the_everlight` | The Order of the Everlight | Integrity/Resolve, Affinity control themes, Melee/Weaponry |
+| `diplomats` | The Diplomats | Social Maneuvering, Empathy/Persuasion, alliance lean |
+| `veritas` | Veritas | Investigation/Academics/Occult, information sharing |
+
+Faction membership is optional in play; generator always picks one for sheet flavor + bias (full random included).
+
+### 2.6 Starter archetypes (pared; extensible)
+
+Primaries only for MVP — **no subtypes**. Empty `archetypes/` pack layout so SPI staff can add parents/subtypes later without schema churn.
+
+| id | label | Role sketch | Default Affinity lean |
+|----|-------|-------------|------------------------|
+| `investigator` | Investigator | Clues, interviews, forensics | Mage / Ghost |
+| `occultist` | Occultist | Rituals, lore, Affinity powers | any (strong Affinity spend) |
+| `scholar` | Scholar | Research, Academics/Science, R&D | Mage / Spirit |
+| `guardian` | Guardian | Protect people; Defense lean | Vampire / Spirit |
+| `field_agent` | Field Agent | Adventure, athletics, travel | Spirit / Fae |
+| `shadow` | Shadow | Spy / infiltrate | Ghost / Fae |
+| `diplomat` | Diplomat | Talk first; Social | Fae / Mage |
+| `caregiver` | Caregiver | Medicine, Integrity support, H&W | Ghost / Spirit |
+
+Bias packs: soft Affinity weights + skill/merit tags. Staff handoff = drop new JSON under `data/archetypes/` and register in manifest.
 
 ---
 
@@ -187,7 +232,8 @@ character {
   affinities: { ghost, spirit, mage, fae, vampire },  # 0..5; sum ≥ 1
   division, faction,
   division_status: 1,          # always for generator output
-  archetype, sub_archetype?,
+  archetype,                   # starter set has no subtypes
+  options: { multi_affinity: bool, affinity_lock: "any"|AffinityType },
   merits: { "<id>": dots },
   integrity, size: 5,
   advantages: { health, speed, willpower, initiative, perception,
@@ -198,9 +244,12 @@ character {
 Hard rules:
 
 - Free Affinity 1 at creation; Affinity merit dots per type ≤ `3 × AffinityRating[type]`
+- If `multi_affinity` is **false**, all Affinity dots/powers stay on a single type
+- If **true**, secondary Affinity allowed via XP / prereq bundles (Integrity still uses top two)
 - `max_integrity = 11 − sum(top two Affinities)`; start `min(7, max_integrity)`
 - No Greater/Lesser templates
 - Prereq bundling when buying gated traits
+- No Codex/merit blurbs required on sheet
 
 ---
 
@@ -216,8 +265,8 @@ L1–5 **keys** only (unlock powers, Unseen Sense, sense mode, fuel, place detec
 
 ### 6.3 `divisions.json` / `factions.json`
 
-Division: five Society Divisions (Acquisitions, Adventure, Defense, Health and Welfare, R&D) + bias profile refs.  
-Faction: SPI political factions + bias profile refs (seed from Division Guide / chronicle docs when scaffolding).
+Division: Acquisitions, Adventure, Defense, Health and Welfare, R&D + bias refs.  
+Faction: five starter factions in §2.5 + bias refs.
 
 ### 6.4 `creation.json`
 
@@ -276,13 +325,15 @@ Explicit CoD lists (§5.1). Do **not** reuse LotN `charisma` / `melee`.
 ```json
 {
   "wizard_steps": ["xp_profile", "division", "faction", "archetype", "affinity", "generate"],
-  "optional_steps": ["affinity"],
+  "affinity_default": "any",
   "copy": {
     "landing_blurb": "Build a Society investigator sheet for oneshots or NPCs.",
     "division_title": "Division",
     "faction_title": "Faction",
     "archetype_title": "Archetype",
-    "affinity_title": "Affinity (optional lock)",
+    "affinity_title": "Affinity",
+    "affinity_any_label": "Any (from archetype)",
+    "multi_affinity_label": "Allow multiple Affinities",
     "xp_title": "Starting XP"
   }
 }
@@ -296,7 +347,7 @@ Explicit CoD lists (§5.1). Do **not** reuse LotN `charisma` / `melee`.
 |-------------------|------|
 | `id`, `label`, `tagline` | Venue identity |
 | `get_wizard_steps()` / `get_wizard_copy()` | UI |
-| Pickers | Division, Faction, Archetypes; optional Affinity lock |
+| Pickers | Division, Faction, Archetypes, Affinity (default Any); multi-affinity toggle on generate |
 | `get_xp_profile_picker()` | Today: `get_venue_picker()` |
 | `generate(...)` → `GenerationResult` | Engine |
 | `build_sheet_model(...)` | Sheet VM |
@@ -326,11 +377,12 @@ Approvals, VIP, CCD, Touchstones/Aspirations UI, Conditions, Status politics, Ik
 
 ## 10. Next phases
 
-1. Extract catalogs from `character_sheet.xlsx` → seed JSON (ids, costs, prereq text, tags)  
-2. Scaffold `games/spi/` + catalog stub (`implemented: false`) + XP profile stubs  
-3. VenueSystem Protocol (LotN adapter) when wiring UI  
-4. Generator MVP with archetype/Faction/Division bias + prereq bundling  
-5. `SpiSheetModel` + wizard steps  
+1. ~~Extract catalogs~~ (done: `scripts/extract_spi_sheet_catalogs.py`)  
+2. Scaffold `games/spi/` + catalog stub + XP profiles (`mes_spi` floor, `fixed_35`, `custom_xp`)  
+3. Seed factions §2.5 + starter archetypes §2.6 (manifest extensible)  
+4. VenueSystem Protocol when wiring UI  
+5. Generator MVP: biases + prereq bundling + multi-affinity toggle  
+6. `SpiSheetModel` + wizard  
 
 ---
 
@@ -340,5 +392,6 @@ Approvals, VIP, CCD, Touchstones/Aspirations UI, Conditions, Status politics, Ik
 - [x] Venue vs XP profile terminology  
 - [x] Official SPI/CoD sheet shape (Presence, Weaponry, no Flaws)  
 - [x] Locked wizard order and product decisions  
+- [x] Factions, starter archetypes, XP floor formula, multi-affinity toggle  
 - [x] Prereq bundling + parsing approach  
 - [x] JSON sketches + coupling checklist  
