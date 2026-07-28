@@ -68,7 +68,7 @@ def test_weight_map_page_renders(site_base_url: str):
         browser = p.chromium.launch(headless=True, args=["--disable-http-cache"])
         context = browser.new_context()
         page = context.new_page()
-        page.goto(f"{site_base_url}/#weights", wait_until="domcontentloaded", timeout=60_000)
+        page.goto(f"{site_base_url}/#weights?game=lotn_v5", wait_until="domcontentloaded", timeout=60_000)
 
         deadline = time.monotonic() + 90
         last_state = ""
@@ -134,6 +134,11 @@ def test_top_nav_switches_generator_and_weight_map(site_base_url: str):
             }""",
             timeout=30_000,
         )
+        # Venue picker when no game is set — pick LotN to reach the canvas.
+        lotn = page.get_by_role("button", name="Laws of the Night V5")
+        if lotn.count() > 0:
+            lotn.first.click()
+            page.wait_for_selector("#weight-map-canvas", timeout=30_000)
 
         nav.get_by_role("link", name="Character generator", exact=True).click()
         page.wait_for_function(

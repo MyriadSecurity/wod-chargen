@@ -10,12 +10,9 @@ from pyscript import document, window
 
 from app.components.footer import dark_pack_footer
 from app.nav import app_nav
-from app.weight_map_data import (
-    LENSES,
-    build_tree,
-    picker_for_lens,
-    predator_picker_options,
-)
+from app import weight_map_data as lotn_data
+from app import weight_map_data_spi as spi_data
+from wod_chargen.games.registry import load_game_catalog
 
 _MAX_RENDER_ATTEMPTS = 40
 _RENDER_RETRY_MS = 100
@@ -25,6 +22,7 @@ class WeightMapApp:
     def __init__(self, root: Any) -> None:
         self.root = root
         self.state: dict[str, Any] = {
+            "game": "",
             "lens": "archetype",
             "mode": "overview",
             "arch": "diplomat",
@@ -33,9 +31,14 @@ class WeightMapApp:
             "id": "brujah",
             "predator": "alleycat",
             "clan": "brujah",
+            "division": "adventure",
+            "faction": "higher_ground",
         }
         self._render_attempts = 0
         self._parse_hash()
+
+    def _data(self):
+        return spi_data if self.state.get("game") == "spi" else lotn_data
 
     def _parse_hash(self) -> None:
         raw = (window.location.hash or "").lstrip("#")
@@ -47,6 +50,7 @@ class WeightMapApp:
                 continue
             key, val = part.split("=", 1)
             if val and key in (
+                "game",
                 "lens",
                 "mode",
                 "arch",
@@ -55,13 +59,34 @@ class WeightMapApp:
                 "id",
                 "predator",
                 "clan",
+                "division",
+                "faction",
             ):
                 self.state[key] = val
+        if self.state.get("game") == "spi" and self.state["lens"] not in spi_data.LENSES:
+            self.state["lens"] = "archetype"
+            self.state["arch"] = "investigator"
+            self.state["id"] = "investigator"
 
     def _sync_hash(self) -> None:
         parts = [f"lens={quote(self.state['lens'])}", f"mode={quote(self.state['mode'])}"]
+        if self.state.get("game"):
+            parts.insert(0, f"game={quote(self.state['game'])}")
         if self.state["mode"] == "profile":
-            if self.state["lens"] == "archetype":
+            if self.state["game"] == "spi":
+                if self.state["lens"] == "archetype":
+                    parts.append(f"id={quote(self.state.get('id') or self.state['arch'])}")
+                elif self.state["lens"] == "combo":
+                    parts.extend(
+                        [
+                            f"arch={quote(self.state['arch'])}",
+                            f"division={quote(self.state['division'])}",
+                            f"faction={quote(self.state['faction'])}",
+                        ]
+                    )
+                elif self.state["lens"] in ("division", "faction", "affinity"):
+                    parts.append(f"id={quote(self.state['id'])}")
+            elif self.state["lens"] == "archetype":
                 parts.extend(
                     [
                         f"arch={quote(self.state['arch'])}",
@@ -95,6 +120,13 @@ class WeightMapApp:
         wrap = document.createElement("div")
         wrap.className = "weight-map-page mx-auto w-full px-4 py-6 max-w-6xl"
 
+        if not self.state.get("game"):
+            wrap.appendChild(self._venue_picker())
+            self.root.appendChild(wrap)
+            dark_pack_footer()
+            return
+
+        data = self._data()
         header = document.createElement("div")
         header.className = "mb-4"
         h1 = document.createElement("h1")
@@ -103,16 +135,23 @@ class WeightMapApp:
         header.appendChild(h1)
         blurb = document.createElement("p")
         blurb.className = "text-stone-400 text-sm mt-2 max-w-3xl"
-        blurb.innerText = (
-            "Explore procedural bias weights by source: archetypes, predator feed types, clans, "
-            "catalog defaults, and trait categories. Use Archetype + feed + clan for the merged "
-            "profile the generator applies. Values show boosts (green) and suppressions (red). "
-            "Click nodes in overview to drill down. Scroll to zoom, drag to pan."
-        )
+        if self.state["game"] == "spi":
+            blurb.innerText = (
+                "Explore SPI bias weights by archetype, Division, Faction, Affinity, and "
+                "combined profiles. Values show boosts (green) and suppressions (red). "
+                "Click nodes in overview to drill down. Scroll to zoom, drag to pan."
+            )
+        else:
+            blurb.innerText = (
+                "Explore procedural bias weights by source: archetypes, predator feed types, clans, "
+                "catalog defaults, and trait categories. Use Archetype + feed + clan for the merged "
+                "profile the generator applies. Values show boosts (green) and suppressions (red). "
+                "Click nodes in overview to drill down. Scroll to zoom, drag to pan."
+            )
         header.appendChild(blurb)
         wrap.appendChild(header)
 
-        wrap.appendChild(self._controls())
+        wrap.appendChild(self._controls(data))
         wrap.appendChild(self._legend())
 
         canvas = document.createElement("div")
@@ -126,7 +165,44 @@ class WeightMapApp:
         self._render_attempts = 0
         self._draw(canvas)
 
-    def _controls(self) -> Any:
+    def _venue_picker(self) -> Any:
+        from pyscript.ffi import create_proxy
+
+        box = document.createElement("div")
+        h1 = document.createElement("h1")
+        h1.className = "text-2xl font-bold text-blood mb-2"
+        h1.innerText = "Weight Map"
+        box.appendChild(h1)
+        p = document.createElement("p")
+        p.className = "text-stone-400 mb-4"
+        p.innerText = "Choose a Venue to explore its weight map."
+        box.appendChild(p)
+        catalog = load_game_catalog()
+        for gid, game in catalog.items():
+            if not game.get("implemented"):
+                continue
+            btn = document.createElement("button")
+            btn.type = "button"
+            btn.className = "card p-4 w-full text-left mb-3"
+
+            def pick(_=None, game_id=gid):
+                self.state["game"] = game_id
+                if game_id == "spi":
+                    self.state["lens"] = "archetype"
+                    self.state["arch"] = "investigator"
+                    self.state["id"] = "investigator"
+                self._sync_hash()
+                self._render()
+
+            btn.innerHTML = (
+                f"<div class='font-semibold'>{game['label']}</div>"
+                f"<p class='text-stone-400 text-sm mt-1'>{game['tagline']}</p>"
+            )
+            btn.onclick = create_proxy(pick)
+            box.appendChild(btn)
+        return box
+
+    def _controls(self, data: Any) -> Any:
         bar = document.createElement("div")
         bar.className = "weight-map-controls"
 
@@ -141,7 +217,7 @@ class WeightMapApp:
             self._sync_hash()
             self._render()
 
-        for lens_id, lens_name in LENSES.items():
+        for lens_id, lens_name in data.LENSES.items():
             o = document.createElement("option")
             o.value = lens_id
             o.innerText = lens_name
@@ -177,20 +253,72 @@ class WeightMapApp:
         bar.appendChild(tabs)
 
         if self.state["mode"] == "profile" and lens != "catalog":
-            bar.appendChild(self._profile_pickers())
+            bar.appendChild(self._profile_pickers(data))
 
         return bar
 
-    def _profile_pickers(self) -> Any:
+    def _profile_pickers(self, data: Any) -> Any:
         wrap = document.createElement("div")
         wrap.className = "weight-map-profile-pickers"
         lens = self.state["lens"]
+
+        if self.state.get("game") == "spi":
+            if lens in ("archetype", "division", "faction", "affinity"):
+                label = document.createElement("label")
+                label.innerText = data.LENSES.get(lens, "Profile")
+                sel = document.createElement("select")
+                options = data.picker_for_lens(lens)
+                current = self.state.get("id") or self.state.get("arch")
+                for opt in options:
+                    o = document.createElement("option")
+                    o.value = opt["id"]
+                    o.innerText = opt["label"]
+                    if o.value == current:
+                        o.selected = True
+                    sel.appendChild(o)
+
+                def on_id_change(_=None):
+                    self.state["id"] = sel.value
+                    if lens == "archetype":
+                        self.state["arch"] = sel.value
+                    self._sync_hash()
+                    self._render()
+
+                sel.onchange = on_id_change
+                label.appendChild(sel)
+                wrap.appendChild(label)
+            if lens == "combo":
+                for key, lens_name in (
+                    ("arch", "archetype"),
+                    ("division", "division"),
+                    ("faction", "faction"),
+                ):
+                    label = document.createElement("label")
+                    label.innerText = data.LENSES.get(lens_name, key)
+                    sel = document.createElement("select")
+                    for opt in data.picker_for_lens(lens_name):
+                        o = document.createElement("option")
+                        o.value = opt["id"]
+                        o.innerText = opt["label"]
+                        if o.value == self.state.get(key):
+                            o.selected = True
+                        sel.appendChild(o)
+
+                    def on_change(_=None, state_key=key, select=sel):
+                        self.state[state_key] = select.value
+                        self._sync_hash()
+                        self._render()
+
+                    sel.onchange = on_change
+                    label.appendChild(sel)
+                    wrap.appendChild(label)
+            return wrap
 
         if lens in ("archetype", "combo"):
             label = document.createElement("label")
             label.innerText = "Archetype"
             sel = document.createElement("select")
-            options = picker_for_lens("archetype")
+            options = data.picker_for_lens("archetype")
             current = f"{self.state['arch']}:{self.state['sub']}"
             for opt in options:
                 o = document.createElement("option")
@@ -217,7 +345,7 @@ class WeightMapApp:
             plabel = document.createElement("label")
             plabel.innerText = "Feed type"
             psel = document.createElement("select")
-            for opt in predator_picker_options():
+            for opt in data.predator_picker_options():
                 o = document.createElement("option")
                 o.value = opt["id"]
                 o.innerText = opt["label"]
@@ -237,7 +365,7 @@ class WeightMapApp:
             clabel = document.createElement("label")
             clabel.innerText = "Domitor clan" if self.state.get("type") == "ghoul" else "Clan"
             csel = document.createElement("select")
-            for opt in picker_for_lens("clan"):
+            for opt in data.picker_for_lens("clan"):
                 o = document.createElement("option")
                 o.value = opt["id"]
                 o.innerText = opt["label"]
@@ -259,7 +387,7 @@ class WeightMapApp:
             labels = {"predator": "Feed type", "clan": "Clan", "category": "Category"}
             label.innerText = labels.get(lens, "Profile")
             sel = document.createElement("select")
-            options = picker_for_lens(lens)
+            options = data.picker_for_lens(lens)
             for opt in options:
                 o = document.createElement("option")
                 o.value = opt["id"]
@@ -299,6 +427,8 @@ class WeightMapApp:
             "id": str(self.state.get("id", "")),
             "predator": str(self.state.get("predator", "")),
             "clan": str(self.state.get("clan", "")),
+            "division": str(self.state.get("division", "")),
+            "faction": str(self.state.get("faction", "")),
         }
 
     def _show_draw_error(self, canvas: Any, message: str) -> None:
@@ -328,7 +458,7 @@ class WeightMapApp:
             return
 
         try:
-            tree = build_tree(
+            tree = self._data().build_tree(
                 self.state["lens"],
                 self.state["mode"],
                 **self._tree_params(),

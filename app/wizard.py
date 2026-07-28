@@ -512,54 +512,67 @@ class WizardApp:
         el.appendChild(self._page_header("WoD Character Generator"))
         p = document.createElement("p")
         p.className = "text-stone-400 mb-6"
-        p.innerText = self.system.get_wizard_copy().get(
-            "landing_blurb",
-            "Pick lineage and build. Same seed gives the same sheet.",
-        )
+        p.innerText = "Pick a Venue, then generate a sheet, open its build guide, or explore its weight map."
         el.appendChild(p)
 
-        map_link = document.createElement("a")
-        map_link.href = "#weights"
-        map_link.className = "inline-block mb-2 mr-4 text-blood hover:underline text-sm"
-        map_link.innerText = "Explore weight map →"
         from pyscript.ffi import create_proxy
-
-        from app.nav import _nav_click
-
-        map_link.onclick = create_proxy(lambda e: _nav_click("weights", e))
-        el.appendChild(map_link)
-
-        strat_link = document.createElement("a")
-        strat_link.href = "#strategy"
-        strat_link.className = "inline-block mb-6 text-blood hover:underline text-sm"
-        strat_link.innerText = "Build guide →"
-        strat_link.onclick = create_proxy(lambda e: _nav_click("strategy", e))
-        el.appendChild(strat_link)
 
         catalog = load_game_catalog()
         for game_id, game in catalog.items():
             card = document.createElement("div")
-            if game.get("implemented"):
-                card.className = "card p-6 cursor-pointer hover:border-blood transition"
-                card.innerHTML = (
-                    f"<h2 class='text-xl font-semibold'>{game['label']}</h2>"
-                    f"<p class='text-stone-400 mt-2'>{game['tagline']}</p>"
-                )
+            card.className = "card p-6 mb-4"
+            heading = document.createElement("h2")
+            heading.className = "text-xl font-semibold"
+            heading.innerText = game["label"]
+            card.appendChild(heading)
+            tag = document.createElement("p")
+            tag.className = "text-stone-400 mt-2"
+            tag.innerText = game["tagline"]
+            card.appendChild(tag)
 
-                def start(_=None, gid=game_id):
+            if game.get("implemented"):
+                actions = document.createElement("div")
+                actions.className = "flex flex-wrap gap-2 mt-4"
+
+                def start_generate(_=None, gid=game_id):
                     self.state["game"] = gid
                     self.system = get_game(gid)
                     self._venue_picker = {v["id"]: v for v in self.system.get_venue_picker()}
                     self._start_build()
                     self._render()
 
-                card.onclick = start
-            else:
-                card.className = "card p-6 mt-4 opacity-50"
-                card.innerHTML = (
-                    f"<h2 class='text-lg font-semibold'>{game['label']}</h2>"
-                    f"<p class='text-stone-500 mt-2'>{game['tagline']}</p>"
+                gen_btn = document.createElement("button")
+                gen_btn.type = "button"
+                gen_btn.className = "btn-primary text-sm"
+                gen_btn.innerText = "Generate"
+                gen_btn.onclick = create_proxy(start_generate)
+                actions.appendChild(gen_btn)
+
+                guide_btn = document.createElement("button")
+                guide_btn.type = "button"
+                guide_btn.className = "btn-secondary text-sm"
+                guide_btn.innerText = "Build guide"
+                guide_btn.onclick = create_proxy(
+                    lambda e, gid=game_id: self._open_venue_page("strategy", gid)
                 )
+                actions.appendChild(guide_btn)
+
+                map_btn = document.createElement("button")
+                map_btn.type = "button"
+                map_btn.className = "btn-secondary text-sm"
+                map_btn.innerText = "Weight map"
+                map_btn.onclick = create_proxy(
+                    lambda e, gid=game_id: self._open_venue_page("weights", gid)
+                )
+                actions.appendChild(map_btn)
+                card.appendChild(actions)
+            else:
+                card.className += " opacity-50"
+                soon = document.createElement("p")
+                soon.className = "text-stone-500 text-sm mt-3"
+                soon.innerText = "Coming soon"
+                card.appendChild(soon)
+
             el.appendChild(card)
 
         if self.state.get("error"):
@@ -568,6 +581,10 @@ class WizardApp:
             err.innerText = f"URL error: {self.state['error']}"
             el.appendChild(err)
         return el
+
+    def _open_venue_page(self, page: str, game_id: str) -> None:
+        window.location.hash = f"{page}?game={game_id}"
+        _nav_click(page)
 
     def _faction_role(self) -> str:
         return faction_view.faction_role(self)
@@ -648,17 +665,21 @@ class WizardApp:
         sheet_panel.className = "results-tab-panel sheet-panel"
         if self.state["tab"] != "sheet":
             sheet_panel.className += " results-tab-hidden"
-        sheet_model = self.system.build_sheet_model(
-            result,
-            convictions=self._convictions(),
-            convictions_seed=int(self.state["convictions_seed"]),
-        )
-        sheet_panel.appendChild(
-            render_lotn_v5_sheet(
-                sheet_model,
-                on_reroll_convictions=self._reroll_convictions,
+        if is_spi(self):
+            sheet_model = self.system.build_sheet_model(result)
+            sheet_panel.appendChild(render_spi_sheet(sheet_model))
+        else:
+            sheet_model = self.system.build_sheet_model(
+                result,
+                convictions=self._convictions(),
+                convictions_seed=int(self.state["convictions_seed"]),
             )
-        )
+            sheet_panel.appendChild(
+                render_lotn_v5_sheet(
+                    sheet_model,
+                    on_reroll_convictions=self._reroll_convictions,
+                )
+            )
         panel.appendChild(sheet_panel)
 
         creation_lines = [f"[{e.phase}] {e.message}" for e in result.creation_log]

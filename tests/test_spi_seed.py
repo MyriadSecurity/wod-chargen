@@ -44,7 +44,7 @@ def test_resolve_fixed_35():
 def test_catalog_includes_spi_stub():
     catalog = load_json_cached("wod_chargen.games", "catalog.json")
     assert "spi" in catalog
-    assert catalog["spi"]["implemented"] is False
+    assert catalog["spi"]["implemented"] is True
     assert "Society" in catalog["spi"]["label"]
 
 

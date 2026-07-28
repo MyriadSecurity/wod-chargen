@@ -6,8 +6,8 @@
   },
   "spi": {
     "label": "Society of Paranormal Investigators",
-    "tagline": "MES CoD 2e — investigators for oneshots & NPCs",
-    "implemented": false
+    "tagline": "MES CoD 2e — An Original Mortals+ Investigation Venu",
+    "implemented": true
   },
   "werewolf_apocalypse": {
     "label": "Werewolf: the Apocalypse",

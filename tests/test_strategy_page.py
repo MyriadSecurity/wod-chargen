@@ -46,7 +46,7 @@ def _find_h1(root):
 
 def test_strategy_page_mount_overview(stubs):
     mod = _fresh_strategy_module()
-    stubs.window.location.hash = "#strategy"
+    stubs.window.location.hash = "#strategy?game=lotn_v5"
     app = mod.StrategyPageApp(stubs.elements["app-root"])
     app.mount()
     h1 = _find_h1(stubs.elements["app-root"])
@@ -56,9 +56,10 @@ def test_strategy_page_mount_overview(stubs):
 
 def test_strategy_page_tab_hash(stubs):
     mod = _fresh_strategy_module()
-    stubs.window.location.hash = "#strategy?tab=xp"
+    stubs.window.location.hash = "#strategy?game=lotn_v5&tab=xp"
     app = mod.StrategyPageApp(stubs.elements["app-root"])
     assert app.state["tab"] == "xp"
+    assert app.state["game"] == "lotn_v5"
     app.mount()
     body = _find_by_class(stubs.elements["app-root"], "strategy-body")
     assert body is not None
@@ -68,6 +69,26 @@ def test_strategy_page_tab_hash(stubs):
         if getattr(n, "tagName", "") == "H2"
     ]
     assert "Choosing XP spends" in h2_titles
+
+
+def test_strategy_page_venue_picker_without_game(stubs):
+    mod = _fresh_strategy_module()
+    stubs.window.location.hash = "#strategy"
+    app = mod.StrategyPageApp(stubs.elements["app-root"])
+    app.mount()
+    h1 = _find_h1(stubs.elements["app-root"])
+    assert h1 is not None
+    assert h1.innerText == "Build guide"
+
+
+def test_strategy_page_spi_guide(stubs):
+    mod = _fresh_strategy_module()
+    stubs.window.location.hash = "#strategy?game=spi"
+    app = mod.StrategyPageApp(stubs.elements["app-root"])
+    app.mount()
+    h1 = _find_h1(stubs.elements["app-root"])
+    assert h1 is not None
+    assert "SPI" in h1.innerText
 
 
 def test_inline_html_renders_bold_markers():
@@ -80,7 +101,7 @@ def test_inline_html_renders_bold_markers():
 
 def test_strategy_page_renders_bold_in_creation_tab(stubs):
     mod = _fresh_strategy_module()
-    stubs.window.location.hash = "#strategy?tab=creation"
+    stubs.window.location.hash = "#strategy?game=lotn_v5&tab=creation"
     app = mod.StrategyPageApp(stubs.elements["app-root"])
     app.mount()
     body = _find_by_class(stubs.elements["app-root"], "strategy-body")
@@ -105,7 +126,7 @@ def test_strategy_content_covers_all_tabs():
 def test_main_reuses_strategy_app_on_hash_update(stubs):
     from pathlib import Path
 
-    stubs.window.location.hash = "#strategy?tab=creation"
+    stubs.window.location.hash = "#strategy?game=lotn_v5&tab=creation"
     source = (Path(__file__).resolve().parents[1] / "app/main.py").read_text(encoding="utf-8")
     lines = source.rstrip().splitlines()
     if lines[-1].strip() == "main()":
@@ -117,7 +138,7 @@ def test_main_reuses_strategy_app_on_hash_update(stubs):
     assert first is not None
     assert first.state["tab"] == "creation"
 
-    stubs.window.location.hash = "#strategy?tab=reference"
+    stubs.window.location.hash = "#strategy?game=lotn_v5&tab=reference"
     ns["_mount_app"]()
     assert ns["_strategy_app"] is first
     assert first.state["tab"] == "reference"

@@ -44,7 +44,7 @@ def _find_canvas(root):
 
 def test_weight_map_mount_predator_lens(stubs):
     mod = _fresh_weight_map_module()
-    stubs.window.location.hash = "#weights?lens=predator&mode=overview"
+    stubs.window.location.hash = "#weights?game=lotn_v5&lens=predator&mode=overview"
     app = mod.WeightMapApp(stubs.elements["app-root"])
     app.mount()
     assert app.state["lens"] == "predator"
@@ -53,7 +53,7 @@ def test_weight_map_mount_predator_lens(stubs):
 
 def test_weight_map_parse_lens_and_id(stubs):
     mod = _fresh_weight_map_module()
-    stubs.window.location.hash = "#weights?lens=clan&mode=profile&id=tremere"
+    stubs.window.location.hash = "#weights?game=lotn_v5&lens=clan&mode=profile&id=tremere"
     app = mod.WeightMapApp(stubs.elements["app-root"])
     assert app.state["lens"] == "clan"
     assert app.state["mode"] == "profile"
@@ -63,6 +63,7 @@ def test_weight_map_parse_lens_and_id(stubs):
 def test_weight_map_render_stops_after_max_attempts(stubs):
     mod = _fresh_weight_map_module()
     stubs.window.weightMapAssetsReady = lambda: False
+    stubs.window.location.hash = "#weights?game=lotn_v5"
     root = stubs.elements["app-root"]
     app = mod.WeightMapApp(root)
     app._render_attempts = mod._MAX_RENDER_ATTEMPTS
@@ -78,7 +79,7 @@ def test_main_reuses_weight_app_on_hash_update(stubs):
     stubs.window.d3 = object()
     stubs.window.renderWeightMap = lambda container, payload: True
     stubs.window.weightMapAssetsReady = lambda: True
-    stubs.window.location.hash = "#weights?lens=archetype&mode=overview"
+    stubs.window.location.hash = "#weights?game=lotn_v5&lens=archetype&mode=overview"
 
     source = (Path(__file__).resolve().parents[1] / "app/main.py").read_text(encoding="utf-8")
     lines = source.rstrip().splitlines()
@@ -90,7 +91,7 @@ def test_main_reuses_weight_app_on_hash_update(stubs):
     first = ns["_weight_app"]
     assert first is not None
 
-    stubs.window.location.hash = "#weights?lens=predator&mode=profile&id=alleycat"
+    stubs.window.location.hash = "#weights?game=lotn_v5&lens=predator&mode=profile&id=alleycat"
     ns["_mount_app"]()
     assert ns["_weight_app"] is first
     assert first.state["lens"] == "predator"
@@ -99,6 +100,7 @@ def test_main_reuses_weight_app_on_hash_update(stubs):
 
 def test_tree_payload_json_serializable():
     from app.weight_map_data import build_tree
+    from app.weight_map_data_spi import build_tree as build_spi_tree
 
     for lens in ("archetype", "predator", "clan", "catalog", "category", "combo"):
         tree = build_tree(lens, "overview")
@@ -115,3 +117,5 @@ def test_tree_payload_json_serializable():
             type="vampire",
         )
     )
+    for lens in ("archetype", "division", "faction", "affinity", "catalog", "combo"):
+        json.dumps(build_spi_tree(lens, "overview"))

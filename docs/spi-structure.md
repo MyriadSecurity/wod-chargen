@@ -361,8 +361,9 @@ Landing: pick **Venue** first, then that Venue’s wizard.
 | Area | Issue |
 |------|--------|
 | [`registry.py`](../wod_chargen/games/registry.py) | Only `LotnV5System` |
-| [`app/wizard.py`](../app/wizard.py), sheet, views | LotN imports; clan/predator state |
-| [`core/share.py`](../wod_chargen/core/share.py) | LotN option keys |
+| [`app/wizard.py`](../app/wizard.py), sheet, views | Venue-branched; LotN + SPI pickers/sheets |
+| [`app/strategy_page.py`](../app/strategy_page.py) / weight map | Venue-scoped via `?game=` |
+| [`core/share.py`](../wod_chargen/core/share.py) | LotN option keys; SPI options built in wizard_state |
 | [`core/xp_log_format.py`](../wod_chargen/core/xp_log_format.py) | LotN discipline labels |
 | [`venues/picker.json`](../wod_chargen/venues/picker.json) | No `spi` XP profiles yet |
 | Naming | `game` vs Venue; `venue` vs XP profile |
@@ -380,9 +381,8 @@ Approvals, VIP, CCD, Touchstones/Aspirations UI, Conditions, Status politics, Ik
 1. ~~Extract catalogs~~ (done: `scripts/extract_spi_sheet_catalogs.py`)  
 2. ~~Scaffold `games/spi/` + catalog stub + XP profiles~~ (done: seed via `scripts/seed_spi_data_from_extract.py`)  
 3. ~~Seed factions §2.5 + starter archetypes §2.6~~  
-4. VenueSystem Protocol when wiring UI  
-5. Generator MVP: biases + prereq bundling + multi-affinity toggle  
-6. `SpiSheetModel` + wizard + Venue-scoped Build guide / Weight Map  
+4. ~~Generator MVP + SpiSheetModel~~  
+5. ~~Wizard + Venue-scoped Build guide / Weight Map~~  
 
 ---
 
