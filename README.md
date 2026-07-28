@@ -7,6 +7,7 @@ Browser-only **World of Darkness / MET** procedural character generator.
 - **Venues:** LotN V5 (`lotn_v5`), SPI (`spi`)
 - **Deploy:** GitHub Pages (static)
 - **Version:** see `CHANGELOG.md` and `wod_chargen/__init__.py` (`__version__`)
+- **Source:** [github.com/MyriadSecurity/wod-chargen](https://github.com/MyriadSecurity/wod-chargen)
 
 ## Local development
 
