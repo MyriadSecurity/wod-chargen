@@ -304,7 +304,9 @@ Faction: five starter factions in §2.5 + bias refs.
 
 ### 6.5 `costs.json` (flat per dot)
 
-Affinity 5 · Attribute 4 · Skill 2 · Integrity 2 · Supernatural Resistance 2 · Specialty 1 · Merit 1 · Willpower-dot regain 1.
+Affinity 5 · Attribute 4 · Skill 2 · Integrity 2 · Supernatural Resistance **2** · Specialty 1 · Merit 1 · Willpower-dot regain 1.
+
+**Flat vs graduated:** MES SPI is CoD 2e flat rate (same XP per new dot). Merits default to **1 XP/dot**; fixed-rating catalog entries (`dots_min == dots_max`) are bought as one package but still cost N×1 XP. **Extra Touchstone** is the sole graduated exception (level N costs N XP; 15 XP for •••••) — omitted from oneshot generation with Touchstones.
 
 ### 6.6 `merits.json`
 

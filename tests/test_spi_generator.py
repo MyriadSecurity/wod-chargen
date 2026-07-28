@@ -177,3 +177,34 @@ def test_xp_log_formats_affinity_labels():
     )
     assert "Affinities" in text
     assert "Mage" in text
+
+
+def test_merit_xp_costs_flat_and_exceptions():
+    from wod_chargen.core.data_loader import load_json_cached
+    from wod_chargen.games.spi.generator import _merit_xp_cost
+    from wod_chargen.games.spi.paths import DATA_PKG
+
+    costs = load_json_cached(DATA_PKG, "costs.json")
+    assert _merit_xp_cost(costs, "allies", current=0, target=3) == 3
+    assert _merit_xp_cost(costs, "supernatural_resistance", current=0, target=2) == 4
+    assert _merit_xp_cost(costs, "supernatural_resistance", current=1, target=2) == 2
+    # Graduated Extra Touchstone: 1+2+3 = 6 for 0→3; level 3 alone costs 3
+    assert _merit_xp_cost(costs, "extra_touchstone", current=0, target=3) == 6
+    assert _merit_xp_cost(costs, "extra_touchstone", current=2, target=3) == 3
+    assert _merit_xp_cost(costs, "extra_touchstone", current=0, target=5) == 15
+
+
+def test_extra_touchstone_never_purchased():
+    venue = load_venue("spi_custom_xp")
+    for seed in range(40):
+        result = generate_character(
+            seed,
+            {
+                "archetype": "caregiver",
+                "sub_archetype": "chaplain",
+                "affinity": "ghost",
+                "xp": "120",
+            },
+            venue,
+        )
+        assert "extra_touchstone" not in result.character["merits"]

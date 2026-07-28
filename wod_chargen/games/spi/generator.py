@@ -166,7 +166,8 @@ def _spend_merit_dots(
     eligible = [
         m
         for m in merit_defs
-        if not m.get("style_steps")
+        if m["id"] not in OMITTED_MERIT_IDS
+        and not m.get("style_steps")
         and not any(p.get("unresolved") for p in m.get("prereqs", []))
         and (
             m.get("category") == "general"
@@ -299,8 +300,9 @@ def _bundle_prereq_cost(
         elif kind == "merit":
             cur = int(char["merits"].get(pid, 0))
             while cur < need:
-                cur += 1
-                total += lookup_cost(costs, "merit", new_level=cur)
+                nxt = cur + 1
+                total += _merit_xp_cost(costs, str(pid), current=cur, target=nxt)
+                cur = nxt
                 level = cur
 
                 def _apply_merit(m=pid, lv=level):
@@ -454,9 +456,11 @@ def _enumerate_purchases(
 
     pool_per = int(_data("creation.json").get("affinity_merit_dots_per_affinity_level", 3))
     for m in merit_defs:
+        mid = m["id"]
+        if mid in OMITTED_MERIT_IDS:
+            continue
         if m.get("style_steps"):
             continue
-        mid = m["id"]
         cur = int(char["merits"].get(mid, 0))
         dmin = int(m.get("dots_min", 1))
         dmax = int(m.get("dots_max", dmin))
@@ -491,12 +495,13 @@ def _enumerate_purchases(
         else:
             spend_group = "merits"
 
-        base_cost = lookup_cost(costs, "merit", new_level=1) * max(1, target - cur)
+        base_cost = _merit_xp_cost(costs, mid, current=cur, target=target)
         bundle_cost, bundle_applies = _bundle_prereq_cost(char, costs, m.get("prereqs", []))
         # Only bundle if prereqs not already met
         if _prereqs_met(char, m.get("prereqs", []), soft=False):
             bundle_cost, bundle_applies = 0, []
         total_cost = base_cost + bundle_cost
+        is_package = cur == 0 and dmin == dmax and target > 1
 
         def apply(merit_id=mid, lv=target, extras=bundle_applies):
             for fn in extras:
@@ -515,6 +520,8 @@ def _enumerate_purchases(
                 clan_factor=1.0,
                 source=source,
                 apply=apply,
+                current_level=cur,
+                package=is_package,
             )
         )
 
