@@ -1,10 +1,19 @@
 # SPI Venue Structure
 
-Design bible for adding **Society of Paranormal Investigators** as a second Venue.
+Design bible for **Society of Paranormal Investigators** as a second Venue.
 Sheet generator for oneshots and NPCs — not MES chronicle intake.
 
-**Status:** structure locked for scaffolding prep. No `games/spi/` package yet.
+**Status:** Venue package + generator + wizard + Build guide / Weight Map shipped.
 **Sources:** MES SPI docs + official character sheet under `reference/spi/` (gitignored).
+
+### Maintainer quick links
+
+| Need | Go to |
+|------|--------|
+| Which file to edit | [`where-to-edit.md`](where-to-edit.md) |
+| Bias ranges / SPI workflow | [`archetype-weight-guidelines.md`](archetype-weight-guidelines.md) |
+| Data folder map | [`wod_chargen/games/spi/data/README.md`](../wod_chargen/games/spi/data/README.md) |
+| Contribute / validate commands | [`CONTRIBUTING.md`](../CONTRIBUTING.md) |
 
 ---
 
@@ -162,7 +171,9 @@ flowchart LR
 
 ---
 
-## 4. Proposed Venue package tree
+## 4. Venue package tree
+
+Shipped under `wod_chargen/games/spi/` (see also `data/README.md`):
 
 ```
 wod_chargen/games/spi/

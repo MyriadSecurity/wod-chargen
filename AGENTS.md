@@ -5,6 +5,8 @@
 ### What this project is
 `wod-chargen` is a **browser-only** World of Darkness / MET character generator. There is **no backend, no database, and no external API** at runtime. The UI runs entirely client-side via **PyScript** (Python in the browser via WebAssembly). The Python engine lives in `wod_chargen/` and the PyScript UI in `app/`. See `README.md` and `CONTRIBUTING.md` for the standard commands.
 
+**Where to edit what:** [`docs/where-to-edit.md`](docs/where-to-edit.md) (SPI and LotN task → file index).
+
 ### Environment
 - Python is managed in a local virtualenv at `.venv` (gitignored). The startup update script creates it and installs `.[dev]` plus the Playwright Chromium browser. Prefix commands with `.venv/bin/` (e.g. `.venv/bin/pytest`) or activate with `source .venv/bin/activate`.
 - Runtime `dependencies` in `pyproject.toml` are intentionally empty — everything the app needs at runtime is loaded in-browser from CDNs.
