@@ -104,6 +104,11 @@ def test_sheet_model_builds():
     labels = {m.label for m in sheet.advantages}
     assert "Health" in labels
     assert "Max Integrity" in labels
+    merit_lines = list(sheet.merits_general.stats) + list(sheet.merits_affinity.stats)
+    assert merit_lines
+    assert all(line.description for line in merit_lines)
+    for line in sheet.merits_affinity.stats:
+        assert "(" in line.label and ")" in line.label
 
 
 def test_system_generate_via_facade():

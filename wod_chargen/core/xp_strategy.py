@@ -13,12 +13,12 @@ BASE_CATEGORY_TARGETS = {
     "merits_flaws": 0.14,
 }
 
-# SPI oneshot mix (no disciplines/backgrounds).
+# SPI oneshot mix (no disciplines/backgrounds). Slight merit lean vs attrs/skills.
 SPI_CATEGORY_TARGETS = {
-    "attributes": 0.28,
-    "skills": 0.30,
-    "merits_flaws": 0.27,
-    "affinity": 0.15,
+    "attributes": 0.25,
+    "skills": 0.27,
+    "merits_flaws": 0.34,
+    "affinity": 0.14,
 }
 
 SPEND_GROUP_MACRO = {

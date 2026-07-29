@@ -29,9 +29,11 @@
   "tag_affinities": {
     "medicine": 1.95,
     "care": 1.85,
-    "protection": 0.95,
+    "protection": 1.15,
     "social": 1.25,
     "academia": 1.2,
+    "resources": 1.25,
+    "status": 1.15,
     "combat": 0.45,
     "deception": 0.5
   }

@@ -32,6 +32,8 @@
     "infiltration": 1.35,
     "equipment": 1.35,
     "stealth": 1.25,
+    "resources": 1.2,
+    "protection": 1.2,
     "academia": 0.5,
     "ritual": 0.55
   }

@@ -32,6 +32,9 @@
     "mental": 1.35,
     "occult": 1.25,
     "stealth": 1.15,
+    "resources": 1.2,
+    "status": 1.15,
+    "protection": 1.15,
     "combat": 0.55
   }
 }

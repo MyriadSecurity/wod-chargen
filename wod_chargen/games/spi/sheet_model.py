@@ -25,6 +25,7 @@ class DotRow:
 class StatLine:
     label: str
     dots: DotRow
+    description: str | None = None
 
 
 @dataclass(frozen=True)
@@ -88,6 +89,9 @@ def build_sheet_model(result: GenerationResult) -> SpiSheetModel:
     factions = load_json_cached(DATA_PKG, "factions.json")
     merits_payload = load_json_cached(DATA_PKG, "merits.json")
     merit_by_id = {m["id"]: m for m in merits_payload.get("merits", [])}
+    merit_descriptions = load_json_cached(DATA_PKG, "merit_descriptions.json").get(
+        "descriptions", {}
+    )
 
     division = divisions.get(char.get("division", ""), {})
     faction = factions.get(char.get("faction", ""), {})
@@ -126,7 +130,17 @@ def build_sheet_model(result: GenerationResult) -> SpiSheetModel:
     for mid, dots in sorted(char.get("merits", {}).items()):
         m = merit_by_id.get(mid, {})
         label = str(m.get("label", _title(mid)))
-        line = StatLine(label=label, dots=DotRow(value=int(dots), max_dots=int(m.get("dots_max", 5))))
+        if m.get("category") == "affinity":
+            aff_type = m.get("affinity_type")
+            if aff_type:
+                label = f"{label} ({_title(str(aff_type))})"
+        blurb = merit_descriptions.get(mid) or m.get("description")
+        blurb_s = str(blurb).strip() if blurb else None
+        line = StatLine(
+            label=label,
+            dots=DotRow(value=int(dots), max_dots=int(m.get("dots_max", 5))),
+            description=blurb_s or None,
+        )
         if m.get("category") == "affinity":
             affinity_stats.append(line)
         else:

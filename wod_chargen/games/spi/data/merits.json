@@ -981,14 +981,12 @@
       "sheet_category": "General",
       "dots_min": 2,
       "dots_max": 2,
-      "prereq_text": "WIllpower 6",
+      "prereq_text": "Willpower 6",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "willpower",
-          "label": "WIllpower",
+          "kind": "willpower_min",
           "dots": 6,
-          "unresolved": true
+          "label": "Willpower 6"
         }
       ],
       "tags": [
@@ -1005,11 +1003,9 @@
       "prereq_text": "Integrity 5 or lower",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "integrity_5_or_lower",
-          "label": "Integrity 5 or lower",
-          "dots": 1,
-          "unresolved": true
+          "kind": "integrity_max",
+          "dots": 5,
+          "label": "Integrity 5 or lower"
         }
       ],
       "tags": [
@@ -1477,11 +1473,9 @@
       "prereq_text": "Skill 3 with Specialty",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "skill_3_with_specialty",
-          "label": "Skill 3 with Specialty",
-          "dots": 1,
-          "unresolved": true
+          "kind": "skill_with_specialty",
+          "dots": 3,
+          "label": "Skill 3 with Specialty"
         }
       ],
       "tags": [
@@ -1498,11 +1492,9 @@
       "prereq_text": "Chosen Skill at 3+",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "chosen_skill_at_3",
-          "label": "Chosen Skill at 3+",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_skill",
+          "dots": 3,
+          "label": "Any Skill 3+"
         }
       ],
       "tags": [
@@ -2525,11 +2517,9 @@
       "prereq_text": "Skill 2+",
       "prereqs": [
         {
-          "kind": "merit",
-          "id": "skill_2",
-          "label": "Skill 2+",
-          "dots": 1,
-          "unresolved": true
+          "kind": "any_skill",
+          "dots": 2,
+          "label": "Any Skill 2+"
         }
       ],
       "tags": [
@@ -2818,21 +2808,21 @@
       "sheet_category": "Social",
       "dots_min": 1,
       "dots_max": 1,
-      "prereq_text": "Crafts, Specialty in Crafts or Expression",
+      "prereq_text": "Crafts 2, Specialty in Crafts or Expression",
       "prereqs": [
         {
-          "kind": "merit",
+          "kind": "skill",
           "id": "crafts",
           "label": "Crafts",
-          "dots": 1,
-          "unresolved": true
+          "dots": 2
         },
         {
-          "kind": "merit",
-          "id": "specialty_in_crafts_or_expression",
-          "label": "Specialty in Crafts or Expression",
-          "dots": 1,
-          "unresolved": true
+          "kind": "specialty_on",
+          "skills": [
+            "crafts",
+            "expression"
+          ],
+          "label": "Specialty in Crafts or Expression"
         }
       ],
       "tags": [
