@@ -16,6 +16,27 @@ from app.components.sheet import (
 from wod_chargen.games.spi.sheet_model import RatedTraitsSection, SpiSheetModel
 
 
+def _rated_stat(stat) -> Any:
+    """Render a rated trait; include flavor blurb when present (merits/powers)."""
+    if not getattr(stat, "description", None):
+        return _stat_line(stat)
+    card = document.createElement("div")
+    card.className = "sheet-stat sheet-stat--described"
+    head = document.createElement("div")
+    head.className = "sheet-stat__head"
+    label = document.createElement("span")
+    label.className = "sheet-stat__name"
+    label.innerText = stat.label
+    head.appendChild(label)
+    head.appendChild(_dot_row(stat.dots))
+    card.appendChild(head)
+    blurb = document.createElement("p")
+    blurb.className = "sheet-stat__blurb"
+    blurb.innerText = stat.description
+    card.appendChild(blurb)
+    return card
+
+
 def _rated_section(section: RatedTraitsSection) -> Any:
     el = document.createElement("section")
     el.className = "sheet-rated-traits"
@@ -26,10 +47,15 @@ def _rated_section(section: RatedTraitsSection) -> Any:
         empty.innerText = "None"
         el.appendChild(empty)
         return el
+    has_blurbs = any(getattr(s, "description", None) for s in section.stats)
     grid = document.createElement("div")
-    grid.className = "sheet-rated-traits__grid"
+    grid.className = (
+        "sheet-rated-traits__grid sheet-rated-traits__grid--described"
+        if has_blurbs
+        else "sheet-rated-traits__grid"
+    )
     for stat in section.stats:
-        grid.appendChild(_stat_line(stat))
+        grid.appendChild(_rated_stat(stat))
     el.appendChild(grid)
     return el
 

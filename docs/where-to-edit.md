@@ -22,6 +22,7 @@ After any new/changed `.py` / `.json` under `app/` or `wod_chargen/`:
 | Tilt a Division | `wod_chargen/games/spi/data/divisions.json` |
 | Tilt a Faction | `wod_chargen/games/spi/data/factions.json` |
 | Retag merits for theme weighting | `wod_chargen/games/spi/data/trait_tags.json` (not extract tags on `merits.json`) |
+| Edit merit / affinity flavor blurbs | `wod_chargen/games/spi/data/merit_descriptions.json` |
 | Change XP / creation costs | `wod_chargen/games/spi/data/costs.json`, `creation.json` |
 | Change XP spend mix targets | `wod_chargen/core/xp_strategy.py` → `SPI_CATEGORY_TARGETS` |
 | Change wizard steps / labels | `wod_chargen/games/spi/data/wizard_ui.json` |

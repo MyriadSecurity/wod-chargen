@@ -46,7 +46,7 @@ Sheet generator for oneshots and NPCs — not MES chronicle intake.
 | Archetypes | Pared starter set (§2.6); Affinity usually from biases; staff can add packs later |
 | Affinity step | Always shown; default **Any (from archetype)**; optional lock to one Affinity |
 | Multi-Affinity | Generator **toggle** (off = stay on one Affinity track; on = allow secondary via XP/bundle) |
-| Merit blurbs | Ship **without** Codex summaries (ids/costs/tags only) |
+| Merit blurbs | Ship **flavor** blurbs on sheet via `merit_descriptions.json` (no Codex mechanics) |
 | Virtue / Vice | Include on sheet |
 | Touchstones / Aspirations | Omit |
 | Conditions | Ignore (no live tracking) |
@@ -277,7 +277,7 @@ Hard rules:
 - `max_integrity = 11 − sum(top two Affinities)`; start `min(7, max_integrity)`
 - No Greater/Lesser templates
 - Prereq bundling when buying gated traits
-- No Codex/merit blurbs required on sheet
+- Flavor merit blurbs on sheet (`merit_descriptions.json`); no Codex mechanics dump
 
 ---
 

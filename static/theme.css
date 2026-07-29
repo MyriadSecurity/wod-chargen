@@ -645,6 +645,7 @@ body {
     .sheet-section__title,
     .sheet-block__title,
     .sheet-stat__name,
+    .sheet-stat__blurb,
     .sheet-stat,
     .sheet-convictions__item,
     .sheet-background-card__title,
@@ -966,6 +967,44 @@ body {
   text-align: left;
   border-bottom: none;
   margin-bottom: 0.5rem;
+}
+
+.sheet-stat--described {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.2rem;
+}
+
+.sheet-stat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sheet-stat--described .sheet-stat__name {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.sheet-stat__blurb {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: #b8a8b8;
+}
+
+.sheet-rated-traits__grid--described {
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+}
+
+@media (min-width: 40rem) {
+  .sheet-rated-traits__grid--described {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .sheet-rated-traits__grid {

@@ -16,6 +16,7 @@ Authoritative oneshot/NPC data for Society of Paranormal Investigators.
 | `divisions.json` / `factions.json` | Soft bias layers |
 | `trait_tags.json` | Judgment theme tags for merit weighting |
 | `merits.json` | Catalog (ids, dots, prereqs); extract tags are metadata only |
+| `merit_descriptions.json` | Flavor-only blurbs for sheet display (survives re-seed) |
 | `costs.json` / `creation.json` | XP rates and free-creation pools |
 | `wizard_ui.json` | Wizard step ids and copy keys |
 | `attributes.json` / `skills.json` | CoD trait lists (Presence, Weaponry) |
