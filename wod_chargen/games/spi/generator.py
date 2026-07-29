@@ -217,6 +217,25 @@ def _spend_merit_dots(
     ]
     remaining = dots
     affinity_spent = 0
+
+    # Soft life floor: most sheets should have Resources •1 from creation.
+    resources_def = next((m for m in eligible if m.get("id") == "resources"), None)
+    if (
+        resources_def is not None
+        and int(char["merits"].get("resources", 0)) < 1
+        and remaining >= 1
+        and _prereqs_met(char, resources_def.get("prereqs", []), soft=True)
+    ):
+        char["merits"]["resources"] = 1
+        remaining -= 1
+        log.append(
+            LogEntry(
+                phase="creation_merits",
+                message=f"Merit {_title('resources')} → 1 (1 dots)",
+                detail={"merit": "resources", "dots": 1, "category": "general", "floor": True},
+            )
+        )
+
     while remaining > 0 and eligible:
         cands = []
         weights = []

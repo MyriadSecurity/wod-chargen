@@ -1,7 +1,7 @@
 {
   "notes": "SPI catalog priors applied after resolve_merit_bias (then clamped). Lift CoD life/infrastructure merits; soft-damp hot 1-dot hogs. deepen_ids get stronger XP buy-up; all merits get a mild deepen lean vs new opens.",
   "priors": {
-    "resources": 1.4,
+    "resources": 2.6,
     "safe_place": 1.4,
     "retainer": 1.35,
     "staff": 1.35,

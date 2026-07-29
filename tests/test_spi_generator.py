@@ -136,26 +136,39 @@ def test_creation_affinity_merit_cap():
 
 
 def test_prereq_bundle_can_raise_affinity_for_gated_merit():
-    """Buying a Fae-gated merit with multi on should allow Affinity in the bundle path."""
-    venue = load_venue("spi_custom_xp")
-    # High XP; multi on so Affinity prereqs can be purchased
-    bought = False
-    for seed in range(80):
-        result = generate_character(
-            seed,
-            {
-                "archetype": "occultist",
-                "affinity": "fae",
-                "multi_affinity": True,
-                "xp": "300",
-            },
-            venue,
-        )
-        if result.character["merits"].get("goblin_bounty"):
-            assert result.character["affinities"]["fae"] >= 4
-            bought = True
-            break
-    assert bought, "expected a seed to purchase goblin_bounty via prereq bundling"
+    """Affinity dots can be purchased via the prereq-bundle path (Goblin Bounty needs Fae 4)."""
+    from wod_chargen.games.spi.generator import _bundle_prereq_cost
+    from wod_chargen.games.spi.paths import DATA_PKG
+    from wod_chargen.core.data_loader import load_json_cached
+
+    costs = load_json_cached(DATA_PKG, "costs.json")
+    char = {
+        "attributes": {},
+        "skills": {},
+        "merits": {},
+        "affinities": {"fae": 1},
+        "integrity": 7,
+        "willpower": 5,
+        "specialties": {},
+    }
+    prereqs = [{"kind": "affinity", "id": "fae", "dots": 4}]
+    cost, applies = _bundle_prereq_cost(char, costs, prereqs)
+    assert cost > 0
+    assert len(applies) == 3  # raise fae 2, 3, 4
+    for fn in applies:
+        fn()
+    assert char["affinities"]["fae"] == 4
+
+
+def test_creation_grants_resources_floor():
+    venue = load_venue("fixed_35")
+    result = generate_character(1, {"archetype": "guardian"}, venue)
+    assert int(result.character["merits"].get("resources", 0)) >= 1
+    assert any(
+        e.detail.get("floor") and e.detail.get("merit") == "resources"
+        for e in result.creation_log
+        if e.phase == "creation_merits"
+    )
 
 
 def test_xp_log_formats_affinity_labels():

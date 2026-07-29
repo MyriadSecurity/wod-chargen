@@ -4,6 +4,21 @@ All notable changes to **wod-chargen** are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-07-29
+
+### Added
+
+- SPI merit flavor blurbs on the sheet (`merit_descriptions.json`); Affinity powers show type
+- SPI catalog priors / deepen curve for CoD mundane infrastructure merits
+- Specialty catalog picks (`specialties.json`); signature-skill creation floors
+- Structured soft prereqs for formerly dead merits (Taste, Hobbyist Clique, Investigative Aide, etc.)
+
+### Changed
+
+- Creation grants **Resources •1** as a soft life floor; Resources catalog prior raised so most sheets have disposable income
+- SPI XP mix leans more into merits; stronger buy-up on Status / Resources-class traits
+- Archetype theme affinities mildly lift `resources` / `status` / `protection` (Shadow stays cautious)
+
 ## [0.3.0] - 2026-07-28
 
 ### Added
@@ -82,6 +97,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use [Se
 - Rating caps (5 dots default; thin-blood discipline/formula limits)
 - PyScript boot issues (`js.null`, manifest sync, cache busting)
 
-[0.3.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.3.0
-[0.2.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.2.0
-[0.1.0]: https://github.com/gscott/wod-chargen/releases/tag/v0.1.0
+[0.3.1]: https://github.com/MyriadSecurity/wod-chargen/releases/tag/v0.3.1
+[0.3.0]: https://github.com/MyriadSecurity/wod-chargen/releases/tag/v0.3.0
+[0.2.0]: https://github.com/MyriadSecurity/wod-chargen/releases/tag/v0.2.0
+[0.1.0]: https://github.com/MyriadSecurity/wod-chargen/releases/tag/v0.1.0
