@@ -70,7 +70,7 @@ def test_resolve_merit_bias_explicit_is_floor_not_cap():
     }
     bias = resolve_merit_bias(profile, "defensive_combat_brawl")
     assert bias >= 1.4
-    assert bias == 3.0  # tag product clamps
+    assert bias == 3.0  # tag product hits clamp (prior cannot lift further)
 
 
 def test_any_of_prereq_stamina_or_resolve():
@@ -107,13 +107,13 @@ def test_merit_absent_and_unresolved_only_policy():
         [{"kind": "merit_absent", "id": "fame"}],
         soft=True,
     )
-    taste = {
-        "id": "taste",
-        "prereqs": [{"kind": "merit", "id": "crafts", "unresolved": True}],
+    stub_only = {
+        "id": "stub_merit",
+        "prereqs": [{"kind": "merit", "id": "mystery_thing", "unresolved": True}],
     }
-    assert not _merit_creation_eligible(taste)
+    assert not _merit_creation_eligible(stub_only)
     char = {"attributes": {}, "skills": {}, "merits": {}, "affinities": {}}
-    assert not _merit_xp_prereqs_ok(char, taste)
+    assert not _merit_xp_prereqs_ok(char, stub_only)
     iron = {
         "id": "iron_stamina",
         "prereqs": [
@@ -127,6 +127,71 @@ def test_merit_absent_and_unresolved_only_policy():
         ],
     }
     assert _merit_creation_eligible(iron)
+
+
+def test_structured_soft_prereqs_for_former_dead_merits():
+    from wod_chargen.games.spi.generator import _prereq_entry_met
+
+    taste = {
+        "id": "taste",
+        "prereqs": [
+            {"kind": "skill", "id": "crafts", "dots": 2},
+            {"kind": "specialty_on", "skills": ["crafts", "expression"]},
+        ],
+    }
+    assert _merit_creation_eligible(taste)
+    char = {
+        "attributes": {"resolve": 3, "composure": 3},
+        "skills": {"crafts": 2, "investigation": 3},
+        "merits": {},
+        "affinities": {},
+        "specialties": ["crafts:Appraisal"],
+        "integrity": 7,
+    }
+    assert _merit_xp_prereqs_ok(char, taste)
+    assert _prereq_entry_met(char, {"kind": "any_skill", "dots": 3}, soft=False)
+    assert _prereq_entry_met(
+        char, {"kind": "skill_with_specialty", "dots": 2}, soft=False
+    )
+    assert _prereq_entry_met(char, {"kind": "willpower_min", "dots": 6}, soft=False)
+    assert not _prereq_entry_met(char, {"kind": "integrity_max", "dots": 5}, soft=False)
+    char["integrity"] = 5
+    assert _prereq_entry_met(char, {"kind": "integrity_max", "dots": 5}, soft=False)
+
+
+def test_former_dead_merits_can_appear():
+    _reload_spi_data()
+    venue = load_venue("fixed_35")
+    hits = {
+        "hobbyist_clique": 0,
+        "investigative_aide": 0,
+        "interdisciplinary_specialty": 0,
+        "taste": 0,
+        "punch_drunk": 0,
+    }
+    n = 200
+    for seed in range(n):
+        result = generate_character(
+            seed,
+            {"archetype": "scholar", "sub": "scientist"},
+            venue,
+        )
+        for mid in hits:
+            if mid in result.character["merits"]:
+                hits[mid] += 1
+        result2 = generate_character(
+            10_000 + seed,
+            {"archetype": "guardian", "sub": "bodyguard"},
+            venue,
+        )
+        if "punch_drunk" in result2.character["merits"]:
+            hits["punch_drunk"] += 1
+    # Soft floors — just prove they are no longer hard-dead.
+    assert hits["hobbyist_clique"] + hits["investigative_aide"] + hits[
+        "interdisciplinary_specialty"
+    ] + hits["taste"] >= 3, hits
+    # Punch Drunk needs WP 6; may be rarer but should not be zero across 200 guardians.
+    assert sum(hits.values()) >= 3, hits
 
 
 def test_guardian_bodyguard_brawl_mastery_improved():

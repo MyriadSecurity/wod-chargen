@@ -388,6 +388,9 @@ def _bundle_prereq_cost(
     for p in prereqs or []:
         if p.get("unresolved") or p.get("kind") == "merit_absent":
             continue
+        if p.get("kind") == "integrity_max":
+            # Cannot buy Integrity down; eligibility is check-only.
+            continue
         if p.get("kind") == "any_of":
             options = [opt for opt in (p.get("options") or []) if _prereq_is_evaluable(opt)]
             if not options:
@@ -452,6 +455,105 @@ def _bundle_prereq_cost(
                     char["merits"][m] = max(int(char["merits"].get(m, 0)), lv)
 
                 applies.append(_apply_merit)
+        elif kind == "any_skill":
+            if _prereq_entry_met(char, p, soft=False):
+                continue
+            skills = char.get("skills") or {}
+            # Raise the skill already closest to the floor (cheapest).
+            sk = max(skills, key=lambda s: (int(skills.get(s, 0)), s), default=None)
+            if sk is None:
+                continue
+            cur = int(skills.get(sk, 0))
+            while cur < need:
+                cur += 1
+                total += lookup_cost(costs, "skill", new_level=cur)
+                level = cur
+
+                def _apply_any_skill(s=sk, lv=level):
+                    char["skills"][s] = max(int(char["skills"].get(s, 0)), lv)
+
+                applies.append(_apply_any_skill)
+        elif kind == "skill_with_specialty":
+            if _prereq_entry_met(char, p, soft=False):
+                continue
+            skills = char.get("skills") or {}
+            owned = _specialty_skills(char)
+            # Prefer a skill that already has a specialty, else the highest skill.
+            candidates = [s for s in skills if s in owned] or list(skills)
+            if not candidates:
+                continue
+            sk = max(candidates, key=lambda s: (int(skills.get(s, 0)), s))
+            cur = int(skills.get(sk, 0))
+            while cur < need:
+                cur += 1
+                total += lookup_cost(costs, "skill", new_level=cur)
+                level = cur
+
+                def _apply_sws_skill(s=sk, lv=level):
+                    char["skills"][s] = max(int(char["skills"].get(s, 0)), lv)
+
+                applies.append(_apply_sws_skill)
+            if sk not in owned:
+                total += lookup_cost(costs, "specialty", new_level=1)
+
+                def _apply_sws_spec(s=sk):
+                    if s not in _specialty_skills(char):
+                        catalog = _data("specialties.json")
+                        _append_specialty(SeededRng(0), char, s, catalog)
+
+                applies.append(_apply_sws_spec)
+        elif kind == "specialty_on":
+            if _prereq_entry_met(char, p, soft=False):
+                continue
+            allowed = [str(s) for s in (p.get("skills") or [])]
+            if not allowed:
+                continue
+            skills = char.get("skills") or {}
+            sk = max(allowed, key=lambda s: (int(skills.get(s, 0)), s))
+            if int(skills.get(sk, 0)) < 1:
+                total += lookup_cost(costs, "skill", new_level=1)
+
+                def _apply_spec_skill(s=sk):
+                    char["skills"][s] = max(int(char["skills"].get(s, 0)), 1)
+
+                applies.append(_apply_spec_skill)
+            total += lookup_cost(costs, "specialty", new_level=1)
+
+            def _apply_spec_on(s=sk):
+                if s not in _specialty_skills(char):
+                    catalog = _data("specialties.json")
+                    _append_specialty(SeededRng(0), char, s, catalog)
+
+            applies.append(_apply_spec_on)
+        elif kind == "willpower_min":
+            if _prereq_entry_met(char, p, soft=False):
+                continue
+            # Plan Resolve/Composure bumps without mutating char during costing.
+            res = int(char["attributes"].get("resolve", 1))
+            com = int(char["attributes"].get("composure", 1))
+            while res + com < need:
+                if res <= com and res < 5:
+                    res += 1
+                    total += lookup_cost(costs, "attribute", new_level=res)
+
+                    def _apply_wp_res(lv=res):
+                        char["attributes"]["resolve"] = max(
+                            int(char["attributes"].get("resolve", 1)), lv
+                        )
+
+                    applies.append(_apply_wp_res)
+                elif com < 5:
+                    com += 1
+                    total += lookup_cost(costs, "attribute", new_level=com)
+
+                    def _apply_wp_com(lv=com):
+                        char["attributes"]["composure"] = max(
+                            int(char["attributes"].get("composure", 1)), lv
+                        )
+
+                    applies.append(_apply_wp_com)
+                else:
+                    break
     return total, applies
 
 

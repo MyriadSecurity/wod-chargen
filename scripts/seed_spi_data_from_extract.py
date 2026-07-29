@@ -29,6 +29,51 @@ COPY_AS_IS = (
 
 DROP_MERIT_KEYS = frozenset({"summary", "book", "summary_source"})
 
+# Hand-authored structured prereqs for sheet stubs the extract leaves unresolved.
+PREREQ_OVERRIDES: dict[str, dict] = {
+    "taste": {
+        "prereq_text": "Crafts 2, Specialty in Crafts or Expression",
+        "prereqs": [
+            {"kind": "skill", "id": "crafts", "label": "Crafts", "dots": 2},
+            {
+                "kind": "specialty_on",
+                "skills": ["crafts", "expression"],
+                "label": "Specialty in Crafts or Expression",
+            },
+        ],
+    },
+    "scarred": {
+        "prereq_text": "Integrity 5 or lower",
+        "prereqs": [
+            {"kind": "integrity_max", "dots": 5, "label": "Integrity 5 or lower"},
+        ],
+    },
+    "punch_drunk": {
+        "prereq_text": "Willpower 6",
+        "prereqs": [
+            {"kind": "willpower_min", "dots": 6, "label": "Willpower 6"},
+        ],
+    },
+    "investigative_aide": {
+        "prereq_text": "Chosen Skill at 3+",
+        "prereqs": [
+            {"kind": "any_skill", "dots": 3, "label": "Any Skill 3+"},
+        ],
+    },
+    "interdisciplinary_specialty": {
+        "prereq_text": "Skill 3 with Specialty",
+        "prereqs": [
+            {"kind": "skill_with_specialty", "dots": 3, "label": "Skill 3 with Specialty"},
+        ],
+    },
+    "hobbyist_clique": {
+        "prereq_text": "Skill 2+",
+        "prereqs": [
+            {"kind": "any_skill", "dots": 2, "label": "Any Skill 2+"},
+        ],
+    },
+}
+
 
 def _load_allowlist() -> tuple[bool, set[str]]:
     if not ALLOWLIST.is_file():
@@ -64,6 +109,8 @@ def _strip_and_filter_merits(payload: dict) -> dict:
             skipped += 1
             continue
         cleaned = {k: v for k, v in entry.items() if k not in DROP_MERIT_KEYS}
+        if mid in PREREQ_OVERRIDES:
+            cleaned.update(PREREQ_OVERRIDES[mid])
         merits_out.append(cleaned)
     return {
         "notes": (
