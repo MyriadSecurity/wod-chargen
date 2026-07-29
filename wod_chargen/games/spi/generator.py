@@ -17,6 +17,7 @@ from wod_chargen.games.spi.archetypes import (
     list_archetypes,
     resolve_sub_id,
 )
+from wod_chargen.games.spi.merit_efficiency import spi_merit_efficiency
 from wod_chargen.games.spi.paths import DATA_PKG
 from wod_chargen.games.spi.signature_skills import ensure_signature_skill_floor
 from wod_chargen.games.spi.trait_biases import resolve_merit_bias
@@ -260,6 +261,19 @@ def _spend_merit_dots(
         )
 
 
+def _willpower(char: dict[str, Any]) -> int:
+    a = char.get("attributes") or {}
+    return int(a.get("resolve", 1)) + int(a.get("composure", 1))
+
+
+def _specialty_skills(char: dict[str, Any]) -> set[str]:
+    out: set[str] = set()
+    for sp in char.get("specialties") or []:
+        if isinstance(sp, str) and ":" in sp:
+            out.add(sp.split(":", 1)[0])
+    return out
+
+
 def _prereq_entry_met(char: dict[str, Any], p: dict[str, Any], *, soft: bool) -> bool:
     """Evaluate a single prereq entry (including any_of / merit_absent)."""
     kind = p.get("kind")
@@ -271,6 +285,26 @@ def _prereq_entry_met(char: dict[str, Any], p: dict[str, Any], *, soft: bool) ->
     if kind == "merit_absent":
         pid = str(p.get("id") or "")
         return int(char["merits"].get(pid, 0)) <= 0
+    if kind == "any_skill":
+        need = int(p.get("dots", 1))
+        skills = char.get("skills") or {}
+        return any(int(v) >= need for v in skills.values())
+    if kind == "skill_with_specialty":
+        need = int(p.get("dots", 1))
+        skills = char.get("skills") or {}
+        owned = _specialty_skills(char)
+        return any(int(skills.get(sk, 0)) >= need and sk in owned for sk in skills)
+    if kind == "specialty_on":
+        allowed = {str(s) for s in (p.get("skills") or [])}
+        if not allowed:
+            return not soft
+        return bool(_specialty_skills(char) & allowed)
+    if kind == "integrity_max":
+        cap = int(p.get("dots", 5))
+        return int(char.get("integrity", 7)) <= cap
+    if kind == "willpower_min":
+        need = int(p.get("dots", 1))
+        return _willpower(char) >= need
     pid = p.get("id")
     need = int(p.get("dots", 1))
     if kind == "attribute":
@@ -298,6 +332,22 @@ def _prereqs_met(char: dict[str, Any], prereqs: list[dict[str, Any]], *, soft: b
     return True
 
 
+_EVALUABLE_PREREQ_KINDS = frozenset(
+    {
+        "attribute",
+        "skill",
+        "merit",
+        "affinity",
+        "merit_absent",
+        "any_skill",
+        "skill_with_specialty",
+        "specialty_on",
+        "integrity_max",
+        "willpower_min",
+    }
+)
+
+
 def _prereq_is_evaluable(p: dict[str, Any]) -> bool:
     """True when the generator can meaningfully check this prereq."""
     if p.get("unresolved"):
@@ -305,7 +355,7 @@ def _prereq_is_evaluable(p: dict[str, Any]) -> bool:
     kind = p.get("kind")
     if kind == "any_of":
         return any(_prereq_is_evaluable(opt) for opt in (p.get("options") or []))
-    return kind in {"attribute", "skill", "merit", "affinity", "merit_absent"}
+    return kind in _EVALUABLE_PREREQ_KINDS
 
 
 def _merit_creation_eligible(m: dict[str, Any]) -> bool:
@@ -616,6 +666,11 @@ def _enumerate_purchases(
                 apply=apply,
                 current_level=cur,
                 package=is_package,
+                efficiency_fn=(
+                    None
+                    if is_package
+                    else (lambda cur_lv, new_lv, merit=mid: spi_merit_efficiency(merit, cur_lv, new_lv))
+                ),
             )
         )
 

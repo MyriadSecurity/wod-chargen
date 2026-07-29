@@ -137,6 +137,9 @@ Clamp via `wod_chargen.games.spi.trait_biases` (0.05–3.0).
   archetype / Division / Faction `tag_affinities`.
 - Explicit `merit_biases` on those packs set a **floor** via
   `max(explicit, tag_product)` (they no longer fully replace tags).
+- Catalog **priors** in `merit_priors.json` multiply after that resolve (then
+  clamp). Use them to lift CoD infrastructure merits and soft-damp hot 1-dots.
+- `deepen_ids` in the same file get SPI XP efficiency boosts for •2–•3 buys.
 - Resolver: `wod_chargen.games.spi.trait_biases.resolve_merit_bias`.
 
 ### Subtypes

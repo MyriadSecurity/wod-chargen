@@ -15,18 +15,26 @@ from wod_chargen.venues import load_venue
 
 def test_resolve_explicit_is_floor():
     clear_trait_tags_cache()
+    from wod_chargen.games.spi.trait_biases import load_merit_priors
+
     profile = {
         "merit_biases": {"library": 2.0},
         "tag_affinities": {"academia": 1.5, "combat": 1.8},
     }
-    # library theme tags do not include combat; explicit 2.0 remains the floor.
-    assert resolve_merit_bias(profile, "library") == 2.0
-    # Weak explicit must not undercut a strong tag product.
+    # library theme tags do not include combat; explicit 2.0 remains the floor,
+    # then catalog prior applies.
+    prior = load_merit_priors().get("library", 1.0)
+    assert resolve_merit_bias(profile, "library") == 2.0 * prior
+    # Weak explicit must not undercut a strong tag product (then × prior).
     combat_profile = {
         "merit_biases": {"defensive_combat_brawl": 1.4},
         "tag_affinities": {"combat": 1.85, "protection": 1.8},
     }
-    assert resolve_merit_bias(combat_profile, "defensive_combat_brawl") == 3.0
+    combat_prior = load_merit_priors().get("defensive_combat_brawl", 1.0)
+    # tag product clamps to 3.0 before prior; prior may lift further then re-clamp.
+    assert resolve_merit_bias(combat_profile, "defensive_combat_brawl") == min(
+        3.0, 3.0 * combat_prior
+    )
 
 
 def test_resolve_tag_product_and_default():
@@ -36,7 +44,32 @@ def test_resolve_tag_product_and_default():
     profile = {"merit_biases": {}, "tag_affinities": {"academia": 1.5, "information": 1.4}}
     bias = resolve_merit_bias(profile, "library")
     assert bias > 1.0
-    assert resolve_merit_bias({"merit_biases": {}, "tag_affinities": {}}, "library") == 1.0
+    # Untagged path is 1.0 × catalog prior (library prior soft-damps hot academia merits).
+    from wod_chargen.games.spi.trait_biases import load_merit_priors
+
+    prior = load_merit_priors().get("library", 1.0)
+    assert resolve_merit_bias({"merit_biases": {}, "tag_affinities": {}}, "library") == prior
+
+
+def test_catalog_prior_lifts_resources():
+    clear_trait_tags_cache()
+    bare = resolve_merit_bias({"merit_biases": {}, "tag_affinities": {}}, "resources")
+    assert bare > 1.0
+    hog = resolve_merit_bias({"merit_biases": {}, "tag_affinities": {}}, "takes_one_to_know_one")
+    assert hog < 1.0
+
+
+def test_spi_merit_efficiency_deepens_status():
+    from wod_chargen.core.xp_strategy import efficiency_item_bias
+    from wod_chargen.games.spi.merit_efficiency import spi_merit_efficiency
+
+    assert spi_merit_efficiency("status", 2, 3) > efficiency_item_bias(2, 3)
+    assert spi_merit_efficiency("status", 1, 2) > efficiency_item_bias(1, 2)
+    # Non-deepen merits still get a mild 2→3 lift vs the global cliff.
+    assert spi_merit_efficiency("taste", 2, 3) > efficiency_item_bias(2, 3)
+    # New opens are softer than the global 2.5 so buy-up can compete.
+    assert spi_merit_efficiency("status", 0, 1) < efficiency_item_bias(0, 1)
+    assert spi_merit_efficiency("taste", 0, 1) < efficiency_item_bias(0, 1)
 
 
 def test_investigator_veritas_rnd_prefers_investigation_over_combat_merits():

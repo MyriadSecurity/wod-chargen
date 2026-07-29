@@ -17,9 +17,23 @@ def load_trait_tags() -> dict[str, Any]:
     return load_json_cached(DATA_PKG, "trait_tags.json")
 
 
+@lru_cache(maxsize=1)
+def load_merit_priors() -> dict[str, float]:
+    payload = load_json_cached(DATA_PKG, "merit_priors.json")
+    raw = payload.get("priors") or {}
+    return {str(k): float(v) for k, v in raw.items()}
+
+
 def clear_trait_tags_cache() -> None:
-    """Test helper — drop cached trait_tags after data edits."""
+    """Test helper — drop cached trait_tags / priors after data edits."""
     load_trait_tags.cache_clear()
+    load_merit_priors.cache_clear()
+    try:
+        from wod_chargen.games.spi.merit_efficiency import clear_merit_priors_cache
+
+        clear_merit_priors_cache()
+    except ImportError:
+        pass
 
 
 def trait_tag_list(merit_id: str) -> list[str]:
@@ -75,9 +89,16 @@ def _tag_product(affinities: dict[str, float], merit_id: str) -> float:
 
 
 def resolve_merit_bias(profile: Mapping[str, Any] | Any, merit_id: str) -> float:
-    """Effective merit bias: max(explicit floor, tag product), else 1.0."""
+    """Effective merit bias: max(explicit floor, tag product) × catalog prior, else prior.
+
+    Untagged / unmatched merits start at 1.0 before the catalog prior from
+    ``merit_priors.json`` (default 1.0 when absent).
+    """
     explicit, affinities = _as_bias_maps(profile)
     tag = _tag_product(affinities, merit_id)
     if merit_id in explicit:
-        return _clamp(max(float(explicit[merit_id]), tag))
-    return tag
+        base = max(float(explicit[merit_id]), tag)
+    else:
+        base = tag
+    prior = float(load_merit_priors().get(merit_id, 1.0))
+    return _clamp(base * prior)

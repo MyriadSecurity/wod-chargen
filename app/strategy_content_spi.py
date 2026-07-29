@@ -162,10 +162,10 @@ def _xp_sections() -> list[dict[str, Any]]:
             "table": {
                 "headers": ["Area", "Target share"],
                 "rows": [
-                    ["Skills (+ extra specialties)", "~30%"],
-                    ["Attributes", "~28%"],
-                    ["Merits (general + Affinity powers)", "~27%"],
-                    ["Affinity dots", "~15%"],
+                    ["Merits (general + Affinity powers)", "~34%"],
+                    ["Skills (+ extra specialties)", "~27%"],
+                    ["Attributes", "~25%"],
+                    ["Affinity dots", "~14%"],
                 ],
             },
         },

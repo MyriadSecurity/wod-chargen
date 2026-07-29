@@ -38,6 +38,8 @@ class PurchaseCandidate:
     current_level: int | None = None
     # Fixed-rating (min==max) multi-dot package: score like opening a trait.
     package: bool = False
+    # Optional override: (current_level, new_level) -> efficiency multiplier.
+    efficiency_fn: Callable[[int, int], float] | None = None
 
     @property
     def effective_weight(self) -> float:
@@ -93,7 +95,9 @@ def _pick_candidate(
     scored: list[tuple[PurchaseCandidate, float, float, float]] = []
     for cand in pool:
         cur = cand.new_level - 1 if cand.current_level is None else cand.current_level
-        if cand.category == "loresheet":
+        if cand.efficiency_fn is not None:
+            eff = cand.efficiency_fn(cur, cand.new_level)
+        elif cand.category == "loresheet":
             eff = loresheet_efficiency_bias(cur, cand.new_level)
         elif cand.is_signature:
             eff = signature_skill_efficiency_bias(cur, cand.new_level)
