@@ -62,6 +62,12 @@ def _collect_python_closure(entry_rel: str) -> set[str]:
     return seen
 
 
+def test_footer_includes_feedback_form():
+    source = (ROOT / "app" / "components" / "footer.py").read_text(encoding="utf-8")
+    assert "https://forms.gle/p9jyBE1eyfv72MfV6" in source
+    assert ">Feedback<" in source
+
+
 def test_index_html_entrypoints_exist():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     refs = SRC_ATTR_RE.findall(html)

@@ -17,6 +17,7 @@ def dark_pack_footer() -> None:
       This is an <strong>unofficial</strong> fan project, not affiliated with Paradox Interactive.</p>
       <a class="text-blood hover:underline" href="https://www.paradoxinteractive.com/games/world-of-darkness/community/dark-pack-agreement" target="_blank" rel="noopener">Dark Pack Agreement</a>
       <a class="text-blood hover:underline" href="https://github.com/MyriadSecurity/wod-chargen" target="_blank" rel="noopener">GitHub</a>
+      <a class="text-blood hover:underline" href="https://forms.gle/p9jyBE1eyfv72MfV6" target="_blank" rel="noopener">Feedback</a>
       <p class="text-stone-500 text-xs">wod-chargen v{__version__}</p>
     </div>
     """

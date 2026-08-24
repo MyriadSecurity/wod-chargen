@@ -57,6 +57,8 @@ def test_main_page_loads_wizard(site_base_url: str):
         _wait_for_app(page)
         title = page.locator("#app-root h1").first.inner_text()
         assert "Character Generator" in title
+        feedback = page.locator('footer a[href="https://forms.gle/p9jyBE1eyfv72MfV6"]')
+        assert feedback.inner_text() == "Feedback"
         context.close()
         browser.close()
 
