@@ -15,7 +15,7 @@ RULES: dict[str, dict[str, Any]] = {
         "creation_only": True,
         "forbidden_with_categories": [{"kind": "flaw", "category": "bonding"}],
     },
-    "short_bond": {"forbidden_with": ["long_bond"]},
+    "short_bond": {"forbidden_with": ["long_bond", "unbondable"]},
     "long_bond": {"forbidden_with": ["short_bond", "unbondable"]},
     "bond_at_first_taste": {"forbidden_with": ["unbondable"]},
     "bond_junkie": {"forbidden_with": ["unbondable"]},
