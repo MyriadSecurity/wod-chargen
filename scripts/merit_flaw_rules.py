@@ -13,7 +13,7 @@ RULES: dict[str, dict[str, Any]] = {
     # Bonding
     "unbondable": {
         "creation_only": True,
-        "forbidden_with_categories": [{"kind": "flaw", "category": "bonding"}],
+        "forbidden_with_categories": [{"kind": "merit", "category": "bonding"}],
     },
     "bond_resistance": {"forbidden_with": ["Unbondable"]},
     "short_bond": {"forbidden_with": ["long_bond", "unbondable"]},
